@@ -3,7 +3,7 @@
     "id": "culture-001",
     "title": "Team Engagement Survey Analysis",
     "created_at": "2025-09-07T08:30:00",
-    "updated_at": "2025-09-07T12:16:13.968545",
+    "updated_at": "2025-09-07T12:32:04.065110",
     "messages": [
       {
         "id": "msg-001-1",
@@ -22,6 +22,18 @@
         "role": "user",
         "content": "What specific recognition programs do you recommend",
         "timestamp": "2025-09-07T12:16:13.968434"
+      },
+      {
+        "id": "81531489-60e7-4e1f-84dc-8e8493aeaee0",
+        "role": "user",
+        "content": "/survey",
+        "timestamp": "2025-09-07T12:31:57.412529"
+      },
+      {
+        "id": "d445868e-2e08-431c-a422-92df27a7f90d",
+        "role": "assistant",
+        "content": "It looks like you've entered \"/survey.\" If you're looking to analyze survey results or design a recognition-oriented survey, I can help with the following:\n\n### 1. **Survey Analysis**\nIf you've already collected survey data:\n- **Share key metrics and themes** such as engagement, satisfaction with recognition, or open comments about recognition practices.\n- I can help **identify strengths, gaps, and priorities** for recognition programs based on your data.\n\n### 2. **Survey Design: Recognition Focus**\nIf you want to **survey your team about recognition**, include questions such as:\n- How frequently do you feel recognized for your work?\n- What forms of recognition are most meaningful to you? (e.g., public praise, private thanks, rewards, development opportunities)\n- Do you believe our current recognition programs are fair and inclusive?\n- What could we do better to make employees feel valued?\n\n### 3. **Recommended Recognition Programs (Based on Data)**\nIf your survey raises concerns about recognition, consider these **evidence-based programs**:\n- **Peer-to-peer recognition platforms** (e.g., Kudos, Bonusly)\n- **Spot awards** for demonstrating company values\n- **Celebrating milestones** (work anniversaries, project completions)\n- **Recognition in all-hands meetings** or company newsletters\n- **Manager training** on personalized, timely feedback\n\n### 4. **Next Steps**\nPlease clarify if you want to:\n- Analyze existing survey results (share the data or main findings)\n- Get sample questions for a new survey\n- Benchmark your results against best practices\n\nLet me know how you'd like to proceed, or provide more details for tailored insight!",
+        "timestamp": "2025-09-07T12:32:04.065042"
       }
     ],
     "is_active": true
@@ -321,5 +333,66 @@
     "updated_at": "2025-09-07T12:25:38.853353",
     "messages": [],
     "is_active": false
+  },
+  "d4882361-fb02-4ff7-a81f-116593f1bc22": {
+    "id": "d4882361-fb02-4ff7-a81f-116593f1bc22",
+    "title": "New Chat",
+    "created_at": "2025-09-07T12:27:56.154291",
+    "updated_at": "2025-09-07T12:27:56.154296",
+    "messages": [],
+    "is_active": true
+  },
+  "4ddc2447-c4d8-4aeb-be2e-118455e72077": {
+    "id": "4ddc2447-c4d8-4aeb-be2e-118455e72077",
+    "title": "New Chat",
+    "created_at": "2025-09-07T12:27:56.158845",
+    "updated_at": "2025-09-07T12:27:56.158849",
+    "messages": [],
+    "is_active": true
+  },
+  "6528a2b7-854c-4ecf-938a-5cc93428d917": {
+    "id": "6528a2b7-854c-4ecf-938a-5cc93428d917",
+    "title": "Canvas Test",
+    "created_at": "2025-09-07T12:31:55.415639",
+    "updated_at": "2025-09-07T12:31:55.415642",
+    "messages": [],
+    "is_active": true
+  },
+  "346c3775-dd3f-4b69-b9dd-6a52d904bbf4": {
+    "id": "346c3775-dd3f-4b69-b9dd-6a52d904bbf4",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T12:32:28.617628",
+    "updated_at": "2025-09-07T12:32:30.673892",
+    "messages": [
+      {
+        "id": "3fa8f264-00c5-4452-a026-56345c36bd87",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T12:32:28.669400"
+      },
+      {
+        "id": "1c0cb7af-97be-4d1e-9f1f-b48dbcced4fb",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As your Culture Intelligence Assistant, I'm here to help you interpret culture data, extract actionable insights, and recommend improvements for your organization's culture. How can I assist you today? Would you like to discuss recent survey results, review engagement trends, or focus on a specific area of your company culture?",
+        "timestamp": "2025-09-07T12:32:30.673858"
+      }
+    ],
+    "is_active": true
+  },
+  "1154f229-c4cc-49ab-a241-41a4d2484544": {
+    "id": "1154f229-c4cc-49ab-a241-41a4d2484544",
+    "title": "New Chat",
+    "created_at": "2025-09-07T12:32:33.601956",
+    "updated_at": "2025-09-07T12:32:33.601968",
+    "messages": [],
+    "is_active": true
+  },
+  "32e2df0b-c7ea-44ac-bae4-89dfb5ea054f": {
+    "id": "32e2df0b-c7ea-44ac-bae4-89dfb5ea054f",
+    "title": "New Chat",
+    "created_at": "2025-09-07T12:32:33.661588",
+    "updated_at": "2025-09-07T12:32:33.661593",
+    "messages": [],
+    "is_active": true
   }
 }

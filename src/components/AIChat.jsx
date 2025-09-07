@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp } from 'lucide-react'
+import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp, Settings, Eye, FileText, Palette, Type, List, Grid, Sliders } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -36,18 +36,31 @@ function AIChat() {
   const [isTyping, setIsTyping] = useState(false)
   const [sidebarExpanded, setSidebarExpanded] = useState(false)
   const [canvasOpen, setCanvasOpen] = useState(false)
-  const [canvasView, setCanvasView] = useState('survey')
+  const [canvasView, setCanvasView] = useState('editor')
+  const [canvasMode, setCanvasMode] = useState('split') // 'split', 'focus', 'chat-only'
   const [activeSurveyId, setActiveSurveyId] = useState(null)
   const [backendConnected, setBackendConnected] = useState(false)
   const [currentPersona, setCurrentPersona] = useState('employee') // Default persona
   const [surveyDraft, setSurveyDraft] = useState({
-    title: 'New Culture Survey',
+    title: 'Culture Intelligence Survey',
+    description: 'Understanding team dynamics and workplace culture',
     questions: [
-      { id: 'q1', type: 'radio', text: 'How engaged do you feel this week?', options: ['Low', 'Medium', 'High'], required: true },
-      { id: 'q2', type: 'text', text: 'What is one thing that would improve your week?', required: false }
+      { id: 'q1', type: 'multiple_choice', text: 'How would you rate your overall job satisfaction?', options: ['Very Dissatisfied', 'Dissatisfied', 'Neutral', 'Satisfied', 'Very Satisfied'], required: true },
+      { id: 'q2', type: 'scale', text: 'On a scale of 1-10, how likely are you to recommend this company as a great place to work?', min: 1, max: 10, required: true },
+      { id: 'q3', type: 'text', text: 'What aspects of our company culture do you value most?', placeholder: 'Share your thoughts...', required: false },
+      { id: 'q4', type: 'multiple_select', text: 'Which areas would you like to see improved? (Select all that apply)', options: ['Communication', 'Recognition', 'Work-life balance', 'Career development', 'Team collaboration', 'Leadership'], required: false }
     ],
-    theme: 'light',
-    logic: {}
+    theme: 'modern',
+    branding: {
+      primaryColor: '#8B5CF6',
+      backgroundColor: '#FAFBFF',
+      fontFamily: 'Inter'
+    },
+    settings: {
+      anonymous: true,
+      deadline: null,
+      targetAudience: 'All employees'
+    }
   })
   
   // Chat thread management state
@@ -100,17 +113,33 @@ function AIChat() {
     initializeThreads()
   }, [])
 
-  // Keyboard shortcut: Ctrl + \\ to toggle canvas
+  // Keyboard shortcuts for Canvas
   useEffect(() => {
     const handleKey = (e) => {
       if (e.ctrlKey && e.key === '\\') {
         e.preventDefault()
         setCanvasOpen(prev => !prev)
       }
+      if (canvasOpen && e.key === 'Escape') {
+        e.preventDefault()
+        setCanvasOpen(false)
+      }
+      if (canvasOpen && e.ctrlKey && e.key === '1') {
+        e.preventDefault()
+        setCanvasView('editor')
+      }
+      if (canvasOpen && e.ctrlKey && e.key === '2') {
+        e.preventDefault()
+        setCanvasView('preview')
+      }
+      if (canvasOpen && e.ctrlKey && e.key === '3') {
+        e.preventDefault()
+        setCanvasView('settings')
+      }
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
-  }, [])
+  }, [canvasOpen])
 
   const checkBackendConnection = async () => {
     try {
@@ -147,7 +176,8 @@ function AIChat() {
   // Canvas control helpers
   const openCanvasForSurvey = async (surveyId = 'draft') => {
     setActiveSurveyId(surveyId)
-    setCanvasView('survey')
+    setCanvasView('editor')  // Start in editor mode
+    setCanvasMode('split')   // Default to split mode
     setCanvasOpen(true)
     if (surveyId && surveyId !== 'draft') {
       const data = await fetchSurvey(surveyId)
@@ -1132,82 +1162,327 @@ function AIChat() {
         </div>
       </div>
 
-      <div className={`canvas-pane ${canvasOpen ? 'open' : ''}`}>
+      <div className={`canvas-pane ${canvasOpen ? 'open' : ''} ${canvasMode}`}>
         <div className="canvas-header">
-          <div className="canvas-title">
-            <span className="title-text">{surveyDraft.title || 'Untitled Survey'}</span>
-            <span className={`status-dot ${canvasView}`}></span>
+          <div className="canvas-title-section">
+            <div className="canvas-title">
+              <FileText size={18} className="canvas-icon" />
+              <span className="title-text">{surveyDraft.title || 'Untitled Survey'}</span>
+            </div>
+            <div className="canvas-subtitle">
+              <span className="subtitle-text">{surveyDraft.description || 'Culture intelligence survey'}</span>
+            </div>
           </div>
-          <div className="canvas-controls">
-            <button className={`flip-btn ${canvasView === 'survey' ? 'active' : ''}`} onClick={() => setCanvasView(canvasView === 'survey' ? 'settings' : 'survey')}>
-              {canvasView === 'survey' ? 'Settings' : 'Survey'}
-            </button>
-            <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
-              Save
-            </button>
-            <button className="close-btn" onClick={() => setCanvasOpen(false)}>×</button>
+          
+          <div className="canvas-toolbar">
+            <div className="view-controls">
+              <button 
+                className={`view-btn ${canvasView === 'editor' ? 'active' : ''}`} 
+                onClick={() => setCanvasView('editor')}
+                title="Edit Survey"
+              >
+                <Type size={16} />
+                <span>Edit</span>
+              </button>
+              <button 
+                className={`view-btn ${canvasView === 'preview' ? 'active' : ''}`} 
+                onClick={() => setCanvasView('preview')}
+                title="Preview Survey"
+              >
+                <Eye size={16} />
+                <span>Preview</span>
+              </button>
+              <button 
+                className={`view-btn ${canvasView === 'settings' ? 'active' : ''}`} 
+                onClick={() => setCanvasView('settings')}
+                title="Survey Settings"
+              >
+                <Settings size={16} />
+                <span>Settings</span>
+              </button>
+            </div>
+            
+            <div className="canvas-actions">
+              <button className="mode-btn" onClick={() => setCanvasMode(canvasMode === 'split' ? 'focus' : 'split')}>
+                {canvasMode === 'split' ? <Grid size={16} /> : <List size={16} />}
+              </button>
+              <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
+                Save
+              </button>
+              <button className="close-btn" onClick={() => setCanvasOpen(false)}>
+                <X size={16} />
+              </button>
+            </div>
           </div>
         </div>
         <div className="canvas-body">
-          {canvasView === 'survey' ? (
-            <div className="survey-view">
-              {surveyDraft.questions.map(q => (
-                <div key={q.id} className="survey-question">
-                  <label className="q-label">{q.text}{q.required ? ' *' : ''}</label>
-                  {q.type === 'radio' && (
-                    <div className="q-options">
-                      {q.options.map(opt => (
-                        <label key={opt} className="q-option">
-                          <input type="radio" name={q.id} />
-                          <span>{opt}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                  {q.type === 'text' && (
-                    <textarea className="q-text" rows="3" placeholder="Type your answer..." />
-                  )}
+          {canvasView === 'editor' ? (
+            <div className="survey-editor">
+              <div className="editor-toolbar">
+                <button className="tool-btn" title="Add Question">
+                  <Plus size={16} />
+                </button>
+                <button className="tool-btn" title="Question Types">
+                  <List size={16} />
+                </button>
+                <button className="tool-btn" title="Styling">
+                  <Palette size={16} />
+                </button>
+              </div>
+              
+              <div className="editor-content">
+                <div className="survey-header-editor">
+                  <input
+                    type="text"
+                    className="title-editor"
+                    value={surveyDraft.title}
+                    onChange={e => setSurveyDraft(prev => ({ ...prev, title: e.target.value }))}
+                    placeholder="Survey Title"
+                  />
+                  <textarea
+                    className="description-editor"
+                    value={surveyDraft.description}
+                    onChange={e => setSurveyDraft(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="Describe your survey..."
+                    rows={2}
+                  />
                 </div>
-              ))}
-              <div className="survey-actions">
-                <button className="btn-ghost" onClick={() => setCanvasView('settings')}>Preview</button>
-                <button className="btn-primary" onClick={async () => { await submitSurveyResponses(activeSurveyId || 'draft', {}) }}>Submit</button>
+                
+                <div className="questions-editor">
+                  {surveyDraft.questions.map((q, index) => (
+                    <div key={q.id} className="question-editor">
+                      <div className="question-header">
+                        <span className="question-number">{index + 1}</span>
+                        <input
+                          type="text"
+                          className="question-text"
+                          value={q.text}
+                          onChange={e => {
+                            const updatedQuestions = [...surveyDraft.questions]
+                            updatedQuestions[index].text = e.target.value
+                            setSurveyDraft(prev => ({ ...prev, questions: updatedQuestions }))
+                          }}
+                          placeholder="Enter your question..."
+                        />
+                        <select 
+                          className="question-type"
+                          value={q.type}
+                          onChange={e => {
+                            const updatedQuestions = [...surveyDraft.questions]
+                            updatedQuestions[index].type = e.target.value
+                            setSurveyDraft(prev => ({ ...prev, questions: updatedQuestions }))
+                          }}
+                        >
+                          <option value="multiple_choice">Multiple Choice</option>
+                          <option value="scale">Rating Scale</option>
+                          <option value="text">Text Response</option>
+                          <option value="multiple_select">Multiple Select</option>
+                        </select>
+                      </div>
+                      
+                      {(q.type === 'multiple_choice' || q.type === 'multiple_select') && (
+                        <div className="options-editor">
+                          {q.options?.map((opt, optIndex) => (
+                            <div key={optIndex} className="option-row">
+                              <input
+                                type="text"
+                                value={opt}
+                                onChange={e => {
+                                  const updatedQuestions = [...surveyDraft.questions]
+                                  updatedQuestions[index].options[optIndex] = e.target.value
+                                  setSurveyDraft(prev => ({ ...prev, questions: updatedQuestions }))
+                                }}
+                                placeholder={`Option ${optIndex + 1}`}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {q.type === 'scale' && (
+                        <div className="scale-editor">
+                          <input
+                            type="number"
+                            value={q.min || 1}
+                            onChange={e => {
+                              const updatedQuestions = [...surveyDraft.questions]
+                              updatedQuestions[index].min = parseInt(e.target.value)
+                              setSurveyDraft(prev => ({ ...prev, questions: updatedQuestions }))
+                            }}
+                            placeholder="Min"
+                            className="scale-input"
+                          />
+                          <span>to</span>
+                          <input
+                            type="number"
+                            value={q.max || 10}
+                            onChange={e => {
+                              const updatedQuestions = [...surveyDraft.questions]
+                              updatedQuestions[index].max = parseInt(e.target.value)
+                              setSurveyDraft(prev => ({ ...prev, questions: updatedQuestions }))
+                            }}
+                            placeholder="Max"
+                            className="scale-input"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : canvasView === 'preview' ? (
+            <div className="survey-preview">
+              <div className="preview-header">
+                <h2 className="preview-title">{surveyDraft.title}</h2>
+                <p className="preview-description">{surveyDraft.description}</p>
+              </div>
+              
+              <div className="preview-questions">
+                {surveyDraft.questions.map((q, index) => (
+                  <div key={q.id} className="preview-question">
+                    <label className="preview-q-label">
+                      {index + 1}. {q.text}{q.required ? ' *' : ''}
+                    </label>
+                    
+                    {q.type === 'multiple_choice' && (
+                      <div className="preview-options">
+                        {q.options?.map((opt, optIndex) => (
+                          <label key={optIndex} className="preview-option">
+                            <input type="radio" name={`preview-${q.id}`} />
+                            <span>{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {q.type === 'multiple_select' && (
+                      <div className="preview-options">
+                        {q.options?.map((opt, optIndex) => (
+                          <label key={optIndex} className="preview-option">
+                            <input type="checkbox" />
+                            <span>{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {q.type === 'scale' && (
+                      <div className="preview-scale">
+                        <div className="scale-labels">
+                          <span>{q.min || 1}</span>
+                          <span>{q.max || 10}</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min={q.min || 1} 
+                          max={q.max || 10} 
+                          className="scale-slider"
+                        />
+                      </div>
+                    )}
+                    
+                    {q.type === 'text' && (
+                      <textarea 
+                        className="preview-text" 
+                        rows="3" 
+                        placeholder={q.placeholder || "Type your answer..."}
+                        disabled
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="preview-actions">
+                <button className="preview-btn primary">Submit Survey</button>
+                <button className="preview-btn secondary">Save as Draft</button>
               </div>
             </div>
           ) : (
             <div className="settings-view">
-              <div className="form-field">
-                <label>Survey Title</label>
-                <input 
-                  type="text" 
-                  className="survey-input" 
-                  value={surveyDraft.title}
-                  onChange={e => setSurveyDraft(prev => ({ ...prev, title: e.target.value }))}
-                />
+              <div className="settings-section">
+                <h3>Survey Configuration</h3>
+                
+                <div className="form-field">
+                  <label>Survey Title</label>
+                  <input 
+                    type="text" 
+                    className="canvas-input" 
+                    value={surveyDraft.title}
+                    onChange={e => setSurveyDraft(prev => ({ ...prev, title: e.target.value }))}
+                    placeholder="Enter survey title"
+                  />
+                </div>
+                
+                <div className="form-field">
+                  <label>Description</label>
+                  <textarea 
+                    className="canvas-input" 
+                    value={surveyDraft.description}
+                    onChange={e => setSurveyDraft(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="Describe the purpose of this survey..."
+                    rows={3}
+                  />
+                </div>
+                
+                <div className="form-field">
+                  <label>Target Audience</label>
+                  <input 
+                    type="text" 
+                    className="canvas-input" 
+                    value={surveyDraft.settings?.targetAudience}
+                    onChange={e => setSurveyDraft(prev => ({ 
+                      ...prev, 
+                      settings: { ...prev.settings, targetAudience: e.target.value }
+                    }))}
+                    placeholder="e.g., All employees, Management team"
+                  />
+                </div>
+                
+                <div className="form-field checkbox-field">
+                  <label className="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      checked={surveyDraft.settings?.anonymous}
+                      onChange={e => setSurveyDraft(prev => ({ 
+                        ...prev, 
+                        settings: { ...prev.settings, anonymous: e.target.checked }
+                      }))}
+                    />
+                    <span>Anonymous responses</span>
+                  </label>
+                </div>
               </div>
-              <div className="form-field">
-                <label>Theme</label>
-                <select 
-                  className="survey-input" 
-                  value={surveyDraft.theme}
-                  onChange={e => setSurveyDraft(prev => ({ ...prev, theme: e.target.value }))}
-                >
-                  <option value="light">Light</option>
-                  <option value="frosted">Frosted</option>
-                </select>
-              </div>
-              <div className="form-field">
-                <label>Logic (JSON)</label>
-                <textarea 
-                  className="survey-input" rows="6"
-                  value={JSON.stringify(surveyDraft.logic, null, 2)}
-                  onChange={e => {
-                    try {
-                      const val = JSON.parse(e.target.value || '{}')
-                      setSurveyDraft(prev => ({ ...prev, logic: val }))
-                    } catch {}
-                  }}
-                />
+              
+              <div className="settings-section">
+                <h3>Branding</h3>
+                
+                <div className="form-field">
+                  <label>Primary Color</label>
+                  <input 
+                    type="color" 
+                    className="color-input" 
+                    value={surveyDraft.branding?.primaryColor}
+                    onChange={e => setSurveyDraft(prev => ({ 
+                      ...prev, 
+                      branding: { ...prev.branding, primaryColor: e.target.value }
+                    }))}
+                  />
+                </div>
+                
+                <div className="form-field">
+                  <label>Background</label>
+                  <input 
+                    type="color" 
+                    className="color-input" 
+                    value={surveyDraft.branding?.backgroundColor}
+                    onChange={e => setSurveyDraft(prev => ({ 
+                      ...prev, 
+                      branding: { ...prev.branding, backgroundColor: e.target.value }
+                    }))}
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -1393,56 +1668,667 @@ function AIChat() {
 
          .canvas-pane {
            position: fixed;
-           top: var(--space-6);
+           top: var(--space-4);
            right: var(--space-4);
            bottom: var(--space-4);
            width: 0;
            overflow: hidden;
-           background: rgba(255, 255, 255, 0.75);
-           backdrop-filter: blur(18px);
-           -webkit-backdrop-filter: blur(18px);
-           border: 1px solid rgba(226, 232, 240, 0.5);
-           border-radius: 16px;
-           box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-           transition: width 0.3s ease;
+           background: linear-gradient(135deg, 
+             rgba(255, 255, 255, 0.98) 0%, 
+             rgba(250, 251, 255, 0.95) 100%);
+           backdrop-filter: blur(24px);
+           -webkit-backdrop-filter: blur(24px);
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           border-radius: 20px;
+           box-shadow: 
+             0 20px 60px rgba(0, 0, 0, 0.12),
+             0 8px 32px rgba(139, 92, 246, 0.08),
+             inset 0 1px 0 rgba(255, 255, 255, 0.4);
+           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
            display: flex;
            flex-direction: column;
+           z-index: 1000;
          }
-         .canvas-pane.open { width: 420px; }
+         
+         .canvas-pane.open { 
+           width: 500px; 
+           transform: translateX(0);
+         }
+         
+         .canvas-pane.focus {
+           width: 70vw;
+           left: 15vw;
+           right: 15vw;
+         }
          .canvas-header {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-3);
+           padding: var(--space-5);
+           border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+           background: rgba(255, 255, 255, 0.6);
+           backdrop-filter: blur(12px);
+         }
+         
+         .canvas-title-section {
+           display: flex;
+           flex-direction: column;
+           gap: 4px;
+         }
+         
+         .canvas-title { 
+           display: flex; 
+           align-items: center; 
+           gap: var(--space-2); 
+         }
+         
+         .canvas-icon {
+           color: rgba(139, 92, 246, 0.8);
+         }
+         
+         .title-text { 
+           font-weight: 600; 
+           color: var(--text-primary); 
+           font-size: 1.1em;
+         }
+         
+         .canvas-subtitle {
+           margin-left: 26px;
+         }
+         
+         .subtitle-text {
+           font-size: 0.85em;
+           color: var(--text-secondary);
+           opacity: 0.8;
+         }
+         
+         .canvas-toolbar {
            display: flex;
            align-items: center;
            justify-content: space-between;
-           padding: var(--space-4) var(--space-4) var(--space-3) var(--space-4);
-           border-bottom: 1px solid rgba(226,232,240,0.5);
          }
-         .canvas-title { display: flex; align-items: center; gap: var(--space-2); }
-         .title-text { font-weight: 600; color: var(--text-primary); }
-         .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; }
-         .status-dot.survey { background: #cbd5e1; }
-         .status-dot.settings { background: #b19cd9; }
-         .canvas-controls { display: flex; align-items: center; gap: var(--space-2); }
-         .flip-btn { border: 1px solid rgba(139,92,246,0.25); background: rgba(248,250,252,0.6); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
-         .flip-btn.active { border-color: rgba(139,92,246,0.5); }
-         .save-btn { border: 1px solid rgba(226,232,240,0.8); background: white; border-radius: 10px; padding: 8px 12px; cursor: pointer; }
-         .close-btn { border: none; background: transparent; font-size: 20px; color: var(--text-secondary); cursor: pointer; padding: 6px 8px; border-radius: 8px; }
-         .close-btn:hover { background: rgba(226,232,240,0.5); }
-         .canvas-body { padding: var(--space-4); overflow-y: auto; }
-         .survey-question { margin-bottom: var(--space-4); }
-         .q-label { display: block; font-weight: 500; color: var(--text-primary); margin-bottom: var(--space-2); }
-         .q-options { display: flex; flex-direction: column; gap: 8px; }
-         .q-option { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
-         .q-text { width: 100%; padding: var(--space-3); border: 1px solid rgba(226,232,240,0.8); border-radius: 12px; background: rgba(255,255,255,0.8); }
-         .survey-actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-6); }
-         .settings-view .form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: var(--space-4); }
+         
+         .view-controls {
+           display: flex;
+           align-items: center;
+           gap: 4px;
+           background: rgba(248, 250, 252, 0.8);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 12px;
+           padding: 4px;
+         }
+         
+         .view-btn {
+           display: flex;
+           align-items: center;
+           gap: 6px;
+           padding: 8px 12px;
+           border: none;
+           background: transparent;
+           border-radius: 8px;
+           font-size: 0.85em;
+           font-weight: 500;
+           color: var(--text-secondary);
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+         
+         .view-btn.active {
+           background: white;
+           color: rgba(139, 92, 246, 0.9);
+           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+         }
+         
+         .view-btn:hover:not(.active) {
+           color: var(--text-primary);
+           background: rgba(255, 255, 255, 0.6);
+         }
+         
+         .canvas-actions {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+         }
+         
+         .mode-btn, .save-btn, .close-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           padding: 8px 12px;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 8px;
+           cursor: pointer;
+           transition: all 0.2s ease;
+           font-size: 0.85em;
+           font-weight: 500;
+         }
+         
+         .save-btn {
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+           color: white;
+           border-color: transparent;
+         }
+         
+         .save-btn:hover {
+           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           transform: translateY(-1px);
+           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+         }
+         
+         .mode-btn:hover, .close-btn:hover {
+           background: rgba(248, 250, 252, 0.9);
+           border-color: rgba(226, 232, 240, 0.6);
+         }
+         
+         .close-btn {
+           color: var(--text-secondary);
+         }
+         .canvas-body { 
+           flex: 1;
+           overflow-y: auto;
+           background: rgba(255, 255, 255, 0.4);
+         }
+         
+         /* Survey Editor Styles */
+         .survey-editor {
+           height: 100%;
+           display: flex;
+           flex-direction: column;
+         }
+         
+         .editor-toolbar {
+           display: flex;
+           gap: 8px;
+           padding: var(--space-4);
+           border-bottom: 1px solid rgba(226, 232, 240, 0.2);
+         }
+         
+         .tool-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           width: 36px;
+           height: 36px;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 8px;
+           color: var(--text-secondary);
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+         
+         .tool-btn:hover {
+           background: rgba(139, 92, 246, 0.05);
+           border-color: rgba(139, 92, 246, 0.3);
+           color: rgba(139, 92, 246, 0.8);
+         }
+         
+         .editor-content {
+           flex: 1;
+           padding: var(--space-4);
+           overflow-y: auto;
+         }
+         
+         .survey-header-editor {
+           margin-bottom: var(--space-6);
+         }
+         
+         .title-editor {
+           width: 100%;
+           font-size: 1.4em;
+           font-weight: 600;
+           border: none;
+           background: transparent;
+           color: var(--text-primary);
+           margin-bottom: var(--space-2);
+           padding: var(--space-2) 0;
+           outline: none;
+         }
+         
+         .title-editor:focus {
+           background: rgba(248, 250, 252, 0.6);
+           border-radius: 8px;
+           padding: var(--space-2) var(--space-3);
+         }
+         
+         .description-editor {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.6);
+           border-radius: 10px;
+           padding: var(--space-3);
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           resize: vertical;
+           transition: all 0.2s ease;
+         }
+         
+         .description-editor:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: rgba(255, 255, 255, 0.9);
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+         
+         .questions-editor {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-4);
+         }
+         
+         .question-editor {
+           background: rgba(255, 255, 255, 0.8);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 12px;
+           padding: var(--space-4);
+           transition: all 0.2s ease;
+         }
+         
+         .question-editor:hover {
+           border-color: rgba(139, 92, 246, 0.3);
+           box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08);
+         }
+         
+         .question-header {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+           margin-bottom: var(--space-3);
+         }
+         
+         .question-number {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           width: 28px;
+           height: 28px;
+           background: rgba(139, 92, 246, 0.1);
+           color: rgba(139, 92, 246, 0.8);
+           border-radius: 50%;
+           font-weight: 600;
+           font-size: 0.85em;
+           flex-shrink: 0;
+         }
+         
+         .question-text {
+           flex: 1;
+           border: none;
+           background: rgba(248, 250, 252, 0.6);
+           border-radius: 8px;
+           padding: var(--space-2) var(--space-3);
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+         }
+         
+         .question-text:focus {
+           background: rgba(255, 255, 255, 0.9);
+           box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+         }
+         
+         .question-type {
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.9);
+           border-radius: 8px;
+           padding: var(--space-2) var(--space-3);
+           font-size: 0.8em;
+           color: var(--text-primary);
+           cursor: pointer;
+           outline: none;
+         }
+         
+         .options-editor {
+           display: flex;
+           flex-direction: column;
+           gap: 8px;
+           margin-left: var(--space-6);
+         }
+         
+         .option-row input {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           background: rgba(248, 250, 252, 0.4);
+           border-radius: 6px;
+           padding: 8px 12px;
+           font-size: 0.85em;
+           outline: none;
+           transition: all 0.2s ease;
+         }
+         
+         .option-row input:focus {
+           background: white;
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+         
+         .scale-editor {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+           margin-left: var(--space-6);
+         }
+         
+         .scale-input {
+           width: 80px;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 6px;
+           padding: 6px 8px;
+           font-size: 0.85em;
+           text-align: center;
+           outline: none;
+         }
+
+         /* Survey Preview Styles */
+         .survey-preview {
+           height: 100%;
+           padding: var(--space-5);
+           overflow-y: auto;
+         }
+         
+         .preview-header {
+           text-align: center;
+           margin-bottom: var(--space-6);
+           padding-bottom: var(--space-4);
+           border-bottom: 2px solid rgba(226, 232, 240, 0.3);
+         }
+         
+         .preview-title {
+           font-size: 1.6em;
+           font-weight: 700;
+           color: var(--text-primary);
+           margin-bottom: var(--space-2);
+         }
+         
+         .preview-description {
+           font-size: 0.95em;
+           color: var(--text-secondary);
+           line-height: 1.6;
+         }
+         
+         .preview-questions {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-5);
+         }
+         
+         .preview-question {
+           background: rgba(255, 255, 255, 0.9);
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           border-radius: 12px;
+           padding: var(--space-4);
+         }
+         
+         .preview-q-label {
+           display: block;
+           font-weight: 600;
+           color: var(--text-primary);
+           margin-bottom: var(--space-3);
+           font-size: 0.95em;
+         }
+         
+         .preview-options {
+           display: flex;
+           flex-direction: column;
+           gap: 12px;
+         }
+         
+         .preview-option {
+           display: flex;
+           align-items: center;
+           gap: 12px;
+           padding: 12px;
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 8px;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+         
+         .preview-option:hover {
+           background: rgba(255, 255, 255, 0.8);
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+         
+         .preview-scale {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-2);
+         }
+         
+         .scale-labels {
+           display: flex;
+           justify-content: space-between;
+           font-size: 0.85em;
+           color: var(--text-secondary);
+         }
+         
+         .scale-slider {
+           width: 100%;
+           height: 6px;
+           border-radius: 3px;
+           background: rgba(226, 232, 240, 0.6);
+           outline: none;
+           cursor: pointer;
+         }
+         
+         .preview-text {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(248, 250, 252, 0.4);
+           border-radius: 8px;
+           padding: var(--space-3);
+           font-size: 0.9em;
+           color: var(--text-secondary);
+           outline: none;
+           resize: vertical;
+         }
+         
+         .preview-actions {
+           display: flex;
+           gap: var(--space-3);
+           justify-content: center;
+           margin-top: var(--space-6);
+           padding-top: var(--space-4);
+           border-top: 1px solid rgba(226, 232, 240, 0.3);
+         }
+         
+         .preview-btn {
+           padding: 12px 24px;
+           border-radius: 10px;
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.2s ease;
+           font-size: 0.9em;
+         }
+         
+         .preview-btn.primary {
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+           color: white;
+           border: none;
+         }
+         
+         .preview-btn.primary:hover {
+           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           transform: translateY(-2px);
+           box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+         }
+         
+         .preview-btn.secondary {
+           background: rgba(255, 255, 255, 0.8);
+           color: var(--text-primary);
+           border: 1px solid rgba(226, 232, 240, 0.5);
+         }
+         
+         .preview-btn.secondary:hover {
+           background: rgba(255, 255, 255, 0.9);
+           border-color: rgba(226, 232, 240, 0.7);
+         }
+
+         /* Settings View Styles */
+         .settings-view {
+           height: 100%;
+           padding: var(--space-5);
+           overflow-y: auto;
+         }
+         
+         .settings-section {
+           margin-bottom: var(--space-6);
+         }
+         
+         .settings-section h3 {
+           font-size: 1.1em;
+           font-weight: 600;
+           color: var(--text-primary);
+           margin-bottom: var(--space-4);
+           padding-bottom: var(--space-2);
+           border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+         }
+         
+         .form-field {
+           display: flex;
+           flex-direction: column;
+           gap: 8px;
+           margin-bottom: var(--space-4);
+         }
+         
+         .form-field label {
+           font-weight: 500;
+           color: var(--text-primary);
+           font-size: 0.9em;
+         }
+         
+         .canvas-input {
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 10px;
+           padding: 12px 16px;
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+         }
+         
+         .canvas-input:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: rgba(255, 255, 255, 0.95);
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+         
+         .checkbox-field {
+           flex-direction: row;
+           align-items: center;
+         }
+         
+         .checkbox-label {
+           display: flex;
+           align-items: center;
+           gap: 8px;
+           cursor: pointer;
+         }
+         
+         .color-input {
+           width: 60px;
+           height: 40px;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 8px;
+           cursor: pointer;
+           outline: none;
+         }
+         
+         /* Canvas Animation Enhancements */
+         .canvas-pane:not(.open) {
+           transform: translateX(100%);
+         }
+         
+         .canvas-body > * {
+           animation: fadeInCanvas 0.4s ease-out;
+         }
+         
+         @keyframes fadeInCanvas {
+           from {
+             opacity: 0;
+             transform: translateY(10px);
+           }
+           to {
+             opacity: 1;
+             transform: translateY(0);
+           }
+         }
+         
+         /* Smooth scrolling */
+         .editor-content, .survey-preview, .settings-view {
+           scroll-behavior: smooth;
+         }
+         
+         .editor-content::-webkit-scrollbar,
+         .survey-preview::-webkit-scrollbar,
+         .settings-view::-webkit-scrollbar {
+           width: 6px;
+         }
+         
+         .editor-content::-webkit-scrollbar-track,
+         .survey-preview::-webkit-scrollbar-track,
+         .settings-view::-webkit-scrollbar-track {
+           background: transparent;
+         }
+         
+         .editor-content::-webkit-scrollbar-thumb,
+         .survey-preview::-webkit-scrollbar-thumb,
+         .settings-view::-webkit-scrollbar-thumb {
+           background: rgba(226, 232, 240, 0.6);
+           border-radius: 3px;
+         }
+         
+         .editor-content::-webkit-scrollbar-thumb:hover,
+         .survey-preview::-webkit-scrollbar-thumb:hover,
+         .settings-view::-webkit-scrollbar-thumb:hover {
+           background: rgba(226, 232, 240, 0.8);
+         }
 
           .canvas-open .chat-input-area { 
-            right: 480px; 
-            transition: right 0.3s ease;
+            right: 520px; 
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           }
-         @media (max-width: 1024px) {
-           .canvas-pane.open { width: 92vw; right: var(--space-2); left: var(--space-2); }
-           .canvas-open .chat-input-area { right: var(--space-4); }
+          
+          .canvas-open .chat-messages {
+            margin-right: 520px;
+            transition: margin-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          
+          .canvas-pane.focus .chat-messages {
+            opacity: 0.3;
+            pointer-events: none;
+          }
+          
+          @media (max-width: 1200px) {
+            .canvas-pane.open { 
+              width: 45vw; 
+              min-width: 400px;
+            }
+            .canvas-open .chat-input-area { 
+              right: 45vw; 
+            }
+            .canvas-open .chat-messages {
+              margin-right: 45vw;
+            }
+          }
+          
+         @media (max-width: 768px) {
+           .canvas-pane.open { 
+             width: 95vw; 
+             right: 2.5vw; 
+             left: 2.5vw; 
+           }
+           .canvas-open .chat-input-area { 
+             right: var(--space-4); 
+             left: var(--space-4);
+           }
+           .canvas-open .chat-messages {
+             margin-right: 0;
+             opacity: 0.2;
+           }
          }
 
          .chat-panel {
