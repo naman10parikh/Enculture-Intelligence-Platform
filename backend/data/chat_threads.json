@@ -81,7 +81,7 @@
     "id": "fbb56ccf-ef19-44ed-b62b-6f3991e608c7",
     "title": "Hi",
     "created_at": "2025-09-07T10:33:16.502216",
-    "updated_at": "2025-09-07T10:39:32.449865",
+    "updated_at": "2025-09-07T10:42:43.825502",
     "messages": [
       {
         "id": "b954aab0-dfd8-4e01-94e4-2ffcc9a4d2cd",
@@ -118,6 +118,42 @@
         "role": "assistant",
         "content": "Hi! What would you like to work on today? I can quickly help you: - Diagnose your latest survey/pulse to find hotspots and key drivers - Turn open-text comments into themes with example quotes - Build a focused action plan for managers - Draft a 5\u20137 question follow-up pulse - Prep an exec-ready culture summary If you want me to dive in now, share: 1) Your goal (e.g., improve manager effectiveness, reduce attrition risk) 2) Group(s) and time period 3) Data you have (scores, eNPS, comments, participation) Or drop a CSV/export and I\u2019ll run a 5-minute diagnostic with top 3 insights and recommended actions. ",
         "timestamp": "2025-09-07T10:39:32.449771"
+      },
+      {
+        "id": "4327bb89-38b6-4455-8262-f6a7c0f4d4e6",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T10:41:30.499153"
+      },
+      {
+        "id": "5e0538bc-2ebe-400d-ad91-bd32f542d79c",
+        "role": "assistant",
+        "content": "I apologize, but I encountered an error while processing your request. Please try again. Error: Error code: 400 - {'error': {'message': \"Unsupported parameter: 'reasoning.effort' is not supported with this model.\", 'type': 'invalid_request_error', 'param': 'reasoning.effort', 'code': 'unsupported_parameter'}}",
+        "timestamp": "2025-09-07T10:41:31.073675"
+      },
+      {
+        "id": "fe6f16dd-c4d9-4361-83df-7af7e9eac84b",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T10:42:20.067633"
+      },
+      {
+        "id": "b89e976e-ce5b-45ef-ae9e-816da36a32c2",
+        "role": "assistant",
+        "content": "I apologize, but I encountered an error while processing your request. Please try again. Error: Error code: 400 - {'error': {'message': \"Unsupported parameter: 'reasoning.effort' is not supported with this model.\", 'type': 'invalid_request_error', 'param': 'reasoning.effort', 'code': 'unsupported_parameter'}}",
+        "timestamp": "2025-09-07T10:42:20.267105"
+      },
+      {
+        "id": "0d14f520-1f9f-47ca-9710-2b195a848f3c",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T10:42:40.953660"
+      },
+      {
+        "id": "43f1d3ce-959f-4f4b-beb8-f5873c6af3a3",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I help you today? Are you looking to analyze survey data, identify culture trends, create an action plan, or something else? Let me know your goal or share any data you have, and I\u2019ll get started right away. ",
+        "timestamp": "2025-09-07T10:42:43.825454"
       }
     ],
     "is_active": true

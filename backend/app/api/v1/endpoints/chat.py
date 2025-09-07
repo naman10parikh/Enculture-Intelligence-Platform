@@ -32,7 +32,7 @@ chat_thread_service = ChatThreadService()
 @router.post("/stream")
 async def chat_stream(request: ChatRequest):
     """
-    Stream chat completion responses from OpenAI GPT-5.
+    Stream chat completion responses from OpenAI gpt-4.1.
     
     This endpoint provides real-time streaming responses for better user experience.
     """

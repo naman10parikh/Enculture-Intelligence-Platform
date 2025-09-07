@@ -4,7 +4,7 @@
 
 ### ✅ Complete Backend Infrastructure
 - **FastAPI Backend** with proper project structure
-- **OpenAI GPT-5 Integration** with streaming responses
+- **OpenAI gpt-4.1 Integration** with streaming responses
 - **Web Search Tools** via function calling
 - **Persona-Aware AI** responses
 - **Comprehensive Testing** suite
@@ -185,7 +185,7 @@ python test_setup.py
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `OPENAI_API_KEY` | OpenAI API key (required) | - |
-| `OPENAI_MODEL` | OpenAI model to use | `gpt-5` |
+| `OPENAI_MODEL` | OpenAI model to use | `gpt-4.1` |
 | `OPENAI_MAX_TOKENS` | Maximum tokens per response | `2048` |
 | `ENVIRONMENT` | Environment mode | `development` |
 | `DEBUG` | Enable debug mode | `True` |
@@ -242,7 +242,7 @@ The backend is designed to support:
 ## 🎯 Backend is Working! 
 
 Your Enculture platform now has:
-- ✅ **Real AI-powered chat** with OpenAI GPT-5
+- ✅ **Real AI-powered chat** with OpenAI gpt-4.1
 - ✅ **Streaming responses** for better UX
 - ✅ **Web search capabilities** for current data
 - ✅ **Persona-aware responses** for different users

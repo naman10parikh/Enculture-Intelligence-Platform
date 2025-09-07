@@ -8,12 +8,12 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def run_test():
     # basic request with reasoning/verbosity/tool options
     resp = client.responses.create(
-        model="gpt-5",                        # model id
+        model="gpt-4.1",                        # model id
         input="summarize jeff bezos recent wedding in 11 words",
         instructions="Be concise and technical.",
 
         # reasoning controls
-        reasoning={"effort": "medium"},     # minimal | low | medium | high
+        # reasoning={"effort": "medium"},     # minimal | low | medium | high
 
         tools=[{ "type": "web_search_preview" }],
 
