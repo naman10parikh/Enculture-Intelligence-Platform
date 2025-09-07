@@ -2,14 +2,14 @@
  * API service for Enculture platform backend communication
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
 /**
  * Chat service for handling AI chat functionality
  */
 export class ChatService {
   constructor() {
-    this.baseUrl = `${API_BASE_URL}/api/v1/chat`;
+    this.baseUrl = `${API_BASE_URL}/chat`;
   }
 
   /**
@@ -169,7 +169,9 @@ export class ChatService {
    */
   async checkHealth() {
     try {
-      const response = await fetch(`${this.baseUrl}/health`);
+      // Health endpoint is at root level, not under /api/v1
+      const healthUrl = API_BASE_URL.replace('/api/v1', '') + '/health';
+      const response = await fetch(healthUrl);
       return response.ok;
     } catch (error) {
       console.error('Health check error:', error);

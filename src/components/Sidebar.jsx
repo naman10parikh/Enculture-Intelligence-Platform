@@ -308,6 +308,10 @@ function Sidebar({ activeSection, setActiveSection }) {
           width: 100%;
         }
 
+        .user-profile {
+          position: relative;
+        }
+
         .user-dropdown-trigger {
           background: transparent;
           border: none;
@@ -324,11 +328,7 @@ function Sidebar({ activeSection, setActiveSection }) {
           transition: all 0.2s ease;
         }
 
-        .user-dropdown-trigger:hover {
-          background: rgba(177, 156, 217, 0.1);
-          border-radius: 6px;
-          padding: 4px 8px;
-        }
+        /* No hover effects - keep it simple */
 
         .user-dropdown-content {
           display: flex;
@@ -349,84 +349,87 @@ function Sidebar({ activeSection, setActiveSection }) {
 
         .user-dropdown-menu {
           position: absolute;
-          bottom: 100%;
-          left: 0;
-          right: 0;
+          bottom: calc(100% + 8px);
+          left: calc(-1 * var(--space-4) - var(--space-3) - 40px);
+          right: calc(-1 * var(--space-4));
           background: white;
           border: 1px solid rgba(177, 156, 217, 0.2);
           border-radius: 12px;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           z-index: 1000;
-          margin-bottom: 8px;
-          max-height: 300px;
-          overflow-y: auto;
+          padding: var(--space-4);
         }
 
         .user-dropdown-item {
-          padding: 0;
+          padding: 8px 12px;
           cursor: pointer;
-          transition: background-color 0.2s ease;
-        }
-
-        .user-dropdown-item:hover {
-          background: rgba(177, 156, 217, 0.05);
+          border-radius: 8px;
+          margin-bottom: 2px;
         }
 
         .user-dropdown-item.active {
-          background: rgba(177, 156, 217, 0.1);
+          background: rgba(177, 156, 217, 0.06);
+        }
+
+        .user-dropdown-item:last-child {
+          margin-bottom: 0;
         }
 
         .user-card {
           display: flex;
           align-items: center;
-          gap: var(--space-3);
-          padding: var(--space-3);
+          gap: 12px;
+          padding: 0;
           position: relative;
         }
 
         .user-card-avatar {
-          font-size: var(--text-lg);
-          width: 36px;
-          height: 36px;
+          font-size: 16px;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #d9c9ff 0%, #b19cd9 100%);
+          background: #f9fafb;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 600;
-          color: #301934;
+          flex-shrink: 0;
         }
 
         .user-card-info {
           flex: 1;
           display: flex;
           flex-direction: column;
+          gap: 2px;
+          min-width: 0;
         }
 
         .user-card-name {
           font-weight: 500;
-          font-size: var(--text-sm);
-          color: var(--text-primary);
+          font-size: 13px;
+          color: #1f2937;
+          line-height: 1.2;
         }
 
         .user-card-role {
-          font-size: var(--text-xs);
-          color: var(--text-secondary);
-          margin-top: 1px;
+          font-size: 12px;
+          color: #6b7280;
+          font-weight: 400;
         }
 
         .user-card-department {
-          font-size: var(--text-xs);
-          color: rgba(177, 156, 217, 0.7);
-          margin-top: 1px;
-          font-weight: 500;
+          font-size: 11px;
+          color: #9ca3af;
+          font-weight: 400;
         }
 
         .current-user-indicator {
           color: #10b981;
           font-weight: 600;
-          font-size: var(--text-sm);
+          font-size: 14px;
+          flex-shrink: 0;
         }
+
+        /* Clean and simple dropdown */
 
         @media (max-width: 1024px) {
           .sidebar {

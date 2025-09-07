@@ -51,6 +51,10 @@ function AIChat() {
   
   // Get user context
   const { currentUser, currentUserId, demoUsers, switchUser } = useUser()
+  
+  // Check if current user can create surveys
+  const canCreateSurveys = currentUser?.canCreateSurveys || false
+  
   const [websocketConnected, setWebsocketConnected] = useState(false)
   const [receivedSurveys, setReceivedSurveys] = useState([])
   const [surveyTakingMode, setSurveyTakingMode] = useState(false)
@@ -149,9 +153,13 @@ function AIChat() {
     setIsDragging(true)
   }
 
-  // Check backend connection on mount
+  // Check backend connection on mount and periodically
   useEffect(() => {
     checkBackendConnection()
+    
+    // Check every 30 seconds
+    const interval = setInterval(checkBackendConnection, 30000)
+    return () => clearInterval(interval)
   }, [])
 
   // Initialize chat threads on mount
@@ -516,11 +524,13 @@ function AIChat() {
     }))
   }
 
-  // Load user state when switching
-  const loadUserState = (userId) => {
+  // Load user state when switching with role-specific defaults
+  const loadUserState = async (userId) => {
     const savedState = userStates[userId]
+    const user = demoUsers.find(u => u.id === userId)
     
     if (savedState) {
+      // Load saved state
       setMessages(savedState.messages || initialMessages)
       setCurrentThreadId(savedState.currentThreadId)
       setRecentThreads(savedState.recentThreads || [])
@@ -530,15 +540,29 @@ function AIChat() {
       setSurveyResponses(savedState.surveyResponses || {})
       setReceivedSurveys(savedState.receivedSurveys || [])
     } else {
-      // First time loading this user - set defaults
+      // First time loading this user - set role-specific defaults
       setMessages(initialMessages)
       setCurrentThreadId(null)
-      setRecentThreads([])
       setNotifications([])
       setSurveyTakingMode(false)
       setActiveSurveyData(null)
       setSurveyResponses({})
       setReceivedSurveys([])
+      
+      // Only Manager (Michael Chen) gets existing chat threads
+      if (userId === 'michael_chen') {
+        // Load existing threads for the manager
+        try {
+          await loadRecentThreads()
+        } catch (error) {
+          console.error('Failed to load manager threads:', error)
+          setRecentThreads([])
+        }
+      } else {
+        // Other roles start with clean slate
+        setRecentThreads([])
+        console.log(`${user?.name} (${user?.role}) starting with fresh chat history`)
+      }
     }
   }
 
@@ -555,13 +579,12 @@ function AIChat() {
       // Load new user's state
       loadUserState(userId)
       
-      // Add switching notification
-      addNotification(`Switched to ${user.name} (${user.role})`, 'info')
+      // Clean user switching without notifications
       
-      // Reconnect WebSocket as new user and load their threads
+      // Reconnect WebSocket as new user
       setTimeout(() => {
         websocketService.connect(userId)
-        loadRecentThreads()
+        // loadRecentThreads() now handled in loadUserState
       }, 500)
     }
   }
@@ -574,12 +597,12 @@ function AIChat() {
     // Set up event listeners
     const handleWebSocketConnected = () => {
       setWebsocketConnected(true)
-      addNotification('Connected to real-time notifications', 'success')
+      // Removed notification - keeping UX clean
     }
 
     const handleWebSocketDisconnected = () => {
       setWebsocketConnected(false)
-      addNotification('Disconnected from real-time notifications', 'warning')
+      // Only show disconnection notice if it's a persistent issue
     }
 
     const handleSurveyNotification = (data) => {
@@ -594,7 +617,7 @@ function AIChat() {
 
     const handleWebSocketError = (error) => {
       console.error('WebSocket error:', error)
-      addNotification('Connection error occurred', 'error')
+      // Removed notification - keeping UX clean
     }
 
     // Attach event listeners
@@ -620,6 +643,14 @@ function AIChat() {
       handleUserSwitch(currentUserId)
     }
   }, [currentUserId])
+
+  // Initial load effect for current user
+  useEffect(() => {
+    if (currentUser?.id === 'michael_chen') {
+      // Load existing threads for manager on initial load
+      loadRecentThreads()
+    }
+  }, [])
 
   // Auto-save user state periodically
   useEffect(() => {
@@ -1901,7 +1932,7 @@ function AIChat() {
             </div>
             
             <div className="canvas-actions">
-              {!surveyTakingMode && currentUser.canCreateSurveys ? (
+              {!surveyTakingMode && canCreateSurveys ? (
                 <>
                   <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
                     Save

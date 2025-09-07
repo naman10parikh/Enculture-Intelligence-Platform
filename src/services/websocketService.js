@@ -11,6 +11,9 @@ class WebSocketService {
     this.reconnectInterval = 3000; // 3 seconds
     this.listeners = new Map();
     this.userId = null;
+    this.heartbeatInterval = null;
+    this.heartbeatFrequency = 30000; // 30 seconds
+    this.lastHeartbeat = null;
   }
 
   /**
@@ -33,6 +36,7 @@ class WebSocketService {
         console.log('WebSocket connected for user:', userId);
         this.isConnected = true;
         this.reconnectAttempts = 0;
+        this.startHeartbeat();
         this.emit('connected', { userId });
       };
 
@@ -54,7 +58,12 @@ class WebSocketService {
       this.socket.onclose = (event) => {
         console.log('WebSocket disconnected:', event.code, event.reason);
         this.isConnected = false;
-        this.emit('disconnected', { code: event.code, reason: event.reason });
+        this.stopHeartbeat();
+        
+        // Only emit disconnected if it wasn't a manual close and we were previously connected
+        if (event.code !== 1000 && this.reconnectAttempts === 0) {
+          this.emit('disconnected', { code: event.code, reason: event.reason });
+        }
         
         // Attempt to reconnect if it wasn't a manual close
         if (event.code !== 1000 && this.reconnectAttempts < this.maxReconnectAttempts) {
@@ -74,9 +83,34 @@ class WebSocketService {
   }
 
   /**
+   * Start heartbeat mechanism
+   */
+  startHeartbeat() {
+    this.stopHeartbeat(); // Clear any existing interval
+    
+    this.heartbeatInterval = setInterval(() => {
+      if (this.isConnected && this.socket) {
+        this.send({ type: 'heartbeat', timestamp: Date.now() });
+        this.lastHeartbeat = Date.now();
+      }
+    }, this.heartbeatFrequency);
+  }
+
+  /**
+   * Stop heartbeat mechanism
+   */
+  stopHeartbeat() {
+    if (this.heartbeatInterval) {
+      clearInterval(this.heartbeatInterval);
+      this.heartbeatInterval = null;
+    }
+  }
+
+  /**
    * Disconnect from WebSocket server
    */
   disconnect() {
+    this.stopHeartbeat();
     if (this.socket && this.isConnected) {
       this.socket.close(1000, 'Manual disconnect');
       this.socket = null;
@@ -98,11 +132,14 @@ class WebSocketService {
     this.reconnectAttempts++;
     console.log(`Attempting to reconnect... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
     
+    // Exponential backoff for reconnection
+    const delay = Math.min(this.reconnectInterval * Math.pow(2, this.reconnectAttempts - 1), 30000);
+    
     setTimeout(() => {
       if (this.userId) {
         this.connect(this.userId);
       }
-    }, this.reconnectInterval);
+    }, delay);
   }
 
   /**
