@@ -395,7 +395,7 @@ function AIChat() {
       setMessages(prev => [...prev, userMessage])
       
       // Open canvas
-      openCanvasForSurvey('draft')
+        openCanvasForSurvey('draft')
       
       // If there's a description, show AI response and generate template
       if (description) {
@@ -639,10 +639,10 @@ function AIChat() {
         return (
           <pre style={{
             background: 'rgba(248, 250, 252, 0.9)',
-            border: '1px solid rgba(226, 232, 240, 0.6)',
-            borderRadius: '8px',
-            padding: '1em',
-            overflowX: 'auto',
+          border: '1px solid rgba(226, 232, 240, 0.6)',
+          borderRadius: '8px',
+          padding: '1em',
+          overflowX: 'auto',
             margin: '1em 0',
             fontSize: '0.9em'
           }} {...props}>
@@ -652,10 +652,10 @@ function AIChat() {
       }
       return (
         <code style={{
-          background: 'rgba(139, 92, 246, 0.1)',
+        background: 'rgba(139, 92, 246, 0.1)',
           padding: '0.15em 0.3em',
           borderRadius: '3px',
-          fontFamily: 'Monaco, Menlo, Ubuntu Mono, monospace',
+        fontFamily: 'Monaco, Menlo, Ubuntu Mono, monospace',
           fontSize: '0.9em',
           color: 'rgba(139, 92, 246, 0.9)'
         }} {...props}>
@@ -668,10 +668,10 @@ function AIChat() {
     ),
     blockquote: ({children, ...props}) => (
       <blockquote style={{
-        borderLeft: '3px solid rgba(139, 92, 246, 0.3)',
-        paddingLeft: '1em',
-        margin: '1em 0',
-        fontStyle: 'italic',
+      borderLeft: '3px solid rgba(139, 92, 246, 0.3)',
+      paddingLeft: '1em',
+      margin: '1em 0',
+      fontStyle: 'italic',
         color: 'var(--text-secondary)',
         background: 'rgba(139, 92, 246, 0.05)',
         borderRadius: '0 4px 4px 0'
@@ -685,7 +685,7 @@ function AIChat() {
         target="_blank" 
         rel="noopener noreferrer" 
         style={{
-          color: 'rgba(139, 92, 246, 0.8)',
+      color: 'rgba(139, 92, 246, 0.8)',
           textDecoration: 'underline',
           textDecorationThickness: '1px',
           textUnderlineOffset: '2px'
@@ -1056,16 +1056,16 @@ function AIChat() {
                   className="search-input"
                 />
                 {searchQuery && (
-                  <button 
+              <button 
                     className="clear-search-btn"
-                    onClick={() => {
+                onClick={() => {
                       setSearchQuery('')
                       setSearchResults([])
                       setIsSearching(false)
-                    }}
-                  >
+                }}
+              >
                     <X size={14} />
-                  </button>
+              </button>
                 )}
               </div>
             </div>
@@ -1085,37 +1085,37 @@ function AIChat() {
                 {searchQuery && !isSearching ? (
                   // Show search results
                   searchResults.map(thread => (
-                    <div 
-                      key={thread.id}
+                  <div 
+                    key={thread.id}
                       className={`thread-item search-result ${thread.id === currentThreadId ? 'active' : ''}`}
-                      onClick={() => switchToThread(thread.id)}
-                    >
+                    onClick={() => switchToThread(thread.id)}
+                  >
                       <div className="thread-content">
-                        <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                    <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
                         <span className="thread-snippet search-snippet">
                           {thread.lastMessage || 'No messages yet'}
                         </span>
                       </div>
                       <div className="thread-actions">
-                        <button 
+                    <button 
                           className="thread-action-btn"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            deleteThread(thread.id)
-                          }}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        deleteThread(thread.id)
+                      }}
                           title="Delete conversation"
-                        >
+                    >
                           <X size={14} />
-                        </button>
-                      </div>
-                    </div>
+                    </button>
+                  </div>
+              </div>
                   ))
                 ) : (
                   // Show recent threads grouped by time categories
                   threadsLoading ? (
                     <div className="loading">Loading conversations...</div>
-                  ) : (
-                    <>
+              ) : (
+                <>
                       {(() => {
                         // Group threads by time categories
                         const grouped = {}
@@ -1138,38 +1138,38 @@ function AIChat() {
                             <div key={category} className="thread-category">
                               <div className="category-header">{category}</div>
                               {threads.map(thread => (
-                                <div 
-                                  key={thread.id}
+                    <div 
+                      key={thread.id}
                                   className={`thread-item ${thread.id === currentThreadId ? 'active' : ''}`}
-                                  onClick={() => switchToThread(thread.id)}
-                                >
+                      onClick={() => switchToThread(thread.id)}
+                    >
                                   <div className="thread-content">
-                                    <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                      <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
                                   </div>
                                   <div className="thread-actions">
-                                    <button 
+                      <button 
                                       className="thread-action-btn"
-                                      onClick={(e) => {
-                                        e.stopPropagation()
-                                        deleteThread(thread.id)
-                                      }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          deleteThread(thread.id)
+                        }}
                                       title="Delete conversation"
-                                    >
+                      >
                                       <X size={14} />
-                                    </button>
+                      </button>
                                   </div>
-                                </div>
-                              ))}
+                    </div>
+                  ))}
                             </div>
                           )
                         })
                       })()}
-                      {recentThreads.length === 0 && !threadsLoading && (
+                  {recentThreads.length === 0 && !threadsLoading && (
                         <div className="no-threads">No conversations yet</div>
-                      )}
-                    </>
+                  )}
+                </>
                   )
-                )}
+              )}
               </div>
             </div>
           </div>
@@ -1198,7 +1198,7 @@ function AIChat() {
             return (
               <div key={message.id} className={`message-container ${message.type}-container`}>
                 <div className={`message ${message.type}-message`}>
-                  <div className="message-bubble glass-bubble">
+                <div className="message-bubble glass-bubble">
                     {isEditing ? (
                       <div className="edit-mode">
                         <textarea
@@ -1227,46 +1227,46 @@ function AIChat() {
                       </div>
                     ) : (
                       <>
-                        {message.type === 'ai' ? (
-                          <>
-                            <div className="markdown-content">
-                              <ReactMarkdown 
-                                remarkPlugins={[remarkGfm]}
-                                rehypePlugins={[rehypeHighlight]}
-                                components={markdownComponents}
+                  {message.type === 'ai' ? (
+                    <>
+                      <div className="markdown-content">
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeHighlight]}
+                          components={markdownComponents}
                                 skipHtml={false}
                                 allowedElements={undefined}
-                              >
+                        >
                                 {cleanContent || ''}
-                              </ReactMarkdown>
-                            </div>
-                            {/* Display citations if any */}
-                            {citations.length > 0 && (
-                              <div className="citations-section">
-                                <div className="citations-header">Sources:</div>
-                                <div className="citations-list">
-                                  {citations.map((citation, index) => (
-                                    <a 
-                                      key={index}
-                                      href={citation.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="citation-link"
-                                    >
-                                      <span className="citation-number">{index + 1}</span>
-                                      <span className="citation-title">{citation.title}</span>
-                                    </a>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                          </>
-                        ) : (
-                          <p>{message.content}</p>
-                        )}
+                        </ReactMarkdown>
+                      </div>
+                      {/* Display citations if any */}
+                      {citations.length > 0 && (
+                        <div className="citations-section">
+                          <div className="citations-header">Sources:</div>
+                          <div className="citations-list">
+                            {citations.map((citation, index) => (
+                              <a 
+                                key={index}
+                                href={citation.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="citation-link"
+                              >
+                                <span className="citation-number">{index + 1}</span>
+                                <span className="citation-title">{citation.title}</span>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <p>{message.content}</p>
+                  )}
                       </>
-                    )}
-                  </div>
+                  )}
+                </div>
                 </div>
                 
                 {/* Message actions below the bubble */}
@@ -1405,10 +1405,10 @@ function AIChat() {
       >
         <div className="canvas-header">
           <div className="canvas-title-section">
-            <div className="canvas-title">
+          <div className="canvas-title">
               <FileText size={18} className="canvas-icon" />
-              <span className="title-text">{surveyDraft.title || 'Untitled Survey'}</span>
-            </div>
+            <span className="title-text">{surveyDraft.title || 'Untitled Survey'}</span>
+          </div>
             <div className="canvas-subtitle">
               <span className="subtitle-text">{surveyDraft.description || 'Culture intelligence survey'}</span>
             </div>
@@ -1423,7 +1423,7 @@ function AIChat() {
               >
                 <Wand2 size={16} />
                 <span>Create</span>
-              </button>
+            </button>
               <button 
                 className={`view-btn ${canvasView === 'preview' ? 'active' : ''}`} 
                 onClick={() => setCanvasView('preview')}
@@ -1443,9 +1443,9 @@ function AIChat() {
             </div>
             
             <div className="canvas-actions">
-              <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
-                Save
-              </button>
+            <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
+              Save
+            </button>
               <button className="close-btn" onClick={() => setCanvasOpen(false)}>
                 <X size={16} />
               </button>
@@ -1457,30 +1457,41 @@ function AIChat() {
             <div className="survey-wizard">
               {/* Progress Indicator */}
               <div className="wizard-progress">
-                <div className="progress-steps">
-                  {[
-                    { step: 1, icon: FileText, label: 'Name', desc: 'Survey title' },
-                    { step: 2, icon: Target, label: 'Context', desc: 'Purpose & outcomes' },
-                    { step: 3, icon: Tag, label: 'Classifiers', desc: 'Category labels' },
-                    { step: 4, icon: Calculator, label: 'Metrics', desc: 'Analysis formulas' },
-                    { step: 5, icon: List, label: 'Questions', desc: 'Survey content' },
-                    { step: 6, icon: Settings, label: 'Config', desc: 'Settings & audience' },
-                    { step: 7, icon: CheckCircle, label: 'Publish', desc: 'Launch survey' }
-                  ].map(({ step, icon: Icon, label, desc }) => (
-                    <button
-                      key={step}
-                      className={`progress-step ${surveyStep >= step ? 'completed' : ''} ${surveyStep === step ? 'active' : ''}`}
-                      onClick={() => goToStep(step)}
-                    >
-                      <div className="step-icon">
-                        <Icon size={16} />
-                      </div>
-                      <div className="step-content">
-                        <span className="step-label">{label}</span>
-                        <span className="step-desc">{desc}</span>
-                      </div>
-                    </button>
-                  ))}
+                <div className="progress-indicator">
+                  <div className="current-step-info">
+                    {(() => {
+                      const stepInfo = [
+                        { step: 1, icon: FileText, label: 'Name', desc: 'Survey title' },
+                        { step: 2, icon: Target, label: 'Context', desc: 'Purpose & outcomes' },
+                        { step: 3, icon: Tag, label: 'Classifiers', desc: 'Category labels' },
+                        { step: 4, icon: Calculator, label: 'Metrics', desc: 'Analysis formulas' },
+                        { step: 5, icon: List, label: 'Questions', desc: 'Survey content' },
+                        { step: 6, icon: Settings, label: 'Config', desc: 'Settings & audience' },
+                        { step: 7, icon: CheckCircle, label: 'Publish', desc: 'Launch survey' }
+                      ].find(s => s.step === surveyStep)
+                      const Icon = stepInfo.icon
+                      return (
+                        <>
+                          <div className="step-number">
+                            <div className="step-icon-wrapper">
+                              <Icon size={20} />
+                            </div>
+                            <span className="step-counter">Step {surveyStep} of 7</span>
+                          </div>
+                          <div className="step-info">
+                            <h4 className="step-title">{stepInfo.label}</h4>
+                            <p className="step-description">{stepInfo.desc}</p>
+                          </div>
+                        </>
+                      )
+                    })()}
+                  </div>
+                  <div className="progress-bar">
+                    <div 
+                      className="progress-fill" 
+                      style={{width: `${(surveyStep / 7) * 100}%`}}
+                    ></div>
+                  </div>
                 </div>
               </div>
 
@@ -2087,11 +2098,11 @@ function AIChat() {
                         {q.options?.map((opt, optIndex) => (
                           <label key={optIndex} className="preview-option">
                             <input type="radio" name={`preview-${q.id}`} />
-                            <span>{opt}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
+                          <span>{opt}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
                     
                     {q.type === 'multiple_select' && (
                       <div className="preview-options">
@@ -2119,16 +2130,16 @@ function AIChat() {
                       </div>
                     )}
                     
-                    {q.type === 'text' && (
+                  {q.type === 'text' && (
                       <textarea 
                         className="preview-text" 
                         rows="3" 
                         placeholder={q.placeholder || "Type your answer..."}
                         disabled
                       />
-                    )}
-                  </div>
-                ))}
+                  )}
+                </div>
+              ))}
               </div>
               
               <div className="preview-actions">
@@ -2141,18 +2152,18 @@ function AIChat() {
               <div className="settings-section">
                 <h3>Survey Configuration</h3>
                 
-                <div className="form-field">
-                  <label>Survey Title</label>
-                  <input 
-                    type="text" 
+              <div className="form-field">
+                <label>Survey Title</label>
+                <input 
+                  type="text" 
                     className="canvas-input" 
-                    value={surveyDraft.title}
-                    onChange={e => setSurveyDraft(prev => ({ ...prev, title: e.target.value }))}
+                  value={surveyDraft.title}
+                  onChange={e => setSurveyDraft(prev => ({ ...prev, title: e.target.value }))}
                     placeholder="Enter survey title"
-                  />
-                </div>
+                />
+              </div>
                 
-                <div className="form-field">
+              <div className="form-field">
                   <label>Description</label>
                   <textarea 
                     className="canvas-input" 
@@ -2161,9 +2172,9 @@ function AIChat() {
                     placeholder="Describe the purpose of this survey..."
                     rows={3}
                   />
-                </div>
+              </div>
                 
-                <div className="form-field">
+              <div className="form-field">
                   <label>Target Audience</label>
                   <input 
                     type="text" 
@@ -2289,9 +2300,9 @@ function AIChat() {
                       className="metric-formula"
                       placeholder="Formula (e.g., avg(q1,q2))"
                     />
-                    <textarea
+                <textarea 
                       value={metric.description}
-                      onChange={e => {
+                  onChange={e => {
                         const updated = [...surveyDraft.metrics]
                         updated[index].description = e.target.value
                         setSurveyDraft(prev => ({ ...prev, metrics: updated }))
@@ -2403,20 +2414,26 @@ function AIChat() {
           transition: margin-right 0.3s ease;
         }
 
-         .message {
-           display: flex;
-           gap: var(--space-3);
-           animation: fadeInUp 0.4s ease-out;
-           max-width: 900px;
-           margin: 0 auto;
-         }
+        .message {
+          display: flex;
+          gap: var(--space-3);
+          animation: fadeInUp 0.4s ease-out;
+          max-width: 900px;
+          margin: 0 auto;
+          width: 100%;
+          justify-content: flex-start;
+        }
 
-         .user-message {
-           flex-direction: row-reverse;
-         }
+        .user-message {
+          justify-content: flex-end;
+        }
+        
+        .ai-message {
+          justify-content: flex-start;
+        }
 
          .message-bubble {
-           max-width: 100%;
+           max-width: 70%;
            padding: var(--space-4) var(--space-5);
            position: relative;
            border-radius: var(--radius-lg);
@@ -2680,81 +2697,86 @@ function AIChat() {
          }
          
          .wizard-progress {
-           background: rgba(255, 255, 255, 0.6);
-           border-bottom: 1px solid rgba(226, 232, 240, 0.3);
-           padding: var(--space-3) var(--space-4);
+           padding: var(--space-4);
+           border-bottom: 1px solid rgba(239, 246, 255, 0.4);
+           background: rgba(250, 251, 255, 0.6);
          }
          
-         .progress-steps {
+         .progress-indicator {
            display: flex;
-           gap: 4px;
-           justify-content: space-between;
-           flex-wrap: nowrap;
+           flex-direction: column;
+           gap: var(--space-3);
+         }
+         
+         .current-step-info {
+           display: flex;
+           align-items: center;
+           gap: var(--space-4);
+         }
+         
+         .step-number {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+         }
+         
+         .step-icon-wrapper {
+           width: 48px;
+           height: 48px;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.15) 0%, 
+             rgba(124, 58, 237, 0.10) 100%);
+           border: 2px solid rgba(139, 92, 246, 0.3);
+           color: rgb(139, 92, 246);
+         }
+         
+         .step-counter {
+           font-size: var(--text-sm);
+           font-weight: 600;
+           color: var(--text-secondary);
+           background: rgba(139, 92, 246, 0.1);
+           padding: 4px 12px;
+           border-radius: 20px;
+           border: 1px solid rgba(139, 92, 246, 0.2);
+         }
+         
+         .step-info {
+           flex: 1;
+         }
+         
+         .step-title {
+           font-size: 1.2em;
+           font-weight: 700;
+           color: var(--text-primary);
+           margin: 0 0 4px 0;
+         }
+         
+         .step-description {
+           font-size: var(--text-sm);
+           color: var(--text-secondary);
+           margin: 0;
+           opacity: 0.8;
+         }
+         
+         .progress-bar {
+           width: 100%;
+           height: 6px;
+           background: rgba(226, 232, 240, 0.4);
+           border-radius: 3px;
            overflow: hidden;
          }
          
-         .progress-steps::-webkit-scrollbar {
-           display: none;
-         }
-         
-         .progress-step {
-           display: flex;
-           align-items: center;
-           gap: 6px;
-           padding: 8px 12px;
-           background: rgba(248, 250, 252, 0.8);
-           border: 1px solid rgba(226, 232, 240, 0.4);
-           border-radius: 10px;
-           cursor: pointer;
-           transition: all 0.3s ease;
-           flex: 1;
-           min-width: 0;
-           justify-content: center;
-         }
-         
-         .progress-step.active {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
-           border-color: rgba(139, 92, 246, 0.4);
-           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
-         }
-         
-         .progress-step.completed {
-           background: rgba(34, 197, 94, 0.05);
-           border-color: rgba(34, 197, 94, 0.3);
-           color: rgba(34, 197, 94, 0.8);
-         }
-         
-         .progress-step:hover:not(.active) {
-           background: rgba(255, 255, 255, 0.9);
-           transform: translateY(-1px);
-         }
-         
-         .step-icon {
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           width: 32px;
-           height: 32px;
-           background: rgba(255, 255, 255, 0.8);
-           border-radius: 8px;
-           color: var(--text-secondary);
-           transition: all 0.2s ease;
-         }
-         
-         .progress-step.active .step-icon {
-           background: rgba(139, 92, 246, 0.1);
-           color: rgba(139, 92, 246, 0.8);
-         }
-         
-         .progress-step.completed .step-icon {
-           background: rgba(34, 197, 94, 0.1);
-           color: rgba(34, 197, 94, 0.8);
-         }
-         
-         .step-content {
-           display: flex;
-           flex-direction: column;
-           gap: 2px;
+         .progress-fill {
+           height: 100%;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.8) 0%, 
+             rgba(124, 58, 237, 0.9) 100%);
+           border-radius: 3px;
+           transition: width 0.3s ease;
          }
          
          .step-label {
@@ -2778,12 +2800,13 @@ function AIChat() {
          }
          
          .step-container {
-           max-width: 600px;
-           margin: 0 auto;
+           max-width: 100%;
+           width: 100%;
            flex: 1;
            display: flex;
            flex-direction: column;
            justify-content: center;
+           padding: 0 var(--space-4);
          }
          
          .step-header {
@@ -4394,7 +4417,7 @@ function AIChat() {
          
          .search-input-wrapper {
            position: relative;
-           display: flex;
+           display: flex; 
            align-items: center;
            background: rgba(248, 250, 252, 0.8);
            border: 1px solid rgba(226, 232, 240, 0.5);
@@ -4429,7 +4452,7 @@ function AIChat() {
          }
          
          .search-input::placeholder {
-           color: var(--text-secondary);
+           color: var(--text-secondary); 
            opacity: 0.7;
          }
          
@@ -4711,11 +4734,11 @@ function AIChat() {
           line-height: 1.5;
         }
 
-         .message-time {
+        .message-time {
            font-size: 0.75em;
            color: var(--text-secondary);
            opacity: 0.6;
-         }
+        }
 
         /* Markdown Content Styling */
         .markdown-content {
@@ -4750,15 +4773,15 @@ function AIChat() {
            margin: 0.8em 0 0.4em 0;
          }
 
-         .markdown-content p {
+        .markdown-content p {
            margin: 0 0 1.2em 0;
            line-height: 1.7;
-         }
+        }
 
-         .markdown-content ul,
-         .markdown-content ol {
+        .markdown-content ul,
+        .markdown-content ol {
            margin: 0.8em 0;
-           padding-left: 1.5em;
+          padding-left: 1.5em;
            line-height: 1.6;
          }
 
@@ -4777,9 +4800,9 @@ function AIChat() {
 
          .markdown-content ol {
            list-style-type: decimal;
-         }
+        }
 
-         .markdown-content li {
+        .markdown-content li {
            margin: 0.4em 0;
            padding-left: 0.2em;
          }
@@ -4814,7 +4837,7 @@ function AIChat() {
 
          .markdown-content tr:nth-child(even) {
            background: rgba(248, 250, 252, 0.4);
-         }
+        }
 
         .markdown-content blockquote {
           border-left: 3px solid rgba(139, 92, 246, 0.3);
@@ -4876,65 +4899,65 @@ function AIChat() {
           text-decoration: underline;
         }
 
-         /* Citations Styling */
-         .citations-section {
+        /* Citations Styling */
+        .citations-section {
            margin-top: 1em;
            padding-top: 0.5em;
-         }
+        }
 
-         .citations-header {
+        .citations-header {
            font-size: 0.75em;
            font-weight: 500;
-           color: var(--text-secondary);
-           margin-bottom: 0.5em;
+          color: var(--text-secondary);
+          margin-bottom: 0.5em;
            opacity: 0.8;
-         }
+        }
 
-         .citations-list {
-           display: flex;
+        .citations-list {
+          display: flex;
            flex-wrap: wrap;
-           gap: 0.5em;
-         }
+          gap: 0.5em;
+        }
 
-         .citation-link {
+        .citation-link {
            display: inline-flex;
-           align-items: center;
+          align-items: center;
            gap: 0.25em;
            padding: 0.25em 0.5em;
            background: rgba(139, 92, 246, 0.08);
            border: 1px solid rgba(139, 92, 246, 0.15);
            border-radius: 12px;
-           text-decoration: none;
+          text-decoration: none;
            color: rgba(139, 92, 246, 0.8);
-           transition: all 0.2s ease;
+          transition: all 0.2s ease;
            font-size: 0.75em;
            max-width: 200px;
-         }
+        }
 
-         .citation-link:hover {
+        .citation-link:hover {
            background: rgba(139, 92, 246, 0.12);
            border-color: rgba(139, 92, 246, 0.25);
-         }
+        }
 
-         .citation-number {
-           display: flex;
-           align-items: center;
-           justify-content: center;
+        .citation-number {
+          display: flex;
+          align-items: center;
+          justify-content: center;
            width: 16px;
            height: 16px;
            background: rgba(139, 92, 246, 0.7);
-           color: white;
-           border-radius: 50%;
+          color: white;
+          border-radius: 50%;
            font-size: 0.65em;
-           font-weight: 600;
-           flex-shrink: 0;
-         }
+          font-weight: 600;
+          flex-shrink: 0;
+        }
 
-         .citation-title {
-           overflow: hidden;
-           text-overflow: ellipsis;
-           white-space: nowrap;
-         }
+        .citation-title {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
 
          /* Message Container Styles */
          .message-container {
@@ -4948,8 +4971,16 @@ function AIChat() {
            align-items: flex-start;
          }
          
+         .ai-container .message {
+           justify-content: flex-start;
+         }
+         
          .user-container {
            align-items: flex-end;
+         }
+         
+         .user-container .message {
+           justify-content: flex-end;
          }
          
          /* Message Actions Styles */
@@ -5099,7 +5130,7 @@ function AIChat() {
          .edit-cancel-btn:hover {
            background: rgba(107, 114, 128, 0.15);
            border-color: rgba(107, 114, 128, 0.4);
-         }
+        }
 
          .chat-input-area {
            position: fixed;

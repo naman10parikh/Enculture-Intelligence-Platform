@@ -3,7 +3,7 @@
     "id": "culture-001",
     "title": "Team Engagement Survey Analysis",
     "created_at": "2025-09-07T08:30:00",
-    "updated_at": "2025-09-07T13:22:22.891504",
+    "updated_at": "2025-09-07T14:10:33.973084",
     "messages": [
       {
         "id": "msg-001-1",
@@ -16,24 +16,6 @@
         "role": "assistant",
         "content": "I'd be happy to help analyze your team engagement survey results. What specific trends are you noticing that concern you? Are you seeing patterns in particular areas like communication, workload, career development, or team dynamics?\n\nTo provide the most valuable insights, could you share:\n- Overall engagement scores or key metrics\n- Any demographic breakdowns (by department, tenure, etc.)\n- Specific areas with declining scores\n\nThis will help me identify root causes and suggest targeted improvement strategies.",
         "timestamp": "2025-09-07T08:30:15"
-      },
-      {
-        "id": "865ab282-2108-40e1-8cec-1c0b1f454fae",
-        "role": "user",
-        "content": "Can you explain this with bullet points",
-        "timestamp": "2025-09-07T12:53:58.396088"
-      },
-      {
-        "id": "e578a378-9742-49bb-ad11-399e06648925",
-        "role": "assistant",
-        "content": "Absolutely! Here's a bullet-point summary to clarify the information I need to analyze your team engagement survey results: - **Overall Engagement Scores:** - Provide the average or overall engagement rating. - Note any significant changes compared to previous surveys. - **Key Metrics or Survey Categories:** - Highlight specific areas (e.g., communication, workload, recognition, career growth) showing low or declining scores. - **Demographic Breakdown:** - Share if possible by department, team, tenure, or location. - Note if specific groups are experiencing more concerns. - **Trends or Patterns Noticed:** - Describe noticeable drops or concerning patterns in particular areas. - Mention any comments or qualitative feedback from employees. - **Your Primary Concerns:** - Specify which issues you find most urgent or want help prioritizing. If you provide these details, I'll be able to offer a targeted analysis and actionable recommendations to address the concerns. ",
-        "timestamp": "2025-09-07T12:54:04.179740"
-      },
-      {
-        "id": "e499ea8e-55ea-40f9-807c-30bf67403bac",
-        "role": "user",
-        "content": "How many questions should my engagement survey have",
-        "timestamp": "2025-09-07T13:22:22.891456"
       }
     ],
     "is_active": true
@@ -42,7 +24,7 @@
     "id": "culture-002",
     "title": "Remote Work Culture Assessment",
     "created_at": "2025-09-06T14:15:00",
-    "updated_at": "2025-09-07T12:55:40.287742",
+    "updated_at": "2025-09-06T14:20:00",
     "messages": [
       {
         "id": "msg-002-1",
@@ -55,30 +37,6 @@
         "role": "assistant",
         "content": "**Remote-first culture** requires intentional design and consistent effort. Here are proven strategies:\n\n## Core Elements:\n\n### **Virtual Connection Rituals**\n- **Daily standups** with personal check-ins\n- **Virtual coffee chats** (15-min random pairings)\n- **All-hands meetings** with interactive elements\n- **Online team building** activities\n\n### **Communication Standards** \n- **Async-first** communication principles\n- **Documentation culture** for transparency\n- **Response time expectations** clearly defined\n- **Video-on meetings** for important discussions\n\n### **Recognition & Belonging**\n- **Digital recognition wall** for achievements\n- **Virtual celebration** of milestones\n- **Inclusive meeting practices** (camera etiquette, speaking time)\n- **Remote onboarding buddy** system\n\nThe key is being **more intentional** about culture touchpoints that happened naturally in-office. What specific aspect would you like to focus on first?",
         "timestamp": "2025-09-06T14:16:00"
-      },
-      {
-        "id": "3aab943a-2380-4358-8fd0-c075f8380978",
-        "role": "user",
-        "content": "Test streaming with markdown formatting",
-        "timestamp": "2025-09-07T12:54:33.134539"
-      },
-      {
-        "id": "7cec0d81-1b80-4a27-b6d8-a2e8722ff50f",
-        "role": "assistant",
-        "content": "Absolutely! Here's a **streamed response with markdown formatting** to demonstrate: --- ### \ud83c\udf1f **Welcome to Culture Intelligence!** Let's try a simple, streamed markdown example: 1. **Heading:** `# Company Culture Priorities` 2. **Bullet List:** - Strong communication - Psychological safety - Recognition - Wellbeing 3. **Quote:** > \"Culture eats strategy for breakfast.\" \u2013 Peter Drucker --- If you'd like to test something specific (tables, code blocks, stepwise info), let me know! ",
-        "timestamp": "2025-09-07T12:54:36.857946"
-      },
-      {
-        "id": "8199f39b-de76-48ef-ac0d-0837b903065a",
-        "role": "user",
-        "content": "hows it going",
-        "timestamp": "2025-09-07T12:55:37.112644"
-      },
-      {
-        "id": "62886d34-b7d6-4e29-809c-5f627e2f42e5",
-        "role": "assistant",
-        "content": "It's going well, thank you for asking! \ud83d\ude0a I'm here and ready to support you on all things related to **analyzing, improving, and quantifying company culture**. Is there a particular area you'd like to explore today? For example: - Reviewing recent **employee survey data** - Brainstorming **culture-building actions** - Identifying **engagement trends** - Or something else culture-intelligence related? Let me know how I can assist! ",
-        "timestamp": "2025-09-07T12:55:40.287584"
       }
     ],
     "is_active": true
@@ -87,7 +45,7 @@
     "id": "culture-003",
     "title": "Diversity & Inclusion Metrics",
     "created_at": "2025-09-05T16:45:00",
-    "updated_at": "2025-09-07T13:09:17.421813",
+    "updated_at": "2025-09-05T16:50:00",
     "messages": [
       {
         "id": "msg-003-1",
@@ -98,20 +56,8 @@
       {
         "id": "msg-003-2",
         "role": "assistant",
-        "content": "Here are the **essential D&I metrics** every organization should track:\n\n## Representation Metrics:\n- **Demographic composition** by level/department\n- **Leadership diversity** (C-suite, VP, Director levels)\n- **Hiring diversity** (candidate pipeline \u2192 offers \u2192 acceptances)\n- **Promotion rates** by demographic groups\n\n## Inclusion Experience:\n- **Belonging scores** (survey-based)\n- **Psychological safety** index\n- **Voice & influence** perception surveys\n- **Mentor/sponsor** access rates\n\n## Pay Equity:\n- **Compensation analysis** by role and demographics\n- **Bonus/equity** distribution patterns\n- **Performance rating** distribution fairness\n\n## Retention & Growth:\n- **Turnover rates** by demographic groups\n- **Internal mobility** success rates\n- **High-potential identification** diversity\n\n## Actionable Insights:\nTrack these **quarterly** and focus on **trends over time** rather than snapshots. The most critical metric is often **belonging scores** - they predict retention and performance better than representation alone.\n\nWhich metrics would you like help setting up measurement frameworks for?",
+        "content": "Here are the **essential D&I metrics** every organization should track:\n\n## Representation Metrics:\n- **Demographic composition** by level/department\n- **Leadership diversity** (C-suite, VP, Director levels)\n- **Hiring diversity** (candidate pipeline → offers → acceptances)\n- **Promotion rates** by demographic groups\n\n## Inclusion Experience:\n- **Belonging scores** (survey-based)\n- **Psychological safety** index\n- **Voice & influence** perception surveys\n- **Mentor/sponsor** access rates\n\n## Pay Equity:\n- **Compensation analysis** by role and demographics\n- **Bonus/equity** distribution patterns\n- **Performance rating** distribution fairness\n\n## Retention & Growth:\n- **Turnover rates** by demographic groups\n- **Internal mobility** success rates\n- **High-potential identification** diversity\n\n## Actionable Insights:\nTrack these **quarterly** and focus on **trends over time** rather than snapshots. The most critical metric is often **belonging scores** - they predict retention and performance better than representation alone.\n\nWhich metrics would you like help setting up measurement frameworks for?",
         "timestamp": "2025-09-05T16:46:30"
-      },
-      {
-        "id": "727abf8a-37e2-4372-a3ab-8937ca0d82b7",
-        "role": "user",
-        "content": "Quick test of word streaming",
-        "timestamp": "2025-09-07T13:09:15.163082"
-      },
-      {
-        "id": "06c8250c-5a90-4a46-bb4e-c0319bb83a36",
-        "role": "assistant",
-        "content": "Word streaming is working! You're seeing my response arrive in real time\u2014useful for rapid feedback or longer explanations. Let me know if you want to try another test or continue with D&I metric frameworks! ",
-        "timestamp": "2025-09-07T13:09:17.421761"
       }
     ],
     "is_active": true
@@ -120,7 +66,7 @@
     "id": "culture-004",
     "title": "Employee Feedback Analysis",
     "created_at": "2025-09-04T11:20:00",
-    "updated_at": "2025-09-07T13:22:41.022001",
+    "updated_at": "2025-09-04T11:25:00",
     "messages": [
       {
         "id": "msg-004-1",
@@ -133,233 +79,8 @@
         "role": "assistant",
         "content": "**Burnout signals** in anonymous feedback require immediate, thoughtful action. Here's a strategic approach:\n\n## Immediate Assessment:\n- **Follow-up survey** with specific burnout indicators\n- **Workload audit** across teams and individuals\n- **Manager 1:1 quality** evaluation\n- **Resource availability** check\n\n## Root Cause Analysis:\n### Common Burnout Drivers:\n- **Unclear priorities** or constantly shifting goals\n- **Insufficient resources** for expected outcomes\n- **Poor work-life boundaries** (especially remote)\n- **Lack of autonomy** or micromanagement\n- **Inadequate recognition** for extra effort\n\n## Action Framework:\n\n### **Week 1**: Emergency measures\n- **Deadline audit** - what can be postponed?\n- **Resource reallocation** - who needs help?\n- **Manager coaching** on recognizing burnout signs\n\n### **Month 1**: Structural changes  \n- **Workload redistribution** protocols\n- **Meeting audit** (reduce unnecessary meetings)\n- **\"Right to disconnect\"** policies\n- **Mental health resources** enhancement\n\n**Critical**: Address this transparently with the team. Acknowledge the feedback and share your action plan. Burnout spreads quickly but so does the positive impact of genuine leadership response.",
         "timestamp": "2025-09-04T11:21:45"
-      },
-      {
-        "id": "ef6bba59-272d-414f-b80f-87311bf25025",
-        "role": "user",
-        "content": "What are best practices for survey design",
-        "timestamp": "2025-09-07T13:22:41.021951"
       }
     ],
     "is_active": true
-  },
-  "culture-005": {
-    "id": "culture-005",
-    "title": "Onboarding Experience Redesign",
-    "created_at": "2025-09-03T09:30:00",
-    "updated_at": "2025-09-03T09:35:00",
-    "messages": [
-      {
-        "id": "msg-005-1",
-        "role": "user",
-        "content": "Our new hires are struggling to feel connected to the team culture. Any suggestions for improving onboarding?",
-        "timestamp": "2025-09-03T09:30:00"
-      },
-      {
-        "id": "msg-005-2",
-        "role": "assistant",
-        "content": "**Cultural integration** during onboarding is critical for long-term success. Here's a comprehensive approach:\n\n## Pre-Day 1 (Culture Preview):\n- **Welcome video** from team members\n- **Culture guidebook** with real stories/examples\n- **Buddy assignment** with informal intro call\n- **First-week schedule** shared in advance\n\n## Week 1 (Immersion):\n### Daily Culture Touchpoints:\n- **Coffee chat** with different team members\n- **Lunch & learn** about company values in action\n- **Shadow sessions** observing team dynamics\n- **Story sharing** - how others joined and thrived\n\n## Week 2-4 (Integration):\n- **Cross-functional** project or collaboration\n- **Feedback loops** with buddy and manager\n- **Culture quiz/game** about company traditions\n- **Contribution opportunity** to feel valued early\n\n## Success Metrics:\n- **30-day check-in** survey on belonging\n- **Cultural fluency** assessment\n- **Relationship network** mapping\n- **Early performance** indicators\n\n**Key insight**: Culture isn't just communicated - it's experienced through **authentic interactions** and **meaningful inclusion** in the team's daily rhythm.\n\nWhat's your current onboarding timeline, and where do you see the biggest gaps?",
-        "timestamp": "2025-09-03T09:32:00"
-      }
-    ],
-    "is_active": true
-  },
-  "culture-006": {
-    "id": "culture-006",
-    "title": "Performance Review Culture",
-    "created_at": "2025-09-02T13:00:00",
-    "updated_at": "2025-09-02T13:10:00",
-    "messages": [
-      {
-        "id": "msg-006-1",
-        "role": "user",
-        "content": "How can we make performance reviews more focused on growth rather than just evaluation?",
-        "timestamp": "2025-09-02T13:00:00"
-      },
-      {
-        "id": "msg-006-2",
-        "role": "assistant",
-        "content": "Transforming performance reviews from **evaluation to development** creates a more positive, growth-oriented culture:\n\n## Shift the Framework:\n\n### **From Evaluation TO Development**\n- Replace \"How did you perform?\" with \"**How can we help you grow?**\"\n- Focus on **future potential** rather than past mistakes\n- **Collaborative goal setting** instead of top-down targets\n\n### **From Annual TO Continuous**\n- **Monthly growth conversations** (15-20 min)\n- **Quarterly development planning**\n- **Real-time feedback** culture\n- **Peer feedback** incorporation\n\n## New Review Structure:\n\n### **1. Strengths Amplification** (40%)\n- What energizes you most at work?\n- Where do you add unique value?\n- How can we leverage these strengths more?\n\n### **2. Growth Opportunities** (40%)\n- What skills excite you to develop?\n- What challenges interest you?\n- What support do you need?\n\n### **3. Career Pathing** (20%)\n- Where do you see yourself growing?\n- What experiences would accelerate your development?\n- How does your growth align with company needs?\n\n**Result**: Employees leave energized about their future rather than defensive about their past. This approach increases retention and engagement significantly.",
-        "timestamp": "2025-09-02T13:02:30"
-      }
-    ],
-    "is_active": true
-  },
-  "culture-007": {
-    "id": "culture-007",
-    "title": "Cross-Team Collaboration Issues",
-    "created_at": "2025-09-01T15:45:00",
-    "updated_at": "2025-09-01T15:48:00",
-    "messages": [
-      {
-        "id": "msg-007-1",
-        "role": "user",
-        "content": "There's tension between our sales and engineering teams. How can we improve collaboration?",
-        "timestamp": "2025-09-01T15:45:00"
-      },
-      {
-        "id": "msg-007-2",
-        "role": "assistant",
-        "content": "**Sales-Engineering tension** is common but solvable with the right cultural interventions:\n\n## Understanding the Disconnect:\n- **Different timelines**: Sales (immediate) vs Engineering (long-term)\n- **Different metrics**: Revenue targets vs Technical quality\n- **Communication styles**: Customer-facing vs Internal technical\n- **Pressure points**: Customer demands vs Technical feasibility\n\n## Bridge-Building Solutions:\n\n### **Shared Understanding**\n- **Team shadowing** - Sales sits in engineering meetings, engineers join sales calls\n- **Cross-functional goals** tied to both revenue and product quality\n- **Joint planning sessions** for product roadmap\n\n### **Communication Protocols**\n- **Weekly sync meetings** with structured agenda\n- **Shared slack channels** for real-time updates\n- **Escalation pathways** for urgent customer needs\n- **Documentation standards** both teams can follow\n\n### **Celebration & Recognition**\n- **Joint wins celebration** when deals close with great technical execution\n- **Customer success stories** highlighting both teams' contributions\n- **Cross-team recognition** in company meetings\n\n**Quick win**: Start with a **joint retrospective** where both teams share their biggest challenges and frustrations. Often, simply understanding each other's constraints builds empathy and collaboration.\n\nHave you identified specific friction points or is this more of a general cultural misalignment?",
-        "timestamp": "2025-09-01T15:46:30"
-      }
-    ],
-    "is_active": true
-  },
-  "culture-008": {
-    "id": "culture-008",
-    "title": "Psychological Safety Workshop",
-    "created_at": "2025-08-30T10:15:00",
-    "updated_at": "2025-08-30T10:18:00",
-    "messages": [
-      {
-        "id": "msg-008-1",
-        "role": "user",
-        "content": "I want to run a workshop on psychological safety. What should I include?",
-        "timestamp": "2025-08-30T10:15:00"
-      },
-      {
-        "id": "msg-008-2",
-        "role": "assistant",
-        "content": "A **psychological safety workshop** is excellent for building trust and innovation. Here's a proven structure:\n\n## Workshop Outline (3 hours):\n\n### **Opening (30 min)**\n- **Define psychological safety**: \"The belief that you can speak up without risk of punishment or humiliation\"\n- **Share Google's findings**: Teams with high psychological safety perform 27% better\n- **Anonymous survey**: Current team safety levels\n\n### **Interactive Exercises (90 min)**\n\n**Exercise 1: Failure Stories** (30 min)\n- Leaders share their **biggest professional failure** and lessons learned\n- Small groups discuss: \"When have you felt safe/unsafe to share concerns?\"\n\n**Exercise 2: Scenario Practice** (30 min)\n- Role-play difficult conversations\n- Practice giving/receiving constructive feedback\n- Discuss: \"How would we handle this situation?\"\n\n**Exercise 3: Team Norms** (30 min)\n- Create team agreements for safe communication\n- Define what \"healthy conflict\" looks like\n- Establish \"speak up\" protocols\n\n### **Action Planning (60 min)**\n- **Team commitments**: What will we start/stop/continue?\n- **Manager commitments**: How will leaders model safety?\n- **Follow-up plan**: 30/60/90 day check-ins\n\n**Key Success Factor**: Leaders must be **vulnerable first** - psychological safety flows from the top down.\n\nWould you like specific facilitation tips or materials for any of these sections?",
-        "timestamp": "2025-08-30T10:17:00"
-      }
-    ],
-    "is_active": true
-  },
-  "756b78bf-f5ad-4782-a9a5-744f4ee92fb0": {
-    "id": "756b78bf-f5ad-4782-a9a5-744f4ee92fb0",
-    "title": "Final Canvas Test",
-    "created_at": "2025-09-07T12:54:31.193422",
-    "updated_at": "2025-09-07T12:54:31.193426",
-    "messages": [],
-    "is_active": true
-  },
-  "00f84e6a-4f91-45bf-811f-14a199342577": {
-    "id": "00f84e6a-4f91-45bf-811f-14a199342577",
-    "title": "Test Integration",
-    "created_at": "2025-09-07T12:55:08.776950",
-    "updated_at": "2025-09-07T12:55:10.995054",
-    "messages": [
-      {
-        "id": "676e5ccf-be2c-4eab-ac44-acf5ce94b0e1",
-        "role": "user",
-        "content": "hello",
-        "timestamp": "2025-09-07T12:55:08.831040"
-      },
-      {
-        "id": "a0efba11-a740-403f-b1a7-f88056528c05",
-        "role": "assistant",
-        "content": "Hello! How can I assist you with culture intelligence today? If you have data or feedback to analyze, need insights on team dynamics, or are looking for actionable recommendations to enhance your organization's culture, just let me know. What would you like to focus on? ",
-        "timestamp": "2025-09-07T12:55:10.995025"
-      }
-    ],
-    "is_active": true
-  },
-  "298d9ee0-2ee5-4797-bb68-bd7756189eab": {
-    "id": "298d9ee0-2ee5-4797-bb68-bd7756189eab",
-    "title": "New Chat",
-    "created_at": "2025-09-07T12:55:13.394244",
-    "updated_at": "2025-09-07T12:55:23.378604",
-    "messages": [],
-    "is_active": false
-  },
-  "f97fcbb6-833f-45e5-9967-cefcf2e36ceb": {
-    "id": "f97fcbb6-833f-45e5-9967-cefcf2e36ceb",
-    "title": "New Chat",
-    "created_at": "2025-09-07T12:55:13.397107",
-    "updated_at": "2025-09-07T13:12:31.667329",
-    "messages": [],
-    "is_active": false
-  },
-  "a0c80e69-ec87-48c8-945c-9c02d18ff4fa": {
-    "id": "a0c80e69-ec87-48c8-945c-9c02d18ff4fa",
-    "title": "New Chat",
-    "created_at": "2025-09-07T13:04:25.154388",
-    "updated_at": "2025-09-07T13:12:30.808939",
-    "messages": [],
-    "is_active": false
-  },
-  "8fc0abed-d38e-4978-bb04-15e7244961a5": {
-    "id": "8fc0abed-d38e-4978-bb04-15e7244961a5",
-    "title": "New Chat",
-    "created_at": "2025-09-07T13:04:25.172530",
-    "updated_at": "2025-09-07T13:12:30.337988",
-    "messages": [],
-    "is_active": false
-  },
-  "b5fbdcc6-e8bd-4b5d-b090-ed75341b1d66": {
-    "id": "b5fbdcc6-e8bd-4b5d-b090-ed75341b1d66",
-    "title": "Test Integration",
-    "created_at": "2025-09-07T13:11:42.956263",
-    "updated_at": "2025-09-07T13:11:44.998908",
-    "messages": [
-      {
-        "id": "439aaa24-5c28-4b10-b648-e86c74adadad",
-        "role": "user",
-        "content": "hello",
-        "timestamp": "2025-09-07T13:11:43.006800"
-      },
-      {
-        "id": "9fa0ec4a-9ddb-4f57-89d6-76f6c6e583f9",
-        "role": "assistant",
-        "content": "Hello! \ud83d\udc4b How can I assist you with your company culture analysis or insights today? If you have culture data, feedback, or specific challenges, feel free to share\u2014I'm here to help you interpret the data and suggest actionable improvements! ",
-        "timestamp": "2025-09-07T13:11:44.998810"
-      }
-    ],
-    "is_active": true
-  },
-  "96b00d2e-0b1b-4020-8133-b356e0f5114e": {
-    "id": "96b00d2e-0b1b-4020-8133-b356e0f5114e",
-    "title": "New Chat",
-    "created_at": "2025-09-07T13:11:47.337913",
-    "updated_at": "2025-09-07T13:12:32.802157",
-    "messages": [],
-    "is_active": false
-  },
-  "0121b275-4ff0-431b-b794-836662207880": {
-    "id": "0121b275-4ff0-431b-b794-836662207880",
-    "title": "New Chat",
-    "created_at": "2025-09-07T13:11:47.339217",
-    "updated_at": "2025-09-07T13:25:31.677762",
-    "messages": [],
-    "is_active": false
-  },
-  "30e61106-fba2-4274-bfe1-17165fe139bd": {
-    "id": "30e61106-fba2-4274-bfe1-17165fe139bd",
-    "title": "Test Integration",
-    "created_at": "2025-09-07T13:24:42.755381",
-    "updated_at": "2025-09-07T13:24:44.664682",
-    "messages": [
-      {
-        "id": "2d933caa-6c4e-4969-b2cd-ea85417005f2",
-        "role": "user",
-        "content": "hello",
-        "timestamp": "2025-09-07T13:24:42.799818"
-      },
-      {
-        "id": "21b6aa3d-84bf-400d-9652-8a1ad41dafaf",
-        "role": "assistant",
-        "content": "Hello! \ud83d\udc4b How can I support your culture intelligence work today? Are you looking to analyze recent survey results, explore patterns in team dynamics, or discuss ways to enhance your organization's culture? Let me know how I can help! ",
-        "timestamp": "2025-09-07T13:24:44.664562"
-      }
-    ],
-    "is_active": true
-  },
-  "33f4aa82-1b7a-4ff0-92ea-b7bbd8d0b399": {
-    "id": "33f4aa82-1b7a-4ff0-92ea-b7bbd8d0b399",
-    "title": "New Chat",
-    "created_at": "2025-09-07T13:24:46.840341",
-    "updated_at": "2025-09-07T13:25:30.546290",
-    "messages": [],
-    "is_active": false
-  },
-  "9792a645-d7f0-4ade-9143-328739147f74": {
-    "id": "9792a645-d7f0-4ade-9143-328739147f74",
-    "title": "New Chat",
-    "created_at": "2025-09-07T13:24:46.847678",
-    "updated_at": "2025-09-07T13:25:30.063811",
-    "messages": [],
-    "is_active": false
   }
 }
