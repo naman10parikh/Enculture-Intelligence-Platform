@@ -171,17 +171,18 @@ function AIChat() {
         await loadUserState(currentUserId)
       }
       
-      // Only load backend threads for manager, others get persisted local state
-      if (currentUser?.id === 'michael_chen') {
+      // All users can now load backend threads for consistent experience
+      try {
         await loadRecentThreads()
         
         // Create a new thread if none exists and no saved state
         if (!currentThreadId) {
           await createNewThread()
         }
-      } else {
-        // Other users use their persisted local state (already loaded by loadUserState)
-        console.log(`${currentUser?.name} loaded from persisted state`)
+      } catch (error) {
+        console.error('Failed to load backend threads for', currentUser?.name, ':', error)
+        // Continue with local state if backend fails
+        console.log(`${currentUser?.name} continuing with local state due to backend error`)
       }
     }
     
@@ -617,17 +618,14 @@ function AIChat() {
       // Each user gets their own isolated chat environment
       console.log(`${user?.name} (${user?.role}) starting with mock chat history`)
       
-      // Only Manager gets existing backend threads, others use mock local threads
-      if (userId === 'michael_chen') {
-        try {
-          await loadRecentThreads()
-        } catch (error) {
-          console.error('Failed to load manager threads:', error)
-          setRecentThreads([])
-        }
-      } else {
-        // All other users use mock data for better initial experience
-        console.log(`${user?.name} loaded with ${mockData.recentThreads.length} mock threads`)
+      // All users can now load backend threads for consistent AI responses
+      try {
+        await loadRecentThreads()
+        console.log(`${user?.name} loaded backend threads successfully`)
+      } catch (error) {
+        console.error('Failed to load backend threads for', user?.name, ':', error)
+        // Fallback to mock data if backend fails
+        console.log(`${user?.name} loaded with ${mockData.recentThreads.length} mock threads due to backend error`)
       }
     }
   }
@@ -801,19 +799,21 @@ function AIChat() {
       }
       
       // Only create a new thread if no empty chat exists
-      if (currentUser?.id === 'michael_chen') {
-        // Only Manager creates backend threads
+      // All users can now create backend threads for consistent AI responses
+      try {
         const newThread = await chatThreadsApi.createThread(null, currentUserId)
         setCurrentThreadId(newThread.id)
         setMessages([]) // Clear current messages
         await loadRecentThreads() // Refresh the list
-      } else {
-        // Other users use local-only threads
+        console.log(`${currentUser?.name} created backend thread: ${newThread.id}`)
+      } catch (error) {
+        console.error('Failed to create backend thread, falling back to local:', error)
+        // Fallback to local thread if backend fails
         const localThreadId = `local_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
         setCurrentThreadId(localThreadId)
         setMessages([]) // Clear current messages
         setRecentThreads([{ id: localThreadId, title: 'New Chat', message_count: 0, updated_at: new Date().toISOString() }])
-        console.log(`${currentUser?.name} created local-only thread: ${localThreadId}`)
+        console.log(`${currentUser?.name} created fallback local thread: ${localThreadId}`)
       }
     } catch (error) {
       console.error('Failed to create new thread:', error)
@@ -942,8 +942,8 @@ function AIChat() {
 
   const deleteThread = async (threadId) => {
     try {
-      // Only delete backend threads for manager
-      if (currentUser?.id === 'michael_chen') {
+      // All users can now delete backend threads
+      if (!threadId.startsWith('local_')) {
         await chatThreadsApi.deleteThread(threadId)
       }
       
@@ -955,8 +955,8 @@ function AIChat() {
         await createNewThread()
       }
       
-      // Only refresh backend threads for manager
-      if (currentUser?.id === 'michael_chen') {
+      // Refresh backend threads for all users
+      if (!threadId.startsWith('local_')) {
         await loadRecentThreads()
       }
     } catch (error) {
@@ -1023,8 +1023,8 @@ function AIChat() {
     }
 
     try {
-      if (backendConnected && (currentUser?.id === 'michael_chen' || !currentThreadId.startsWith('local_'))) {
-        // Only use backend API for Manager or non-local threads
+      if (backendConnected) {
+        // All users can use backend API for real AI responses
         // Add user message to UI immediately
         const userMessage = {
           id: `user-${Date.now()}`,
@@ -1096,8 +1096,8 @@ function AIChat() {
             
             if (data.title_updated && !titleUpdated) {
               titleUpdated = true
-              // Refresh the threads list to show new title - only for manager
-              if (currentUser?.id === 'michael_chen') {
+              // Refresh the threads list to show new title - for all users with backend threads
+              if (!currentThreadId.startsWith('local_')) {
                 loadRecentThreads()
               }
             }

@@ -2008,9 +2008,9 @@
     "title": "New Chat",
     "user_id": null,
     "created_at": "2025-09-07T20:54:56.222538",
-    "updated_at": "2025-09-07T20:54:56.222545",
+    "updated_at": "2025-09-07T21:59:14.517011",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "b834d6b6-157f-45db-9e13-6cc2ea1f64cf": {
     "id": "b834d6b6-157f-45db-9e13-6cc2ea1f64cf",
@@ -2153,7 +2153,7 @@
     "title": "Chat History Persistence Test",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:22:43.725482",
-    "updated_at": "2025-09-07T21:46:36.238659",
+    "updated_at": "2025-09-07T21:56:25.312224",
     "messages": [
       {
         "id": "1c072a40-f9a7-4447-a055-28605c868a96",
@@ -2226,6 +2226,30 @@
         "role": "assistant",
         "content": "I'm doing well, thank you for asking! \ud83d\ude0a Ready to help you with anything related to company culture, employee feedback, or analytics. If you have any culture data you want to analyze, specific questions about engagement, or just want to continue testing, let me know how you'd like to proceed! What would you like to do next? ",
         "timestamp": "2025-09-07T21:46:36.238572"
+      },
+      {
+        "id": "edd5d033-d036-45b3-aa9a-fb14a1edb6e9",
+        "role": "user",
+        "content": "Hello! This is Emily Rodriguez testing the new consistent logic. I should get a proper AI response, not a preset template.",
+        "timestamp": "2025-09-07T21:49:59.793785"
+      },
+      {
+        "id": "b0a559e9-0d2f-4fcf-99be-281afa1342ef",
+        "role": "assistant",
+        "content": "Hello Emily! Thanks for testing the new consistent logic\u2014your feedback is valuable. You're right; it's important that my responses feel natural and context-aware, rather than templated. Here's an AI-generated, thoughtful response based on your message: --- Hi Emily! It's great to see you testing the platform's consistency. I'm here to provide real-time, tailored insights and support as you explore or roll out new features. Whether you want to review recent culture trends in your data, run a test scenario around employee feedback, or just evaluate how the system responds to varied input styles, I'm ready to assist. Would you like to simulate an employee pulse survey, dig into analytics, or perhaps stress-test how the platform handles nuanced queries around culture? Let me know your next step\u2014I'll adapt accordingly! --- If you have a specific logic path or feature you want to try right now, just lay it out, and I'll respond dynamically. ",
+        "timestamp": "2025-09-07T21:50:07.204448"
+      },
+      {
+        "id": "b480b4bf-ce53-4f6f-bdbe-85709697d97b",
+        "role": "user",
+        "content": "This is a totally new message from Emily Rodriguez. I should get a real AI response from the backend, not a template response. What do you think about innovation in the workplace?",
+        "timestamp": "2025-09-07T21:56:09.245311"
+      },
+      {
+        "id": "047ec4ac-87ef-4714-b076-4a91ba7505d2",
+        "role": "assistant",
+        "content": "Absolutely, Emily! Innovation in the workplace is essential for both organizational growth and employee engagement. Here's a data-driven perspective on why it matters and how to foster it: ### Why Innovation Matters - **Drives Competitive Advantage:** Innovative companies adapt quickly to market changes, outpace competitors, and better satisfy customer needs. - **Boosts Employee Engagement:** Employees who are encouraged to innovate feel more valued, empowered, and invested in organizational success. - **Enhances Problem-Solving:** A culture of innovation nurtures creativity, resulting in fresh solutions to persistent challenges. ### Indicators of an Innovative Workplace (Based on Culture Data) - **Open Feedback Channels:** Employees regularly share ideas without fear of negative repercussions. - **Cross-Functional Collaboration:** Teams with diverse skills tackle challenges together, leading to more creative solutions. - **Recognition of Experimentation:** Efforts to innovate\u2014even those that \"fail\"\u2014are recognized and learned from. - **Agility:** Decision-making structures that adapt to insights and new information quickly. ### Actionable Recommendations to Foster Innovation 1. **Empower Risk-Taking:** Regularly solicit and pilot employee ideas, celebrating learnings from both successes and failures. 2. **Establish Psychological Safety:** Ensure teams feel comfortable voicing unconventional ideas by reinforcing leader support. 3. **Provide Innovation Resources:** Allocate time, budget, and training for experimental projects (e.g., \"hackathons,\" innovation sprints). 4. **Measure & Share Results:** Track metrics on new initiatives and transparently communicate outcomes\u2014what worked, what didn't, and why. 5. **Integrate Innovation into Values:** Explicitly include \"innovation\" in company values and reward behaviors that reinforce it. ### Cultural Challenges to Monitor - **Fear of Failure:** In cultures where mistakes are penalized, innovation is usually stifled. - **Siloed Information:** If knowledge doesn't flow freely, innovative ideas rarely evolve or scale. #### Example Metrics to Track (if you're measuring culture) - Frequency of new ideas proposed by employees per quarter - % of employees who feel comfortable suggesting improvements (survey item) - Number of cross-team projects launched If you'd like, I can help interpret your company's feedback data for innovation trends, or suggest specific questions to include in a culture survey. Would you like to see recent benchmarks or best practices from high-performing innovative companies? ",
+        "timestamp": "2025-09-07T21:56:25.312178"
       }
     ],
     "is_active": true
@@ -2281,11 +2305,24 @@
   },
   "aa833ee4-50c6-471e-a49e-7b44e8b1b33a": {
     "id": "aa833ee4-50c6-471e-a49e-7b44e8b1b33a",
-    "title": "New Chat",
+    "title": "Loading Animation Fix Test",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:38:57.734833",
-    "updated_at": "2025-09-07T21:41:15.183633",
-    "messages": [],
+    "updated_at": "2025-09-07T21:49:25.783413",
+    "messages": [
+      {
+        "id": "1942c74e-75a9-4f1a-85df-1b4761dc5d96",
+        "role": "user",
+        "content": "Testing the loading animation fix",
+        "timestamp": "2025-09-07T21:49:21.566873"
+      },
+      {
+        "id": "5306c433-c6ee-4409-b47c-bdda80490f3d",
+        "role": "assistant",
+        "content": "Thank you for letting me know! If you have any feedback or need to confirm that the loading animation fix is visually working as expected, please let me know what to look for or how you'd like to proceed. If you want me to simulate or describe how a good loading animation experience should feel from a culture intelligence perspective (e.g., impact on employee engagement during survey submission), just ask! ",
+        "timestamp": "2025-09-07T21:49:25.063433"
+      }
+    ],
     "is_active": false
   },
   "00bf5678-6c8d-416f-8a36-174eceb8f1db": {
@@ -2302,7 +2339,7 @@
     "title": "Profile Isolation Feature Test",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:39:08.353582",
-    "updated_at": "2025-09-07T21:39:32.897375",
+    "updated_at": "2025-09-07T21:59:35.243483",
     "messages": [
       {
         "id": "c14785cd-37c0-49a1-b27f-4d9a1a178cc3",
@@ -2315,6 +2352,18 @@
         "role": "assistant",
         "content": "Hello Michael! Thank you for testing the new profile isolation feature. Your session is set to the **culture_intelligence** role, which means responses will be tailored for someone analyzing and interpreting culture data across organizations. If you'd like to: - Analyze sample data - Test insights generation - Check recommendations for specific personas (CEO, HR, managers, etc.) - Or see how profile isolation impacts data privacy and context switching Just let me know your scenario or the type of workflow you want to test! How would you like to proceed? ",
         "timestamp": "2025-09-07T21:39:32.227590"
+      },
+      {
+        "id": "2d7fec9a-3a09-4eba-8b4c-8f03b897d260",
+        "role": "user",
+        "content": "cool thanks",
+        "timestamp": "2025-09-07T21:59:31.357736"
+      },
+      {
+        "id": "0c9df69e-dba0-4b17-b244-351994829a2d",
+        "role": "assistant",
+        "content": "You're welcome, Michael! If you'd like to try out any specific workflows (like importing sample culture data, running a pulse survey mock analysis, or switching perspectives between personas), just let me know the scenario. I can walk you through insight generation, action recommendations, or demonstrate how profile isolation keeps user data segmented and secure. Ready to test something specific, or do you want suggestions on possible test cases for the culture_intelligence role? ",
+        "timestamp": "2025-09-07T21:59:35.243310"
       }
     ],
     "is_active": true
@@ -2364,7 +2413,7 @@
     "title": "Culture Intelligence Assistance Overview",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:46:54.750239",
-    "updated_at": "2025-09-07T21:47:04.205668",
+    "updated_at": "2025-09-07T21:56:50.557022",
     "messages": [
       {
         "id": "6e843d8e-37f2-4157-bf8b-98327c990cd9",
@@ -2377,6 +2426,18 @@
         "role": "assistant",
         "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Are you looking to analyze recent culture data, interpret survey results, or explore ways to improve team engagement? Let me know what you need, and I'll provide tailored insights or recommendations. ",
         "timestamp": "2025-09-07T21:47:03.218802"
+      },
+      {
+        "id": "5fbdb71f-ede3-4e78-b776-731565b2273d",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:56:47.388054"
+      },
+      {
+        "id": "f1032a3b-9367-4894-ab6e-f4f74adf56e1",
+        "role": "assistant",
+        "content": "Hi again! \ud83d\ude0a How can I support your work in culture intelligence today? If you have a specific dataset, recent feedback, or survey results you'd like to discuss, just share the details. I can help analyze trends, identify strengths or risks in culture, and suggest actionable next steps. What would you like to focus on? ",
+        "timestamp": "2025-09-07T21:56:50.556961"
       }
     ],
     "is_active": true
@@ -2386,8 +2447,260 @@
     "title": "New Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:47:33.013004",
-    "updated_at": "2025-09-07T21:47:33.013010",
+    "updated_at": "2025-09-07T21:59:27.603557",
     "messages": [],
+    "is_active": false
+  },
+  "277d85cd-e127-44c7-88aa-b0e9b939637a": {
+    "id": "277d85cd-e127-44c7-88aa-b0e9b939637a",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:48:28.041643",
+    "updated_at": "2025-09-07T21:48:30.618921",
+    "messages": [
+      {
+        "id": "c8bc93cc-5d10-466f-bafc-789bac12b3a0",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:48:28.105464"
+      },
+      {
+        "id": "83c114fd-5c6a-489e-b3c2-f6c5c2922363",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your culture intelligence efforts today? If you have specific culture data, survey results, or any questions about employee engagement and team dynamics, feel free to share them\u2014I'm here to help you analyze and generate actionable insights. ",
+        "timestamp": "2025-09-07T21:48:30.618859"
+      }
+    ],
+    "is_active": true
+  },
+  "172a7f9d-1311-4190-b3b3-ec67620ffe9a": {
+    "id": "172a7f9d-1311-4190-b3b3-ec67620ffe9a",
+    "title": "Culture Intelligence Assistance",
+    "user_id": "sarah_johnson",
+    "created_at": "2025-09-07T21:53:56.883080",
+    "updated_at": "2025-09-07T21:59:51.485538",
+    "messages": [
+      {
+        "id": "42f17dd1-032f-41c0-adb0-6173ac5a3fb3",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:53:59.769520"
+      },
+      {
+        "id": "72b95a8e-24cf-4a2e-ba44-9181dbc59df7",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with culture intelligence today? Are you interested in analyzing recent survey data, looking for actionable insights, or would you like recommendations to strengthen your company culture? Let me know what you need, and I'll get started! ",
+        "timestamp": "2025-09-07T21:54:02.158569"
+      },
+      {
+        "id": "db501dd6-4835-45e2-871f-d62f6322fa5e",
+        "role": "user",
+        "content": "whats up",
+        "timestamp": "2025-09-07T21:56:56.702492"
+      },
+      {
+        "id": "b3e2f75a-9cd7-4a4c-8256-8f6ee344ca44",
+        "role": "assistant",
+        "content": "All good here\u2014ready to help! Is there a specific aspect of your company culture or recent data you're focusing on today? For example, do you want to dive into employee engagement results, team dynamics, or identify culture strengths and opportunities? Let me know what you're curious about, and I'll provide targeted insights or actions! ",
+        "timestamp": "2025-09-07T21:56:59.653459"
+      }
+    ],
+    "is_active": false
+  },
+  "bcac1826-3e67-46b1-8f99-b7177198bf5b": {
+    "id": "bcac1826-3e67-46b1-8f99-b7177198bf5b",
+    "title": "New Chat",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:54:06.779279",
+    "updated_at": "2025-09-07T21:54:13.903301",
+    "messages": [],
+    "is_active": false
+  },
+  "dcdb3780-5a23-446c-8aff-b56faebac033": {
+    "id": "dcdb3780-5a23-446c-8aff-b56faebac033",
+    "title": "New Chat",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:54:15.026073",
+    "updated_at": "2025-09-07T21:58:31.637493",
+    "messages": [],
+    "is_active": false
+  },
+  "cd5c16d4-9926-459f-84f5-1c112ef82095": {
+    "id": "cd5c16d4-9926-459f-84f5-1c112ef82095",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:55:27.522225",
+    "updated_at": "2025-09-07T21:55:29.437809",
+    "messages": [
+      {
+        "id": "61153d8b-cefd-43c8-abfa-eed0b8aa92d8",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:55:27.583462"
+      },
+      {
+        "id": "ebc1e047-374d-4e32-9fe9-f5494bbec16b",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your culture intelligence work today? If you have data to analyze, need insights on team dynamics, or are looking for actionable steps to enhance your company culture, just let me know. ",
+        "timestamp": "2025-09-07T21:55:29.437773"
+      }
+    ],
+    "is_active": true
+  },
+  "900740a9-6b6f-4f36-b765-9280306d7be4": {
+    "id": "900740a9-6b6f-4f36-b765-9280306d7be4",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:57:46.764582",
+    "updated_at": "2025-09-07T21:57:48.907713",
+    "messages": [
+      {
+        "id": "500cf726-2cb3-4cb5-b088-465771cdd0ae",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:57:46.812720"
+      },
+      {
+        "id": "eba524c6-e69d-4d91-b42e-362a28abbc23",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As a culture intelligence specialist, how can I assist you today? Are you looking to analyze recent culture data, generate insights, discuss best practices, or something else related to organizational culture? Let me know your focus, and I'll tailor my support accordingly. ",
+        "timestamp": "2025-09-07T21:57:48.907539"
+      }
+    ],
+    "is_active": true
+  },
+  "08e2568e-62df-4953-9540-52a46df7160c": {
+    "id": "08e2568e-62df-4953-9540-52a46df7160c",
+    "title": "Culture Intelligence Support Introduction",
+    "user_id": "emily_rodriguez",
+    "created_at": "2025-09-07T21:58:13.729803",
+    "updated_at": "2025-09-07T21:58:25.938275",
+    "messages": [
+      {
+        "id": "2c5eba9d-8bed-4739-b53c-57c35940975a",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:58:22.524768"
+      },
+      {
+        "id": "dadd9303-3a63-480d-b536-a3201733d05a",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I support your work in culture intelligence today? Are you looking to analyze recent survey results, derive insights, benchmark culture metrics, or discuss actions to boost your organization's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T21:58:24.906713"
+      }
+    ],
+    "is_active": true
+  },
+  "aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a": {
+    "id": "aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a",
+    "title": "Culture Intelligence Inquiry",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:58:32.759280",
+    "updated_at": "2025-09-07T21:58:41.303643",
+    "messages": [
+      {
+        "id": "3d02b756-0a68-4b8b-9c20-3b0e307a617d",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:58:38.168601"
+      },
+      {
+        "id": "42807243-bca1-48e3-b6f0-18341b1da63c",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your culture intelligence needs today? Are you looking to analyze recent culture data, discuss insights, or explore ways to enhance your company's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T21:58:40.522306"
+      }
+    ],
+    "is_active": true
+  },
+  "24b22cbc-d23f-494d-a35a-3c3703c1446a": {
+    "id": "24b22cbc-d23f-494d-a35a-3c3703c1446a",
+    "title": "User Role Clarification",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:58:54.136809",
+    "updated_at": "2025-09-07T22:00:43.444282",
+    "messages": [
+      {
+        "id": "95301a97-ef4a-4137-8ff8-38b164f7fbe7",
+        "role": "user",
+        "content": "whats my role",
+        "timestamp": "2025-09-07T21:59:01.159071"
+      },
+      {
+        "id": "00d2aab0-6b25-4176-895f-c6125d9d4ef1",
+        "role": "assistant",
+        "content": "As a **Culture Intelligence** user, your role typically involves analyzing and synthesizing data related to workplace culture within your organization. You likely have responsibilities such as: - Monitoring and interpreting employee feedback and survey data - Identifying patterns, trends, and potential issues in cultural health - Providing insights to leadership, HR, and teams about engagement, sentiment, and culture risks - Recommending evidence-based actions to strengthen or evolve company culture - Supporting or guiding the overall cultural strategy and initiatives You serve as a bridge between raw culture data and actionable decisions, ensuring that leadership can effectively use culture metrics to drive positive organizational outcomes. Would you like specific tools, frameworks, or examples to help you fulfill this role more effectively? ",
+        "timestamp": "2025-09-07T21:59:06.998842"
+      },
+      {
+        "id": "84718be7-163c-472b-8f13-d8d0649ce26a",
+        "role": "user",
+        "content": "awesome summarize jeff bezos wedding in 11 words",
+        "timestamp": "2025-09-07T22:00:19.356339"
+      },
+      {
+        "id": "bc605e6e-4c89-4fc7-b63a-f90e361a315d",
+        "role": "assistant",
+        "content": "Jeff Bezos and Lauren S\u00e1nchez's lavish Venice wedding sparked local protests. ",
+        "timestamp": "2025-09-07T22:00:24.525720"
+      },
+      {
+        "id": "2788e4b7-1161-4dcd-ab04-53db2c85fc03",
+        "role": "user",
+        "content": "give citations",
+        "timestamp": "2025-09-07T22:00:32.015376"
+      },
+      {
+        "id": "e165b641-b01a-4505-a06a-5b3c41a5387e",
+        "role": "assistant",
+        "content": "Jeff Bezos and Lauren S\u00e1nchez's lavish wedding in Venice drew significant attention and sparked local protests. The three-day celebration, held in June 2025, featured extravagant events and a star-studded guest list. However, the opulence of the festivities led to criticism from local activists concerned about overtourism and the commercialization of Venice's cultural heritage. ([theweek.com](https://theweek.com/culture-life/jeff-bezos-wedding-venice-tacky?utm_source=openai)) The wedding took place on June 27, 2025, with the couple exchanging vows at the Basilica of San Giorgio Maggiore. The ceremony was followed by themed parties, including a Great Gatsby event, a pajama party, and a foam party. S\u00e1nchez reportedly had 27 outfits for the extended nuptials. The couple stayed at the Aman Venice hotel, located in the former Palazzo Papadopoli. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Wedding_of_Jeff_Bezos_and_Lauren_S%C3%A1nchez?utm_source=openai)) The guest list included high-profile figures such as Oprah Winfrey, Tom Brady, Kim and Khlo\u00e9 Kardashian, Kris Jenner, Ivanka Trump, Leonardo DiCaprio, Orlando Bloom, Queen Rania of Jordan, Mick Jagger, Bill Gates, and the Jenner sisters. Despite the absence of NDAs, several celebrities reportedly opted to avoid being photographed during the event. ([apnews.com](https://apnews.com/article/03cfa41cbb38929e016f412236cbc213?utm_source=openai), [cinemablend.com](https://www.cinemablend.com/streaming-news/jeff-bezos-wedding-insider-speaks-celebs-refusing-be-photographed?utm_source=openai)) Local activists and residents expressed opposition to the wedding, viewing it as a symbol of the exploitation of Venice by outsiders. Protests were organized by groups such as \"No Space for Bezos,\" who criticized the event for treating Venice as a playground for the ultra-wealthy. Banners were displayed with slogans like \"If you can rent Venice for your wedding, you can pay more tax.\" In response to the backlash, Bezos donated \u20ac1 million to three environmental organizations focused on preserving Venice. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Wedding_of_Jeff_Bezos_and_Lauren_S%C3%A1nchez?utm_source=openai), [apnews.com](https://apnews.com/article/03cfa41cbb38929e016f412236cbc213?utm_source=openai)) The wedding's extravagance and the resulting protests highlighted broader debates about tourism, wealth disparity, and the preservation of local culture in historically significant cities like Venice. ([theweek.com](https://theweek.com/culture-life/jeff-bezos-wedding-venice-tacky?utm_source=openai)) ## Jeff Bezos and Lauren S\u00e1nchez's Venice Wedding Sparks Controversy: - [Jeff in Venice: a 'triumph of tackiness'?](https://theweek.com/culture-life/jeff-bezos-wedding-venice-tacky?utm_source=openai)18\ue201 ",
+        "timestamp": "2025-09-07T22:00:43.444110"
+      }
+    ],
+    "is_active": true
+  },
+  "c2b9f809-c79d-4d54-89fa-427a9f207ec9": {
+    "id": "c2b9f809-c79d-4d54-89fa-427a9f207ec9",
+    "title": "Assistant Introduction Query",
+    "user_id": "david_williams",
+    "created_at": "2025-09-07T21:59:39.364995",
+    "updated_at": "2025-09-07T21:59:46.930612",
+    "messages": [
+      {
+        "id": "a02ee3b5-283d-41a4-892d-caff7fe035fb",
+        "role": "user",
+        "content": "whats your name",
+        "timestamp": "2025-09-07T21:59:42.520483"
+      },
+      {
+        "id": "3f8c5800-7b00-4eb9-b1c1-47f5dad91e38",
+        "role": "assistant",
+        "content": "I'm your Enculture AI Culture Intelligence Assistant! You can call me \"Enculture AI,\" or just \"AI\" if you prefer. My role is to help you interpret culture data, generate insights, and recommend culture-building actions. If you'd like to give me a name that fits your organization's vibe, let me know\u2014personalizing even your digital collaborators can be a great touch for company culture! How can I assist you today? ",
+        "timestamp": "2025-09-07T21:59:46.123221"
+      }
+    ],
+    "is_active": true
+  },
+  "83917a0d-fda3-4276-aa5b-9c7edf27aaca": {
+    "id": "83917a0d-fda3-4276-aa5b-9c7edf27aaca",
+    "title": "CEO Culture Intelligence Guidance",
+    "user_id": "sarah_johnson",
+    "created_at": "2025-09-07T21:59:52.165843",
+    "updated_at": "2025-09-07T22:00:01.114061",
+    "messages": [
+      {
+        "id": "42536c39-7d36-4f87-b519-058a614ce6f1",
+        "role": "user",
+        "content": "hi ceo",
+        "timestamp": "2025-09-07T21:59:55.663930"
+      },
+      {
+        "id": "e9193233-36a8-45f8-90aa-1e53b99fe0f2",
+        "role": "assistant",
+        "content": "Hello! It looks like you might be addressing a CEO or would like information tailored for a CEO perspective on culture intelligence. How can I assist you today? Here are some ways I can help: - **Executive Summary**: Provide a high-level overview of your company's current cultural health and engagement trends. - **Strategic Insights**: Offer data-driven insights on culture strengths, gaps, and areas of risk. - **Actionable Recommendations**: Suggest executive-level initiatives for improving company culture and aligning culture with business goals. - **Benchmarking**: Share best practices and how your culture compares to industry standards. What specific information or insights would be most valuable to you right now? ",
+        "timestamp": "2025-09-07T22:00:00.509501"
+      }
+    ],
     "is_active": true
   }
 }
