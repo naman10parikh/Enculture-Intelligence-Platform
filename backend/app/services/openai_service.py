@@ -104,19 +104,40 @@ Always be empathetic, professional, and focused on positive culture building. Us
             # Get the response text
             response_text = response.output_text
             
-            # Simulate streaming by yielding chunks
-            words = response_text.split()
+            # Clean up any unicode escapes in the response
+            response_text = (response_text
+                .replace('\\u2019', "'")     # Right single quotation mark
+                .replace('\\u201c', '"')     # Left double quotation mark  
+                .replace('\\u201d', '"')     # Right double quotation mark
+                .replace('\\u2013', '–')     # En dash
+                .replace('\\u2014', '—')     # Em dash
+                .replace('\\u2026', '...')   # Horizontal ellipsis
+                .replace('\\u00a0', ' ')     # Non-breaking space
+                .replace('\u2019', "'")      # Handle actual unicode chars too
+                .replace('\u201c', '"')
+                .replace('\u201d', '"')
+                .replace('\u2013', '–')
+                .replace('\u2014', '—')
+                .replace('\u2026', '...')
+                .replace('\u00a0', ' '))
+            
+            # Simulate streaming by yielding sentence-based chunks to preserve markdown
+            sentences = response_text.split('. ')
             current_chunk = ""
             
-            for i, word in enumerate(words):
-                current_chunk += word + " "
+            for i, sentence in enumerate(sentences):
+                if i < len(sentences) - 1:
+                    current_chunk += sentence + ". "
+                else:
+                    current_chunk += sentence  # Last sentence might not end with period
                 
-                # Yield chunks of ~5 words for smooth streaming effect
-                if (i + 1) % 5 == 0 or i == len(words) - 1:
-                    yield current_chunk
-                    current_chunk = ""
-                    # Small delay to simulate streaming
-                    await asyncio.sleep(0.1)
+                # Yield chunks every 2-3 sentences or when we hit markdown breaks
+                if (i + 1) % 2 == 0 or i == len(sentences) - 1 or '\n#' in sentence:
+                    if current_chunk.strip():
+                        yield current_chunk
+                        current_chunk = ""
+                        # Small delay to simulate streaming
+                        await asyncio.sleep(0.15)
             
         except Exception as e:
             logger.error(f"Error in gpt-4.1 Responses API: {str(e)}")

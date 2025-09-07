@@ -332,7 +332,23 @@ function AIChat() {
           currentInput,
           (data) => {
             if (data.content) {
-              fullResponse += data.content
+              // Clean and normalize the content chunk - comprehensive unicode cleanup
+              const cleanChunk = data.content
+                // Handle escaped unicode sequences
+                .replace(/\\u2019/g, "'").replace(/\\u2018/g, "'")   // Single quotes
+                .replace(/\\u201c/g, '"').replace(/\\u201d/g, '"')   // Double quotes
+                .replace(/\\u2013/g, '–').replace(/\\u2014/g, '—')   // Dashes
+                .replace(/\\u2026/g, '...').replace(/\\u00a0/g, ' ') // Ellipsis, space
+                .replace(/\\u2192/g, '→').replace(/\\u2190/g, '←')   // Arrows
+                // Handle actual unicode characters
+                .replace(/[\u2018\u2019]/g, "'")   // Smart single quotes
+                .replace(/[\u201c\u201d]/g, '"')   // Smart double quotes  
+                .replace(/[\u2013\u2014]/g, '–')   // En/em dashes
+                .replace(/\u2026/g, '...')         // Ellipsis
+                .replace(/\u00a0/g, ' ')           // Non-breaking space
+                .replace(/[\u2190\u2192]/g, '→')   // Arrows
+              
+              fullResponse += cleanChunk
               
               // Stop typing animation on first content chunk
               if (isTyping) {
@@ -979,8 +995,10 @@ function AIChat() {
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeHighlight]}
                                 components={markdownComponents}
+                                skipHtml={false}
+                                allowedElements={undefined}
                               >
-                                {cleanContent}
+                                {cleanContent || ''}
                               </ReactMarkdown>
                             </div>
                             {/* Display citations if any */}
