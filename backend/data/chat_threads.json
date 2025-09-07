@@ -68,5 +68,58 @@
       }
     ],
     "is_active": true
+  },
+  "d89077f6-4d5c-4c4d-8c6c-e6ee567a5962": {
+    "id": "d89077f6-4d5c-4c4d-8c6c-e6ee567a5962",
+    "title": "New Chat",
+    "created_at": "2025-09-07T10:33:16.462067",
+    "updated_at": "2025-09-07T10:33:16.462070",
+    "messages": [],
+    "is_active": true
+  },
+  "fbb56ccf-ef19-44ed-b62b-6f3991e608c7": {
+    "id": "fbb56ccf-ef19-44ed-b62b-6f3991e608c7",
+    "title": "Hi",
+    "created_at": "2025-09-07T10:33:16.502216",
+    "updated_at": "2025-09-07T10:39:32.449865",
+    "messages": [
+      {
+        "id": "b954aab0-dfd8-4e01-94e4-2ffcc9a4d2cd",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T10:38:07.724578"
+      },
+      {
+        "id": "dd79d4e8-afba-41d2-900c-6048693c79e9",
+        "role": "assistant",
+        "content": "Hi there! How can I help you today? I can quickly: - Analyze your latest survey or pulse results and surface hotspots/drivers - Turn open\u2011text feedback into themes with example quotes - Build a focused action plan for managers - Draft a next pulse with 5\u20137 targeted questions - Prep an exec-ready culture summary If you want me to dive in now, share: 1) Your goal (e.g., improve manager effectiveness, reduce attrition risk) 2) The group(s) and time period 3) Data you have (scores, eNPS, comments, participation) Or drop a CSV/export and I\u2019ll run a quick diagnostic and give you the top 3 insights and recommended actions. ",
+        "timestamp": "2025-09-07T10:38:16.553483"
+      },
+      {
+        "id": "4547814b-f782-43be-b5cb-34d7c3dd466c",
+        "role": "user",
+        "content": "summarize jeff bezos wedding",
+        "timestamp": "2025-09-07T10:38:22.458409"
+      },
+      {
+        "id": "718d95ff-1092-4a09-898f-115d9963d0a2",
+        "role": "assistant",
+        "content": "Here\u2019s the short version: - Date and place: Jeff Bezos married Lauren S\u00e1nchez on June 27, 2025, at the Basilica of San Giorgio Maggiore in Venice, Italy. ([people.com](https://people.com/jeff-bezos-and-lauren-sanchez-wedding-all-the-details-8765960)) - Guests: Roughly 200 high\u2011profile attendees, including Oprah Winfrey, Tom Brady, Leonardo DiCaprio, several Kardashians/Jenners, Queen Rania, and Bill Gates. ([people.com](https://people.com/jeff-bezos-and-lauren-sanchez-wedding-all-the-details-8765960)) - Dress and fashion: S\u00e1nchez wore a custom long\u2011sleeve lace Dolce & Gabbana mermaid gown with 180 silk chiffon\u2011covered buttons, inspired by Sophia Loren\u2019s Houseboat look; she later changed into a Rita Hayworth\u2013inspired dinner gown and an Oscar de la Renta crystal\u2011laden cocktail dress. ([vogue.com](https://www.vogue.com/article/lauren-sanchez-and-jeff-bezos-are-married), [people.com](https://people.com/jeff-bezos-and-lauren-sanchez-wedding-all-the-details-8765960)) - Program: A multi\u2011day celebration with welcome dinners and a phone\u2011free reception; the post\u2011wedding \u201cDolce Notte\u201d party had a lingerie/pajama theme. ([vogue.com](https://www.vogue.com/article/jeff-bezos-lauren-sanchez-wedding-explainer), [people.com](https://people.com/jeff-bezos-and-lauren-sanchez-wedding-all-the-details-8765960)) - Gifts/impact: Instead of traditional gifts, the couple made donations on each guest\u2019s behalf to the UNESCO Venice Office, CORILA (lagoon restoration), and Venice International University. ([vogue.com](https://www.vogue.com/article/jeff-bezos-lauren-sanchez-wedding-explainer)) - Details people talked about: Goody bags with Venetian items, plush Amazon slippers for women and Vibi Venezia slippers for men; S\u00e1nchez confirmed the marriage via Instagram the same day. ([people.com](https://people.com/jeff-bezos-and-lauren-sanchez-wedding-all-the-details-8765960)) If helpful, I can also pull a couple of culture takeaways (e.g., their \u201cno phones\u201d policy and local philanthropy) and translate them into ideas for internal events. ",
+        "timestamp": "2025-09-07T10:38:59.041331"
+      },
+      {
+        "id": "ef1e44fc-25c0-4b59-b5be-fa3ccd7fef4f",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T10:39:25.212464"
+      },
+      {
+        "id": "f042d51e-b311-498e-9f49-1a2dc1e132bd",
+        "role": "assistant",
+        "content": "Hi! What would you like to work on today? I can quickly help you: - Diagnose your latest survey/pulse to find hotspots and key drivers - Turn open-text comments into themes with example quotes - Build a focused action plan for managers - Draft a 5\u20137 question follow-up pulse - Prep an exec-ready culture summary If you want me to dive in now, share: 1) Your goal (e.g., improve manager effectiveness, reduce attrition risk) 2) Group(s) and time period 3) Data you have (scores, eNPS, comments, participation) Or drop a CSV/export and I\u2019ll run a 5-minute diagnostic with top 3 insights and recommended actions. ",
+        "timestamp": "2025-09-07T10:39:32.449771"
+      }
+    ],
+    "is_active": true
   }
 }

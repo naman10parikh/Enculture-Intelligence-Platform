@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 from typing import List
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Query
 from fastapi.responses import StreamingResponse, JSONResponse
 
 from app.core.logging_config import get_logger
@@ -182,7 +182,7 @@ async def chat_health():
 
 
 @router.post("/stream-with-thread")
-async def chat_stream_with_thread(thread_id: str, prompt: str):
+async def chat_stream_with_thread(thread_id: str = Query(...), prompt: str = Query(...)):
     """
     Stream chat completion with thread persistence.
     
