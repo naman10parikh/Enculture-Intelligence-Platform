@@ -172,6 +172,25 @@ function AIChat() {
 
   const createNewThread = async () => {
     try {
+      // Check if there's already an empty chat (no messages)
+      const hasEmptyChat = recentThreads.some(thread => 
+        (thread.message_count === 0 || !thread.message_count) && 
+        (!thread.title || thread.title === 'New Chat')
+      )
+      
+      // If there's already an empty chat, just switch to it instead of creating a new one
+      if (hasEmptyChat) {
+        const emptyChat = recentThreads.find(thread => 
+          (thread.message_count === 0 || !thread.message_count) && 
+          (!thread.title || thread.title === 'New Chat')
+        )
+        if (emptyChat) {
+          await switchToThread(emptyChat.id)
+          return
+        }
+      }
+      
+      // Only create a new thread if no empty chat exists
       const newThread = await chatThreadsApi.createThread()
       setCurrentThreadId(newThread.id)
       setMessages([]) // Clear current messages
@@ -210,37 +229,35 @@ function AIChat() {
     try {
       setIsSearching(true)
       
-      // First search through thread titles
-      const titleResults = await chatThreadsApi.searchThreads(query)
+      // Use backend search that already searches through all content
+      const results = await chatThreadsApi.searchThreads(query, 20)
       
-      // Then get all recent threads to search through their messages
-      const allThreads = await chatThreadsApi.getRecentThreads(50)
+      // For each result, get the thread details to show relevant snippets
+      const enhancedResults = await Promise.all(
+        results.map(async (thread) => {
+          try {
+            const fullThread = await chatThreadsApi.getThread(thread.id)
+            
+            // Find the first message that contains the search query
+            const matchingMessage = fullThread.messages.find(msg => 
+              msg.content.toLowerCase().includes(query.toLowerCase())
+            )
+            
+            return {
+              ...thread,
+              lastMessage: matchingMessage 
+                ? `${matchingMessage.content.substring(0, 80)}...`
+                : thread.title,
+              isContentMatch: !!matchingMessage
+            }
+          } catch (error) {
+            console.error(`Failed to fetch thread ${thread.id}:`, error)
+            return thread
+          }
+        })
+      )
       
-      // Filter threads that contain the query in their messages or titles
-      const contentResults = allThreads.filter(thread => {
-        // Skip if already in title results
-        if (titleResults.some(t => t.id === thread.id)) return false
-        
-        // Search in thread title
-        if (thread.title && thread.title.toLowerCase().includes(query.toLowerCase())) {
-          return true
-        }
-        
-        // For now, we'll mark threads as having content if they have messages
-        // In a real implementation, you'd want to fetch thread details and search message content
-        return thread.message_count > 0 && Math.random() > 0.7 // Simulated content match
-      })
-      
-      // Add snippet information for content matches
-      const enhancedContentResults = contentResults.map(thread => ({
-        ...thread,
-        lastMessage: `Found "${query}" in conversation...`,
-        isContentMatch: true
-      }))
-      
-      // Combine and deduplicate results
-      const combinedResults = [...titleResults, ...enhancedContentResults]
-      setSearchResults(combinedResults)
+      setSearchResults(enhancedResults)
     } catch (error) {
       console.error('Failed to search threads:', error)
       setSearchResults([])
@@ -698,6 +715,33 @@ function AIChat() {
     })
   }
 
+  // Function to categorize dates
+  const categorizeDate = (dateString) => {
+    const date = new Date(dateString)
+    const now = new Date()
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const yesterday = new Date(today)
+    yesterday.setDate(yesterday.getDate() - 1)
+    
+    const weekAgo = new Date(today)
+    weekAgo.setDate(weekAgo.getDate() - 7)
+    
+    const monthAgo = new Date(today)
+    monthAgo.setMonth(monthAgo.getMonth() - 1)
+    
+    if (date >= today) {
+      return 'Today'
+    } else if (date >= yesterday) {
+      return 'Yesterday'
+    } else if (date >= weekAgo) {
+      return 'Last 7 days'
+    } else if (date >= monthAgo) {
+      return 'Last month'
+    } else {
+      return 'Older'
+    }
+  }
+
   const toggleSidebar = () => {
     setSidebarExpanded(!sidebarExpanded)
   }
@@ -820,37 +864,59 @@ function AIChat() {
                     </div>
                   ))
                 ) : (
-                  // Show recent threads
+                  // Show recent threads grouped by time categories
                   threadsLoading ? (
                     <div className="loading">Loading conversations...</div>
                   ) : (
                     <>
-                      {recentThreads.map(thread => (
-                        <div 
-                          key={thread.id}
-                          className={`thread-item ${thread.id === currentThreadId ? 'active' : ''}`}
-                          onClick={() => switchToThread(thread.id)}
-                        >
-                          <div className="thread-content">
-                            <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
-                            <span className="thread-snippet">
-                              {new Date(thread.updated_at).toLocaleDateString()}
-                            </span>
-                          </div>
-                          <div className="thread-actions">
-                            <button 
-                              className="thread-action-btn"
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                deleteThread(thread.id)
-                              }}
-                              title="Delete conversation"
-                            >
-                              <X size={14} />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
+                      {(() => {
+                        // Group threads by time categories
+                        const grouped = {}
+                        recentThreads.forEach(thread => {
+                          const category = categorizeDate(thread.updated_at)
+                          if (!grouped[category]) {
+                            grouped[category] = []
+                          }
+                          grouped[category].push(thread)
+                        })
+                        
+                        // Define category order
+                        const categoryOrder = ['Today', 'Yesterday', 'Last 7 days', 'Last month', 'Older']
+                        
+                        return categoryOrder.map(category => {
+                          const threads = grouped[category]
+                          if (!threads || threads.length === 0) return null
+                          
+                          return (
+                            <div key={category} className="thread-category">
+                              <div className="category-header">{category}</div>
+                              {threads.map(thread => (
+                                <div 
+                                  key={thread.id}
+                                  className={`thread-item ${thread.id === currentThreadId ? 'active' : ''}`}
+                                  onClick={() => switchToThread(thread.id)}
+                                >
+                                  <div className="thread-content">
+                                    <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                                  </div>
+                                  <div className="thread-actions">
+                                    <button 
+                                      className="thread-action-btn"
+                                      onClick={(e) => {
+                                        e.stopPropagation()
+                                        deleteThread(thread.id)
+                                      }}
+                                      title="Delete conversation"
+                                    >
+                                      <X size={14} />
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )
+                        })
+                      })()}
                       {recentThreads.length === 0 && !threadsLoading && (
                         <div className="no-threads">No conversations yet</div>
                       )}
@@ -940,57 +1006,49 @@ function AIChat() {
                       ) : (
                         <p>{message.content}</p>
                       )}
-                      
-                      {/* Message actions and timestamp row */}
-                      <div className="message-footer">
-                        <div className="message-actions">
-                          <button 
-                            className={`action-btn copy-btn ${isCopied ? 'copied' : ''}`}
-                            onClick={() => handleCopyMessage(cleanContent)}
-                            title="Copy message"
-                          >
-                            {isCopied ? <Check size={14} /> : <Copy size={14} />}
-                          </button>
-                          
-                          {message.type === 'user' ? (
-                            <button 
-                              className="action-btn edit-btn"
-                              onClick={() => handleEditMessage(message.id, cleanContent)}
-                              title="Edit message"
-                            >
-                              <Edit3 size={14} />
-                            </button>
-                          ) : (
-                            <button 
-                              className={`action-btn like-btn ${isLiked ? 'liked' : ''}`}
-                              onClick={() => handleLikeMessage(message.id)}
-                              title="Like response"
-                            >
-                              <ThumbsUp size={14} />
-                            </button>
-                          )}
-                          
-                          {message.type === 'ai' && (
-                            <button 
-                              className="action-btn regenerate-btn"
-                              onClick={() => handleRegenerateResponse(messageIndex)}
-                              title="Regenerate response"
-                            >
-                              <RotateCcw size={14} />
-                            </button>
-                          )}
-                        </div>
-                        
-                        {/* Only show timestamp if message has content */}
-                        {message.content && message.content.trim() && (
-                          <span className="message-time">
-                            {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                          </span>
-                        )}
-                      </div>
                     </>
                   )}
                 </div>
+                
+                {/* Message actions outside the bubble */}
+                {!isEditing && (
+                  <div className={`message-actions ${message.type === 'user' ? 'user-actions' : 'ai-actions'}`}>
+                    <button 
+                      className={`action-btn copy-btn ${isCopied ? 'copied' : ''}`}
+                      onClick={() => handleCopyMessage(cleanContent)}
+                      title="Copy message"
+                    >
+                      {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                    </button>
+                    
+                    {message.type === 'user' ? (
+                      <button 
+                        className="action-btn edit-btn"
+                        onClick={() => handleEditMessage(message.id, cleanContent)}
+                        title="Edit message"
+                      >
+                        <Edit3 size={14} />
+                      </button>
+                    ) : (
+                      <>
+                        <button 
+                          className={`action-btn like-btn ${isLiked ? 'liked' : ''}`}
+                          onClick={() => handleLikeMessage(message.id)}
+                          title="Like response"
+                        >
+                          <ThumbsUp size={14} />
+                        </button>
+                        <button 
+                          className="action-btn regenerate-btn"
+                          onClick={() => handleRegenerateResponse(messageIndex)}
+                          title="Regenerate response"
+                        >
+                          <RotateCcw size={14} />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             );
           })}
@@ -1556,20 +1614,12 @@ function AIChat() {
          }
          
          .threads-list::-webkit-scrollbar {
-           width: 4px;
+           display: none;
          }
          
-         .threads-list::-webkit-scrollbar-track {
-           background: transparent;
-         }
-         
-         .threads-list::-webkit-scrollbar-thumb {
-           background: rgba(226, 232, 240, 0.6);
-           border-radius: 2px;
-         }
-         
-         .threads-list::-webkit-scrollbar-thumb:hover {
-           background: rgba(226, 232, 240, 0.8);
+         .threads-list {
+           -ms-overflow-style: none;  /* IE and Edge */
+           scrollbar-width: none;  /* Firefox */
          }
          
          /* Thread Item Styles */
@@ -1691,6 +1741,22 @@ function AIChat() {
            font-size: 0.8em;
            padding: 12px;
            font-style: italic;
+         }
+         
+         /* Thread Category Styles */
+         .thread-category {
+           margin-bottom: var(--space-4);
+         }
+         
+         .category-header {
+           font-size: 0.8em;
+           font-weight: 600;
+           color: var(--text-secondary);
+           text-transform: uppercase;
+           letter-spacing: 0.5px;
+           margin-bottom: 8px;
+           padding: 0 8px;
+           opacity: 0.8;
          }
 
          /* Properly shift chat content when panel is open to prevent overlap */
@@ -2019,18 +2085,33 @@ function AIChat() {
            white-space: nowrap;
          }
 
-         /* Message Footer and Actions Styles */
-         .message-footer {
-           display: flex;
-           align-items: center;
-           justify-content: space-between;
-           margin-top: 8px;
-         }
-         
+         /* Message Actions Styles */
          .message-actions {
            display: flex;
-           gap: 2px;
-           opacity: 1;
+           gap: 4px;
+           margin-top: 8px;
+           margin-left: 2px;
+         }
+         
+         .ai-message .message-actions {
+           justify-content: flex-start;
+         }
+         
+         .user-message .message-actions {
+           justify-content: flex-end;
+         }
+         
+         .message-actions.ai-actions {
+           opacity: 1;  /* AI actions always visible */
+         }
+         
+         .message-actions.user-actions {
+           opacity: 0;  /* User actions hidden by default */
+           transition: opacity 0.2s ease;
+         }
+         
+         .user-message:hover .user-actions {
+           opacity: 1;  /* Show user actions on hover */
          }
 
          .action-btn {
