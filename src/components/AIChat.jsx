@@ -273,6 +273,11 @@ function AIChat() {
             if (data.content) {
               fullResponse += data.content
               
+              // Stop typing animation on first content chunk
+              if (isTyping) {
+                setIsTyping(false)
+              }
+              
               // Update the AI message with streamed content
               setMessages(prev => 
                 prev.map(msg => 
@@ -350,44 +355,151 @@ function AIChat() {
 
   // Custom markdown components for better rendering
   const markdownComponents = {
-    h1: ({children}) => <h1 style={{fontSize: '1.5em', fontWeight: '600', margin: '1em 0 0.5em 0', color: 'var(--text-primary)'}}>{children}</h1>,
-    h2: ({children}) => <h2 style={{fontSize: '1.3em', fontWeight: '600', margin: '1em 0 0.5em 0', color: 'var(--text-primary)'}}>{children}</h2>,
-    h3: ({children}) => <h3 style={{fontSize: '1.2em', fontWeight: '600', margin: '1em 0 0.5em 0', color: 'var(--text-primary)'}}>{children}</h3>,
-    p: ({children}) => <p style={{margin: '0 0 1em 0', lineHeight: '1.6'}}>{children}</p>,
-    ul: ({children}) => <ul style={{margin: '0.5em 0', paddingLeft: '1.5em'}}>{children}</ul>,
-    ol: ({children}) => <ol style={{margin: '0.5em 0', paddingLeft: '1.5em'}}>{children}</ol>,
-    li: ({children}) => <li style={{margin: '0.25em 0'}}>{children}</li>,
-    code: ({children, className}) => {
-      if (className && className.startsWith('language-')) {
-        return <pre style={{
-          background: 'rgba(248, 250, 252, 0.8)',
-          border: '1px solid rgba(226, 232, 240, 0.6)',
-          borderRadius: '8px',
-          padding: '1em',
-          overflowX: 'auto',
-          margin: '1em 0'
-        }}><code className={className}>{children}</code></pre>;
+    h1: ({children, ...props}) => (
+      <h1 style={{
+        fontSize: '1.4em', 
+        fontWeight: '600', 
+        margin: '1.2em 0 0.6em 0', 
+        color: 'var(--text-primary)',
+        lineHeight: '1.3'
+      }} {...props}>
+        {children}
+      </h1>
+    ),
+    h2: ({children, ...props}) => (
+      <h2 style={{
+        fontSize: '1.25em', 
+        fontWeight: '600', 
+        margin: '1em 0 0.5em 0', 
+        color: 'var(--text-primary)',
+        lineHeight: '1.3'
+      }} {...props}>
+        {children}
+      </h2>
+    ),
+    h3: ({children, ...props}) => (
+      <h3 style={{
+        fontSize: '1.1em', 
+        fontWeight: '600', 
+        margin: '0.8em 0 0.4em 0', 
+        color: 'var(--text-primary)',
+        lineHeight: '1.3'
+      }} {...props}>
+        {children}
+      </h3>
+    ),
+    p: ({children, ...props}) => (
+      <p style={{
+        margin: '0 0 0.8em 0', 
+        lineHeight: '1.6',
+        color: 'var(--text-primary)'
+      }} {...props}>
+        {children}
+      </p>
+    ),
+    ul: ({children, ...props}) => (
+      <ul style={{
+        margin: '0.5em 0', 
+        paddingLeft: '1.5em',
+        listStyleType: 'disc'
+      }} {...props}>
+        {children}
+      </ul>
+    ),
+    ol: ({children, ...props}) => (
+      <ol style={{
+        margin: '0.5em 0', 
+        paddingLeft: '1.5em',
+        listStyleType: 'decimal'
+      }} {...props}>
+        {children}
+      </ol>
+    ),
+    li: ({children, ...props}) => (
+      <li style={{
+        margin: '0.25em 0',
+        lineHeight: '1.5'
+      }} {...props}>
+        {children}
+      </li>
+    ),
+    code: ({children, className, inline, ...props}) => {
+      if (!inline && className && className.startsWith('language-')) {
+        return (
+          <pre style={{
+            background: 'rgba(248, 250, 252, 0.9)',
+            border: '1px solid rgba(226, 232, 240, 0.6)',
+            borderRadius: '8px',
+            padding: '1em',
+            overflowX: 'auto',
+            margin: '1em 0',
+            fontSize: '0.9em'
+          }} {...props}>
+            <code className={className}>{children}</code>
+          </pre>
+        );
       }
-      return <code style={{
-        background: 'rgba(139, 92, 246, 0.1)',
-        padding: '0.2em 0.4em',
-        borderRadius: '4px',
-        fontFamily: 'Monaco, Menlo, Ubuntu Mono, monospace',
-        fontSize: '0.9em'
-      }}>{children}</code>;
+      return (
+        <code style={{
+          background: 'rgba(139, 92, 246, 0.1)',
+          padding: '0.15em 0.3em',
+          borderRadius: '3px',
+          fontFamily: 'Monaco, Menlo, Ubuntu Mono, monospace',
+          fontSize: '0.9em',
+          color: 'rgba(139, 92, 246, 0.9)'
+        }} {...props}>
+          {children}
+        </code>
+      );
     },
-    pre: ({children}) => <div>{children}</div>,
-    blockquote: ({children}) => <blockquote style={{
-      borderLeft: '3px solid rgba(139, 92, 246, 0.3)',
-      paddingLeft: '1em',
-      margin: '1em 0',
-      fontStyle: 'italic',
-      color: 'var(--text-secondary)'
-    }}>{children}</blockquote>,
-    a: ({children, href}) => <a href={href} target="_blank" rel="noopener noreferrer" style={{
-      color: 'rgba(139, 92, 246, 0.8)',
-      textDecoration: 'none'
-    }}>{children}</a>
+    pre: ({children, ...props}) => (
+      <div {...props}>{children}</div>
+    ),
+    blockquote: ({children, ...props}) => (
+      <blockquote style={{
+        borderLeft: '3px solid rgba(139, 92, 246, 0.3)',
+        paddingLeft: '1em',
+        margin: '1em 0',
+        fontStyle: 'italic',
+        color: 'var(--text-secondary)',
+        background: 'rgba(139, 92, 246, 0.05)',
+        borderRadius: '0 4px 4px 0'
+      }} {...props}>
+        {children}
+      </blockquote>
+    ),
+    a: ({children, href, ...props}) => (
+      <a 
+        href={href} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style={{
+          color: 'rgba(139, 92, 246, 0.8)',
+          textDecoration: 'underline',
+          textDecorationThickness: '1px',
+          textUnderlineOffset: '2px'
+        }} 
+        {...props}
+      >
+        {children}
+      </a>
+    ),
+    strong: ({children, ...props}) => (
+      <strong style={{
+        fontWeight: '600',
+        color: 'var(--text-primary)'
+      }} {...props}>
+        {children}
+      </strong>
+    ),
+    em: ({children, ...props}) => (
+      <em style={{
+        fontStyle: 'italic',
+        color: 'var(--text-primary)'
+      }} {...props}>
+        {children}
+      </em>
+    )
   };
 
   // Function to parse and extract citations from AI responses
@@ -474,66 +586,65 @@ function AIChat() {
             </button>
 
             <nav className="panel-nav">
-              <button className="panel-item" onClick={createNewThread}>
+              <button className="panel-item new-chat-btn" onClick={createNewThread}>
                 <Plus size={16} />
                 <span>New chat</span>
               </button>
-              <button 
-                className="panel-item" 
-                onClick={() => {
-                  const query = prompt('Search chats:')
-                  if (query) handleSearch(query)
-                }}
-              >
-                <Search size={16} />
-                <span>Search chats</span>
-              </button>
-              <button className="panel-item" onClick={() => setSidebarExpanded(!sidebarExpanded)}>
-                <History size={16} />
-                <span>Chat history</span>
-              </button>
             </nav>
             
-            {/* Search results */}
-            {searchResults.length > 0 && (
-              <div className="search-results">
-                <div className="search-results-header">Search Results:</div>
-                {searchResults.map(thread => (
-                  <div 
-                    key={thread.id}
-                    className={`history-item ${thread.id === currentThreadId ? 'active' : ''}`}
-                    onClick={() => switchToThread(thread.id)}
+            {/* Search input */}
+            <div className="search-container">
+              <div className="search-input-wrapper">
+                <Search size={16} className="search-icon" />
+                <input
+                  type="text"
+                  placeholder="Search conversations..."
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    handleSearch(e.target.value)
+                  }}
+                  className="search-input"
+                />
+                {searchQuery && (
+                  <button 
+                    className="clear-search-btn"
+                    onClick={() => {
+                      setSearchQuery('')
+                      setSearchResults([])
+                      setIsSearching(false)
+                    }}
                   >
-                    <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
-                    <button 
-                      className="delete-thread-btn"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        deleteThread(thread.id)
-                      }}
-                    >
-                      <X size={12} />
-                    </button>
-                  </div>
-                ))}
+                    <X size={14} />
+                  </button>
+                )}
               </div>
-            )}
+            </div>
             
-            <div className="panel-spacer"></div>
-            
-            {/* Recent chat threads */}
-            <div className="history-list">
-              {threadsLoading ? (
-                <div className="loading">Loading chats...</div>
-              ) : (
-                <>
-                  {recentThreads.map(thread => (
+            {/* Chat threads list */}
+            <div className="threads-container">
+              {isSearching && (
+                <div className="loading">Searching...</div>
+              )}
+              
+              {!isSearching && searchQuery && searchResults.length === 0 && (
+                <div className="no-results">No conversations found</div>
+              )}
+              
+              {/* Show search results or recent threads */}
+              <div className="threads-list">
+                {searchQuery && !isSearching ? (
+                  // Show search results
+                  searchResults.map(thread => (
                     <div 
                       key={thread.id}
-                      className={`history-item ${thread.id === currentThreadId ? 'active' : ''}`}
+                      className={`thread-item ${thread.id === currentThreadId ? 'active' : ''}`}
                       onClick={() => switchToThread(thread.id)}
                     >
-                      <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                      <div className="thread-content">
+                        <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                        <span className="thread-snippet">{thread.lastMessage || 'No messages yet'}</span>
+                      </div>
                       <button 
                         className="delete-thread-btn"
                         onClick={(e) => {
@@ -544,12 +655,43 @@ function AIChat() {
                         <X size={12} />
                       </button>
                     </div>
-                  ))}
-                  {recentThreads.length === 0 && !threadsLoading && (
-                    <div className="no-threads">No chat history yet</div>
-                  )}
-                </>
-              )}
+                  ))
+                ) : (
+                  // Show recent threads
+                  threadsLoading ? (
+                    <div className="loading">Loading conversations...</div>
+                  ) : (
+                    <>
+                      {recentThreads.map(thread => (
+                        <div 
+                          key={thread.id}
+                          className={`thread-item ${thread.id === currentThreadId ? 'active' : ''}`}
+                          onClick={() => switchToThread(thread.id)}
+                        >
+                          <div className="thread-content">
+                            <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                            <span className="thread-snippet">
+                              {new Date(thread.updated_at).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <button 
+                            className="delete-thread-btn"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              deleteThread(thread.id)
+                            }}
+                          >
+                            <X size={12} />
+                          </button>
+                        </div>
+                      ))}
+                      {recentThreads.length === 0 && !threadsLoading && (
+                        <div className="no-threads">No conversations yet</div>
+                      )}
+                    </>
+                  )
+                )}
+              </div>
             </div>
           </div>
         </aside>
@@ -855,31 +997,14 @@ function AIChat() {
          }
 
          .ai-message .message-bubble {
-           background: linear-gradient(135deg, 
-             rgba(248, 250, 252, 0.95) 0%, 
-             rgba(241, 245, 249, 0.90) 50%, 
-             rgba(248, 250, 252, 0.85) 100%);  /* Subtle gradient */
-           border: 1px solid rgba(226, 232, 240, 0.4);  /* Softer border */
-           backdrop-filter: blur(12px);  /* Enhanced glass effect */
+           background: rgba(255, 255, 255, 0.8);
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           backdrop-filter: blur(10px);
            padding: var(--space-4) var(--space-5);
-           box-shadow: 
-             0 1px 3px rgba(0, 0, 0, 0.05),
-             0 8px 24px rgba(139, 92, 246, 0.04);  /* Branded shadow with depth */
+           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
            position: relative;
          }
          
-         .ai-message .message-bubble::before {
-           content: '';
-           position: absolute;
-           top: 0;
-           left: 0;
-           right: 0;
-           height: 1px;
-           background: linear-gradient(90deg, 
-             transparent 0%, 
-             rgba(139, 92, 246, 0.2) 50%, 
-             transparent 100%);  /* Subtle top accent */
-         }
 
          .user-message .message-bubble {
            background: rgba(255, 255, 255, 0.6);
@@ -985,7 +1110,7 @@ function AIChat() {
          .chat-panel {
            position: fixed;
            top: var(--space-4);
-           left: 320px;
+           left: 288px;
            height: calc(100vh - var(--space-8));
            z-index: 100;
            overflow: hidden;
@@ -1095,58 +1220,146 @@ function AIChat() {
            transform: translateX(2px);
          }
          
-         .panel-spacer { 
-           flex: 1 1 auto; 
+         /* Search Container Styles */
+         .search-container {
+           margin: var(--space-3) 0;
          }
          
-         .history-list { 
-           margin-top: var(--space-3); 
-           display: flex; 
-           flex-direction: column; 
-           gap: 4px; 
-         }
-         
-         .history-item { 
-           padding: 8px 12px; 
-           border-radius: 6px; 
-           background: transparent;
-           color: var(--text-secondary); 
-           font-size: 0.85em;
-           cursor: pointer;
+         .search-input-wrapper {
+           position: relative;
+           display: flex;
+           align-items: center;
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 8px;
+           padding: 8px 12px;
            transition: all 0.2s ease;
          }
          
-         .history-item {
+         .search-input-wrapper:focus-within {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+         }
+         
+         .search-icon {
+           color: var(--text-secondary);
+           margin-right: 8px;
+           flex-shrink: 0;
+         }
+         
+         .search-input {
+           flex: 1;
+           border: none;
+           background: transparent;
+           outline: none;
+           font-size: 0.9em;
+           color: var(--text-primary);
+         }
+         
+         .search-input::placeholder {
+           color: var(--text-secondary);
+         }
+         
+         .clear-search-btn {
+           background: none;
+           border: none;
+           color: var(--text-secondary);
+           cursor: pointer;
+           padding: 2px;
+           border-radius: 2px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           margin-left: 4px;
+           transition: all 0.2s ease;
+         }
+         
+         .clear-search-btn:hover {
+           background: rgba(239, 68, 68, 0.1);
+           color: rgb(239, 68, 68);
+         }
+         
+         /* Threads Container Styles */
+         .threads-container {
+           flex: 1;
+           overflow: hidden;
+           display: flex;
+           flex-direction: column;
+         }
+         
+         .threads-list {
+           flex: 1;
+           overflow-y: auto;
+           display: flex;
+           flex-direction: column;
+           gap: 2px;
+           padding-right: 4px;
+         }
+         
+         .threads-list::-webkit-scrollbar {
+           width: 4px;
+         }
+         
+         .threads-list::-webkit-scrollbar-track {
+           background: transparent;
+         }
+         
+         .threads-list::-webkit-scrollbar-thumb {
+           background: rgba(226, 232, 240, 0.6);
+           border-radius: 2px;
+         }
+         
+         .threads-list::-webkit-scrollbar-thumb:hover {
+           background: rgba(226, 232, 240, 0.8);
+         }
+         
+         /* Thread Item Styles */
+         .thread-item {
            display: flex;
            align-items: center;
            justify-content: space-between;
-           padding: 8px 12px; 
-           border-radius: 6px; 
+           padding: 10px 12px;
+           border-radius: 8px;
            background: transparent;
-           color: var(--text-secondary); 
-           font-size: 0.85em;
            cursor: pointer;
            transition: all 0.2s ease;
            position: relative;
+           min-height: 48px;
          }
          
-         .history-item:hover {
-           background: rgba(239, 242, 247, 0.6);
-           color: var(--text-primary);
+         .thread-item:hover {
+           background: rgba(239, 242, 247, 0.7);
          }
          
-         .history-item.active {
+         .thread-item.active {
            background: rgba(139, 92, 246, 0.1);
-           color: var(--text-primary);
            border-left: 3px solid rgba(139, 92, 246, 0.6);
          }
          
-         .thread-title {
+         .thread-content {
            flex: 1;
+           display: flex;
+           flex-direction: column;
+           gap: 2px;
+           margin-right: 8px;
+           min-width: 0;
+         }
+         
+         .thread-title {
+           font-size: 0.9em;
+           font-weight: 500;
+           color: var(--text-primary);
            white-space: nowrap;
            overflow: hidden;
            text-overflow: ellipsis;
-           margin-right: 8px;
+         }
+         
+         .thread-snippet {
+           font-size: 0.75em;
+           color: var(--text-secondary);
+           white-space: nowrap;
+           overflow: hidden;
+           text-overflow: ellipsis;
          }
          
          .delete-thread-btn {
@@ -1154,16 +1367,17 @@ function AIChat() {
            border: none;
            color: var(--text-secondary);
            cursor: pointer;
-           padding: 4px;
+           padding: 6px;
            border-radius: 4px;
            opacity: 0;
            transition: all 0.2s ease;
            display: flex;
            align-items: center;
            justify-content: center;
+           flex-shrink: 0;
          }
          
-         .history-item:hover .delete-thread-btn {
+         .thread-item:hover .delete-thread-btn {
            opacity: 1;
          }
          
@@ -1172,20 +1386,17 @@ function AIChat() {
            color: rgb(239, 68, 68);
          }
          
-         .search-results {
-           margin-bottom: var(--space-3);
+         .new-chat-btn {
+           background: rgba(139, 92, 246, 0.1);
+           border: 1px solid rgba(139, 92, 246, 0.2);
          }
          
-         .search-results-header {
-           font-size: 0.8em;
-           font-weight: 600;
-           color: var(--text-secondary);
-           margin-bottom: 8px;
-           text-transform: uppercase;
-           letter-spacing: 0.5px;
+         .new-chat-btn:hover {
+           background: rgba(139, 92, 246, 0.15);
+           border-color: rgba(139, 92, 246, 0.3);
          }
          
-         .loading, .no-threads {
+         .loading, .no-threads, .no-results {
            text-align: center;
            color: var(--text-secondary);
            font-size: 0.8em;
@@ -1195,7 +1406,7 @@ function AIChat() {
 
          /* Properly shift chat content when panel is open to prevent overlap */
          .panel-open .chat-input-area { 
-           left: calc(320px + 48px + var(--space-4));  /* Account for collapsed panel width */
+           left: calc(288px + 48px + var(--space-2));  /* Account for collapsed panel width */
            transition: left 0.25s ease; 
          }
          .panel-open .chat-messages { 
@@ -1207,7 +1418,7 @@ function AIChat() {
            transition: margin-left 0.25s ease; 
          }
          .chat-container:not(.panel-open) .chat-input-area { 
-           left: 320px; 
+           left: 288px; 
            transition: left 0.25s ease; 
          }
 
