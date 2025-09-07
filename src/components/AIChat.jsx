@@ -44,6 +44,7 @@ function AIChat() {
   const [activeSurveyId, setActiveSurveyId] = useState(null)
   const [backendConnected, setBackendConnected] = useState(false)
   const [currentPersona, setCurrentPersona] = useState('employee') // Default persona
+  const [notifications, setNotifications] = useState([])
   const [surveyDraft, setSurveyDraft] = useState({
     name: '',
     context: '',
@@ -203,8 +204,44 @@ function AIChat() {
   }
 
   const saveSurveyDraft = async (draft) => {
-    await new Promise(r => setTimeout(r, 300))
-    return { ok: true, draft }
+    try {
+      // Show loading state
+      setIsLoading(true)
+      
+      // Persist to localStorage as backup
+      const draftWithTimestamp = {
+        ...draft,
+        id: draft.id || `survey_${Date.now()}`,
+        lastSaved: new Date().toISOString(),
+        status: 'draft'
+      }
+      
+      localStorage.setItem('currentSurveyDraft', JSON.stringify(draftWithTimestamp))
+      
+      // Try to save to backend if available
+      try {
+        const response = await chatService.saveSurveyDraft?.(draftWithTimestamp)
+        if (response?.ok) {
+          // Backend save successful
+          addNotification('Draft saved successfully!', 'success')
+        }
+      } catch (backendError) {
+        console.warn('Backend save failed, but local save succeeded:', backendError)
+        addNotification('Draft saved locally (backend unavailable)', 'info')
+      }
+      
+      // Update the current draft state
+      setSurveyDraft(draftWithTimestamp)
+      
+      await new Promise(r => setTimeout(r, 300)) // UI feedback delay
+      return { ok: true, draft: draftWithTimestamp }
+    } catch (error) {
+      console.error('Failed to save draft:', error)
+      addNotification('Failed to save draft', 'error')
+      return { ok: false, error: error.message }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const submitSurveyResponses = async (surveyId, responses) => {
@@ -213,6 +250,75 @@ function AIChat() {
   }
 
   // Canvas control helpers
+  // Notification helpers
+  const addNotification = (message, type = 'info') => {
+    const id = `notification_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    const notification = { id, message, type, timestamp: Date.now() }
+    
+    setNotifications(prev => [...prev, notification])
+    
+    // Auto-remove after 4 seconds
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(n => n.id !== id))
+    }, 4000)
+  }
+
+  // Survey draft persistence helpers
+  const loadSavedDraft = () => {
+    try {
+      const savedDraft = localStorage.getItem('currentSurveyDraft')
+      if (savedDraft) {
+        const parsedDraft = JSON.parse(savedDraft)
+        setSurveyDraft(prev => ({ ...prev, ...parsedDraft }))
+        addNotification('Previous draft loaded successfully', 'success')
+        return parsedDraft
+      }
+    } catch (error) {
+      console.error('Failed to load saved draft:', error)
+      addNotification('Failed to load previous draft', 'error')
+    }
+    return null
+  }
+
+  const clearSavedDraft = () => {
+    localStorage.removeItem('currentSurveyDraft')
+    addNotification('Draft cleared', 'info')
+  }
+
+  // Simple debounce function
+  const debounce = (func, wait) => {
+    let timeout
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout)
+        func(...args)
+      }
+      clearTimeout(timeout)
+      timeout = setTimeout(later, wait)
+    }
+  }
+
+  // Auto-save functionality
+  const autoSave = React.useMemo(
+    () => debounce(async (draft) => {
+      if (draft.name || draft.context || (draft.questions && draft.questions.length > 0)) {
+        try {
+          await saveSurveyDraft(draft)
+        } catch (error) {
+          console.error('Auto-save failed:', error)
+        }
+      }
+    }, 3000),
+    []
+  )
+
+  // Effect to auto-save when survey draft changes
+  React.useEffect(() => {
+    if (canvasOpen && surveyDraft && Object.keys(surveyDraft).length > 0) {
+      autoSave(surveyDraft)
+    }
+  }, [surveyDraft, canvasOpen, autoSave])
+
   const openCanvasForSurvey = async (surveyId = 'draft') => {
     setActiveSurveyId(surveyId)
     setCanvasView('wizard')  // Start in wizard mode
@@ -222,6 +328,9 @@ function AIChat() {
     if (surveyId && surveyId !== 'draft') {
       const data = await fetchSurvey(surveyId)
       setSurveyDraft(prev => ({ ...prev, ...data }))
+    } else {
+      // Try to load saved draft
+      loadSavedDraft()
     }
   }
 
@@ -944,21 +1053,54 @@ function AIChat() {
   }
 
   // AI Formula Generation
-  const generateFormulaFromAI = async (description) => {
+  const generateFormulaFromAI = async (description, classifierNames = []) => {
     try {
-      // Simple formula generation based on description
-      if (description.toLowerCase().includes('engagement')) {
-        return 'avg(q1,q2,q3)'
-      } else if (description.toLowerCase().includes('satisfaction')) {
-        return 'avg(satisfaction_questions)'
-      } else if (description.toLowerCase().includes('culture')) {
-        return 'weighted_avg(culture_q1:0.3,culture_q2:0.7)'
-      } else {
-        return 'avg(related_questions)'
+      // Enhanced formula generation using AI service
+      const response = await chatService.generateFormula?.(description, classifierNames)
+      if (response && response.formula) {
+        return response.formula
       }
+      
+      // Fallback intelligent formula generation based on description and classifiers
+      let formula = '';
+      const descLower = description.toLowerCase();
+      
+      if (classifierNames.length > 0) {
+        // Include classifiers in the formula
+        const classifierWeights = classifierNames.map((name, index) => 
+          `${name.toLowerCase().replace(/\s+/g, '_')}:${0.2 + (index * 0.1)}`
+        ).join(',');
+        
+        if (descLower.includes('engagement') || descLower.includes('satisfaction')) {
+          formula = `weighted_avg(questions, classifiers[${classifierWeights}])`
+        } else if (descLower.includes('performance') || descLower.includes('productivity')) {
+          formula = `performance_index(responses) * classifier_weight(${classifierNames[0]?.toLowerCase().replace(/\s+/g, '_') || 'default'})`
+        } else if (descLower.includes('culture') || descLower.includes('environment')) {
+          formula = `culture_score(avg(responses), segment_by[${classifierNames.join(', ')}])`
+      } else {
+          formula = `avg(responses) + classifier_adjustment(${classifierNames.join(', ')})`
+        }
+      } else {
+        // Standard formulas without classifiers
+        if (descLower.includes('engagement')) {
+          formula = 'engagement_score(avg(q_engagement_*), response_rate)'
+        } else if (descLower.includes('satisfaction')) {
+          formula = 'satisfaction_index(avg(q_satisfaction_*), variance(responses))'
+        } else if (descLower.includes('culture')) {
+          formula = 'culture_health(avg(culture_questions), diversity_factor)'
+        } else if (descLower.includes('performance')) {
+          formula = 'performance_metric(avg(performance_q*), completion_rate)'
+        } else {
+          formula = 'insight_score(avg(all_responses), response_quality)'
+        }
+      }
+      
+      return formula;
     } catch (error) {
       console.error('Failed to generate formula:', error)
-      return 'avg(q1,q2)'
+      return classifierNames.length > 0 
+        ? `avg(responses) + classifier_weight(${classifierNames[0]?.toLowerCase().replace(/\s+/g, '_') || 'default'})`
+        : 'avg(responses)'
     }
   }
 
@@ -1470,15 +1612,12 @@ function AIChat() {
                       const Icon = stepInfo.icon
                       return (
                         <>
-                          <div className="step-number">
+                          <div className="centered-step-header">
                             <div className="step-icon-wrapper">
-                              <Icon size={20} />
+                              <Icon size={24} />
                             </div>
-                            <span className="step-counter">Step {surveyStep} of 7</span>
-                          </div>
-                          <div className="step-info">
-                            <h4 className="step-title">{stepInfo.label}</h4>
-                            <p className="step-description">{stepInfo.desc}</p>
+                          <h4 className="step-title">{stepInfo.label}</h4>
+                          <p className="step-description">{stepInfo.desc}</p>
                           </div>
                         </>
                       )
@@ -1511,10 +1650,13 @@ function AIChat() {
                           className="ai-suggest-btn"
                           onClick={() => generateSurveyFromAIStreaming('Generate a creative survey name for employee engagement')}
                         >
-                          Generate with AI
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="ai-icon">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          Generate AI-Powered Name
                         </button>
                         <div className="step-help">
-                          <span>Chat with AI about survey naming ideas</span>
+                          <span>Need inspiration? Let AI suggest creative survey titles based on your goals</span>
                         </div>
                       </div>
                     </div>
@@ -1522,59 +1664,83 @@ function AIChat() {
                 )}
 
                 {surveyStep === 2 && (
-                  <div className="step-container">
+                  <div className="step-container modern">
                     <div className="step-body">
-                      <div className="form-group">
-                        <label>Survey Context</label>
-                        <textarea
-                          className="wizard-textarea"
-                          value={surveyDraft.context}
-                          onChange={e => setSurveyDraft(prev => ({ ...prev, context: e.target.value }))}
-                          placeholder="Describe the context and background for this survey..."
-                          rows={4}
-                        />
-                      </div>
-                      
-                      <div className="form-group">
-                        <label>Desired Outcomes</label>
-                        <div className="outcomes-editor">
+                      <div className="modern-card">
+                        <div className="card-header">
+                          <div className="header-icon">
+                            <Target size={20} />
+                          </div>
+                          <h3>Survey Context</h3>
+                          <p>Help us understand the purpose and background of your survey</p>
+                        </div>
+                        <div className="card-content">
+                          <textarea
+                            className="modern-textarea"
+                            value={surveyDraft.context}
+                            onChange={e => setSurveyDraft(prev => ({ ...prev, context: e.target.value }))}
+                            placeholder="e.g., We want to understand employee satisfaction with our new remote work policy and identify areas for improvement..."
+                            rows={5}
+                          />
+                        </div>
+                        </div>
+                        
+                      <div className="modern-card">
+                        <div className="card-header">
+                          <div className="header-icon">
+                            <CheckCircle size={20} />
+                          </div>
+                          <h3>Desired Outcomes</h3>
+                          <p>What specific insights or changes are you hoping to achieve?</p>
+                        </div>
+                        <div className="card-content">
+                          <div className="outcomes-list">
                           {(surveyDraft.desiredOutcomes || []).map((outcome, index) => (
-                            <div key={index} className="outcome-item">
-                              <input
-                                type="text"
-                                value={outcome}
-                                onChange={e => {
-                                  const updated = [...(surveyDraft.desiredOutcomes || [])]
-                                  updated[index] = e.target.value
-                                  setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
-                                }}
-                                placeholder={`Outcome ${index + 1}`}
-                                className="outcome-input"
-                              />
-                              <button
-                                className="remove-btn"
-                                onClick={() => {
-                                  const updated = [...(surveyDraft.desiredOutcomes || [])]
-                                  updated.splice(index, 1)
-                                  setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
-                                }}
-                              >
-                                <X size={14} />
-                              </button>
+                              <div key={index} className="outcome-row">
+                                <div className="outcome-number">{index + 1}</div>
+                                <input
+                                  type="text"
+                                  value={outcome}
+                                  onChange={e => {
+                                    const updated = [...(surveyDraft.desiredOutcomes || [])]
+                                    updated[index] = e.target.value
+                                    setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
+                                  }}
+                                  placeholder="e.g., Improve team communication effectiveness"
+                                  className="modern-input"
+                                />
+                                <button
+                                  className="modern-remove-btn"
+                                  onClick={() => {
+                                    const updated = [...(surveyDraft.desiredOutcomes || [])]
+                                    updated.splice(index, 1)
+                                    setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
+                                  }}
+                                  title="Remove outcome"
+                                >
+                                  <X size={16} />
+                                </button>
                             </div>
                           ))}
                           <button
-                            className="add-outcome-btn"
+                            className="modern-add-btn"
                             onClick={() => {
                               const updated = [...(surveyDraft.desiredOutcomes || []), '']
                               setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
                             }}
                           >
-                            <Plus size={14} />
-                            Add Outcome
+                            <Plus size={16} />
+                              <span>Add New Outcome</span>
                           </button>
-                          <div className="step-help">
-                            <span>💬 Ask AI: "What outcomes should I track for employee engagement?"</span>
+                          </div>
+                          <div className="ai-help-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div>
+                              <strong>Need inspiration?</strong>
+                              <p>Ask AI: "What outcomes should I track for employee engagement surveys?"</p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1583,285 +1749,508 @@ function AIChat() {
                 )}
 
                 {surveyStep === 3 && (
-                  <div className="step-container">
+                  <div className="step-container modern">
                     <div className="step-body">
-                      <div className="classifiers-grid">
-                        {Array.from({ length: 5 }, (_, index) => {
-                          const classifier = (surveyDraft.classifiers || [])[index] || { name: '', values: [''] }
-                          return (
-                            <div key={index} className="classifier-card">
-                              <div className="classifier-header">
-                                <span className="classifier-number">#{index + 1}</span>
-                                <input
-                                  type="text"
-                                  value={classifier.name}
-                                  onChange={e => {
-                                    const updated = [...(surveyDraft.classifiers || [])]
-                                    while (updated.length <= index) {
-                                      updated.push({ name: '', values: [''] })
-                                    }
-                                    updated[index].name = e.target.value
-                                    setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
-                                  }}
-                                  placeholder="Classifier name"
-                                  className="classifier-name-input"
-                                />
-                              </div>
-                              <div className="classifier-values">
-                                {(classifier.values || ['']).map((value, valueIndex) => (
+                      <div className="modern-card">
+                        <div className="card-header">
+                          <div className="header-icon">
+                            <Tag size={20} />
+                          </div>
+                          <div>
+                            <h3>Category Labels (Classifiers)</h3>
+                            <p>Define qualitative categories to analyze and segment your survey data</p>
+                          </div>
+                        </div>
+                        <div className="card-content">
+                          <div className="classifiers-modern-grid">
+                            {Array.from({ length: 4 }, (_, index) => {
+                              const classifier = (surveyDraft.classifiers || [])[index] || { name: '', values: [''] }
+                              const suggestedClassifiers = [
+                                { name: 'Leadership Style', values: ['Transformational', 'Transactional', 'Servant', 'Authentic'] },
+                                { name: 'Growth Mindset', values: ['Fixed Mindset', 'Growth Mindset', 'Mixed Mindset'] },
+                                { name: 'Communication Preference', values: ['Direct', 'Collaborative', 'Supportive', 'Analytical'] },
+                                { name: 'Work Environment', values: ['Remote', 'Hybrid', 'In-Office', 'Field Work'] }
+                              ]
+                              const suggestion = suggestedClassifiers[index]
+                              
+                              return (
+                              <div key={index} className="modern-classifier-card">
+                                  <div className="classifier-badge">{index + 1}</div>
                                   <input
-                                    key={valueIndex}
                                     type="text"
-                                    value={value}
+                                    value={classifier.name}
                                     onChange={e => {
                                       const updated = [...(surveyDraft.classifiers || [])]
                                       while (updated.length <= index) {
                                         updated.push({ name: '', values: [''] })
                                       }
-                                      const updatedValues = [...(updated[index].values || [''])]
-                                      updatedValues[valueIndex] = e.target.value
-                                      updated[index].values = updatedValues
+                                      updated[index].name = e.target.value
                                       setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
                                     }}
-                                    placeholder={`Value ${valueIndex + 1}`}
-                                    className="classifier-value-input"
+                                    placeholder={suggestion.name}
+                                    className="classifier-title-input"
                                   />
-                                ))}
-                                <button
-                                  className="add-value-btn"
-                                  onClick={() => {
-                                    const updated = [...(surveyDraft.classifiers || [])]
-                                    while (updated.length <= index) {
-                                      updated.push({ name: '', values: [''] })
-                                    }
-                                    updated[index].values = [...(updated[index].values || []), '']
-                                    setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
-                                  }}
-                                >
-                                  <Plus size={12} />
-                                </button>
+                                <div className="classifier-values-section">
+                                    <label className="section-label">Category Options:</label>
+                                    <div className="classifier-values-list">
+                                    {(classifier.values || ['']).map((value, valueIndex) => (
+                                        <div key={valueIndex} className="value-input-row">
+                                        <input
+                                          type="text"
+                                          value={value}
+                                          onChange={e => {
+                                            const updated = [...(surveyDraft.classifiers || [])]
+                                              while (updated.length <= index) {
+                                                updated.push({ name: '', values: [''] })
+                                              }
+                                              const updatedValues = [...(updated[index].values || [''])]
+                                            updatedValues[valueIndex] = e.target.value
+                                              updated[index].values = updatedValues
+                                            setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
+                                          }}
+                                            placeholder={suggestion.values[valueIndex] || `Option ${valueIndex + 1}`}
+                                            className="value-input"
+                                        />
+                                          {valueIndex > 0 && (
+                                          <button
+                                              className="remove-value-btn"
+                                            onClick={() => {
+                                              const updated = [...(surveyDraft.classifiers || [])]
+                                                const values = [...(updated[index]?.values || [])]
+                                                values.splice(valueIndex, 1)
+                                                if (updated[index]) {
+                                                  updated[index] = { ...updated[index], values }
+                                              setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
+                                                }
+                                            }}
+                                          >
+                                              <X size={14} />
+                                          </button>
+                                        )}
+                                      </div>
+                                    ))}
+                                    <button
+                                        className="add-value-btn-modern"
+                                      onClick={() => {
+                                        const updated = [...(surveyDraft.classifiers || [])]
+                                          while (updated.length <= index) {
+                                            updated.push({ name: '', values: [''] })
+                                        }
+                                          updated[index].values = [...(updated[index].values || []), '']
+                                        setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
+                                      }}
+                                    >
+                                      <Plus size={14} />
+                                        <span>Add Option</span>
+                                    </button>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          )
-                        })}
+                              )
+                            })}
                       </div>
+                          <div className="ai-help-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div>
+                              <strong>Smart Categorization</strong>
+                              <p>Use classifiers to analyze patterns like leadership styles, communication preferences, or work environments. This helps you segment and understand different groups in your data.</p>
+                    </div>
+                  </div>
+                            </div>
+                            </div>
                     </div>
                   </div>
                 )}
 
                 {surveyStep === 4 && (
-                  <div className="step-container">
+                  <div className="step-container modern">
                     <div className="step-body">
-                      <div className="metrics-editor">
-                        {(surveyDraft.metrics || []).map((metric, index) => (
-                          <div key={index} className="metric-card">
-                            <div className="metric-header">
-                              <input
-                                type="text"
-                                value={metric.name || ''}
-                                onChange={e => {
-                                  const updated = [...(surveyDraft.metrics || [])]
-                                  updated[index] = { ...updated[index], name: e.target.value }
-                                  setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                                }}
-                                placeholder="Metric name (e.g., Employee Engagement Score)"
-                                className="metric-name-input"
-                              />
+                      <div className="modern-card">
+                        <div className="card-header">
+                          <div className="header-icon">
+                            <Calculator size={20} />
                             </div>
-                            <textarea
-                              value={metric.description || ''}
-                              onChange={e => {
-                                const updated = [...(surveyDraft.metrics || [])]
-                                updated[index] = { ...updated[index], description: e.target.value }
-                                setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                              }}
-                              placeholder="Describe what this metric measures..."
-                              className="metric-description-input"
-                              rows={2}
-                            />
-                            <div className="metric-formula">
-                              <span className="formula-label">AI Generated Formula:</span>
-                              <code className="formula-display">{metric.formula || 'avg(q1,q2,q3)'}</code>
-                              <button 
-                                className="generate-formula-btn"
-                                onClick={async () => {
-                                  // AI generate formula based on description
-                                  const formula = await generateFormulaFromAI(metric.description)
-                                  const updated = [...(surveyDraft.metrics || [])]
-                                  updated[index] = { ...updated[index], formula }
-                                  setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                                }}
-                              >
-                                <Wand2 size={12} />
-                                Generate Formula
-                              </button>
-                            </div>
+                          <div>
+                            <h3>Analytics Metrics</h3>
+                            <p>Define how you want to measure and calculate insights from your survey data</p>
+                                </div>
+                              </div>
+                        <div className="card-content">
+                          <div className="metrics-modern-list">
+                            {(surveyDraft.metrics || [{ name: '', description: '', formula: '' }]).map((metric, index) => (
+                              <div key={index} className="modern-metric-card">
+                                <div className="metric-card-header">
+                                  <div className="metric-badge">
+                                    <Calculator size={16} />
+                                  </div>
+                                  <input
+                                    type="text"
+                                    value={metric.name || ''}
+                                    onChange={e => {
+                                      const updated = [...(surveyDraft.metrics || [])]
+                                      updated[index] = { ...updated[index], name: e.target.value }
+                                      setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                                    }}
+                                    placeholder="e.g., Employee Engagement Score"
+                                    className="metric-title-input"
+                                  />
+                                    <button
+                                    className="modern-remove-metric-btn"
+                                      onClick={() => {
+                                      if ((surveyDraft.metrics || []).length > 1) {
+                                        const updated = [...(surveyDraft.metrics || [])]
+                                        updated.splice(index, 1)
+                                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                                      }
+                                      }}
+                                    disabled={(surveyDraft.metrics || []).length <= 1}
+                                    >
+                                      <X size={16} />
+                                    </button>
+                                </div>
+                                
+                                  <textarea
+                                    value={metric.description || ''}
+                                    onChange={e => {
+                                      const updated = [...(surveyDraft.metrics || [])]
+                                      updated[index] = { ...updated[index], description: e.target.value }
+                                      setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                                    }}
+                                  placeholder="Describe what this metric measures and why it's important for your analysis..."
+                                  className="metric-description"
+                                    rows={3}
+                                  />
+                                
+                                <div className="metric-formula-section">
+                                  <div className="formula-header">
+                                    <label className="formula-label">Smart Formula</label>
+                                    <button 
+                                      className="generate-formula-btn-modern"
+                                      onClick={async () => {
+                                        if (!metric.description) {
+                                          alert('Please add a description first to generate an AI formula')
+                                          return
+                                        }
+                                        
+                                        // Generate AI formula including classifiers
+                                        const classifierNames = (surveyDraft.classifiers || [])
+                                          .filter(c => c.name)
+                                          .map(c => c.name)
+                                        
+                                        const formula = await generateFormulaFromAI(metric.description, classifierNames)
+                                        const updated = [...(surveyDraft.metrics || [])]
+                                        updated[index] = { ...updated[index], formula }
+                                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                                      }}
+                                    >
+                                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                      </svg>
+                                      Generate Formula
+                                    </button>
+                                  </div>
+                                  <div className="formula-display-modern">
+                                    <code>{metric.formula || 'avg(responses) + weight(classifiers)'}</code>
+                                  </div>
+                                  <div className="formula-explanation">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                                      <path d="m9 12 2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                    This formula will incorporate your classifiers and survey responses for intelligent analysis
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                            
                             <button
-                              className="remove-metric-btn"
+                              className="modern-add-metric-btn"
                               onClick={() => {
-                                const updated = [...(surveyDraft.metrics || [])]
-                                updated.splice(index, 1)
+                                const updated = [...(surveyDraft.metrics || []), { name: '', description: '', formula: '' }]
                                 setSurveyDraft(prev => ({ ...prev, metrics: updated }))
                               }}
                             >
-                              <X size={14} />
-                              Remove
+                              <Plus size={18} />
+                              <span>Add New Metric</span>
                             </button>
                           </div>
-                        ))}
-                        <button
-                          className="add-metric-btn"
-                          onClick={() => {
-                            const updated = [...(surveyDraft.metrics || []), { name: '', description: '', formula: '' }]
-                            setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                          }}
-                        >
-                          <Plus size={14} />
-                          Add Metric
-                        </button>
+                          
+                          <div className="metrics-preview-section">
+                            <h4>Your Metrics Overview</h4>
+                            <div className="metrics-preview-grid">
+                              {(surveyDraft.metrics || []).filter(m => m.name).map((metric, index) => (
+                                <div key={index} className="metric-preview-card">
+                                  <div className="preview-metric-name">{metric.name}</div>
+                                  <div className="preview-metric-formula">{metric.formula || 'Formula pending'}</div>
+                            </div>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          <div className="ai-help-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div>
+                              <strong>Advanced Analytics</strong>
+                              <p>Our AI generates smart formulas that combine your survey responses with classifiers for deeper insights. Each metric can analyze patterns across different employee segments.</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 )}
 
                 {surveyStep === 5 && (
-                  <div className="step-container">
+                  <div className="step-container modern">
                     <div className="step-body">
-                      <div className="questions-builder">
-                        {(surveyDraft.questions || []).map((question, index) => (
-                          <div key={index} className="question-builder-card">
-                            <div className="question-builder-header">
-                              <span className="question-builder-number">{index + 1}</span>
-                              <input
-                                type="text"
-                                value={question.text || ''}
-                                onChange={e => {
-                                  const updated = [...(surveyDraft.questions || [])]
-                                  updated[index] = { ...updated[index], text: e.target.value }
-                                  setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                }}
-                                placeholder="Enter your question or statement..."
-                                className="question-builder-text"
-                              />
-                              <select
-                                value={question.type || 'multiple_choice'}
-                                onChange={e => {
-                                  const updated = [...(surveyDraft.questions || [])]
-                                  updated[index] = { ...updated[index], type: e.target.value }
-                                  setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                }}
-                                className="question-builder-type"
-                              >
-                                <option value="multiple_choice">Multiple Choice</option>
-                                <option value="scale">Rating Scale</option>
-                                <option value="text">Text Response</option>
-                                <option value="multiple_select">Multiple Select</option>
-                                <option value="yes_no">Yes/No</option>
-                                <option value="likert">Likert Scale</option>
-                              </select>
-                            </div>
-                            
-                            <div className="question-builder-options">
-                              <div className="builder-row">
-                                <label className="builder-checkbox">
-                                  <input
-                                    type="checkbox"
-                                    checked={question.required || false}
-                                    onChange={e => {
-                                      const updated = [...(surveyDraft.questions || [])]
-                                      updated[index] = { ...updated[index], required: e.target.checked }
-                                      setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                    }}
-                                  />
-                                  <span>Required</span>
-                                </label>
-                                
-                                <div className="linked-selectors">
-                                  <select 
-                                    value={question.linkedMetric || ''}
-                                    onChange={e => {
-                                      const updated = [...(surveyDraft.questions || [])]
-                                      updated[index] = { ...updated[index], linkedMetric: e.target.value }
-                                      setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                    }}
-                                    className="metric-selector"
-                                  >
-                                    <option value="">Link to Metric</option>
-                                    {(surveyDraft.metrics || []).map(metric => (
-                                      <option key={metric.name} value={metric.name}>{metric.name}</option>
-                                    ))}
-                                  </select>
-                                  
-                                  <select
-                                    value={question.linkedClassifier || ''}
-                                    onChange={e => {
-                                      const updated = [...(surveyDraft.questions || [])]
-                                      updated[index] = { ...updated[index], linkedClassifier: e.target.value }
-                                      setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                    }}
-                                    className="classifier-selector"
-                                  >
-                                    <option value="">Link to Classifier</option>
-                                    {(surveyDraft.classifiers || []).filter(c => c.name).map(classifier => (
-                                      <option key={classifier.name} value={classifier.name}>{classifier.name}</option>
-                                    ))}
-                                  </select>
-                                </div>
-                              </div>
-                              
-                              {(question.type === 'multiple_choice' || question.type === 'multiple_select') && (
-                                <div className="options-builder">
-                                  {(question.options || ['', '']).map((option, optIndex) => (
-                                    <input
-                                      key={optIndex}
-                                      type="text"
-                                      value={option}
-                                      onChange={e => {
-                                        const updated = [...(surveyDraft.questions || [])]
-                                        const updatedOptions = [...(updated[index].options || [])]
-                                        updatedOptions[optIndex] = e.target.value
-                                        updated[index] = { ...updated[index], options: updatedOptions }
-                                        setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                      }}
-                                      placeholder={`Option ${optIndex + 1}`}
-                                      className="option-builder-input"
-                                    />
-                                  ))}
+                      <div className="modern-card">
+                        <div className="card-header">
+                          <div className="header-icon">
+                            <List size={20} />
+                          </div>
+                          <div>
+                            <h3>Survey Questions</h3>
+                            <p>Create engaging questions that will provide valuable insights from your team</p>
+                          </div>
+                        </div>
+                        <div className="card-content">
+                          <div className="questions-modern-builder">
+                            {(surveyDraft.questions || [{ text: '', type: 'multiple_choice', required: false, options: [''] }]).map((question, index) => (
+                              <div key={index} className="modern-question-card">
+                                <div className="question-card-header">
+                                  <div className="question-drag-handle">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                      <circle cx="9" cy="12" r="1" fill="currentColor"/>
+                                      <circle cx="15" cy="12" r="1" fill="currentColor"/>
+                                      <circle cx="9" cy="6" r="1" fill="currentColor"/>
+                                      <circle cx="15" cy="6" r="1" fill="currentColor"/>
+                                      <circle cx="9" cy="18" r="1" fill="currentColor"/>
+                                      <circle cx="15" cy="18" r="1" fill="currentColor"/>
+                                    </svg>
+                                  </div>
+                                  <div className="question-number-badge">Q{index + 1}</div>
                                   <button
-                                    className="add-option-btn"
+                                    className="modern-question-remove-btn"
                                     onClick={() => {
-                                      const updated = [...(surveyDraft.questions || [])]
-                                      updated[index] = { 
-                                        ...updated[index], 
-                                        options: [...(updated[index].options || []), ''] 
+                                      if ((surveyDraft.questions || []).length > 1) {
+                                        const updated = [...(surveyDraft.questions || [])]
+                                        updated.splice(index, 1)
+                                        setSurveyDraft(prev => ({ ...prev, questions: updated }))
                                       }
-                                      setSurveyDraft(prev => ({ ...prev, questions: updated }))
                                     }}
+                                    disabled={(surveyDraft.questions || []).length <= 1}
                                   >
-                                    <Plus size={12} />
+                                    <X size={16} />
                                   </button>
                                 </div>
-                              )}
+                                
+                                <div className="question-content-section">
+                                  <input
+                                    type="text"
+                                    value={question.text || ''}
+                                    onChange={e => {
+                                      const updated = [...(surveyDraft.questions || [])]
+                                      updated[index] = { ...updated[index], text: e.target.value }
+                                      setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                    }}
+                                    placeholder="e.g., How satisfied are you with our team communication?"
+                                    className="modern-question-input"
+                                  />
+                                </div>
+                                
+                                <div className="question-type-section">
+                                  <div className="type-selector-header">
+                                    <label>Question Type</label>
+                                    <div className="question-settings">
+                                      <label className="modern-checkbox">
+                                        <input
+                                          type="checkbox"
+                                          checked={question.required || false}
+                                    onChange={e => {
+                                      const updated = [...(surveyDraft.questions || [])]
+                                            updated[index] = { ...updated[index], required: e.target.checked }
+                                      setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                    }}
+                                        />
+                                        <div className="checkbox-custom"></div>
+                                        <span>Required</span>
+                                      </label>
+                                    </div>
+                                  </div>
+                                  
+                                  <div className="question-type-grid">
+                                    {[
+                                      { type: 'multiple_choice', label: 'Multiple Choice', icon: '◉' },
+                                      { type: 'scale', label: 'Rating Scale', icon: '⭐' },
+                                      { type: 'likert', label: 'Likert Scale', icon: '📊' },
+                                      { type: 'text', label: 'Text Response', icon: '✏️' },
+                                      { type: 'yes_no', label: 'Yes/No', icon: '✓' },
+                                      { type: 'multiple_select', label: 'Multiple Select', icon: '☑️' }
+                                    ].map(typeOption => (
+                                      <button
+                                        key={typeOption.type}
+                                        className={`question-type-option ${question.type === typeOption.type ? 'active' : ''}`}
+                                        onClick={() => {
+                                          const updated = [...(surveyDraft.questions || [])]
+                                          updated[index] = { ...updated[index], type: typeOption.type }
+                                          setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                        }}
+                                      >
+                                        <span className="type-icon">{typeOption.icon}</span>
+                                        <span className="type-label">{typeOption.label}</span>
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                                
+                                {(question.type === 'multiple_choice' || question.type === 'multiple_select') && (
+                                  <div className="question-options-section">
+                                    <label className="section-label">Answer Options</label>
+                                    <div className="options-list">
+                                      {(question.options || ['']).map((option, optIndex) => (
+                                        <div key={optIndex} className="option-row">
+                                          <div className="option-indicator">
+                                            {question.type === 'multiple_choice' ? '◉' : '☑'}
+                                          </div>
+                                          <input
+                                            type="text"
+                                            value={option}
+                                            onChange={e => {
+                                              const updated = [...(surveyDraft.questions || [])]
+                                              const updatedOptions = [...(updated[index].options || [])]
+                                              updatedOptions[optIndex] = e.target.value
+                                              updated[index] = { ...updated[index], options: updatedOptions }
+                                              setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                            }}
+                                            placeholder={`Option ${optIndex + 1}`}
+                                            className="modern-option-input"
+                                          />
+                                          {optIndex > 0 && (
+                                            <button
+                                              className="remove-option-btn"
+                                              onClick={() => {
+                                                const updated = [...(surveyDraft.questions || [])]
+                                                const updatedOptions = [...(updated[index].options || [])]
+                                                updatedOptions.splice(optIndex, 1)
+                                                updated[index] = { ...updated[index], options: updatedOptions }
+                                                setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                              }}
+                                            >
+                                              <X size={14} />
+                                            </button>
+                                          )}
+                                        </div>
+                                      ))}
+                                      <button
+                                        className="add-option-btn-modern"
+                                        onClick={() => {
+                                          const updated = [...(surveyDraft.questions || [])]
+                                          updated[index] = { 
+                                            ...updated[index], 
+                                            options: [...(updated[index].options || []), ''] 
+                                          }
+                                          setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                        }}
+                                      >
+                                        <Plus size={14} />
+                                        <span>Add Option</span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                )}
+                                
+                                <div className="question-analytics-section">
+                                  <div className="analytics-selectors">
+                                    <div className="analytics-selector">
+                                      <label>Link to Metric</label>
+                                      <select 
+                                        value={question.linkedMetric || ''}
+                                      onChange={e => {
+                                        const updated = [...(surveyDraft.questions || [])]
+                                          updated[index] = { ...updated[index], linkedMetric: e.target.value }
+                                        setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                      }}
+                                        className="modern-select"
+                                      >
+                                        <option value="">Choose metric...</option>
+                                        {(surveyDraft.metrics || []).filter(m => m.name).map(metric => (
+                                          <option key={metric.name} value={metric.name}>{metric.name}</option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                    
+                                    <div className="analytics-selector">
+                                      <label>Link to Classifier</label>
+                                      <select
+                                        value={question.linkedClassifier || ''}
+                                        onChange={e => {
+                                        const updated = [...(surveyDraft.questions || [])]
+                                          updated[index] = { ...updated[index], linkedClassifier: e.target.value }
+                                        setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                      }}
+                                        className="modern-select"
+                                      >
+                                        <option value="">Choose classifier...</option>
+                                        {(surveyDraft.classifiers || []).filter(c => c.name).map(classifier => (
+                                          <option key={classifier.name} value={classifier.name}>{classifier.name}</option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                            
+                            <button
+                              className="modern-add-question-btn"
+                              onClick={() => {
+                                const updated = [...(surveyDraft.questions || []), {
+                                  id: `q${(surveyDraft.questions || []).length + 1}`,
+                                  text: '',
+                                  type: 'multiple_choice',
+                                  required: false,
+                                  options: ['']
+                                }]
+                                setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                              }}
+                            >
+                              <Plus size={20} />
+                              <span>Add New Question</span>
+                            </button>
+                          </div>
+                          
+                          <div className="questions-preview-section">
+                            <h4>Survey Preview</h4>
+                            <div className="survey-preview-container">
+                              {(surveyDraft.questions || []).filter(q => q.text).map((question, index) => (
+                                <div key={index} className="preview-question">
+                                  <div className="preview-question-number">Q{index + 1}</div>
+                                  <div className="preview-question-text">
+                                    {question.text}
+                                    {question.required && <span className="required-indicator">*</span>}
+                            </div>
+                                  <div className="preview-question-type">
+                                    {question.type.replace('_', ' ').toUpperCase()}
+                          </div>
+                        </div>
+                              ))}
                             </div>
                           </div>
-                        ))}
-                        
-                        <button
-                          className="add-question-btn"
-                          onClick={() => {
-                            const updated = [...(surveyDraft.questions || []), {
-                              id: `q${(surveyDraft.questions || []).length + 1}`,
-                              text: '',
-                              type: 'multiple_choice',
-                              required: false,
-                              options: ['', '']
-                            }]
-                            setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                          }}
-                        >
-                          <Plus size={16} />
-                          Add Question
-                        </button>
+                          
+                          <div className="ai-help-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div>
+                              <strong>Smart Question Design</strong>
+                              <p>Link questions to your metrics and classifiers for intelligent analysis. This helps create actionable insights from your survey responses.</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2377,7 +2766,8 @@ function AIChat() {
           left: 320px;
           right: var(--space-4);
           overflow-y: auto;
-          padding: 120px 0 120px 0;
+          overflow-x: hidden;
+          padding: 120px var(--space-4) 120px var(--space-4);
           display: flex;
           flex-direction: column;
           gap: var(--space-4);
@@ -2387,10 +2777,10 @@ function AIChat() {
           display: flex;
           gap: var(--space-3);
           animation: fadeInUp 0.4s ease-out;
-          max-width: 900px;
-          margin: 0 auto;
+          max-width: 100%;
           width: 100%;
           justify-content: flex-start;
+          padding: 0 var(--space-2);
         }
 
         .user-message {
@@ -2402,10 +2792,13 @@ function AIChat() {
         }
 
          .message-bubble {
-           max-width: 70%;
+           max-width: min(70%, 600px);
+           min-width: 120px;
            padding: var(--space-4) var(--space-5);
            position: relative;
            border-radius: var(--radius-lg);
+           word-wrap: break-word;
+           overflow-wrap: break-word;
          }
 
          .ai-message .message-bubble {
@@ -2427,6 +2820,15 @@ function AIChat() {
            background: rgba(255, 255, 255, 0.6);
            color: var(--text-primary);
            border: 1px solid rgba(255, 255, 255, 0.4);
+           backdrop-filter: blur(12px);
+           padding: var(--space-4) var(--space-5);
+           box-shadow: 
+             0 2px 12px rgba(0, 0, 0, 0.06),
+             0 1px 4px rgba(0, 0, 0, 0.04);
+           position: relative;
+           text-align: center;
+           min-width: 150px;
+           width: fit-content;
          }
 
          .message-time {
@@ -2438,6 +2840,46 @@ function AIChat() {
 
          .user-message .message-time {
            color: var(--text-secondary);
+           text-align: center;
+         }
+
+         /* Responsive chat messages */
+         @media (max-width: 1024px) {
+           .chat-messages {
+             left: var(--space-4);
+             right: var(--space-4);
+             padding: 80px var(--space-2) 80px var(--space-2);
+           }
+           
+           .message {
+             padding: 0 var(--space-1);
+           }
+           
+           .message-bubble {
+             max-width: min(85%, 500px);
+             min-width: 100px;
+             padding: var(--space-3) var(--space-4);
+           }
+           
+           .user-message .message-bubble {
+             min-width: 120px;
+           }
+         }
+
+         @media (max-width: 768px) {
+           .chat-messages {
+             padding: 60px var(--space-2) 60px var(--space-2);
+           }
+           
+           .message-bubble {
+             max-width: min(90%, 400px);
+             min-width: 80px;
+             padding: var(--space-3) var(--space-3);
+           }
+           
+           .user-message .message-bubble {
+             min-width: 100px;
+           }
          }
 
          .typing-indicator {
@@ -2680,18 +3122,21 @@ function AIChat() {
          .current-step-info {
            display: flex;
            align-items: center;
+           justify-content: center;
            gap: var(--space-4);
          }
          
-         .step-number {
+         .centered-step-header {
            display: flex;
+           flex-direction: column;
            align-items: center;
            gap: var(--space-3);
+           text-align: center;
          }
          
          .step-icon-wrapper {
-           width: 48px;
-           height: 48px;
+           width: 56px;
+           height: 56px;
            border-radius: 50%;
            display: flex;
            align-items: center;
@@ -2701,34 +3146,23 @@ function AIChat() {
              rgba(124, 58, 237, 0.10) 100%);
            border: 2px solid rgba(139, 92, 246, 0.3);
            color: rgb(139, 92, 246);
-         }
-         
-         .step-counter {
-           font-size: var(--text-sm);
-           font-weight: 600;
-           color: var(--text-secondary);
-           background: rgba(139, 92, 246, 0.1);
-           padding: 4px 12px;
-           border-radius: 20px;
-           border: 1px solid rgba(139, 92, 246, 0.2);
-         }
-         
-         .step-info {
-           flex: 1;
+           margin-bottom: var(--space-2);
          }
          
          .step-title {
-           font-size: 1.2em;
+           font-size: 1.5em;
            font-weight: 700;
            color: var(--text-primary);
-           margin: 0 0 4px 0;
+           margin: 0 0 var(--space-2) 0;
+           text-align: center;
          }
          
          .step-description {
-           font-size: var(--text-sm);
+           font-size: var(--text-base);
            color: var(--text-secondary);
            margin: 0;
            opacity: 0.8;
+           text-align: center;
          }
          
          .progress-bar {
@@ -2836,23 +3270,35 @@ function AIChat() {
          .add-metric-btn, .add-question-btn {
            display: flex;
            align-items: center;
+           justify-content: center;
            gap: 8px;
-           padding: 10px 16px;
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
-           border: 1px solid rgba(139, 92, 246, 0.25);
-           border-radius: 10px;
-           color: rgba(139, 92, 246, 0.8);
+           padding: 12px 20px;
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.06) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.3);
+           border-radius: 12px;
+           color: rgba(139, 92, 246, 0.9);
            cursor: pointer;
-           font-weight: 500;
-           font-size: 0.85em;
-           transition: all 0.2s ease;
+           font-weight: 600;
+           font-size: 0.9em;
+           transition: all 0.3s ease;
+           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
          }
          
          .ai-suggest-btn:hover, .generate-formula-btn:hover, .add-outcome-btn:hover,
          .add-metric-btn:hover, .add-question-btn:hover {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
-           transform: translateY(-1px);
-           border-color: rgba(139, 92, 246, 0.35);
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+           transform: translateY(-2px);
+           border-color: rgba(139, 92, 246, 0.4);
+           box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+         }
+         
+         .ai-icon {
+           opacity: 0.8;
+           transition: transform 0.2s ease;
+         }
+         
+         .ai-suggest-btn:hover .ai-icon {
+           transform: scale(1.1);
          }
          
          .step-help {
@@ -2869,17 +3315,226 @@ function AIChat() {
            font-weight: 500;
          }
          
-         /* Step 2: Context */
-         .form-group {
-           display: flex;
-           flex-direction: column;
-           gap: 12px;
+         /* Modern Step Styling */
+         .step-container.modern {
+           max-width: 800px;
+           gap: var(--space-6);
          }
          
-         .form-group label {
-           font-weight: 600;
+         .modern-card {
+           background: white;
+           border-radius: 20px;
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+           overflow: hidden;
+           transition: all 0.3s ease;
+           margin-bottom: var(--space-5);
+         }
+         
+         .modern-card:hover {
+           transform: translateY(-2px);
+           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+         }
+         
+         .card-header {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.05) 0%, 
+             rgba(124, 58, 237, 0.02) 100%);
+           border-bottom: 1px solid rgba(226, 232, 240, 0.4);
+           padding: var(--space-5);
+           display: flex;
+           align-items: flex-start;
+           gap: var(--space-4);
+         }
+         
+         .header-icon {
+           width: 48px;
+           height: 48px;
+           border-radius: 12px;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.1) 0%, 
+             rgba(124, 58, 237, 0.06) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.2);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           color: rgb(139, 92, 246);
+           flex-shrink: 0;
+         }
+         
+         .card-header h3 {
+           font-size: 1.25em;
+           font-weight: 700;
            color: var(--text-primary);
+           margin: 0 0 var(--space-1) 0;
+         }
+         
+         .card-header p {
+           font-size: 0.9em;
+           color: var(--text-secondary);
+           margin: 0;
+           opacity: 0.8;
+           line-height: 1.5;
+         }
+         
+         .card-content {
+           padding: var(--space-5);
+         }
+         
+         .modern-textarea {
+           width: 100%;
+           min-height: 120px;
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           background: rgba(248, 250, 252, 0.4);
+           border-radius: 16px;
+           padding: var(--space-4);
            font-size: 0.95em;
+           font-family: inherit;
+           color: var(--text-primary);
+           line-height: 1.6;
+           resize: vertical;
+           outline: none;
+           transition: all 0.3s ease;
+         }
+         
+         .modern-textarea:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: white;
+           box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+         }
+         
+         .modern-input {
+           flex: 1;
+           height: 48px;
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           background: rgba(248, 250, 252, 0.4);
+           border-radius: 12px;
+           padding: 0 var(--space-4);
+           font-size: 0.95em;
+           font-family: inherit;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.3s ease;
+         }
+         
+         .modern-input:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: white;
+           box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+         }
+         
+         .outcomes-list {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-3);
+         }
+         
+         .outcome-row {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+           padding: var(--space-2);
+           border-radius: 12px;
+           transition: background 0.2s ease;
+         }
+         
+         .outcome-row:hover {
+           background: rgba(248, 250, 252, 0.6);
+         }
+         
+         .outcome-number {
+           width: 32px;
+           height: 32px;
+           border-radius: 8px;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.1) 0%, 
+             rgba(124, 58, 237, 0.06) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.2);
+           color: rgba(139, 92, 246, 0.8);
+           font-weight: 700;
+           font-size: 0.85em;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           flex-shrink: 0;
+         }
+         
+         .modern-remove-btn {
+           width: 40px;
+           height: 40px;
+           border: none;
+           border-radius: 10px;
+           background: rgba(239, 68, 68, 0.05);
+           color: rgba(239, 68, 68, 0.7);
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.2s ease;
+           flex-shrink: 0;
+         }
+         
+         .modern-remove-btn:hover {
+           background: rgba(239, 68, 68, 0.1);
+           transform: scale(1.05);
+         }
+         
+         .modern-add-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: var(--space-2);
+           width: 100%;
+           height: 56px;
+           border: 2px dashed rgba(139, 92, 246, 0.3);
+           background: rgba(139, 92, 246, 0.02);
+           border-radius: 16px;
+           color: rgba(139, 92, 246, 0.8);
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           margin-top: var(--space-2);
+         }
+         
+         .modern-add-btn:hover {
+           background: rgba(139, 92, 246, 0.05);
+           border-color: rgba(139, 92, 246, 0.4);
+           transform: translateY(-1px);
+         }
+         
+         .ai-help-card {
+           display: flex;
+           align-items: flex-start;
+           gap: var(--space-3);
+           margin-top: var(--space-4);
+           padding: var(--space-4);
+           background: linear-gradient(135deg, 
+             rgba(59, 130, 246, 0.05) 0%, 
+             rgba(37, 99, 235, 0.02) 100%);
+           border: 1px solid rgba(59, 130, 246, 0.15);
+           border-radius: 12px;
+         }
+         
+         .help-icon {
+           color: rgba(59, 130, 246, 0.7);
+           flex-shrink: 0;
+           margin-top: 2px;
+         }
+         
+         .ai-help-card strong {
+           font-size: 0.9em;
+           color: var(--text-primary);
+           font-weight: 600;
+           display: block;
+           margin-bottom: var(--space-1);
+         }
+         
+         .ai-help-card p {
+           font-size: 0.8em;
+           color: var(--text-secondary);
+           margin: 0;
+           opacity: 0.8;
+           line-height: 1.4;
          }
          
          .wizard-textarea {
@@ -2969,11 +3624,153 @@ function AIChat() {
            border-color: rgba(139, 92, 246, 0.4);
          }
 
-         /* Step 3: Classifiers */
-         .classifiers-grid {
+         /* Modern Classifiers Styling */
+         .classifiers-modern-grid {
            display: grid;
-           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-           gap: var(--space-4);
+           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+           gap: var(--space-5);
+         }
+         
+         .modern-classifier-card {
+           background: linear-gradient(135deg, 
+             rgba(248, 250, 252, 0.8) 0%, 
+             rgba(255, 255, 255, 0.9) 100%);
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           border-radius: 16px;
+           padding: var(--space-5);
+           transition: all 0.3s ease;
+           position: relative;
+         }
+         
+         .modern-classifier-card:hover {
+           transform: translateY(-2px);
+           box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+         
+         .classifier-badge {
+           position: absolute;
+           top: -8px;
+           left: var(--space-4);
+           width: 28px;
+           height: 28px;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.9) 0%, 
+             rgba(124, 58, 237, 0.8) 100%);
+           color: white;
+           border-radius: 8px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-weight: 700;
+           font-size: 0.8em;
+           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+         }
+         
+         .classifier-title-input {
+           width: 100%;
+           border: none;
+           background: transparent;
+           font-size: 1.1em;
+           font-weight: 700;
+           color: var(--text-primary);
+           padding: var(--space-2) 0;
+           margin-bottom: var(--space-4);
+           border-bottom: 2px solid rgba(226, 232, 240, 0.4);
+           outline: none;
+           transition: all 0.3s ease;
+         }
+         
+         .classifier-title-input:focus {
+           border-bottom-color: rgba(139, 92, 246, 0.6);
+         }
+         
+         .classifier-values-section {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-3);
+         }
+         
+         .section-label {
+           font-size: 0.85em;
+           font-weight: 600;
+           color: var(--text-secondary);
+           text-transform: uppercase;
+           letter-spacing: 0.5px;
+           margin-bottom: var(--space-2);
+         }
+         
+         .classifier-values-list {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-2);
+         }
+         
+         .value-input-row {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+         }
+         
+         .value-input {
+           flex: 1;
+           height: 40px;
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           background: rgba(255, 255, 255, 0.7);
+           border-radius: 8px;
+           padding: 0 var(--space-3);
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+         }
+         
+         .value-input:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: white;
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+         
+         .remove-value-btn {
+           width: 32px;
+           height: 32px;
+           border: none;
+           border-radius: 6px;
+           background: rgba(239, 68, 68, 0.1);
+           color: rgba(239, 68, 68, 0.7);
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.2s ease;
+           flex-shrink: 0;
+         }
+         
+         .remove-value-btn:hover {
+           background: rgba(239, 68, 68, 0.2);
+           transform: scale(1.1);
+         }
+         
+         .add-value-btn-modern {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: var(--space-2);
+           height: 36px;
+           border: 1px dashed rgba(139, 92, 246, 0.4);
+           background: rgba(139, 92, 246, 0.02);
+           border-radius: 8px;
+           color: rgba(139, 92, 246, 0.8);
+           font-size: 0.85em;
+           font-weight: 500;
+           cursor: pointer;
+           transition: all 0.2s ease;
+           margin-top: var(--space-1);
+         }
+         
+         .add-value-btn-modern:hover {
+           background: rgba(139, 92, 246, 0.05);
+           border-color: rgba(139, 92, 246, 0.6);
          }
          
          .classifier-card {
@@ -3061,11 +3858,253 @@ function AIChat() {
            background: rgba(139, 92, 246, 0.08);
          }
 
-         /* Step 4: Metrics */
-         .metrics-editor {
+         /* Modern Metrics Styling */
+         .metrics-modern-list {
            display: flex;
            flex-direction: column;
-           gap: var(--space-4);
+           gap: var(--space-5);
+         }
+         
+         .modern-metric-card {
+           background: linear-gradient(135deg, 
+             rgba(248, 250, 252, 0.9) 0%, 
+             rgba(255, 255, 255, 0.95) 100%);
+           border: 2px solid rgba(226, 232, 240, 0.5);
+           border-radius: 20px;
+           padding: var(--space-5);
+           transition: all 0.3s ease;
+           position: relative;
+         }
+         
+         .modern-metric-card:hover {
+           transform: translateY(-3px);
+           box-shadow: 0 12px 32px rgba(139, 92, 246, 0.15);
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+         
+         .metric-card-header {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+           margin-bottom: var(--space-4);
+         }
+         
+         .metric-badge {
+           width: 40px;
+           height: 40px;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.1) 0%, 
+             rgba(124, 58, 237, 0.08) 100%);
+           border: 2px solid rgba(139, 92, 246, 0.2);
+           border-radius: 12px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           color: rgba(139, 92, 246, 0.8);
+           flex-shrink: 0;
+         }
+         
+         .metric-title-input {
+           flex: 1;
+           border: none;
+           background: transparent;
+           font-size: 1.2em;
+           font-weight: 700;
+           color: var(--text-primary);
+           padding: var(--space-2) 0;
+           border-bottom: 2px solid rgba(226, 232, 240, 0.4);
+           outline: none;
+           transition: all 0.3s ease;
+         }
+         
+         .metric-title-input:focus {
+           border-bottom-color: rgba(139, 92, 246, 0.6);
+         }
+         
+         .modern-remove-metric-btn {
+           width: 36px;
+           height: 36px;
+           border: none;
+           border-radius: 10px;
+           background: rgba(239, 68, 68, 0.08);
+           color: rgba(239, 68, 68, 0.7);
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.2s ease;
+           flex-shrink: 0;
+         }
+         
+         .modern-remove-metric-btn:hover:not(:disabled) {
+           background: rgba(239, 68, 68, 0.15);
+           transform: scale(1.05);
+         }
+         
+         .modern-remove-metric-btn:disabled {
+           opacity: 0.3;
+           cursor: not-allowed;
+         }
+         
+         .metric-description {
+           width: 100%;
+           min-height: 80px;
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           background: rgba(248, 250, 252, 0.3);
+           border-radius: 12px;
+           padding: var(--space-3);
+           font-size: 0.9em;
+           font-family: inherit;
+           color: var(--text-primary);
+           line-height: 1.6;
+           resize: vertical;
+           outline: none;
+           transition: all 0.3s ease;
+           margin-bottom: var(--space-4);
+         }
+         
+         .metric-description:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: white;
+           box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+         }
+         
+         .metric-formula-section {
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 16px;
+           padding: var(--space-4);
+         }
+         
+         .formula-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: var(--space-3);
+         }
+         
+         .formula-label {
+           font-size: 0.9em;
+           font-weight: 600;
+           color: var(--text-primary);
+         }
+         
+         .generate-formula-btn-modern {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+           padding: 8px 16px;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.1) 0%, 
+             rgba(124, 58, 237, 0.06) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.3);
+           border-radius: 10px;
+           color: rgba(139, 92, 246, 0.9);
+           font-size: 0.8em;
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+         
+         .generate-formula-btn-modern:hover {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.15) 0%, 
+             rgba(124, 58, 237, 0.08) 100%);
+           transform: translateY(-1px);
+           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+         }
+         
+         .formula-display-modern {
+           background: rgba(15, 23, 42, 0.95);
+           border-radius: 8px;
+           padding: var(--space-3);
+           margin-bottom: var(--space-3);
+         }
+         
+         .formula-display-modern code {
+           font-family: 'Monaco', 'Menlo', monospace;
+           color: #64dd17;
+           font-size: 0.9em;
+           line-height: 1.5;
+         }
+         
+         .formula-explanation {
+           display: flex;
+           align-items: flex-start;
+           gap: var(--space-2);
+           font-size: 0.8em;
+           color: var(--text-secondary);
+           opacity: 0.8;
+         }
+         
+         .formula-explanation svg {
+           flex-shrink: 0;
+           margin-top: 2px;
+           color: rgba(34, 197, 94, 0.7);
+         }
+         
+         .modern-add-metric-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: var(--space-3);
+           height: 60px;
+           border: 2px dashed rgba(139, 92, 246, 0.4);
+           background: rgba(139, 92, 246, 0.03);
+           border-radius: 20px;
+           color: rgba(139, 92, 246, 0.8);
+           font-size: 1em;
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           margin-top: var(--space-2);
+         }
+         
+         .modern-add-metric-btn:hover {
+           background: rgba(139, 92, 246, 0.06);
+           border-color: rgba(139, 92, 246, 0.6);
+           transform: translateY(-2px);
+         }
+         
+         .metrics-preview-section {
+           margin-top: var(--space-6);
+           padding-top: var(--space-5);
+           border-top: 1px solid rgba(226, 232, 240, 0.4);
+         }
+         
+         .metrics-preview-section h4 {
+           font-size: 1.1em;
+           font-weight: 600;
+           color: var(--text-primary);
+           margin-bottom: var(--space-4);
+         }
+         
+         .metrics-preview-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+           gap: var(--space-3);
+         }
+         
+         .metric-preview-card {
+           background: rgba(248, 250, 252, 0.8);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 12px;
+           padding: var(--space-4);
+         }
+         
+         .preview-metric-name {
+           font-weight: 600;
+           color: var(--text-primary);
+           margin-bottom: var(--space-2);
+         }
+         
+         .preview-metric-formula {
+           font-family: 'Monaco', monospace;
+           font-size: 0.8em;
+           color: rgba(139, 92, 246, 0.8);
+           background: rgba(139, 92, 246, 0.05);
+           padding: 4px 8px;
+           border-radius: 6px;
          }
          
          .metric-card {
@@ -3174,11 +4213,452 @@ function AIChat() {
            background: rgba(139, 92, 246, 0.08);
          }
 
-         /* Step 5: Questions */
-         .questions-builder {
+         /* Modern Questions Builder Styling */
+         .questions-modern-builder {
            display: flex;
            flex-direction: column;
+           gap: var(--space-6);
+         }
+         
+         .modern-question-card {
+           background: linear-gradient(135deg, 
+             rgba(248, 250, 252, 0.95) 0%, 
+             rgba(255, 255, 255, 0.98) 100%);
+           border: 2px solid rgba(226, 232, 240, 0.6);
+           border-radius: 24px;
+           padding: var(--space-6);
+           transition: all 0.3s ease;
+           position: relative;
+         }
+         
+         .modern-question-card:hover {
+           transform: translateY(-4px);
+           box-shadow: 0 16px 40px rgba(139, 92, 246, 0.15);
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+         
+         .question-card-header {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           margin-bottom: var(--space-5);
+         }
+         
+         .question-drag-handle {
+           width: 20px;
+           height: 20px;
+           color: rgba(156, 163, 175, 0.6);
+           cursor: grab;
+           transition: color 0.2s ease;
+         }
+         
+         .question-drag-handle:hover {
+           color: rgba(139, 92, 246, 0.8);
+         }
+         
+         .question-number-badge {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.9) 0%, 
+             rgba(124, 58, 237, 0.8) 100%);
+           color: white;
+           padding: 8px 16px;
+           border-radius: 12px;
+           font-weight: 700;
+           font-size: 0.9em;
+           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+         }
+         
+         .modern-question-remove-btn {
+           width: 36px;
+           height: 36px;
+           border: none;
+           border-radius: 10px;
+           background: rgba(239, 68, 68, 0.08);
+           color: rgba(239, 68, 68, 0.7);
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.2s ease;
+         }
+         
+         .modern-question-remove-btn:hover:not(:disabled) {
+           background: rgba(239, 68, 68, 0.15);
+           transform: scale(1.1);
+         }
+         
+         .modern-question-remove-btn:disabled {
+           opacity: 0.3;
+           cursor: not-allowed;
+         }
+         
+         .question-content-section {
+           margin-bottom: var(--space-5);
+         }
+         
+         .modern-question-input {
+           width: 100%;
+           border: none;
+           background: rgba(248, 250, 252, 0.8);
+           border-radius: 16px;
+           padding: var(--space-4) var(--space-5);
+           font-size: 1.1em;
+           font-weight: 500;
+           color: var(--text-primary);
+           line-height: 1.5;
+           outline: none;
+           transition: all 0.3s ease;
+           min-height: 60px;
+         }
+         
+         .modern-question-input:focus {
+           background: white;
+           box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+           transform: scale(1.01);
+         }
+         
+         .question-type-section {
+           margin-bottom: var(--space-5);
+           padding: var(--space-4);
+           background: rgba(248, 250, 252, 0.6);
+           border-radius: 16px;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+         }
+         
+         .type-selector-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: var(--space-4);
+         }
+         
+         .type-selector-header label {
+           font-weight: 600;
+           color: var(--text-primary);
+           font-size: 0.95em;
+         }
+         
+         .question-settings {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+         }
+         
+         .modern-checkbox {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+           cursor: pointer;
+           font-size: 0.9em;
+           font-weight: 500;
+         }
+         
+         .modern-checkbox input[type="checkbox"] {
+           display: none;
+         }
+         
+         .checkbox-custom {
+           width: 20px;
+           height: 20px;
+           border: 2px solid rgba(139, 92, 246, 0.3);
+           border-radius: 4px;
+           background: white;
+           transition: all 0.2s ease;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+         }
+         
+         .modern-checkbox input[type="checkbox"]:checked + .checkbox-custom {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.9) 0%, 
+             rgba(124, 58, 237, 0.8) 100%);
+           border-color: rgba(139, 92, 246, 0.6);
+         }
+         
+         .modern-checkbox input[type="checkbox"]:checked + .checkbox-custom::after {
+           content: '✓';
+           color: white;
+           font-size: 12px;
+           font-weight: bold;
+         }
+         
+         .question-type-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+           gap: var(--space-3);
+         }
+         
+         .question-type-option {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           gap: var(--space-2);
+           padding: var(--space-3);
+           background: white;
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           border-radius: 12px;
+           cursor: pointer;
+           transition: all 0.2s ease;
+           min-height: 80px;
+           justify-content: center;
+         }
+         
+         .question-type-option:hover {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: rgba(139, 92, 246, 0.02);
+           transform: translateY(-1px);
+         }
+         
+         .question-type-option.active {
+           border-color: rgba(139, 92, 246, 0.6);
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.08) 0%, 
+             rgba(124, 58, 237, 0.04) 100%);
+           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+         }
+         
+         .type-icon {
+           font-size: 1.5em;
+           margin-bottom: var(--space-1);
+         }
+         
+         .type-label {
+           font-size: 0.85em;
+           font-weight: 600;
+           color: var(--text-secondary);
+           text-align: center;
+           line-height: 1.2;
+         }
+         
+         .question-options-section {
+           margin-bottom: var(--space-4);
+           padding: var(--space-4);
+           background: rgba(248, 250, 252, 0.4);
+           border-radius: 16px;
+           border: 1px solid rgba(226, 232, 240, 0.3);
+         }
+         
+         .options-list {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-3);
+         }
+         
+         .option-row {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+           padding: var(--space-2);
+           background: white;
+           border-radius: 12px;
+           transition: background 0.2s ease;
+         }
+         
+         .option-row:hover {
+           background: rgba(248, 250, 252, 0.8);
+         }
+         
+         .option-indicator {
+           width: 24px;
+           height: 24px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           background: rgba(139, 92, 246, 0.1);
+           border-radius: 6px;
+           color: rgba(139, 92, 246, 0.7);
+           font-size: 0.9em;
+           flex-shrink: 0;
+         }
+         
+         .modern-option-input {
+           flex: 1;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 8px;
+           padding: 10px var(--space-3);
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+         }
+         
+         .modern-option-input:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: white;
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+         
+         .remove-option-btn {
+           width: 28px;
+           height: 28px;
+           border: none;
+           border-radius: 6px;
+           background: rgba(239, 68, 68, 0.08);
+           color: rgba(239, 68, 68, 0.7);
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.2s ease;
+           flex-shrink: 0;
+         }
+         
+         .remove-option-btn:hover {
+           background: rgba(239, 68, 68, 0.15);
+           transform: scale(1.1);
+         }
+         
+         .add-option-btn-modern {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: var(--space-2);
+           height: 40px;
+           border: 1px dashed rgba(139, 92, 246, 0.4);
+           background: rgba(139, 92, 246, 0.02);
+           border-radius: 12px;
+           color: rgba(139, 92, 246, 0.8);
+           font-size: 0.85em;
+           font-weight: 500;
+           cursor: pointer;
+           transition: all 0.2s ease;
+           margin-top: var(--space-2);
+         }
+         
+         .add-option-btn-modern:hover {
+           background: rgba(139, 92, 246, 0.05);
+           border-color: rgba(139, 92, 246, 0.6);
+         }
+         
+         .question-analytics-section {
+           padding: var(--space-4);
+           background: rgba(59, 130, 246, 0.03);
+           border: 1px solid rgba(59, 130, 246, 0.1);
+           border-radius: 16px;
+         }
+         
+         .analytics-selectors {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
            gap: var(--space-4);
+         }
+         
+         .analytics-selector label {
+           display: block;
+           font-size: 0.85em;
+           font-weight: 600;
+           color: var(--text-secondary);
+           margin-bottom: var(--space-2);
+         }
+         
+         .modern-select {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           background: white;
+           border-radius: 8px;
+           padding: 10px var(--space-3);
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+         
+         .modern-select:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+         
+         .modern-add-question-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: var(--space-3);
+           height: 70px;
+           border: 2px dashed rgba(139, 92, 246, 0.4);
+           background: rgba(139, 92, 246, 0.03);
+           border-radius: 24px;
+           color: rgba(139, 92, 246, 0.8);
+           font-size: 1.1em;
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           margin-top: var(--space-4);
+         }
+         
+         .modern-add-question-btn:hover {
+           background: rgba(139, 92, 246, 0.06);
+           border-color: rgba(139, 92, 246, 0.6);
+           transform: translateY(-2px);
+           box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+         }
+         
+         .questions-preview-section {
+           margin-top: var(--space-6);
+           padding-top: var(--space-5);
+           border-top: 1px solid rgba(226, 232, 240, 0.4);
+         }
+         
+         .questions-preview-section h4 {
+           font-size: 1.2em;
+           font-weight: 600;
+           color: var(--text-primary);
+           margin-bottom: var(--space-4);
+         }
+         
+         .survey-preview-container {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-3);
+           max-height: 300px;
+           overflow-y: auto;
+           padding-right: var(--space-2);
+         }
+         
+         .preview-question {
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 12px;
+           padding: var(--space-4);
+           display: flex;
+           align-items: flex-start;
+           gap: var(--space-3);
+         }
+         
+         .preview-question-number {
+           background: rgba(139, 92, 246, 0.1);
+           color: rgba(139, 92, 246, 0.8);
+           padding: 4px 8px;
+           border-radius: 6px;
+           font-weight: 600;
+           font-size: 0.8em;
+           flex-shrink: 0;
+         }
+         
+         .preview-question-text {
+           flex: 1;
+           font-size: 0.9em;
+           color: var(--text-primary);
+           line-height: 1.4;
+         }
+         
+         .required-indicator {
+           color: rgba(239, 68, 68, 0.8);
+           font-weight: bold;
+           margin-left: 2px;
+         }
+         
+         .preview-question-type {
+           background: rgba(34, 197, 94, 0.1);
+           color: rgba(34, 197, 94, 0.8);
+           padding: 2px 8px;
+           border-radius: 4px;
+           font-size: 0.7em;
+           font-weight: 600;
+           text-transform: uppercase;
+           flex-shrink: 0;
          }
          
          .question-builder-card {
