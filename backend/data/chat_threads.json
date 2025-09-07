@@ -81,7 +81,7 @@
     "id": "culture-003",
     "title": "Diversity & Inclusion Metrics",
     "created_at": "2025-09-05T16:45:00",
-    "updated_at": "2025-09-05T16:50:00",
+    "updated_at": "2025-09-07T13:09:17.421813",
     "messages": [
       {
         "id": "msg-003-1",
@@ -94,6 +94,18 @@
         "role": "assistant",
         "content": "Here are the **essential D&I metrics** every organization should track:\n\n## Representation Metrics:\n- **Demographic composition** by level/department\n- **Leadership diversity** (C-suite, VP, Director levels)\n- **Hiring diversity** (candidate pipeline \u2192 offers \u2192 acceptances)\n- **Promotion rates** by demographic groups\n\n## Inclusion Experience:\n- **Belonging scores** (survey-based)\n- **Psychological safety** index\n- **Voice & influence** perception surveys\n- **Mentor/sponsor** access rates\n\n## Pay Equity:\n- **Compensation analysis** by role and demographics\n- **Bonus/equity** distribution patterns\n- **Performance rating** distribution fairness\n\n## Retention & Growth:\n- **Turnover rates** by demographic groups\n- **Internal mobility** success rates\n- **High-potential identification** diversity\n\n## Actionable Insights:\nTrack these **quarterly** and focus on **trends over time** rather than snapshots. The most critical metric is often **belonging scores** - they predict retention and performance better than representation alone.\n\nWhich metrics would you like help setting up measurement frameworks for?",
         "timestamp": "2025-09-05T16:46:30"
+      },
+      {
+        "id": "727abf8a-37e2-4372-a3ab-8937ca0d82b7",
+        "role": "user",
+        "content": "Quick test of word streaming",
+        "timestamp": "2025-09-07T13:09:15.163082"
+      },
+      {
+        "id": "06c8250c-5a90-4a46-bb4e-c0319bb83a36",
+        "role": "assistant",
+        "content": "Word streaming is working! You're seeing my response arrive in real time\u2014useful for rapid feedback or longer explanations. Let me know if you want to try another test or continue with D&I metric frameworks! ",
+        "timestamp": "2025-09-07T13:09:17.421761"
       }
     ],
     "is_active": true
@@ -244,7 +256,60 @@
     "id": "f97fcbb6-833f-45e5-9967-cefcf2e36ceb",
     "title": "New Chat",
     "created_at": "2025-09-07T12:55:13.397107",
-    "updated_at": "2025-09-07T12:55:13.397110",
+    "updated_at": "2025-09-07T13:12:31.667329",
+    "messages": [],
+    "is_active": false
+  },
+  "a0c80e69-ec87-48c8-945c-9c02d18ff4fa": {
+    "id": "a0c80e69-ec87-48c8-945c-9c02d18ff4fa",
+    "title": "New Chat",
+    "created_at": "2025-09-07T13:04:25.154388",
+    "updated_at": "2025-09-07T13:12:30.808939",
+    "messages": [],
+    "is_active": false
+  },
+  "8fc0abed-d38e-4978-bb04-15e7244961a5": {
+    "id": "8fc0abed-d38e-4978-bb04-15e7244961a5",
+    "title": "New Chat",
+    "created_at": "2025-09-07T13:04:25.172530",
+    "updated_at": "2025-09-07T13:12:30.337988",
+    "messages": [],
+    "is_active": false
+  },
+  "b5fbdcc6-e8bd-4b5d-b090-ed75341b1d66": {
+    "id": "b5fbdcc6-e8bd-4b5d-b090-ed75341b1d66",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T13:11:42.956263",
+    "updated_at": "2025-09-07T13:11:44.998908",
+    "messages": [
+      {
+        "id": "439aaa24-5c28-4b10-b648-e86c74adadad",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T13:11:43.006800"
+      },
+      {
+        "id": "9fa0ec4a-9ddb-4f57-89d6-76f6c6e583f9",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your company culture analysis or insights today? If you have culture data, feedback, or specific challenges, feel free to share\u2014I'm here to help you interpret the data and suggest actionable improvements! ",
+        "timestamp": "2025-09-07T13:11:44.998810"
+      }
+    ],
+    "is_active": true
+  },
+  "96b00d2e-0b1b-4020-8133-b356e0f5114e": {
+    "id": "96b00d2e-0b1b-4020-8133-b356e0f5114e",
+    "title": "New Chat",
+    "created_at": "2025-09-07T13:11:47.337913",
+    "updated_at": "2025-09-07T13:12:32.802157",
+    "messages": [],
+    "is_active": false
+  },
+  "0121b275-4ff0-431b-b794-836662207880": {
+    "id": "0121b275-4ff0-431b-b794-836662207880",
+    "title": "New Chat",
+    "created_at": "2025-09-07T13:11:47.339217",
+    "updated_at": "2025-09-07T13:11:47.339220",
     "messages": [],
     "is_active": true
   }
