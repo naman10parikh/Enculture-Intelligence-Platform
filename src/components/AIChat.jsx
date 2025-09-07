@@ -1195,10 +1195,11 @@ function AIChat() {
             const isCopied = copiedMessageId === cleanContent.substring(0, 20);
             const isLiked = likedMessages.has(message.id);
             
-            return (
-              <div key={message.id} className={`message-container ${message.type}-container`}>
-                <div className={`message ${message.type}-message`}>
-                <div className="message-bubble glass-bubble">
+             return (
+               <div key={message.id} className={`message-container ${message.type}-container`}>
+                 <div className="message-wrapper">
+                   <div className={`message ${message.type}-message`}>
+                   <div className="message-bubble glass-bubble">
                     {isEditing ? (
                       <div className="edit-mode">
                         <textarea
@@ -1308,10 +1309,11 @@ function AIChat() {
                         </>
                       )}
                     </div>
-                  </div>
-                )}
-              </div>
-            );
+                     </div>
+                   )}
+                 </div>
+               </div>
+             );
           })}
           
           {isTyping && (
@@ -4927,24 +4929,35 @@ function AIChat() {
            justify-content: flex-end;
          }
          
-         /* Message Actions Styles */
+         /* Message Actions Styles - Position relative to message bubble */
          .message-actions-container {
-           display: flex;
-           width: 100%;
+           margin-top: 6px;
          }
          
+         /* AI actions: align with AI bubble left edge */
          .ai-actions-container {
-           justify-content: flex-start;  /* AI actions on bottom left */
+           display: flex;
+           justify-content: flex-start;
          }
          
-         .user-actions-container {
-           justify-content: flex-end;    /* User actions on bottom right */
-         }
-         
-         .message-actions {
+         .ai-actions-container .message-actions {
            display: flex;
            gap: 4px;
+           width: fit-content;
          }
+         
+         /* User actions: align with user bubble right edge */
+         .user-actions-container {
+           display: flex;
+           justify-content: flex-end;
+         }
+         
+         .user-actions-container .message-actions {
+           display: flex;
+           gap: 4px;
+           width: fit-content;
+         }
+         
          
          .message-actions.ai-actions {
            opacity: 1;  /* AI actions always visible */

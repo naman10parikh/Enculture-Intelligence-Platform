@@ -103,17 +103,17 @@
     "id": "b9ccfb60-7d00-4394-afb7-014fbdc43ebd",
     "title": "New Chat",
     "created_at": "2025-09-07T14:56:35.038096",
-    "updated_at": "2025-09-07T14:56:35.038110",
+    "updated_at": "2025-09-07T15:23:39.947903",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "33d8bf6c-1ca5-4fca-ace6-32b2f8c013e3": {
     "id": "33d8bf6c-1ca5-4fca-ace6-32b2f8c013e3",
     "title": "New Chat",
     "created_at": "2025-09-07T14:56:35.047529",
-    "updated_at": "2025-09-07T14:56:35.047535",
+    "updated_at": "2025-09-07T15:23:39.801723",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "fbcaf8dd-c0df-4713-a71a-a695b8d3fd63": {
     "id": "fbcaf8dd-c0df-4713-a71a-a695b8d3fd63",
@@ -140,15 +140,129 @@
     "id": "95eb6fb4-742a-4d32-9f9a-e09d7a6a74ce",
     "title": "New Chat",
     "created_at": "2025-09-07T14:57:03.507466",
-    "updated_at": "2025-09-07T14:57:03.507551",
+    "updated_at": "2025-09-07T15:23:38.039887",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "b6e49776-1bc5-4b04-92cf-8d0949041add": {
     "id": "b6e49776-1bc5-4b04-92cf-8d0949041add",
     "title": "New Chat",
     "created_at": "2025-09-07T14:57:03.516093",
-    "updated_at": "2025-09-07T14:57:03.516101",
+    "updated_at": "2025-09-07T15:23:37.373760",
+    "messages": [],
+    "is_active": false
+  },
+  "a3c8cbbc-9d74-458f-adc7-a71bc2bea69a": {
+    "id": "a3c8cbbc-9d74-458f-adc7-a71bc2bea69a",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:04:24.126870",
+    "updated_at": "2025-09-07T15:23:37.173788",
+    "messages": [],
+    "is_active": false
+  },
+  "c9f8f7a9-7d25-40ba-b259-84bccfe17faa": {
+    "id": "c9f8f7a9-7d25-40ba-b259-84bccfe17faa",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:04:24.128954",
+    "updated_at": "2025-09-07T15:23:37.042486",
+    "messages": [],
+    "is_active": false
+  },
+  "cfc41bac-5624-41dd-bbd7-56145e087080": {
+    "id": "cfc41bac-5624-41dd-bbd7-56145e087080",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:08:55.235513",
+    "updated_at": "2025-09-07T15:23:36.904005",
+    "messages": [],
+    "is_active": false
+  },
+  "f5617c77-7f3f-4238-839d-93f69c4157b7": {
+    "id": "f5617c77-7f3f-4238-839d-93f69c4157b7",
+    "title": "Culture Analytics Introduction",
+    "created_at": "2025-09-07T15:08:55.247909",
+    "updated_at": "2025-09-07T15:09:34.880953",
+    "messages": [
+      {
+        "id": "0404008c-ca5e-492a-bb69-7eaade4c4b30",
+        "role": "user",
+        "content": "hello test",
+        "timestamp": "2025-09-07T15:09:32.338715"
+      },
+      {
+        "id": "3626d9ad-3fd7-4ed5-8843-cba39d2fe600",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b I'm here and ready to assist you with any culture analytics, insights, or recommendations you need for your organization. How can I help you today? ",
+        "timestamp": "2025-09-07T15:09:34.351017"
+      }
+    ],
+    "is_active": true
+  },
+  "2876de5e-7246-4ee9-9871-7d76ea9525e6": {
+    "id": "2876de5e-7246-4ee9-9871-7d76ea9525e6",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:14:41.778760",
+    "updated_at": "2025-09-07T15:23:36.122267",
+    "messages": [],
+    "is_active": false
+  },
+  "4a29e15e-7748-4780-8940-2066f9906365": {
+    "id": "4a29e15e-7748-4780-8940-2066f9906365",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:14:41.784024",
+    "updated_at": "2025-09-07T15:23:35.934156",
+    "messages": [],
+    "is_active": false
+  },
+  "f71a8f6e-84da-40d3-8a8d-766fda86638e": {
+    "id": "f71a8f6e-84da-40d3-8a8d-766fda86638e",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T15:20:46.543494",
+    "updated_at": "2025-09-07T15:20:48.969045",
+    "messages": [
+      {
+        "id": "25fe3966-d860-491c-9cb0-bc15bcb42f08",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T15:20:46.593270"
+      },
+      {
+        "id": "5f949d20-8526-435d-b671-344a27e05cd8",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As your Culture Intelligence Assistant, I'm here to help you analyze and interpret your organization's culture data, surface insights, and suggest actionable steps to build a healthier workplace. How can I support your culture analytics goals today? ",
+        "timestamp": "2025-09-07T15:20:48.968935"
+      }
+    ],
+    "is_active": true
+  },
+  "7127fbaa-4223-4542-a10a-de5530c33ca0": {
+    "id": "7127fbaa-4223-4542-a10a-de5530c33ca0",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:20:52.094581",
+    "updated_at": "2025-09-07T15:23:35.110677",
+    "messages": [],
+    "is_active": false
+  },
+  "703a9f6e-8bf2-48d3-a65e-b8f3e962979a": {
+    "id": "703a9f6e-8bf2-48d3-a65e-b8f3e962979a",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:20:52.102269",
+    "updated_at": "2025-09-07T15:23:34.602377",
+    "messages": [],
+    "is_active": false
+  },
+  "fdaf9d60-4b71-40dd-b6d8-1cebefaa220e": {
+    "id": "fdaf9d60-4b71-40dd-b6d8-1cebefaa220e",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:25:40.195181",
+    "updated_at": "2025-09-07T15:25:40.195186",
+    "messages": [],
+    "is_active": true
+  },
+  "d82e1a10-aeda-41ca-ac3d-a81218877354": {
+    "id": "d82e1a10-aeda-41ca-ac3d-a81218877354",
+    "title": "New Chat",
+    "created_at": "2025-09-07T15:25:40.205597",
+    "updated_at": "2025-09-07T15:25:40.205603",
     "messages": [],
     "is_active": true
   }
