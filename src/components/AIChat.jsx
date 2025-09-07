@@ -3803,7 +3803,7 @@ function AIChat() {
          
          .view-btn.active {
            background: white;
-           color: rgba(139, 92, 246, 0.9);
+           color: rgba(94, 74, 143, 0.9);
            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
          }
          
@@ -3956,8 +3956,8 @@ function AIChat() {
          .progress-fill {
            height: 100%;
            background: linear-gradient(135deg, 
-             rgba(139, 92, 246, 0.8) 0%, 
-             rgba(124, 58, 237, 0.9) 100%);
+             rgba(94, 74, 143, 0.8) 0%, 
+             rgba(84, 64, 133, 0.9) 100%);
            border-radius: 3px;
            transition: width 0.3s ease;
          }
@@ -6277,15 +6277,15 @@ function AIChat() {
          }
          
          .publish-btn.primary {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+           background: linear-gradient(135deg, rgba(94, 74, 143, 0.9) 0%, rgba(84, 64, 133, 0.9) 100%);
            color: white;
-           box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+           box-shadow: 0 4px 16px rgba(94, 74, 143, 0.3);
          }
          
          .publish-btn.primary:hover {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           background: linear-gradient(135deg, rgba(94, 74, 143, 1) 0%, rgba(84, 64, 133, 1) 100%);
            transform: translateY(-2px);
-           box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+           box-shadow: 0 8px 24px rgba(94, 74, 143, 0.4);
          }
          
          .publish-btn.secondary {
@@ -6324,12 +6324,12 @@ function AIChat() {
          }
          
          .nav-btn.primary {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+           background: linear-gradient(135deg, rgba(94, 74, 143, 0.9) 0%, rgba(84, 64, 133, 0.9) 100%);
            color: white;
          }
          
          .nav-btn.primary:hover:not(:disabled) {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           background: linear-gradient(135deg, rgba(94, 74, 143, 1) 0%, rgba(84, 64, 133, 1) 100%);
            transform: translateY(-1px);
          }
          
@@ -6754,15 +6754,15 @@ function AIChat() {
          }
          
          .preview-btn.primary {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+           background: linear-gradient(135deg, rgba(94, 74, 143, 0.9) 0%, rgba(84, 64, 133, 0.9) 100%);
            color: white;
            border: none;
          }
          
          .preview-btn.primary:hover {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           background: linear-gradient(135deg, rgba(94, 74, 143, 1) 0%, rgba(84, 64, 133, 1) 100%);
            transform: translateY(-2px);
-           box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+           box-shadow: 0 8px 24px rgba(94, 74, 143, 0.3);
          }
          
          .preview-btn.secondary {
@@ -7655,24 +7655,24 @@ function AIChat() {
          }
 
          .enable-survey-btn {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
-           color: white;
+           background: linear-gradient(135deg, rgba(94, 74, 143, 0.9) 0%, rgba(84, 64, 133, 0.9) 100%);
+           color: rgba(255, 255, 255, 0.9);
            border: none;
            padding: 12px 16px;
            border-radius: 8px;
            font-weight: 500;
            cursor: pointer;
            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+           box-shadow: 0 2px 8px rgba(94, 74, 143, 0.15);
            margin-bottom: var(--space-3);
            font-size: 0.9em;
            width: 100%;
          }
 
          .enable-survey-btn:hover {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           background: linear-gradient(135deg, rgba(94, 74, 143, 1) 0%, rgba(84, 64, 133, 1) 100%);
            transform: translateY(-1px);
-           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+           box-shadow: 0 4px 12px rgba(94, 74, 143, 0.25);
          }
 
          @keyframes slideIn {
