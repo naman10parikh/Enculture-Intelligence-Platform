@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History } from 'lucide-react'
+import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import 'highlight.js/styles/github.css'  // Add syntax highlighting CSS
 import { chatService } from '../services/api'
+import { chatThreadsApi } from '../services/chatThreadsApi'
 
 const chatThreads = [
   { id: 1, name: 'General Chat', active: true },
@@ -48,6 +49,14 @@ function AIChat() {
     theme: 'light',
     logic: {}
   })
+  
+  // Chat thread management state
+  const [currentThreadId, setCurrentThreadId] = useState(null)
+  const [recentThreads, setRecentThreads] = useState([])
+  const [threadsLoading, setThreadsLoading] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const [isSearching, setIsSearching] = useState(false)
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
@@ -61,6 +70,20 @@ function AIChat() {
   // Check backend connection on mount
   useEffect(() => {
     checkBackendConnection()
+  }, [])
+
+  // Initialize chat threads on mount
+  useEffect(() => {
+    const initializeThreads = async () => {
+      await loadRecentThreads()
+      
+      // Create a new thread if none exists
+      if (!currentThreadId) {
+        await createNewThread()
+      }
+    }
+    
+    initializeThreads()
   }, [])
 
   // Keyboard shortcut: Ctrl + \\ to toggle canvas
@@ -120,67 +143,176 @@ function AIChat() {
   const closeCanvas = () => setCanvasOpen(false)
   const flipCanvasView = () => setCanvasView(prev => (prev === 'survey' ? 'settings' : 'survey'))
 
+  // Chat thread management functions
+  const loadRecentThreads = async () => {
+    try {
+      setThreadsLoading(true)
+      const threads = await chatThreadsApi.getRecentThreads(10)
+      setRecentThreads(threads)
+    } catch (error) {
+      console.error('Failed to load recent threads:', error)
+    } finally {
+      setThreadsLoading(false)
+    }
+  }
+
+  const createNewThread = async () => {
+    try {
+      const newThread = await chatThreadsApi.createThread()
+      setCurrentThreadId(newThread.id)
+      setMessages([]) // Clear current messages
+      await loadRecentThreads() // Refresh the list
+    } catch (error) {
+      console.error('Failed to create new thread:', error)
+    }
+  }
+
+  const switchToThread = async (threadId) => {
+    try {
+      const thread = await chatThreadsApi.getThread(threadId)
+      setCurrentThreadId(threadId)
+      
+      // Convert thread messages to component format
+      const formattedMessages = thread.messages.map(msg => ({
+        id: msg.id,
+        type: msg.role === 'user' ? 'user' : 'ai',
+        content: msg.content,
+        timestamp: new Date(msg.timestamp)
+      }))
+      
+      setMessages(formattedMessages)
+    } catch (error) {
+      console.error('Failed to switch to thread:', error)
+    }
+  }
+
+  const handleSearch = async (query) => {
+    if (!query.trim()) {
+      setSearchResults([])
+      setIsSearching(false)
+      return
+    }
+
+    try {
+      setIsSearching(true)
+      const results = await chatThreadsApi.searchThreads(query)
+      setSearchResults(results)
+    } catch (error) {
+      console.error('Failed to search threads:', error)
+      setSearchResults([])
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
+  const deleteThread = async (threadId) => {
+    try {
+      await chatThreadsApi.deleteThread(threadId)
+      
+      // If deleting current thread, create a new one
+      if (threadId === currentThreadId) {
+        await createNewThread()
+      }
+      
+      await loadRecentThreads()
+    } catch (error) {
+      console.error('Failed to delete thread:', error)
+    }
+  }
+
   const handleSend = async () => {
     if (!inputValue.trim()) return
 
-    const userMessage = {
-      id: messages.length + 1,
-      type: 'user',
-      content: inputValue,
-      timestamp: new Date()
+    // Ensure we have a current thread
+    if (!currentThreadId) {
+      await createNewThread()
+      return // Will be called again after thread is created
     }
 
     const currentInput = inputValue
-    setMessages(prev => [...prev, userMessage])
     setInputValue('')
-    setIsTyping(true)
 
     // Handle special commands
     if (currentInput.startsWith('/survey')) {
       setTimeout(() => {
         openCanvasForSurvey('draft')
-        setIsTyping(false)
       }, 500)
       return
     }
 
     try {
       if (backendConnected) {
-        // Use real backend API with streaming
-        const aiMessageId = messages.length + 2
+        // Add user message to UI immediately
+        const userMessage = {
+          id: `user-${Date.now()}`,
+          type: 'user',
+          content: currentInput,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, userMessage])
+
+        // Add empty AI message to start streaming into
+        const aiMessageId = `ai-${Date.now()}`
         const aiMessage = {
           id: aiMessageId,
           type: 'ai',
           content: '',
           timestamp: new Date()
         }
-
-        // Add empty AI message to start streaming into
         setMessages(prev => [...prev, aiMessage])
-        setIsTyping(false)
+        setIsTyping(true)
 
-        // Stream response from backend
+        // Stream response from backend with thread persistence
         let fullResponse = ''
-        const currentMessages = [...messages, userMessage]
-        const persona = getCurrentPersona()
-
-        for await (const chunk of chatService.streamChat(currentMessages, persona, true)) {
-          fullResponse += chunk
-          
-          // Update the AI message with streamed content
-          setMessages(prev => 
-            prev.map(msg => 
-              msg.id === aiMessageId 
-                ? { ...msg, content: fullResponse }
-                : msg
-            )
-          )
-        }
+        let titleUpdated = false
+        
+        await chatThreadsApi.streamChatWithThread(
+          currentThreadId,
+          currentInput,
+          (data) => {
+            if (data.content) {
+              fullResponse += data.content
+              
+              // Update the AI message with streamed content
+              setMessages(prev => 
+                prev.map(msg => 
+                  msg.id === aiMessageId 
+                    ? { ...msg, content: fullResponse }
+                    : msg
+                )
+              )
+            }
+            
+            if (data.title_updated && !titleUpdated) {
+              titleUpdated = true
+              // Refresh the threads list to show new title
+              loadRecentThreads()
+            }
+            
+            if (data.done) {
+              setIsTyping(false)
+            }
+            
+            if (data.error) {
+              console.error('Streaming error:', data.error)
+              setIsTyping(false)
+            }
+          }
+        )
       } else {
         // Fallback to mock responses if backend is not available
+        const userMessage = {
+          id: `user-${Date.now()}`,
+          type: 'user',
+          content: currentInput,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, userMessage])
+        setIsTyping(true)
+
         setTimeout(() => {
           const aiResponse = {
-            id: messages.length + 2,
+            id: `ai-${Date.now()}`,
             type: 'ai',
             content: getFallbackResponse(currentInput),
             timestamp: new Date()
@@ -195,7 +327,7 @@ function AIChat() {
       
       // Add error message
       const errorMessage = {
-        id: messages.length + 2,
+        id: `error-${Date.now()}`,
         type: 'ai',
         content: '⚠️ I\'m having trouble connecting to my AI backend. Please check that the backend server is running on http://localhost:8000 and try again.',
         timestamp: new Date()
@@ -300,14 +432,7 @@ function AIChat() {
     setSidebarExpanded(!sidebarExpanded)
   }
 
-  const createNewThread = () => {
-    const newThread = {
-      id: threads.length + 1,
-      name: `Chat ${threads.length + 1}`,
-      active: false
-    }
-    setThreads(prev => [...prev, newThread])
-  }
+  // Removed old createNewThread function - using new async version above
 
   const switchThread = (threadId) => {
     setThreads(prev =>
@@ -353,21 +478,78 @@ function AIChat() {
                 <Plus size={16} />
                 <span>New chat</span>
               </button>
-              <button className="panel-item">
+              <button 
+                className="panel-item" 
+                onClick={() => {
+                  const query = prompt('Search chats:')
+                  if (query) handleSearch(query)
+                }}
+              >
                 <Search size={16} />
                 <span>Search chats</span>
               </button>
-              <button className="panel-item">
+              <button className="panel-item" onClick={() => setSidebarExpanded(!sidebarExpanded)}>
                 <History size={16} />
                 <span>Chat history</span>
               </button>
             </nav>
+            
+            {/* Search results */}
+            {searchResults.length > 0 && (
+              <div className="search-results">
+                <div className="search-results-header">Search Results:</div>
+                {searchResults.map(thread => (
+                  <div 
+                    key={thread.id}
+                    className={`history-item ${thread.id === currentThreadId ? 'active' : ''}`}
+                    onClick={() => switchToThread(thread.id)}
+                  >
+                    <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                    <button 
+                      className="delete-thread-btn"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        deleteThread(thread.id)
+                      }}
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            
             <div className="panel-spacer"></div>
+            
+            {/* Recent chat threads */}
             <div className="history-list">
-              <div className="history-item">Team Pulse – Feb 10</div>
-              <div className="history-item">Career Growth Questions</div>
-              <div className="history-item">Culture Health Check</div>
-              <div className="history-item">Onboarding Feedback</div>
+              {threadsLoading ? (
+                <div className="loading">Loading chats...</div>
+              ) : (
+                <>
+                  {recentThreads.map(thread => (
+                    <div 
+                      key={thread.id}
+                      className={`history-item ${thread.id === currentThreadId ? 'active' : ''}`}
+                      onClick={() => switchToThread(thread.id)}
+                    >
+                      <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
+                      <button 
+                        className="delete-thread-btn"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          deleteThread(thread.id)
+                        }}
+                      >
+                        <X size={12} />
+                      </button>
+                    </div>
+                  ))}
+                  {recentThreads.length === 0 && !threadsLoading && (
+                    <div className="no-threads">No chat history yet</div>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </aside>
@@ -934,9 +1116,81 @@ function AIChat() {
            transition: all 0.2s ease;
          }
          
+         .history-item {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           padding: 8px 12px; 
+           border-radius: 6px; 
+           background: transparent;
+           color: var(--text-secondary); 
+           font-size: 0.85em;
+           cursor: pointer;
+           transition: all 0.2s ease;
+           position: relative;
+         }
+         
          .history-item:hover {
            background: rgba(239, 242, 247, 0.6);
            color: var(--text-primary);
+         }
+         
+         .history-item.active {
+           background: rgba(139, 92, 246, 0.1);
+           color: var(--text-primary);
+           border-left: 3px solid rgba(139, 92, 246, 0.6);
+         }
+         
+         .thread-title {
+           flex: 1;
+           white-space: nowrap;
+           overflow: hidden;
+           text-overflow: ellipsis;
+           margin-right: 8px;
+         }
+         
+         .delete-thread-btn {
+           background: none;
+           border: none;
+           color: var(--text-secondary);
+           cursor: pointer;
+           padding: 4px;
+           border-radius: 4px;
+           opacity: 0;
+           transition: all 0.2s ease;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+         }
+         
+         .history-item:hover .delete-thread-btn {
+           opacity: 1;
+         }
+         
+         .delete-thread-btn:hover {
+           background: rgba(239, 68, 68, 0.1);
+           color: rgb(239, 68, 68);
+         }
+         
+         .search-results {
+           margin-bottom: var(--space-3);
+         }
+         
+         .search-results-header {
+           font-size: 0.8em;
+           font-weight: 600;
+           color: var(--text-secondary);
+           margin-bottom: 8px;
+           text-transform: uppercase;
+           letter-spacing: 0.5px;
+         }
+         
+         .loading, .no-threads {
+           text-align: center;
+           color: var(--text-secondary);
+           font-size: 0.8em;
+           padding: 12px;
+           font-style: italic;
          }
 
          /* Properly shift chat content when panel is open to prevent overlap */

@@ -1,0 +1,72 @@
+{
+  "63b0a7a3-3676-47ca-90ee-c8573b99a34d": {
+    "id": "63b0a7a3-3676-47ca-90ee-c8573b99a34d",
+    "title": "New Chat",
+    "created_at": "2025-09-07T04:49:23.820062",
+    "updated_at": "2025-09-07T04:49:23.820065",
+    "messages": [],
+    "is_active": true
+  },
+  "fec122bb-7eab-4ad5-be11-87b86d9ac58b": {
+    "id": "fec122bb-7eab-4ad5-be11-87b86d9ac58b",
+    "title": "Whats Your Name",
+    "created_at": "2025-09-07T05:10:32.257011",
+    "updated_at": "2025-09-07T05:13:51.391692",
+    "messages": [
+      {
+        "id": "486c07dc-0670-4e11-aa58-178a3a61030f",
+        "role": "user",
+        "content": "whats your name",
+        "timestamp": "2025-09-07T05:13:47.274239"
+      },
+      {
+        "id": "ddc7bc7a-a2dd-4906-8cd5-d42351c42d5f",
+        "role": "assistant",
+        "content": "I\u2019m Enculture AI, your Culture Intelligence Assistant. You can call me Enculture AI\u2014or pick a nickname if you\u2019d like. How can I help with your culture goals today? ",
+        "timestamp": "2025-09-07T05:13:51.390132"
+      }
+    ],
+    "is_active": true
+  },
+  "611a9d43-ddf9-4363-abf2-4516fc395263": {
+    "id": "611a9d43-ddf9-4363-abf2-4516fc395263",
+    "title": "New Chat",
+    "created_at": "2025-09-07T05:10:47.695488",
+    "updated_at": "2025-09-07T05:10:47.695493",
+    "messages": [],
+    "is_active": true
+  },
+  "1e26681e-6b26-45f2-9795-948cc8f0b563": {
+    "id": "1e26681e-6b26-45f2-9795-948cc8f0b563",
+    "title": "Hey",
+    "created_at": "2025-09-07T05:10:47.725695",
+    "updated_at": "2025-09-07T05:13:40.645104",
+    "messages": [
+      {
+        "id": "561f13cd-01f4-4349-9774-9cc2a05a8a91",
+        "role": "user",
+        "content": "hey",
+        "timestamp": "2025-09-07T05:13:13.058025"
+      },
+      {
+        "id": "cfa7cabb-d537-43f7-82cc-91186ee11288",
+        "role": "assistant",
+        "content": "Hi there! How can I help with your culture insights today? Options I can jump into right away: - Diagnose engagement drivers from your latest survey - Summarize open\u2011text comments into themes and sentiment - Build a targeted action plan for a team or manager - Set up a short pulse with benchmarked questions - Compare your scores to industry benchmarks If you have data, you can paste a snippet (questions, scores, sample size, timeframe). Or tell me: what\u2019s one culture outcome you want to improve this quarter? ",
+        "timestamp": "2025-09-07T05:13:22.472587"
+      },
+      {
+        "id": "e6629fdb-f448-4a8d-8f8d-04906e69e056",
+        "role": "user",
+        "content": "whats your name",
+        "timestamp": "2025-09-07T05:13:37.163362"
+      },
+      {
+        "id": "9258a7e3-5302-4a02-a24a-e2c23b0423d0",
+        "role": "assistant",
+        "content": "You can call me Enculture AI. How can I help with your culture insights today? ",
+        "timestamp": "2025-09-07T05:13:40.644747"
+      }
+    ],
+    "is_active": true
+  }
+}

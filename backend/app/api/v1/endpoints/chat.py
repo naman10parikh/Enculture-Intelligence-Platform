@@ -18,10 +18,15 @@ from app.models.chat import (
     SurveyGenerationResponse,
     ErrorResponse
 )
+from app.models.chat_thread import MessageRole
 from app.services.openai_service import openai_service
+from app.services.chat_thread_service import ChatThreadService
 
 router = APIRouter()
 logger = get_logger(__name__)
+
+# Initialize chat thread service
+chat_thread_service = ChatThreadService()
 
 
 @router.post("/stream")
@@ -173,4 +178,80 @@ async def chat_health():
                 "error": str(e),
                 "timestamp": datetime.utcnow().isoformat()
             }
+        )
+
+
+@router.post("/stream-with-thread")
+async def chat_stream_with_thread(thread_id: str, prompt: str):
+    """
+    Stream chat completion with thread persistence.
+    
+    This endpoint saves messages to a specific thread and generates titles automatically.
+    """
+    try:
+        logger.info(f"Received streaming chat request for thread {thread_id}")
+        
+        # Get the thread to build context
+        thread = await chat_thread_service.get_thread(thread_id)
+        if not thread:
+            raise HTTPException(status_code=404, detail="Thread not found")
+        
+        # Add user message to thread
+        await chat_thread_service.add_message(thread_id, MessageRole.user, prompt)
+        
+        # Build message history for context
+        messages = []
+        for msg in thread.messages:
+            messages.append({
+                "role": msg.role.value,
+                "content": msg.content
+            })
+        
+        # Create async generator for streaming
+        async def generate_stream():
+            try:
+                full_response = ""
+                async for chunk in openai_service.chat_completion_streaming(
+                    messages=messages,
+                    use_tools=True,  # Enable web search by default
+                    persona="culture_intelligence"
+                ):
+                    full_response += chunk
+                    # Format as Server-Sent Events
+                    yield f"data: {json.dumps({'content': chunk})}\n\n"
+                
+                # Save AI response to thread
+                if full_response:
+                    await chat_thread_service.add_message(thread_id, MessageRole.assistant, full_response)
+                    
+                    # Generate title if this is the first exchange
+                    if len(thread.messages) <= 2 and (not thread.title or thread.title == "New Chat"):
+                        title = await chat_thread_service.generate_thread_title(prompt, full_response)
+                        await chat_thread_service.update_thread_title(thread_id, title)
+                        yield f"data: {json.dumps({'title_updated': title})}\n\n"
+                
+                # Send end-of-stream marker
+                yield f"data: {json.dumps({'done': True})}\n\n"
+                
+            except Exception as e:
+                logger.error(f"Error in stream generation: {str(e)}")
+                yield f"data: {json.dumps({'error': str(e)})}\n\n"
+        
+        return StreamingResponse(
+            generate_stream(),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no"
+            }
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in chat stream with thread endpoint: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to process streaming chat request: {str(e)}"
         )
