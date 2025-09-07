@@ -121,23 +121,20 @@ Always be empathetic, professional, and focused on positive culture building. Us
                 .replace('\u2026', '...')
                 .replace('\u00a0', ' '))
             
-            # Simulate streaming by yielding sentence-based chunks to preserve markdown
-            sentences = response_text.split('. ')
+            # Simulate streaming by yielding word-based chunks for smooth effect
+            words = response_text.split()
             current_chunk = ""
             
-            for i, sentence in enumerate(sentences):
-                if i < len(sentences) - 1:
-                    current_chunk += sentence + ". "
-                else:
-                    current_chunk += sentence  # Last sentence might not end with period
+            for i, word in enumerate(words):
+                current_chunk += word + " "
                 
-                # Yield chunks every 2-3 sentences or when we hit markdown breaks
-                if (i + 1) % 2 == 0 or i == len(sentences) - 1 or '\n#' in sentence:
+                # Yield chunks of ~3-4 words for smooth streaming effect
+                if (i + 1) % 3 == 0 or i == len(words) - 1:
                     if current_chunk.strip():
-                        yield current_chunk
+                        yield current_chunk.strip() + " "
                         current_chunk = ""
-                        # Small delay to simulate streaming
-                        await asyncio.sleep(0.15)
+                        # Shorter delay for smoother streaming
+                        await asyncio.sleep(0.05)
             
         except Exception as e:
             logger.error(f"Error in gpt-4.1 Responses API: {str(e)}")

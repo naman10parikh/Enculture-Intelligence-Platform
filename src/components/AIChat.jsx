@@ -375,13 +375,42 @@ function AIChat() {
       // Extract description from command
       const description = currentInput.replace('/survey', '').trim()
       
+      // Add user message to UI first
+      const userMessage = {
+        id: `user-${Date.now()}`,
+        type: 'user',
+        content: currentInput,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, userMessage])
+      
+      // Open canvas
       openCanvasForSurvey('draft')
       
-      // If there's a description, generate AI template
+      // If there's a description, show AI response and generate template
       if (description) {
+        // Add AI response message
+        const aiMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai', 
+          content: `I'll create a professional survey for "${description}". Let me generate that template for you now...`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, aiMessage])
+        
+        // Generate template with streaming effect
         setTimeout(() => {
-          generateSurveyFromAI(description)
-        }, 800)
+          generateSurveyFromAIStreaming(description)
+        }, 1000)
+      } else {
+        // Just show that canvas was opened
+        const aiMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: 'I\'ve opened the Survey Canvas for you. You can now create a professional culture intelligence survey using the editor.',
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, aiMessage])
       }
       
       return
@@ -830,6 +859,59 @@ function AIChat() {
     }
   }
 
+  // AI Survey Template Generation with Streaming Effect
+  const generateSurveyFromAIStreaming = async (description) => {
+    try {
+      const template = await chatService.generateSurveyTemplate(description)
+      if (template) {
+        // Start with empty template
+        setSurveyDraft(prev => ({ 
+          ...prev, 
+          title: '',
+          description: '',
+          questions: [],
+          classifiers: [],
+          metrics: []
+        }))
+        
+        // Simulate streaming population
+        await new Promise(resolve => {
+          let step = 0;
+          const interval = setInterval(() => {
+            step++;
+            
+            if (step === 1) {
+              // Add title
+              setSurveyDraft(prev => ({ ...prev, title: template.title }))
+            } else if (step === 2) {
+              // Add description
+              setSurveyDraft(prev => ({ ...prev, description: template.description }))
+            } else if (step <= 2 + template.questions.length) {
+              // Add questions one by one
+              const questionIndex = step - 3;
+              setSurveyDraft(prev => ({ 
+                ...prev, 
+                questions: template.questions.slice(0, questionIndex + 1)
+              }))
+            } else if (step === 3 + template.questions.length) {
+              // Add classifiers
+              setSurveyDraft(prev => ({ ...prev, classifiers: template.classifiers }))
+            } else if (step === 4 + template.questions.length) {
+              // Add metrics
+              setSurveyDraft(prev => ({ ...prev, metrics: template.metrics }))
+              clearInterval(interval)
+              resolve()
+            }
+          }, 600) // 600ms between each step for visible streaming effect
+        })
+        
+        setCanvasView('editor') // Switch to editor to show the generated survey
+      }
+    } catch (error) {
+      console.error('Failed to generate survey template:', error)
+    }
+  }
+
   // Function to categorize dates
   const categorizeDate = (dateString) => {
     const date = new Date(dateString)
@@ -1045,12 +1127,12 @@ function AIChat() {
 
         <div 
           className="chat-messages"
-          style={{
-            marginRight: canvasOpen && canvasMode === 'split' ? `${canvasWidth + 32}px` : '0px',
-            transition: 'margin-right 0.3s ease',
-            opacity: canvasOpen && canvasMode === 'focus' ? '0.3' : '1',
-            pointerEvents: canvasOpen && canvasMode === 'focus' ? 'none' : 'auto'
-          }}
+        style={{
+          marginRight: canvasOpen && canvasMode === 'split' ? `${canvasWidth + 16}px` : '0px',
+          transition: 'margin-right 0.3s ease',
+          opacity: canvasOpen && canvasMode === 'focus' ? '0.3' : '1',
+          pointerEvents: canvasOpen && canvasMode === 'focus' ? 'none' : 'auto'
+        }}
         >
           {messages.map((message, messageIndex) => {
             // Don't render AI messages that are empty/being prepared
@@ -1199,10 +1281,10 @@ function AIChat() {
 
         <div 
           className="chat-input-area"
-          style={{
-            marginRight: canvasOpen && canvasMode === 'split' ? `${canvasWidth + 32}px` : '0px',
-            transition: 'margin-right 0.3s ease'
-          }}
+        style={{
+          marginRight: canvasOpen && canvasMode === 'split' ? `${canvasWidth + 16}px` : '0px',
+          transition: 'margin-right 0.3s ease'
+        }}
         >
           <div className="chat-suggestions">
             {suggestedActions.map((action, index) => (
@@ -1311,17 +1393,6 @@ function AIChat() {
             </div>
             
             <div className="canvas-actions">
-              <button 
-                className={`mode-btn ${canvasMode}`} 
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  setCanvasMode(canvasMode === 'split' ? 'focus' : 'split')
-                }}
-                title={canvasMode === 'split' ? 'Focus mode' : 'Split mode'}
-              >
-                {canvasMode === 'split' ? <Grid size={16} /> : <List size={16} />}
-              </button>
               <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
                 Save
               </button>
@@ -3058,11 +3129,11 @@ function AIChat() {
 
          /* Properly shift chat content when panel is open to prevent overlap */
          .panel-open .chat-input-area { 
-           left: calc(288px + 280px + var(--space-2));  /* Reduced spacing */
+           left: calc(288px + 280px + 8px);  /* Minimal spacing */
            transition: left 0.25s ease; 
          }
          .panel-open .chat-messages { 
-           margin-left: calc(280px + var(--space-1));  /* Reduced margin for tighter layout */
+           margin-left: calc(280px + 8px);  /* Minimal margin for tighter layout */
            transition: margin-left 0.25s ease; 
          }
          .chat-container:not(.panel-open) .chat-messages { 
@@ -3072,13 +3143,6 @@ function AIChat() {
          .chat-container:not(.panel-open) .chat-input-area { 
            left: 288px; 
            transition: left 0.25s ease; 
-         }
-         
-         /* Adjust spacing when both sidebars are open */
-         .panel-open.canvas-open .chat-messages { 
-           margin-left: calc(280px + var(--space-1));
-           margin-right: calc(460px + var(--space-1));  /* Reduced right margin too */
-           transition: all 0.3s ease;
          }
 
          .enable-survey-btn {
@@ -3581,13 +3645,15 @@ function AIChat() {
           font-size: var(--text-base);
           color: var(--text-primary);
           outline: none;
-          padding: var(--space-2) 0;
+          padding: var(--space-2) var(--space-3);
           resize: none;
           overflow-y: hidden;
           font-family: inherit;
           line-height: 1.5;
           min-height: 24px;
           max-height: 120px;
+          text-align: left;
+          vertical-align: middle;
         }
 
         .expandable-input {
