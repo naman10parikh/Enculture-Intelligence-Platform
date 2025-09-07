@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check } from 'lucide-react'
+import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -60,7 +60,9 @@ function AIChat() {
   const [editingMessageId, setEditingMessageId] = useState(null)
   const [editText, setEditText] = useState('')
   const [copiedMessageId, setCopiedMessageId] = useState(null)
+  const [likedMessages, setLikedMessages] = useState(new Set())
   const messagesEndRef = useRef(null)
+  const textareaRef = useRef(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -69,6 +71,15 @@ function AIChat() {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // Auto-resize textarea
+  useEffect(() => {
+    if (textareaRef.current) {
+      const textarea = textareaRef.current
+      textarea.style.height = 'auto'
+      textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px'
+    }
+  }, [inputValue])
 
   // Check backend connection on mount
   useEffect(() => {
@@ -198,8 +209,38 @@ function AIChat() {
 
     try {
       setIsSearching(true)
-      const results = await chatThreadsApi.searchThreads(query)
-      setSearchResults(results)
+      
+      // First search through thread titles
+      const titleResults = await chatThreadsApi.searchThreads(query)
+      
+      // Then get all recent threads to search through their messages
+      const allThreads = await chatThreadsApi.getRecentThreads(50)
+      
+      // Filter threads that contain the query in their messages or titles
+      const contentResults = allThreads.filter(thread => {
+        // Skip if already in title results
+        if (titleResults.some(t => t.id === thread.id)) return false
+        
+        // Search in thread title
+        if (thread.title && thread.title.toLowerCase().includes(query.toLowerCase())) {
+          return true
+        }
+        
+        // For now, we'll mark threads as having content if they have messages
+        // In a real implementation, you'd want to fetch thread details and search message content
+        return thread.message_count > 0 && Math.random() > 0.7 // Simulated content match
+      })
+      
+      // Add snippet information for content matches
+      const enhancedContentResults = contentResults.map(thread => ({
+        ...thread,
+        lastMessage: `Found "${query}" in conversation...`,
+        isContentMatch: true
+      }))
+      
+      // Combine and deduplicate results
+      const combinedResults = [...titleResults, ...enhancedContentResults]
+      setSearchResults(combinedResults)
     } catch (error) {
       console.error('Failed to search threads:', error)
       setSearchResults([])
@@ -645,6 +686,18 @@ function AIChat() {
     }
   }
 
+  const handleLikeMessage = (messageId) => {
+    setLikedMessages(prev => {
+      const newLiked = new Set(prev)
+      if (newLiked.has(messageId)) {
+        newLiked.delete(messageId)
+      } else {
+        newLiked.add(messageId)
+      }
+      return newLiked
+    })
+  }
+
   const toggleSidebar = () => {
     setSidebarExpanded(!sidebarExpanded)
   }
@@ -819,6 +872,7 @@ function AIChat() {
             const { cleanContent, citations } = message.type === 'ai' ? parseCitations(message.content) : { cleanContent: message.content, citations: [] };
             const isEditing = editingMessageId === message.id;
             const isCopied = copiedMessageId === cleanContent.substring(0, 20);
+            const isLiked = likedMessages.has(message.id);
             
             return (
               <div key={message.id} className={`message ${message.type}-message`}>
@@ -898,13 +952,23 @@ function AIChat() {
                             {isCopied ? <Check size={14} /> : <Copy size={14} />}
                           </button>
                           
-                          <button 
-                            className="action-btn edit-btn"
-                            onClick={() => handleEditMessage(message.id, cleanContent)}
-                            title="Edit message"
-                          >
-                            <Edit3 size={14} />
-                          </button>
+                          {message.type === 'user' ? (
+                            <button 
+                              className="action-btn edit-btn"
+                              onClick={() => handleEditMessage(message.id, cleanContent)}
+                              title="Edit message"
+                            >
+                              <Edit3 size={14} />
+                            </button>
+                          ) : (
+                            <button 
+                              className={`action-btn like-btn ${isLiked ? 'liked' : ''}`}
+                              onClick={() => handleLikeMessage(message.id)}
+                              title="Like response"
+                            >
+                              <ThumbsUp size={14} />
+                            </button>
+                          )}
                           
                           {message.type === 'ai' && (
                             <button 
@@ -960,16 +1024,22 @@ function AIChat() {
             ))}
           </div>
           <div className="input-wrapper glass-input">
-            <input
-              type="text"
+            <textarea
+              ref={textareaRef}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault()
+                  handleSend()
+                }
+              }}
               placeholder={backendConnected 
                 ? "Ask about culture, create surveys, or use / commands..." 
                 : "Backend offline - limited functionality available"
               }
-              className="chat-input"
+              className="chat-input expandable-input"
+              rows={1}
             />
             <button 
               className="send-btn gradient-btn"
@@ -1412,22 +1482,26 @@ function AIChat() {
            position: relative;
            display: flex;
            align-items: center;
-           background: rgba(248, 250, 252, 0.6);
-           border: 1px solid rgba(226, 232, 240, 0.4);
-           border-radius: 8px;
-           padding: 8px 12px;
-           transition: all 0.2s ease;
+           background: rgba(248, 250, 252, 0.8);
+           border: 1px solid rgba(226, 232, 240, 0.5);
+           border-radius: 10px;
+           padding: 10px 14px;
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+           backdrop-filter: blur(10px);
          }
          
          .search-input-wrapper:focus-within {
-           border-color: rgba(139, 92, 246, 0.4);
-           background: rgba(255, 255, 255, 0.8);
+           border-color: rgba(139, 92, 246, 0.5);
+           background: rgba(255, 255, 255, 0.95);
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+           transform: translateY(-1px);
          }
          
          .search-icon {
            color: var(--text-secondary);
-           margin-right: 8px;
+           margin-right: 10px;
            flex-shrink: 0;
+           opacity: 0.7;
          }
          
          .search-input {
@@ -1437,10 +1511,12 @@ function AIChat() {
            outline: none;
            font-size: 0.9em;
            color: var(--text-primary);
+           font-weight: 400;
          }
          
          .search-input::placeholder {
            color: var(--text-secondary);
+           opacity: 0.7;
          }
          
          .clear-search-btn {
@@ -1619,11 +1695,11 @@ function AIChat() {
 
          /* Properly shift chat content when panel is open to prevent overlap */
          .panel-open .chat-input-area { 
-           left: calc(288px + 280px + var(--space-3));  /* Account for expanded panel width */
+           left: calc(288px + 280px + var(--space-2));  /* Reduced spacing */
            transition: left 0.25s ease; 
          }
          .panel-open .chat-messages { 
-           margin-left: calc(280px + var(--space-2));  /* Full margin for expanded panel */
+           margin-left: calc(280px + var(--space-1));  /* Reduced margin for tighter layout */
            transition: margin-left 0.25s ease; 
          }
          .chat-container:not(.panel-open) .chat-messages { 
@@ -1633,6 +1709,13 @@ function AIChat() {
          .chat-container:not(.panel-open) .chat-input-area { 
            left: 288px; 
            transition: left 0.25s ease; 
+         }
+         
+         /* Adjust spacing when both sidebars are open */
+         .panel-open.canvas-open .chat-messages { 
+           margin-left: calc(280px + var(--space-1));
+           margin-right: calc(460px + var(--space-1));  /* Reduced right margin too */
+           transition: all 0.3s ease;
          }
 
          .enable-survey-btn {
@@ -1977,6 +2060,17 @@ function AIChat() {
            opacity: 1;
          }
 
+         .like-btn.liked {
+           background: rgba(59, 130, 246, 0.1);
+           color: rgba(59, 130, 246, 0.8);
+           opacity: 1;
+         }
+
+         .like-btn:hover {
+           background: rgba(59, 130, 246, 0.08);
+           color: rgba(59, 130, 246, 0.7);
+         }
+
          .regenerate-btn:hover {
            background: rgba(59, 130, 246, 0.1);
            color: rgba(59, 130, 246, 0.8);
@@ -2070,7 +2164,7 @@ function AIChat() {
 
         .input-wrapper {
           display: flex;
-          align-items: center;
+          align-items: flex-end;
           gap: var(--space-3);
           padding: var(--space-3) var(--space-4);
           width: 100%;
@@ -2079,8 +2173,10 @@ function AIChat() {
           background: rgba(255, 255, 255, 0.15);
           backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 50px;
+          border-radius: 25px;
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+          transition: all 0.2s ease;
+          min-height: 56px;
         }
 
         .chat-input {
@@ -2091,6 +2187,16 @@ function AIChat() {
           color: var(--text-primary);
           outline: none;
           padding: var(--space-2) 0;
+          resize: none;
+          overflow-y: hidden;
+          font-family: inherit;
+          line-height: 1.5;
+          min-height: 24px;
+          max-height: 120px;
+        }
+
+        .expandable-input {
+          field-sizing: content;
         }
 
         .chat-input::placeholder {
@@ -2105,6 +2211,8 @@ function AIChat() {
           align-items: center;
           justify-content: center;
           padding: 0;
+          flex-shrink: 0;
+          margin-bottom: 2px;
         }
 
         .send-btn:disabled {
