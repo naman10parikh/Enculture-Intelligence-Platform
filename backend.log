@@ -2591,3 +2591,402 @@ DEBUG:    % sending keepalive ping
 DEBUG:    > PING 8c a4 af f0 [binary, 4 bytes]
 DEBUG:    < PONG 8c a4 af f0 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING c5 18 95 3d [binary, 4 bytes]
+DEBUG:    < PONG c5 18 95 3d [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
+DEBUG:    x half-closing TCP connection
+DEBUG:    = connection is CLOSED
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 12:30:54 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 12:30:54 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+INFO:     connection closed
+INFO:     127.0.0.1:59124 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    = connection is CONNECTING
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < host: localhost:8000
+DEBUG:    < connection: Upgrade
+DEBUG:    < pragma: no-cache
+DEBUG:    < cache-control: no-cache
+DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+DEBUG:    < upgrade: websocket
+DEBUG:    < origin: http://localhost:3000
+DEBUG:    < sec-websocket-version: 13
+DEBUG:    < accept-encoding: gzip, deflate, br, zstd
+DEBUG:    < accept-language: en-US,en;q=0.9
+DEBUG:    < sec-websocket-key: anW2j6l6+or6ijm6ir3W0g==
+DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+INFO:     ('127.0.0.1', 59128) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > HTTP/1.1 101 Switching Protocols
+DEBUG:    > Upgrade: websocket
+DEBUG:    > Connection: Upgrade
+DEBUG:    > Sec-WebSocket-Accept: 8Wjcjk2QWPg0E8QtSn+o6+wZFLI=
+DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
+DEBUG:    > date: Sun, 07 Sep 2025 19:30:53 GMT
+DEBUG:    > server: uvicorn
+INFO:     connection open
+DEBUG:    = connection is OPEN
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.200675"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.200675"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.200675"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.200675"}' [128 bytes]
+INFO:     127.0.0.1:59127 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59124 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
+DEBUG:    x half-closing TCP connection
+DEBUG:    = connection is CLOSED
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 12:30:54 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 12:30:54 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+INFO:     connection closed
+INFO:     127.0.0.1:59130 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59130 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+DEBUG:    = connection is CONNECTING
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < host: localhost:8000
+DEBUG:    < connection: Upgrade
+DEBUG:    < pragma: no-cache
+DEBUG:    < cache-control: no-cache
+DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+DEBUG:    < upgrade: websocket
+DEBUG:    < origin: http://localhost:3000
+DEBUG:    < sec-websocket-version: 13
+DEBUG:    < accept-encoding: gzip, deflate, br, zstd
+DEBUG:    < accept-language: en-US,en;q=0.9
+DEBUG:    < sec-websocket-key: 8ZNPq+LHmKOWmusvsXrSJg==
+DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+INFO:     ('127.0.0.1', 59132) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 12:30:54 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.288577"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.288577"}' [128 bytes]
+DEBUG:    > HTTP/1.1 101 Switching Protocols
+DEBUG:    > Upgrade: websocket
+DEBUG:    > Connection: Upgrade
+DEBUG:    > Sec-WebSocket-Accept: HB+WCSe1bbmbFP0gm0+NbvXsIK0=
+DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
+DEBUG:    > date: Sun, 07 Sep 2025 19:30:53 GMT
+DEBUG:    > server: uvicorn
+INFO:     connection open
+DEBUG:    = connection is OPEN
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.288577"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T12:30:54.288577"}' [128 bytes]
+INFO:     127.0.0.1:59130 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 06 be 58 97 [binary, 4 bytes]
+DEBUG:    < PONG 06 be 58 97 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING b5 72 2b b4 [binary, 4 bytes]
+DEBUG:    < PONG b5 72 2b b4 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 9a 51 07 aa [binary, 4 bytes]
+DEBUG:    < PONG 9a 51 07 aa [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 9f a1 35 30 [binary, 4 bytes]
+DEBUG:    < PONG 9f a1 35 30 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59153 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273484205}' [46 bytes]
+2025-09-07 12:31:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273484205}
+2025-09-07 12:31:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273484205}
+INFO:     127.0.0.1:59155 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273484337}' [46 bytes]
+2025-09-07 12:31:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273484337}
+2025-09-07 12:31:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273484337}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING ca 3d cf 4b [binary, 4 bytes]
+DEBUG:    < PONG ca 3d cf 4b [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a3 df a0 32 [binary, 4 bytes]
+DEBUG:    < PONG a3 df a0 32 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 83 54 ae 7b [binary, 4 bytes]
+DEBUG:    < PONG 83 54 ae 7b [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 0b 53 22 ce [binary, 4 bytes]
+DEBUG:    < PONG 0b 53 22 ce [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a0 df 5b b2 [binary, 4 bytes]
+DEBUG:    < PONG a0 df 5b b2 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 1a 5c 85 84 [binary, 4 bytes]
+DEBUG:    < PONG 1a 5c 85 84 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59167 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING d6 42 6e 4b [binary, 4 bytes]
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273514204}' [46 bytes]
+DEBUG:    < PONG d6 42 6e 4b [binary, 4 bytes]
+2025-09-07 12:31:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273514204}
+2025-09-07 12:31:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273514204}
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59169 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 95 24 9d 89 [binary, 4 bytes]
+DEBUG:    < PONG 95 24 9d 89 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273514336}' [46 bytes]
+2025-09-07 12:31:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273514336}
+2025-09-07 12:31:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273514336}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 'Y\x0cX3' [text, 4 bytes]
+DEBUG:    < PONG 'Y\x0cX3' [text, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 87 d8 bb 34 [binary, 4 bytes]
+DEBUG:    < PONG 87 d8 bb 34 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 4c ad c8 46 [binary, 4 bytes]
+DEBUG:    < PONG 4c ad c8 46 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 67 9a 4a 8e [binary, 4 bytes]
+DEBUG:    < PONG 67 9a 4a 8e [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59207 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273544203}' [46 bytes]
+2025-09-07 12:32:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273544203}
+2025-09-07 12:32:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273544203}
+INFO:     127.0.0.1:59209 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273544336}' [46 bytes]
+2025-09-07 12:32:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273544336}
+2025-09-07 12:32:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273544336}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 8c 75 fd 81 [binary, 4 bytes]
+DEBUG:    < PONG 8c 75 fd 81 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 77 7a 2f c6 [binary, 4 bytes]
+DEBUG:    < PONG 77 7a 2f c6 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 64 4f ab 78 [binary, 4 bytes]
+DEBUG:    < PONG 64 4f ab 78 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 17 0e 64 fb [binary, 4 bytes]
+DEBUG:    < PONG 17 0e 64 fb [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a6 1f ff 69 [binary, 4 bytes]
+DEBUG:    < PONG a6 1f ff 69 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING dc f4 8c fc [binary, 4 bytes]
+DEBUG:    < PONG dc f4 8c fc [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a5 4e c9 14 [binary, 4 bytes]
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273574205}' [46 bytes]
+DEBUG:    < PONG a5 4e c9 14 [binary, 4 bytes]
+INFO:     127.0.0.1:59235 - "GET /health HTTP/1.1" 200 OK
+2025-09-07 12:32:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273574205}
+2025-09-07 12:32:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273574205}
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59237 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING f5 f6 99 7e [binary, 4 bytes]
+DEBUG:    < PONG f5 f6 99 7e [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273574336}' [46 bytes]
+2025-09-07 12:32:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273574336}
+2025-09-07 12:32:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273574336}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING e5 95 05 6f [binary, 4 bytes]
+DEBUG:    < PONG e5 95 05 6f [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 32 df d1 dc [binary, 4 bytes]
+DEBUG:    < PONG 32 df d1 dc [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 1d 0d ce 2a [binary, 4 bytes]
+DEBUG:    < PONG 1d 0d ce 2a [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 7c 85 05 12 [binary, 4 bytes]
+DEBUG:    < PONG 7c 85 05 12 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59241 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273604203}' [46 bytes]
+2025-09-07 12:33:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273604203}
+2025-09-07 12:33:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273604203}
+INFO:     127.0.0.1:59243 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273604336}' [46 bytes]
+2025-09-07 12:33:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273604336}
+2025-09-07 12:33:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273604336}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 12 2b 03 f5 [binary, 4 bytes]
+DEBUG:    < PONG 12 2b 03 f5 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59253 - "OPTIONS /api/v1/chat-threads/threads/ff06502b-8dcb-4d51-9ba9-9c822837a14c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "DELETE /api/v1/chat-threads/threads/ff06502b-8dcb-4d51-9ba9-9c822837a14c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "GET /api/v1/chat-threads/threads/ff06502b-8dcb-4d51-9ba9-9c822837a14c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:31 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+INFO:     127.0.0.1:59253 - "OPTIONS /api/v1/chat-threads/threads/792e5ebc-69d3-43c3-904a-a4860c316bd7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "DELETE /api/v1/chat-threads/threads/792e5ebc-69d3-43c3-904a-a4860c316bd7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "OPTIONS /api/v1/chat-threads/threads/c7752ccc-f825-4a44-acec-f2261b129675 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "DELETE /api/v1/chat-threads/threads/c7752ccc-f825-4a44-acec-f2261b129675 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:32 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+INFO:     127.0.0.1:59253 - "OPTIONS /api/v1/chat-threads/threads/05002c15-1160-44ce-ad07-e9fda5ab4e51 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "DELETE /api/v1/chat-threads/threads/05002c15-1160-44ce-ad07-e9fda5ab4e51 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "OPTIONS /api/v1/chat-threads/threads/e01098d3-5046-4866-8176-3d1732eebdd7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "DELETE /api/v1/chat-threads/threads/e01098d3-5046-4866-8176-3d1732eebdd7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59253 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:32 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/237fbac6-4b74-4333-a369-b6622f9edc86 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/237fbac6-4b74-4333-a369-b6622f9edc86 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:32 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/77d96cd7-b420-4199-96cf-6b0f02821774 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/77d96cd7-b420-4199-96cf-6b0f02821774 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:33 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/1658c6f9-2074-4f61-8b4b-c6979b7e729f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/1658c6f9-2074-4f61-8b4b-c6979b7e729f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/cc0d0d95-59ec-4799-b6e6-5c81e21802f2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/cc0d0d95-59ec-4799-b6e6-5c81e21802f2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:33 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a6 96 7c 61 [binary, 4 bytes]
+DEBUG:    < PONG a6 96 7c 61 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a8 50 5f 60 [binary, 4 bytes]
+DEBUG:    < PONG a8 50 5f 60 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING d1 6c 5e 44 [binary, 4 bytes]
+DEBUG:    < PONG d1 6c 5e 44 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/3d10aa08-72bf-4854-a84f-72554ff333d9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/3d10aa08-72bf-4854-a84f-72554ff333d9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:34 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/b9928754-e979-4bab-8bae-fe14a64036ad HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/b9928754-e979-4bab-8bae-fe14a64036ad HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/0bdf6898-0404-4e8c-9f1a-5f41a9c35de6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/0bdf6898-0404-4e8c-9f1a-5f41a9c35de6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "OPTIONS /api/v1/chat-threads/threads/67de88a1-4202-4672-8f34-316970ca6af7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "DELETE /api/v1/chat-threads/threads/67de88a1-4202-4672-8f34-316970ca6af7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59257 - "GET /api/v1/chat-threads/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 12:33:34 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 12:33:36 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING bb 69 17 d0 [binary, 4 bytes]
+DEBUG:    < PONG bb 69 17 d0 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING d1 77 09 f7 [binary, 4 bytes]
+DEBUG:    < PONG d1 77 09 f7 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59271 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273634202}' [46 bytes]
+2025-09-07 12:33:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273634202}
+2025-09-07 12:33:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273634202}
+INFO:     127.0.0.1:59273 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 33 a7 82 2e [binary, 4 bytes]
+DEBUG:    < PONG 33 a7 82 2e [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a0 de bd 47 [binary, 4 bytes]
+DEBUG:    < PONG a0 de bd 47 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273634336}' [46 bytes]
+2025-09-07 12:33:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273634336}
+2025-09-07 12:33:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273634336}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 19 21 b0 cc [binary, 4 bytes]
+DEBUG:    < PONG 19 21 b0 cc [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 80 bc 8b a3 [binary, 4 bytes]
+DEBUG:    < PONG 80 bc 8b a3 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 28 05 14 b1 [binary, 4 bytes]
+DEBUG:    < PONG 28 05 14 b1 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 06 2f 63 ad [binary, 4 bytes]
+DEBUG:    < PONG 06 2f 63 ad [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59294 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273664204}' [46 bytes]
+2025-09-07 12:34:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273664204}
+2025-09-07 12:34:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273664204}
+INFO:     127.0.0.1:59296 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273664336}' [46 bytes]
+2025-09-07 12:34:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273664336}
+2025-09-07 12:34:24 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273664336}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 5a 8d a1 17 [binary, 4 bytes]
+DEBUG:    < PONG 5a 8d a1 17 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 40 e7 b5 5c [binary, 4 bytes]
+DEBUG:    < PONG 40 e7 b5 5c [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 9f 2d 00 df [binary, 4 bytes]
+DEBUG:    < PONG 9f 2d 00 df [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 45 6b ec 7f [binary, 4 bytes]
+DEBUG:    < PONG 45 6b ec 7f [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 91 68 dc 63 [binary, 4 bytes]
+DEBUG:    < PONG 91 68 dc 63 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING ec 85 a2 9c [binary, 4 bytes]
+DEBUG:    < PONG ec 85 a2 9c [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:59328 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273694204}' [46 bytes]
+2025-09-07 12:34:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273694204}
+2025-09-07 12:34:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273694204}
+INFO:     127.0.0.1:59330 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 60 92 16 fe [binary, 4 bytes]
+DEBUG:    < PONG 60 92 16 fe [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 59 a9 07 ef [binary, 4 bytes]
+DEBUG:    < PONG 59 a9 07 ef [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757273694376}' [46 bytes]
+2025-09-07 12:34:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273694376}
+2025-09-07 12:34:54 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757273694376}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 23 41 8d 76 [binary, 4 bytes]
+DEBUG:    < PONG 23 41 8d 76 [binary, 4 bytes]
+DEBUG:    % received keepalive pong

@@ -101,12 +101,12 @@ function Sidebar({ activeSection, setActiveSection }) {
       </nav>
 
       <div className="sidebar-footer">
-        <div className="user-profile glass-card">
+        <div className={`user-profile glass-card ${dropdownOpen ? 'dropdown-open' : ''}`}>
           <div className="user-avatar">
             <span>{currentUser?.avatar || '👤'}</span>
           </div>
           <div className="user-info">
-            <div className="user-dropdown">
+            <div className={`user-dropdown ${dropdownOpen ? 'open' : ''}`}>
               <button 
                 className="user-dropdown-trigger"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -310,6 +310,12 @@ function Sidebar({ activeSection, setActiveSection }) {
 
         .user-profile {
           position: relative;
+          border-radius: 12px;
+          transition: all 0.2s ease;
+        }
+
+        .user-profile.dropdown-open {
+          border-radius: 12px;
         }
 
         .user-dropdown-trigger {
@@ -349,15 +355,19 @@ function Sidebar({ activeSection, setActiveSection }) {
 
         .user-dropdown-menu {
           position: absolute;
-          bottom: calc(100% + 8px);
+          bottom: calc(100% + 18px);
           left: calc(-1 * var(--space-4) - var(--space-3) - 40px);
           right: calc(-1 * var(--space-4));
-          background: white;
-          border: 1px solid rgba(177, 156, 217, 0.2);
+          background: var(--gradient-glass);
+          border: var(--border-glass);
           border-radius: 12px;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          z-index: 1000;
+          z-index: 1001;
           padding: var(--space-4);
+          max-height: 300px;
+          overflow-y: auto;
         }
 
         .user-dropdown-item {

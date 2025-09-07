@@ -1180,33 +1180,33 @@
     "id": "67de88a1-4202-4672-8f34-316970ca6af7",
     "title": "New Chat",
     "created_at": "2025-09-07T18:34:19.254746",
-    "updated_at": "2025-09-07T18:34:19.254753",
+    "updated_at": "2025-09-07T19:33:34.799871",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "0bdf6898-0404-4e8c-9f1a-5f41a9c35de6": {
     "id": "0bdf6898-0404-4e8c-9f1a-5f41a9c35de6",
     "title": "New Chat",
     "created_at": "2025-09-07T18:34:19.306600",
-    "updated_at": "2025-09-07T18:34:19.306605",
+    "updated_at": "2025-09-07T19:33:34.677399",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "b9928754-e979-4bab-8bae-fe14a64036ad": {
     "id": "b9928754-e979-4bab-8bae-fe14a64036ad",
     "title": "New Chat",
     "created_at": "2025-09-07T19:10:27.907119",
-    "updated_at": "2025-09-07T19:10:27.907123",
+    "updated_at": "2025-09-07T19:33:34.540806",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "3d10aa08-72bf-4854-a84f-72554ff333d9": {
     "id": "3d10aa08-72bf-4854-a84f-72554ff333d9",
     "title": "New Chat",
     "created_at": "2025-09-07T19:10:27.913567",
-    "updated_at": "2025-09-07T19:10:27.913571",
+    "updated_at": "2025-09-07T19:33:34.399566",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "b71572d1-6a32-4e98-921c-897201b5d46a": {
     "id": "b71572d1-6a32-4e98-921c-897201b5d46a",
@@ -1233,9 +1233,9 @@
     "id": "cc0d0d95-59ec-4799-b6e6-5c81e21802f2",
     "title": "New Chat",
     "created_at": "2025-09-07T19:11:46.785332",
-    "updated_at": "2025-09-07T19:11:46.785339",
+    "updated_at": "2025-09-07T19:33:33.657527",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "a1fb0f8f-3ba3-4512-ba90-28877eb173d3": {
     "id": "a1fb0f8f-3ba3-4512-ba90-28877eb173d3",
@@ -1262,64 +1262,64 @@
     "id": "1658c6f9-2074-4f61-8b4b-c6979b7e729f",
     "title": "New Chat",
     "created_at": "2025-09-07T19:14:46.458116",
-    "updated_at": "2025-09-07T19:14:46.458120",
+    "updated_at": "2025-09-07T19:33:33.452535",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "77d96cd7-b420-4199-96cf-6b0f02821774": {
     "id": "77d96cd7-b420-4199-96cf-6b0f02821774",
     "title": "New Chat",
     "created_at": "2025-09-07T19:14:47.456631",
-    "updated_at": "2025-09-07T19:14:47.456638",
+    "updated_at": "2025-09-07T19:33:33.307902",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "237fbac6-4b74-4333-a369-b6622f9edc86": {
     "id": "237fbac6-4b74-4333-a369-b6622f9edc86",
     "title": "New Chat",
     "created_at": "2025-09-07T19:18:31.625547",
-    "updated_at": "2025-09-07T19:18:31.625551",
+    "updated_at": "2025-09-07T19:33:32.680102",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "e01098d3-5046-4866-8176-3d1732eebdd7": {
     "id": "e01098d3-5046-4866-8176-3d1732eebdd7",
     "title": "New Chat",
     "created_at": "2025-09-07T19:18:31.655055",
-    "updated_at": "2025-09-07T19:18:31.655059",
+    "updated_at": "2025-09-07T19:33:32.235002",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "05002c15-1160-44ce-ad07-e9fda5ab4e51": {
     "id": "05002c15-1160-44ce-ad07-e9fda5ab4e51",
     "title": "New Chat",
     "created_at": "2025-09-07T19:20:14.614414",
-    "updated_at": "2025-09-07T19:20:14.614418",
+    "updated_at": "2025-09-07T19:33:32.077956",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "c7752ccc-f825-4a44-acec-f2261b129675": {
     "id": "c7752ccc-f825-4a44-acec-f2261b129675",
     "title": "New Chat",
     "created_at": "2025-09-07T19:20:14.618026",
-    "updated_at": "2025-09-07T19:20:14.618030",
+    "updated_at": "2025-09-07T19:33:31.902586",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "792e5ebc-69d3-43c3-904a-a4860c316bd7": {
     "id": "792e5ebc-69d3-43c3-904a-a4860c316bd7",
     "title": "New Chat",
     "created_at": "2025-09-07T19:26:08.852550",
-    "updated_at": "2025-09-07T19:26:08.852557",
+    "updated_at": "2025-09-07T19:33:31.718085",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "ff06502b-8dcb-4d51-9ba9-9c822837a14c": {
     "id": "ff06502b-8dcb-4d51-9ba9-9c822837a14c",
     "title": "New Chat",
     "created_at": "2025-09-07T19:26:08.864157",
-    "updated_at": "2025-09-07T19:26:08.864165",
+    "updated_at": "2025-09-07T19:33:31.547005",
     "messages": [],
-    "is_active": true
+    "is_active": false
   }
 }
