@@ -276,6 +276,11 @@ async def generate_survey_template(request: dict):
         Survey type: {survey_type}
         Target audience: {target_audience}
         
+        For the title, create a concise, professional name that captures the essence without redundant words like "Survey" or "Culture Survey:". For example:
+        - "Culture and Employee Satisfaction" → "Employee Satisfaction Assessment"
+        - "Team Engagement Survey" → "Team Engagement Analysis"
+        - "Workplace Culture" → "Workplace Culture Evaluation"
+        
         Generate a JSON response with the following structure:
         {{
           "title": "Survey title",
@@ -323,9 +328,15 @@ async def generate_survey_template(request: dict):
             template_data = json.loads(template_json)
             return template_data
         except json.JSONDecodeError:
-            # Fallback if JSON parsing fails
+            # Fallback if JSON parsing fails - create better naming
+            title = description[:50].strip()
+            if title.lower().startswith(('culture', 'employee', 'team')):
+                title = f"{title.title()} Assessment"
+            else:
+                title = f"Culture {title.title()}"
+            
             return {
-                "title": f"Culture Survey: {description[:50]}",
+                "title": title,
                 "description": description,
                 "questions": [
                     {

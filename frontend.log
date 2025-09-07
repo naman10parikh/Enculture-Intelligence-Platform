@@ -3,15 +3,13 @@
 > vite
 
 
-  VITE v4.5.14  ready in 293 ms
+  VITE v4.5.14  ready in 287 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: use --host to expose
-7:33:43 AM [vite] hmr update /src/components/AIChat.jsx
-7:38:27 AM [vite] hmr update /src/components/AIChat.jsx
-7:39:12 AM [vite] hmr update /src/components/AIChat.jsx
-7:39:23 AM [vite] hmr update /src/components/AIChat.jsx
-7:42:43 AM [vite] hmr update /src/components/AIChat.jsx
-7:42:50 AM [vite] hmr update /src/components/AIChat.jsx
-7:42:57 AM [vite] hmr update /src/components/AIChat.jsx
-7:43:21 AM [vite] hmr update /src/components/AIChat.jsx
+7:59:03 AM [vite] hmr update /src/components/AIChat.jsx
+7:59:14 AM [vite] hmr update /src/components/AIChat.jsx
+7:59:25 AM [vite] hmr update /src/components/AIChat.jsx
+8:00:56 AM [vite] hmr update /src/components/AIChat.jsx
+8:02:40 AM [vite] hmr update /src/components/AIChat.jsx
+8:02:58 AM [vite] hmr update /src/components/AIChat.jsx

@@ -1406,12 +1406,8 @@ function AIChat() {
         <div className="canvas-header">
           <div className="canvas-title-section">
           <div className="canvas-title">
-              <FileText size={18} className="canvas-icon" />
-            <span className="title-text">{surveyDraft.title || 'Untitled Survey'}</span>
+            <span className="title-text">{surveyDraft.name || 'New Survey'}</span>
           </div>
-            <div className="canvas-subtitle">
-              <span className="subtitle-text">{surveyDraft.description || 'Culture intelligence survey'}</span>
-            </div>
           </div>
           
           <div className="canvas-toolbar">
@@ -1499,10 +1495,6 @@ function AIChat() {
               <div className="wizard-content">
                 {surveyStep === 1 && (
                   <div className="step-container">
-                    <div className="step-header">
-                      <h3>Survey Name</h3>
-                      <p>What would you like to call your survey?</p>
-                    </div>
                     <div className="step-body">
                       <input
                         type="text"
@@ -1517,11 +1509,10 @@ function AIChat() {
                           className="ai-suggest-btn"
                           onClick={() => generateSurveyFromAIStreaming('Generate a creative survey name for employee engagement')}
                         >
-                          <Wand2 size={14} />
                           Generate with AI
                         </button>
                         <div className="step-help">
-                          <span>💡 Tip: Chat with AI about survey naming ideas!</span>
+                          <span>Chat with AI about survey naming ideas</span>
                         </div>
                       </div>
                     </div>
@@ -1530,10 +1521,6 @@ function AIChat() {
 
                 {surveyStep === 2 && (
                   <div className="step-container">
-                    <div className="step-header">
-                      <h3>Context & Desired Outcomes</h3>
-                      <p>What's the purpose of this survey and what do you want to achieve?</p>
-                    </div>
                     <div className="step-body">
                       <div className="form-group">
                         <label>Survey Context</label>
@@ -1595,10 +1582,6 @@ function AIChat() {
 
                 {surveyStep === 3 && (
                   <div className="step-container">
-                    <div className="step-header">
-                      <h3>Classifiers</h3>
-                      <p>Define up to 5 category labels for data analysis (e.g., Growth Mindset → Empathy)</p>
-                    </div>
                     <div className="step-body">
                       <div className="classifiers-grid">
                         {Array.from({ length: 5 }, (_, index) => {
@@ -1666,10 +1649,6 @@ function AIChat() {
 
                 {surveyStep === 4 && (
                   <div className="step-container">
-                    <div className="step-header">
-                      <h3>Metrics</h3>
-                      <p>Define scores to calculate from survey responses. AI will generate formulas for you.</p>
-                    </div>
                     <div className="step-body">
                       <div className="metrics-editor">
                         {(surveyDraft.metrics || []).map((metric, index) => (
@@ -1745,10 +1724,6 @@ function AIChat() {
 
                 {surveyStep === 5 && (
                   <div className="step-container">
-                    <div className="step-header">
-                      <h3>Questions</h3>
-                      <p>Create survey questions with response types, requirements, and linked metrics/classifiers.</p>
-                    </div>
                     <div className="step-body">
                       <div className="questions-builder">
                         {(surveyDraft.questions || []).map((question, index) => (
@@ -1892,10 +1867,6 @@ function AIChat() {
 
                 {surveyStep === 6 && (
                   <div className="step-container">
-                    <div className="step-header">
-                      <h3>Configuration</h3>
-                      <p>Set up survey settings, audience, and timing.</p>
-                    </div>
                     <div className="step-body">
                       <div className="config-sections">
                         <div className="config-section">
@@ -1995,14 +1966,10 @@ function AIChat() {
 
                 {surveyStep === 7 && (
                   <div className="step-container">
-                    <div className="step-header">
-                      <h3>Publish Survey</h3>
-                      <p>Review and launch your culture intelligence survey to your team.</p>
-                    </div>
                     <div className="step-body">
                       <div className="publish-summary">
                         <div className="summary-card">
-                          <h4>📊 Survey Overview</h4>
+                          <h4>Survey Overview</h4>
                           <div className="summary-item">
                             <strong>Name:</strong> {surveyDraft.name || 'Untitled Survey'}
                           </div>
@@ -2081,8 +2048,8 @@ function AIChat() {
                 <h1 className="preview-title">{surveyDraft.name || 'Untitled Survey'}</h1>
                 <p className="preview-description">{surveyDraft.context || 'Culture intelligence survey'}</p>
                 <div className="preview-meta">
-                  <span className="preview-audience">📊 Target: {surveyDraft.configuration?.targetAudience || 'All employees'}</span>
-                  <span className="preview-anonymous">🔒 {surveyDraft.configuration?.anonymous ? 'Anonymous' : 'Named'} responses</span>
+                  <span className="preview-audience">Target: {surveyDraft.configuration?.targetAudience || 'All employees'}</span>
+                  <span className="preview-anonymous">{surveyDraft.configuration?.anonymous ? 'Anonymous' : 'Named'} responses</span>
                 </div>
               </div>
               
@@ -2402,16 +2369,16 @@ function AIChat() {
         }
 
         .chat-messages {
-          flex: 1;
+          position: fixed;
+          top: var(--space-4);
+          bottom: 160px;
+          left: 320px;
+          right: var(--space-4);
           overflow-y: auto;
           padding: 120px 0 120px 0;
           display: flex;
           flex-direction: column;
           gap: var(--space-4);
-        }
-        .canvas-open .chat-messages { 
-          margin-right: 460px; 
-          transition: margin-right 0.3s ease;
         }
 
         .message {
@@ -2806,32 +2773,18 @@ function AIChat() {
            display: flex;
            flex-direction: column;
            justify-content: center;
-           padding: 0 var(--space-4);
-         }
-         
-         .step-header {
+           align-items: center;
+           padding: var(--space-6) var(--space-4);
            text-align: center;
-           margin-bottom: var(--space-4);
-         }
-         
-         .step-header h3 {
-           font-size: 1.3em;
-           font-weight: 700;
-           color: var(--text-primary);
-           margin-bottom: var(--space-2);
-         }
-         
-         .step-header p {
-           font-size: 0.9em;
-           color: var(--text-secondary);
-           line-height: 1.5;
          }
          
          .step-body {
            display: flex;
            flex-direction: column;
-           gap: var(--space-3);
+           gap: var(--space-4);
            flex: 1;
+           width: 100%;
+           max-width: 600px;
          }
          
          /* Consistent Input Styling Across All Steps */
@@ -2848,28 +2801,33 @@ function AIChat() {
          /* Step 1: Name */
          .wizard-input.large {
            width: 100%;
-           font-size: 1.1em;
+           font-size: 1.4em;
            font-weight: 600;
-           padding: 16px 20px;
-           border: 1px solid rgba(226, 232, 240, 0.4);
-           background: rgba(255, 255, 255, 0.9);
-           border-radius: 12px;
+           padding: var(--space-5) var(--space-6);
+           border: 2px solid rgba(139, 92, 246, 0.15);
+           background: rgba(255, 255, 255, 0.95);
+           border-radius: 20px;
            color: var(--text-primary);
            outline: none;
            text-align: center;
            transition: all 0.3s ease;
+           box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
+           min-height: 70px;
          }
          
          .wizard-input.large:focus {
-           border-color: rgba(139, 92, 246, 0.5);
-           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+           border-color: rgba(139, 92, 246, 0.4);
+           box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12), 0 8px 32px rgba(139, 92, 246, 0.15);
            background: white;
+           transform: translateY(-2px);
          }
          
          .ai-suggestion {
            display: flex;
-           justify-content: center;
-           margin-top: var(--space-4);
+           flex-direction: column;
+           align-items: center;
+           gap: var(--space-3);
+           margin-top: var(--space-5);
          }
          
          .ai-suggest-btn, .generate-formula-btn, .add-outcome-btn,
@@ -4273,12 +4231,6 @@ function AIChat() {
               width: 45vw; 
               min-width: 400px;
             }
-            .canvas-open .chat-input-area { 
-              right: 45vw; 
-            }
-            .canvas-open .chat-messages {
-              margin-right: 45vw;
-            }
           }
           
          @media (max-width: 768px) {
@@ -4286,14 +4238,6 @@ function AIChat() {
              width: 95vw; 
              right: 2.5vw; 
              left: 2.5vw; 
-           }
-           .canvas-open .chat-input-area { 
-             right: var(--space-4); 
-             left: var(--space-4);
-           }
-           .canvas-open .chat-messages {
-             margin-right: 0;
-             opacity: 0.2;
            }
          }
 
@@ -5142,6 +5086,7 @@ function AIChat() {
            display: flex;
            flex-direction: column;
            gap: var(--space-3);
+           transition: margin-right 0.3s ease;
          }
 
         .input-wrapper {
