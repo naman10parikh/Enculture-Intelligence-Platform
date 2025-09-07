@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History } from 'lucide-react'
+import { chatService } from '../services/api'
 
 const chatThreads = [
   { id: 1, name: 'General Chat', active: true },
@@ -32,6 +33,8 @@ function AIChat() {
   const [canvasOpen, setCanvasOpen] = useState(false)
   const [canvasView, setCanvasView] = useState('survey')
   const [activeSurveyId, setActiveSurveyId] = useState(null)
+  const [backendConnected, setBackendConnected] = useState(false)
+  const [currentPersona, setCurrentPersona] = useState('employee') // Default persona
   const [surveyDraft, setSurveyDraft] = useState({
     title: 'New Culture Survey',
     questions: [
@@ -51,6 +54,11 @@ function AIChat() {
     scrollToBottom()
   }, [messages])
 
+  // Check backend connection on mount
+  useEffect(() => {
+    checkBackendConnection()
+  }, [])
+
   // Keyboard shortcut: Ctrl + \\ to toggle canvas
   useEffect(() => {
     const handleKey = (e) => {
@@ -63,7 +71,23 @@ function AIChat() {
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
-  // API layer stubs
+  const checkBackendConnection = async () => {
+    try {
+      const isHealthy = await chatService.checkHealth()
+      setBackendConnected(isHealthy)
+    } catch (error) {
+      console.error('Backend connection check failed:', error)
+      setBackendConnected(false)
+    }
+  }
+
+  const getCurrentPersona = () => {
+    // This would be set by a persona switching component
+    // For now, return default or from localStorage
+    return localStorage.getItem('userPersona') || currentPersona
+  }
+
+  // API layer stubs for canvas functionality
   const fetchSurvey = async (surveyId) => {
     await new Promise(r => setTimeout(r, 300))
     return { id: surveyId, ...surveyDraft }
@@ -95,19 +119,20 @@ function AIChat() {
   const handleSend = async () => {
     if (!inputValue.trim()) return
 
-    const newMessage = {
+    const userMessage = {
       id: messages.length + 1,
       type: 'user',
       content: inputValue,
       timestamp: new Date()
     }
 
-    setMessages(prev => [...prev, newMessage])
+    const currentInput = inputValue
+    setMessages(prev => [...prev, userMessage])
     setInputValue('')
     setIsTyping(true)
 
-    // Handle commands
-    if (inputValue.startsWith('/survey')) {
+    // Handle special commands
+    if (currentInput.startsWith('/survey')) {
       setTimeout(() => {
         openCanvasForSurvey('draft')
         setIsTyping(false)
@@ -115,25 +140,74 @@ function AIChat() {
       return
     }
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = {
+    try {
+      if (backendConnected) {
+        // Use real backend API with streaming
+        const aiMessageId = messages.length + 2
+        const aiMessage = {
+          id: aiMessageId,
+          type: 'ai',
+          content: '',
+          timestamp: new Date()
+        }
+
+        // Add empty AI message to start streaming into
+        setMessages(prev => [...prev, aiMessage])
+        setIsTyping(false)
+
+        // Stream response from backend
+        let fullResponse = ''
+        const currentMessages = [...messages, userMessage]
+        const persona = getCurrentPersona()
+
+        for await (const chunk of chatService.streamChat(currentMessages, persona, true)) {
+          fullResponse += chunk
+          
+          // Update the AI message with streamed content
+          setMessages(prev => 
+            prev.map(msg => 
+              msg.id === aiMessageId 
+                ? { ...msg, content: fullResponse }
+                : msg
+            )
+          )
+        }
+      } else {
+        // Fallback to mock responses if backend is not available
+        setTimeout(() => {
+          const aiResponse = {
+            id: messages.length + 2,
+            type: 'ai',
+            content: getFallbackResponse(currentInput),
+            timestamp: new Date()
+          }
+          setMessages(prev => [...prev, aiResponse])
+          setIsTyping(false)
+        }, 1500)
+      }
+
+    } catch (error) {
+      console.error('Chat error:', error)
+      
+      // Add error message
+      const errorMessage = {
         id: messages.length + 2,
         type: 'ai',
-        content: getAIResponse(inputValue),
+        content: '⚠️ I\'m having trouble connecting to my AI backend. Please check that the backend server is running on http://localhost:8000 and try again.',
         timestamp: new Date()
       }
-      setMessages(prev => [...prev, aiResponse])
+      
+      setMessages(prev => [...prev, errorMessage])
       setIsTyping(false)
-    }, 1500)
+    }
   }
 
-  const getAIResponse = (input) => {
+  const getFallbackResponse = (input) => {
     const responses = [
-      "That's a great question about workplace culture! Based on recent patterns, I've noticed some interesting trends in team collaboration.",
-      "I can help you analyze that further. Would you like me to create a quick survey to gather more insights from your team?",
-      "Culture intelligence suggests that this topic might benefit from a deeper dive. Let me suggest some actions you could take.",
-      "Based on similar organizations, here are some strategies that have proven effective for improving team dynamics."
+      "That's a great question about workplace culture! I'd love to help you with more detailed insights, but I need my backend connection to provide the best analysis.",
+      "I can help you analyze that further with real-time data once my backend is connected. For now, I suggest checking team communication patterns.",
+      "Culture intelligence suggests this topic would benefit from deeper analysis. Please ensure the backend server is running for personalized recommendations.",
+      "This is an interesting area! To provide data-driven insights specific to your organization, I need access to my AI backend services."
     ]
     return responses[Math.floor(Math.random() * responses.length)]
   }
@@ -171,6 +245,23 @@ function AIChat() {
   return (
     <div className={`chat-container ${canvasOpen ? 'canvas-open' : ''} ${sidebarExpanded ? 'panel-open' : ''}`}>
       <div className="chat-content">
+        {/* Backend Connection Status */}
+        {!backendConnected && (
+          <div className="connection-status">
+            <div className="status-indicator offline">
+              <span className="status-dot"></span>
+              Backend Offline - Using fallback mode
+              <button 
+                className="retry-btn"
+                onClick={checkBackendConnection}
+                title="Retry backend connection"
+              >
+                Retry
+              </button>
+            </div>
+          </div>
+        )}
+
         <aside className={`chat-panel ${sidebarExpanded ? 'expanded' : 'collapsed'}`}>
           <button className="panel-header" onClick={toggleSidebar} aria-label="Toggle panel">
             <PanelLeft size={18} />
@@ -182,7 +273,7 @@ function AIChat() {
             </button>
 
             <nav className="panel-nav">
-              <button className="panel-item">
+              <button className="panel-item" onClick={createNewThread}>
                 <Plus size={16} />
                 <span>New chat</span>
               </button>
@@ -251,7 +342,10 @@ function AIChat() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Ask about culture, create surveys, or use / commands..."
+              placeholder={backendConnected 
+                ? "Ask about culture, create surveys, or use / commands..." 
+                : "Backend offline - limited functionality available"
+              }
               className="chat-input"
             />
             <button 
@@ -367,60 +461,67 @@ function AIChat() {
           gap: var(--space-6);
         }
 
+        /* Backend Connection Status */
+        .connection-status {
+          position: fixed;
+          top: var(--space-4);
+          right: var(--space-4);
+          z-index: 1000;
+        }
 
-
-         .chat-hero {
-           margin-bottom: var(--space-6);
-         }
-
-        .chat-hero .hero-content {
+        .status-indicator {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          flex-wrap: wrap;
-          gap: var(--space-6);
-        }
-
-        .chat-hero .hero-text h2 {
+          gap: var(--space-2);
+          padding: var(--space-2) var(--space-4);
+          background: rgba(239, 68, 68, 0.9);
           color: white;
-          font-size: var(--text-3xl);
-          font-weight: 700;
-          margin: 0 0 var(--space-3) 0;
-        }
-
-        .chat-hero .hero-text p {
-          color: rgba(255, 255, 255, 0.8);
-          font-size: var(--text-lg);
-          margin: 0 0 var(--space-4) 0;
-          max-width: 400px;
-        }
-
-        .hero-stats {
-          display: flex;
-          gap: var(--space-8);
-          flex-wrap: wrap;
-        }
-
-        .hero-stat {
-          text-align: center;
-          min-width: 80px;
-        }
-
-        .stat-number {
-          font-size: var(--text-2xl);
-          font-weight: 700;
-          color: white;
-          margin-bottom: var(--space-1);
-        }
-
-        .stat-label {
+          border-radius: var(--radius-full);
           font-size: var(--text-sm);
-          color: rgba(255, 255, 255, 0.7);
           font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
+          backdrop-filter: blur(10px);
+          box-shadow: var(--shadow-soft);
         }
 
+        .status-indicator.offline {
+          background: rgba(239, 68, 68, 0.9);
+        }
+
+        .status-indicator.online {
+          background: rgba(34, 197, 94, 0.9);
+        }
+
+        .status-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: currentColor;
+          animation: pulse 2s infinite;
+        }
+
+        .retry-btn {
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: white;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .retry-btn:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
 
         .chat-messages {
           flex: 1;
@@ -440,18 +541,6 @@ function AIChat() {
 
         .user-message {
           flex-direction: row-reverse;
-        }
-
-        .message-avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background: var(--gradient-accent);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--blue-soft);
-          flex-shrink: 0;
         }
 
          .message-bubble {
@@ -649,38 +738,6 @@ function AIChat() {
            transform: translateY(-1px);
          }
 
-         .sidebar-section {
-           display: flex;
-           flex-direction: column;
-           gap: var(--space-2);
-         }
-
-         .sidebar-feature-btn {
-           background: transparent;
-           border: 1px solid rgba(139, 92, 246, 0.2);
-           padding: var(--space-3);
-           border-radius: 12px;
-           cursor: pointer;
-           transition: all 0.2s ease;
-           display: flex;
-           align-items: center;
-           gap: var(--space-2);
-           color: var(--text-primary);
-           font-weight: 500;
-         }
-
-         .sidebar-feature-btn:hover {
-           background: rgba(139, 92, 246, 0.1);
-           border-color: rgba(139, 92, 246, 0.3);
-           transform: translateY(-1px);
-         }
-
-         .feature-icon {
-           font-size: 16px;
-           width: 20px;
-           text-align: center;
-         }
-
          @keyframes slideIn {
            from {
              opacity: 0;
@@ -737,60 +794,6 @@ function AIChat() {
         .message-time {
           font-size: var(--text-xs);
           opacity: 0.7;
-        }
-
-        .typing-indicator {
-          display: flex;
-          gap: 4px;
-          align-items: center;
-        }
-
-        .typing-indicator span {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: var(--blue-soft);
-          animation: bounce 1.4s infinite ease-in-out both;
-        }
-
-        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-
-        @keyframes bounce {
-          0%, 80%, 100% {
-            transform: scale(0);
-          } 40% {
-            transform: scale(1);
-          }
-        }
-
-        .chat-suggestions {
-          display: flex;
-          gap: var(--space-3);
-          padding: 0 var(--space-4);
-          overflow-x: auto;
-        }
-
-        .suggestion-card {
-          display: flex;
-          align-items: center;
-          gap: var(--space-2);
-          padding: var(--space-3) var(--space-4);
-          border: none;
-          cursor: pointer;
-          white-space: nowrap;
-          color: var(--text-secondary);
-          transition: all var(--transition-base);
-          min-width: fit-content;
-          background: var(--gradient-card);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(15px);
-          -webkit-backdrop-filter: blur(15px);
-          border-radius: var(--radius-lg);
-        }
-
-        .suggestion-card:hover {
-          border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
          .chat-input-area {
@@ -860,190 +863,6 @@ function AIChat() {
           }
         }
       `}</style>
-    </div>
-  )
-}
-
-function SurveyModal({ onClose }) {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [surveyData, setSurveyData] = useState({
-    title: '',
-    questions: []
-  })
-
-  const surveySteps = [
-    'Survey Title',
-    'Question Type',
-    'Question Content',
-    'Review & Send'
-  ]
-
-  return (
-    <div className="modal-overlay">
-      <div className="survey-modal glass-card">
-        <div className="survey-header">
-          <h3>Create Culture Survey</h3>
-          <button className="close-btn" onClick={onClose}>×</button>
-        </div>
-        
-        <div className="survey-progress">
-          {surveySteps.map((step, index) => (
-            <div key={index} className={`progress-step ${index <= currentStep ? 'active' : ''}`}>
-              <span className="step-number">{index + 1}</span>
-              <span className="step-label">{step}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="survey-content">
-          <p>🎯 Let's create a quick culture pulse survey! I'll guide you through each step.</p>
-          <div className="survey-form">
-            <input 
-              type="text" 
-              placeholder="Enter survey title..."
-              className="survey-input"
-            />
-            <div className="form-actions">
-              <button className="btn-ghost" onClick={onClose}>Cancel</button>
-              <button className="btn-primary">Next Step</button>
-            </div>
-          </div>
-        </div>
-
-        <style jsx>{`
-          .survey-modal {
-            width: 600px;
-            max-width: 90vw;
-            padding: var(--space-8);
-            position: relative;
-          }
-
-          .survey-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-6);
-          }
-
-          .survey-header h3 {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
-          }
-
-          .close-btn {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-          }
-
-          .close-btn:hover {
-            background: var(--surface-secondary);
-          }
-
-          .survey-progress {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: var(--space-8);
-            position: relative;
-          }
-
-          .survey-progress::before {
-            content: '';
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            right: 16px;
-            height: 2px;
-            background: var(--surface-secondary);
-            z-index: 0;
-          }
-
-          .progress-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-2);
-            position: relative;
-            z-index: 1;
-          }
-
-          .step-number {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--surface-secondary);
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            font-size: var(--text-sm);
-          }
-
-          .progress-step.active .step-number {
-            background: var(--blue-soft);
-            color: white;
-          }
-
-          .step-label {
-            font-size: var(--text-xs);
-            color: var(--text-secondary);
-            text-align: center;
-          }
-
-          .progress-step.active .step-label {
-            color: var(--text-primary);
-            font-weight: 500;
-          }
-
-          .survey-content {
-            margin-bottom: var(--space-6);
-          }
-
-          .survey-content p {
-            margin-bottom: var(--space-6);
-            color: var(--text-secondary);
-            text-align: center;
-          }
-
-          .survey-form {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-4);
-          }
-
-          .survey-input {
-            padding: var(--space-4);
-            border: var(--border-soft);
-            border-radius: var(--radius-md);
-            font-size: var(--text-base);
-            background: var(--surface-primary);
-            transition: all var(--transition-base);
-          }
-
-          .survey-input:focus {
-            outline: none;
-            border-color: var(--blue-soft);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-          }
-
-          .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: var(--space-3);
-          }
-        `}</style>
-      </div>
     </div>
   )
 }
