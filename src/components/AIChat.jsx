@@ -452,9 +452,18 @@ function AIChat() {
         let fullResponse = ''
         let titleUpdated = false
         
+        // Add survey context if Canvas is open
+        let contextualPrompt = currentInput
+        if (canvasOpen && canvasView === 'wizard') {
+          const stepNames = ['', 'name', 'context', 'classifiers', 'metrics', 'questions', 'configuration', 'publish']
+          const currentStepName = stepNames[surveyStep] || 'unknown'
+          
+          contextualPrompt = `[Survey Creation Context: Currently working on survey "${surveyDraft.name || 'Untitled'}" at step ${surveyStep} (${currentStepName}). Current survey data: name="${surveyDraft.name}", context="${surveyDraft.context}", ${(surveyDraft.questions || []).length} questions defined, ${(surveyDraft.classifiers || []).filter(c => c.name).length} classifiers, ${(surveyDraft.metrics || []).length} metrics.] User request: ${currentInput}`
+        }
+        
         await chatThreadsApi.streamChatWithThread(
           currentThreadId,
-          currentInput,
+          contextualPrompt,
           (data) => {
             if (data.content) {
               // Clean and normalize the content chunk - comprehensive unicode cleanup
@@ -874,7 +883,8 @@ function AIChat() {
     try {
       const template = await chatService.generateSurveyTemplate(description)
       if (template) {
-        // Start with empty template
+        // Start with empty template and go to step 1
+        setSurveyStep(1)
         setSurveyDraft(prev => ({ 
           ...prev, 
           name: '',
@@ -885,36 +895,45 @@ function AIChat() {
           metrics: []
         }))
         
-        // Simulate streaming population
+        // Simulate streaming population with auto-navigation
         await new Promise(resolve => {
           let step = 0;
           const interval = setInterval(() => {
             step++;
             
             if (step === 1) {
-              // Add name
+              // Add name and navigate to step 1
+              setSurveyStep(1)
               setSurveyDraft(prev => ({ ...prev, name: template.title }))
             } else if (step === 2) {
-              // Add context
+              // Add context and navigate to step 2
+              setSurveyStep(2)
               setSurveyDraft(prev => ({ ...prev, context: template.description }))
             } else if (step === 3) {
-              // Add classifiers
+              // Add classifiers and navigate to step 3
+              setSurveyStep(3)
               setSurveyDraft(prev => ({ ...prev, classifiers: template.classifiers || [] }))
             } else if (step === 4) {
-              // Add metrics
+              // Add metrics and navigate to step 4
+              setSurveyStep(4)
               setSurveyDraft(prev => ({ ...prev, metrics: template.metrics || [] }))
-            } else if (step <= 4 + template.questions.length) {
-              // Add questions one by one
-              const questionIndex = step - 5;
+            } else if (step === 5) {
+              // Navigate to questions step and start adding
+              setSurveyStep(5)
+              setSurveyDraft(prev => ({ ...prev, questions: [] }))
+            } else if (step <= 5 + template.questions.length) {
+              // Add questions one by one while staying on step 5
+              const questionIndex = step - 6;
               setSurveyDraft(prev => ({ 
                 ...prev, 
                 questions: template.questions.slice(0, questionIndex + 1)
               }))
             } else {
+              // Complete generation
               clearInterval(interval)
               resolve()
             }
-          }, 800) // 800ms between each step for visible streaming effect
+          }, 1200) // 1200ms between each step for visible streaming effect
         })
         
         setCanvasView('wizard') // Stay in wizard to show the generated survey
@@ -1490,6 +1509,9 @@ function AIChat() {
                           <Wand2 size={14} />
                           Generate with AI
                         </button>
+                        <div className="step-help">
+                          <span>💡 Tip: Chat with AI about survey naming ideas!</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1551,6 +1573,9 @@ function AIChat() {
                             <Plus size={14} />
                             Add Outcome
                           </button>
+                          <div className="step-help">
+                            <span>💬 Ask AI: "What outcomes should I track for employee engagement?"</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2028,8 +2053,26 @@ function AIChat() {
           ) : canvasView === 'preview' ? (
             <div className="survey-preview">
               <div className="preview-header">
-                <h2 className="preview-title">{surveyDraft.title}</h2>
-                <p className="preview-description">{surveyDraft.description}</p>
+                <div className="preview-branding">
+                  <img 
+                    src="/EncultureLogo.png" 
+                    alt="Enculture" 
+                    className="preview-logo"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <div className="preview-logo-fallback" style={{display: 'none'}}>
+                    <span className="logo-text">enculture</span>
+                  </div>
+                </div>
+                <h1 className="preview-title">{surveyDraft.name || 'Untitled Survey'}</h1>
+                <p className="preview-description">{surveyDraft.context || 'Culture intelligence survey'}</p>
+                <div className="preview-meta">
+                  <span className="preview-audience">📊 Target: {surveyDraft.configuration?.targetAudience || 'All employees'}</span>
+                  <span className="preview-anonymous">🔒 {surveyDraft.configuration?.anonymous ? 'Anonymous' : 'Named'} responses</span>
+                </div>
               </div>
               
               <div className="preview-questions">
@@ -2360,18 +2403,20 @@ function AIChat() {
           transition: margin-right 0.3s ease;
         }
 
-        .message {
-          display: flex;
-          gap: var(--space-3);
-          animation: fadeInUp 0.4s ease-out;
-        }
+         .message {
+           display: flex;
+           gap: var(--space-3);
+           animation: fadeInUp 0.4s ease-out;
+           max-width: 900px;
+           margin: 0 auto;
+         }
 
-        .user-message {
-          flex-direction: row-reverse;
-        }
+         .user-message {
+           flex-direction: row-reverse;
+         }
 
          .message-bubble {
-           max-width: 70%;
+           max-width: 100%;
            padding: var(--space-4) var(--space-5);
            position: relative;
            border-radius: var(--radius-lg);
@@ -2637,27 +2682,34 @@ function AIChat() {
          .wizard-progress {
            background: rgba(255, 255, 255, 0.6);
            border-bottom: 1px solid rgba(226, 232, 240, 0.3);
-           padding: var(--space-4);
-           overflow-x: auto;
+           padding: var(--space-3) var(--space-4);
          }
          
          .progress-steps {
            display: flex;
-           gap: 8px;
-           min-width: max-content;
+           gap: 4px;
+           justify-content: space-between;
+           flex-wrap: nowrap;
+           overflow: hidden;
+         }
+         
+         .progress-steps::-webkit-scrollbar {
+           display: none;
          }
          
          .progress-step {
            display: flex;
            align-items: center;
-           gap: 8px;
-           padding: 12px 16px;
+           gap: 6px;
+           padding: 8px 12px;
            background: rgba(248, 250, 252, 0.8);
            border: 1px solid rgba(226, 232, 240, 0.4);
-           border-radius: 12px;
+           border-radius: 10px;
            cursor: pointer;
            transition: all 0.3s ease;
-           min-width: 140px;
+           flex: 1;
+           min-width: 0;
+           justify-content: center;
          }
          
          .progress-step.active {
@@ -2720,47 +2772,65 @@ function AIChat() {
          .wizard-content {
            flex: 1;
            overflow-y: auto;
-           padding: var(--space-6);
+           padding: var(--space-4);
+           display: flex;
+           flex-direction: column;
          }
          
          .step-container {
            max-width: 600px;
            margin: 0 auto;
+           flex: 1;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
          }
          
          .step-header {
            text-align: center;
-           margin-bottom: var(--space-6);
+           margin-bottom: var(--space-4);
          }
          
          .step-header h3 {
-           font-size: 1.4em;
+           font-size: 1.3em;
            font-weight: 700;
            color: var(--text-primary);
            margin-bottom: var(--space-2);
          }
          
          .step-header p {
-           font-size: 0.95em;
+           font-size: 0.9em;
            color: var(--text-secondary);
-           line-height: 1.6;
+           line-height: 1.5;
          }
          
          .step-body {
            display: flex;
            flex-direction: column;
-           gap: var(--space-5);
+           gap: var(--space-3);
+           flex: 1;
+         }
+         
+         /* Consistent Input Styling Across All Steps */
+         .wizard-input, .wizard-textarea, .wizard-input.large,
+         .classifier-name-input, .metric-name-input, .question-builder-text,
+         .outcome-input, .config-input {
+           font-family: inherit;
+           font-weight: 500;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
          }
          
          /* Step 1: Name */
          .wizard-input.large {
            width: 100%;
-           font-size: 1.2em;
+           font-size: 1.1em;
            font-weight: 600;
-           padding: 18px 24px;
-           border: 2px solid rgba(226, 232, 240, 0.4);
+           padding: 16px 20px;
+           border: 1px solid rgba(226, 232, 240, 0.4);
            background: rgba(255, 255, 255, 0.9);
-           border-radius: 16px;
+           border-radius: 12px;
            color: var(--text-primary);
            outline: none;
            text-align: center;
@@ -2769,7 +2839,7 @@ function AIChat() {
          
          .wizard-input.large:focus {
            border-color: rgba(139, 92, 246, 0.5);
-           box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
            background: white;
          }
          
@@ -2779,23 +2849,41 @@ function AIChat() {
            margin-top: var(--space-4);
          }
          
-         .ai-suggest-btn {
+         .ai-suggest-btn, .generate-formula-btn, .add-outcome-btn,
+         .add-metric-btn, .add-question-btn {
            display: flex;
            align-items: center;
            gap: 8px;
-           padding: 12px 20px;
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
-           border: 1px solid rgba(139, 92, 246, 0.3);
-           border-radius: 12px;
+           padding: 10px 16px;
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.25);
+           border-radius: 10px;
            color: rgba(139, 92, 246, 0.8);
            cursor: pointer;
            font-weight: 500;
+           font-size: 0.85em;
            transition: all 0.2s ease;
          }
          
-         .ai-suggest-btn:hover {
-           background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+         .ai-suggest-btn:hover, .generate-formula-btn:hover, .add-outcome-btn:hover,
+         .add-metric-btn:hover, .add-question-btn:hover {
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(124, 58, 237, 0.06) 100%);
            transform: translateY(-1px);
+           border-color: rgba(139, 92, 246, 0.35);
+         }
+         
+         .step-help {
+           margin-top: var(--space-3);
+           padding: 12px 16px;
+           background: rgba(139, 92, 246, 0.05);
+           border-radius: 10px;
+           text-align: center;
+         }
+         
+         .step-help span {
+           font-size: 0.8em;
+           color: rgba(139, 92, 246, 0.7);
+           font-weight: 500;
          }
          
          /* Step 2: Context */
@@ -3457,10 +3545,10 @@ function AIChat() {
            display: flex;
            align-items: center;
            justify-content: space-between;
-           padding: var(--space-4) var(--space-6);
+           padding: var(--space-3) var(--space-4);
            background: rgba(255, 255, 255, 0.6);
            border-top: 1px solid rgba(226, 232, 240, 0.3);
-           margin-top: auto;
+           margin-top: var(--space-3);
          }
          
          .nav-btn {
@@ -3749,26 +3837,65 @@ function AIChat() {
            height: 100%;
            padding: var(--space-5);
            overflow-y: auto;
+           background: linear-gradient(135deg, rgba(250, 251, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
          }
          
          .preview-header {
            text-align: center;
            margin-bottom: var(--space-6);
-           padding-bottom: var(--space-4);
-           border-bottom: 2px solid rgba(226, 232, 240, 0.3);
+           padding: var(--space-5);
+           background: rgba(255, 255, 255, 0.9);
+           border-radius: 16px;
+           border: 1px solid rgba(226, 232, 240, 0.3);
+         }
+         
+         .preview-branding {
+           display: flex;
+           justify-content: center;
+           margin-bottom: var(--space-4);
+         }
+         
+         .preview-logo {
+           height: 60px;
+           width: auto;
+           max-width: 200px;
+           object-fit: contain;
+         }
+         
+         .preview-logo-fallback {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           height: 60px;
+         }
+         
+         .preview-logo-fallback .logo-text {
+           font-size: 1.5em;
+           font-weight: 700;
+           color: #392A48;
+           text-transform: lowercase;
          }
          
          .preview-title {
-           font-size: 1.6em;
+           font-size: 1.8em;
            font-weight: 700;
            color: var(--text-primary);
-           margin-bottom: var(--space-2);
+           margin-bottom: var(--space-3);
          }
          
          .preview-description {
-           font-size: 0.95em;
+           font-size: 1em;
            color: var(--text-secondary);
            line-height: 1.6;
+           margin-bottom: var(--space-3);
+         }
+         
+         .preview-meta {
+           display: flex;
+           justify-content: center;
+           gap: var(--space-4);
+           font-size: 0.85em;
+           color: var(--text-secondary);
          }
          
          .preview-questions {

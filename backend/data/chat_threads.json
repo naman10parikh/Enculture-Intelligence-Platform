@@ -3,7 +3,7 @@
     "id": "culture-001",
     "title": "Team Engagement Survey Analysis",
     "created_at": "2025-09-07T08:30:00",
-    "updated_at": "2025-09-07T12:54:04.179782",
+    "updated_at": "2025-09-07T13:22:22.891504",
     "messages": [
       {
         "id": "msg-001-1",
@@ -28,6 +28,12 @@
         "role": "assistant",
         "content": "Absolutely! Here's a bullet-point summary to clarify the information I need to analyze your team engagement survey results: - **Overall Engagement Scores:** - Provide the average or overall engagement rating. - Note any significant changes compared to previous surveys. - **Key Metrics or Survey Categories:** - Highlight specific areas (e.g., communication, workload, recognition, career growth) showing low or declining scores. - **Demographic Breakdown:** - Share if possible by department, team, tenure, or location. - Note if specific groups are experiencing more concerns. - **Trends or Patterns Noticed:** - Describe noticeable drops or concerning patterns in particular areas. - Mention any comments or qualitative feedback from employees. - **Your Primary Concerns:** - Specify which issues you find most urgent or want help prioritizing. If you provide these details, I'll be able to offer a targeted analysis and actionable recommendations to address the concerns. ",
         "timestamp": "2025-09-07T12:54:04.179740"
+      },
+      {
+        "id": "e499ea8e-55ea-40f9-807c-30bf67403bac",
+        "role": "user",
+        "content": "How many questions should my engagement survey have",
+        "timestamp": "2025-09-07T13:22:22.891456"
       }
     ],
     "is_active": true
@@ -114,7 +120,7 @@
     "id": "culture-004",
     "title": "Employee Feedback Analysis",
     "created_at": "2025-09-04T11:20:00",
-    "updated_at": "2025-09-04T11:25:00",
+    "updated_at": "2025-09-07T13:22:41.022001",
     "messages": [
       {
         "id": "msg-004-1",
@@ -127,6 +133,12 @@
         "role": "assistant",
         "content": "**Burnout signals** in anonymous feedback require immediate, thoughtful action. Here's a strategic approach:\n\n## Immediate Assessment:\n- **Follow-up survey** with specific burnout indicators\n- **Workload audit** across teams and individuals\n- **Manager 1:1 quality** evaluation\n- **Resource availability** check\n\n## Root Cause Analysis:\n### Common Burnout Drivers:\n- **Unclear priorities** or constantly shifting goals\n- **Insufficient resources** for expected outcomes\n- **Poor work-life boundaries** (especially remote)\n- **Lack of autonomy** or micromanagement\n- **Inadequate recognition** for extra effort\n\n## Action Framework:\n\n### **Week 1**: Emergency measures\n- **Deadline audit** - what can be postponed?\n- **Resource reallocation** - who needs help?\n- **Manager coaching** on recognizing burnout signs\n\n### **Month 1**: Structural changes  \n- **Workload redistribution** protocols\n- **Meeting audit** (reduce unnecessary meetings)\n- **\"Right to disconnect\"** policies\n- **Mental health resources** enhancement\n\n**Critical**: Address this transparently with the team. Acknowledge the feedback and share your action plan. Burnout spreads quickly but so does the positive impact of genuine leadership response.",
         "timestamp": "2025-09-04T11:21:45"
+      },
+      {
+        "id": "ef6bba59-272d-414f-b80f-87311bf25025",
+        "role": "user",
+        "content": "What are best practices for survey design",
+        "timestamp": "2025-09-07T13:22:41.021951"
       }
     ],
     "is_active": true
@@ -309,8 +321,45 @@
     "id": "0121b275-4ff0-431b-b794-836662207880",
     "title": "New Chat",
     "created_at": "2025-09-07T13:11:47.339217",
-    "updated_at": "2025-09-07T13:11:47.339220",
+    "updated_at": "2025-09-07T13:25:31.677762",
     "messages": [],
+    "is_active": false
+  },
+  "30e61106-fba2-4274-bfe1-17165fe139bd": {
+    "id": "30e61106-fba2-4274-bfe1-17165fe139bd",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T13:24:42.755381",
+    "updated_at": "2025-09-07T13:24:44.664682",
+    "messages": [
+      {
+        "id": "2d933caa-6c4e-4969-b2cd-ea85417005f2",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T13:24:42.799818"
+      },
+      {
+        "id": "21b6aa3d-84bf-400d-9652-8a1ad41dafaf",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I support your culture intelligence work today? Are you looking to analyze recent survey results, explore patterns in team dynamics, or discuss ways to enhance your organization's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T13:24:44.664562"
+      }
+    ],
     "is_active": true
+  },
+  "33f4aa82-1b7a-4ff0-92ea-b7bbd8d0b399": {
+    "id": "33f4aa82-1b7a-4ff0-92ea-b7bbd8d0b399",
+    "title": "New Chat",
+    "created_at": "2025-09-07T13:24:46.840341",
+    "updated_at": "2025-09-07T13:25:30.546290",
+    "messages": [],
+    "is_active": false
+  },
+  "9792a645-d7f0-4ade-9143-328739147f74": {
+    "id": "9792a645-d7f0-4ade-9143-328739147f74",
+    "title": "New Chat",
+    "created_at": "2025-09-07T13:24:46.847678",
+    "updated_at": "2025-09-07T13:25:30.063811",
+    "messages": [],
+    "is_active": false
   }
 }
