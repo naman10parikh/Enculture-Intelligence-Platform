@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { MessageCircle, BarChart3, CheckSquare, Palette } from 'lucide-react'
+import { MessageCircle, BarChart3, CheckSquare, Palette, ChevronDown, ChevronUp } from 'lucide-react'
+import { useUser } from '../context/UserContext'
 
 const navigationItems = [
   {
@@ -35,6 +36,25 @@ const navigationItems = [
 
 function Sidebar({ activeSection, setActiveSection }) {
   const location = useLocation()
+  const { currentUser, demoUsers, switchUser } = useUser()
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.user-dropdown')) {
+        setDropdownOpen(false)
+      }
+    }
+
+    if (dropdownOpen) {
+      document.addEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [dropdownOpen])
 
   return (
     <aside className="sidebar">
@@ -83,11 +103,48 @@ function Sidebar({ activeSection, setActiveSection }) {
       <div className="sidebar-footer">
         <div className="user-profile glass-card">
           <div className="user-avatar">
-            <span>GS</span>
+            <span>{currentUser?.avatar || '👤'}</span>
           </div>
           <div className="user-info">
-            <span className="user-name">Gayathri Sriram</span>
-            <span className="user-role">Product Manager</span>
+            <div className="user-dropdown">
+              <button 
+                className="user-dropdown-trigger"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                <div className="user-dropdown-content">
+                  <span className="user-dropdown-name">{currentUser?.name}</span>
+                  <span className="user-dropdown-role">{currentUser?.role}</span>
+                </div>
+                {dropdownOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+              
+              {dropdownOpen && (
+                <div className="user-dropdown-menu">
+                  {demoUsers?.map(user => (
+                    <div 
+                      key={user.id} 
+                      className={`user-dropdown-item ${user.id === currentUser?.id ? 'active' : ''}`}
+                      onClick={() => {
+                        switchUser(user.id)
+                        setDropdownOpen(false)
+                      }}
+                    >
+                      <div className="user-card">
+                        <div className="user-card-avatar">{user.avatar}</div>
+                        <div className="user-card-info">
+                          <div className="user-card-name">{user.name}</div>
+                          <div className="user-card-role">{user.role}</div>
+                          <div className="user-card-department">{user.department}</div>
+                        </div>
+                        {user.id === currentUser?.id && (
+                          <div className="current-user-indicator">✓</div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -236,24 +293,139 @@ function Sidebar({ activeSection, setActiveSection }) {
           align-items: center;
           justify-content: center;
           font-weight: 600;
-          font-size: var(--text-sm);
+          font-size: var(--text-lg);
           color: #301934;
         }
 
         .user-info {
           display: flex;
           flex-direction: column;
+          flex: 1;
         }
 
-        .user-name {
+        .user-dropdown {
+          position: relative;
+          width: 100%;
+        }
+
+        .user-dropdown-trigger {
+          background: transparent;
+          border: none;
+          font-weight: 500;
+          font-size: var(--text-sm);
+          color: var(--text-primary);
+          cursor: pointer;
+          padding: 4px 0;
+          outline: none;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          transition: all 0.2s ease;
+        }
+
+        .user-dropdown-trigger:hover {
+          background: rgba(177, 156, 217, 0.1);
+          border-radius: 6px;
+          padding: 4px 8px;
+        }
+
+        .user-dropdown-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .user-dropdown-name {
+          font-weight: 500;
+          font-size: var(--text-sm);
+        }
+
+        .user-dropdown-role {
+          font-size: var(--text-xs);
+          color: var(--text-secondary);
+          margin-top: 1px;
+        }
+
+        .user-dropdown-menu {
+          position: absolute;
+          bottom: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border: 1px solid rgba(177, 156, 217, 0.2);
+          border-radius: 12px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+          margin-bottom: 8px;
+          max-height: 300px;
+          overflow-y: auto;
+        }
+
+        .user-dropdown-item {
+          padding: 0;
+          cursor: pointer;
+          transition: background-color 0.2s ease;
+        }
+
+        .user-dropdown-item:hover {
+          background: rgba(177, 156, 217, 0.05);
+        }
+
+        .user-dropdown-item.active {
+          background: rgba(177, 156, 217, 0.1);
+        }
+
+        .user-card {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          padding: var(--space-3);
+          position: relative;
+        }
+
+        .user-card-avatar {
+          font-size: var(--text-lg);
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #d9c9ff 0%, #b19cd9 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          color: #301934;
+        }
+
+        .user-card-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .user-card-name {
           font-weight: 500;
           font-size: var(--text-sm);
           color: var(--text-primary);
         }
 
-        .user-role {
+        .user-card-role {
           font-size: var(--text-xs);
           color: var(--text-secondary);
+          margin-top: 1px;
+        }
+
+        .user-card-department {
+          font-size: var(--text-xs);
+          color: rgba(177, 156, 217, 0.7);
+          margin-top: 1px;
+          font-weight: 500;
+        }
+
+        .current-user-indicator {
+          color: #10b981;
+          font-weight: 600;
+          font-size: var(--text-sm);
         }
 
         @media (max-width: 1024px) {

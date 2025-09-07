@@ -3,7 +3,7 @@ const API_BASE_URL = 'http://localhost:8000/api/v1';
 export const chatThreadsApi = {
   // Create a new chat thread
   createThread: async (title = null) => {
-    const response = await fetch(`${API_BASE_URL}/chat/threads`, {
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export const chatThreadsApi = {
 
   // Get all chat threads
   getThreads: async (limit = 50, offset = 0) => {
-    const response = await fetch(`${API_BASE_URL}/chat/threads?limit=${limit}&offset=${offset}`);
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads?limit=${limit}&offset=${offset}`);
     
     if (!response.ok) {
       const errorData = await response.json();
@@ -33,7 +33,7 @@ export const chatThreadsApi = {
 
   // Get recent threads for sidebar
   getRecentThreads: async (limit = 10) => {
-    const response = await fetch(`${API_BASE_URL}/chat/threads/recent?limit=${limit}`);
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/recent?limit=${limit}`);
     
     if (!response.ok) {
       const errorData = await response.json();
@@ -45,7 +45,7 @@ export const chatThreadsApi = {
 
   // Get a specific thread with all messages
   getThread: async (threadId) => {
-    const response = await fetch(`${API_BASE_URL}/chat/threads/${threadId}`);
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/${threadId}`);
     
     if (!response.ok) {
       const errorData = await response.json();
@@ -57,7 +57,7 @@ export const chatThreadsApi = {
 
   // Delete a thread
   deleteThread: async (threadId) => {
-    const response = await fetch(`${API_BASE_URL}/chat/threads/${threadId}`, {
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/${threadId}`, {
       method: 'DELETE',
     });
 
@@ -71,7 +71,7 @@ export const chatThreadsApi = {
 
   // Update thread title
   updateThreadTitle: async (threadId, title) => {
-    const response = await fetch(`${API_BASE_URL}/chat/threads/${threadId}/title`, {
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/${threadId}/title`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export const chatThreadsApi = {
 
   // Search chat threads
   searchThreads: async (query, limit = 20) => {
-    const response = await fetch(`${API_BASE_URL}/chat/threads/search`, {
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

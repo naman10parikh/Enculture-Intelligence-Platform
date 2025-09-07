@@ -3,8 +3,368 @@
 > vite
 
 
-  VITE v4.5.14  ready in 299 ms
+  VITE v4.5.14  ready in 293 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: use --host to expose
-10:26:36 AM [vite] hmr update /src/components/AIChat.jsx
+11:03:44 AM [vite] hmr update /src/components/AIChat.jsx
+11:03:51 AM [vite] hmr update /src/components/AIChat.jsx
+11:03:53 AM [vite] hmr update /src/components/AIChat.jsx
+11:04:06 AM [vite] hmr update /src/components/Sidebar.jsx
+11:04:10 AM [vite] hmr update /src/components/Sidebar.jsx
+11:04:16 AM [vite] hmr update /src/components/Sidebar.jsx
+11:04:20 AM [vite] hmr update /src/App.jsx
+11:04:29 AM [vite] hmr update /src/App.jsx
+11:04:32 AM [vite] hmr update /src/App.jsx
+11:04:35 AM [vite] hmr update /src/components/Sidebar.jsx
+11:04:36 AM [vite] hmr update /src/components/Sidebar.jsx
+11:04:38 AM [vite] hmr update /src/components/Sidebar.jsx
+11:04:46 AM [vite] hmr update /src/components/AIChat.jsx
+11:04:50 AM [vite] hmr update /src/components/AIChat.jsx
+11:04:50 AM [vite] Internal server error: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx: Identifier 'demoUsers' has already been declared. (498:8)
+
+  496 |
+  497 |   // Demo users for role switching
+> 498 |   const demoUsers = [
+      |         ^
+  499 |     {
+  500 |       id: 'sarah_johnson',
+  501 |       name: 'Sarah Johnson', 
+  Plugin: vite:react-babel
+  File: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx:498:8
+  496|  
+  497|    // Demo users for role switching
+  498|    const demoUsers = [
+     |          ^
+  499|      {
+  500|        id: 'sarah_johnson',
+      at constructor (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6630:19)
+      at ScopeHandler.checkRedeclarationInScope (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:1647:19)
+      at ScopeHandler.declareName (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:1613:12)
+      at JSXParserMixin.declareNameFromIdentifier (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:7594:16)
+      at JSXParserMixin.checkIdentifier (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:7590:12)
+      at JSXParserMixin.checkLVal (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:7529:12)
+      at JSXParserMixin.parseVarId (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13421:10)
+      at JSXParserMixin.parseVar (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13392:12)
+      at JSXParserMixin.parseVarStatement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13239:10)
+      at JSXParserMixin.parseStatementContent (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12860:23)
+      at JSXParserMixin.parseStatementLike (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12096:10)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13454:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12413:14)
+      at JSXParserMixin.parseFunction (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13453:10)
+      at JSXParserMixin.parseFunctionStatement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13134:17)
+      at JSXParserMixin.parseStatementContent (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12800:21)
+      at JSXParserMixin.parseStatementLike (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseModuleItem (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12753:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13325:36)
+      at JSXParserMixin.parseBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseProgram (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12634:10)
+      at JSXParserMixin.parseTopLevel (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12624:25)
+      at JSXParserMixin.parse (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:14501:10)
+      at parse (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:14535:38)
+      at parser (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:261:32)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:223:11)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:189:28
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:113:33
+      at step (/Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:287:14)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/naman/Enculture-Intelligence-Platform/node_modules/gensync/index.js:223:11)
+11:04:56 AM [vite] hmr update /src/components/AIChat.jsx
+11:05:07 AM [vite] hmr update /src/components/AIChat.jsx
+11:05:07 AM [vite] Internal server error: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx: Unexpected token (2528:0)
+
+  2526 |
+  2527 |                 {surveyStep === 6 && (
+> 2528 |
+       | ^
+  Plugin: vite:react-babel
+  File: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx:2528:0
+  2525|                  )}
+  2526|  
+  2527|                  {surveyStep === 6 && (
+     |                                         ^
+  2528|  
+      at constructor (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.unexpected (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6650:16)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11451:16)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOpBaseRightExpr (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10990:34)
+      at JSXParserMixin.parseExprOpRightExpr (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10985:21)
+      at JSXParserMixin.parseExprOp (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10951:27)
+      at JSXParserMixin.parseExprOp (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10957:21)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10912:17)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.jsxParseExpressionContainer (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4665:31)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4744:36)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12503:17)
+11:05:16 AM [vite] hmr update /src/components/AIChat.jsx
+11:05:41 AM [vite] hmr update /src/components/Sidebar.jsx
+11:05:41 AM [vite] hmr update /src/App.jsx
+11:05:41 AM [vite] hmr update /src/context/UserContext.jsx
+11:05:41 AM [vite] hmr update /src/components/AIChat.jsx
+11:05:42 AM [vite] hmr invalidate /src/context/UserContext.jsx Could not Fast Refresh ("default" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+11:05:42 AM [vite] hmr update /src/App.jsx, /src/components/Sidebar.jsx, /src/components/AIChat.jsx
+11:10:14 AM [vite] hmr update /src/components/AIChat.jsx
+11:10:22 AM [vite] hmr update /src/components/AIChat.jsx
+11:10:22 AM [vite] hmr update /src/App.jsx
+11:10:31 AM [vite] hmr update /src/components/AIChat.jsx
+11:10:31 AM [vite] Internal server error: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx: Unterminated template. (3351:19)
+
+  3349 |       </div>
+  3350 |
+> 3351 |       <style jsx>{`
+       |                    ^
+  3352 |         .chat-container {
+  3353 |           display: flex;
+  3354 |           flex-direction: column;
+  Plugin: vite:react-babel
+  File: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx:3351:19
+  3349|        </div>
+  3350|  
+  3351|        <style jsx>{`
+     |                     ^
+  3352|          .chat-container {
+  3353|            display: flex;
+      at constructor (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6630:19)
+      at Object.unterminated (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:5701:20)
+      at readStringContents (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:5396:14)
+      at JSXParserMixin.readTemplateToken (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6550:9)
+      at JSXParserMixin.getTokenFromCode (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6258:14)
+      at JSXParserMixin.getTokenFromCode (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4830:11)
+      at JSXParserMixin.nextToken (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4740:20)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12096:10)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13454:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12413:14)
+      at JSXParserMixin.parseFunction (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13453:10)
+11:10:51 AM [vite] hmr update /src/components/AIChat.jsx
+11:11:01 AM [vite] hmr update /src/components/Sidebar.jsx
+11:11:04 AM [vite] hmr update /src/components/Sidebar.jsx
+11:11:12 AM [vite] hmr update /src/components/Sidebar.jsx
+11:11:27 AM [vite] hmr update /src/components/Sidebar.jsx
+11:11:43 AM [vite] hmr update /src/components/AIChat.jsx
+11:11:55 AM [vite] hmr update /src/components/AIChat.jsx
+11:11:56 AM [vite] Internal server error: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx: Unexpected token (2577:0)
+
+  2575 |
+  2576 |                 {surveyStep === 6 && (
+> 2577 |
+       | ^
+  Plugin: vite:react-babel
+  File: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx:2577:0
+  2574|                  )}
+  2575|  
+  2576|                  {surveyStep === 6 && (
+     |                                         ^
+  2577|  
+      at constructor (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.unexpected (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6650:16)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11451:16)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOpBaseRightExpr (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10990:34)
+      at JSXParserMixin.parseExprOpRightExpr (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10985:21)
+      at JSXParserMixin.parseExprOp (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10951:27)
+      at JSXParserMixin.parseExprOp (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10957:21)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10912:17)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.jsxParseExpressionContainer (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4665:31)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4744:36)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12503:17)
+11:11:59 AM [vite] hmr update /src/components/AIChat.jsx
+11:11:59 AM [vite] hmr update /src/App.jsx
+11:12:01 AM [vite] hmr update /src/components/AIChat.jsx
+11:12:01 AM [vite] Internal server error: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx: Unexpected token (1920:17)
+
+  1918 |                   setCanvasOpen(false)
+  1919 |                 }
+> 1920 |               }}>
+       |                  ^
+  Plugin: vite:react-babel
+  File: /Users/naman/Enculture-Intelligence-Platform/src/components/AIChat.jsx:1920:17
+  1918|                    setCanvasOpen(false)
+  1919|                  }
+  1920|                }}>
+     |                   ^
+      at constructor (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.unexpected (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:6650:16)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4749:18)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElementAt (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12096:10)
+      at /Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13454:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12413:14)
+      at JSXParserMixin.parseFunction (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13453:10)
+      at JSXParserMixin.parseFunctionStatement (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:13134:17)
+      at JSXParserMixin.parseStatementContent (/Users/naman/Enculture-Intelligence-Platform/node_modules/@babel/parser/lib/index.js:12800:21)
+11:12:01 AM [vite] hmr update /src/components/AIChat.jsx
+11:12:12 AM [vite] hmr update /src/components/Sidebar.jsx
+11:12:44 AM [vite] hmr update /src/components/Sidebar.jsx
+11:12:44 AM [vite] hmr update /src/components/AIChat.jsx

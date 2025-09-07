@@ -119,7 +119,7 @@
     "id": "fbcaf8dd-c0df-4713-a71a-a695b8d3fd63",
     "title": "Test Integration",
     "created_at": "2025-09-07T14:56:58.652098",
-    "updated_at": "2025-09-07T17:08:42.522308",
+    "updated_at": "2025-09-07T17:55:54.948183",
     "messages": [
       {
         "id": "87395b9a-144e-4a5c-b5e5-1370f2e62409",
@@ -146,7 +146,7 @@
         "timestamp": "2025-09-07T17:08:42.522221"
       }
     ],
-    "is_active": true
+    "is_active": false
   },
   "95eb6fb4-742a-4d32-9f9a-e09d7a6a74ce": {
     "id": "95eb6fb4-742a-4d32-9f9a-e09d7a6a74ce",
@@ -229,7 +229,7 @@
     "id": "f71a8f6e-84da-40d3-8a8d-766fda86638e",
     "title": "Test Integration",
     "created_at": "2025-09-07T15:20:46.543494",
-    "updated_at": "2025-09-07T15:20:48.969045",
+    "updated_at": "2025-09-07T17:55:56.730515",
     "messages": [
       {
         "id": "25fe3966-d860-491c-9cb0-bc15bcb42f08",
@@ -244,7 +244,7 @@
         "timestamp": "2025-09-07T15:20:48.968935"
       }
     ],
-    "is_active": true
+    "is_active": false
   },
   "7127fbaa-4223-4542-a10a-de5530c33ca0": {
     "id": "7127fbaa-4223-4542-a10a-de5530c33ca0",
@@ -538,7 +538,7 @@
     "id": "97fcd011-8f96-4422-a066-73e5418f316c",
     "title": "Test Integration",
     "created_at": "2025-09-07T16:53:36.749164",
-    "updated_at": "2025-09-07T16:53:39.540026",
+    "updated_at": "2025-09-07T17:55:55.416248",
     "messages": [
       {
         "id": "f2044b55-0ad2-43c0-a85f-5e74e7eafa9c",
@@ -553,7 +553,7 @@
         "timestamp": "2025-09-07T16:53:39.539925"
       }
     ],
-    "is_active": true
+    "is_active": false
   },
   "7a0d3754-4ada-40ea-99e6-14ac57dedf74": {
     "id": "7a0d3754-4ada-40ea-99e6-14ac57dedf74",
@@ -607,23 +607,23 @@
     "id": "86766cf2-e438-4648-b1b5-100eaf159301",
     "title": "New Chat",
     "created_at": "2025-09-07T17:22:18.346831",
-    "updated_at": "2025-09-07T17:22:18.346839",
+    "updated_at": "2025-09-07T17:28:29.397175",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "5b8a12b3-c489-46ca-98ee-649ce45060be": {
     "id": "5b8a12b3-c489-46ca-98ee-649ce45060be",
     "title": "New Chat",
     "created_at": "2025-09-07T17:22:18.356202",
-    "updated_at": "2025-09-07T17:22:18.356205",
+    "updated_at": "2025-09-07T17:28:29.236115",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "89e12784-0a7c-4434-a43d-97fc68fe7678": {
     "id": "89e12784-0a7c-4434-a43d-97fc68fe7678",
     "title": "Test Integration",
     "created_at": "2025-09-07T17:22:39.526450",
-    "updated_at": "2025-09-07T17:22:41.794813",
+    "updated_at": "2025-09-07T17:55:54.784048",
     "messages": [
       {
         "id": "9f6457e0-8bc2-48ca-bb72-d7c01b8c7447",
@@ -638,85 +638,403 @@
         "timestamp": "2025-09-07T17:22:41.794689"
       }
     ],
-    "is_active": true
+    "is_active": false
   },
   "d0d6e0b2-5988-438b-87a4-d20cc745fd16": {
     "id": "d0d6e0b2-5988-438b-87a4-d20cc745fd16",
     "title": "New Chat",
     "created_at": "2025-09-07T17:22:43.931825",
-    "updated_at": "2025-09-07T17:22:43.931829",
+    "updated_at": "2025-09-07T17:28:28.435087",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "0391f046-d487-42da-9b41-dda95826ecc1": {
     "id": "0391f046-d487-42da-9b41-dda95826ecc1",
     "title": "New Chat",
     "created_at": "2025-09-07T17:22:43.963203",
-    "updated_at": "2025-09-07T17:22:43.963207",
+    "updated_at": "2025-09-07T17:28:27.872446",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "9c85e5a6-8220-4ae6-b39f-cae41c80b740": {
     "id": "9c85e5a6-8220-4ae6-b39f-cae41c80b740",
     "title": "New Chat",
     "created_at": "2025-09-07T17:25:13.495685",
-    "updated_at": "2025-09-07T17:25:13.495690",
+    "updated_at": "2025-09-07T17:28:27.655541",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "1a8566ee-2216-4ffc-95c7-28291fc848ed": {
     "id": "1a8566ee-2216-4ffc-95c7-28291fc848ed",
     "title": "New Chat",
     "created_at": "2025-09-07T17:25:13.501901",
-    "updated_at": "2025-09-07T17:25:13.501906",
+    "updated_at": "2025-09-07T17:28:27.480928",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "6660b3ac-25bb-4a1a-ac79-c8573b224811": {
     "id": "6660b3ac-25bb-4a1a-ac79-c8573b224811",
     "title": "New Chat",
     "created_at": "2025-09-07T17:26:38.266970",
-    "updated_at": "2025-09-07T17:26:38.266977",
+    "updated_at": "2025-09-07T17:28:27.280623",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "27cc900d-3b20-4be3-acec-1fbd6d080577": {
     "id": "27cc900d-3b20-4be3-acec-1fbd6d080577",
     "title": "New Chat",
     "created_at": "2025-09-07T17:26:38.274745",
-    "updated_at": "2025-09-07T17:26:38.274750",
+    "updated_at": "2025-09-07T17:28:27.114956",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "769eea9f-6b4c-464b-8b55-015630254bcc": {
     "id": "769eea9f-6b4c-464b-8b55-015630254bcc",
     "title": "New Chat",
     "created_at": "2025-09-07T17:26:42.575761",
-    "updated_at": "2025-09-07T17:26:42.575764",
+    "updated_at": "2025-09-07T17:28:26.961598",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "0d8d866f-27f2-419d-b04d-fa51e1813547": {
     "id": "0d8d866f-27f2-419d-b04d-fa51e1813547",
     "title": "New Chat",
     "created_at": "2025-09-07T17:26:42.577541",
-    "updated_at": "2025-09-07T17:26:42.577543",
+    "updated_at": "2025-09-07T17:28:26.593768",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "c71c6aad-d991-4384-b644-5108305acdda": {
     "id": "c71c6aad-d991-4384-b644-5108305acdda",
     "title": "New Chat",
     "created_at": "2025-09-07T17:26:49.848491",
-    "updated_at": "2025-09-07T17:26:49.848494",
+    "updated_at": "2025-09-07T17:28:26.246017",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "69e8d592-69ff-49fc-9f22-920f1a9c5a73": {
     "id": "69e8d592-69ff-49fc-9f22-920f1a9c5a73",
     "title": "New Chat",
     "created_at": "2025-09-07T17:26:49.852473",
-    "updated_at": "2025-09-07T17:26:49.852480",
+    "updated_at": "2025-09-07T17:28:26.119503",
+    "messages": [],
+    "is_active": false
+  },
+  "17503531-e3ab-408f-a13f-2b0bb220c670": {
+    "id": "17503531-e3ab-408f-a13f-2b0bb220c670",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T17:44:04.000746",
+    "updated_at": "2025-09-07T17:55:54.640191",
+    "messages": [],
+    "is_active": false
+  },
+  "5a4a227c-e065-4bb2-8d62-7c088901acf4": {
+    "id": "5a4a227c-e065-4bb2-8d62-7c088901acf4",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T17:44:54.967143",
+    "updated_at": "2025-09-07T17:55:54.484259",
+    "messages": [
+      {
+        "id": "80dd0b64-866b-4cd3-924f-66d596702bc2",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:44:55.027212"
+      },
+      {
+        "id": "64c92b2f-7a4e-41a3-8c54-bfa136c92cce",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your company culture intelligence? If you'd like to discuss trends, analyze recent survey results, or need actionable recommendations for fostering a stronger culture, just let me know what you'd like to focus on. ",
+        "timestamp": "2025-09-07T17:44:57.411917"
+      }
+    ],
+    "is_active": false
+  },
+  "10bfe715-e2ee-4ba7-ab71-d1c240e35319": {
+    "id": "10bfe715-e2ee-4ba7-ab71-d1c240e35319",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T17:45:42.229222",
+    "updated_at": "2025-09-07T17:55:54.307984",
+    "messages": [
+      {
+        "id": "edbc8e97-2ee2-4868-a2a4-a4655910f8be",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:45:42.276176"
+      },
+      {
+        "id": "fddfabcd-d05c-47f1-9984-54c3030371b5",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence needs? Are you looking to analyze some recent culture data, need insights on team dynamics, or perhaps recommendations to boost engagement or wellbeing? Let me know how I can help! ",
+        "timestamp": "2025-09-07T17:45:44.711168"
+      }
+    ],
+    "is_active": false
+  },
+  "9145c1aa-3789-4fc9-9d7c-d8b48690886d": {
+    "id": "9145c1aa-3789-4fc9-9d7c-d8b48690886d",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T17:53:29.701797",
+    "updated_at": "2025-09-07T17:55:53.966963",
+    "messages": [
+      {
+        "id": "786f38b1-4d32-429c-8801-ec5f4a100d08",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:53:29.764466"
+      },
+      {
+        "id": "22602915-5144-4346-9319-048d1c99499c",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As the Culture Intelligence lead, is there a particular area of your organization's culture you'd like to analyze or discuss today? For example, would you like to: - Review employee feedback or survey results? - Explore current engagement or culture metrics? - Identify patterns in recent culture data? - Get suggestions for cultural improvement actions? Let me know how I can assist you best! ",
+        "timestamp": "2025-09-07T17:53:32.471702"
+      }
+    ],
+    "is_active": false
+  },
+  "7ea3fbc1-80cb-4bbe-a22d-752f3d8f0e49": {
+    "id": "7ea3fbc1-80cb-4bbe-a22d-752f3d8f0e49",
+    "title": "New Chat",
+    "created_at": "2025-09-07T17:53:35.829389",
+    "updated_at": "2025-09-07T17:54:22.592980",
+    "messages": [],
+    "is_active": false
+  },
+  "4453e419-7069-4c3b-978f-179d38cf46ca": {
+    "id": "4453e419-7069-4c3b-978f-179d38cf46ca",
+    "title": "New Chat",
+    "created_at": "2025-09-07T17:53:35.848326",
+    "updated_at": "2025-09-07T17:54:22.279110",
+    "messages": [],
+    "is_active": false
+  },
+  "bf18ea82-a475-4b61-8741-6baa40209fd9": {
+    "id": "bf18ea82-a475-4b61-8741-6baa40209fd9",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T17:54:09.022983",
+    "updated_at": "2025-09-07T17:55:53.730579",
+    "messages": [
+      {
+        "id": "db6914f0-7525-431d-8145-5fbd25344ef1",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:54:09.075154"
+      },
+      {
+        "id": "a7afe6dd-21a7-4796-978b-6ff9b1598e86",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence needs? Whether you're looking to interpret culture data, generate actionable insights, or explore best practices in organizational culture, I'm here to help. Let me know what you'd like to focus on! ",
+        "timestamp": "2025-09-07T17:54:11.350413"
+      }
+    ],
+    "is_active": false
+  },
+  "93bf52e1-465a-4931-a476-f8cbaf2ce311": {
+    "id": "93bf52e1-465a-4931-a476-f8cbaf2ce311",
+    "title": "New Chat",
+    "created_at": "2025-09-07T17:54:14.586848",
+    "updated_at": "2025-09-07T17:54:20.471916",
+    "messages": [],
+    "is_active": false
+  },
+  "a9bb4b99-0ca2-4935-a2f0-f15fa0c960ce": {
+    "id": "a9bb4b99-0ca2-4935-a2f0-f15fa0c960ce",
+    "title": "New Chat",
+    "created_at": "2025-09-07T17:54:14.592270",
+    "updated_at": "2025-09-07T17:54:20.112697",
+    "messages": [],
+    "is_active": false
+  },
+  "c5a43df7-c0a4-4543-a8ce-d8d70a2d8946": {
+    "id": "c5a43df7-c0a4-4543-a8ce-d8d70a2d8946",
+    "title": "New Chat",
+    "created_at": "2025-09-07T17:58:18.649041",
+    "updated_at": "2025-09-07T18:06:26.299899",
+    "messages": [],
+    "is_active": false
+  },
+  "1ccaf7a4-d7ff-4fdf-8c68-c125c7983d8f": {
+    "id": "1ccaf7a4-d7ff-4fdf-8c68-c125c7983d8f",
+    "title": "New Chat",
+    "created_at": "2025-09-07T17:58:18.690018",
+    "updated_at": "2025-09-07T18:06:26.103505",
+    "messages": [],
+    "is_active": false
+  },
+  "2ca401b8-88a7-4935-b871-080c3c7c7f49": {
+    "id": "2ca401b8-88a7-4935-b871-080c3c7c7f49",
+    "title": "Test Integration",
+    "created_at": "2025-09-07T18:02:32.948328",
+    "updated_at": "2025-09-07T18:02:34.943762",
+    "messages": [
+      {
+        "id": "7a7bae7c-582d-44c5-9e87-4c1e3e3f4dd9",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T18:02:32.999043"
+      },
+      {
+        "id": "d86a8816-053c-4578-bfc0-8a88cc426e17",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today in analyzing or enhancing your company's culture? If you have specific data, survey results, or areas of concern, feel free to share them, and I'll provide insights and actionable recommendations. ",
+        "timestamp": "2025-09-07T18:02:34.943710"
+      }
+    ],
+    "is_active": true
+  },
+  "9793dff0-4c52-4e33-b13c-7b6bfb0333f6": {
+    "id": "9793dff0-4c52-4e33-b13c-7b6bfb0333f6",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:02:37.295770",
+    "updated_at": "2025-09-07T18:06:25.095999",
+    "messages": [],
+    "is_active": false
+  },
+  "1c42e4cc-dcdf-452c-a01f-7adec3639c3f": {
+    "id": "1c42e4cc-dcdf-452c-a01f-7adec3639c3f",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:02:37.298555",
+    "updated_at": "2025-09-07T18:06:24.958279",
+    "messages": [],
+    "is_active": false
+  },
+  "4c77be3e-0c21-4251-8707-a26b812e5424": {
+    "id": "4c77be3e-0c21-4251-8707-a26b812e5424",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:03:54.184624",
+    "updated_at": "2025-09-07T18:06:24.707745",
+    "messages": [],
+    "is_active": false
+  },
+  "ac484df8-2717-4efd-9ce6-4d73afc4d392": {
+    "id": "ac484df8-2717-4efd-9ce6-4d73afc4d392",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:03:54.192265",
+    "updated_at": "2025-09-07T18:06:24.299177",
+    "messages": [],
+    "is_active": false
+  },
+  "bc6cca85-aee0-4e5e-a99d-90b3b8375ecd": {
+    "id": "bc6cca85-aee0-4e5e-a99d-90b3b8375ecd",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:04:33.230240",
+    "updated_at": "2025-09-07T18:06:23.907153",
+    "messages": [],
+    "is_active": false
+  },
+  "5f23b022-0a07-427e-851a-3f2f15989d25": {
+    "id": "5f23b022-0a07-427e-851a-3f2f15989d25",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:04:33.236242",
+    "updated_at": "2025-09-07T18:06:23.775566",
+    "messages": [],
+    "is_active": false
+  },
+  "013422ef-6058-47d3-99af-7fc4aa0b8553": {
+    "id": "013422ef-6058-47d3-99af-7fc4aa0b8553",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:04:56.927639",
+    "updated_at": "2025-09-07T18:06:23.641804",
+    "messages": [],
+    "is_active": false
+  },
+  "23176af0-a645-45e9-a669-b35d1e5556a3": {
+    "id": "23176af0-a645-45e9-a669-b35d1e5556a3",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:04:56.935248",
+    "updated_at": "2025-09-07T18:06:23.504300",
+    "messages": [],
+    "is_active": false
+  },
+  "bc48de98-ce99-4119-b207-195f5bed66df": {
+    "id": "bc48de98-ce99-4119-b207-195f5bed66df",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:05:17.030889",
+    "updated_at": "2025-09-07T18:06:23.153315",
+    "messages": [],
+    "is_active": false
+  },
+  "fb034933-b503-412d-bfb1-80d9084fc0da": {
+    "id": "fb034933-b503-412d-bfb1-80d9084fc0da",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:05:17.046953",
+    "updated_at": "2025-09-07T18:06:22.997653",
+    "messages": [],
+    "is_active": false
+  },
+  "1aadd9d6-da5a-4981-b996-49cfed3421fd": {
+    "id": "1aadd9d6-da5a-4981-b996-49cfed3421fd",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:05:42.415279",
+    "updated_at": "2025-09-07T18:06:22.807206",
+    "messages": [],
+    "is_active": false
+  },
+  "cfe25361-51a8-4ef7-9efe-a49be96015d2": {
+    "id": "cfe25361-51a8-4ef7-9efe-a49be96015d2",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:05:42.423651",
+    "updated_at": "2025-09-07T18:06:22.545675",
+    "messages": [],
+    "is_active": false
+  },
+  "2792bf8b-a214-45a1-aed1-c9ef392acc87": {
+    "id": "2792bf8b-a214-45a1-aed1-c9ef392acc87",
+    "title": "Survey Naming Assistance",
+    "created_at": "2025-09-07T18:06:10.875840",
+    "updated_at": "2025-09-07T18:06:19.476050",
+    "messages": [
+      {
+        "id": "75922754-58a8-4957-b125-29c41fb3d913",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Untitled\" at step 1 (name). Current survey data: name=\"\", context=\"\", 0 questions defined, 0 classifiers, 0 metrics.] User request: hi",
+        "timestamp": "2025-09-07T18:06:14.741587"
+      },
+      {
+        "id": "06d89c7b-776b-4604-a097-0e70b945fb79",
+        "role": "assistant",
+        "content": "Hello! I see you're starting to create a new survey (currently untitled). How can I assist you today? Would you like help with: - Naming your survey - Defining its purpose or context - Suggesting relevant questions - Setting up classifiers or metrics Let me know your focus, and I can offer tailored suggestions to get your culture survey off to a strong start! ",
+        "timestamp": "2025-09-07T18:06:17.526550"
+      }
+    ],
+    "is_active": true
+  },
+  "ff326943-d212-4217-8558-51613c49671f": {
+    "id": "ff326943-d212-4217-8558-51613c49671f",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:10:22.913219",
+    "updated_at": "2025-09-07T18:10:22.913235",
+    "messages": [],
+    "is_active": true
+  },
+  "c5c94ed9-2423-4c8f-83a4-26682df199e6": {
+    "id": "c5c94ed9-2423-4c8f-83a4-26682df199e6",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:11:44.552000",
+    "updated_at": "2025-09-07T18:11:44.552007",
+    "messages": [],
+    "is_active": true
+  },
+  "9078819a-f188-4a11-b882-d33b0ea5b7de": {
+    "id": "9078819a-f188-4a11-b882-d33b0ea5b7de",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:11:44.565184",
+    "updated_at": "2025-09-07T18:11:44.565197",
+    "messages": [],
+    "is_active": true
+  },
+  "001b716c-9780-4c5d-8afe-d96ccec2d12e": {
+    "id": "001b716c-9780-4c5d-8afe-d96ccec2d12e",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:12:00.408546",
+    "updated_at": "2025-09-07T18:12:00.408557",
+    "messages": [],
+    "is_active": true
+  },
+  "94cf6b37-bc88-4e07-9cad-c90fc7163462": {
+    "id": "94cf6b37-bc88-4e07-9cad-c90fc7163462",
+    "title": "New Chat",
+    "created_at": "2025-09-07T18:12:00.420644",
+    "updated_at": "2025-09-07T18:12:00.420687",
     "messages": [],
     "is_active": true
   }

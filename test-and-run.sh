@@ -118,7 +118,7 @@ test_backend() {
     
     # Test thread creation
     print_status "Testing thread creation..."
-    THREAD_ID=$(curl -f -s "http://localhost:8000/api/v1/chat/threads" \
+    THREAD_ID=$(curl -f -s "http://localhost:8000/api/v1/chat-threads/threads" \
         -X POST \
         -H "Content-Type: application/json" \
         -d '{"title": "Test Integration"}' | \
@@ -213,7 +213,7 @@ test('Chat API endpoints', async ({ request }) => {
   expect(healthResponse.ok()).toBeTruthy();
   
   // Test thread creation
-  const threadResponse = await request.post('http://localhost:8000/api/v1/chat/threads', {
+  const threadResponse = await request.post('http://localhost:8000/api/v1/chat-threads/threads', {
     data: { title: 'Playwright Test' }
   });
   expect(threadResponse.ok()).toBeTruthy();

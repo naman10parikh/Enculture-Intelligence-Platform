@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp, Settings, Eye, FileText, Palette, Type, List, Grid, Sliders, ArrowRight, ArrowLeft, CheckCircle, Target, Tag, Calculator, Globe, Calendar, Users as UsersIcon, Image, Wand2, Shield } from 'lucide-react'
+import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp, Settings, Eye, FileText, Palette, Type, List, Grid, Sliders, ArrowRight, ArrowLeft, CheckCircle, Target, Tag, Calculator, Globe, Calendar, Users as UsersIcon, Image, Wand2, Shield, Bell } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import 'highlight.js/styles/github.css'  // Add syntax highlighting CSS
 import { chatService } from '../services/api'
 import { chatThreadsApi } from '../services/chatThreadsApi'
+import websocketService from '../services/websocketService'
+import surveyService from '../services/surveyApi'
+import { useUser } from '../context/UserContext'
 
 const chatThreads = [
   { id: 1, name: 'General Chat', active: true },
@@ -45,6 +48,14 @@ function AIChat() {
   const [backendConnected, setBackendConnected] = useState(false)
   const [currentPersona, setCurrentPersona] = useState('employee') // Default persona
   const [notifications, setNotifications] = useState([])
+  
+  // Get user context
+  const { currentUser, currentUserId, demoUsers, switchUser } = useUser()
+  const [websocketConnected, setWebsocketConnected] = useState(false)
+  const [receivedSurveys, setReceivedSurveys] = useState([])
+  const [surveyTakingMode, setSurveyTakingMode] = useState(false)
+  const [activeSurveyData, setActiveSurveyData] = useState(null)
+  const [surveyResponses, setSurveyResponses] = useState({})
   const [surveyDraft, setSurveyDraft] = useState({
     name: '',
     context: '',
@@ -76,6 +87,9 @@ function AIChat() {
   const [isSearching, setIsSearching] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [editingMessageId, setEditingMessageId] = useState(null)
+  
+  // Per-user state storage
+  const [userStates, setUserStates] = useState({})
   const [editText, setEditText] = useState('')
   const [copiedMessageId, setCopiedMessageId] = useState(null)
   const [likedMessages, setLikedMessages] = useState(new Set())
@@ -264,6 +278,169 @@ function AIChat() {
     }, 4000)
   }
 
+  // Survey notification with action
+  const addSurveyNotification = (survey) => {
+    const id = `survey_notification_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    const notification = { 
+      id, 
+      message: `New survey available: ${survey.name}`, 
+      type: 'survey',
+      timestamp: Date.now(),
+      survey: survey,
+      action: () => openSurveyTaking(survey)
+    }
+    
+    setNotifications(prev => [...prev, notification])
+    
+    // Auto-remove after 8 seconds (longer for survey notifications)
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(n => n.id !== id))
+    }, 8000)
+  }
+
+  // Survey taking functions
+  const openSurveyTaking = (survey) => {
+    setActiveSurveyData(survey)
+    setSurveyTakingMode(true)
+    setSurveyResponses({}) // Reset responses
+    setCanvasOpen(true)
+    setCanvasView('survey')
+    addNotification(`Opening survey: ${survey.name}`, 'info')
+  }
+
+  const closeSurveyTaking = () => {
+    setSurveyTakingMode(false)
+    setActiveSurveyData(null)
+    setCanvasView('wizard')
+    setSurveyResponses({})
+  }
+
+  const updateSurveyResponse = (questionId, response) => {
+    setSurveyResponses(prev => ({
+      ...prev,
+      [questionId]: response
+    }))
+  }
+
+  const submitSurvey = async () => {
+    if (!activeSurveyData) return
+
+    try {
+      setIsLoading(true)
+      
+      const result = await surveyService.submitSurveyResponse(
+        activeSurveyData.id,
+        currentUserId,
+        surveyResponses
+      )
+
+      if (result.success) {
+        addNotification('Survey submitted successfully!', 'success')
+        closeSurveyTaking()
+        
+        // Add a chat message about survey completion
+        const completionMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `Thank you for completing the survey "${activeSurveyData.name}"! Your responses have been recorded and will help improve our workplace culture. You can view insights from this survey in the Insights dashboard.`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, completionMessage])
+      }
+    } catch (error) {
+      console.error('Error submitting survey:', error)
+      addNotification('Failed to submit survey', 'error')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Survey publishing function
+  const handlePublishSurvey = async () => {
+    if (!surveyDraft.name || !surveyDraft.questions || surveyDraft.questions.length === 0) {
+      addNotification('Please complete the survey before publishing', 'warning')
+      return
+    }
+
+    try {
+      setIsLoading(true)
+      
+      // First create the survey
+      const surveyData = {
+        name: surveyDraft.name,
+        context: surveyDraft.context,
+        desired_outcomes: surveyDraft.desiredOutcomes,
+        classifiers: surveyDraft.classifiers,
+        metrics: surveyDraft.metrics,
+        questions: surveyDraft.questions.map(q => ({
+          id: q.id,
+          question: q.text,
+          response_type: q.type,
+          options: q.options,
+          mandatory: q.required
+        })),
+        configuration: surveyDraft.configuration,
+        branding: surveyDraft.branding,
+        created_by: currentUser?.name || currentUserId
+      }
+
+      const createdSurvey = await surveyService.createSurvey(surveyData)
+      
+      // Then publish it to demo users (for demo purposes)
+      const targetAudience = demoUsers
+        .filter(user => user.id !== currentUserId) // Don't send to self
+        .map(user => user.id) // Get user IDs
+      
+      const publishResult = await surveyService.publishSurvey(
+        createdSurvey.id,
+        targetAudience
+      )
+
+      if (publishResult.success) {
+        addNotification(`Survey published successfully! Sent to ${publishResult.notifications_sent} users.`, 'success')
+        
+        // Add a chat message about successful publish
+        const publishMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `🎉 Your survey "${surveyDraft.name}" has been published successfully! It has been sent to ${publishResult.target_audience_count} team members. You'll receive real-time notifications as responses come in, and you can view analytics in the Insights dashboard.`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, publishMessage])
+        
+        // Clear the draft after successful publish
+        clearSavedDraft()
+        setSurveyDraft({
+          name: '',
+          context: '',
+          desiredOutcomes: [],
+          classifiers: [],
+          metrics: [],
+          questions: [],
+          configuration: {
+            backgroundImage: null,
+            languages: ['English'],
+            targetAudience: [],
+            releaseDate: null,
+            deadline: null,
+            anonymous: true
+          },
+          branding: {
+            primaryColor: '#8B5CF6',
+            backgroundColor: '#FAFBFF',
+            fontFamily: 'Inter'
+          }
+        })
+        setSurveyStep(1)
+      }
+    } catch (error) {
+      console.error('Error publishing survey:', error)
+      addNotification('Failed to publish survey', 'error')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   // Survey draft persistence helpers
   const loadSavedDraft = () => {
     try {
@@ -319,6 +496,141 @@ function AIChat() {
       autoSave(surveyDraft)
     }
   }, [surveyDraft, canvasOpen, autoSave])
+
+  // Save current user state before switching
+  const saveCurrentUserState = (userId) => {
+    const currentState = {
+      messages,
+      currentThreadId,
+      recentThreads,
+      notifications: notifications.filter(n => n.type !== 'info'), // Don't persist switching notifications
+      surveyTakingMode,
+      activeSurveyData,
+      surveyResponses,
+      receivedSurveys
+    }
+    
+    setUserStates(prev => ({
+      ...prev,
+      [userId]: currentState
+    }))
+  }
+
+  // Load user state when switching
+  const loadUserState = (userId) => {
+    const savedState = userStates[userId]
+    
+    if (savedState) {
+      setMessages(savedState.messages || initialMessages)
+      setCurrentThreadId(savedState.currentThreadId)
+      setRecentThreads(savedState.recentThreads || [])
+      setNotifications(savedState.notifications || [])
+      setSurveyTakingMode(savedState.surveyTakingMode || false)
+      setActiveSurveyData(savedState.activeSurveyData)
+      setSurveyResponses(savedState.surveyResponses || {})
+      setReceivedSurveys(savedState.receivedSurveys || [])
+    } else {
+      // First time loading this user - set defaults
+      setMessages(initialMessages)
+      setCurrentThreadId(null)
+      setRecentThreads([])
+      setNotifications([])
+      setSurveyTakingMode(false)
+      setActiveSurveyData(null)
+      setSurveyResponses({})
+      setReceivedSurveys([])
+    }
+  }
+
+  // User switching function with persistent chat history
+  const handleUserSwitch = (userId) => {
+    const user = switchUser(userId)
+    if (user) {
+      // Save current user's state before switching
+      saveCurrentUserState(currentUser?.id)
+      
+      // Disconnect current WebSocket
+      websocketService.disconnect()
+      
+      // Load new user's state
+      loadUserState(userId)
+      
+      // Add switching notification
+      addNotification(`Switched to ${user.name} (${user.role})`, 'info')
+      
+      // Reconnect WebSocket as new user and load their threads
+      setTimeout(() => {
+        websocketService.connect(userId)
+        loadRecentThreads()
+      }, 500)
+    }
+  }
+
+  // WebSocket connection effect
+  useEffect(() => {
+    // Connect to WebSocket
+    websocketService.connect(currentUserId)
+
+    // Set up event listeners
+    const handleWebSocketConnected = () => {
+      setWebsocketConnected(true)
+      addNotification('Connected to real-time notifications', 'success')
+    }
+
+    const handleWebSocketDisconnected = () => {
+      setWebsocketConnected(false)
+      addNotification('Disconnected from real-time notifications', 'warning')
+    }
+
+    const handleSurveyNotification = (data) => {
+      console.log('Survey notification received:', data)
+      
+      // Add to received surveys
+      setReceivedSurveys(prev => [...prev, data.survey])
+      
+      // Show notification with action
+      addSurveyNotification(data.survey)
+    }
+
+    const handleWebSocketError = (error) => {
+      console.error('WebSocket error:', error)
+      addNotification('Connection error occurred', 'error')
+    }
+
+    // Attach event listeners
+    websocketService.on('connected', handleWebSocketConnected)
+    websocketService.on('disconnected', handleWebSocketDisconnected)
+    websocketService.on('survey_notification', handleSurveyNotification)
+    websocketService.on('error', handleWebSocketError)
+
+    // Cleanup on unmount
+    return () => {
+      websocketService.off('connected', handleWebSocketConnected)
+      websocketService.off('disconnected', handleWebSocketDisconnected)
+      websocketService.off('survey_notification', handleSurveyNotification)
+      websocketService.off('error', handleWebSocketError)
+      websocketService.disconnect()
+    }
+  }, [currentUserId])
+
+  // Effect to handle user switching from sidebar
+  useEffect(() => {
+    // Only handle user switches after initial load
+    if (currentUser?.id && currentUserId !== currentUser?.id) {
+      handleUserSwitch(currentUserId)
+    }
+  }, [currentUserId])
+
+  // Auto-save user state periodically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (currentUser?.id) {
+        saveCurrentUserState(currentUser.id)
+      }
+    }, 5000) // Save every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [messages, currentThreadId, recentThreads, notifications, surveyTakingMode, activeSurveyData, surveyResponses, receivedSurveys, currentUser?.id])
 
   const openCanvasForSurvey = async (surveyId = 'draft') => {
     setActiveSurveyId(surveyId)
@@ -1519,6 +1831,7 @@ function AIChat() {
               <Send size={18} />
             </button>
           </div>
+          
         </div>
       </div>
 
@@ -1557,29 +1870,54 @@ function AIChat() {
           
           <div className="canvas-toolbar">
             <div className="view-controls">
-              <button 
-                className={`view-btn ${canvasView === 'wizard' ? 'active' : ''}`} 
-                onClick={() => setCanvasView('wizard')}
-                title="Survey Creation Wizard"
-              >
-                <Wand2 size={16} />
-                <span>Create</span>
-            </button>
-              <button 
-                className={`view-btn ${canvasView === 'preview' ? 'active' : ''}`} 
-                onClick={() => setCanvasView('preview')}
-                title="Preview Survey"
-              >
-                <Eye size={16} />
-                <span>Preview</span>
-              </button>
+              {!surveyTakingMode ? (
+                <>
+                  <button 
+                    className={`view-btn ${canvasView === 'wizard' ? 'active' : ''}`} 
+                    onClick={() => setCanvasView('wizard')}
+                    title="Survey Creation Wizard"
+                  >
+                    <Wand2 size={16} />
+                    <span>Create</span>
+                  </button>
+                  <button 
+                    className={`view-btn ${canvasView === 'preview' ? 'active' : ''}`} 
+                    onClick={() => setCanvasView('preview')}
+                    title="Preview Survey"
+                  >
+                    <Eye size={16} />
+                    <span>Preview</span>
+                  </button>
+                </>
+              ) : (
+                <button 
+                  className={`view-btn active`} 
+                  title="Taking Survey"
+                >
+                  <Bell size={16} />
+                  <span>Taking Survey</span>
+                </button>
+              )}
             </div>
             
             <div className="canvas-actions">
-            <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
-              Save
-            </button>
-              <button className="close-btn" onClick={() => setCanvasOpen(false)}>
+              {!surveyTakingMode && currentUser.canCreateSurveys ? (
+                <>
+                  <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
+                    Save
+                  </button>
+                  <button className="publish-btn" onClick={() => handlePublishSurvey()}>
+                    Publish
+                  </button>
+                </>
+              ) : null}
+              <button className="close-btn" onClick={() => {
+                if (surveyTakingMode) {
+                  closeSurveyTaking()
+                } else {
+                  setCanvasOpen(false)
+                }
+              }}>
                 <X size={16} />
               </button>
             </div>
@@ -2369,15 +2707,10 @@ function AIChat() {
                             </div>
 
                             <div className="audience-selector">
-                              <div className="mock-employees-grid">
-                                {[
-                                  { id: 1, name: 'Sarah Chen', role: 'Product Manager', department: 'Product', avatar: '👩‍💼' },
-                                  { id: 2, name: 'Alex Rodriguez', role: 'Software Engineer', department: 'Engineering', avatar: '👨‍💻' },
-                                  { id: 3, name: 'Maya Patel', role: 'Designer', department: 'Design', avatar: '👩‍🎨' },
-                                  { id: 4, name: 'James Wilson', role: 'Marketing Lead', department: 'Marketing', avatar: '👨‍💼' },
-                                  { id: 5, name: 'Lisa Zhang', role: 'Data Analyst', department: 'Analytics', avatar: '👩‍💻' },
-                                  { id: 6, name: 'David Kim', role: 'DevOps Engineer', department: 'Engineering', avatar: '👨‍🔧' }
-                                ].map(employee => (
+                              <div className="employees-grid">
+                                {demoUsers
+                                  .filter(user => user.id !== currentUserId) // Don't show current user
+                                  .map(employee => (
                                   <div key={employee.id} className="employee-card">
                                     <label className="employee-selector">
                                       <input
@@ -2424,14 +2757,14 @@ function AIChat() {
                                     <span className="stat-label">Selected</span>
                                   </div>
                                   <div className="stat-item">
-                                    <span className="stat-number">6</span>
+                                    <span className="stat-number">{demoUsers.filter(u => u.id !== currentUserId).length}</span>
                                     <span className="stat-label">Total</span>
                                   </div>
                                 </div>
                                 <button 
                                   className="select-all-btn"
                                   onClick={() => {
-                                    const allEmployeeIds = [1, 2, 3, 4, 5, 6]
+                                    const allEmployeeIds = demoUsers.filter(u => u.id !== currentUserId).map(u => u.id)
                                     const currentSelection = surveyDraft.configuration?.selectedEmployees || []
                                     const allSelected = allEmployeeIds.every(id => currentSelection.includes(id))
                                     
@@ -2444,7 +2777,7 @@ function AIChat() {
                                     }))
                                   }}
                                 >
-                                  {((surveyDraft.configuration?.selectedEmployees || []).length === 6) ? 'Deselect All' : 'Select All'}
+                                  {((surveyDraft.configuration?.selectedEmployees || []).length === demoUsers.filter(u => u.id !== currentUserId).length) ? 'Deselect All' : 'Select All'}
                                 </button>
                               </div>
                             </div>
@@ -2781,14 +3114,7 @@ function AIChat() {
                             <h4>Selected Recipients ({(surveyDraft.configuration?.selectedEmployees || []).length})</h4>
                             <div className="recipients-list">
                               {(surveyDraft.configuration?.selectedEmployees || []).map(employeeId => {
-                                const employee = [
-                                  { id: 1, name: 'Sarah Chen', role: 'Product Manager', department: 'Product', avatar: '👩‍💼' },
-                                  { id: 2, name: 'Alex Rodriguez', role: 'Software Engineer', department: 'Engineering', avatar: '👨‍💻' },
-                                  { id: 3, name: 'Maya Patel', role: 'Designer', department: 'Design', avatar: '👩‍🎨' },
-                                  { id: 4, name: 'James Wilson', role: 'Marketing Lead', department: 'Marketing', avatar: '👨‍💼' },
-                                  { id: 5, name: 'Lisa Zhang', role: 'Data Analyst', department: 'Analytics', avatar: '👩‍💻' },
-                                  { id: 6, name: 'David Kim', role: 'DevOps Engineer', department: 'Engineering', avatar: '👨‍🔧' }
-                                ].find(emp => emp.id === employeeId)
+                                const employee = demoUsers.find(emp => emp.id === employeeId)
                                 
                                 if (!employee) return null
                                 
@@ -2943,6 +3269,135 @@ function AIChat() {
               <div className="preview-actions">
                 <button className="preview-btn primary">Submit Survey</button>
                 <button className="preview-btn secondary">Save as Draft</button>
+              </div>
+            </div>
+          ) : canvasView === 'survey' ? (
+            <div className="survey-taking">
+              <div className="survey-header">
+                <div className="survey-branding">
+                  <img 
+                    src="/EncultureLogo.png" 
+                    alt="Enculture" 
+                    className="survey-logo"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <div className="survey-logo-fallback" style={{display: 'none'}}>
+                    <span className="logo-text">enculture</span>
+                  </div>
+                </div>
+                <h1 className="survey-title">{activeSurveyData?.name || 'Survey'}</h1>
+                <p className="survey-description">{activeSurveyData?.context || 'Please complete this culture intelligence survey'}</p>
+                <div className="survey-progress">
+                  <div className="progress-info">
+                    <span>Question {Object.keys(surveyResponses).length + 1} of {activeSurveyData?.questions?.length || 0}</span>
+                  </div>
+                  <div className="progress-bar">
+                    <div 
+                      className="progress-fill" 
+                      style={{width: `${((Object.keys(surveyResponses).length + 1) / (activeSurveyData?.questions?.length || 1)) * 100}%`}}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="survey-questions">
+                {activeSurveyData?.questions?.map((question, index) => (
+                  <div key={question.id} className="survey-question">
+                    <label className="question-label">
+                      {index + 1}. {question.question}
+                      {question.mandatory && <span className="required">*</span>}
+                    </label>
+                    
+                    {question.response_type === 'multiple_choice' && (
+                      <div className="response-options">
+                        {question.options?.map((option, optIndex) => (
+                          <label key={optIndex} className="option-label">
+                            <input 
+                              type="radio" 
+                              name={question.id}
+                              value={option}
+                              checked={surveyResponses[question.id] === option}
+                              onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                            />
+                            <span>{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {question.response_type === 'multiple_select' && (
+                      <div className="response-options">
+                        {question.options?.map((option, optIndex) => (
+                          <label key={optIndex} className="option-label">
+                            <input 
+                              type="checkbox"
+                              value={option}
+                              checked={Array.isArray(surveyResponses[question.id]) && surveyResponses[question.id].includes(option)}
+                              onChange={(e) => {
+                                const currentResponses = Array.isArray(surveyResponses[question.id]) ? surveyResponses[question.id] : [];
+                                if (e.target.checked) {
+                                  updateSurveyResponse(question.id, [...currentResponses, option]);
+                                } else {
+                                  updateSurveyResponse(question.id, currentResponses.filter(r => r !== option));
+                                }
+                              }}
+                            />
+                            <span>{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {question.response_type === 'scale' && (
+                      <div className="response-scale">
+                        <div className="scale-labels">
+                          <span>1</span>
+                          <span>10</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min="1" 
+                          max="10" 
+                          value={surveyResponses[question.id] || 5}
+                          onChange={(e) => updateSurveyResponse(question.id, parseInt(e.target.value))}
+                          className="scale-slider"
+                        />
+                        <div className="scale-value">
+                          Value: {surveyResponses[question.id] || 5}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {question.response_type === 'text' && (
+                      <textarea 
+                        className="response-text" 
+                        rows="4" 
+                        placeholder="Type your answer..."
+                        value={surveyResponses[question.id] || ''}
+                        onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="survey-actions">
+                <button 
+                  className="survey-btn secondary" 
+                  onClick={closeSurveyTaking}
+                >
+                  Close Survey
+                </button>
+                <button 
+                  className="survey-btn primary" 
+                  onClick={submitSurvey}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Submitting...' : 'Submit Survey'}
+                </button>
               </div>
             </div>
           ) : null}
@@ -3356,6 +3811,28 @@ function AIChat() {
            background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
            transform: translateY(-1px);
            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+         }
+
+         .publish-btn {
+           background: linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(5, 150, 105, 0.9) 100%);
+           color: white;
+           border-color: transparent;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           padding: 8px 12px;
+           border: 1px solid transparent;
+           border-radius: 8px;
+           cursor: pointer;
+           transition: all 0.2s ease;
+           font-size: 0.85em;
+           font-weight: 500;
+         }
+         
+         .publish-btn:hover {
+           background: linear-gradient(135deg, rgba(16, 185, 129, 1) 0%, rgba(5, 150, 105, 1) 100%);
+           transform: translateY(-1px);
+           box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
          }
          
          .mode-btn:hover, .close-btn:hover {
@@ -7712,6 +8189,283 @@ function AIChat() {
             padding: 0 var(--space-2);
           }
         }
+
+        /* Survey Taking Styles */
+        .survey-taking {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          background: white;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .survey-header {
+          padding: var(--space-6);
+          border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+          background: linear-gradient(135deg, #f8f6ff 0%, #ffffff 100%);
+        }
+
+        .survey-branding {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          margin-bottom: var(--space-4);
+        }
+
+        .survey-logo {
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
+        }
+
+        .survey-logo-fallback {
+          width: 40px;
+          height: 40px;
+          background: var(--primary);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: 600;
+          font-size: var(--text-sm);
+        }
+
+        .survey-title {
+          font-size: var(--text-2xl);
+          font-weight: 700;
+          color: var(--text-primary);
+          margin: 0 0 var(--space-2) 0;
+        }
+
+        .survey-description {
+          font-size: var(--text-base);
+          color: var(--text-secondary);
+          margin: 0 0 var(--space-4) 0;
+          line-height: 1.6;
+        }
+
+        .survey-progress {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-2);
+        }
+
+        .progress-info {
+          font-size: var(--text-sm);
+          color: var(--text-secondary);
+          font-weight: 500;
+        }
+
+        .survey-questions {
+          flex: 1;
+          padding: var(--space-6);
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-6);
+        }
+
+        .survey-question {
+          background: rgba(248, 246, 255, 0.5);
+          border: 1px solid rgba(139, 92, 246, 0.1);
+          border-radius: 12px;
+          padding: var(--space-5);
+        }
+
+        .question-label {
+          display: block;
+          font-size: var(--text-lg);
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: var(--space-4);
+          line-height: 1.4;
+        }
+
+        .required {
+          color: #ef4444;
+          margin-left: var(--space-1);
+        }
+
+        .response-options {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+        }
+
+        .option-label {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          padding: var(--space-3);
+          background: white;
+          border: 2px solid rgba(139, 92, 246, 0.1);
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          font-size: var(--text-base);
+        }
+
+        .option-label:hover {
+          border-color: rgba(139, 92, 246, 0.3);
+          background: rgba(139, 92, 246, 0.02);
+        }
+
+        .option-label input {
+          margin: 0;
+        }
+
+        .response-scale {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+        }
+
+        .scale-labels {
+          display: flex;
+          justify-content: space-between;
+          font-size: var(--text-sm);
+          color: var(--text-secondary);
+          font-weight: 500;
+        }
+
+        .scale-slider {
+          width: 100%;
+          height: 6px;
+          border-radius: 3px;
+          background: rgba(139, 92, 246, 0.1);
+          outline: none;
+          -webkit-appearance: none;
+        }
+
+        .scale-slider::-webkit-slider-thumb {
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: var(--primary);
+          cursor: pointer;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .scale-value {
+          text-align: center;
+          font-weight: 600;
+          color: var(--primary);
+          background: rgba(139, 92, 246, 0.1);
+          padding: var(--space-2);
+          border-radius: 6px;
+          font-size: var(--text-sm);
+        }
+
+        .response-text {
+          width: 100%;
+          padding: var(--space-4);
+          border: 2px solid rgba(139, 92, 246, 0.1);
+          border-radius: 8px;
+          font-size: var(--text-base);
+          resize: vertical;
+          font-family: inherit;
+          transition: border-color 0.2s ease;
+        }
+
+        .response-text:focus {
+          outline: none;
+          border-color: var(--primary);
+        }
+
+        .survey-actions {
+          padding: var(--space-6);
+          border-top: 1px solid rgba(139, 92, 246, 0.1);
+          display: flex;
+          gap: var(--space-3);
+          justify-content: flex-end;
+          background: rgba(248, 246, 255, 0.3);
+        }
+
+        .survey-btn {
+          padding: var(--space-3) var(--space-6);
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: var(--text-base);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border: none;
+        }
+
+        .survey-btn.primary {
+          background: var(--primary);
+          color: white;
+        }
+
+        .survey-btn.primary:hover:not(:disabled) {
+          background: rgba(139, 92, 246, 0.9);
+          transform: translateY(-1px);
+        }
+
+        .survey-btn.primary:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .survey-btn.secondary {
+          background: transparent;
+          color: var(--text-secondary);
+          border: 2px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .survey-btn.secondary:hover {
+          background: rgba(139, 92, 246, 0.05);
+          border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        /* Notification Action Buttons */
+        .notification-actions {
+          display: flex;
+          gap: var(--space-2);
+          margin-top: var(--space-3);
+        }
+
+        .notification-btn {
+          padding: var(--space-2) var(--space-3);
+          border-radius: 6px;
+          font-weight: 500;
+          font-size: var(--text-sm);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border: none;
+        }
+
+        .notification-btn.primary {
+          background: var(--primary);
+          color: white;
+        }
+
+        .notification-btn.primary:hover {
+          background: rgba(139, 92, 246, 0.9);
+        }
+
+        .notification-btn.secondary {
+          background: rgba(0, 0, 0, 0.05);
+          color: var(--text-secondary);
+        }
+
+        .notification-btn.secondary:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Survey notification specific styling */
+        .notification-toast.survey {
+          border-left: 4px solid var(--primary);
+          background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(255, 255, 255, 0.95) 100%);
+        }
+
+        .notification-toast.survey .notification-icon {
+          background: var(--primary);
+          color: white;
+        }
+
       `}</style>
       
       {/* Notifications */}
@@ -7722,15 +8476,39 @@ function AIChat() {
               <div className={`notification-icon ${notification.type}`}>
                 {notification.type === 'success' ? '✓' : 
                  notification.type === 'error' ? '✕' : 
+                 notification.type === 'survey' ? <Bell size={16} /> :
                  notification.type === 'info' ? 'i' : '!'}
               </div>
               <div className="notification-content">
                 <div className="notification-title">
                   {notification.type === 'success' ? 'Success' : 
                    notification.type === 'error' ? 'Error' : 
+                   notification.type === 'survey' ? 'New Survey' :
                    notification.type === 'info' ? 'Info' : 'Warning'}
                 </div>
                 <div className="notification-message">{notification.message}</div>
+                {notification.type === 'survey' && notification.action && (
+                  <div className="notification-actions">
+                    <button 
+                      className="notification-btn primary"
+                      onClick={() => {
+                        notification.action();
+                        // Remove this notification after clicking
+                        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+                      }}
+                    >
+                      Take Survey
+                    </button>
+                    <button 
+                      className="notification-btn secondary"
+                      onClick={() => {
+                        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+                      }}
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           ))}
