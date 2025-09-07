@@ -357,13 +357,32 @@ function AIChat() {
 
       if (result.success) {
         addNotification('Survey submitted successfully!', 'success')
+        
+        // Mark survey as completed in localStorage
+        const publishedSurveys = JSON.parse(localStorage.getItem('enculture_publishedSurveys') || '[]')
+        const updatedSurveys = publishedSurveys.map(survey => {
+          if (survey.id === activeSurveyData.id) {
+            return {
+              ...survey,
+              completedBy: [...(survey.completedBy || []), currentUserId]
+            }
+          }
+          return survey
+        })
+        localStorage.setItem('enculture_publishedSurveys', JSON.stringify(updatedSurveys))
+        
+        // Remove the survey thread from recent threads since it's completed
+        setRecentThreads(prev => prev.filter(thread => 
+          !(thread.id.startsWith('survey_') && thread.surveyData?.id === activeSurveyData.id)
+        ))
+        
         closeSurveyTaking()
         
         // Add a chat message about survey completion
         const completionMessage = {
           id: `ai-${Date.now()}`,
           type: 'ai',
-          content: `Thank you for completing the survey "${activeSurveyData.name}"! Your responses have been recorded and will help improve our workplace culture. You can view insights from this survey in the Insights dashboard.`,
+          content: `✅ **Survey Complete!**\n\nThank you for completing the survey "${activeSurveyData.name}"! Your responses have been recorded and will help improve our workplace culture. You can view insights from this survey in the Insights dashboard.`,
           timestamp: new Date()
         }
         setMessages(prev => [...prev, completionMessage])
@@ -373,6 +392,59 @@ function AIChat() {
       addNotification('Failed to submit survey', 'error')
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  // Check for pending surveys for a user and create notification chat if needed
+  const checkAndCreateSurveyNotifications = async (userId) => {
+    try {
+      // Get published surveys from localStorage
+      const publishedSurveys = JSON.parse(localStorage.getItem('enculture_publishedSurveys') || '[]')
+      console.log(`🔍 Checking notifications for ${userId}. Found ${publishedSurveys.length} published surveys:`, publishedSurveys)
+      
+      // Find surveys for this user that haven't been completed
+      const userSurveys = publishedSurveys.filter(survey => {
+        const isTargeted = survey.targetAudience && survey.targetAudience.includes(userId)
+        const notCompleted = !survey.completedBy?.includes(userId)
+        console.log(`📋 Survey "${survey.name}": targeted=${isTargeted}, not completed=${notCompleted}`)
+        return isTargeted && notCompleted
+      })
+      
+      console.log(`📬 Found ${userSurveys.length} surveys for ${userId}:`, userSurveys.map(s => s.name))
+      
+      if (userSurveys.length > 0) {
+        // Create a survey notification chat for the most recent survey
+        const latestSurvey = userSurveys[userSurveys.length - 1]
+        const surveyThreadId = `survey_${latestSurvey.id}_${userId}`
+        
+        console.log(`🔄 Creating notification for survey: ${latestSurvey.name} (ID: ${surveyThreadId})`)
+        
+        // Check if we already have this survey thread
+        const existingSurveyThread = recentThreads.find(thread => thread.id === surveyThreadId)
+        
+        if (!existingSurveyThread) {
+          // Create survey notification thread
+          const surveyThread = {
+            id: surveyThreadId,
+            title: `📋 Survey: ${latestSurvey.name}`,
+            message_count: 2,
+            updated_at: new Date().toISOString(),
+            isSurveyThread: true,
+            surveyData: latestSurvey
+          }
+          
+          // Add to recent threads
+          setRecentThreads(prev => [surveyThread, ...prev])
+          
+          console.log(`✅ Created survey notification for ${userId}: ${latestSurvey.name}`)
+        } else {
+          console.log(`ℹ️  Survey thread already exists for ${userId}: ${latestSurvey.name}`)
+        }
+      } else {
+        console.log(`📭 No pending surveys found for ${userId}`)
+      }
+    } catch (error) {
+      console.error('❌ Error checking survey notifications:', error)
     }
   }
 
@@ -407,10 +479,8 @@ function AIChat() {
 
       const createdSurvey = await surveyService.createSurvey(surveyData)
       
-      // Then publish it to demo users (for demo purposes)
-      const targetAudience = demoUsers
-        .filter(user => user.id !== currentUserId) // Don't send to self
-        .map(user => user.id) // Get user IDs
+      // Use the target audience selected in the survey configuration
+      const targetAudience = surveyDraft.configuration?.selectedEmployees || []
       
       const publishResult = await surveyService.publishSurvey(
         createdSurvey.id,
@@ -419,6 +489,25 @@ function AIChat() {
 
       if (publishResult.success) {
         addNotification(`Survey published successfully! Sent to ${publishResult.notifications_sent} users.`, 'success')
+        
+        // Store the published survey in localStorage for notifications
+        const publishedSurveyData = {
+          id: createdSurvey.id,
+          name: surveyDraft.name,
+          context: surveyDraft.context,
+          questions: surveyDraft.questions,
+          targetAudience: targetAudience,
+          publishedBy: currentUserId,
+          publishedAt: new Date().toISOString(),
+          completedBy: []
+        }
+        
+        const existingPublishedSurveys = JSON.parse(localStorage.getItem('enculture_publishedSurveys') || '[]')
+        existingPublishedSurveys.push(publishedSurveyData)
+        localStorage.setItem('enculture_publishedSurveys', JSON.stringify(existingPublishedSurveys))
+        
+        console.log(`🚀 Survey "${surveyDraft.name}" published to ${targetAudience.length} users:`, targetAudience)
+        console.log(`📦 Stored survey data:`, publishedSurveyData)
         
         // Add a chat message about successful publish
         const publishMessage = {
@@ -628,6 +717,9 @@ function AIChat() {
         console.log(`${user?.name} loaded with ${mockData.recentThreads.length} mock threads due to backend error`)
       }
     }
+    
+    // Always check for survey notifications after loading user state
+    await checkAndCreateSurveyNotifications(userId)
   }
 
   // User switching is now handled in useEffect above
@@ -822,6 +914,37 @@ function AIChat() {
 
   const switchToThread = async (threadId) => {
     try {
+      // Check if this is a survey thread
+      if (threadId.startsWith('survey_')) {
+        const surveyThread = recentThreads.find(thread => thread.id === threadId)
+        if (surveyThread && surveyThread.isSurveyThread && surveyThread.surveyData) {
+          setCurrentThreadId(threadId)
+          
+          // Create survey notification messages
+          const surveyMessages = [
+            {
+              id: `survey-welcome-${Date.now()}`,
+              type: 'ai',
+              content: `📋 **New Survey Available**\n\nHi ${currentUser?.name}! You have been invited to participate in a new survey: **"${surveyThread.surveyData.name}"**\n\n${surveyThread.surveyData.context}\n\nThis survey will help us understand and improve our workplace culture. Your responses are valuable and will be used to create actionable insights for our team.`,
+              timestamp: new Date()
+            },
+            {
+              id: `survey-action-${Date.now()}`,
+              type: 'ai',
+              content: `🎯 **Ready to get started?**\n\nClick the button below to begin the survey. It should take about 5-10 minutes to complete.\n\n**Survey Details:**\n• ${surveyThread.surveyData.questions.length} questions\n• Anonymous responses\n• Results will be shared with the team\n\n[Take Survey Now]`,
+              timestamp: new Date(),
+              isSurveyPrompt: true,
+              surveyData: surveyThread.surveyData
+            }
+          ]
+          
+          setMessages(surveyMessages)
+          console.log(`Opened survey thread: ${surveyThread.surveyData.name}`)
+          return
+        }
+      }
+      
+      // Regular thread handling
       const thread = await chatThreadsApi.getThread(threadId)
       setCurrentThreadId(threadId)
       
@@ -1897,6 +2020,23 @@ function AIChat() {
                               </a>
                             ))}
                           </div>
+                        </div>
+                      )}
+                      
+                      {/* Display survey action button if this is a survey prompt */}
+                      {message.isSurveyPrompt && message.surveyData && (
+                        <div className="survey-action-section">
+                          <button 
+                            className="survey-take-btn"
+                            onClick={() => {
+                              setActiveSurveyData(message.surveyData)
+                              setSurveyTakingMode(true)
+                              setCanvasOpen(true)
+                              setCanvasView('survey')
+                            }}
+                          >
+                            📋 Take Survey Now
+                          </button>
                         </div>
                       )}
                     </>
@@ -3991,7 +4131,7 @@ function AIChat() {
            gap: var(--space-2);
          }
          
-         .mode-btn, .save-btn, .close-btn {
+         .mode-btn, .save-btn, .publish-btn, .close-btn {
            display: flex;
            align-items: center;
            justify-content: center;
@@ -4021,16 +4161,6 @@ function AIChat() {
            background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
            color: white;
            border-color: transparent;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           padding: 8px 12px;
-           border: 1px solid transparent;
-           border-radius: 8px;
-           cursor: pointer;
-           transition: all 0.2s ease;
-           font-size: 0.85em;
-           font-weight: 500;
          }
          
          .publish-btn:hover {
@@ -6436,18 +6566,6 @@ function AIChat() {
            gap: var(--space-3);
          }
          
-         .publish-btn {
-           display: flex;
-           align-items: center;
-           gap: 8px;
-           padding: 16px 24px;
-           border-radius: 12px;
-           font-weight: 600;
-           font-size: 1em;
-           cursor: pointer;
-           transition: all 0.3s ease;
-           border: none;
-         }
          
          .publish-btn.primary {
            background: linear-gradient(135deg, rgba(94, 74, 143, 0.9) 0%, rgba(84, 64, 133, 0.9) 100%);

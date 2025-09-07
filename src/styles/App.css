@@ -266,6 +266,15 @@
   box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
 }
 
+/* Survey Action Section in Messages */
+.survey-action-section {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(177, 156, 217, 0.2);
+  display: flex;
+  justify-content: center;
+}
+
 /* Disabled button styles */
 .new-chat-btn.disabled {
   opacity: 0.5;

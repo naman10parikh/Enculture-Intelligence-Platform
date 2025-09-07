@@ -1,32 +1,9 @@
 INFO:     Will watch for changes in these directories: ['/Users/naman/Enculture-Intelligence-Platform/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [81499] using WatchFiles
-INFO:     Started server process [81514]
+INFO:     Started reloader process [21437] using WatchFiles
+INFO:     Started server process [21447]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-🚀 Starting Enculture Backend API...
-Environment: development
-Debug Mode: True
-INFO:     127.0.0.1:52840 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52843 - "GET /health HTTP/1.1" 200 OK
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11684ee50>
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11684ee50>
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11684ee20>
-2025-09-07 14:57:38 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11684ee20>
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:57:38 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/emily_rodriguez HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -39,70 +16,94 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: 8IJMM47EfYAbVtX4Ql9N4g==
+DEBUG:    < sec-websocket-key: p4ASHeNhT/4AZuIeWm62zg==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 52861) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
-2025-09-07 14:57:40 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
-2025-09-07 14:57:40 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+INFO:     ('127.0.0.1', 56535) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
+🚀 Starting Enculture Backend API...
+Environment: development
+Debug Mode: True
+2025-09-07 16:46:04 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+2025-09-07 16:46:04 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: fQI9PjQU2wJfs+A3ZiQhs2XjH44=
+DEBUG:    > Sec-WebSocket-Accept: FqUccOAcIaGVWGoQBlYFLiq4bQg=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:57:40 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:46:04 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:57:40.426972"}' [128 bytes]
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:57:46 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_7f43185319be735f682da63af9be38df'), (b'openai-processing-ms', b'7829'), (b'x-envoy-upstream-service-time', b'7833'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=hQIzupTxyko4O87KS1SrBLtODbhpfhAOYycLMEHsG0Y-1757282266-1.0.1.1-VGMHBhb0Z3IV3hchVhauOeEbmVd8o3AuJFcpapYtuWBA4KBbRMZNsI0BVZerv2QWBZObevODRx1lWAi_lEN.5ivWiWzY12uQzGcFBN8zqrg; path=/; expires=Sun, 07-Sep-25 22:27:46 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=ucuUJKJ6llVK6Ck4OXi8eAF1ZqTI.k3igSD2jVAWZKI-1757282266538-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b976844c84709c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:57:46 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_7f43185319be735f682da63af9be38df'), (b'openai-processing-ms', b'7829'), (b'x-envoy-upstream-service-time', b'7833'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=hQIzupTxyko4O87KS1SrBLtODbhpfhAOYycLMEHsG0Y-1757282266-1.0.1.1-VGMHBhb0Z3IV3hchVhauOeEbmVd8o3AuJFcpapYtuWBA4KBbRMZNsI0BVZerv2QWBZObevODRx1lWAi_lEN.5ivWiWzY12uQzGcFBN8zqrg; path=/; expires=Sun, 07-Sep-25 22:27:46 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=ucuUJKJ6llVK6Ck4OXi8eAF1ZqTI.k3igSD2jVAWZKI-1757282266538-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b976844c84709c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - response_closed.complete
-INFO:     127.0.0.1:52845 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52883 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-2025-09-07 14:57:46 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 900740a9-6b6f-4f36-b765-9280306d7be4
-2025-09-07 14:57:46 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 900740a9-6b6f-4f36-b765-9280306d7be4
-INFO:     127.0.0.1:52885 - "POST /api/v1/chat/stream-with-thread?thread_id=900740a9-6b6f-4f36-b765-9280306d7be4&prompt=hello HTTP/1.1" 200 OK
-2025-09-07 14:57:46 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:57:46 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:57:46 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:57:48 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449485'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_617ac3beac7eafaa5371c339404ab3dd'), (b'openai-processing-ms', b'1196'), (b'x-envoy-upstream-service-time', b'1198'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b976b7ea1c709c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:57:48 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449485'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_617ac3beac7eafaa5371c339404ab3dd'), (b'openai-processing-ms', b'1196'), (b'x-envoy-upstream-service-time', b'1198'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b976b7ea1c709c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:57:48 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:57:49 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:04.528131"}' [128 bytes]
+INFO:     127.0.0.1:56532 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56537 - "GET /health HTTP/1.1" 200 OK
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1166a97f0>
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1166a97f0>
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11008d890> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11008d890> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11661d130>
+2025-09-07 16:46:04 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11661d130>
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:04 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 23:46:12 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_d383b0d9634fe3c20e64d4c028699c4c'), (b'openai-processing-ms', b'7418'), (b'x-envoy-upstream-service-time', b'7420'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=bwbGaHl1eLJQPDIIokXPUDY4oh63leiITezEIAT2va4-1757288772-1.0.1.1-FjbwXIUy9Df9eApXc_vv1b1r3D.zZN3TuNBbZhexYGudROMkVPghetnZ1ylJMm1gJhgOMhvNT5VzmnR74FB4y..BfOYQTBEWrvY8iO2R4Cc; path=/; expires=Mon, 08-Sep-25 00:16:12 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=5p8gbcWby.uiVu4GlbZ8lbGZ3F4PkB.E3iNm78b5RPE-1757288772512-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97ba155d2e9576d4-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 23:46:12 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_d383b0d9634fe3c20e64d4c028699c4c'), (b'openai-processing-ms', b'7418'), (b'x-envoy-upstream-service-time', b'7420'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=bwbGaHl1eLJQPDIIokXPUDY4oh63leiITezEIAT2va4-1757288772-1.0.1.1-FjbwXIUy9Df9eApXc_vv1b1r3D.zZN3TuNBbZhexYGudROMkVPghetnZ1ylJMm1gJhgOMhvNT5VzmnR74FB4y..BfOYQTBEWrvY8iO2R4Cc; path=/; expires=Mon, 08-Sep-25 00:16:12 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=5p8gbcWby.uiVu4GlbZ8lbGZ3F4PkB.E3iNm78b5RPE-1757288772512-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97ba155d2e9576d4-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:56539 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56598 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
+2025-09-07 16:46:12 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 6fd42166-4c46-47dc-aa1f-24fa1710eb56
+2025-09-07 16:46:12 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 6fd42166-4c46-47dc-aa1f-24fa1710eb56
+INFO:     127.0.0.1:56600 - "POST /api/v1/chat/stream-with-thread?thread_id=6fd42166-4c46-47dc-aa1f-24fa1710eb56&prompt=hello HTTP/1.1" 200 OK
+2025-09-07 16:46:12 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 16:46:12 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 16:46:12 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 23:46:15 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_971ca219f7aa437b8074d2bbed836375'), (b'openai-processing-ms', b'2094'), (b'x-envoy-upstream-service-time', b'2098'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97ba158eafd376d4-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 23:46:15 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_971ca219f7aa437b8074d2bbed836375'), (b'openai-processing-ms', b'2094'), (b'x-envoy-upstream-service-time', b'2098'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97ba158eafd376d4-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 16:46:15 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 16:46:16 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
 DEBUG:    < CLOSE 1001 (going away) [2 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1001 (going away) [2 bytes]
 DEBUG:    x half-closing TCP connection
 DEBUG:    = connection is CLOSED
-2025-09-07 14:57:49 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 14:57:49 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 14:57:49 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
-2025-09-07 14:57:49 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
+2025-09-07 16:46:18 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
+2025-09-07 16:46:18 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
+2025-09-07 16:46:18 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
+2025-09-07 16:46:18 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
 INFO:     connection closed
+INFO:     127.0.0.1:56651 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -115,25 +116,22 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: ioqvdiQH5CLHHbvz9LAA7A==
+DEBUG:    < sec-websocket-key: z0SMX7yGAPDGVYM/ii0SVg==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 52924) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 14:57:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 14:57:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-INFO:     127.0.0.1:52926 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 56653) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 16:46:18 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 16:46:18 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+INFO:     127.0.0.1:56651 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: buAx1Yar+VQak2ebpJ9g/ViAyHo=
+DEBUG:    > Sec-WebSocket-Accept: 4fsGyAJJTrlp7yLvRY6lSpVis4g=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:57:50 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:46:18 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:57:51.063392"}' [128 bytes]
-INFO:     127.0.0.1:52926 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52929 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52926 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:18.908400"}' [128 bytes]
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -146,192 +144,35 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: N/Wk+fRfY3ufVTYn8ApPpA==
+DEBUG:    < sec-websocket-key: XYih0GSSx+Ibo7ro1oHBag==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 52932) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 14:57:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 14:57:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+INFO:     ('127.0.0.1', 56657) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 16:46:18 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 16:46:18 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:18.927492"}' [128 bytes]
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: DibpS6WPshDULz0tDlNaVP2gjOA=
+DEBUG:    > Sec-WebSocket-Accept: RlMv7s9gw0p4wUYR6qTFwuULShY=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:57:50 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:46:18 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:57:51.098513"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:57:51.098513"}' [128 bytes]
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/sarah_johnson HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: m74HCGdihPJersOeNOFsgA==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-2025-09-07 14:58:02 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 14:58:02 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 14:58:02 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 14:58:02 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-INFO:     connection closed
-INFO:     ('127.0.0.1', 52995) - "WebSocket /api/v1/notifications/ws/sarah_johnson" [accepted]
-2025-09-07 14:58:02 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-2025-09-07 14:58:02 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: CpTfqukvdj8bCdm7BBgvVEPNZW0=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:58:01 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:58:02.422892"}' [128 bytes]
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-DEBUG:    = connection is CONNECTING
-2025-09-07 14:58:08 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 14:58:08 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 14:58:08 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-2025-09-07 14:58:08 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-INFO:     connection closed
-DEBUG:    < GET /api/v1/notifications/ws/emily_rodriguez HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: 2CV5X3rVjKVEpvgJC9symw==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53032) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
-2025-09-07 14:58:08 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
-2025-09-07 14:58:08 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: nrcSFPOHxrS0qp3PFRpHkoYVDLc=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:58:08 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:58:08.996005"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:18.927492"}' [128 bytes]
+INFO:     127.0.0.1:56651 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56655 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 28 a8 b8 64 [binary, 4 bytes]
-DEBUG:    < PONG 28 a8 b8 64 [binary, 4 bytes]
+DEBUG:    > PING 2c ef df cd [binary, 4 bytes]
+DEBUG:    < PONG 2c ef df cd [binary, 4 bytes]
 DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53034 - "GET /api/v1/chat-threads/threads/local_1757280612245_536rx6bng HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:53034 - "OPTIONS /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53034 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53034 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=emily_rodriguez HTTP/1.1" 200 OK
-2025-09-07 14:58:13 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53039 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53041 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=08e2568e-62df-4953-9540-52a46df7160c&prompt=hi HTTP/1.1" 200 OK
-2025-09-07 14:58:22 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 08e2568e-62df-4953-9540-52a46df7160c
-2025-09-07 14:58:22 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 08e2568e-62df-4953-9540-52a46df7160c
-INFO:     127.0.0.1:53041 - "POST /api/v1/chat/stream-with-thread?thread_id=08e2568e-62df-4953-9540-52a46df7160c&prompt=hi HTTP/1.1" 200 OK
-2025-09-07 14:58:22 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:58:22 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f34340>
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f34340>
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f342b0>
-2025-09-07 14:58:22 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f342b0>
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:22 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:22 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:24 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_bf1e00316d08aa28b1d9035da0b2277a'), (b'openai-processing-ms', b'1225'), (b'x-envoy-upstream-service-time', b'1227'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b977977f6fc586-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:24 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_bf1e00316d08aa28b1d9035da0b2277a'), (b'openai-processing-ms', b'1225'), (b'x-envoy-upstream-service-time', b'1227'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b977977f6fc586-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f23d90>
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f23d90>
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f23fa0>
-2025-09-07 14:58:24 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f23fa0>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:24 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:25 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:25 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449858'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'18ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e91983428d3c69bbb211463a895029ac'), (b'openai-processing-ms', b'873'), (b'x-envoy-upstream-service-time', b'876'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=ndNRqLnypWojTkuXeaYvzdhwg5nD6X2oysdy.Fh.UDo-1757282305-1.0.1.1-NgSCZMEkJsoRLKubP9wCFQbcISM1drl829D6Q9kb7GFyoCHSG1H8K1GftGRXmqU_bMKUO69PdY.gUmaZyeU2xhWr5XVDUrY.g_7nOP9xImo; path=/; expires=Sun, 07-Sep-25 22:28:25 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=nThbVRW4p88X3PBzM03l3pEeO94fKwT4yfev2J8z5Ps-1757282305974-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b977a63e6bba4c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:25 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449858'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'18ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e91983428d3c69bbb211463a895029ac'), (b'openai-processing-ms', b'873'), (b'x-envoy-upstream-service-time', b'876'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=ndNRqLnypWojTkuXeaYvzdhwg5nD6X2oysdy.Fh.UDo-1757282305-1.0.1.1-NgSCZMEkJsoRLKubP9wCFQbcISM1drl829D6Q9kb7GFyoCHSG1H8K1GftGRXmqU_bMKUO69PdY.gUmaZyeU2xhWr5XVDUrY.g_7nOP9xImo; path=/; expires=Sun, 07-Sep-25 22:28:25 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=nThbVRW4p88X3PBzM03l3pEeO94fKwT4yfev2J8z5Ps-1757282305974-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b977a63e6bba4c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:58:25 - httpcore.http11 - DEBUG - response_closed.complete
-INFO:     127.0.0.1:53041 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=emily_rodriguez HTTP/1.1" 200 OK
-2025-09-07 14:58:26 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 3c 1d 8c a4 [binary, 4 bytes]
-DEBUG:    < PONG 3c 1d 8c a4 [binary, 4 bytes]
+DEBUG:    > PING 3a bc a9 c4 [binary, 4 bytes]
+DEBUG:    < PONG 3a bc a9 c4 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
+INFO:     127.0.0.1:56710 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
-2025-09-07 14:58:29 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 14:58:29 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 14:58:29 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
-2025-09-07 14:58:29 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
-INFO:     connection closed
-DEBUG:    < GET /api/v1/notifications/ws/gayathri_sriram HTTP/1.1
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
 DEBUG:    < connection: Upgrade
 DEBUG:    < pragma: no-cache
@@ -342,113 +183,26 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: b9bMQadXuA+PGrNxWPVhhQ==
+DEBUG:    < sec-websocket-key: lp1gd8tRz5HuXhBzY6Pfig==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53049) - "WebSocket /api/v1/notifications/ws/gayathri_sriram" [accepted]
-2025-09-07 14:58:29 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
-2025-09-07 14:58:29 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
+INFO:     ('127.0.0.1', 56712) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 16:46:40 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 16:46:40 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:40.251727"}' [128 bytes]
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: +iTfKZbzhzIcXDoa4X+bDYu5qCw=
+DEBUG:    > Sec-WebSocket-Accept: ZnOFN1+UO5sYTwdUUaABYPJa4o0=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:58:28 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:46:39 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:58:29.723466"}' [128 bytes]
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING c0 6b 44 e9 [binary, 4 bytes]
-DEBUG:    < PONG c0 6b 44 e9 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53053 - "OPTIONS /api/v1/chat-threads/threads/dcdb3780-5a23-446c-8aff-b56faebac033 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53053 - "DELETE /api/v1/chat-threads/threads/dcdb3780-5a23-446c-8aff-b56faebac033 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53053 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=gayathri_sriram HTTP/1.1" 200 OK
-2025-09-07 14:58:31 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53053 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53053 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=gayathri_sriram HTTP/1.1" 200 OK
-2025-09-07 14:58:32 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53056 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a&prompt=hi HTTP/1.1" 200 OK
-2025-09-07 14:58:38 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a
-2025-09-07 14:58:38 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a
-INFO:     127.0.0.1:53056 - "POST /api/v1/chat/stream-with-thread?thread_id=aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a&prompt=hi HTTP/1.1" 200 OK
-2025-09-07 14:58:38 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:58:38 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116eb75b0>
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116eb75b0>
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f34d60>
-2025-09-07 14:58:38 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f34d60>
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:38 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:38 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:39 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_7a0050ea10d090ac041f813e1c4ca369'), (b'openai-processing-ms', b'1227'), (b'x-envoy-upstream-service-time', b'1234'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b977f91aec18f4-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:39 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_7a0050ea10d090ac041f813e1c4ca369'), (b'openai-processing-ms', b'1227'), (b'x-envoy-upstream-service-time', b'1234'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b977f91aec18f4-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:58:39 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:58:40 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f23b50>
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f23b50>
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116e6a4f0>
-2025-09-07 14:58:40 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116e6a4f0>
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:40 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:41 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449856'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e8fb260540c9c03798cd36e475a5be3f'), (b'openai-processing-ms', b'585'), (b'x-envoy-upstream-service-time', b'587'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b978083db2495b-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:58:41 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449856'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e8fb260540c9c03798cd36e475a5be3f'), (b'openai-processing-ms', b'585'), (b'x-envoy-upstream-service-time', b'587'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b978083db2495b-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:58:41 - httpcore.http11 - DEBUG - response_closed.complete
-INFO:     127.0.0.1:53056 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=gayathri_sriram HTTP/1.1" 200 OK
-2025-09-07 14:58:41 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:40.251727"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:40.251727"}' [128 bytes]
+INFO:     127.0.0.1:56710 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/sarah_johnson HTTP/1.1
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
 DEBUG:    < connection: Upgrade
 DEBUG:    < pragma: no-cache
@@ -459,26 +213,70 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: +11c23sy8p1rUKKLwnmDiw==
+DEBUG:    < sec-websocket-key: XXRFIutlXw1fytY7Wj/YgA==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53062) - "WebSocket /api/v1/notifications/ws/sarah_johnson" [accepted]
-2025-09-07 14:58:43 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-2025-09-07 14:58:43 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-2025-09-07 14:58:43 - app.services.websocket_manager - INFO - WebSocket connection closed for user gayathri_sriram
-2025-09-07 14:58:43 - app.services.websocket_manager - INFO - WebSocket connection closed for user gayathri_sriram
-2025-09-07 14:58:43 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user gayathri_sriram
-2025-09-07 14:58:43 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user gayathri_sriram
-INFO:     connection closed
+INFO:     ('127.0.0.1', 56714) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 16:46:40 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 16:46:40 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:40.316321"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:40.316321"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:40.316321"}' [128 bytes]
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: 5uCXwtGqiGhclSH8x/iYnU1IKU0=
+DEBUG:    > Sec-WebSocket-Accept: UruKAsCBH1ZvR2oQSLx2APe7ftk=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:58:42 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:46:39 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:58:43.005859"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:46:40.316321"}' [128 bytes]
+INFO:     127.0.0.1:56710 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56710 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288809523}' [46 bytes]
+2025-09-07 16:46:49 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288809523}
+2025-09-07 16:46:49 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288809523}
+INFO:     127.0.0.1:56721 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING c5 4b 33 50 [binary, 4 bytes]
+DEBUG:    < PONG c5 4b 33 50 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 01 4f 3a d2 [binary, 4 bytes]
+DEBUG:    < PONG 01 4f 3a d2 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING b2 ef 52 93 [binary, 4 bytes]
+DEBUG:    < PONG b2 ef 52 93 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING af 0d a0 13 [binary, 4 bytes]
+DEBUG:    < PONG af 0d a0 13 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56725 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288831778}' [46 bytes]
+2025-09-07 16:47:11 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288831778}
+2025-09-07 16:47:11 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288831778}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING af 6f 55 77 [binary, 4 bytes]
+DEBUG:    < PONG af 6f 55 77 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 61 69 1c ad [binary, 4 bytes]
+DEBUG:    < PONG 61 69 1c ad [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288839521}' [46 bytes]
+2025-09-07 16:47:19 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288839521}
+2025-09-07 16:47:19 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288839521}
+INFO:     127.0.0.1:56730 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 3d d0 db 6a [binary, 4 bytes]
+DEBUG:    < PONG 3d d0 db 6a [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 'R3R\x1e' [text, 4 bytes]
+DEBUG:    < PONG 'R3R\x1e' [text, 4 bytes]
+DEBUG:    % received keepalive pong
 DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
@@ -495,313 +293,178 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: VBZkmHKDOuJsuGXsjLGy0g==
+DEBUG:    < sec-websocket-key: XYudE6PRbK7yUJw3SD0p6w==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53064) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
-2025-09-07 14:58:49 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
-2025-09-07 14:58:49 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+INFO:     ('127.0.0.1', 56735) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
+2025-09-07 16:47:29 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+2025-09-07 16:47:29 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
 DEBUG:    = connection is CLOSED
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: f0Q6dMwYYPsTVW2o5gqOfnSyQ40=
+DEBUG:    > Sec-WebSocket-Accept: yZN0cSXedCHhtM6H/pORGHWZNQA=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:58:48 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:47:29 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:58:49.610522"}' [128 bytes]
-2025-09-07 14:58:49 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 14:58:49 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 14:58:49 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-2025-09-07 14:58:49 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:47:29.642033"}' [128 bytes]
+2025-09-07 16:47:29 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:47:29 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:47:29 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 16:47:29 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
 INFO:     connection closed
-INFO:     127.0.0.1:53066 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING fb 5c 15 9a [binary, 4 bytes]
-DEBUG:    < PONG fb 5c 15 9a [binary, 4 bytes]
+DEBUG:    > PING 53 d6 57 76 [binary, 4 bytes]
+DEBUG:    < PONG 53 d6 57 76 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING b5 da 92 59 [binary, 4 bytes]
+DEBUG:    < PONG b5 da 92 59 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 24 b4 0c 0a [binary, 4 bytes]
+DEBUG:    < PONG 24 b4 0c 0a [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56738 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288869522}' [46 bytes]
+2025-09-07 16:47:49 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288869522}
+2025-09-07 16:47:49 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288869522}
+INFO:     127.0.0.1:56740 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 39 a2 45 d8 [binary, 4 bytes]
+DEBUG:    < PONG 39 a2 45 d8 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING ab e1 28 70 [binary, 4 bytes]
+DEBUG:    < PONG ab e1 28 70 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 01 ea 31 9a [binary, 4 bytes]
+DEBUG:    < PONG 01 ea 31 9a [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING fd 32 c9 b2 [binary, 4 bytes]
+DEBUG:    < PONG fd 32 c9 b2 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288882372}' [46 bytes]
+2025-09-07 16:48:02 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757288882372}
+2025-09-07 16:48:02 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757288882372}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 11 81 fb a8 [binary, 4 bytes]
+DEBUG:    < PONG 11 81 fb a8 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56744 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56748 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 82 60 16 ad [binary, 4 bytes]
+DEBUG:    < PONG 82 60 16 ad [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 76 cc da ad [binary, 4 bytes]
+DEBUG:    < PONG 76 cc da ad [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288899030}' [46 bytes]
+2025-09-07 16:48:19 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288899030}
+2025-09-07 16:48:19 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288899030}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 6e d2 0a ea [binary, 4 bytes]
+DEBUG:    < PONG 6e d2 0a ea [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 93 e6 7a 0e [binary, 4 bytes]
+DEBUG:    < PONG 93 e6 7a 0e [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288912138}' [46 bytes]
+2025-09-07 16:48:32 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757288912138}
+2025-09-07 16:48:32 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757288912138}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 4c 60 65 da [binary, 4 bytes]
+DEBUG:    < PONG 4c 60 65 da [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 43 8b e5 41 [binary, 4 bytes]
+DEBUG:    < PONG 43 8b e5 41 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < CLOSE 1001 (going away) [2 bytes]
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1001 (going away) [2 bytes]
+DEBUG:    x half-closing TCP connection
+DEBUG:    = connection is CLOSED
+DEBUG:    < CLOSE 1001 (going away) [2 bytes]
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1001 (going away) [2 bytes]
+2025-09-07 16:48:38 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:48:38 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:48:38 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 16:48:38 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+DEBUG:    x half-closing TCP connection
+DEBUG:    = connection is CLOSED
+2025-09-07 16:48:38 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
+2025-09-07 16:48:38 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
+2025-09-07 16:48:38 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
+2025-09-07 16:48:38 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:56762 - "OPTIONS /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
+2025-09-07 16:48:40 - app.api.v1.endpoints.chat - INFO - Generating survey template for: make a survey about employee satisfaction...
+2025-09-07 16:48:40 - app.api.v1.endpoints.chat - INFO - Generating survey template for: make a survey about employee satisfaction...
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - close.started
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - close.started
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - close.complete
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - close.complete
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116af58b0>
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116af58b0>
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11008d890> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11008d890> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11585d370>
+2025-09-07 16:48:40 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11585d370>
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 16:48:40 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 23:48:45 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449130'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'115ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_31135985b8ce00f20a6a5cf1c4100064'), (b'openai-processing-ms', b'5678'), (b'x-envoy-upstream-service-time', b'5681'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97ba19270c57767e-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 23:48:45 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449130'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'115ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_31135985b8ce00f20a6a5cf1c4100064'), (b'openai-processing-ms', b'5678'), (b'x-envoy-upstream-service-time', b'5681'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97ba19270c57767e-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 16:48:45 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:56762 - "POST /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56762 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757288929030}' [46 bytes]
+2025-09-07 16:48:49 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288929030}
+2025-09-07 16:48:49 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757288929030}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING fc 6a 0d aa [binary, 4 bytes]
+DEBUG:    < PONG fc 6a 0d aa [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 9f f3 77 9a [binary, 4 bytes]
+DEBUG:    < PONG 9f f3 77 9a [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
 DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CONNECTING
 DEBUG:    = connection is CLOSED
-DEBUG:    < GET /api/v1/notifications/ws/gayathri_sriram HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: vrfd830bbFgYazm2qUTprQ==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53068) - "WebSocket /api/v1/notifications/ws/gayathri_sriram" [accepted]
-2025-09-07 14:58:52 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
-2025-09-07 14:58:52 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: 8Udykbrta/mvFdrmii7Gm+bR1n0=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:58:52 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:58:52.768380"}' [128 bytes]
-2025-09-07 14:58:52 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 14:58:52 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 14:58:52 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
-2025-09-07 14:58:52 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
+2025-09-07 16:49:09 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:49:09 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:49:09 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 16:49:09 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
 INFO:     connection closed
-INFO:     127.0.0.1:53082 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53082 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=gayathri_sriram HTTP/1.1" 200 OK
-2025-09-07 14:58:54 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53087 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=24b22cbc-d23f-494d-a35a-3c3703c1446a&prompt=whats%20my%20role HTTP/1.1" 200 OK
-2025-09-07 14:59:01 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 24b22cbc-d23f-494d-a35a-3c3703c1446a
-2025-09-07 14:59:01 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 24b22cbc-d23f-494d-a35a-3c3703c1446a
-INFO:     127.0.0.1:53087 - "POST /api/v1/chat/stream-with-thread?thread_id=24b22cbc-d23f-494d-a35a-3c3703c1446a&prompt=whats%20my%20role HTTP/1.1" 200 OK
-2025-09-07 14:59:01 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:01 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3a730>
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3a730>
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3a6a0>
-2025-09-07 14:59:01 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3a6a0>
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:01 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:01 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:04 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449481'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'69ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_b2a30b4102f875017d7b682e4fb46a66'), (b'openai-processing-ms', b'3473'), (b'x-envoy-upstream-service-time', b'3476'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97888ccd0b9ca-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:04 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449481'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'69ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_b2a30b4102f875017d7b682e4fb46a66'), (b'openai-processing-ms', b'3473'), (b'x-envoy-upstream-service-time', b'3476'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97888ccd0b9ca-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:04 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f2d460>
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f2d460>
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3cee0>
-2025-09-07 14:59:07 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3cee0>
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:07 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:07 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:08 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449859'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'18ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f2a851ab12f9f2f575846d26eb7dd4c3'), (b'openai-processing-ms', b'788'), (b'x-envoy-upstream-service-time', b'793'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b978ad5ede58a7-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:08 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449859'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'18ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f2a851ab12f9f2f575846d26eb7dd4c3'), (b'openai-processing-ms', b'788'), (b'x-envoy-upstream-service-time', b'793'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b978ad5ede58a7-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:08 - httpcore.http11 - DEBUG - response_closed.complete
-INFO:     127.0.0.1:53087 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=gayathri_sriram HTTP/1.1" 200 OK
-2025-09-07 14:59:08 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 3f 62 12 c9 [binary, 4 bytes]
-DEBUG:    < PONG 3f 62 12 c9 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-2025-09-07 14:59:12 - app.services.websocket_manager - INFO - WebSocket connection closed for user gayathri_sriram
-2025-09-07 14:59:12 - app.services.websocket_manager - INFO - WebSocket connection closed for user gayathri_sriram
-2025-09-07 14:59:12 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user gayathri_sriram
-2025-09-07 14:59:12 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user gayathri_sriram
-INFO:     connection closed
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/david_williams HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: 9Hwb1RDrm06v4vB0etaBQg==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53093) - "WebSocket /api/v1/notifications/ws/david_williams" [accepted]
-2025-09-07 14:59:12 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-2025-09-07 14:59:12 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: 4M19Ed2OstLQhK56nR84lHFOLWw=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:59:12 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:12.426494"}' [128 bytes]
-INFO:     127.0.0.1:53095 - "OPTIONS /api/v1/chat-threads/threads/25baddbf-6299-4d35-9aba-74fe8b659bbf HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53095 - "DELETE /api/v1/chat-threads/threads/25baddbf-6299-4d35-9aba-74fe8b659bbf HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53095 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=david_williams HTTP/1.1" 200 OK
-2025-09-07 14:59:14 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CONNECTING
-DEBUG:    = connection is CLOSED
-DEBUG:    < GET /api/v1/notifications/ws/sarah_johnson HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: tJ6iDzWhEMkrQYDXB+T9Wg==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53098) - "WebSocket /api/v1/notifications/ws/sarah_johnson" [accepted]
-2025-09-07 14:59:18 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-2025-09-07 14:59:18 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: vKs1jOD82stt5fzqj+P/NZG8aSE=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:59:17 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:18.213641"}' [128 bytes]
-2025-09-07 14:59:18 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 14:59:18 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 14:59:18 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
-2025-09-07 14:59:18 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
-INFO:     connection closed
-INFO:     127.0.0.1:53100 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/david_williams HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: ifFW/8s1spDqlvotDEkgcw==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53102) - "WebSocket /api/v1/notifications/ws/david_williams" [accepted]
-2025-09-07 14:59:21 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-2025-09-07 14:59:21 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: XthNrWAEiEW6JLMVlic8k64V740=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:59:20 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-2025-09-07 14:59:21 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 14:59:21 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 14:59:21 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-2025-09-07 14:59:21 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-INFO:     connection closed
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:21.245438"}' [128 bytes]
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/gayathri_sriram HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: /HXB0F97QpuuXsN2D1HmCw==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53106) - "WebSocket /api/v1/notifications/ws/gayathri_sriram" [accepted]
-2025-09-07 14:59:24 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
-2025-09-07 14:59:24 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
-DEBUG:    = connection is CLOSED
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: P1dxQWL7GPrCptmprBeCuqPQSOM=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:59:23 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:24.137044"}' [128 bytes]
-2025-09-07 14:59:24 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 14:59:24 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 14:59:24 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
-2025-09-07 14:59:24 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
-INFO:     connection closed
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-2025-09-07 14:59:26 - app.services.websocket_manager - INFO - WebSocket connection closed for user gayathri_sriram
-2025-09-07 14:59:26 - app.services.websocket_manager - INFO - WebSocket connection closed for user gayathri_sriram
-2025-09-07 14:59:26 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user gayathri_sriram
-2025-09-07 14:59:26 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user gayathri_sriram
-INFO:     connection closed
+INFO:     127.0.0.1:56777 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -814,319 +477,27 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: 3+BOz+dE93BzdfBeUAVJzw==
+DEBUG:    < sec-websocket-key: imQUS9D9Pg/ffPNecmX3MA==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53108) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 14:59:26 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 14:59:26 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+INFO:     ('127.0.0.1', 56779) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 16:49:09 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 16:49:09 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:49:09.480497"}' [128 bytes]
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: CTcSKcRoEaZ0kkTvttKC7qsFP48=
+DEBUG:    > Sec-WebSocket-Accept: EDsla5cTHdCAxWIWqSVNPusDL+Q=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:59:25 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:49:08 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:26.011508"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:26.011508"}' [128 bytes]
-INFO:     127.0.0.1:53110 - "OPTIONS /api/v1/chat-threads/threads/092c6f8d-c21d-4f13-9a08-e42557f439d8 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53110 - "DELETE /api/v1/chat-threads/threads/092c6f8d-c21d-4f13-9a08-e42557f439d8 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53110 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-2025-09-07 14:59:27 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53110 - "GET /api/v1/chat-threads/threads/5f0f9caf-daaa-4883-8e15-2e650684ad74 HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING a5 ee 9a 06 [binary, 4 bytes]
-DEBUG:    < PONG a5 ee 9a 06 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53115 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=5f0f9caf-daaa-4883-8e15-2e650684ad74&prompt=cool%20thanks HTTP/1.1" 200 OK
-2025-09-07 14:59:31 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 5f0f9caf-daaa-4883-8e15-2e650684ad74
-2025-09-07 14:59:31 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 5f0f9caf-daaa-4883-8e15-2e650684ad74
-INFO:     127.0.0.1:53115 - "POST /api/v1/chat/stream-with-thread?thread_id=5f0f9caf-daaa-4883-8e15-2e650684ad74&prompt=cool%20thanks HTTP/1.1" 200 OK
-2025-09-07 14:59:31 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:31 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116eb7e20>
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116eb7e20>
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:31 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f34f70>
-2025-09-07 14:59:31 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f34f70>
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:31 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:34 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449358'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'85ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_803b7bf531cf83bda51fb955527b631e'), (b'openai-processing-ms', b'2422'), (b'x-envoy-upstream-service-time', b'2425'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97945fe659b6b-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:34 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449358'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'85ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_803b7bf531cf83bda51fb955527b631e'), (b'openai-processing-ms', b'2422'), (b'x-envoy-upstream-service-time', b'2425'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97945fe659b6b-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:34 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:35 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:49:09.480497"}' [128 bytes]
+INFO:     127.0.0.1:56777 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
 DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
 DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/david_williams HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: vS3oTFqEAXcLixU2Dn2a7Q==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53121) - "WebSocket /api/v1/notifications/ws/david_williams" [accepted]
-2025-09-07 14:59:38 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-2025-09-07 14:59:38 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-DEBUG:    = connection is CLOSED
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: dUHKM9SDXwIjjtnTl6Qiorhe/lE=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:59:37 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:38.274579"}' [128 bytes]
-2025-09-07 14:59:38 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 14:59:38 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 14:59:38 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 14:59:38 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-INFO:     connection closed
-INFO:     127.0.0.1:53123 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53123 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=david_williams HTTP/1.1" 200 OK
-2025-09-07 14:59:39 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53123 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=c2b9f809-c79d-4d54-89fa-427a9f207ec9&prompt=whats%20your%20name HTTP/1.1" 200 OK
-2025-09-07 14:59:42 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread c2b9f809-c79d-4d54-89fa-427a9f207ec9
-2025-09-07 14:59:42 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread c2b9f809-c79d-4d54-89fa-427a9f207ec9
-INFO:     127.0.0.1:53123 - "POST /api/v1/chat/stream-with-thread?thread_id=c2b9f809-c79d-4d54-89fa-427a9f207ec9&prompt=whats%20your%20name HTTP/1.1" 200 OK
-2025-09-07 14:59:42 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:42 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f2d2b0>
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f2d2b0>
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3c040>
-2025-09-07 14:59:42 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3c040>
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:42 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:42 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:44 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449481'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'69ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_d3bba7d17cd9543f844e10eb4c431abb'), (b'openai-processing-ms', b'2179'), (b'x-envoy-upstream-service-time', b'2183'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b9798b6eaf8061-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:44 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449481'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'69ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_d3bba7d17cd9543f844e10eb4c431abb'), (b'openai-processing-ms', b'2179'), (b'x-envoy-upstream-service-time', b'2183'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b9798b6eaf8061-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:44 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f40850>
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f40850>
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f407c0>
-2025-09-07 14:59:46 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f407c0>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:46 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449850'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_52f71c94ec90e70c5e5c104cc3a29dd6'), (b'openai-processing-ms', b'602'), (b'x-envoy-upstream-service-time', b'606'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b979a1d9d27526-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:46 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449850'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_52f71c94ec90e70c5e5c104cc3a29dd6'), (b'openai-processing-ms', b'602'), (b'x-envoy-upstream-service-time', b'606'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b979a1d9d27526-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:46 - httpcore.http11 - DEBUG - response_closed.complete
-INFO:     127.0.0.1:53123 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=david_williams HTTP/1.1" 200 OK
-2025-09-07 14:59:47 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CONNECTING
-DEBUG:    = connection is CLOSED
-DEBUG:    < GET /api/v1/notifications/ws/sarah_johnson HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: o40OA7OOwgmEmupyypGeGQ==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53130) - "WebSocket /api/v1/notifications/ws/sarah_johnson" [accepted]
-2025-09-07 14:59:49 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-2025-09-07 14:59:49 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: jKJDmSIABpjZZMjNd/x4jXqNMy8=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 21:59:48 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T14:59:49.033750"}' [128 bytes]
-2025-09-07 14:59:49 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 14:59:49 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 14:59:49 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
-2025-09-07 14:59:49 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
-INFO:     connection closed
-INFO:     127.0.0.1:53132 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING '[@HV' [text, 4 bytes]
-DEBUG:    < PONG '[@HV' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53132 - "OPTIONS /api/v1/chat-threads/threads/172a7f9d-1311-4190-b3b3-ec67620ffe9a HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53132 - "DELETE /api/v1/chat-threads/threads/172a7f9d-1311-4190-b3b3-ec67620ffe9a HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53132 - "GET /api/v1/chat-threads/threads/172a7f9d-1311-4190-b3b3-ec67620ffe9a HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53132 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=sarah_johnson HTTP/1.1" 200 OK
-2025-09-07 14:59:51 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53132 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53132 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=sarah_johnson HTTP/1.1" 200 OK
-2025-09-07 14:59:52 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53136 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=83917a0d-fda3-4276-aa5b-9c7edf27aaca&prompt=hi%20ceo HTTP/1.1" 200 OK
-2025-09-07 14:59:55 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 83917a0d-fda3-4276-aa5b-9c7edf27aaca
-2025-09-07 14:59:55 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 83917a0d-fda3-4276-aa5b-9c7edf27aaca
-INFO:     127.0.0.1:53136 - "POST /api/v1/chat/stream-with-thread?thread_id=83917a0d-fda3-4276-aa5b-9c7edf27aaca&prompt=hi%20ceo HTTP/1.1" 200 OK
-2025-09-07 14:59:55 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:55 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - close.started
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - close.complete
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3af40>
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f3af40>
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f401f0>
-2025-09-07 14:59:55 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f401f0>
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:55 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 14:59:55 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:58 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449483'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_49496bf12607e32fb695eec11c138969'), (b'openai-processing-ms', b'2833'), (b'x-envoy-upstream-service-time', b'2836'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b979dd696e762d-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 21:59:58 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449483'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_49496bf12607e32fb695eec11c138969'), (b'openai-processing-ms', b'2833'), (b'x-envoy-upstream-service-time', b'2836'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b979dd696e762d-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 14:59:58 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - close.started
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - close.started
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - close.complete
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - close.complete
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4a0d0>
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4a0d0>
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x11057eb30> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f37b50>
-2025-09-07 15:00:00 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f37b50>
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:00 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:00 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 22:00:01 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449852'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_a586721f12dbc9d954cf50f4d5220ce7'), (b'openai-processing-ms', b'438'), (b'x-envoy-upstream-service-time', b'441'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b979fbb9b28a73-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 22:00:01 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449852'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_a586721f12dbc9d954cf50f4d5220ce7'), (b'openai-processing-ms', b'438'), (b'x-envoy-upstream-service-time', b'441'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b979fbb9b28a73-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 15:00:01 - httpcore.http11 - DEBUG - response_closed.complete
-INFO:     127.0.0.1:53136 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=sarah_johnson HTTP/1.1" 200 OK
-2025-09-07 15:00:01 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-2025-09-07 15:00:03 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 15:00:03 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 15:00:03 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-2025-09-07 15:00:03 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-INFO:     connection closed
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/emily_rodriguez HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -1139,234 +510,32 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: U4kHvgQrADR9/VzCMiaKTA==
+DEBUG:    < sec-websocket-key: arIUJ8AYC5fwVG9FMFdkJg==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53156) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
-2025-09-07 15:00:03 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
-2025-09-07 15:00:03 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: WMcdOoJJslK6bKKI8aQBiAU7o5U=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 22:00:02 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T15:00:03.785027"}' [128 bytes]
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CONNECTING
-DEBUG:    = connection is CLOSED
-DEBUG:    < GET /api/v1/notifications/ws/sarah_johnson HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: thacIWwKJd0xwUDINRqd5A==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53158) - "WebSocket /api/v1/notifications/ws/sarah_johnson" [accepted]
-2025-09-07 15:00:06 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-2025-09-07 15:00:06 - app.services.websocket_manager - INFO - WebSocket connection established for user sarah_johnson
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: AeQ3ms6ezanj3Q9tiNID3b9B3XE=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 22:00:05 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T15:00:06.022898"}' [128 bytes]
-2025-09-07 15:00:06 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 15:00:06 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
-2025-09-07 15:00:06 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
-2025-09-07 15:00:06 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
-INFO:     connection closed
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-2025-09-07 15:00:07 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 15:00:07 - app.services.websocket_manager - INFO - WebSocket connection closed for user sarah_johnson
-2025-09-07 15:00:07 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-2025-09-07 15:00:07 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user sarah_johnson
-INFO:     connection closed
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/david_williams HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: gx+6aLdcvS635LXTw9H4cQ==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53160) - "WebSocket /api/v1/notifications/ws/david_williams" [accepted]
-2025-09-07 15:00:07 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-2025-09-07 15:00:07 - app.services.websocket_manager - INFO - WebSocket connection established for user david_williams
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: FmA+HnD8YEAokgjTD6R77BLF1ws=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 22:00:06 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T15:00:07.595442"}' [128 bytes]
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/gayathri_sriram HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: dklWrdpiBmUE8gxIZZK6Rg==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53162) - "WebSocket /api/v1/notifications/ws/gayathri_sriram" [accepted]
-2025-09-07 15:00:09 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
-2025-09-07 15:00:09 - app.services.websocket_manager - INFO - WebSocket connection established for user gayathri_sriram
+INFO:     ('127.0.0.1', 56785) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
+2025-09-07 16:49:16 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+2025-09-07 16:49:16 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
 DEBUG:    = connection is CLOSED
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: EvGVJqbbilm6pV3adzrVRAa/pbw=
+DEBUG:    > Sec-WebSocket-Accept: isHY38o5R5GQeHP4X5dJMwVObIM=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Sun, 07 Sep 2025 22:00:08 GMT
+DEBUG:    > date: Sun, 07 Sep 2025 23:49:16 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T15:00:09.724229"}' [128 bytes]
-2025-09-07 15:00:09 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 15:00:09 - app.services.websocket_manager - INFO - WebSocket connection closed for user david_williams
-2025-09-07 15:00:09 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
-2025-09-07 15:00:09 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user david_williams
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T16:49:16.951282"}' [128 bytes]
+2025-09-07 16:49:16 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:49:16 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 16:49:16 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 16:49:16 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
 INFO:     connection closed
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING a7 77 a5 0f [binary, 4 bytes]
-DEBUG:    < PONG a7 77 a5 0f [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53164 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=24b22cbc-d23f-494d-a35a-3c3703c1446a&prompt=awesome%20summarize%20jeff%20bezos%20wedding%20in%2011%20words HTTP/1.1" 200 OK
-2025-09-07 15:00:19 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 24b22cbc-d23f-494d-a35a-3c3703c1446a
-2025-09-07 15:00:19 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 24b22cbc-d23f-494d-a35a-3c3703c1446a
-INFO:     127.0.0.1:53164 - "POST /api/v1/chat/stream-with-thread?thread_id=24b22cbc-d23f-494d-a35a-3c3703c1446a&prompt=awesome%20summarize%20jeff%20bezos%20wedding%20in%2011%20words HTTP/1.1" 200 OK
-2025-09-07 15:00:19 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 15:00:19 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - close.started
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - close.started
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - close.complete
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - close.complete
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f37400>
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f37400>
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4a5e0>
-2025-09-07 15:00:19 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4a5e0>
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:19 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:19 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:53168 - "GET /health HTTP/1.1" 200 OK
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 22:00:24 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449322'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'90ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_8c529b9f245e5e951ea24834aaeb989e'), (b'openai-processing-ms', b'4804'), (b'x-envoy-upstream-service-time', b'4806'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97a7189fd2841-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 22:00:24 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449322'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'90ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_8c529b9f245e5e951ea24834aaeb989e'), (b'openai-processing-ms', b'4804'), (b'x-envoy-upstream-service-time', b'4806'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97a7189fd2841-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 15:00:24 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 15:00:24 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 10 cc 8f 9b [binary, 4 bytes]
-DEBUG:    < PONG 10 cc 8f 9b [binary, 4 bytes]
+DEBUG:    > PING 'ˎFV' [text, 4 bytes]
+DEBUG:    < PONG 'ˎFV' [text, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING a9 1f a7 0f [binary, 4 bytes]
-DEBUG:    < PONG a9 1f a7 0f [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53175 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=24b22cbc-d23f-494d-a35a-3c3703c1446a&prompt=give%20citations HTTP/1.1" 200 OK
-2025-09-07 15:00:32 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 24b22cbc-d23f-494d-a35a-3c3703c1446a
-2025-09-07 15:00:32 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 24b22cbc-d23f-494d-a35a-3c3703c1446a
-INFO:     127.0.0.1:53175 - "POST /api/v1/chat/stream-with-thread?thread_id=24b22cbc-d23f-494d-a35a-3c3703c1446a&prompt=give%20citations HTTP/1.1" 200 OK
-2025-09-07 15:00:32 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 15:00:32 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - close.started
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - close.started
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - close.complete
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - close.complete
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4aeb0>
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4aeb0>
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110478890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4a460>
-2025-09-07 15:00:32 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116f4a460>
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:32 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 15:00:32 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 22:00:38 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449301'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'93ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_d592b3a67d9032aaea49fe42bbe67c21'), (b'openai-processing-ms', b'6078'), (b'x-envoy-upstream-service-time', b'6083'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97ac0a8b9275f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 22:00:38 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449301'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'93ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_d592b3a67d9032aaea49fe42bbe67c21'), (b'openai-processing-ms', b'6078'), (b'x-envoy-upstream-service-time', b'6083'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b97ac0a8b9275f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 15:00:38 - httpcore.http11 - DEBUG - response_closed.complete
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757282439736}' [46 bytes]
-2025-09-07 15:00:39 - app.api.v1.endpoints.websocket - INFO - Received message from gayathri_sriram: {"type":"heartbeat","timestamp":1757282439736}
-2025-09-07 15:00:39 - app.api.v1.endpoints.websocket - INFO - Received message from gayathri_sriram: {"type":"heartbeat","timestamp":1757282439736}
-2025-09-07 15:00:43 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 'zD\x03\x13' [text, 4 bytes]
-DEBUG:    < PONG 'zD\x03\x13' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53181 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 9a 49 42 10 [binary, 4 bytes]
-DEBUG:    < PONG 9a 49 42 10 [binary, 4 bytes]
+DEBUG:    > PING '2إ?' [text, 4 bytes]
+DEBUG:    < PONG '2إ?' [text, 4 bytes]
 DEBUG:    % received keepalive pong

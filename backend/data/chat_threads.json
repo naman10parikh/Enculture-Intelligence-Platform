@@ -2339,7 +2339,7 @@
     "title": "Profile Isolation Feature Test",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:39:08.353582",
-    "updated_at": "2025-09-07T21:59:35.243483",
+    "updated_at": "2025-09-07T23:25:21.350984",
     "messages": [
       {
         "id": "c14785cd-37c0-49a1-b27f-4d9a1a178cc3",
@@ -2364,6 +2364,18 @@
         "role": "assistant",
         "content": "You're welcome, Michael! If you'd like to try out any specific workflows (like importing sample culture data, running a pulse survey mock analysis, or switching perspectives between personas), just let me know the scenario. I can walk you through insight generation, action recommendations, or demonstrate how profile isolation keeps user data segmented and secure. Ready to test something specific, or do you want suggestions on possible test cases for the culture_intelligence role? ",
         "timestamp": "2025-09-07T21:59:35.243310"
+      },
+      {
+        "id": "e711c078-f977-4485-bc24-d30684066737",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Untitled\" at step 1 (name). Current survey data: name=\"\", context=\"\", 0 questions defined, 0 classifiers, 0 metrics.] User request: make a survey about employee satisfaction",
+        "timestamp": "2025-09-07T23:25:07.831233"
+      },
+      {
+        "id": "10cf0008-f986-4196-8ec5-7081ac6c668a",
+        "role": "assistant",
+        "content": "Great! Let's design a baseline **Employee Satisfaction Survey**. I'll guide you through the key steps: --- ### Step 1. Name Your Survey **Suggestion:** `Employee Satisfaction Survey \u2013 [Month/Year]` --- ### Step 2. Context/Purpose (Optional) **Suggestion:** \"This survey aims to assess overall employee satisfaction, identify areas for improvement, and inform actions to enhance our workplace culture.\" --- ### Step 3. Core Questions Here are some data-driven, benchmark-friendly questions for employee satisfaction. These use a standard agreement scale (Strongly Disagree \u2192 Strongly Agree): 1. **Overall, I am satisfied with my experience at [Company].** 2. **I feel valued for the work I do.** 3. **I have the resources and support I need to do my job well.** 4. **Communication from management is clear and effective.** 5. **I have opportunities for professional growth and development.** 6. **The work environment at [Company] is positive and inclusive.** 7. **I am satisfied with the balance between my work and personal life.** 8. **I would recommend [Company] as a great place to work.** **Optional Open-Ended:** - What is one thing [Company] could do to improve your satisfaction at work? --- ### Step 4. Classifiers To analyze results by group, consider adding classifiers like: - Department/Team - Tenure (e.g., 0-1 yr, 2-5 yrs, etc.) - Location --- ### Step 5. Metrics The above questions can be used to create these metrics: - **Overall satisfaction (Q1)** - **Perceived value/recognition (Q2)** - **Support/resources (Q3)** - **Communications (Q4)** - **Growth opportunity (Q5)** - **Work environment & inclusivity (Q6)** - **Work-life balance (Q7)** - **Net Promoter Score (Q8, adapted)** --- **Next Steps:** - Would you like to use these default questions, or add/remove any? - Do you want help configuring classifiers or metrics? - Shall I fill these into your survey draft and propose a flow? Let me know how you'd like to customize or proceed! ",
+        "timestamp": "2025-09-07T23:25:21.350920"
       }
     ],
     "is_active": true
@@ -2699,6 +2711,116 @@
         "role": "assistant",
         "content": "Hello! It looks like you might be addressing a CEO or would like information tailored for a CEO perspective on culture intelligence. How can I assist you today? Here are some ways I can help: - **Executive Summary**: Provide a high-level overview of your company's current cultural health and engagement trends. - **Strategic Insights**: Offer data-driven insights on culture strengths, gaps, and areas of risk. - **Actionable Recommendations**: Suggest executive-level initiatives for improving company culture and aligning culture with business goals. - **Benchmarking**: Share best practices and how your culture compares to industry standards. What specific information or insights would be most valuable to you right now? ",
         "timestamp": "2025-09-07T22:00:00.509501"
+      }
+    ],
+    "is_active": true
+  },
+  "56da418e-6fe0-43d1-94ae-bf4606cfcf8d": {
+    "id": "56da418e-6fe0-43d1-94ae-bf4606cfcf8d",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T22:07:12.214365",
+    "updated_at": "2025-09-07T22:07:14.418252",
+    "messages": [
+      {
+        "id": "26d93fa5-534d-4669-bfbc-3c99814b1172",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T22:07:12.284501"
+      },
+      {
+        "id": "ffa22ccc-10fa-4c50-b2cd-1e129e6591d8",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your company culture goals today? If you have any culture data, survey results, or specific challenges you're facing, feel free to share. I'm here to help analyze, provide insights, and suggest ways to build a stronger, healthier workplace culture. ",
+        "timestamp": "2025-09-07T22:07:14.418209"
+      }
+    ],
+    "is_active": true
+  },
+  "f7e4f6a6-5336-495c-a97e-5a242f02ca5b": {
+    "id": "f7e4f6a6-5336-495c-a97e-5a242f02ca5b",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T22:13:19.433634",
+    "updated_at": "2025-09-07T22:13:22.142471",
+    "messages": [
+      {
+        "id": "e92374cc-a2bc-49ee-99fd-c112658780cb",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T22:13:19.486625"
+      },
+      {
+        "id": "0e2724bc-738b-4f41-8ff9-7d8fb5647208",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As your Culture Intelligence Assistant, I'm here to help you interpret culture data, uncover actionable insights, and recommend ways to strengthen your organization's culture. How can I assist you today? Are you looking to analyze recent survey results, discuss team engagement, or explore areas for culture improvement? Let me know your area of focus! ",
+        "timestamp": "2025-09-07T22:13:22.142348"
+      }
+    ],
+    "is_active": true
+  },
+  "7bc3fa10-28da-4fd6-90a3-49cd636517ab": {
+    "id": "7bc3fa10-28da-4fd6-90a3-49cd636517ab",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T22:19:58.947095",
+    "updated_at": "2025-09-07T22:20:00.819393",
+    "messages": [
+      {
+        "id": "4b42e8b3-508e-41eb-923c-ea5219da4dbd",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T22:19:59.001714"
+      },
+      {
+        "id": "81abe194-9af4-4807-8824-ec1eb96241f6",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your company's culture intelligence needs today? If you have data to review, need insights, or are looking for actionable recommendations, just let me know. ",
+        "timestamp": "2025-09-07T22:20:00.819352"
+      }
+    ],
+    "is_active": true
+  },
+  "b6d40bf7-00f2-4a2b-b869-922dbbdc57df": {
+    "id": "b6d40bf7-00f2-4a2b-b869-922dbbdc57df",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T23:24:23.635907",
+    "updated_at": "2025-09-07T23:24:26.654279",
+    "messages": [
+      {
+        "id": "5a00277e-7590-4a24-a24c-fbb1b5ebca44",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T23:24:23.692308"
+      },
+      {
+        "id": "ce48c5de-dbb4-4822-af96-78007e747199",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your culture data or insights today? Whether you need help interpreting survey results, identifying trends, or suggesting culture-improving actions, I'm here to help. Let me know what you'd like to explore or achieve! ",
+        "timestamp": "2025-09-07T23:24:26.654151"
+      }
+    ],
+    "is_active": true
+  },
+  "6fd42166-4c46-47dc-aa1f-24fa1710eb56": {
+    "id": "6fd42166-4c46-47dc-aa1f-24fa1710eb56",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T23:46:12.784142",
+    "updated_at": "2025-09-07T23:46:16.191861",
+    "messages": [
+      {
+        "id": "76ed577b-e535-4256-9e0f-597f0d37f27c",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T23:46:12.828622"
+      },
+      {
+        "id": "1b69219c-c75a-421a-99be-cbf38153c402",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your culture intelligence efforts today? If you have employee feedback, survey results, or any culture data to analyze, just let me know. I'm here to help you interpret the data, generate actionable insights, and recommend next steps to strengthen your company culture. What would you like to focus on? ",
+        "timestamp": "2025-09-07T23:46:16.191664"
       }
     ],
     "is_active": true
