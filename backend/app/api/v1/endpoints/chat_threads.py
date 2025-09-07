@@ -16,9 +16,12 @@ from app.services.chat_thread_service import ChatThreadService
 
 router = APIRouter()
 
+# Initialize single shared instance
+chat_thread_service = ChatThreadService()
+
 # Dependency to get chat thread service
 def get_chat_thread_service() -> ChatThreadService:
-    return ChatThreadService()
+    return chat_thread_service
 
 
 @router.post("/threads", response_model=ChatThreadResponse)

@@ -1,0 +1,282 @@
+INFO:     Will watch for changes in these directories: ['/Users/naman/Enculture-Intelligence-Platform/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [2523] using WatchFiles
+INFO:     Started server process [2533]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+🚀 Starting Enculture Backend API...
+Environment: development
+Debug Mode: True
+INFO:     127.0.0.1:52822 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52824 - "GET /health HTTP/1.1" 200 OK
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1164551c0>
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1164551c0>
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1162cd1c0>
+2025-09-07 04:29:39 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1162cd1c0>
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:39 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:29:45 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_c4acdf74db8f6f0c2c6c85b15664a881'), (b'openai-processing-ms', b'5654'), (b'x-envoy-upstream-service-time', b'5656'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=ubJWrpH4xSEcnTKMhqnVHbWygxwrrH_WmXrpIQq43AQ-1757244585-1.0.1.1-LLHtkbsPe_roLCqZRDm7TV.sTvzsK2HZu0Cr1jDIU8ADC.VnN0mDjY7YfjjU0GPQvQ1eqd3gVxq230ixCvjrCI9bpPi_8l9jD2j2A9uQA_E; path=/; expires=Sun, 07-Sep-25 11:59:45 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=ffDAuau3o.CyLbISNl_wyeTl9zXpnLb_yQONLFiLJ5o-1757244585367-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5de9e8b85ec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:29:45 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_c4acdf74db8f6f0c2c6c85b15664a881'), (b'openai-processing-ms', b'5654'), (b'x-envoy-upstream-service-time', b'5656'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=ubJWrpH4xSEcnTKMhqnVHbWygxwrrH_WmXrpIQq43AQ-1757244585-1.0.1.1-LLHtkbsPe_roLCqZRDm7TV.sTvzsK2HZu0Cr1jDIU8ADC.VnN0mDjY7YfjjU0GPQvQ1eqd3gVxq230ixCvjrCI9bpPi_8l9jD2j2A9uQA_E; path=/; expires=Sun, 07-Sep-25 11:59:45 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=ffDAuau3o.CyLbISNl_wyeTl9zXpnLb_yQONLFiLJ5o-1757244585367-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5de9e8b85ec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:52826 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52842 - "POST /api/v1/chat/threads HTTP/1.1" 200 OK
+2025-09-07 04:29:45 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:29:45 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 35253633-9b20-43fb-8e86-df9c9d9197f1
+2025-09-07 04:29:45 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 35253633-9b20-43fb-8e86-df9c9d9197f1
+INFO:     127.0.0.1:52844 - "POST /api/v1/chat/stream-with-thread?thread_id=35253633-9b20-43fb-8e86-df9c9d9197f1&prompt=hello HTTP/1.1" 200 OK
+2025-09-07 04:29:45 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:29:45 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:45 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:46 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:29:46 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:29:48 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_5be9e137da1a42af7e688d9005d9adcd'), (b'openai-processing-ms', b'2533'), (b'x-envoy-upstream-service-time', b'2535'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5dec4e885ec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:29:48 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_5be9e137da1a42af7e688d9005d9adcd'), (b'openai-processing-ms', b'2533'), (b'x-envoy-upstream-service-time', b'2535'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5dec4e885ec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:29:48 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:29:49 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:29:51 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_headers.complete
+INFO:     127.0.0.1:52886 - "GET /api/v1/chat/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:51 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+INFO:     127.0.0.1:52886 - "GET /api/v1/chat/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52886 - "OPTIONS /api/v1/chat/threads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52888 - "OPTIONS /api/v1/chat/threads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52886 - "POST /api/v1/chat/threads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52888 - "POST /api/v1/chat/threads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52888 - "GET /api/v1/chat/threads/recent?limit=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52886 - "GET /api/v1/chat/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 04:29:51 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:29:56 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:29:57 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449500'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_2290792bcec9bf3fdf1a42cf6ea2ccf5'), (b'openai-processing-ms', b'6109'), (b'x-envoy-upstream-service-time', b'6112'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5dee8fbb0ec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:29:57 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449500'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_2290792bcec9bf3fdf1a42cf6ea2ccf5'), (b'openai-processing-ms', b'6109'), (b'x-envoy-upstream-service-time', b'6112'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5dee8fbb0ec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:52885 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:29:57 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+INFO:     127.0.0.1:52943 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=fa084039-7c61-400a-9b50-2d63a2ac2086&prompt=hi HTTP/1.1" 200 OK
+2025-09-07 04:30:01 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread fa084039-7c61-400a-9b50-2d63a2ac2086
+2025-09-07 04:30:01 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread fa084039-7c61-400a-9b50-2d63a2ac2086
+INFO:     127.0.0.1:52943 - "POST /api/v1/chat/stream-with-thread?thread_id=fa084039-7c61-400a-9b50-2d63a2ac2086&prompt=hi HTTP/1.1" 200 OK
+2025-09-07 04:30:01 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:30:01 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11680f760>
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11680f760>
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11680f6d0>
+2025-09-07 04:30:01 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11680f6d0>
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:01 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:02 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:03 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f63cb7668f477d99fb40fb6673092737'), (b'openai-processing-ms', b'1193'), (b'x-envoy-upstream-service-time', b'1197'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5df2a0fcdc379-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:03 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f63cb7668f477d99fb40fb6673092737'), (b'openai-processing-ms', b'1193'), (b'x-envoy-upstream-service-time', b'1197'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5df2a0fcdc379-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:30:03 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167b16d0>
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167b16d0>
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x1100999e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x1100999e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167b16a0>
+2025-09-07 04:30:04 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167b16a0>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:04 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_46ff80252de6f338e5185d18f5d9fdb3'), (b'openai-processing-ms', b'6420'), (b'x-envoy-upstream-service-time', b'6424'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5df10398fec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:04 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_46ff80252de6f338e5185d18f5d9fdb3'), (b'openai-processing-ms', b'6420'), (b'x-envoy-upstream-service-time', b'6424'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5df10398fec44-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:52885 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:04 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449858'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'18ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_6a17b9e68485ea40b19d93788efa0ecb'), (b'openai-processing-ms', b'727'), (b'x-envoy-upstream-service-time', b'731'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=hmlZTG3mYzeXnTl24DUYc8CJ649xd5OkrKM0XZ_Nz7A-1757244604-1.0.1.1-3oJSKzyDSxVUhY_fe19GjDYQy9xmQsRV.LSppFrrMVe_bL.8ziBn3YxK0yomr8HRtyX_CHxuPbRaT3YI6m..kvfdQQ3jHgh.ky_5DtrWU3Q; path=/; expires=Sun, 07-Sep-25 12:00:04 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=Ugu4yGmyXYrInT686jzydByjyvVlo7q9DB16yWJei6U-1757244604900-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5df378c857688-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:04 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449858'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'18ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_6a17b9e68485ea40b19d93788efa0ecb'), (b'openai-processing-ms', b'727'), (b'x-envoy-upstream-service-time', b'731'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=hmlZTG3mYzeXnTl24DUYc8CJ649xd5OkrKM0XZ_Nz7A-1757244604-1.0.1.1-3oJSKzyDSxVUhY_fe19GjDYQy9xmQsRV.LSppFrrMVe_bL.8ziBn3YxK0yomr8HRtyX_CHxuPbRaT3YI6m..kvfdQQ3jHgh.ky_5DtrWU3Q; path=/; expires=Sun, 07-Sep-25 12:00:04 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=Ugu4yGmyXYrInT686jzydByjyvVlo7q9DB16yWJei6U-1757244604900-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5df378c857688-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:30:04 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:52943 - "GET /api/v1/chat/threads/recent?limit=10 HTTP/1.1" 200 OK
+2025-09-07 04:30:05 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:30:07 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+INFO:     127.0.0.1:52943 - "GET /api/v1/chat/threads/832034eb-6afb-4457-b737-b4f2b0a7c96a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53005 - "GET /api/v1/chat/threads/be36c16b-a311-439b-b062-2da98c6681ae HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53005 - "GET /api/v1/chat/threads/832034eb-6afb-4457-b737-b4f2b0a7c96a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53005 - "GET /api/v1/chat/threads/7ac4428f-d1df-4326-b008-05a89232a891 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /api/v1/chat/threads/f6e00a3e-259b-4e0c-977f-2623a00feec9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /api/v1/chat/threads/3654c532-1941-4b24-8153-05c0b759df88 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /api/v1/chat/threads/fa084039-7c61-400a-9b50-2d63a2ac2086 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53023 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=fa084039-7c61-400a-9b50-2d63a2ac2086&prompt=give%20me%20details%20about%20jeff%20bezos%20and%20lauren%20sanchez%20wedding HTTP/1.1" 200 OK
+2025-09-07 04:30:27 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread fa084039-7c61-400a-9b50-2d63a2ac2086
+2025-09-07 04:30:27 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread fa084039-7c61-400a-9b50-2d63a2ac2086
+INFO:     127.0.0.1:53023 - "POST /api/v1/chat/stream-with-thread?thread_id=fa084039-7c61-400a-9b50-2d63a2ac2086&prompt=give%20me%20details%20about%20jeff%20bezos%20and%20lauren%20sanchez%20wedding HTTP/1.1" 200 OK
+2025-09-07 04:30:27 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:30:27 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.started
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.started
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.complete
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.complete
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.started
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.started
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.complete
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - close.complete
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167c95e0>
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167c95e0>
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167c9550>
+2025-09-07 04:30:27 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167c9550>
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:27 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:27 - watchfiles.main - DEBUG - 2 changes detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json'), (<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:35 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449415'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'78ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_de5e41f5101b53e2a252d0cdee6b174d'), (b'openai-processing-ms', b'8123'), (b'x-envoy-upstream-service-time', b'8126'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5dfc99cebd7dd-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:30:35 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449415'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'78ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_de5e41f5101b53e2a252d0cdee6b174d'), (b'openai-processing-ms', b'8123'), (b'x-envoy-upstream-service-time', b'8126'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5dfc99cebd7dd-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:30:35 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:30:44 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:30:48 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+2025-09-07 04:30:57 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread fa084039-7c61-400a-9b50-2d63a2ac2086
+2025-09-07 04:30:57 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread fa084039-7c61-400a-9b50-2d63a2ac2086
+INFO:     127.0.0.1:53031 - "POST /api/v1/chat/stream-with-thread?thread_id=fa084039-7c61-400a-9b50-2d63a2ac2086&prompt=hi HTTP/1.1" 200 OK
+2025-09-07 04:30:57 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:30:57 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - close.started
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - close.started
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - close.complete
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - close.complete
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167cf130>
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167cf130>
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10ff96970> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167c2bb0>
+2025-09-07 04:30:57 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1167c2bb0>
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:57 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 04:30:57 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:31:00 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'448452'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'206ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f808da63cc032bceef69acaebfc00a53'), (b'openai-processing-ms', b'2716'), (b'x-envoy-upstream-service-time', b'2719'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5e08519b1ba3f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 07 Sep 2025 11:31:00 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'448452'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'206ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f808da63cc032bceef69acaebfc00a53'), (b'openai-processing-ms', b'2716'), (b'x-envoy-upstream-service-time', b'2719'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97b5e08519b1ba3f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:31:00 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 04:31:01 - watchfiles.main - DEBUG - 2 changes detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json'), (<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}
+2025-09-07 04:31:06 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/.DS_Store')}

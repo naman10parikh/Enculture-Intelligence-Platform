@@ -25,8 +25,8 @@ from app.services.chat_thread_service import ChatThreadService
 router = APIRouter()
 logger = get_logger(__name__)
 
-# Initialize chat thread service
-chat_thread_service = ChatThreadService()
+# Import the shared instance from chat_threads to ensure consistency
+from app.api.v1.endpoints.chat_threads import chat_thread_service
 
 
 @router.post("/stream")

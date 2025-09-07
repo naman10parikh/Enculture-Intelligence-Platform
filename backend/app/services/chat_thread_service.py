@@ -186,22 +186,14 @@ class ChatThreadService:
             def call_openai():
                 response = self.openai_client.responses.create(
                     model=self.settings.openai_model,
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": """Generate a concise 3-5 word title for this chat conversation. 
-                            The title should capture the main topic or question being discussed.
-                            Be specific and descriptive but brief.
-                            Examples: "Culture Survey Creation", "Team Engagement Analysis", "Onboarding Feedback Discussion"
-                            Return only the title, no quotes or additional text."""
-                        },
-                        {
-                            "role": "user",
-                            "content": f"User: {first_message}\n\nAI: {ai_response[:200]}..."
-                        }
-                    ]
+                    input=f"User: {first_message}\n\nAI: {ai_response[:200]}...",
+                    instructions="""Generate a concise 3-5 word title for this chat conversation. 
+                    The title should capture the main topic or question being discussed.
+                    Be specific and descriptive but brief.
+                    Examples: "Culture Survey Creation", "Team Engagement Analysis", "Onboarding Feedback Discussion"
+                    Return only the title, no quotes or additional text."""
                 )
-                return response.choices[0].message.content.strip()
+                return response.output_text.strip()
 
             title = await asyncio.get_event_loop().run_in_executor(None, call_openai)
             
