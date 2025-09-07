@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X } from 'lucide-react'
+import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -57,6 +57,9 @@ function AIChat() {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [isSearching, setIsSearching] = useState(false)
+  const [editingMessageId, setEditingMessageId] = useState(null)
+  const [editText, setEditText] = useState('')
+  const [copiedMessageId, setCopiedMessageId] = useState(null)
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
@@ -540,6 +543,108 @@ function AIChat() {
     setInputValue(command)
   }
 
+  // Message action handlers
+  const handleCopyMessage = async (content) => {
+    try {
+      await navigator.clipboard.writeText(content)
+      setCopiedMessageId(content.substring(0, 20)) // Use content snippet as ID
+      setTimeout(() => setCopiedMessageId(null), 2000)
+    } catch (error) {
+      console.error('Failed to copy message:', error)
+    }
+  }
+
+  const handleEditMessage = (messageId, content) => {
+    setEditingMessageId(messageId)
+    setEditText(content)
+  }
+
+  const handleSaveEdit = async (messageId) => {
+    if (!editText.trim()) return
+
+    // Update the message content
+    setMessages(prev => 
+      prev.map(msg => 
+        msg.id === messageId 
+          ? { ...msg, content: editText.trim() }
+          : msg
+      )
+    )
+    
+    setEditingMessageId(null)
+    setEditText('')
+  }
+
+  const handleCancelEdit = () => {
+    setEditingMessageId(null)
+    setEditText('')
+  }
+
+  const handleRegenerateResponse = async (messageIndex) => {
+    if (!currentThreadId) return
+    
+    // Find the user message that triggered this AI response
+    const userMessage = messages[messageIndex - 1]
+    if (!userMessage || userMessage.type !== 'user') return
+
+    try {
+      setIsTyping(true)
+      
+      // Remove the AI response and any messages after it
+      const messagesUpToUser = messages.slice(0, messageIndex)
+      setMessages(messagesUpToUser)
+
+      // Add empty AI message to start streaming into
+      const aiMessageId = `ai-${Date.now()}`
+      const aiMessage = {
+        id: aiMessageId,
+        type: 'ai',
+        content: '',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, aiMessage])
+
+      // Stream response from backend
+      let fullResponse = ''
+      
+      await chatThreadsApi.streamChatWithThread(
+        currentThreadId,
+        userMessage.content,
+        (data) => {
+          if (data.content) {
+            fullResponse += data.content
+            
+            // Stop typing animation on first content chunk
+            if (isTyping) {
+              setIsTyping(false)
+            }
+            
+            // Update the AI message with streamed content
+            setMessages(prev => 
+              prev.map(msg => 
+                msg.id === aiMessageId 
+                  ? { ...msg, content: fullResponse }
+                  : msg
+              )
+            )
+          }
+          
+          if (data.done) {
+            setIsTyping(false)
+          }
+          
+          if (data.error) {
+            console.error('Regeneration error:', data.error)
+            setIsTyping(false)
+          }
+        }
+      )
+    } catch (error) {
+      console.error('Regeneration failed:', error)
+      setIsTyping(false)
+    }
+  }
+
   const toggleSidebar = () => {
     setSidebarExpanded(!sidebarExpanded)
   }
@@ -638,22 +743,27 @@ function AIChat() {
                   searchResults.map(thread => (
                     <div 
                       key={thread.id}
-                      className={`thread-item ${thread.id === currentThreadId ? 'active' : ''}`}
+                      className={`thread-item search-result ${thread.id === currentThreadId ? 'active' : ''}`}
                       onClick={() => switchToThread(thread.id)}
                     >
                       <div className="thread-content">
                         <span className="thread-title">{thread.title || 'Untitled Chat'}</span>
-                        <span className="thread-snippet">{thread.lastMessage || 'No messages yet'}</span>
+                        <span className="thread-snippet search-snippet">
+                          {thread.lastMessage || 'No messages yet'}
+                        </span>
                       </div>
-                      <button 
-                        className="delete-thread-btn"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          deleteThread(thread.id)
-                        }}
-                      >
-                        <X size={12} />
-                      </button>
+                      <div className="thread-actions">
+                        <button 
+                          className="thread-action-btn"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            deleteThread(thread.id)
+                          }}
+                          title="Delete conversation"
+                        >
+                          <X size={14} />
+                        </button>
+                      </div>
                     </div>
                   ))
                 ) : (
@@ -674,15 +784,18 @@ function AIChat() {
                               {new Date(thread.updated_at).toLocaleDateString()}
                             </span>
                           </div>
-                          <button 
-                            className="delete-thread-btn"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              deleteThread(thread.id)
-                            }}
-                          >
-                            <X size={12} />
-                          </button>
+                          <div className="thread-actions">
+                            <button 
+                              className="thread-action-btn"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                deleteThread(thread.id)
+                              }}
+                              title="Delete conversation"
+                            >
+                              <X size={14} />
+                            </button>
+                          </div>
                         </div>
                       ))}
                       {recentThreads.length === 0 && !threadsLoading && (
@@ -697,57 +810,121 @@ function AIChat() {
         </aside>
 
         <div className="chat-messages">
-          {messages.map((message) => {
+          {messages.map((message, messageIndex) => {
             // Don't render AI messages that are empty/being prepared
             if (message.type === 'ai' && (!message.content || message.content.trim() === '')) {
               return null;
             }
             
             const { cleanContent, citations } = message.type === 'ai' ? parseCitations(message.content) : { cleanContent: message.content, citations: [] };
+            const isEditing = editingMessageId === message.id;
+            const isCopied = copiedMessageId === cleanContent.substring(0, 20);
             
             return (
               <div key={message.id} className={`message ${message.type}-message`}>
                 <div className="message-bubble glass-bubble">
-                  {message.type === 'ai' ? (
-                    <>
-                      <div className="markdown-content">
-                        <ReactMarkdown 
-                          remarkPlugins={[remarkGfm]}
-                          rehypePlugins={[rehypeHighlight]}
-                          components={markdownComponents}
+                  {isEditing ? (
+                    <div className="edit-mode">
+                      <textarea
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        className="edit-textarea"
+                        rows={4}
+                        autoFocus
+                      />
+                      <div className="edit-actions">
+                        <button 
+                          className="edit-save-btn"
+                          onClick={() => handleSaveEdit(message.id)}
                         >
-                          {cleanContent}
-                        </ReactMarkdown>
+                          <Check size={14} />
+                          Save
+                        </button>
+                        <button 
+                          className="edit-cancel-btn"
+                          onClick={handleCancelEdit}
+                        >
+                          <X size={14} />
+                          Cancel
+                        </button>
                       </div>
-                      {/* Display citations if any */}
-                      {citations.length > 0 && (
-                        <div className="citations-section">
-                          <div className="citations-header">Sources:</div>
-                          <div className="citations-list">
-                            {citations.map((citation, index) => (
-                              <a 
-                                key={index}
-                                href={citation.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="citation-link"
-                              >
-                                <span className="citation-number">{index + 1}</span>
-                                <span className="citation-title">{citation.title}</span>
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </>
+                    </div>
                   ) : (
-                    <p>{message.content}</p>
-                  )}
-                  {/* Only show timestamp if message has content */}
-                  {message.content && message.content.trim() && (
-                    <span className="message-time">
-                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </span>
+                    <>
+                      {message.type === 'ai' ? (
+                        <>
+                          <div className="markdown-content">
+                            <ReactMarkdown 
+                              remarkPlugins={[remarkGfm]}
+                              rehypePlugins={[rehypeHighlight]}
+                              components={markdownComponents}
+                            >
+                              {cleanContent}
+                            </ReactMarkdown>
+                          </div>
+                          {/* Display citations if any */}
+                          {citations.length > 0 && (
+                            <div className="citations-section">
+                              <div className="citations-header">Sources:</div>
+                              <div className="citations-list">
+                                {citations.map((citation, index) => (
+                                  <a 
+                                    key={index}
+                                    href={citation.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="citation-link"
+                                  >
+                                    <span className="citation-number">{index + 1}</span>
+                                    <span className="citation-title">{citation.title}</span>
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <p>{message.content}</p>
+                      )}
+                      
+                      {/* Message actions and timestamp row */}
+                      <div className="message-footer">
+                        <div className="message-actions">
+                          <button 
+                            className={`action-btn copy-btn ${isCopied ? 'copied' : ''}`}
+                            onClick={() => handleCopyMessage(cleanContent)}
+                            title="Copy message"
+                          >
+                            {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                          </button>
+                          
+                          <button 
+                            className="action-btn edit-btn"
+                            onClick={() => handleEditMessage(message.id, cleanContent)}
+                            title="Edit message"
+                          >
+                            <Edit3 size={14} />
+                          </button>
+                          
+                          {message.type === 'ai' && (
+                            <button 
+                              className="action-btn regenerate-btn"
+                              onClick={() => handleRegenerateResponse(messageIndex)}
+                              title="Regenerate response"
+                            >
+                              <RotateCcw size={14} />
+                            </button>
+                          )}
+                        </div>
+                        
+                        {/* Only show timestamp if message has content */}
+                        {message.content && message.content.trim() && (
+                          <span className="message-time">
+                            {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </span>
+                        )}
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
@@ -977,7 +1154,10 @@ function AIChat() {
           flex-direction: column;
           gap: var(--space-4);
         }
-        .canvas-open .chat-messages { margin-right: 460px; }
+        .canvas-open .chat-messages { 
+          margin-right: 460px; 
+          transition: margin-right 0.3s ease;
+        }
 
         .message {
           display: flex;
@@ -1101,7 +1281,10 @@ function AIChat() {
          .survey-actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-6); }
          .settings-view .form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: var(--space-4); }
 
-         .canvas-open .chat-input-area { right: 460px; }
+          .canvas-open .chat-input-area { 
+            right: 480px; 
+            transition: right 0.3s ease;
+          }
          @media (max-width: 1024px) {
            .canvas-pane.open { width: 92vw; right: var(--space-2); left: var(--space-2); }
            .canvas-open .chat-input-area { right: var(--space-4); }
@@ -1316,74 +1499,104 @@ function AIChat() {
          /* Thread Item Styles */
          .thread-item {
            display: flex;
-           align-items: center;
+           align-items: flex-start;
            justify-content: space-between;
-           padding: 10px 12px;
-           border-radius: 8px;
+           padding: 12px 14px;
+           border-radius: 10px;
            background: transparent;
            cursor: pointer;
-           transition: all 0.2s ease;
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
            position: relative;
-           min-height: 48px;
+           border: 1px solid transparent;
+           margin-bottom: 2px;
          }
          
          .thread-item:hover {
-           background: rgba(239, 242, 247, 0.7);
+           background: rgba(248, 250, 252, 0.8);
+           border-color: rgba(226, 232, 240, 0.3);
+           transform: translateX(2px);
          }
          
          .thread-item.active {
-           background: rgba(139, 92, 246, 0.1);
-           border-left: 3px solid rgba(139, 92, 246, 0.6);
+           background: rgba(139, 92, 246, 0.08);
+           border-color: rgba(139, 92, 246, 0.2);
+           border-left: 3px solid rgba(139, 92, 246, 0.7);
+           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+         }
+         
+         .thread-item.search-result {
+           background: rgba(252, 252, 253, 0.9);
          }
          
          .thread-content {
            flex: 1;
            display: flex;
            flex-direction: column;
-           gap: 2px;
+           gap: 4px;
            margin-right: 8px;
            min-width: 0;
          }
          
          .thread-title {
-           font-size: 0.9em;
+           font-size: 0.95em;
            font-weight: 500;
            color: var(--text-primary);
            white-space: nowrap;
            overflow: hidden;
            text-overflow: ellipsis;
+           line-height: 1.3;
          }
          
          .thread-snippet {
-           font-size: 0.75em;
+           font-size: 0.8em;
            color: var(--text-secondary);
            white-space: nowrap;
            overflow: hidden;
            text-overflow: ellipsis;
+           line-height: 1.2;
+           opacity: 0.7;
          }
          
-         .delete-thread-btn {
+         .search-snippet {
+           font-style: italic;
+           color: rgba(139, 92, 246, 0.7);
+         }
+         
+         .thread-actions {
+           display: flex;
+           gap: 4px;
+           opacity: 0;
+           transition: opacity 0.2s ease;
+         }
+         
+         .thread-item:hover .thread-actions {
+           opacity: 1;
+         }
+         
+         .thread-action-btn {
            background: none;
            border: none;
            color: var(--text-secondary);
            cursor: pointer;
-           padding: 6px;
-           border-radius: 4px;
-           opacity: 0;
-           transition: all 0.2s ease;
+           padding: 6px 8px;
+           border-radius: 6px;
            display: flex;
            align-items: center;
            justify-content: center;
-           flex-shrink: 0;
+           transition: all 0.2s ease;
          }
          
-         .thread-item:hover .delete-thread-btn {
-           opacity: 1;
-         }
-         
-         .delete-thread-btn:hover {
+         .thread-action-btn:hover {
            background: rgba(239, 68, 68, 0.1);
            color: rgb(239, 68, 68);
+         }
+         
+         .thread-item.active .thread-title {
+           color: rgba(139, 92, 246, 0.9);
+         }
+         
+         .thread-item:hover .thread-title {
+           color: var(--text-primary);
          }
          
          .new-chat-btn {
@@ -1406,11 +1619,11 @@ function AIChat() {
 
          /* Properly shift chat content when panel is open to prevent overlap */
          .panel-open .chat-input-area { 
-           left: calc(288px + 48px + var(--space-2));  /* Account for collapsed panel width */
+           left: calc(288px + 280px + var(--space-3));  /* Account for expanded panel width */
            transition: left 0.25s ease; 
          }
          .panel-open .chat-messages { 
-           margin-left: 48px;  /* Minimal margin for collapsed panel */
+           margin-left: calc(280px + var(--space-2));  /* Full margin for expanded panel */
            transition: margin-left 0.25s ease; 
          }
          .chat-container:not(.panel-open) .chat-messages { 
@@ -1496,10 +1709,11 @@ function AIChat() {
           line-height: 1.5;
         }
 
-        .message-time {
-          font-size: var(--text-xs);
-          opacity: 0.7;
-        }
+         .message-time {
+           font-size: 0.75em;
+           color: var(--text-secondary);
+           opacity: 0.6;
+         }
 
         /* Markdown Content Styling */
         .markdown-content {
@@ -1517,23 +1731,90 @@ function AIChat() {
           color: var(--text-primary);
         }
 
-        .markdown-content h1 { font-size: 1.5em; }
-        .markdown-content h2 { font-size: 1.3em; }
-        .markdown-content h3 { font-size: 1.2em; }
+         .markdown-content h1 { 
+           font-size: 1.4em; 
+           border-bottom: 2px solid rgba(226, 232, 240, 0.6);
+           padding-bottom: 0.3em;
+           margin: 1.2em 0 0.8em 0;
+         }
+         .markdown-content h2 { 
+           font-size: 1.25em; 
+           border-bottom: 1px solid rgba(226, 232, 240, 0.4);
+           padding-bottom: 0.2em;
+           margin: 1em 0 0.6em 0;
+         }
+         .markdown-content h3 { 
+           font-size: 1.1em; 
+           margin: 0.8em 0 0.4em 0;
+         }
 
-        .markdown-content p {
-          margin: 0 0 1em 0;
-        }
+         .markdown-content p {
+           margin: 0 0 1.2em 0;
+           line-height: 1.7;
+         }
 
-        .markdown-content ul,
-        .markdown-content ol {
-          margin: 0.5em 0;
-          padding-left: 1.5em;
-        }
+         .markdown-content ul,
+         .markdown-content ol {
+           margin: 0.8em 0;
+           padding-left: 1.5em;
+           line-height: 1.6;
+         }
 
-        .markdown-content li {
-          margin: 0.25em 0;
-        }
+         .markdown-content ul {
+           list-style-type: disc;
+         }
+
+         .markdown-content ul ul {
+           list-style-type: circle;
+           margin: 0.3em 0;
+         }
+
+         .markdown-content ul ul ul {
+           list-style-type: square;
+         }
+
+         .markdown-content ol {
+           list-style-type: decimal;
+         }
+
+         .markdown-content li {
+           margin: 0.4em 0;
+           padding-left: 0.2em;
+         }
+
+         .markdown-content li p {
+           margin: 0.2em 0;
+         }
+
+         .markdown-content hr {
+           border: none;
+           border-top: 2px solid rgba(226, 232, 240, 0.6);
+           margin: 1.5em 0;
+         }
+
+         .markdown-content table {
+           border-collapse: collapse;
+           width: 100%;
+           margin: 1.2em 0;
+           border-radius: 8px;
+           overflow: hidden;
+         }
+
+         .markdown-content th,
+         .markdown-content td {
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           padding: 0.8em;
+           text-align: left;
+         }
+
+         .markdown-content th {
+           background: rgba(248, 250, 252, 0.8);
+           font-weight: 600;
+         }
+
+         .markdown-content tr:nth-child(even) {
+           background: rgba(248, 250, 252, 0.4);
+         }
 
         .markdown-content blockquote {
           border-left: 3px solid rgba(139, 92, 246, 0.3);
@@ -1595,69 +1876,185 @@ function AIChat() {
           text-decoration: underline;
         }
 
-        /* Citations Styling */
-        .citations-section {
-          margin-top: 1.5em;
-          padding-top: 1em;
-          border-top: 1px solid rgba(226, 232, 240, 0.4);
-        }
+         /* Citations Styling */
+         .citations-section {
+           margin-top: 1em;
+           padding-top: 0.5em;
+         }
 
-        .citations-header {
-          font-size: 0.85em;
-          font-weight: 600;
-          color: var(--text-secondary);
-          margin-bottom: 0.5em;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
+         .citations-header {
+           font-size: 0.75em;
+           font-weight: 500;
+           color: var(--text-secondary);
+           margin-bottom: 0.5em;
+           opacity: 0.8;
+         }
 
-        .citations-list {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5em;
-        }
+         .citations-list {
+           display: flex;
+           flex-wrap: wrap;
+           gap: 0.5em;
+         }
 
-        .citation-link {
-          display: flex;
-          align-items: center;
-          gap: 0.5em;
-          padding: 0.5em 0.75em;
-          background: rgba(139, 92, 246, 0.05);
-          border: 1px solid rgba(139, 92, 246, 0.2);
-          border-radius: 8px;
-          text-decoration: none;
-          color: var(--text-primary);
-          transition: all 0.2s ease;
-          font-size: 0.9em;
-        }
+         .citation-link {
+           display: inline-flex;
+           align-items: center;
+           gap: 0.25em;
+           padding: 0.25em 0.5em;
+           background: rgba(139, 92, 246, 0.08);
+           border: 1px solid rgba(139, 92, 246, 0.15);
+           border-radius: 12px;
+           text-decoration: none;
+           color: rgba(139, 92, 246, 0.8);
+           transition: all 0.2s ease;
+           font-size: 0.75em;
+           max-width: 200px;
+         }
 
-        .citation-link:hover {
-          background: rgba(139, 92, 246, 0.1);
-          border-color: rgba(139, 92, 246, 0.3);
-          transform: translateY(-1px);
-          box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
-        }
+         .citation-link:hover {
+           background: rgba(139, 92, 246, 0.12);
+           border-color: rgba(139, 92, 246, 0.25);
+         }
 
-        .citation-number {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 20px;
-          height: 20px;
-          background: rgba(139, 92, 246, 0.8);
-          color: white;
-          border-radius: 50%;
-          font-size: 0.75em;
-          font-weight: 600;
-          flex-shrink: 0;
-        }
+         .citation-number {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           width: 16px;
+           height: 16px;
+           background: rgba(139, 92, 246, 0.7);
+           color: white;
+           border-radius: 50%;
+           font-size: 0.65em;
+           font-weight: 600;
+           flex-shrink: 0;
+         }
 
-        .citation-title {
-          flex: 1;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
+         .citation-title {
+           overflow: hidden;
+           text-overflow: ellipsis;
+           white-space: nowrap;
+         }
+
+         /* Message Footer and Actions Styles */
+         .message-footer {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           margin-top: 8px;
+         }
+         
+         .message-actions {
+           display: flex;
+           gap: 2px;
+           opacity: 1;
+         }
+
+         .action-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           width: 28px;
+           height: 28px;
+           border: none;
+           background: transparent;
+           border-radius: 6px;
+           color: var(--text-secondary);
+           cursor: pointer;
+           transition: all 0.2s ease;
+           opacity: 0.6;
+         }
+
+         .action-btn:hover {
+           background: rgba(0, 0, 0, 0.05);
+           color: var(--text-primary);
+           opacity: 1;
+         }
+
+         .copy-btn.copied {
+           background: rgba(34, 197, 94, 0.1);
+           color: rgba(34, 197, 94, 0.8);
+           opacity: 1;
+         }
+
+         .regenerate-btn:hover {
+           background: rgba(59, 130, 246, 0.1);
+           color: rgba(59, 130, 246, 0.8);
+         }
+
+         /* Edit Mode Styles */
+         .edit-mode {
+           width: 100%;
+         }
+
+         .edit-textarea {
+           width: 100%;
+           min-height: 100px;
+           padding: 14px;
+           border: 1px solid rgba(139, 92, 246, 0.3);
+           border-radius: 10px;
+           background: rgba(255, 255, 255, 0.95);
+           font-family: inherit;
+           font-size: 0.9em;
+           line-height: 1.6;
+           color: var(--text-primary);
+           resize: vertical;
+           outline: none;
+           margin-bottom: 10px;
+           transition: all 0.2s ease;
+         }
+
+         .edit-textarea:focus {
+           border-color: rgba(139, 92, 246, 0.5);
+           background: rgba(255, 255, 255, 1);
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+
+         .edit-actions {
+           display: flex;
+           gap: 10px;
+           justify-content: flex-end;
+         }
+
+         .edit-save-btn {
+           display: flex;
+           align-items: center;
+           gap: 6px;
+           padding: 8px 16px;
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+           color: white;
+           border: none;
+           border-radius: 8px;
+           font-size: 0.85em;
+           font-weight: 500;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+
+         .edit-save-btn:hover {
+           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           transform: translateY(-1px);
+           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+         }
+
+         .edit-cancel-btn {
+           display: flex;
+           align-items: center;
+           gap: 6px;
+           padding: 8px 16px;
+           background: rgba(107, 114, 128, 0.1);
+           color: var(--text-secondary);
+           border: 1px solid rgba(107, 114, 128, 0.3);
+           border-radius: 8px;
+           font-size: 0.85em;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+
+         .edit-cancel-btn:hover {
+           background: rgba(107, 114, 128, 0.15);
+           border-color: rgba(107, 114, 128, 0.4);
+         }
 
          .chat-input-area {
            position: fixed;
