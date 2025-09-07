@@ -20,9 +20,10 @@ class Settings(BaseSettings):
     
     # OpenAI configuration
     openai_api_key: str = Field(..., env="OPENAI_API_KEY")
-    openai_model: str = Field(default="gpt-4", env="OPENAI_MODEL")  # Will update to gpt-5 when available
-    openai_max_tokens: int = Field(default=2048, env="OPENAI_MAX_TOKENS")
-    openai_temperature: float = Field(default=0.7, env="OPENAI_TEMPERATURE")
+    openai_model: str = Field(default="gpt-5", env="OPENAI_MODEL")  # Using GPT-5 with Responses API
+    # Let OpenAI API handle default max_tokens and temperature for optimal performance
+    # openai_max_tokens: int = Field(default=2048, env="OPENAI_MAX_TOKENS") 
+    # openai_temperature: float = Field(default=0.7, env="OPENAI_TEMPERATURE")
     
     # CORS settings
     frontend_url: str = Field(default="http://localhost:5173", env="FRONTEND_URL")

@@ -185,7 +185,7 @@ python test_setup.py
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `OPENAI_API_KEY` | OpenAI API key (required) | - |
-| `OPENAI_MODEL` | OpenAI model to use | `gpt-4` |
+| `OPENAI_MODEL` | OpenAI model to use | `gpt-5` |
 | `OPENAI_MAX_TOKENS` | Maximum tokens per response | `2048` |
 | `ENVIRONMENT` | Environment mode | `development` |
 | `DEBUG` | Enable debug mode | `True` |

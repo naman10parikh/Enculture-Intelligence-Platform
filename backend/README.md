@@ -142,7 +142,7 @@ backend/
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `OPENAI_API_KEY` | OpenAI API key (required) | - |
-| `OPENAI_MODEL` | OpenAI model to use | `gpt-4` |
+| `OPENAI_MODEL` | OpenAI model to use | `gpt-5` |
 | `OPENAI_MAX_TOKENS` | Maximum tokens per response | `2048` |
 | `OPENAI_TEMPERATURE` | Response creativity (0-1) | `0.7` |
 | `ENVIRONMENT` | Environment mode | `development` |

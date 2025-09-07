@@ -662,7 +662,7 @@ function AIChat() {
            top: var(--space-4);
            left: 320px;
            height: calc(100vh - var(--space-8));
-           z-index: 1000;
+           z-index: 100;  /* Reduced z-index to prevent overlap */
            background: rgba(255, 255, 255, 0.9);
            backdrop-filter: blur(16px);
            border: 1px solid rgba(226,232,240,0.5);
@@ -671,18 +671,34 @@ function AIChat() {
            overflow: hidden;
            display: flex;
            flex-direction: column;
-           transition: width 0.25s ease;
+           transition: width 0.25s ease, opacity 0.25s ease;
          }
-         .chat-panel.collapsed { width: 44px; background: transparent; border-color: transparent; box-shadow: none; }
-         .chat-panel.expanded { width: 260px; }
+         .chat-panel.collapsed { 
+           width: 0;  /* Take up no space when collapsed */
+           background: transparent;
+           border: none;
+           box-shadow: none;
+           overflow: visible;  /* Allow burger button to show outside */
+         }
+         .chat-panel.collapsed .panel-header {
+           position: absolute;  /* Position burger button absolutely */
+           background: rgba(255,255,255,0.95);
+           border: 1px solid rgba(226,232,240,0.6);
+           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+         }
+         .chat-panel.expanded { 
+           width: 260px; 
+           background: rgba(255, 255, 255, 0.95);  /* More opaque when expanded */
+         }
          .panel-header {
            display: flex; align-items: center; justify-content: center;
            width: 44px; height: 44px;
            cursor: pointer; color: var(--text-secondary);
-           background: rgba(255,255,255,0.9);
+           background: rgba(255,255,255,0.95);
            border: 1px solid rgba(226,232,240,0.6);
            border-radius: 12px;
            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+           transition: all 0.2s ease;
          }
          .chat-panel.expanded .panel-header {
            width: auto;
@@ -715,10 +731,23 @@ function AIChat() {
          .history-list { margin-top: var(--space-2); display: flex; flex-direction: column; gap: 6px; }
          .history-item { padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(226,232,240,0.6); background: rgba(248,250,252,0.6); color: var(--text-secondary); }
 
-         /* Shift chat content when panel open; no overlap */
-         .panel-open .chat-input-area { left: calc(320px + 260px + var(--space-4)); }
-         .panel-open .chat-messages { margin-left: 260px; }
-         .chat-container:not(.panel-open) .chat-messages { margin-left: 0; }
+         /* Properly shift chat content when panel is open to prevent overlap */
+         .panel-open .chat-input-area { 
+           left: calc(320px + 48px + var(--space-4));  /* Account for collapsed panel width */
+           transition: left 0.25s ease; 
+         }
+         .panel-open .chat-messages { 
+           margin-left: 48px;  /* Minimal margin for collapsed panel */
+           transition: margin-left 0.25s ease; 
+         }
+         .chat-container:not(.panel-open) .chat-messages { 
+           margin-left: 0; 
+           transition: margin-left 0.25s ease; 
+         }
+         .chat-container:not(.panel-open) .chat-input-area { 
+           left: 320px; 
+           transition: left 0.25s ease; 
+         }
 
          .enable-survey-btn {
            background: #301934;
