@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
 import { chatService } from '../services/api'
 
 const chatThreads = [
@@ -212,6 +215,36 @@ function AIChat() {
     return responses[Math.floor(Math.random() * responses.length)]
   }
 
+  // Function to parse and extract citations from AI responses
+  const parseCitations = (content) => {
+    if (!content) return { cleanContent: content, citations: [] };
+
+    // Regex patterns to detect common citation formats
+    const urlPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const sourcePattern = /\*\*Sources?:\*\*[\s\S]*$/i;
+    
+    const citations = [];
+    let cleanContent = content;
+
+    // Extract markdown links as citations
+    let match;
+    while ((match = urlPattern.exec(content)) !== null) {
+      citations.push({
+        title: match[1],
+        url: match[2],
+        type: 'link'
+      });
+    }
+
+    // Remove "Sources:" section if it exists
+    const sourcesMatch = sourcePattern.exec(content);
+    if (sourcesMatch) {
+      cleanContent = content.substring(0, sourcesMatch.index).trim();
+    }
+
+    return { cleanContent, citations };
+  }
+
   const handleSuggestionClick = (command) => {
     if (command === '/survey') {
       openCanvasForSurvey('draft')
@@ -297,16 +330,61 @@ function AIChat() {
         </aside>
 
         <div className="chat-messages">
-          {messages.map((message) => (
-            <div key={message.id} className={`message ${message.type}-message`}>
-              <div className="message-bubble glass-bubble">
-                <p>{message.content}</p>
-                <span className="message-time">
-                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </span>
+          {messages.map((message) => {
+            // Don't render AI messages that are empty/being prepared
+            if (message.type === 'ai' && (!message.content || message.content.trim() === '')) {
+              return null;
+            }
+            
+            const { cleanContent, citations } = message.type === 'ai' ? parseCitations(message.content) : { cleanContent: message.content, citations: [] };
+            
+            return (
+              <div key={message.id} className={`message ${message.type}-message`}>
+                <div className="message-bubble glass-bubble">
+                  {message.type === 'ai' ? (
+                    <>
+                      <div className="markdown-content">
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeHighlight]}
+                        >
+                          {cleanContent}
+                        </ReactMarkdown>
+                      </div>
+                      {/* Display citations if any */}
+                      {citations.length > 0 && (
+                        <div className="citations-section">
+                          <div className="citations-header">Sources:</div>
+                          <div className="citations-list">
+                            {citations.map((citation, index) => (
+                              <a 
+                                key={index}
+                                href={citation.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="citation-link"
+                              >
+                                <span className="citation-number">{index + 1}</span>
+                                <span className="citation-title">{citation.title}</span>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <p>{message.content}</p>
+                  )}
+                  {/* Only show timestamp if message has content */}
+                  {message.content && message.content.trim() && (
+                    <span className="message-time">
+                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           
           {isTyping && (
             <div className="message ai-message">
@@ -551,9 +629,11 @@ function AIChat() {
          }
 
          .ai-message .message-bubble {
-           background: transparent;
-           border: none;
-           padding: var(--space-2) 0;
+           background: rgba(255, 255, 255, 0.8);  /* Visible glass background */
+           border: 1px solid rgba(226, 232, 240, 0.6);  /* Subtle border */
+           backdrop-filter: blur(10px);  /* Glass effect */
+           padding: var(--space-4) var(--space-5);  /* Proper padding */
+           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);  /* Soft shadow */
          }
 
          .user-message .message-bubble {
@@ -823,6 +903,164 @@ function AIChat() {
         .message-time {
           font-size: var(--text-xs);
           opacity: 0.7;
+        }
+
+        /* Markdown Content Styling */
+        .markdown-content {
+          line-height: 1.6;
+        }
+
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+          margin: 1em 0 0.5em 0;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+
+        .markdown-content h1 { font-size: 1.5em; }
+        .markdown-content h2 { font-size: 1.3em; }
+        .markdown-content h3 { font-size: 1.2em; }
+
+        .markdown-content p {
+          margin: 0 0 1em 0;
+        }
+
+        .markdown-content ul,
+        .markdown-content ol {
+          margin: 0.5em 0;
+          padding-left: 1.5em;
+        }
+
+        .markdown-content li {
+          margin: 0.25em 0;
+        }
+
+        .markdown-content blockquote {
+          border-left: 3px solid rgba(139, 92, 246, 0.3);
+          padding-left: 1em;
+          margin: 1em 0;
+          font-style: italic;
+          color: var(--text-secondary);
+        }
+
+        .markdown-content code {
+          background: rgba(139, 92, 246, 0.1);
+          padding: 0.2em 0.4em;
+          border-radius: 4px;
+          font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+          font-size: 0.9em;
+          color: var(--text-primary);
+        }
+
+        .markdown-content pre {
+          background: rgba(248, 250, 252, 0.8);
+          border: 1px solid rgba(226, 232, 240, 0.6);
+          border-radius: 8px;
+          padding: 1em;
+          overflow-x: auto;
+          margin: 1em 0;
+        }
+
+        .markdown-content pre code {
+          background: transparent;
+          padding: 0;
+          border-radius: 0;
+        }
+
+        .markdown-content table {
+          border-collapse: collapse;
+          width: 100%;
+          margin: 1em 0;
+          font-size: 0.9em;
+        }
+
+        .markdown-content th,
+        .markdown-content td {
+          border: 1px solid rgba(226, 232, 240, 0.6);
+          padding: 0.5em;
+          text-align: left;
+        }
+
+        .markdown-content th {
+          background: rgba(248, 250, 252, 0.8);
+          font-weight: 600;
+        }
+
+        .markdown-content a {
+          color: rgba(139, 92, 246, 0.8);
+          text-decoration: none;
+        }
+
+        .markdown-content a:hover {
+          text-decoration: underline;
+        }
+
+        /* Citations Styling */
+        .citations-section {
+          margin-top: 1.5em;
+          padding-top: 1em;
+          border-top: 1px solid rgba(226, 232, 240, 0.4);
+        }
+
+        .citations-header {
+          font-size: 0.85em;
+          font-weight: 600;
+          color: var(--text-secondary);
+          margin-bottom: 0.5em;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .citations-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5em;
+        }
+
+        .citation-link {
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+          padding: 0.5em 0.75em;
+          background: rgba(139, 92, 246, 0.05);
+          border: 1px solid rgba(139, 92, 246, 0.2);
+          border-radius: 8px;
+          text-decoration: none;
+          color: var(--text-primary);
+          transition: all 0.2s ease;
+          font-size: 0.9em;
+        }
+
+        .citation-link:hover {
+          background: rgba(139, 92, 246, 0.1);
+          border-color: rgba(139, 92, 246, 0.3);
+          transform: translateY(-1px);
+          box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+        }
+
+        .citation-number {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          background: rgba(139, 92, 246, 0.8);
+          color: white;
+          border-radius: 50%;
+          font-size: 0.75em;
+          font-weight: 600;
+          flex-shrink: 0;
+        }
+
+        .citation-title {
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
          .chat-input-area {
