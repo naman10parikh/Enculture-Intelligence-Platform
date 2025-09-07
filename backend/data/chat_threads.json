@@ -2126,34 +2126,34 @@
     "title": "New Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:22:11.530509",
-    "updated_at": "2025-09-07T21:22:11.530511",
+    "updated_at": "2025-09-07T21:41:16.677959",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "266c04b1-34ce-4dbc-ad44-e4dbc7f1e0f3": {
     "id": "266c04b1-34ce-4dbc-ad44-e4dbc7f1e0f3",
     "title": "New Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:22:11.535575",
-    "updated_at": "2025-09-07T21:22:11.535578",
+    "updated_at": "2025-09-07T21:41:16.236311",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "c2844d93-857f-4a8e-a5ab-0da58348b753": {
     "id": "c2844d93-857f-4a8e-a5ab-0da58348b753",
     "title": "New Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:22:43.702516",
-    "updated_at": "2025-09-07T21:22:43.702521",
+    "updated_at": "2025-09-07T21:41:15.775085",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "f4ad082b-b8a5-4421-8f8e-cf018e6405b7": {
     "id": "f4ad082b-b8a5-4421-8f8e-cf018e6405b7",
     "title": "Chat History Persistence Test",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:22:43.725482",
-    "updated_at": "2025-09-07T21:30:33.593745",
+    "updated_at": "2025-09-07T21:46:36.238659",
     "messages": [
       {
         "id": "1c072a40-f9a7-4447-a055-28605c868a96",
@@ -2190,6 +2190,42 @@
         "role": "assistant",
         "content": "Hello Emily! I'm here and ready to help you with any questions or culture intelligence tasks you have. How can I assist you today\u2014are you interested in analyzing recent employee feedback, reviewing cultural health metrics, or do you have another culture-related topic on your mind? Let me know how you'd like to proceed! ",
         "timestamp": "2025-09-07T21:30:33.593647"
+      },
+      {
+        "id": "1ead64ae-b87f-4faf-ace3-3af3fee3e6a8",
+        "role": "user",
+        "content": "Hello, this is Emily testing if I can send messages properly now!",
+        "timestamp": "2025-09-07T21:40:19.339063"
+      },
+      {
+        "id": "0f1bbd26-bec3-442a-8922-97be6b153e29",
+        "role": "assistant",
+        "content": "Hi Emily! Your message has come through perfectly\u2014everything is working as it should. If you'd like to test any other features (like culture data upload, survey analytics, generating insights, or privacy scenarios), just let me know what you'd like to try next. I'm here to ensure your experience is smooth, secure, and productive! Would you like to continue testing, or is there a specific culture intelligence task you'd like to explore now? ",
+        "timestamp": "2025-09-07T21:40:22.426993"
+      },
+      {
+        "id": "6e747022-e236-4994-9a8c-c1b3fbda13ce",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-07T21:41:20.162707"
+      },
+      {
+        "id": "8afb7c56-fae9-4ce0-a46d-a60c2cfeda37",
+        "role": "assistant",
+        "content": "It's going well, Emily! I'm here and ready to assist with anything you'd like\u2014whether it's more testing, demoing culture analytics, or digging into employee engagement insights. Just let me know what you want to work on next! Are you interested in trying out any specific culture intelligence features or do you want to continue testing messaging for now? ",
+        "timestamp": "2025-09-07T21:41:23.248170"
+      },
+      {
+        "id": "76df8b1c-d796-4715-8199-c8fb05156dad",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-07T21:46:33.867610"
+      },
+      {
+        "id": "50ff87e7-5654-4e5f-a515-faf263b28c8c",
+        "role": "assistant",
+        "content": "I'm doing well, thank you for asking! \ud83d\ude0a Ready to help you with anything related to company culture, employee feedback, or analytics. If you have any culture data you want to analyze, specific questions about engagement, or just want to continue testing, let me know how you'd like to proceed! What would you like to do next? ",
+        "timestamp": "2025-09-07T21:46:36.238572"
       }
     ],
     "is_active": true
@@ -2199,16 +2235,158 @@
     "title": "New Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:24:52.988028",
-    "updated_at": "2025-09-07T21:24:52.988030",
+    "updated_at": "2025-09-07T21:41:15.674241",
     "messages": [],
-    "is_active": true
+    "is_active": false
   },
   "5d24be12-3ffb-400f-b46a-10dc1edb216a": {
     "id": "5d24be12-3ffb-400f-b46a-10dc1edb216a",
     "title": "New Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-07T21:24:53.005209",
-    "updated_at": "2025-09-07T21:24:53.005216",
+    "updated_at": "2025-09-07T21:41:15.554162",
+    "messages": [],
+    "is_active": false
+  },
+  "ae215eba-112c-4741-9264-dcdf7a8b347a": {
+    "id": "ae215eba-112c-4741-9264-dcdf7a8b347a",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:38:47.137629",
+    "updated_at": "2025-09-07T21:38:48.835726",
+    "messages": [
+      {
+        "id": "b8e4029d-d0c5-48c8-8f67-b9f20b97dd77",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:38:47.191399"
+      },
+      {
+        "id": "2159fb69-8dab-4732-9783-4ed01d8026b6",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence needs? If you have data to analyze, need help interpreting metrics, or want advice on improving your company's culture, just let me know. ",
+        "timestamp": "2025-09-07T21:38:48.835666"
+      }
+    ],
+    "is_active": true
+  },
+  "47e35664-d1d8-46c4-99c0-49b91b72fb90": {
+    "id": "47e35664-d1d8-46c4-99c0-49b91b72fb90",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:38:57.714364",
+    "updated_at": "2025-09-07T21:41:15.325234",
+    "messages": [],
+    "is_active": false
+  },
+  "aa833ee4-50c6-471e-a49e-7b44e8b1b33a": {
+    "id": "aa833ee4-50c6-471e-a49e-7b44e8b1b33a",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:38:57.734833",
+    "updated_at": "2025-09-07T21:41:15.183633",
+    "messages": [],
+    "is_active": false
+  },
+  "00bf5678-6c8d-416f-8a36-174eceb8f1db": {
+    "id": "00bf5678-6c8d-416f-8a36-174eceb8f1db",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:39:08.330224",
+    "updated_at": "2025-09-07T21:41:15.038782",
+    "messages": [],
+    "is_active": false
+  },
+  "5f0f9caf-daaa-4883-8e15-2e650684ad74": {
+    "id": "5f0f9caf-daaa-4883-8e15-2e650684ad74",
+    "title": "Profile Isolation Feature Test",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:39:08.353582",
+    "updated_at": "2025-09-07T21:39:32.897375",
+    "messages": [
+      {
+        "id": "c14785cd-37c0-49a1-b27f-4d9a1a178cc3",
+        "role": "user",
+        "content": "Hello, this is Michael Chen testing the new profile isolation feature.",
+        "timestamp": "2025-09-07T21:39:27.822121"
+      },
+      {
+        "id": "4738b38c-38c7-4442-88d8-f9448c6f6d54",
+        "role": "assistant",
+        "content": "Hello Michael! Thank you for testing the new profile isolation feature. Your session is set to the **culture_intelligence** role, which means responses will be tailored for someone analyzing and interpreting culture data across organizations. If you'd like to: - Analyze sample data - Test insights generation - Check recommendations for specific personas (CEO, HR, managers, etc.) - Or see how profile isolation impacts data privacy and context switching Just let me know your scenario or the type of workflow you want to test! How would you like to proceed? ",
+        "timestamp": "2025-09-07T21:39:32.227590"
+      }
+    ],
+    "is_active": true
+  },
+  "01fb7425-d337-4c1c-8a89-05c2385b29a3": {
+    "id": "01fb7425-d337-4c1c-8a89-05c2385b29a3",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:40:51.093447",
+    "updated_at": "2025-09-07T21:40:53.483606",
+    "messages": [
+      {
+        "id": "e2fc3a78-d047-4cf5-a518-7a1e30d43cae",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:40:51.152198"
+      },
+      {
+        "id": "364ed2b9-ab5e-4239-ac47-bfb3dff172e0",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your company culture analysis today? If you have specific culture data, survey results, or are looking for actionable insights or trends, just let me know what you need. ",
+        "timestamp": "2025-09-07T21:40:53.483516"
+      }
+    ],
+    "is_active": true
+  },
+  "71d4371f-14a3-44e5-971a-d7b5f75cb345": {
+    "id": "71d4371f-14a3-44e5-971a-d7b5f75cb345",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:40:56.702468",
+    "updated_at": "2025-09-07T21:46:53.873067",
+    "messages": [],
+    "is_active": false
+  },
+  "b8078844-cf6d-48da-833c-b585e708f11d": {
+    "id": "b8078844-cf6d-48da-833c-b585e708f11d",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:40:56.718016",
+    "updated_at": "2025-09-07T21:46:53.115712",
+    "messages": [],
+    "is_active": false
+  },
+  "7a9a83d1-03c2-4621-900e-cdd699c81f27": {
+    "id": "7a9a83d1-03c2-4621-900e-cdd699c81f27",
+    "title": "Culture Intelligence Assistance Overview",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:46:54.750239",
+    "updated_at": "2025-09-07T21:47:04.205668",
+    "messages": [
+      {
+        "id": "6e843d8e-37f2-4157-bf8b-98327c990cd9",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:47:00.856314"
+      },
+      {
+        "id": "8ff5e8c9-44fe-4a24-a2ac-e2ed6b90a44f",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Are you looking to analyze recent culture data, interpret survey results, or explore ways to improve team engagement? Let me know what you need, and I'll provide tailored insights or recommendations. ",
+        "timestamp": "2025-09-07T21:47:03.218802"
+      }
+    ],
+    "is_active": true
+  },
+  "092c6f8d-c21d-4f13-9a08-e42557f439d8": {
+    "id": "092c6f8d-c21d-4f13-9a08-e42557f439d8",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:47:33.013004",
+    "updated_at": "2025-09-07T21:47:33.013010",
     "messages": [],
     "is_active": true
   }

@@ -547,6 +547,24 @@ function AIChat() {
     }
   }
 
+  // Generate consistent initial data for all users - same logic across profiles
+  const getMockDataForUser = (userId) => {
+    const currentTime = new Date().toISOString();
+    const threadId = `local_${userId}_${Date.now()}`;
+    
+    // All users get the same initial experience - no profile-specific preset messages
+    return {
+      messages: initialMessages,
+      currentThreadId: threadId,
+      recentThreads: [{
+        id: threadId,
+        title: 'New Chat',
+        message_count: 1,
+        updated_at: currentTime
+      }]
+    };
+  };
+
   // Load user state when switching with role-specific defaults - with localStorage persistence
   const loadUserState = async (userId) => {
     if (!userId) return
@@ -584,9 +602,12 @@ function AIChat() {
       setSurveyResponses(savedState.surveyResponses || {})
       setReceivedSurveys(savedState.receivedSurveys || [])
     } else {
-      // First time loading this user - set role-specific defaults
-      setMessages(initialMessages)
-      setCurrentThreadId(null)
+      // First time loading this user - set role-specific defaults with mock data
+      const mockData = getMockDataForUser(userId);
+      
+      setMessages(mockData.messages)
+      setCurrentThreadId(mockData.currentThreadId)
+      setRecentThreads(mockData.recentThreads)
       setNotifications([])
       setSurveyTakingMode(false)
       setActiveSurveyData(null)
@@ -594,9 +615,9 @@ function AIChat() {
       setReceivedSurveys([])
       
       // Each user gets their own isolated chat environment
-      console.log(`${user?.name} (${user?.role}) starting with fresh isolated chat history`)
+      console.log(`${user?.name} (${user?.role}) starting with mock chat history`)
       
-      // Only Manager gets existing backend threads, others start completely fresh
+      // Only Manager gets existing backend threads, others use mock local threads
       if (userId === 'michael_chen') {
         try {
           await loadRecentThreads()
@@ -605,13 +626,8 @@ function AIChat() {
           setRecentThreads([])
         }
       } else {
-        // All other users start completely fresh with no shared history
-        setRecentThreads([])
-        setMessages(initialMessages) // Ensure fresh messages
-        setCurrentThreadId(null)
-        
-        // Don't create backend threads for other users to avoid shared state
-        console.log(`${user?.name} will use local-only chat state`)
+        // All other users use mock data for better initial experience
+        console.log(`${user?.name} loaded with ${mockData.recentThreads.length} mock threads`)
       }
     }
   }
@@ -756,19 +772,29 @@ function AIChat() {
 
   const createNewThread = async () => {
     try {
-      // Check if there's already an empty chat (no messages)
-      const hasEmptyChat = recentThreads.some(thread => 
+      // STRICT new chat logic: Check if current chat is empty OR any existing thread is empty
+      const currentChatIsEmpty = messages.length <= 1 || 
+        (messages.length === 1 && messages[0].type === 'ai' && messages[0].content.includes("I'm your Culture Intelligence Assistant"))
+      
+      const hasEmptyThread = recentThreads.some(thread => 
         (thread.message_count === 0 || !thread.message_count) && 
         (!thread.title || thread.title === 'New Chat')
       )
       
-      // If there's already an empty chat, just switch to it instead of creating a new one
-      if (hasEmptyChat) {
+      // If current chat is empty, don't create new - just stay in current
+      if (currentChatIsEmpty) {
+        console.log('Current chat is empty - not creating new thread')
+        return
+      }
+      
+      // If there's already an empty thread, switch to it instead of creating new
+      if (hasEmptyThread) {
         const emptyChat = recentThreads.find(thread => 
           (thread.message_count === 0 || !thread.message_count) && 
           (!thread.title || thread.title === 'New Chat')
         )
         if (emptyChat) {
+          console.log('Found existing empty thread - switching to it')
           await switchToThread(emptyChat.id)
           return
         }
@@ -860,6 +886,60 @@ function AIChat() {
     }
   }
 
+  // Check if new chat button should be disabled (when current chat is empty)
+  const isNewChatDisabled = () => {
+    const currentChatIsEmpty = messages.length <= 1 || 
+      (messages.length === 1 && messages[0].type === 'ai' && messages[0].content.includes("I'm your Culture Intelligence Assistant"))
+    
+    const hasEmptyThread = recentThreads.some(thread => 
+      (thread.message_count === 0 || !thread.message_count) && 
+      (!thread.title || thread.title === 'New Chat')
+    )
+    
+    return currentChatIsEmpty || hasEmptyThread
+  }
+
+  // Generate role-specific responses for local threads
+  const getRoleSpecificResponse = (input, user) => {
+    const inputLower = input.toLowerCase();
+    
+    // Common responses for all users
+    if (inputLower.includes('help') || inputLower.includes('what can you do')) {
+      switch (user?.role) {
+        case 'Employee':
+          return `Hi ${user.name}! As a ${user.role} in ${user.department}, I can help you with:\n\n• Understanding team culture and dynamics\n• Providing feedback on workplace experiences\n• Participating in culture surveys\n• Getting insights on professional development\n• Discussing collaboration and communication\n\nWhat would you like to explore today?`;
+        
+        case 'HR Admin':
+          return `Hello ${user.name}! As an ${user.role}, you have access to advanced features:\n\n• Create and manage culture surveys\n• Analyze team engagement metrics\n• Generate culture insights and reports\n• Track organizational health indicators\n• Develop action plans for culture improvement\n• Monitor survey responses and trends\n\nHow can I assist you with culture intelligence today?`;
+        
+        default:
+          return `Hello ${user.name}! I'm here to help you with culture intelligence. I can assist with team insights, communication patterns, and workplace dynamics. What would you like to know?`;
+      }
+    }
+    
+    // Role-specific responses based on input content
+    if (user?.role === 'Employee' && user?.department === 'Design') {
+      if (inputLower.includes('team') || inputLower.includes('collaboration')) {
+        return "Great question about team dynamics! As a designer, effective collaboration is crucial. I can help you understand communication patterns, provide feedback strategies, and suggest ways to enhance creative collaboration across teams. What specific aspect of teamwork would you like to explore?";
+      }
+      if (inputLower.includes('culture') || inputLower.includes('environment')) {
+        return "Culture in creative environments is so important! I can help you understand the current team culture, identify areas for improvement, and suggest ways to foster a more innovative and inclusive design environment. What's your experience been like so far?";
+      }
+    }
+    
+    if (user?.role === 'HR Admin') {
+      if (inputLower.includes('survey') || inputLower.includes('create')) {
+        return "Excellent! As an HR Admin, you can create comprehensive culture surveys. I can help you design questions that capture meaningful insights about employee engagement, team dynamics, and organizational culture. Would you like me to guide you through creating a survey or analyzing existing data?";
+      }
+      if (inputLower.includes('analytics') || inputLower.includes('metrics')) {
+        return "Perfect! I can help you dive deep into culture analytics. We can analyze engagement scores, identify trends across departments, track sentiment over time, and generate actionable insights for leadership. What specific metrics are you most interested in exploring?";
+      }
+    }
+    
+    // Default personalized response
+    return `Thanks for your message, ${user.name}! As a ${user.role} in ${user.department}, you bring valuable perspective to our culture intelligence platform. I'm here to help you with insights, analysis, and understanding workplace dynamics. Could you tell me more about what you'd like to explore?`;
+  };
+
   const deleteThread = async (threadId) => {
     try {
       // Only delete backend threads for manager
@@ -943,7 +1023,8 @@ function AIChat() {
     }
 
     try {
-      if (backendConnected) {
+      if (backendConnected && (currentUser?.id === 'michael_chen' || !currentThreadId.startsWith('local_'))) {
+        // Only use backend API for Manager or non-local threads
         // Add user message to UI immediately
         const userMessage = {
           id: `user-${Date.now()}`,
@@ -977,6 +1058,9 @@ function AIChat() {
           contextualPrompt = `[Survey Creation Context: Currently working on survey "${surveyDraft.name || 'Untitled'}" at step ${surveyStep} (${currentStepName}). Current survey data: name="${surveyDraft.name}", context="${surveyDraft.context}", ${(surveyDraft.questions || []).length} questions defined, ${(surveyDraft.classifiers || []).filter(c => c.name).length} classifiers, ${(surveyDraft.metrics || []).length} metrics.] User request: ${currentInput}`
         }
         
+        // Stop typing animation immediately when stream starts (not after first chunk)
+        setIsTyping(false)
+        
         await chatThreadsApi.streamChatWithThread(
           currentThreadId,
           contextualPrompt,
@@ -999,11 +1083,6 @@ function AIChat() {
                 .replace(/[\u2190\u2192]/g, '→')   // Arrows
               
               fullResponse += cleanChunk
-              
-              // Stop typing animation on first content chunk
-              if (isTyping) {
-                setIsTyping(false)
-              }
               
               // Update the AI message with streamed content
               setMessages(prev => 
@@ -1034,7 +1113,7 @@ function AIChat() {
           }
         )
       } else {
-        // Fallback to mock responses if backend is not available
+        // Handle local threads (for non-manager users) or backend not available
         const userMessage = {
           id: `user-${Date.now()}`,
           type: 'user',
@@ -1044,11 +1123,16 @@ function AIChat() {
         setMessages(prev => [...prev, userMessage])
         setIsTyping(true)
 
+        // For local threads, provide role-specific responses
+        const responseContent = currentThreadId.startsWith('local_') ? 
+          getRoleSpecificResponse(currentInput, currentUser) : 
+          getFallbackResponse(currentInput);
+
         setTimeout(() => {
           const aiResponse = {
             id: `ai-${Date.now()}`,
             type: 'ai',
-            content: getFallbackResponse(currentInput),
+            content: responseContent,
             timestamp: new Date()
           }
           setMessages(prev => [...prev, aiResponse])
@@ -1330,6 +1414,9 @@ function AIChat() {
       }
       setMessages(prev => [...prev, aiMessage])
 
+      // Stop typing animation immediately when stream starts
+      setIsTyping(false)
+      
       // Stream response from backend
       let fullResponse = ''
       
@@ -1339,11 +1426,6 @@ function AIChat() {
         (data) => {
           if (data.content) {
             fullResponse += data.content
-            
-            // Stop typing animation on first content chunk
-            if (isTyping) {
-              setIsTyping(false)
-            }
             
             // Update the AI message with streamed content
             setMessages(prev => 
@@ -1586,7 +1668,12 @@ function AIChat() {
             </button>
 
             <nav className="panel-nav">
-              <button className="panel-item new-chat-btn" onClick={createNewThread}>
+              <button 
+                className={`panel-item new-chat-btn ${isNewChatDisabled() ? 'disabled' : ''}`}
+                onClick={createNewThread}
+                disabled={isNewChatDisabled()}
+                title={isNewChatDisabled() ? 'Current chat is empty - add content before creating a new chat' : 'Create new chat'}
+              >
                 <Plus size={16} />
                 <span>New chat</span>
               </button>

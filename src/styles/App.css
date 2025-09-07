@@ -265,3 +265,15 @@
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
 }
+
+/* Disabled button styles */
+.new-chat-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.new-chat-btn.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
