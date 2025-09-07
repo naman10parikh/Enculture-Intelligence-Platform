@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp, Settings, Eye, FileText, Palette, Type, List, Grid, Sliders, ArrowRight, ArrowLeft, CheckCircle, Target, Tag, Calculator, Globe, Calendar, Users as UsersIcon, Image, Wand2 } from 'lucide-react'
+import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp, Settings, Eye, FileText, Palette, Type, List, Grid, Sliders, ArrowRight, ArrowLeft, CheckCircle, Target, Tag, Calculator, Globe, Calendar, Users as UsersIcon, Image, Wand2, Shield } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -74,6 +74,7 @@ function AIChat() {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [isSearching, setIsSearching] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [editingMessageId, setEditingMessageId] = useState(null)
   const [editText, setEditText] = useState('')
   const [copiedMessageId, setCopiedMessageId] = useState(null)
@@ -351,7 +352,7 @@ function AIChat() {
     setSurveyStep(step)
   }
   const closeCanvas = () => setCanvasOpen(false)
-  const flipCanvasView = () => setCanvasView(prev => (prev === 'survey' ? 'settings' : 'survey'))
+  const flipCanvasView = () => setCanvasView(prev => (prev === 'wizard' ? 'preview' : 'wizard'))
 
   // Chat thread management functions
   const loadRecentThreads = async () => {
@@ -1528,7 +1529,7 @@ function AIChat() {
           style={{
             position: 'fixed',
             top: 'var(--space-4)',
-            right: `${canvasWidth + 16}px`,
+            right: `${canvasWidth + 16}px`, 
             bottom: 'var(--space-4)',
             width: '4px',
             cursor: 'col-resize',
@@ -1571,14 +1572,6 @@ function AIChat() {
               >
                 <Eye size={16} />
                 <span>Preview</span>
-              </button>
-              <button 
-                className={`view-btn ${canvasView === 'settings' ? 'active' : ''}`} 
-                onClick={() => setCanvasView('settings')}
-                title="Survey Analytics"
-              >
-                <Settings size={16} />
-                <span>Analytics</span>
               </button>
             </div>
             
@@ -2257,97 +2250,317 @@ function AIChat() {
                 )}
 
                 {surveyStep === 6 && (
-                  <div className="step-container">
+                  <div className="step-container modern">
                     <div className="step-body">
-                      <div className="config-sections">
-                        <div className="config-section">
-                          <h4>Appearance</h4>
-                          <div className="config-row">
-                            <label>Background Image</label>
-                            <div className="image-upload">
-                              <button className="upload-btn">
-                                <Image size={16} />
-                                Choose Image
-                              </button>
-                            </div>
+                      <div className="modern-card">
+                        <div className="card-header">
+                          <div className="header-icon">
+                            <Settings size={20} />
                           </div>
-                          <div className="config-row">
-                            <label>Languages</label>
-                            <div className="languages-selector">
-                              {['English', 'Spanish', 'French', 'German'].map(lang => (
-                                <label key={lang} className="language-option">
-                                  <input
-                                    type="checkbox"
-                                    checked={(surveyDraft.configuration?.languages || ['English']).includes(lang)}
-                                    onChange={e => {
-                                      const currentLangs = surveyDraft.configuration?.languages || ['English']
-                                      const updated = e.target.checked 
-                                        ? [...currentLangs, lang]
-                                        : currentLangs.filter(l => l !== lang)
-                                      setSurveyDraft(prev => ({ 
-                                        ...prev, 
-                                        configuration: { ...prev.configuration, languages: updated }
-                                      }))
-                                    }}
-                                  />
-                                  <span>{lang}</span>
-                                </label>
-                              ))}
-                            </div>
+                          <div>
+                            <h3>Survey Configuration</h3>
+                            <p>Customize your survey settings, timing, and target audience</p>
                           </div>
                         </div>
-                        
-                        <div className="config-section">
-                          <h4>Audience & Timing</h4>
-                          <div className="config-row">
-                            <label>Target Audience</label>
-                            <input
-                              type="text"
-                              value={surveyDraft.configuration?.targetAudience || ''}
-                              onChange={e => setSurveyDraft(prev => ({ 
-                                ...prev, 
-                                configuration: { ...prev.configuration, targetAudience: e.target.value }
-                              }))}
-                              placeholder="e.g., Engineering Team, All Employees"
-                              className="config-input"
-                            />
+                        <div className="card-content">
+                          {/* Appearance Section */}
+                          <div className="config-section-modern">
+                            <div className="section-header">
+                              <div className="section-icon">
+                                <Image size={18} />
+                              </div>
+                              <h4>Survey Appearance</h4>
+                            </div>
+                            
+                            <div className="config-grid">
+                              <div className="config-item">
+                                <label className="config-label">Background Image</label>
+                                <div className="image-upload-modern">
+                                  <input
+                                    type="file"
+                                    id="background-upload"
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    onChange={e => {
+                                      const file = e.target.files[0]
+                                      if (file) {
+                                        const reader = new FileReader()
+                                        reader.onload = (event) => {
+                                          setSurveyDraft(prev => ({
+                                            ...prev,
+                                            configuration: {
+                                              ...prev.configuration,
+                                              backgroundImage: event.target.result
+                                            }
+                                          }))
+                                        }
+                                        reader.readAsDataURL(file)
+                                      }
+                                    }}
+                                  />
+                                  <button 
+                                    className="modern-upload-btn"
+                                    onClick={() => document.getElementById('background-upload').click()}
+                                  >
+                                    <Image size={18} />
+                                    <span>
+                                      {surveyDraft.configuration?.backgroundImage ? 'Change Image' : 'Upload Image'}
+                                    </span>
+                                  </button>
+                                  {surveyDraft.configuration?.backgroundImage && (
+                                    <div className="image-preview">
+                                      <img 
+                                        src={surveyDraft.configuration.backgroundImage} 
+                                        alt="Survey background preview"
+                                        className="preview-image"
+                                      />
+                                      <button
+                                        className="remove-image-btn"
+                                        onClick={() => setSurveyDraft(prev => ({
+                                          ...prev,
+                                          configuration: {
+                                            ...prev.configuration,
+                                            backgroundImage: null
+                                          }
+                                        }))}
+                                      >
+                                        <X size={14} />
+                                      </button>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              <div className="config-item">
+                                <label className="config-label">Survey Languages</label>
+                                <div className="languages-grid">
+                                  {['English', 'Spanish', 'French', 'German', 'Italian', 'Portuguese'].map(lang => (
+                                    <label key={lang} className="language-option-modern">
+                                      <input
+                                        type="checkbox"
+                                        checked={(surveyDraft.configuration?.languages || ['English']).includes(lang)}
+                                        onChange={e => {
+                                          const currentLangs = surveyDraft.configuration?.languages || ['English']
+                                          const updated = e.target.checked 
+                                            ? [...currentLangs, lang]
+                                            : currentLangs.filter(l => l !== lang)
+                                          setSurveyDraft(prev => ({ 
+                                            ...prev, 
+                                            configuration: { ...prev.configuration, languages: updated }
+                                          }))
+                                        }}
+                                      />
+                                      <div className="checkbox-custom"></div>
+                                      <span>{lang}</span>
+                                    </label>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div className="config-row">
-                            <label>Release Date</label>
-                            <input
-                              type="datetime-local"
-                              value={surveyDraft.configuration?.releaseDate || ''}
-                              onChange={e => setSurveyDraft(prev => ({ 
-                                ...prev, 
-                                configuration: { ...prev.configuration, releaseDate: e.target.value }
-                              }))}
-                              className="config-input"
-                            />
+
+                          {/* Target Audience Section */}
+                          <div className="config-section-modern">
+                            <div className="section-header">
+                              <div className="section-icon">
+                                <Users size={18} />
+                              </div>
+                              <h4>Target Audience</h4>
+                            </div>
+
+                            <div className="audience-selector">
+                              <div className="mock-employees-grid">
+                                {[
+                                  { id: 1, name: 'Sarah Chen', role: 'Product Manager', department: 'Product', avatar: '👩‍💼' },
+                                  { id: 2, name: 'Alex Rodriguez', role: 'Software Engineer', department: 'Engineering', avatar: '👨‍💻' },
+                                  { id: 3, name: 'Maya Patel', role: 'Designer', department: 'Design', avatar: '👩‍🎨' },
+                                  { id: 4, name: 'James Wilson', role: 'Marketing Lead', department: 'Marketing', avatar: '👨‍💼' },
+                                  { id: 5, name: 'Lisa Zhang', role: 'Data Analyst', department: 'Analytics', avatar: '👩‍💻' },
+                                  { id: 6, name: 'David Kim', role: 'DevOps Engineer', department: 'Engineering', avatar: '👨‍🔧' }
+                                ].map(employee => (
+                                  <div key={employee.id} className="employee-card">
+                                    <label className="employee-selector">
+                                      <input
+                                        type="checkbox"
+                                        checked={(surveyDraft.configuration?.selectedEmployees || []).includes(employee.id)}
+                                        onChange={e => {
+                                          const currentSelection = surveyDraft.configuration?.selectedEmployees || []
+                                          const updated = e.target.checked
+                                            ? [...currentSelection, employee.id]
+                                            : currentSelection.filter(id => id !== employee.id)
+                                          setSurveyDraft(prev => ({
+                                            ...prev,
+                                            configuration: {
+                                              ...prev.configuration,
+                                              selectedEmployees: updated
+                                            }
+                                          }))
+                                        }}
+                                      />
+                                      <div className="employee-info">
+                                        <div className="employee-avatar">{employee.avatar}</div>
+                                        <div className="employee-details">
+                                          <div className="employee-name">{employee.name}</div>
+                                          <div className="employee-role">{employee.role}</div>
+                                          <div className="employee-department">{employee.department}</div>
+                                        </div>
+                                      </div>
+                                      <div className="selection-indicator">
+                                        {(surveyDraft.configuration?.selectedEmployees || []).includes(employee.id) && (
+                                          <div className="selected-badge">✓</div>
+                                        )}
+                                      </div>
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+
+                              <div className="audience-summary">
+                                <div className="summary-stats">
+                                  <div className="stat-item">
+                                    <span className="stat-number">
+                                      {(surveyDraft.configuration?.selectedEmployees || []).length}
+                                    </span>
+                                    <span className="stat-label">Selected</span>
+                                  </div>
+                                  <div className="stat-item">
+                                    <span className="stat-number">6</span>
+                                    <span className="stat-label">Total</span>
+                                  </div>
+                                </div>
+                                <button 
+                                  className="select-all-btn"
+                                  onClick={() => {
+                                    const allEmployeeIds = [1, 2, 3, 4, 5, 6]
+                                    const currentSelection = surveyDraft.configuration?.selectedEmployees || []
+                                    const allSelected = allEmployeeIds.every(id => currentSelection.includes(id))
+                                    
+                                    setSurveyDraft(prev => ({
+                                      ...prev,
+                                      configuration: {
+                                        ...prev.configuration,
+                                        selectedEmployees: allSelected ? [] : allEmployeeIds
+                                      }
+                                    }))
+                                  }}
+                                >
+                                  {((surveyDraft.configuration?.selectedEmployees || []).length === 6) ? 'Deselect All' : 'Select All'}
+                                </button>
+                              </div>
+                            </div>
                           </div>
-                          <div className="config-row">
-                            <label>Response Deadline</label>
-                            <input
-                              type="datetime-local"
-                              value={surveyDraft.configuration?.deadline || ''}
-                              onChange={e => setSurveyDraft(prev => ({ 
-                                ...prev, 
-                                configuration: { ...prev.configuration, deadline: e.target.value }
-                              }))}
-                              className="config-input"
-                            />
+
+                          {/* Timing Section */}
+                          <div className="config-section-modern">
+                            <div className="section-header">
+                              <div className="section-icon">
+                                <Calendar size={18} />
+                              </div>
+                              <h4>Survey Timing</h4>
+                            </div>
+
+                            <div className="timing-grid">
+                              <div className="date-picker-item">
+                                <label className="config-label">Release Date & Time</label>
+                                <input
+                                  type="datetime-local"
+                                  value={surveyDraft.configuration?.releaseDate || ''}
+                                  onChange={e => setSurveyDraft(prev => ({ 
+                                    ...prev, 
+                                    configuration: { ...prev.configuration, releaseDate: e.target.value }
+                                  }))}
+                                  className="modern-datetime-input"
+                                />
+                              </div>
+
+                              <div className="date-picker-item">
+                                <label className="config-label">Response Deadline</label>
+                                <input
+                                  type="datetime-local"
+                                  value={surveyDraft.configuration?.deadline || ''}
+                                  onChange={e => setSurveyDraft(prev => ({ 
+                                    ...prev, 
+                                    configuration: { ...prev.configuration, deadline: e.target.value }
+                                  }))}
+                                  className="modern-datetime-input"
+                                />
+                              </div>
+                            </div>
                           </div>
-                          <div className="config-row">
-                            <label className="config-checkbox">
-                              <input
-                                type="checkbox"
-                                checked={surveyDraft.configuration?.anonymous || true}
-                                onChange={e => setSurveyDraft(prev => ({ 
-                                  ...prev, 
-                                  configuration: { ...prev.configuration, anonymous: e.target.checked }
-                                }))}
-                              />
-                              <span>Anonymous responses</span>
-                            </label>
+
+                          {/* Privacy Settings */}
+                          <div className="config-section-modern">
+                            <div className="section-header">
+                              <div className="section-icon">
+                                <Shield size={18} />
+                              </div>
+                              <h4>Privacy & Settings</h4>
+                            </div>
+
+                            <div className="privacy-options">
+                              <label className="modern-checkbox-large">
+                                <input
+                                  type="checkbox"
+                                  checked={surveyDraft.configuration?.anonymous !== false}
+                                  onChange={e => setSurveyDraft(prev => ({ 
+                                    ...prev, 
+                                    configuration: { ...prev.configuration, anonymous: e.target.checked }
+                                  }))}
+                                />
+                                <div className="checkbox-custom"></div>
+                                <div className="checkbox-content">
+                                  <span className="checkbox-title">Anonymous Responses</span>
+                                  <span className="checkbox-description">Participant identities will not be tracked or stored</span>
+                                </div>
+                              </label>
+
+                              <label className="modern-checkbox-large">
+                                <input
+                                  type="checkbox"
+                                  checked={surveyDraft.configuration?.reminders !== false}
+                                  onChange={e => setSurveyDraft(prev => ({ 
+                                    ...prev, 
+                                    configuration: { ...prev.configuration, reminders: e.target.checked }
+                                  }))}
+                                />
+                                <div className="checkbox-custom"></div>
+                                <div className="checkbox-content">
+                                  <span className="checkbox-title">Send Reminders</span>
+                                  <span className="checkbox-description">Automatically remind participants to complete the survey</span>
+                                </div>
+                              </label>
+                            </div>
+                          </div>
+
+                          {/* Configuration Preview */}
+                          <div className="config-preview-section">
+                            <h4>Configuration Summary</h4>
+                            <div className="config-summary-grid">
+                              <div className="summary-item">
+                                <span className="summary-label">Target Audience:</span>
+                                <span className="summary-value">
+                                  {(surveyDraft.configuration?.selectedEmployees || []).length} employees selected
+                                </span>
+                              </div>
+                              <div className="summary-item">
+                                <span className="summary-label">Languages:</span>
+                                <span className="summary-value">
+                                  {(surveyDraft.configuration?.languages || ['English']).join(', ')}
+                                </span>
+                              </div>
+                              <div className="summary-item">
+                                <span className="summary-label">Background:</span>
+                                <span className="summary-value">
+                                  {surveyDraft.configuration?.backgroundImage ? 'Custom image uploaded' : 'Default background'}
+                                </span>
+                              </div>
+                              <div className="summary-item">
+                                <span className="summary-label">Privacy:</span>
+                                <span className="summary-value">
+                                  {surveyDraft.configuration?.anonymous !== false ? 'Anonymous' : 'Identified'} responses
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2356,37 +2569,264 @@ function AIChat() {
                 )}
 
                 {surveyStep === 7 && (
-                  <div className="step-container">
+                  <div className="step-container modern">
                     <div className="step-body">
-                      <div className="publish-summary">
-                        <div className="summary-card">
-                          <h4>Survey Overview</h4>
-                          <div className="summary-item">
-                            <strong>Name:</strong> {surveyDraft.name || 'Untitled Survey'}
+                      <div className="modern-card">
+                        <div className="card-header">
+                          <div className="header-icon">
+                            <CheckCircle size={20} />
                           </div>
-                          <div className="summary-item">
-                            <strong>Questions:</strong> {(surveyDraft.questions || []).length} questions
-                          </div>
-                          <div className="summary-item">
-                            <strong>Classifiers:</strong> {(surveyDraft.classifiers || []).filter(c => c.name).length} categories
-                          </div>
-                          <div className="summary-item">
-                            <strong>Metrics:</strong> {(surveyDraft.metrics || []).length} analytics
-                          </div>
-                          <div className="summary-item">
-                            <strong>Audience:</strong> {surveyDraft.configuration?.targetAudience || 'All employees'}
+                          <div>
+                            <h3>Launch Your Survey</h3>
+                            <p>Review your survey details and select recipients for publishing</p>
                           </div>
                         </div>
-                        
-                        <div className="publish-actions">
-                          <button className="publish-btn primary">
-                            <CheckCircle size={18} />
-                            Publish Survey
-                          </button>
-                          <button className="publish-btn secondary">
-                            <FileText size={16} />
-                            Save as Draft
-                          </button>
+                        <div className="card-content">
+                          {/* Survey Overview */}
+                          <div className="publish-overview">
+                            <div className="overview-grid">
+                              <div className="overview-item">
+                                <div className="overview-icon">📋</div>
+                                <div className="overview-content">
+                                  <div className="overview-title">{surveyDraft.name || 'Untitled Survey'}</div>
+                                  <div className="overview-subtitle">{(surveyDraft.questions || []).length} questions prepared</div>
+                                </div>
+                              </div>
+
+                              <div className="overview-item">
+                                <div className="overview-icon">🎯</div>
+                                <div className="overview-content">
+                                  <div className="overview-title">
+                                    {(surveyDraft.classifiers || []).filter(c => c.name).length} Classifiers
+                                  </div>
+                                  <div className="overview-subtitle">For advanced analytics</div>
+                                </div>
+                              </div>
+
+                              <div className="overview-item">
+                                <div className="overview-icon">📊</div>
+                                <div className="overview-content">
+                                  <div className="overview-title">
+                                    {(surveyDraft.metrics || []).length} Metrics
+                                  </div>
+                                  <div className="overview-subtitle">Calculated insights</div>
+                                </div>
+                              </div>
+
+                              <div className="overview-item">
+                                <div className="overview-icon">👥</div>
+                                <div className="overview-content">
+                                  <div className="overview-title">
+                                    {(surveyDraft.configuration?.selectedEmployees || []).length} Recipients
+                                  </div>
+                                  <div className="overview-subtitle">Selected for survey</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Publish Options */}
+                          <div className="publish-options-section">
+                            <div className="section-header">
+                              <div className="section-icon">
+                                <Send size={18} />
+                              </div>
+                              <h4>Publishing Options</h4>
+                            </div>
+
+                            <div className="publish-options-grid">
+                              <div className="publish-option">
+                                <div className="option-header">
+                                  <div className="option-icon">🚀</div>
+                                  <div>
+                                    <div className="option-title">Publish Now</div>
+                                    <div className="option-description">Send survey immediately to selected recipients</div>
+                                  </div>
+                                </div>
+                                <button 
+                                  className="publish-action-btn primary"
+                                  onClick={async () => {
+                                    try {
+                                      const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
+                                      if (selectedEmployees.length === 0) {
+                                        addNotification('Please select at least one recipient', 'error')
+                                        return
+                                      }
+                                      
+                                      setIsLoading(true)
+                                      addNotification('Publishing survey...', 'info')
+                                      
+                                      // Simulate publishing
+                                      await new Promise(resolve => setTimeout(resolve, 2000))
+                                      
+                                      const publishedSurvey = {
+                                        ...surveyDraft,
+                                        id: `published_${Date.now()}`,
+                                        status: 'published',
+                                        publishedAt: new Date().toISOString(),
+                                        recipients: selectedEmployees
+                                      }
+                                      
+                                      // Clear the current draft
+                                      clearSavedDraft()
+                                      
+                                      addNotification(`Survey published to ${selectedEmployees.length} recipients!`, 'success')
+                                      setCanvasOpen(false)
+                                    } catch (error) {
+                                      addNotification('Failed to publish survey', 'error')
+                                      console.error('Publishing error:', error)
+                                    } finally {
+                                      setIsLoading(false)
+                                    }
+                                  }}
+                                  disabled={isLoading || (surveyDraft.configuration?.selectedEmployees || []).length === 0}
+                                >
+                                  <Send size={16} />
+                                  Publish Survey
+                                </button>
+                              </div>
+
+                              <div className="publish-option">
+                                <div className="option-header">
+                                  <div className="option-icon">⏰</div>
+                                  <div>
+                                    <div className="option-title">Schedule Publishing</div>
+                                    <div className="option-description">Set a specific date and time for automatic publishing</div>
+                                  </div>
+                                </div>
+                                <div className="schedule-controls">
+                                  <input
+                                    type="datetime-local"
+                                    value={surveyDraft.configuration?.scheduledPublishDate || ''}
+                                    onChange={e => setSurveyDraft(prev => ({
+                                      ...prev,
+                                      configuration: {
+                                        ...prev.configuration,
+                                        scheduledPublishDate: e.target.value
+                                      }
+                                    }))}
+                                    className="schedule-input"
+                                  />
+                                  <button 
+                                    className="publish-action-btn secondary"
+                                    onClick={async () => {
+                                      const scheduleDate = surveyDraft.configuration?.scheduledPublishDate
+                                      const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
+                                      
+                                      if (!scheduleDate) {
+                                        addNotification('Please select a publishing date', 'error')
+                                        return
+                                      }
+                                      
+                                      if (selectedEmployees.length === 0) {
+                                        addNotification('Please select at least one recipient', 'error')
+                                        return
+                                      }
+                                      
+                                      try {
+                                        setIsLoading(true)
+                                        addNotification('Scheduling survey...', 'info')
+                                        
+                                        await new Promise(resolve => setTimeout(resolve, 1500))
+                                        
+                                        const scheduledSurvey = {
+                                          ...surveyDraft,
+                                          id: `scheduled_${Date.now()}`,
+                                          status: 'scheduled',
+                                          scheduledFor: scheduleDate,
+                                          recipients: selectedEmployees
+                                        }
+                                        
+                                        clearSavedDraft()
+                                        addNotification(`Survey scheduled for ${new Date(scheduleDate).toLocaleString()}`, 'success')
+                                        setCanvasOpen(false)
+                                      } catch (error) {
+                                        addNotification('Failed to schedule survey', 'error')
+                                      } finally {
+                                        setIsLoading(false)
+                                      }
+                                    }}
+                                    disabled={isLoading || !surveyDraft.configuration?.scheduledPublishDate || (surveyDraft.configuration?.selectedEmployees || []).length === 0}
+                                  >
+                                    <Calendar size={16} />
+                                    Schedule Survey
+                                  </button>
+                                </div>
+                              </div>
+
+                              <div className="publish-option">
+                                <div className="option-header">
+                                  <div className="option-icon">💾</div>
+                                  <div>
+                                    <div className="option-title">Save as Draft</div>
+                                    <div className="option-description">Continue working on this survey later</div>
+                                  </div>
+                                </div>
+                                <button 
+                                  className="publish-action-btn tertiary"
+                                  onClick={async () => {
+                                    await saveSurveyDraft(surveyDraft)
+                                  }}
+                                  disabled={isLoading}
+                                >
+                                  <FileText size={16} />
+                                  Save Draft
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Selected Recipients Preview */}
+                          <div className="recipients-preview">
+                            <h4>Selected Recipients ({(surveyDraft.configuration?.selectedEmployees || []).length})</h4>
+                            <div className="recipients-list">
+                              {(surveyDraft.configuration?.selectedEmployees || []).map(employeeId => {
+                                const employee = [
+                                  { id: 1, name: 'Sarah Chen', role: 'Product Manager', department: 'Product', avatar: '👩‍💼' },
+                                  { id: 2, name: 'Alex Rodriguez', role: 'Software Engineer', department: 'Engineering', avatar: '👨‍💻' },
+                                  { id: 3, name: 'Maya Patel', role: 'Designer', department: 'Design', avatar: '👩‍🎨' },
+                                  { id: 4, name: 'James Wilson', role: 'Marketing Lead', department: 'Marketing', avatar: '👨‍💼' },
+                                  { id: 5, name: 'Lisa Zhang', role: 'Data Analyst', department: 'Analytics', avatar: '👩‍💻' },
+                                  { id: 6, name: 'David Kim', role: 'DevOps Engineer', department: 'Engineering', avatar: '👨‍🔧' }
+                                ].find(emp => emp.id === employeeId)
+                                
+                                if (!employee) return null
+                                
+                                return (
+                                  <div key={employeeId} className="recipient-chip">
+                                    <span className="recipient-avatar">{employee.avatar}</span>
+                                    <span className="recipient-name">{employee.name}</span>
+                                    <span className="recipient-role">{employee.role}</span>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                            {(surveyDraft.configuration?.selectedEmployees || []).length === 0 && (
+                              <div className="no-recipients">
+                                <div className="no-recipients-icon">👤</div>
+                                <div className="no-recipients-text">
+                                  <div>No recipients selected</div>
+                                  <div>Go back to step 6 to select your target audience</div>
+                                </div>
+                                <button 
+                                  className="back-to-config-btn"
+                                  onClick={() => setSurveyStep(6)}
+                                >
+                                  Select Recipients
+                                </button>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="ai-help-card">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div>
+                              <strong>Ready to Launch!</strong>
+                              <p>Your survey is configured and ready to go. Choose when to publish and track responses through your dashboard.</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2505,175 +2945,7 @@ function AIChat() {
                 <button className="preview-btn secondary">Save as Draft</button>
               </div>
             </div>
-          ) : (
-            <div className="settings-view">
-              <div className="settings-section">
-                <h3>Survey Configuration</h3>
-                
-              <div className="form-field">
-                <label>Survey Title</label>
-                <input 
-                  type="text" 
-                    className="canvas-input" 
-                  value={surveyDraft.title}
-                  onChange={e => setSurveyDraft(prev => ({ ...prev, title: e.target.value }))}
-                    placeholder="Enter survey title"
-                />
-              </div>
-                
-              <div className="form-field">
-                  <label>Description</label>
-                  <textarea 
-                    className="canvas-input" 
-                    value={surveyDraft.description}
-                    onChange={e => setSurveyDraft(prev => ({ ...prev, description: e.target.value }))}
-                    placeholder="Describe the purpose of this survey..."
-                    rows={3}
-                  />
-              </div>
-                
-              <div className="form-field">
-                  <label>Target Audience</label>
-                  <input 
-                    type="text" 
-                    className="canvas-input" 
-                    value={surveyDraft.settings?.targetAudience}
-                    onChange={e => setSurveyDraft(prev => ({ 
-                      ...prev, 
-                      settings: { ...prev.settings, targetAudience: e.target.value }
-                    }))}
-                    placeholder="e.g., All employees, Management team"
-                  />
-                </div>
-                
-                <div className="form-field checkbox-field">
-                  <label className="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      checked={surveyDraft.settings?.anonymous}
-                      onChange={e => setSurveyDraft(prev => ({ 
-                        ...prev, 
-                        settings: { ...prev.settings, anonymous: e.target.checked }
-                      }))}
-                    />
-                    <span>Anonymous responses</span>
-                  </label>
-                </div>
-              </div>
-              
-              <div className="settings-section">
-                <h3>Branding</h3>
-                
-                <div className="form-field">
-                  <label>Primary Color</label>
-                  <input 
-                    type="color" 
-                    className="color-input" 
-                    value={surveyDraft.branding?.primaryColor}
-                    onChange={e => setSurveyDraft(prev => ({ 
-                      ...prev, 
-                      branding: { ...prev.branding, primaryColor: e.target.value }
-                    }))}
-                  />
-                </div>
-                
-                <div className="form-field">
-                  <label>Background</label>
-                  <input 
-                    type="color" 
-                    className="color-input" 
-                    value={surveyDraft.branding?.backgroundColor}
-                    onChange={e => setSurveyDraft(prev => ({ 
-                      ...prev, 
-                      branding: { ...prev.branding, backgroundColor: e.target.value }
-                    }))}
-                  />
-                </div>
-              </div>
-              
-              <div className="settings-section">
-                <h3>Classifiers</h3>
-                <p className="section-description">Category labels for demographic analysis</p>
-                
-                {surveyDraft.classifiers?.map((classifier, index) => (
-                  <div key={classifier.id} className="classifier-editor">
-                    <div className="classifier-header">
-                      <input
-                        type="text"
-                        value={classifier.name}
-                        onChange={e => {
-                          const updated = [...surveyDraft.classifiers]
-                          updated[index].name = e.target.value
-                          setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
-                        }}
-                        className="classifier-name"
-                        placeholder="Classifier name"
-                      />
-                    </div>
-                    <div className="classifier-values">
-                      {classifier.values?.map((value, valueIndex) => (
-                        <input
-                          key={valueIndex}
-                          type="text"
-                          value={value}
-                          onChange={e => {
-                            const updated = [...surveyDraft.classifiers]
-                            updated[index].values[valueIndex] = e.target.value
-                            setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
-                          }}
-                          className="classifier-value"
-                          placeholder={`Value ${valueIndex + 1}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="settings-section">
-                <h3>Metrics</h3>
-                <p className="section-description">Calculated fields based on survey responses</p>
-                
-                {surveyDraft.metrics?.map((metric, index) => (
-                  <div key={metric.id} className="metric-editor">
-                    <input
-                      type="text"
-                      value={metric.name}
-                      onChange={e => {
-                        const updated = [...surveyDraft.metrics]
-                        updated[index].name = e.target.value
-                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                      }}
-                      className="metric-name"
-                      placeholder="Metric name"
-                    />
-                    <input
-                      type="text"
-                      value={metric.formula}
-                      onChange={e => {
-                        const updated = [...surveyDraft.metrics]
-                        updated[index].formula = e.target.value
-                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                      }}
-                      className="metric-formula"
-                      placeholder="Formula (e.g., avg(q1,q2))"
-                    />
-                <textarea 
-                      value={metric.description}
-                  onChange={e => {
-                        const updated = [...surveyDraft.metrics]
-                        updated[index].description = e.target.value
-                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                      }}
-                      className="metric-description"
-                      placeholder="Description of this metric..."
-                      rows={2}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          ) : null}
         </div>
       </div>
 
@@ -2826,7 +3098,7 @@ function AIChat() {
              0 2px 12px rgba(0, 0, 0, 0.06),
              0 1px 4px rgba(0, 0, 0, 0.04);
            position: relative;
-           text-align: center;
+           text-align: left;
            min-width: 150px;
            width: fit-content;
          }
@@ -2840,7 +3112,7 @@ function AIChat() {
 
          .user-message .message-time {
            color: var(--text-secondary);
-           text-align: center;
+           text-align: right;
          }
 
          /* Responsive chat messages */
@@ -4660,6 +4932,522 @@ function AIChat() {
            text-transform: uppercase;
            flex-shrink: 0;
          }
+
+         /* Modern Config Page Styling */
+         .config-section-modern {
+           margin-bottom: var(--space-8);
+           padding: var(--space-5);
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 20px;
+         }
+
+         .section-header {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+           margin-bottom: var(--space-5);
+           padding-bottom: var(--space-3);
+           border-bottom: 1px solid rgba(226, 232, 240, 0.4);
+         }
+
+         .section-icon {
+           width: 40px;
+           height: 40px;
+           border-radius: 12px;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.1) 0%, 
+             rgba(124, 58, 237, 0.06) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.2);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           color: rgba(139, 92, 246, 0.8);
+         }
+
+         .section-header h4 {
+           font-size: 1.1em;
+           font-weight: 600;
+           color: var(--text-primary);
+           margin: 0;
+         }
+
+         .config-grid {
+           display: grid;
+           gap: var(--space-5);
+         }
+
+         .config-item {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-3);
+         }
+
+         .config-label {
+           font-size: 0.95em;
+           font-weight: 600;
+           color: var(--text-primary);
+         }
+
+         /* Image Upload Styling */
+         .image-upload-modern {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-3);
+         }
+
+         .modern-upload-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: var(--space-2);
+           padding: var(--space-4) var(--space-5);
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.08) 0%, 
+             rgba(124, 58, 237, 0.04) 100%);
+           border: 2px dashed rgba(139, 92, 246, 0.3);
+           border-radius: 16px;
+           color: rgba(139, 92, 246, 0.8);
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           min-height: 60px;
+         }
+
+         .modern-upload-btn:hover {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.12) 0%, 
+             rgba(124, 58, 237, 0.06) 100%);
+           border-color: rgba(139, 92, 246, 0.4);
+           transform: translateY(-1px);
+         }
+
+         .image-preview {
+           position: relative;
+           display: inline-block;
+           max-width: 200px;
+         }
+
+         .preview-image {
+           width: 100%;
+           height: auto;
+           border-radius: 12px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+         }
+
+         .remove-image-btn {
+           position: absolute;
+           top: -8px;
+           right: -8px;
+           width: 24px;
+           height: 24px;
+           border: none;
+           border-radius: 50%;
+           background: rgba(239, 68, 68, 0.9);
+           color: white;
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+           transition: all 0.2s ease;
+         }
+
+         .remove-image-btn:hover {
+           background: rgba(239, 68, 68, 1);
+           transform: scale(1.1);
+         }
+
+         /* Languages Grid */
+         .languages-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+           gap: var(--space-3);
+         }
+
+         .language-option-modern {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+           padding: var(--space-3);
+           background: white;
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           border-radius: 12px;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+
+         .language-option-modern:hover {
+           background: rgba(248, 250, 252, 0.8);
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+
+         .language-option-modern input[type="checkbox"] {
+           display: none;
+         }
+
+         .language-option-modern input[type="checkbox"]:checked + .checkbox-custom {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.9) 0%, 
+             rgba(124, 58, 237, 0.8) 100%);
+           border-color: rgba(139, 92, 246, 0.6);
+         }
+
+         .language-option-modern input[type="checkbox"]:checked + .checkbox-custom::after {
+           content: '✓';
+           color: white;
+           font-size: 10px;
+           font-weight: bold;
+         }
+
+         /* Employee Selection */
+         .audience-selector {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-5);
+         }
+
+         .mock-employees-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+           gap: var(--space-4);
+         }
+
+         .employee-card {
+           background: white;
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           border-radius: 16px;
+           transition: all 0.3s ease;
+           overflow: hidden;
+         }
+
+         .employee-card:hover {
+           border-color: rgba(139, 92, 246, 0.3);
+           box-shadow: 0 4px 16px rgba(139, 92, 246, 0.1);
+           transform: translateY(-2px);
+         }
+
+         .employee-selector {
+           display: flex;
+           align-items: center;
+           gap: var(--space-4);
+           padding: var(--space-4);
+           cursor: pointer;
+           width: 100%;
+         }
+
+         .employee-selector input[type="checkbox"] {
+           display: none;
+         }
+
+         .employee-info {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+           flex: 1;
+         }
+
+         .employee-avatar {
+           width: 48px;
+           height: 48px;
+           border-radius: 50%;
+           background: rgba(248, 250, 252, 0.8);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 1.5em;
+           border: 2px solid rgba(226, 232, 240, 0.4);
+         }
+
+         .employee-details {
+           display: flex;
+           flex-direction: column;
+           gap: 2px;
+         }
+
+         .employee-name {
+           font-weight: 600;
+           color: var(--text-primary);
+           font-size: 0.95em;
+         }
+
+         .employee-role {
+           font-size: 0.85em;
+           color: var(--text-secondary);
+         }
+
+         .employee-department {
+           font-size: 0.75em;
+           color: var(--text-tertiary);
+           background: rgba(139, 92, 246, 0.1);
+           padding: 2px 8px;
+           border-radius: 6px;
+           width: fit-content;
+         }
+
+         .selection-indicator {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           width: 32px;
+           height: 32px;
+         }
+
+         .selected-badge {
+           width: 24px;
+           height: 24px;
+           background: linear-gradient(135deg, 
+             rgba(34, 197, 94, 0.9) 0%, 
+             rgba(22, 163, 74, 0.8) 100%);
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           color: white;
+           font-size: 12px;
+           font-weight: bold;
+           box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+         }
+
+         .audience-summary {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           padding: var(--space-4);
+           background: white;
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           border-radius: 16px;
+         }
+
+         .summary-stats {
+           display: flex;
+           gap: var(--space-5);
+         }
+
+         .stat-item {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           gap: var(--space-1);
+         }
+
+         .stat-number {
+           font-size: 1.5em;
+           font-weight: 700;
+           color: rgba(139, 92, 246, 0.9);
+         }
+
+         .stat-label {
+           font-size: 0.8em;
+           color: var(--text-secondary);
+           text-transform: uppercase;
+           letter-spacing: 0.5px;
+         }
+
+         .select-all-btn {
+           padding: 8px 16px;
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.1) 0%, 
+             rgba(124, 58, 237, 0.06) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.3);
+           border-radius: 10px;
+           color: rgba(139, 92, 246, 0.9);
+           font-weight: 600;
+           font-size: 0.85em;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+
+         .select-all-btn:hover {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.15) 0%, 
+             rgba(124, 58, 237, 0.08) 100%);
+           transform: translateY(-1px);
+         }
+
+         /* Timing Section */
+         .timing-grid {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: var(--space-5);
+         }
+
+         .date-picker-item {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-2);
+         }
+
+         .modern-datetime-input {
+           padding: var(--space-3) var(--space-4);
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           background: white;
+           border-radius: 12px;
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+           min-height: 48px;
+         }
+
+         .modern-datetime-input:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+         }
+
+         /* Privacy Options */
+         .privacy-options {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-4);
+         }
+
+         .modern-checkbox-large {
+           display: flex;
+           align-items: flex-start;
+           gap: var(--space-3);
+           padding: var(--space-4);
+           background: white;
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           border-radius: 16px;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+
+         .modern-checkbox-large:hover {
+           background: rgba(248, 250, 252, 0.8);
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+
+         .modern-checkbox-large input[type="checkbox"] {
+           display: none;
+         }
+
+         .modern-checkbox-large .checkbox-custom {
+           width: 20px;
+           height: 20px;
+           border: 2px solid rgba(139, 92, 246, 0.3);
+           border-radius: 4px;
+           background: white;
+           transition: all 0.2s ease;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           flex-shrink: 0;
+           margin-top: 2px;
+         }
+
+         .modern-checkbox-large input[type="checkbox"]:checked + .checkbox-custom {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.9) 0%, 
+             rgba(124, 58, 237, 0.8) 100%);
+           border-color: rgba(139, 92, 246, 0.6);
+         }
+
+         .modern-checkbox-large input[type="checkbox"]:checked + .checkbox-custom::after {
+           content: '✓';
+           color: white;
+           font-size: 12px;
+           font-weight: bold;
+         }
+
+         .checkbox-content {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-1);
+         }
+
+         .checkbox-title {
+           font-weight: 600;
+           color: var(--text-primary);
+         }
+
+         .checkbox-description {
+           font-size: 0.85em;
+           color: var(--text-secondary);
+           line-height: 1.4;
+         }
+
+         /* Configuration Preview */
+         .config-preview-section {
+           margin-top: var(--space-6);
+           padding: var(--space-5);
+           background: linear-gradient(135deg, 
+             rgba(248, 250, 252, 0.8) 0%, 
+             rgba(255, 255, 255, 0.9) 100%);
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           border-radius: 20px;
+         }
+
+         .config-preview-section h4 {
+           font-size: 1.1em;
+           font-weight: 600;
+           color: var(--text-primary);
+           margin-bottom: var(--space-4);
+         }
+
+         .config-summary-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+           gap: var(--space-4);
+         }
+
+         .summary-item {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding: var(--space-3);
+           background: white;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 12px;
+         }
+
+         .summary-label {
+           font-weight: 500;
+           color: var(--text-secondary);
+           font-size: 0.9em;
+         }
+
+         .summary-value {
+           font-weight: 600;
+           color: var(--text-primary);
+           font-size: 0.9em;
+         }
+
+         /* Responsive Config Page */
+         @media (max-width: 1024px) {
+           .config-grid {
+             gap: var(--space-4);
+           }
+           
+           .timing-grid {
+             grid-template-columns: 1fr;
+             gap: var(--space-4);
+           }
+           
+           .mock-employees-grid {
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+           }
+         }
+
+         @media (max-width: 768px) {
+           .config-section-modern {
+             padding: var(--space-4);
+             margin-bottom: var(--space-6);
+           }
+           
+           .languages-grid {
+             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+           }
+           
+           .mock-employees-grid {
+             grid-template-columns: 1fr;
+           }
+           
+           .config-summary-grid {
+             grid-template-columns: 1fr;
+           }
+         }
          
          .question-builder-card {
            background: rgba(255, 255, 255, 0.9);
@@ -5480,31 +6268,307 @@ function AIChat() {
            border-color: rgba(226, 232, 240, 0.7);
          }
 
-         /* Settings View Styles */
-         .settings-view {
-           height: 100%;
-           padding: var(--space-5);
-           overflow-y: auto;
-         }
-         
-         .settings-section {
+         /* Modern Publish Page Styling */
+         .publish-overview {
            margin-bottom: var(--space-6);
          }
-         
-         .settings-section h3 {
+
+         .overview-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+           gap: var(--space-4);
+           margin-bottom: var(--space-6);
+         }
+
+         .overview-item {
+           background: rgba(248, 250, 252, 0.8);
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           border-radius: 16px;
+           padding: var(--space-4);
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+           transition: all 0.2s ease;
+         }
+
+         .overview-item:hover {
+           background: rgba(255, 255, 255, 0.9);
+           border-color: rgba(139, 92, 246, 0.3);
+           transform: translateY(-1px);
+         }
+
+         .overview-icon {
+           font-size: 1.5em;
+           width: 48px;
+           height: 48px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 12px;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+         }
+
+         .overview-content {
+           flex: 1;
+         }
+
+         .overview-title {
+           font-weight: 600;
+           color: var(--text-primary);
+           font-size: 0.95em;
+           margin-bottom: 2px;
+         }
+
+         .overview-subtitle {
+           font-size: 0.8em;
+           color: var(--text-secondary);
+           opacity: 0.8;
+         }
+
+         /* Publish Options */
+         .publish-options-section {
+           margin-bottom: var(--space-6);
+         }
+
+         .publish-options-grid {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-4);
+         }
+
+         .publish-option {
+           background: rgba(255, 255, 255, 0.9);
+           border: 2px solid rgba(226, 232, 240, 0.4);
+           border-radius: 20px;
+           padding: var(--space-5);
+           transition: all 0.3s ease;
+         }
+
+         .publish-option:hover {
+           border-color: rgba(139, 92, 246, 0.3);
+           box-shadow: 0 8px 24px rgba(139, 92, 246, 0.1);
+           transform: translateY(-2px);
+         }
+
+         .option-header {
+           display: flex;
+           align-items: flex-start;
+           gap: var(--space-4);
+           margin-bottom: var(--space-4);
+         }
+
+         .option-icon {
+           font-size: 2em;
+           width: 56px;
+           height: 56px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           background: rgba(248, 250, 252, 0.8);
+           border-radius: 16px;
+           border: 2px solid rgba(226, 232, 240, 0.4);
+         }
+
+         .option-title {
+           font-size: 1.2em;
+           font-weight: 700;
+           color: var(--text-primary);
+           margin-bottom: var(--space-1);
+         }
+
+         .option-description {
+           font-size: 0.9em;
+           color: var(--text-secondary);
+           line-height: 1.4;
+         }
+
+         .publish-action-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: var(--space-2);
+           padding: var(--space-3) var(--space-5);
+           border: none;
+           border-radius: 12px;
+           font-weight: 600;
+           font-size: 0.95em;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           min-width: 140px;
+         }
+
+         .publish-action-btn.primary {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.9) 0%, 
+             rgba(124, 58, 237, 0.8) 100%);
+           color: white;
+           box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+         }
+
+         .publish-action-btn.primary:hover:not(:disabled) {
+           transform: translateY(-2px);
+           box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+         }
+
+         .publish-action-btn.secondary {
+           background: rgba(59, 130, 246, 0.1);
+           color: rgba(59, 130, 246, 0.9);
+           border: 1px solid rgba(59, 130, 246, 0.3);
+         }
+
+         .publish-action-btn.secondary:hover:not(:disabled) {
+           background: rgba(59, 130, 246, 0.15);
+           transform: translateY(-1px);
+         }
+
+         .publish-action-btn.tertiary {
+           background: rgba(156, 163, 175, 0.1);
+           color: rgba(75, 85, 99, 0.8);
+           border: 1px solid rgba(156, 163, 175, 0.3);
+         }
+
+         .publish-action-btn.tertiary:hover:not(:disabled) {
+           background: rgba(156, 163, 175, 0.15);
+           transform: translateY(-1px);
+         }
+
+         .publish-action-btn:disabled {
+           opacity: 0.5;
+           cursor: not-allowed;
+           transform: none !important;
+           box-shadow: none !important;
+         }
+
+         .schedule-controls {
+           display: flex;
+           align-items: center;
+           gap: var(--space-3);
+         }
+
+         .schedule-input {
+           flex: 1;
+           padding: var(--space-3);
+           border: 1px solid rgba(226, 232, 240, 0.6);
+           background: rgba(248, 250, 252, 0.4);
+           border-radius: 10px;
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+         }
+
+         .schedule-input:focus {
+           border-color: rgba(139, 92, 246, 0.4);
+           background: white;
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+
+         /* Recipients Preview */
+         .recipients-preview {
+           margin-bottom: var(--space-6);
+           padding: var(--space-5);
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           border-radius: 20px;
+         }
+
+         .recipients-preview h4 {
            font-size: 1.1em;
            font-weight: 600;
            color: var(--text-primary);
            margin-bottom: var(--space-4);
-           padding-bottom: var(--space-2);
-           border-bottom: 1px solid rgba(226, 232, 240, 0.3);
          }
-         
-         .form-field {
+
+         .recipients-list {
+           display: flex;
+           flex-wrap: wrap;
+           gap: var(--space-3);
+         }
+
+         .recipient-chip {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+           padding: var(--space-2) var(--space-3);
+           background: white;
+           border: 1px solid rgba(139, 92, 246, 0.2);
+           border-radius: 12px;
+           transition: all 0.2s ease;
+         }
+
+         .recipient-chip:hover {
+           background: rgba(139, 92, 246, 0.05);
+           border-color: rgba(139, 92, 246, 0.4);
+         }
+
+         .recipient-avatar {
+           font-size: 1.2em;
+         }
+
+         .recipient-name {
+           font-weight: 600;
+           color: var(--text-primary);
+           font-size: 0.85em;
+         }
+
+         .recipient-role {
+           font-size: 0.75em;
+           color: var(--text-secondary);
+           background: rgba(139, 92, 246, 0.1);
+           padding: 2px 6px;
+           border-radius: 4px;
+         }
+
+         .no-recipients {
            display: flex;
            flex-direction: column;
-           gap: 8px;
-           margin-bottom: var(--space-4);
+           align-items: center;
+           gap: var(--space-3);
+           padding: var(--space-6);
+           text-align: center;
+         }
+
+         .no-recipients-icon {
+           font-size: 3em;
+           opacity: 0.6;
+         }
+
+         .no-recipients-text {
+           display: flex;
+           flex-direction: column;
+           gap: var(--space-1);
+         }
+
+         .no-recipients-text div:first-child {
+           font-weight: 600;
+           color: var(--text-primary);
+         }
+
+         .no-recipients-text div:last-child {
+           font-size: 0.9em;
+           color: var(--text-secondary);
+         }
+
+         .back-to-config-btn {
+           padding: var(--space-2) var(--space-4);
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.1) 0%, 
+             rgba(124, 58, 237, 0.06) 100%);
+           border: 1px solid rgba(139, 92, 246, 0.3);
+           border-radius: 10px;
+           color: rgba(139, 92, 246, 0.9);
+           font-weight: 600;
+           font-size: 0.85em;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+
+         .back-to-config-btn:hover {
+           background: linear-gradient(135deg, 
+             rgba(139, 92, 246, 0.15) 0%, 
+             rgba(124, 58, 237, 0.08) 100%);
+           transform: translateY(-1px);
          }
          
          .form-field label {
@@ -5673,32 +6737,28 @@ function AIChat() {
          }
          
          /* Smooth scrolling */
-         .editor-content, .survey-preview, .settings-view {
+         .editor-content, .survey-preview {
            scroll-behavior: smooth;
          }
          
          .editor-content::-webkit-scrollbar,
-         .survey-preview::-webkit-scrollbar,
-         .settings-view::-webkit-scrollbar {
+         .survey-preview::-webkit-scrollbar {
            width: 6px;
          }
          
          .editor-content::-webkit-scrollbar-track,
-         .survey-preview::-webkit-scrollbar-track,
-         .settings-view::-webkit-scrollbar-track {
+         .survey-preview::-webkit-scrollbar-track {
            background: transparent;
          }
          
          .editor-content::-webkit-scrollbar-thumb,
-         .survey-preview::-webkit-scrollbar-thumb,
-         .settings-view::-webkit-scrollbar-thumb {
+         .survey-preview::-webkit-scrollbar-thumb {
            background: rgba(226, 232, 240, 0.6);
            border-radius: 3px;
          }
          
          .editor-content::-webkit-scrollbar-thumb:hover,
-         .survey-preview::-webkit-scrollbar-thumb:hover,
-         .settings-view::-webkit-scrollbar-thumb:hover {
+         .survey-preview::-webkit-scrollbar-thumb:hover {
            background: rgba(226, 232, 240, 0.8);
          }
 
@@ -6653,6 +7713,29 @@ function AIChat() {
           }
         }
       `}</style>
+      
+      {/* Notifications */}
+      {notifications.length > 0 && (
+        <div className="notification-container">
+          {notifications.map(notification => (
+            <div key={notification.id} className={`notification-toast ${notification.type}`}>
+              <div className={`notification-icon ${notification.type}`}>
+                {notification.type === 'success' ? '✓' : 
+                 notification.type === 'error' ? '✕' : 
+                 notification.type === 'info' ? 'i' : '!'}
+              </div>
+              <div className="notification-content">
+                <div className="notification-title">
+                  {notification.type === 'success' ? 'Success' : 
+                   notification.type === 'error' ? 'Error' : 
+                   notification.type === 'info' ? 'Info' : 'Warning'}
+                </div>
+                <div className="notification-message">{notification.message}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

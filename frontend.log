@@ -3,37 +3,8 @@
 > vite
 
 
-  VITE v4.5.14  ready in 286 ms
+  VITE v4.5.14  ready in 299 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: use --host to expose
-9:57:54 AM [vite] hmr update /src/components/AIChat.jsx
-9:58:03 AM [vite] hmr update /src/components/AIChat.jsx
-9:58:09 AM [vite] hmr update /src/components/AIChat.jsx
-9:58:18 AM [vite] hmr update /src/components/AIChat.jsx
-9:58:37 AM [vite] hmr update /src/components/AIChat.jsx
-9:59:24 AM [vite] hmr update /src/components/AIChat.jsx
-9:59:32 AM [vite] hmr update /src/components/AIChat.jsx
-9:59:41 AM [vite] hmr update /src/components/AIChat.jsx
-9:59:48 AM [vite] hmr update /src/components/AIChat.jsx
-10:00:08 AM [vite] hmr update /src/components/AIChat.jsx
-10:01:35 AM [vite] hmr update /src/components/AIChat.jsx
-10:01:58 AM [vite] hmr update /src/components/AIChat.jsx
-10:02:08 AM [vite] hmr update /src/components/AIChat.jsx
-10:02:29 AM [vite] hmr update /src/components/AIChat.jsx
-10:02:39 AM [vite] hmr update /src/components/AIChat.jsx
-10:03:07 AM [vite] hmr update /src/components/AIChat.jsx
-10:05:47 AM [vite] hmr update /src/components/AIChat.jsx
-10:05:58 AM [vite] hmr update /src/components/AIChat.jsx
-10:06:07 AM [vite] hmr update /src/components/AIChat.jsx
-10:06:18 AM [vite] hmr update /src/components/AIChat.jsx
-10:06:26 AM [vite] hmr update /src/components/AIChat.jsx
-10:06:36 AM [vite] hmr update /src/components/AIChat.jsx
-10:06:45 AM [vite] hmr update /src/components/AIChat.jsx
-10:07:19 AM [vite] hmr update /src/components/AIChat.jsx
-10:09:13 AM [vite] hmr update /src/components/AIChat.jsx
-10:09:32 AM [vite] hmr update /src/components/AIChat.jsx
-10:09:51 AM [vite] hmr update /src/components/AIChat.jsx
-10:10:39 AM [vite] hmr update /src/components/AIChat.jsx
-10:10:47 AM [vite] hmr update /src/components/AIChat.jsx
-10:11:18 AM [vite] hmr update /src/components/AIChat.jsx
+10:26:36 AM [vite] hmr update /src/components/AIChat.jsx

@@ -106,6 +106,16 @@
   color: var(--blue-soft);
 }
 
+.notification-icon.error {
+  background: rgba(239, 68, 68, 0.15);
+  color: rgba(239, 68, 68, 0.8);
+}
+
+.notification-icon.warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: rgba(245, 158, 11, 0.8);
+}
+
 .notification-content {
   flex: 1;
 }
