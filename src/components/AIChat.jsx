@@ -3,6 +3,7 @@ import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History 
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
+import 'highlight.js/styles/github.css'  // Add syntax highlighting CSS
 import { chatService } from '../services/api'
 
 const chatThreads = [
@@ -215,6 +216,48 @@ function AIChat() {
     return responses[Math.floor(Math.random() * responses.length)]
   }
 
+  // Custom markdown components for better rendering
+  const markdownComponents = {
+    h1: ({children}) => <h1 style={{fontSize: '1.5em', fontWeight: '600', margin: '1em 0 0.5em 0', color: 'var(--text-primary)'}}>{children}</h1>,
+    h2: ({children}) => <h2 style={{fontSize: '1.3em', fontWeight: '600', margin: '1em 0 0.5em 0', color: 'var(--text-primary)'}}>{children}</h2>,
+    h3: ({children}) => <h3 style={{fontSize: '1.2em', fontWeight: '600', margin: '1em 0 0.5em 0', color: 'var(--text-primary)'}}>{children}</h3>,
+    p: ({children}) => <p style={{margin: '0 0 1em 0', lineHeight: '1.6'}}>{children}</p>,
+    ul: ({children}) => <ul style={{margin: '0.5em 0', paddingLeft: '1.5em'}}>{children}</ul>,
+    ol: ({children}) => <ol style={{margin: '0.5em 0', paddingLeft: '1.5em'}}>{children}</ol>,
+    li: ({children}) => <li style={{margin: '0.25em 0'}}>{children}</li>,
+    code: ({children, className}) => {
+      if (className && className.startsWith('language-')) {
+        return <pre style={{
+          background: 'rgba(248, 250, 252, 0.8)',
+          border: '1px solid rgba(226, 232, 240, 0.6)',
+          borderRadius: '8px',
+          padding: '1em',
+          overflowX: 'auto',
+          margin: '1em 0'
+        }}><code className={className}>{children}</code></pre>;
+      }
+      return <code style={{
+        background: 'rgba(139, 92, 246, 0.1)',
+        padding: '0.2em 0.4em',
+        borderRadius: '4px',
+        fontFamily: 'Monaco, Menlo, Ubuntu Mono, monospace',
+        fontSize: '0.9em'
+      }}>{children}</code>;
+    },
+    pre: ({children}) => <div>{children}</div>,
+    blockquote: ({children}) => <blockquote style={{
+      borderLeft: '3px solid rgba(139, 92, 246, 0.3)',
+      paddingLeft: '1em',
+      margin: '1em 0',
+      fontStyle: 'italic',
+      color: 'var(--text-secondary)'
+    }}>{children}</blockquote>,
+    a: ({children, href}) => <a href={href} target="_blank" rel="noopener noreferrer" style={{
+      color: 'rgba(139, 92, 246, 0.8)',
+      textDecoration: 'none'
+    }}>{children}</a>
+  };
+
   // Function to parse and extract citations from AI responses
   const parseCitations = (content) => {
     if (!content) return { cleanContent: content, citations: [] };
@@ -347,6 +390,7 @@ function AIChat() {
                         <ReactMarkdown 
                           remarkPlugins={[remarkGfm]}
                           rehypePlugins={[rehypeHighlight]}
+                          components={markdownComponents}
                         >
                           {cleanContent}
                         </ReactMarkdown>
@@ -629,11 +673,30 @@ function AIChat() {
          }
 
          .ai-message .message-bubble {
-           background: rgba(255, 255, 255, 0.8);  /* Visible glass background */
-           border: 1px solid rgba(226, 232, 240, 0.6);  /* Subtle border */
-           backdrop-filter: blur(10px);  /* Glass effect */
-           padding: var(--space-4) var(--space-5);  /* Proper padding */
-           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);  /* Soft shadow */
+           background: linear-gradient(135deg, 
+             rgba(248, 250, 252, 0.95) 0%, 
+             rgba(241, 245, 249, 0.90) 50%, 
+             rgba(248, 250, 252, 0.85) 100%);  /* Subtle gradient */
+           border: 1px solid rgba(226, 232, 240, 0.4);  /* Softer border */
+           backdrop-filter: blur(12px);  /* Enhanced glass effect */
+           padding: var(--space-4) var(--space-5);
+           box-shadow: 
+             0 1px 3px rgba(0, 0, 0, 0.05),
+             0 8px 24px rgba(139, 92, 246, 0.04);  /* Branded shadow with depth */
+           position: relative;
+         }
+         
+         .ai-message .message-bubble::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           right: 0;
+           height: 1px;
+           background: linear-gradient(90deg, 
+             transparent 0%, 
+             rgba(139, 92, 246, 0.2) 50%, 
+             transparent 100%);  /* Subtle top accent */
          }
 
          .user-message .message-bubble {
@@ -742,74 +805,139 @@ function AIChat() {
            top: var(--space-4);
            left: 320px;
            height: calc(100vh - var(--space-8));
-           z-index: 100;  /* Reduced z-index to prevent overlap */
-           background: rgba(255, 255, 255, 0.9);
-           backdrop-filter: blur(16px);
-           border: 1px solid rgba(226,232,240,0.5);
-           border-radius: 16px;
-           box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+           z-index: 100;
            overflow: hidden;
            display: flex;
            flex-direction: column;
-           transition: width 0.25s ease, opacity 0.25s ease;
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
          }
+         
          .chat-panel.collapsed { 
-           width: 0;  /* Take up no space when collapsed */
+           width: 48px;  /* Just enough for the button */
+           background: transparent;
+         }
+         
+         .chat-panel.expanded { 
+           width: 280px;
+           background: rgba(255, 255, 255, 0.98);
+           backdrop-filter: blur(20px);
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           border-radius: 12px;
+           box-shadow: 
+             0 4px 16px rgba(0, 0, 0, 0.04),
+             0 8px 32px rgba(139, 92, 246, 0.08);
+         }
+         .panel-header {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           width: 40px;
+           height: 40px;
+           cursor: pointer;
+           color: var(--text-secondary);
+           border-radius: 8px;
+           transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+           margin: 4px;
+           position: relative;
+         }
+         
+         .chat-panel.collapsed .panel-header {
+           background: rgba(255, 255, 255, 0.90);
+           border: 1px solid rgba(226, 232, 240, 0.5);
+           box-shadow: 
+             0 2px 8px rgba(0, 0, 0, 0.08),
+             0 1px 3px rgba(0, 0, 0, 0.1);
+         }
+         
+         .chat-panel.collapsed .panel-header:hover {
+           background: rgba(255, 255, 255, 0.95);
+           transform: translateY(-1px);
+           box-shadow: 
+             0 4px 12px rgba(0, 0, 0, 0.12),
+             0 2px 6px rgba(0, 0, 0, 0.08);
+         }
+         
+         .chat-panel.expanded .panel-header {
            background: transparent;
            border: none;
            box-shadow: none;
-           overflow: visible;  /* Allow burger button to show outside */
-         }
-         .chat-panel.collapsed .panel-header {
-           position: absolute;  /* Position burger button absolutely */
-           background: rgba(255,255,255,0.95);
-           border: 1px solid rgba(226,232,240,0.6);
-           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-         }
-         .chat-panel.expanded { 
-           width: 260px; 
-           background: rgba(255, 255, 255, 0.95);  /* More opaque when expanded */
-         }
-         .panel-header {
-           display: flex; align-items: center; justify-content: center;
-           width: 44px; height: 44px;
-           cursor: pointer; color: var(--text-secondary);
-           background: rgba(255,255,255,0.95);
-           border: 1px solid rgba(226,232,240,0.6);
-           border-radius: 12px;
-           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-           transition: all 0.2s ease;
-         }
-         .chat-panel.expanded .panel-header {
-           width: auto;
            align-self: flex-end;
-           margin: var(--space-2);
-           border-radius: 10px;
-           border: 1px solid rgba(226,232,240,0.6);
-           box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+           margin: var(--space-3);
+         }
+         
+         .chat-panel.expanded .panel-header:hover {
+           background: rgba(239, 242, 247, 0.8);
          }
          .panel-content {
-           padding: var(--space-3);
+           padding: var(--space-4);
            display: flex;
            flex-direction: column;
-           gap: var(--space-3);
-           height: calc(100% - 48px);
+           gap: var(--space-4);
+           height: calc(100% - 56px);
+           opacity: 0;
+           transform: translateX(-10px);
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
          }
-         .panel-nav { display: flex; flex-direction: column; gap: 6px; }
+         
+         .chat-panel.expanded .panel-content {
+           opacity: 1;
+           transform: translateX(0);
+         }
+         
+         .chat-panel.collapsed .panel-content { 
+           display: none; 
+         }
+         
+         .panel-nav { 
+           display: flex; 
+           flex-direction: column; 
+           gap: 8px; 
+         }
+         
          .panel-item {
-           display: flex; align-items: center; gap: 10px;
-           padding: 10px 12px; border-radius: 10px;
-           border: 1px solid rgba(226,232,240,0.6);
-           background: rgba(248,250,252,0.6);
+           display: flex; 
+           align-items: center; 
+           gap: 12px;
+           padding: 12px 16px; 
+           border-radius: 8px;
+           background: transparent;
            color: var(--text-primary);
+           cursor: pointer;
+           transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+           border: none;
+           font-size: 0.9em;
+         }
+         
+         .panel-item:hover { 
+           background: rgba(239, 242, 247, 0.8);
+           transform: translateX(2px);
+         }
+         
+         .panel-spacer { 
+           flex: 1 1 auto; 
+         }
+         
+         .history-list { 
+           margin-top: var(--space-3); 
+           display: flex; 
+           flex-direction: column; 
+           gap: 4px; 
+         }
+         
+         .history-item { 
+           padding: 8px 12px; 
+           border-radius: 6px; 
+           background: transparent;
+           color: var(--text-secondary); 
+           font-size: 0.85em;
            cursor: pointer;
            transition: all 0.2s ease;
          }
-         .panel-item:hover { border-color: rgba(139,92,246,0.35); background: rgba(139,92,246,0.06); }
-         .chat-panel.collapsed .panel-content { display: none; }
-         .panel-spacer { flex: 1 1 auto; }
-         .history-list { margin-top: var(--space-2); display: flex; flex-direction: column; gap: 6px; }
-         .history-item { padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(226,232,240,0.6); background: rgba(248,250,252,0.6); color: var(--text-secondary); }
+         
+         .history-item:hover {
+           background: rgba(239, 242, 247, 0.6);
+           color: var(--text-primary);
+         }
 
          /* Properly shift chat content when panel is open to prevent overlap */
          .panel-open .chat-input-area { 
@@ -830,21 +958,24 @@ function AIChat() {
          }
 
          .enable-survey-btn {
-           background: #301934;
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
            color: white;
            border: none;
-           padding: var(--space-3) var(--space-4);
-           border-radius: 12px;
+           padding: 12px 16px;
+           border-radius: 8px;
            font-weight: 500;
            cursor: pointer;
-           transition: all 0.2s ease;
-           box-shadow: 0 4px 12px rgba(48, 25, 52, 0.3);
-           margin-bottom: var(--space-2);
+           transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+           margin-bottom: var(--space-3);
+           font-size: 0.9em;
+           width: 100%;
          }
 
          .enable-survey-btn:hover {
-           background: #392A48;
+           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
            transform: translateY(-1px);
+           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
          }
 
          @keyframes slideIn {
