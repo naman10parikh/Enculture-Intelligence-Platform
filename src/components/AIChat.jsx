@@ -941,112 +941,116 @@ function AIChat() {
             const isLiked = likedMessages.has(message.id);
             
             return (
-              <div key={message.id} className={`message ${message.type}-message`}>
-                <div className="message-bubble glass-bubble">
-                  {isEditing ? (
-                    <div className="edit-mode">
-                      <textarea
-                        value={editText}
-                        onChange={(e) => setEditText(e.target.value)}
-                        className="edit-textarea"
-                        rows={4}
-                        autoFocus
-                      />
-                      <div className="edit-actions">
-                        <button 
-                          className="edit-save-btn"
-                          onClick={() => handleSaveEdit(message.id)}
-                        >
-                          <Check size={14} />
-                          Save
-                        </button>
-                        <button 
-                          className="edit-cancel-btn"
-                          onClick={handleCancelEdit}
-                        >
-                          <X size={14} />
-                          Cancel
-                        </button>
+              <div key={message.id} className={`message-container ${message.type}-container`}>
+                <div className={`message ${message.type}-message`}>
+                  <div className="message-bubble glass-bubble">
+                    {isEditing ? (
+                      <div className="edit-mode">
+                        <textarea
+                          value={editText}
+                          onChange={(e) => setEditText(e.target.value)}
+                          className="edit-textarea"
+                          rows={4}
+                          autoFocus
+                        />
+                        <div className="edit-actions">
+                          <button 
+                            className="edit-save-btn"
+                            onClick={() => handleSaveEdit(message.id)}
+                          >
+                            <Check size={14} />
+                            Save
+                          </button>
+                          <button 
+                            className="edit-cancel-btn"
+                            onClick={handleCancelEdit}
+                          >
+                            <X size={14} />
+                            Cancel
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    <>
-                      {message.type === 'ai' ? (
-                        <>
-                          <div className="markdown-content">
-                            <ReactMarkdown 
-                              remarkPlugins={[remarkGfm]}
-                              rehypePlugins={[rehypeHighlight]}
-                              components={markdownComponents}
-                            >
-                              {cleanContent}
-                            </ReactMarkdown>
-                          </div>
-                          {/* Display citations if any */}
-                          {citations.length > 0 && (
-                            <div className="citations-section">
-                              <div className="citations-header">Sources:</div>
-                              <div className="citations-list">
-                                {citations.map((citation, index) => (
-                                  <a 
-                                    key={index}
-                                    href={citation.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="citation-link"
-                                  >
-                                    <span className="citation-number">{index + 1}</span>
-                                    <span className="citation-title">{citation.title}</span>
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        <p>{message.content}</p>
-                      )}
-                    </>
-                  )}
-                </div>
-                
-                {/* Message actions outside the bubble */}
-                {!isEditing && (
-                  <div className={`message-actions ${message.type === 'user' ? 'user-actions' : 'ai-actions'}`}>
-                    <button 
-                      className={`action-btn copy-btn ${isCopied ? 'copied' : ''}`}
-                      onClick={() => handleCopyMessage(cleanContent)}
-                      title="Copy message"
-                    >
-                      {isCopied ? <Check size={14} /> : <Copy size={14} />}
-                    </button>
-                    
-                    {message.type === 'user' ? (
-                      <button 
-                        className="action-btn edit-btn"
-                        onClick={() => handleEditMessage(message.id, cleanContent)}
-                        title="Edit message"
-                      >
-                        <Edit3 size={14} />
-                      </button>
                     ) : (
                       <>
-                        <button 
-                          className={`action-btn like-btn ${isLiked ? 'liked' : ''}`}
-                          onClick={() => handleLikeMessage(message.id)}
-                          title="Like response"
-                        >
-                          <ThumbsUp size={14} />
-                        </button>
-                        <button 
-                          className="action-btn regenerate-btn"
-                          onClick={() => handleRegenerateResponse(messageIndex)}
-                          title="Regenerate response"
-                        >
-                          <RotateCcw size={14} />
-                        </button>
+                        {message.type === 'ai' ? (
+                          <>
+                            <div className="markdown-content">
+                              <ReactMarkdown 
+                                remarkPlugins={[remarkGfm]}
+                                rehypePlugins={[rehypeHighlight]}
+                                components={markdownComponents}
+                              >
+                                {cleanContent}
+                              </ReactMarkdown>
+                            </div>
+                            {/* Display citations if any */}
+                            {citations.length > 0 && (
+                              <div className="citations-section">
+                                <div className="citations-header">Sources:</div>
+                                <div className="citations-list">
+                                  {citations.map((citation, index) => (
+                                    <a 
+                                      key={index}
+                                      href={citation.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="citation-link"
+                                    >
+                                      <span className="citation-number">{index + 1}</span>
+                                      <span className="citation-title">{citation.title}</span>
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <p>{message.content}</p>
+                        )}
                       </>
                     )}
+                  </div>
+                </div>
+                
+                {/* Message actions below the bubble */}
+                {!isEditing && (
+                  <div className={`message-actions-container ${message.type}-actions-container`}>
+                    <div className={`message-actions ${message.type === 'user' ? 'user-actions' : 'ai-actions'}`}>
+                      <button 
+                        className={`action-btn copy-btn ${isCopied ? 'copied' : ''}`}
+                        onClick={() => handleCopyMessage(cleanContent)}
+                        title="Copy message"
+                      >
+                        {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                      </button>
+                      
+                      {message.type === 'user' ? (
+                        <button 
+                          className="action-btn edit-btn"
+                          onClick={() => handleEditMessage(message.id, cleanContent)}
+                          title="Edit message"
+                        >
+                          <Edit3 size={14} />
+                        </button>
+                      ) : (
+                        <>
+                          <button 
+                            className={`action-btn like-btn ${isLiked ? 'liked' : ''}`}
+                            onClick={() => handleLikeMessage(message.id)}
+                            title="Like response"
+                          >
+                            <ThumbsUp size={14} />
+                          </button>
+                          <button 
+                            className="action-btn regenerate-btn"
+                            onClick={() => handleRegenerateResponse(messageIndex)}
+                            title="Regenerate response"
+                          >
+                            <RotateCcw size={14} />
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -1305,11 +1309,16 @@ function AIChat() {
          }
 
          .ai-message .message-bubble {
-           background: rgba(255, 255, 255, 0.8);
-           border: 1px solid rgba(226, 232, 240, 0.3);
-           backdrop-filter: blur(10px);
+           background: linear-gradient(135deg, 
+             rgba(243, 238, 255, 0.95) 0%, 
+             rgba(245, 241, 255, 0.90) 50%, 
+             rgba(247, 244, 255, 0.85) 100%);
+           border: 1px solid rgba(177, 156, 217, 0.25);
+           backdrop-filter: blur(12px);
            padding: var(--space-4) var(--space-5);
-           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+           box-shadow: 
+             0 2px 12px rgba(139, 92, 246, 0.08),
+             0 1px 4px rgba(0, 0, 0, 0.04);
            position: relative;
          }
          
@@ -1644,10 +1653,13 @@ function AIChat() {
          }
          
          .thread-item.active {
-           background: rgba(139, 92, 246, 0.08);
-           border-color: rgba(139, 92, 246, 0.2);
-           border-left: 3px solid rgba(139, 92, 246, 0.7);
-           box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+           background: linear-gradient(135deg, 
+             rgba(243, 238, 255, 0.7) 0%, 
+             rgba(245, 241, 255, 0.6) 100%);
+           border: 1px solid rgba(177, 156, 217, 0.4);
+           box-shadow: 
+             0 1px 4px rgba(139, 92, 246, 0.08),
+             inset 0 1px 0 rgba(255, 255, 255, 0.4);
          }
          
          .thread-item.search-result {
@@ -1718,7 +1730,8 @@ function AIChat() {
          }
          
          .thread-item.active .thread-title {
-           color: rgba(139, 92, 246, 0.9);
+           color: rgba(57, 42, 72, 0.9);  /* Deeper purple matching sidebar nav active color */
+           font-weight: 600;
          }
          
          .thread-item:hover .thread-title {
@@ -2085,20 +2098,39 @@ function AIChat() {
            white-space: nowrap;
          }
 
+         /* Message Container Styles */
+         .message-container {
+           display: flex;
+           flex-direction: column;
+           gap: 6px;
+           margin-bottom: var(--space-4);
+         }
+         
+         .ai-container {
+           align-items: flex-start;
+         }
+         
+         .user-container {
+           align-items: flex-end;
+         }
+         
          /* Message Actions Styles */
+         .message-actions-container {
+           display: flex;
+           width: 100%;
+         }
+         
+         .ai-actions-container {
+           justify-content: flex-start;  /* AI actions on bottom left */
+         }
+         
+         .user-actions-container {
+           justify-content: flex-end;    /* User actions on bottom right */
+         }
+         
          .message-actions {
            display: flex;
            gap: 4px;
-           margin-top: 8px;
-           margin-left: 2px;
-         }
-         
-         .ai-message .message-actions {
-           justify-content: flex-start;
-         }
-         
-         .user-message .message-actions {
-           justify-content: flex-end;
          }
          
          .message-actions.ai-actions {
@@ -2110,7 +2142,7 @@ function AIChat() {
            transition: opacity 0.2s ease;
          }
          
-         .user-message:hover .user-actions {
+         .message-container:hover .user-actions {
            opacity: 1;  /* Show user actions on hover */
          }
 
