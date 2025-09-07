@@ -176,6 +176,41 @@ export class ChatService {
       return false;
     }
   }
+
+  /**
+   * Generate survey template using AI
+   * @param {string} description - Natural language description of desired survey
+   * @param {string} type - Survey type (default: 'culture')
+   * @param {string} targetAudience - Target audience (default: 'employees')
+   * @returns {Promise<Object>} Generated survey template
+   */
+  async generateSurveyTemplate(description, type = 'culture', targetAudience = 'employees') {
+    try {
+      const payload = {
+        description,
+        type,
+        target_audience: targetAudience
+      };
+
+      const response = await fetch(`${this.baseUrl}/generate-survey-template`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const template = await response.json();
+      return template;
+    } catch (error) {
+      console.error('Survey template generation error:', error);
+      return null;
+    }
+  }
 }
 
 /**

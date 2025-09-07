@@ -255,3 +255,115 @@ async def chat_stream_with_thread(thread_id: str = Query(...), prompt: str = Que
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to process streaming chat request: {str(e)}"
         )
+
+
+@router.post("/generate-survey-template")
+async def generate_survey_template(request: dict):
+    """
+    Generate a survey template using AI based on natural language description.
+    """
+    try:
+        description = request.get('description', '')
+        survey_type = request.get('type', 'culture')
+        target_audience = request.get('target_audience', 'employees')
+        
+        logger.info(f"Generating survey template for: {description[:100]}...")
+        
+        # Create prompt for survey generation
+        prompt = f"""
+        Create a professional survey template based on this description: "{description}"
+        
+        Survey type: {survey_type}
+        Target audience: {target_audience}
+        
+        Generate a JSON response with the following structure:
+        {{
+          "title": "Survey title",
+          "description": "Brief survey description",
+          "questions": [
+            {{
+              "id": "q1",
+              "type": "multiple_choice|scale|text|multiple_select",
+              "text": "Question text",
+              "options": ["Option 1", "Option 2"] (for choice questions),
+              "min": 1, "max": 10 (for scale questions),
+              "placeholder": "hint text" (for text questions),
+              "required": true/false
+            }}
+          ],
+          "classifiers": [
+            {{
+              "id": "classifier_id",
+              "name": "Classifier Name",
+              "values": ["Value 1", "Value 2"]
+            }}
+          ],
+          "metrics": [
+            {{
+              "id": "metric_id", 
+              "name": "Metric Name",
+              "formula": "avg(q1,q2)",
+              "description": "What this metric measures"
+            }}
+          ]
+        }}
+        
+        Focus on culture intelligence, employee engagement, and actionable insights.
+        Generate 4-6 relevant questions with appropriate question types.
+        """
+        
+        # Use OpenAI service to generate the template
+        template_json = await openai_service.get_chat_completion(
+            messages=[{"role": "user", "content": prompt}],
+            persona="culture_intelligence"
+        )
+        
+        try:
+            import json
+            template_data = json.loads(template_json)
+            return template_data
+        except json.JSONDecodeError:
+            # Fallback if JSON parsing fails
+            return {
+                "title": f"Culture Survey: {description[:50]}",
+                "description": description,
+                "questions": [
+                    {
+                        "id": "q1",
+                        "type": "scale",
+                        "text": "How satisfied are you with the current situation?",
+                        "min": 1,
+                        "max": 10,
+                        "required": True
+                    },
+                    {
+                        "id": "q2", 
+                        "type": "text",
+                        "text": "What suggestions do you have for improvement?",
+                        "placeholder": "Share your thoughts...",
+                        "required": False
+                    }
+                ],
+                "classifiers": [
+                    {
+                        "id": "dept",
+                        "name": "Department", 
+                        "values": ["Engineering", "Sales", "Marketing", "HR"]
+                    }
+                ],
+                "metrics": [
+                    {
+                        "id": "satisfaction",
+                        "name": "Satisfaction Score",
+                        "formula": "avg(q1)",
+                        "description": "Average satisfaction rating"
+                    }
+                ]
+            }
+        
+    except Exception as e:
+        logger.error(f"Error in survey template generation: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to generate survey template: {str(e)}"
+        )

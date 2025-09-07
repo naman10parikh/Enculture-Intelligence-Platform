@@ -38,6 +38,8 @@ function AIChat() {
   const [canvasOpen, setCanvasOpen] = useState(false)
   const [canvasView, setCanvasView] = useState('editor')
   const [canvasMode, setCanvasMode] = useState('split') // 'split', 'focus', 'chat-only'
+  const [canvasWidth, setCanvasWidth] = useState(500) // Resizable canvas width
+  const [isDragging, setIsDragging] = useState(false)
   const [activeSurveyId, setActiveSurveyId] = useState(null)
   const [backendConnected, setBackendConnected] = useState(false)
   const [currentPersona, setCurrentPersona] = useState('employee') // Default persona
@@ -60,7 +62,16 @@ function AIChat() {
       anonymous: true,
       deadline: null,
       targetAudience: 'All employees'
-    }
+    },
+    classifiers: [
+      { id: 'dept', name: 'Department', values: ['Engineering', 'Sales', 'Marketing', 'HR', 'Operations'] },
+      { id: 'level', name: 'Job Level', values: ['Individual Contributor', 'Senior', 'Lead', 'Manager', 'Director'] },
+      { id: 'tenure', name: 'Tenure', values: ['0-1 years', '1-3 years', '3-5 years', '5+ years'] }
+    ],
+    metrics: [
+      { id: 'engagement_score', name: 'Engagement Score', formula: 'avg(q1,q2)', description: 'Average of satisfaction and likelihood to recommend' },
+      { id: 'culture_health', name: 'Culture Health Index', formula: 'weighted_avg(q1:0.4,q3:0.6)', description: 'Weighted average focusing on culture aspects' }
+    ]
   })
   
   // Chat thread management state
@@ -76,6 +87,7 @@ function AIChat() {
   const [likedMessages, setLikedMessages] = useState(new Set())
   const messagesEndRef = useRef(null)
   const textareaRef = useRef(null)
+  const dragRef = useRef(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -93,6 +105,41 @@ function AIChat() {
       textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px'
     }
   }, [inputValue])
+
+  // Canvas resize handling
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isDragging) return
+      
+      const newWidth = window.innerWidth - e.clientX - 16 // 16px margin
+      const minWidth = 300
+      const maxWidth = window.innerWidth * 0.7
+      
+      setCanvasWidth(Math.max(minWidth, Math.min(maxWidth, newWidth)))
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+      document.body.style.cursor = 'default'
+      document.body.style.userSelect = 'auto'
+    }
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
+      document.body.style.cursor = 'col-resize'
+      document.body.style.userSelect = 'none'
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [isDragging])
+
+  const handleDragStart = () => {
+    setIsDragging(true)
+  }
 
   // Check backend connection on mount
   useEffect(() => {
@@ -325,9 +372,18 @@ function AIChat() {
 
     // Handle special commands
     if (currentInput.startsWith('/survey')) {
-      setTimeout(() => {
-        openCanvasForSurvey('draft')
-      }, 500)
+      // Extract description from command
+      const description = currentInput.replace('/survey', '').trim()
+      
+      openCanvasForSurvey('draft')
+      
+      // If there's a description, generate AI template
+      if (description) {
+        setTimeout(() => {
+          generateSurveyFromAI(description)
+        }, 800)
+      }
+      
       return
     }
 
@@ -761,6 +817,19 @@ function AIChat() {
     })
   }
 
+  // AI Survey Template Generation
+  const generateSurveyFromAI = async (description) => {
+    try {
+      const template = await chatService.generateSurveyTemplate(description)
+      if (template) {
+        setSurveyDraft(prev => ({ ...prev, ...template }))
+        setCanvasView('editor') // Switch to editor to show the generated survey
+      }
+    } catch (error) {
+      console.error('Failed to generate survey template:', error)
+    }
+  }
+
   // Function to categorize dates
   const categorizeDate = (dateString) => {
     const date = new Date(dateString)
@@ -974,7 +1043,15 @@ function AIChat() {
           </div>
         </aside>
 
-        <div className="chat-messages">
+        <div 
+          className="chat-messages"
+          style={{
+            marginRight: canvasOpen && canvasMode === 'split' ? `${canvasWidth + 32}px` : '0px',
+            transition: 'margin-right 0.3s ease',
+            opacity: canvasOpen && canvasMode === 'focus' ? '0.3' : '1',
+            pointerEvents: canvasOpen && canvasMode === 'focus' ? 'none' : 'auto'
+          }}
+        >
           {messages.map((message, messageIndex) => {
             // Don't render AI messages that are empty/being prepared
             if (message.type === 'ai' && (!message.content || message.content.trim() === '')) {
@@ -1120,7 +1197,13 @@ function AIChat() {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="chat-input-area">
+        <div 
+          className="chat-input-area"
+          style={{
+            marginRight: canvasOpen && canvasMode === 'split' ? `${canvasWidth + 32}px` : '0px',
+            transition: 'margin-right 0.3s ease'
+          }}
+        >
           <div className="chat-suggestions">
             {suggestedActions.map((action, index) => (
               <button
@@ -1162,7 +1245,32 @@ function AIChat() {
         </div>
       </div>
 
-      <div className={`canvas-pane ${canvasOpen ? 'open' : ''} ${canvasMode}`}>
+      {/* Resize Handle */}
+      {canvasOpen && canvasMode === 'split' && (
+        <div 
+          className="canvas-resize-handle"
+          style={{
+            position: 'fixed',
+            top: 'var(--space-4)',
+            right: `${canvasWidth + 16}px`,
+            bottom: 'var(--space-4)',
+            width: '4px',
+            cursor: 'col-resize',
+            zIndex: 1001,
+            background: 'transparent',
+          }}
+          onMouseDown={handleDragStart}
+        >
+          <div className="resize-indicator" />
+        </div>
+      )}
+      
+      <div 
+        className={`canvas-pane ${canvasOpen ? 'open' : ''} ${canvasMode}`}
+        style={{
+          width: canvasOpen ? (canvasMode === 'focus' ? '70vw' : `${canvasWidth}px`) : '0px'
+        }}
+      >
         <div className="canvas-header">
           <div className="canvas-title-section">
             <div className="canvas-title">
@@ -1203,7 +1311,15 @@ function AIChat() {
             </div>
             
             <div className="canvas-actions">
-              <button className="mode-btn" onClick={() => setCanvasMode(canvasMode === 'split' ? 'focus' : 'split')}>
+              <button 
+                className={`mode-btn ${canvasMode}`} 
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setCanvasMode(canvasMode === 'split' ? 'focus' : 'split')
+                }}
+                title={canvasMode === 'split' ? 'Focus mode' : 'Split mode'}
+              >
                 {canvasMode === 'split' ? <Grid size={16} /> : <List size={16} />}
               </button>
               <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
@@ -1219,15 +1335,34 @@ function AIChat() {
           {canvasView === 'editor' ? (
             <div className="survey-editor">
               <div className="editor-toolbar">
-                <button className="tool-btn" title="Add Question">
-                  <Plus size={16} />
-                </button>
-                <button className="tool-btn" title="Question Types">
-                  <List size={16} />
-                </button>
-                <button className="tool-btn" title="Styling">
-                  <Palette size={16} />
-                </button>
+                <div className="ai-generation-section">
+                  <input
+                    type="text"
+                    placeholder="Describe your survey... (e.g., 'team satisfaction survey for remote workers')"
+                    className="ai-input"
+                    onKeyDown={async (e) => {
+                      if (e.key === 'Enter' && e.target.value.trim()) {
+                        await generateSurveyFromAI(e.target.value.trim())
+                        e.target.value = ''
+                      }
+                    }}
+                  />
+                  <button className="ai-generate-btn" title="Generate with AI">
+                    <Sliders size={16} />
+                  </button>
+                </div>
+                
+                <div className="editor-tools">
+                  <button className="tool-btn" title="Add Question">
+                    <Plus size={16} />
+                  </button>
+                  <button className="tool-btn" title="Question Types">
+                    <List size={16} />
+                  </button>
+                  <button className="tool-btn" title="Styling">
+                    <Palette size={16} />
+                  </button>
+                </div>
               </div>
               
               <div className="editor-content">
@@ -1484,6 +1619,88 @@ function AIChat() {
                   />
                 </div>
               </div>
+              
+              <div className="settings-section">
+                <h3>Classifiers</h3>
+                <p className="section-description">Category labels for demographic analysis</p>
+                
+                {surveyDraft.classifiers?.map((classifier, index) => (
+                  <div key={classifier.id} className="classifier-editor">
+                    <div className="classifier-header">
+                      <input
+                        type="text"
+                        value={classifier.name}
+                        onChange={e => {
+                          const updated = [...surveyDraft.classifiers]
+                          updated[index].name = e.target.value
+                          setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
+                        }}
+                        className="classifier-name"
+                        placeholder="Classifier name"
+                      />
+                    </div>
+                    <div className="classifier-values">
+                      {classifier.values?.map((value, valueIndex) => (
+                        <input
+                          key={valueIndex}
+                          type="text"
+                          value={value}
+                          onChange={e => {
+                            const updated = [...surveyDraft.classifiers]
+                            updated[index].values[valueIndex] = e.target.value
+                            setSurveyDraft(prev => ({ ...prev, classifiers: updated }))
+                          }}
+                          className="classifier-value"
+                          placeholder={`Value ${valueIndex + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="settings-section">
+                <h3>Metrics</h3>
+                <p className="section-description">Calculated fields based on survey responses</p>
+                
+                {surveyDraft.metrics?.map((metric, index) => (
+                  <div key={metric.id} className="metric-editor">
+                    <input
+                      type="text"
+                      value={metric.name}
+                      onChange={e => {
+                        const updated = [...surveyDraft.metrics]
+                        updated[index].name = e.target.value
+                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                      }}
+                      className="metric-name"
+                      placeholder="Metric name"
+                    />
+                    <input
+                      type="text"
+                      value={metric.formula}
+                      onChange={e => {
+                        const updated = [...surveyDraft.metrics]
+                        updated[index].formula = e.target.value
+                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                      }}
+                      className="metric-formula"
+                      placeholder="Formula (e.g., avg(q1,q2))"
+                    />
+                    <textarea
+                      value={metric.description}
+                      onChange={e => {
+                        const updated = [...surveyDraft.metrics]
+                        updated[index].description = e.target.value
+                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                      }}
+                      className="metric-description"
+                      placeholder="Description of this metric..."
+                      rows={2}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -1671,7 +1888,6 @@ function AIChat() {
            top: var(--space-4);
            right: var(--space-4);
            bottom: var(--space-4);
-           width: 0;
            overflow: hidden;
            background: linear-gradient(135deg, 
              rgba(255, 255, 255, 0.98) 0%, 
@@ -1684,21 +1900,43 @@ function AIChat() {
              0 20px 60px rgba(0, 0, 0, 0.12),
              0 8px 32px rgba(139, 92, 246, 0.08),
              inset 0 1px 0 rgba(255, 255, 255, 0.4);
-           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+           transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
            display: flex;
            flex-direction: column;
            z-index: 1000;
          }
          
-         .canvas-pane.open { 
-           width: 500px; 
-           transform: translateX(0);
+         .canvas-pane:not(.open) {
+           opacity: 0;
+           transform: translateX(100%);
+           pointer-events: none;
          }
          
          .canvas-pane.focus {
-           width: 70vw;
            left: 15vw;
            right: 15vw;
+           width: 70vw !important;
+         }
+         
+         /* Canvas Resize Handle */
+         .canvas-resize-handle {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+         }
+         
+         .canvas-resize-handle:hover .resize-indicator {
+           background: rgba(139, 92, 246, 0.6);
+           box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+         }
+         
+         .resize-indicator {
+           width: 2px;
+           height: 40px;
+           background: rgba(226, 232, 240, 0.5);
+           border-radius: 1px;
+           transition: all 0.2s ease;
          }
          .canvas-header {
            display: flex;
@@ -1839,9 +2077,59 @@ function AIChat() {
          
          .editor-toolbar {
            display: flex;
-           gap: 8px;
+           flex-direction: column;
+           gap: var(--space-3);
            padding: var(--space-4);
            border-bottom: 1px solid rgba(226, 232, 240, 0.2);
+         }
+         
+         .ai-generation-section {
+           display: flex;
+           gap: 8px;
+           align-items: center;
+         }
+         
+         .ai-input {
+           flex: 1;
+           border: 1px solid rgba(139, 92, 246, 0.3);
+           background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(250, 248, 255, 0.8) 100%);
+           border-radius: 10px;
+           padding: 12px 16px;
+           font-size: 0.9em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+         }
+         
+         .ai-input:focus {
+           border-color: rgba(139, 92, 246, 0.5);
+           background: rgba(255, 255, 255, 0.95);
+           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+         }
+         
+         .ai-generate-btn {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           width: 44px;
+           height: 44px;
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+           color: white;
+           border: none;
+           border-radius: 10px;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+         
+         .ai-generate-btn:hover {
+           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+           transform: translateY(-1px);
+           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+         }
+         
+         .editor-tools {
+           display: flex;
+           gap: 8px;
          }
          
          .tool-btn {
@@ -2237,6 +2525,107 @@ function AIChat() {
            outline: none;
          }
          
+         .section-description {
+           font-size: 0.8em;
+           color: var(--text-secondary);
+           margin-bottom: var(--space-3);
+           opacity: 0.8;
+         }
+         
+         /* Classifiers Styles */
+         .classifier-editor {
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           border-radius: 10px;
+           padding: var(--space-3);
+           margin-bottom: var(--space-3);
+         }
+         
+         .classifier-header {
+           margin-bottom: var(--space-2);
+         }
+         
+         .classifier-name {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 8px;
+           padding: 8px 12px;
+           font-size: 0.85em;
+           font-weight: 500;
+           color: var(--text-primary);
+           outline: none;
+         }
+         
+         .classifier-values {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+           gap: 8px;
+         }
+         
+         .classifier-value {
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           background: rgba(255, 255, 255, 0.6);
+           border-radius: 6px;
+           padding: 6px 10px;
+           font-size: 0.8em;
+           color: var(--text-primary);
+           outline: none;
+           transition: all 0.2s ease;
+         }
+         
+         .classifier-value:focus {
+           background: white;
+           border-color: rgba(139, 92, 246, 0.3);
+         }
+         
+         /* Metrics Styles */
+         .metric-editor {
+           background: rgba(248, 250, 252, 0.6);
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           border-radius: 10px;
+           padding: var(--space-3);
+           margin-bottom: var(--space-3);
+         }
+         
+         .metric-name {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 8px;
+           padding: 8px 12px;
+           font-size: 0.85em;
+           font-weight: 500;
+           color: var(--text-primary);
+           outline: none;
+           margin-bottom: 8px;
+         }
+         
+         .metric-formula {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 8px;
+           padding: 8px 12px;
+           font-size: 0.8em;
+           font-family: 'Monaco', monospace;
+           color: var(--text-primary);
+           outline: none;
+           margin-bottom: 8px;
+         }
+         
+         .metric-description {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 8px;
+           padding: 8px 12px;
+           font-size: 0.8em;
+           color: var(--text-primary);
+           outline: none;
+           resize: vertical;
+         }
+         
          /* Canvas Animation Enhancements */
          .canvas-pane:not(.open) {
            transform: translateX(100%);
@@ -2287,15 +2676,6 @@ function AIChat() {
            background: rgba(226, 232, 240, 0.8);
          }
 
-          .canvas-open .chat-input-area { 
-            right: 520px; 
-            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          }
-          
-          .canvas-open .chat-messages {
-            margin-right: 520px;
-            transition: margin-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          }
           
           .canvas-pane.focus .chat-messages {
             opacity: 0.3;
@@ -2853,9 +3233,7 @@ function AIChat() {
          }
 
          .markdown-content hr {
-           border: none;
-           border-top: 2px solid rgba(226, 232, 240, 0.6);
-           margin: 1.5em 0;
+           display: none;  /* Remove all horizontal rules for cleaner appearance */
          }
 
          .markdown-content table {
