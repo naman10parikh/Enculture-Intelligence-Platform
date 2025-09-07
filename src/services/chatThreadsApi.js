@@ -2,13 +2,13 @@ const API_BASE_URL = 'http://localhost:8000/api/v1';
 
 export const chatThreadsApi = {
   // Create a new chat thread
-  createThread: async (title = null) => {
+  createThread: async (title = null, userId = null) => {
     const response = await fetch(`${API_BASE_URL}/chat-threads/threads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({ title, user_id: userId }),
     });
 
     if (!response.ok) {
@@ -20,8 +20,11 @@ export const chatThreadsApi = {
   },
 
   // Get all chat threads
-  getThreads: async (limit = 50, offset = 0) => {
-    const response = await fetch(`${API_BASE_URL}/chat-threads/threads?limit=${limit}&offset=${offset}`);
+  getThreads: async (userId = null, limit = 50, offset = 0) => {
+    const params = new URLSearchParams({ limit, offset });
+    if (userId) params.append('user_id', userId);
+    
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads?${params}`);
     
     if (!response.ok) {
       const errorData = await response.json();
@@ -32,8 +35,11 @@ export const chatThreadsApi = {
   },
 
   // Get recent threads for sidebar
-  getRecentThreads: async (limit = 10) => {
-    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/recent?limit=${limit}`);
+  getRecentThreads: async (userId = null, limit = 10) => {
+    const params = new URLSearchParams({ limit });
+    if (userId) params.append('user_id', userId);
+    
+    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/recent?${params}`);
     
     if (!response.ok) {
       const errorData = await response.json();
@@ -88,8 +94,13 @@ export const chatThreadsApi = {
   },
 
   // Search chat threads
-  searchThreads: async (query, limit = 20) => {
-    const response = await fetch(`${API_BASE_URL}/chat-threads/threads/search`, {
+  searchThreads: async (query, userId = null, limit = 20) => {
+    const params = new URLSearchParams();
+    if (userId) params.append('user_id', userId);
+    
+    const url = `${API_BASE_URL}/chat-threads/threads/search${params.toString() ? '?' + params : ''}`;
+    
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -17,6 +17,7 @@ from app.models.survey import (
     SurveyResponse
 )
 from app.services.websocket_manager import websocket_manager
+from app.services.survey_service import survey_service
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

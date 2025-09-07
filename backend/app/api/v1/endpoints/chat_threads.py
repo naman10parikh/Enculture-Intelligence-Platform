@@ -30,27 +30,29 @@ async def create_chat_thread(
     service: ChatThreadService = Depends(get_chat_thread_service)
 ):
     """Create a new chat thread"""
-    thread = await service.create_thread(title=request.title)
+    thread = await service.create_thread(title=request.title, user_id=request.user_id)
     return ChatThreadResponse.from_thread(thread)
 
 
 @router.get("/threads", response_model=ChatThreadsListResponse)
 async def get_chat_threads(
+    user_id: Optional[str] = None,
     limit: int = 50,
     offset: int = 0,
     service: ChatThreadService = Depends(get_chat_thread_service)
 ):
-    """Get all chat threads with pagination"""
-    return await service.get_all_threads(limit=limit, offset=offset)
+    """Get all chat threads with pagination for a specific user"""
+    return await service.get_all_threads(user_id=user_id, limit=limit, offset=offset)
 
 
 @router.get("/threads/recent", response_model=List[ChatThreadResponse])
 async def get_recent_threads(
+    user_id: Optional[str] = None,
     limit: int = 10,
     service: ChatThreadService = Depends(get_chat_thread_service)
 ):
-    """Get recent chat threads for sidebar"""
-    return await service.get_recent_threads(limit=limit)
+    """Get recent chat threads for sidebar for a specific user"""
+    return await service.get_recent_threads(user_id=user_id, limit=limit)
 
 
 @router.get("/threads/{thread_id}", response_model=ChatThread)
@@ -106,10 +108,11 @@ async def delete_chat_thread(
 @router.post("/threads/search", response_model=List[ChatThreadResponse])
 async def search_chat_threads(
     request: SearchChatsRequest,
+    user_id: Optional[str] = None,
     service: ChatThreadService = Depends(get_chat_thread_service)
 ):
-    """Search chat threads by content"""
-    return await service.search_threads(request.query, request.limit)
+    """Search chat threads by content for a specific user"""
+    return await service.search_threads(request.query, user_id=user_id, limit=request.limit)
 
 
 @router.post("/threads/generate-title")

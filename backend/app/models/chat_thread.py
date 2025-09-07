@@ -20,6 +20,7 @@ class ChatMessage(BaseModel):
 class ChatThread(BaseModel):
     id: str
     title: Optional[str] = None
+    user_id: Optional[str] = None  # Add user_id for profile isolation
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     messages: List[ChatMessage] = []
@@ -28,6 +29,7 @@ class ChatThread(BaseModel):
 
 class CreateChatThreadRequest(BaseModel):
     title: Optional[str] = None
+    user_id: Optional[str] = None
 
 
 class AddMessageRequest(BaseModel):

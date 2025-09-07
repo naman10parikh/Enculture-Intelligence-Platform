@@ -98,6 +98,7 @@ function AIChat() {
   const [copiedMessageId, setCopiedMessageId] = useState(null)
   const [likedMessages, setLikedMessages] = useState(new Set())
   const messagesEndRef = useRef(null)
+  const previousUserRef = useRef(currentUser?.id)
   const textareaRef = useRef(null)
   const dragRef = useRef(null)
 
@@ -162,18 +163,29 @@ function AIChat() {
     return () => clearInterval(interval)
   }, [])
 
-  // Initialize chat threads on mount
+  // Initialize app and load user-specific state
   useEffect(() => {
-    const initializeThreads = async () => {
-      await loadRecentThreads()
+    const initializeApp = async () => {
+      // Load user-specific state from localStorage
+      if (currentUserId) {
+        await loadUserState(currentUserId)
+      }
       
-      // Create a new thread if none exists
-      if (!currentThreadId) {
-        await createNewThread()
+      // Only load backend threads for manager, others get persisted local state
+      if (currentUser?.id === 'michael_chen') {
+        await loadRecentThreads()
+        
+        // Create a new thread if none exists and no saved state
+        if (!currentThreadId) {
+          await createNewThread()
+        }
+      } else {
+        // Other users use their persisted local state (already loaded by loadUserState)
+        console.log(`${currentUser?.name} loaded from persisted state`)
       }
     }
     
-    initializeThreads()
+    initializeApp()
   }, [])
 
   // Keyboard shortcuts for Canvas
@@ -216,8 +228,8 @@ function AIChat() {
 
   const getCurrentPersona = () => {
     // This would be set by a persona switching component
-    // For now, return default or from localStorage
-    return localStorage.getItem('userPersona') || currentPersona
+    // For now, return default or from localStorage with user-specific key
+    return localStorage.getItem(`enculture_userPersona_${currentUserId}`) || currentPersona
   }
 
   // API layer stubs for canvas functionality
@@ -239,18 +251,18 @@ function AIChat() {
         status: 'draft'
       }
       
-      localStorage.setItem('currentSurveyDraft', JSON.stringify(draftWithTimestamp))
+      localStorage.setItem(`enculture_surveyDraft_${currentUserId}`, JSON.stringify(draftWithTimestamp))
       
       // Try to save to backend if available
       try {
         const response = await chatService.saveSurveyDraft?.(draftWithTimestamp)
         if (response?.ok) {
           // Backend save successful
-          addNotification('Draft saved successfully!', 'success')
+          // addNotification('Draft saved successfully!', 'success') // Hidden for clean UX
         }
       } catch (backendError) {
         console.warn('Backend save failed, but local save succeeded:', backendError)
-        addNotification('Draft saved locally (backend unavailable)', 'info')
+        // addNotification('Draft saved locally (backend unavailable)', 'info') // Hidden for clean UX
       }
       
       // Update the current draft state
@@ -313,7 +325,7 @@ function AIChat() {
     setSurveyResponses({}) // Reset responses
     setCanvasOpen(true)
     setCanvasView('survey')
-    addNotification(`Opening survey: ${survey.name}`, 'info')
+    // addNotification(`Opening survey: ${survey.name}`, 'info') // Hidden for clean UX
   }
 
   const closeSurveyTaking = () => {
@@ -452,11 +464,11 @@ function AIChat() {
   // Survey draft persistence helpers
   const loadSavedDraft = () => {
     try {
-      const savedDraft = localStorage.getItem('currentSurveyDraft')
+      const savedDraft = localStorage.getItem(`enculture_surveyDraft_${currentUserId}`)
       if (savedDraft) {
         const parsedDraft = JSON.parse(savedDraft)
         setSurveyDraft(prev => ({ ...prev, ...parsedDraft }))
-        addNotification('Previous draft loaded successfully', 'success')
+        // addNotification('Previous draft loaded successfully', 'success') // Hidden for clean UX
         return parsedDraft
       }
     } catch (error) {
@@ -467,8 +479,8 @@ function AIChat() {
   }
 
   const clearSavedDraft = () => {
-    localStorage.removeItem('currentSurveyDraft')
-    addNotification('Draft cleared', 'info')
+    localStorage.removeItem(`enculture_surveyDraft_${currentUserId}`)
+    // addNotification('Draft cleared', 'info') // Hidden for clean UX
   }
 
   // Simple debounce function
@@ -505,8 +517,10 @@ function AIChat() {
     }
   }, [surveyDraft, canvasOpen, autoSave])
 
-  // Save current user state before switching
+  // Save current user state before switching - with localStorage persistence
   const saveCurrentUserState = (userId) => {
+    if (!userId) return
+    
     const currentState = {
       messages,
       currentThreadId,
@@ -515,18 +529,48 @@ function AIChat() {
       surveyTakingMode,
       activeSurveyData,
       surveyResponses,
-      receivedSurveys
+      receivedSurveys,
+      savedAt: new Date().toISOString()
     }
     
+    // Save to memory
     setUserStates(prev => ({
       ...prev,
       [userId]: currentState
     }))
+    
+    // Save to localStorage with user-specific key
+    try {
+      localStorage.setItem(`enculture_userState_${userId}`, JSON.stringify(currentState))
+    } catch (error) {
+      console.error('Failed to save user state to localStorage:', error)
+    }
   }
 
-  // Load user state when switching with role-specific defaults
+  // Load user state when switching with role-specific defaults - with localStorage persistence
   const loadUserState = async (userId) => {
-    const savedState = userStates[userId]
+    if (!userId) return
+    
+    let savedState = userStates[userId]
+    
+    // Try to load from localStorage if not in memory
+    if (!savedState) {
+      try {
+        const localStorageState = localStorage.getItem(`enculture_userState_${userId}`)
+        if (localStorageState) {
+          savedState = JSON.parse(localStorageState)
+          
+          // Update userStates with loaded data
+          setUserStates(prev => ({
+            ...prev,
+            [userId]: savedState
+          }))
+        }
+      } catch (error) {
+        console.error('Failed to load user state from localStorage:', error)
+      }
+    }
+    
     const user = demoUsers.find(u => u.id === userId)
     
     if (savedState) {
@@ -549,9 +593,11 @@ function AIChat() {
       setSurveyResponses({})
       setReceivedSurveys([])
       
-      // Only Manager (Michael Chen) gets existing chat threads
+      // Each user gets their own isolated chat environment
+      console.log(`${user?.name} (${user?.role}) starting with fresh isolated chat history`)
+      
+      // Only Manager gets existing backend threads, others start completely fresh
       if (userId === 'michael_chen') {
-        // Load existing threads for the manager
         try {
           await loadRecentThreads()
         } catch (error) {
@@ -559,35 +605,18 @@ function AIChat() {
           setRecentThreads([])
         }
       } else {
-        // Other roles start with clean slate
+        // All other users start completely fresh with no shared history
         setRecentThreads([])
-        console.log(`${user?.name} (${user?.role}) starting with fresh chat history`)
+        setMessages(initialMessages) // Ensure fresh messages
+        setCurrentThreadId(null)
+        
+        // Don't create backend threads for other users to avoid shared state
+        console.log(`${user?.name} will use local-only chat state`)
       }
     }
   }
 
-  // User switching function with persistent chat history
-  const handleUserSwitch = (userId) => {
-    const user = switchUser(userId)
-    if (user) {
-      // Save current user's state before switching
-      saveCurrentUserState(currentUser?.id)
-      
-      // Disconnect current WebSocket
-      websocketService.disconnect()
-      
-      // Load new user's state
-      loadUserState(userId)
-      
-      // Clean user switching without notifications
-      
-      // Reconnect WebSocket as new user
-      setTimeout(() => {
-        websocketService.connect(userId)
-        // loadRecentThreads() now handled in loadUserState
-      }, 500)
-    }
-  }
+  // User switching is now handled in useEffect above
 
   // WebSocket connection effect
   useEffect(() => {
@@ -611,7 +640,20 @@ function AIChat() {
       // Add to received surveys
       setReceivedSurveys(prev => [...prev, data.survey])
       
-      // Show notification with action
+      // Add survey as a chat message card
+      const surveyMessage = {
+        id: `survey_msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        type: 'survey',
+        content: `📋 **Survey Ready**: ${data.survey.name}`,
+        survey: data.survey,
+        timestamp: new Date(),
+        sender: 'system'
+      }
+      
+      // Add survey message to current chat
+      setMessages(prev => [...prev, surveyMessage])
+      
+      // Also show a brief popup notification
       addSurveyNotification(data.survey)
     }
 
@@ -638,19 +680,21 @@ function AIChat() {
 
   // Effect to handle user switching from sidebar
   useEffect(() => {
-    // Only handle user switches after initial load
-    if (currentUser?.id && currentUserId !== currentUser?.id) {
-      handleUserSwitch(currentUserId)
+    if (currentUser?.id && previousUserRef.current && previousUserRef.current !== currentUser.id) {
+      // Save previous user's state before switching
+      saveCurrentUserState(previousUserRef.current);
+      
+      // Load new user's state
+      loadUserState(currentUser.id);
+      
+      console.log(`User switched from ${previousUserRef.current} to ${currentUser.id}`);
     }
-  }, [currentUserId])
+    
+    // Update the ref for next time
+    previousUserRef.current = currentUser?.id;
+  }, [currentUser?.id])
 
-  // Initial load effect for current user
-  useEffect(() => {
-    if (currentUser?.id === 'michael_chen') {
-      // Load existing threads for manager on initial load
-      loadRecentThreads()
-    }
-  }, [])
+  // Initial load effect removed - now handled in main initialization useEffect above
 
   // Auto-save user state periodically
   useEffect(() => {
@@ -701,7 +745,7 @@ function AIChat() {
   const loadRecentThreads = async () => {
     try {
       setThreadsLoading(true)
-      const threads = await chatThreadsApi.getRecentThreads(10)
+      const threads = await chatThreadsApi.getRecentThreads(currentUserId, 10)
       setRecentThreads(threads)
     } catch (error) {
       console.error('Failed to load recent threads:', error)
@@ -731,10 +775,20 @@ function AIChat() {
       }
       
       // Only create a new thread if no empty chat exists
-      const newThread = await chatThreadsApi.createThread()
-      setCurrentThreadId(newThread.id)
-      setMessages([]) // Clear current messages
-      await loadRecentThreads() // Refresh the list
+      if (currentUser?.id === 'michael_chen') {
+        // Only Manager creates backend threads
+        const newThread = await chatThreadsApi.createThread(null, currentUserId)
+        setCurrentThreadId(newThread.id)
+        setMessages([]) // Clear current messages
+        await loadRecentThreads() // Refresh the list
+      } else {
+        // Other users use local-only threads
+        const localThreadId = `local_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+        setCurrentThreadId(localThreadId)
+        setMessages([]) // Clear current messages
+        setRecentThreads([{ id: localThreadId, title: 'New Chat', message_count: 0, updated_at: new Date().toISOString() }])
+        console.log(`${currentUser?.name} created local-only thread: ${localThreadId}`)
+      }
     } catch (error) {
       console.error('Failed to create new thread:', error)
     }
@@ -770,7 +824,7 @@ function AIChat() {
       setIsSearching(true)
       
       // Use backend search that already searches through all content
-      const results = await chatThreadsApi.searchThreads(query, 20)
+      const results = await chatThreadsApi.searchThreads(query, currentUserId, 20)
       
       // For each result, get the thread details to show relevant snippets
       const enhancedResults = await Promise.all(
@@ -808,14 +862,23 @@ function AIChat() {
 
   const deleteThread = async (threadId) => {
     try {
-      await chatThreadsApi.deleteThread(threadId)
+      // Only delete backend threads for manager
+      if (currentUser?.id === 'michael_chen') {
+        await chatThreadsApi.deleteThread(threadId)
+      }
+      
+      // Remove from local state for all users
+      setRecentThreads(prev => prev.filter(t => t.id !== threadId))
       
       // If deleting current thread, create a new one
       if (threadId === currentThreadId) {
         await createNewThread()
       }
       
-      await loadRecentThreads()
+      // Only refresh backend threads for manager
+      if (currentUser?.id === 'michael_chen') {
+        await loadRecentThreads()
+      }
     } catch (error) {
       console.error('Failed to delete thread:', error)
     }
@@ -954,8 +1017,10 @@ function AIChat() {
             
             if (data.title_updated && !titleUpdated) {
               titleUpdated = true
-              // Refresh the threads list to show new title
-              loadRecentThreads()
+              // Refresh the threads list to show new title - only for manager
+              if (currentUser?.id === 'michael_chen') {
+                loadRecentThreads()
+              }
             }
             
             if (data.done) {
@@ -1748,6 +1813,27 @@ function AIChat() {
                         </div>
                       )}
                     </>
+                  ) : message.type === 'survey' ? (
+                    <div className="survey-card" onClick={() => openSurveyTaking(message.survey)}>
+                      <div className="survey-card-header">
+                        <div className="survey-card-icon">📋</div>
+                        <div className="survey-card-title">Survey Ready</div>
+                      </div>
+                      <div className="survey-card-content">
+                        <h4>{message.survey.name}</h4>
+                        <p>{message.survey.context}</p>
+                        <div className="survey-card-meta">
+                          <span>👤 From: {message.survey.created_by}</span>
+                          <span>⏱️ {message.survey.questions?.length || 0} questions</span>
+                        </div>
+                      </div>
+                      <div className="survey-card-action">
+                        <button className="survey-take-btn">
+                          <Bell size={16} />
+                          Take Survey
+                        </button>
+                      </div>
+                    </div>
                   ) : (
                     <p>{message.content}</p>
                   )}
@@ -1932,7 +2018,7 @@ function AIChat() {
             </div>
             
             <div className="canvas-actions">
-              {!surveyTakingMode && canCreateSurveys ? (
+              {!surveyTakingMode && canCreateSurveys && surveyStep !== 6 ? (
                 <>
                   <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
                     Save
@@ -3018,7 +3104,7 @@ function AIChat() {
                                       }
                                       
                                       setIsLoading(true)
-                                      addNotification('Publishing survey...', 'info')
+                                      // addNotification('Publishing survey...', 'info') // Hidden for clean UX
                                       
                                       // Simulate publishing
                                       await new Promise(resolve => setTimeout(resolve, 2000))
@@ -3089,7 +3175,7 @@ function AIChat() {
                                       
                                       try {
                                         setIsLoading(true)
-                                        addNotification('Scheduling survey...', 'info')
+                                        // addNotification('Scheduling survey...', 'info') // Hidden for clean UX
                                         
                                         await new Promise(resolve => setTimeout(resolve, 1500))
                                         
@@ -3845,7 +3931,7 @@ function AIChat() {
          }
 
          .publish-btn {
-           background: linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(5, 150, 105, 0.9) 100%);
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
            color: white;
            border-color: transparent;
            display: flex;
@@ -3861,9 +3947,9 @@ function AIChat() {
          }
          
          .publish-btn:hover {
-           background: linear-gradient(135deg, rgba(16, 185, 129, 1) 0%, rgba(5, 150, 105, 1) 100%);
+           background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
            transform: translateY(-1px);
-           box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
          }
          
          .mode-btn:hover, .close-btn:hover {

@@ -72,12 +72,13 @@ class ChatThreadService:
         except Exception as e:
             print(f"Error saving threads: {e}")
 
-    async def create_thread(self, title: Optional[str] = None) -> ChatThread:
-        """Create a new chat thread"""
+    async def create_thread(self, title: Optional[str] = None, user_id: Optional[str] = None) -> ChatThread:
+        """Create a new chat thread for a specific user"""
         thread_id = str(uuid.uuid4())
         thread = ChatThread(
             id=thread_id,
             title=title or "New Chat",
+            user_id=user_id,
             created_at=datetime.utcnow(),
             updated_at=datetime.utcnow(),
             messages=[],
@@ -92,9 +93,14 @@ class ChatThreadService:
         """Get a specific chat thread"""
         return self._threads.get(thread_id)
 
-    async def get_all_threads(self, limit: int = 50, offset: int = 0) -> ChatThreadsListResponse:
-        """Get all chat threads, sorted by most recent"""
+    async def get_all_threads(self, user_id: Optional[str] = None, limit: int = 50, offset: int = 0) -> ChatThreadsListResponse:
+        """Get all chat threads for a specific user, sorted by most recent"""
         active_threads = [t for t in self._threads.values() if t.is_active]
+        
+        # Filter by user_id if provided
+        if user_id:
+            active_threads = [t for t in active_threads if t.user_id == user_id]
+        
         sorted_threads = sorted(active_threads, key=lambda x: x.updated_at, reverse=True)
         
         # Apply pagination
@@ -148,8 +154,8 @@ class ChatThreadService:
         self._save_threads()
         return True
 
-    async def search_threads(self, query: str, limit: int = 20) -> List[ChatThreadResponse]:
-        """Search chat threads by content"""
+    async def search_threads(self, query: str, user_id: Optional[str] = None, limit: int = 20) -> List[ChatThreadResponse]:
+        """Search chat threads by content for a specific user"""
         if not query.strip():
             return []
         
@@ -158,6 +164,10 @@ class ChatThreadService:
         
         for thread in self._threads.values():
             if not thread.is_active:
+                continue
+                
+            # Filter by user_id if provided
+            if user_id and thread.user_id != user_id:
                 continue
                 
             # Search in title
@@ -212,9 +222,14 @@ class ChatThreadService:
             words = first_message.split()[:3]
             return " ".join(words).title() or "New Chat"
 
-    async def get_recent_threads(self, limit: int = 10) -> List[ChatThreadResponse]:
-        """Get the most recent chat threads"""
+    async def get_recent_threads(self, user_id: Optional[str] = None, limit: int = 10) -> List[ChatThreadResponse]:
+        """Get the most recent chat threads for a specific user"""
         active_threads = [t for t in self._threads.values() if t.is_active]
+        
+        # Filter by user_id if provided
+        if user_id:
+            active_threads = [t for t in active_threads if t.user_id == user_id]
+        
         sorted_threads = sorted(active_threads, key=lambda x: x.updated_at, reverse=True)
         recent_threads = sorted_threads[:limit]
         
