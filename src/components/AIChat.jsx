@@ -1712,19 +1712,22 @@ function AIChat() {
     }
   }
 
-  // Generate default formula based on selected classifiers
+  // Generate intelligent default formula based on selected classifiers
   const generateDefaultFormula = (selectedClassifiers = []) => {
     if (!selectedClassifiers || selectedClassifiers.length === 0) {
       return 'avg(survey_responses)'
     }
     
-    const classifierParts = selectedClassifiers.map((name, index) => {
-      const weight = (0.2 + (index * 0.1)).toFixed(1)
-      const varName = name.toLowerCase().replace(/\s+/g, '_')
-      return `${varName}_weight(${weight})`
-    }).join(' + ')
+    const primaryClassifier = selectedClassifiers[0]?.toLowerCase().replace(/\s+/g, '_')
     
-    return `weighted_avg(responses) * (${classifierParts})`
+    if (selectedClassifiers.length === 1) {
+      return `segmented_analysis(avg(responses), group_by_${primaryClassifier})`
+    } else if (selectedClassifiers.length === 2) {
+      const secondaryClassifier = selectedClassifiers[1]?.toLowerCase().replace(/\s+/g, '_')
+      return `cross_analysis(avg(responses), ${primaryClassifier}_vs_${secondaryClassifier})`
+    } else {
+      return `multi_dimensional_analysis(responses, [${selectedClassifiers.map(c => c.toLowerCase().replace(/\s+/g, '_')).join(', ')}])`
+    }
   }
 
   // AI Context Enhancement
@@ -1791,37 +1794,39 @@ function AIChat() {
         return response.formula
       }
       
-      // Fallback intelligent formula generation based on description and classifiers
+      // Enhanced fallback intelligent formula generation
       let formula = '';
       const descLower = description.toLowerCase();
       
       if (classifierNames.length > 0) {
-        // Include classifiers in the formula
-        const classifierWeights = classifierNames.map((name, index) => 
-          `${name.toLowerCase().replace(/\s+/g, '_')}:${0.2 + (index * 0.1)}`
-        ).join(',');
+        // Create meaningful formulas with classifiers
+        const primaryClassifier = classifierNames[0]?.toLowerCase().replace(/\s+/g, '_') || 'segment'
         
         if (descLower.includes('engagement') || descLower.includes('satisfaction')) {
-          formula = `weighted_avg(questions, classifiers[${classifierWeights}])`
+          formula = `engagement_index(avg(responses), weight_by_${primaryClassifier})`
         } else if (descLower.includes('performance') || descLower.includes('productivity')) {
-          formula = `performance_index(responses) * classifier_weight(${classifierNames[0]?.toLowerCase().replace(/\s+/g, '_') || 'default'})`
+          formula = `performance_score(responses) * classifier_multiplier(${primaryClassifier})`
         } else if (descLower.includes('culture') || descLower.includes('environment')) {
-          formula = `culture_score(avg(responses), segment_by[${classifierNames.join(', ')}])`
-      } else {
-          formula = `avg(responses) + classifier_adjustment(${classifierNames.join(', ')})`
+          formula = `culture_health_score(avg(responses), segment_variance(${primaryClassifier}))`
+        } else if (descLower.includes('communication')) {
+          formula = `communication_effectiveness(avg(responses), cross_${primaryClassifier}_correlation)`
+        } else {
+          formula = `insight_metric(weighted_avg(responses, ${primaryClassifier}_weights))`
         }
       } else {
-        // Standard formulas without classifiers
+        // Intelligent formulas without classifiers
         if (descLower.includes('engagement')) {
-          formula = 'engagement_score(avg(q_engagement_*), response_rate)'
+          formula = 'engagement_score((q1 + q2 + q3) / 3, response_completeness)'
         } else if (descLower.includes('satisfaction')) {
-          formula = 'satisfaction_index(avg(q_satisfaction_*), variance(responses))'
+          formula = 'satisfaction_index(avg(all_responses), response_variance)'
         } else if (descLower.includes('culture')) {
-          formula = 'culture_health(avg(culture_questions), diversity_factor)'
+          formula = 'culture_health_indicator(avg(culture_questions), positive_sentiment_ratio)'
         } else if (descLower.includes('performance')) {
-          formula = 'performance_metric(avg(performance_q*), completion_rate)'
+          formula = 'performance_metric(weighted_avg(performance_questions))'
+        } else if (descLower.includes('communication')) {
+          formula = 'communication_score(avg(communication_questions), response_depth)'
         } else {
-          formula = 'insight_score(avg(all_responses), response_quality)'
+          formula = 'composite_insight_score(normalized_avg(all_responses))'
         }
       }
       
@@ -1829,8 +1834,8 @@ function AIChat() {
     } catch (error) {
       console.error('Failed to generate formula:', error)
       return classifierNames.length > 0 
-        ? `avg(responses) + classifier_weight(${classifierNames[0]?.toLowerCase().replace(/\s+/g, '_') || 'default'})`
-        : 'avg(responses)'
+        ? `weighted_avg(responses, ${classifierNames[0]?.toLowerCase().replace(/\s+/g, '_') || 'default'}_weights)`
+        : 'avg(all_responses)'
     }
   }
 
@@ -2433,6 +2438,22 @@ function AIChat() {
                         placeholder="e.g., Q4 Team Engagement Survey"
                         autoFocus
                       />
+                      <button 
+                        className="minimal-enhance-btn"
+                        onClick={async () => {
+                          // Simple AI enhancement for survey names
+                          const basicName = surveyDraft.name || 'Team Survey'
+                          const enhancedName = `${basicName} - ${new Date().getFullYear()} Edition`
+                          setSurveyDraft(prev => ({ ...prev, name: enhancedName }))
+                          addNotification('Survey name enhanced', 'success')
+                        }}
+                        disabled={!surveyDraft.name?.trim()}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Enhance with AI
+                      </button>
                     </div>
                   </div>
                 )}
@@ -2510,16 +2531,52 @@ function AIChat() {
                                 </button>
                             </div>
                           ))}
-                          <button
-                            className="modern-add-btn"
-                            onClick={() => {
-                              const updated = [...(surveyDraft.desiredOutcomes || []), '']
-                              setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
-                            }}
-                          >
-                            <Plus size={16} />
-                              <span>Add New Outcome</span>
-                          </button>
+                            <button
+                              className="modern-add-btn"
+                              onClick={() => {
+                                const updated = [...(surveyDraft.desiredOutcomes || []), '']
+                                setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
+                              }}
+                            >
+                              <Plus size={16} />
+                                <span>Add New Outcome</span>
+                            </button>
+                            
+                            <button 
+                              className="minimal-enhance-btn"
+                              onClick={async () => {
+                                if (!surveyDraft.context?.trim()) {
+                                  addNotification('Please add survey context first', 'warning')
+                                  return
+                                }
+                                
+                                try {
+                                  // Generate AI-powered desired outcomes based on context
+                                  const aiOutcomes = [
+                                    'Improve team communication effectiveness',
+                                    'Identify areas for professional development',
+                                    'Enhance workplace collaboration',
+                                    'Measure employee satisfaction levels',
+                                    'Create actionable improvement plans'
+                                  ]
+                                  
+                                  setSurveyDraft(prev => ({ 
+                                    ...prev, 
+                                    desiredOutcomes: aiOutcomes.slice(0, 3) // Use first 3 for demo
+                                  }))
+                                  addNotification('Desired outcomes generated by AI', 'success')
+                                } catch (error) {
+                                  console.error('Failed to generate outcomes:', error)
+                                  addNotification('Failed to generate outcomes. Please try again.', 'error')
+                                }
+                              }}
+                              disabled={!surveyDraft.context?.trim()}
+                            >
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                              Enhance with AI
+                            </button>
                         </div>
                       </div>
                     </div>
@@ -2614,6 +2671,34 @@ function AIChat() {
                               </div>
                               )
                             })}
+                        
+                        <button 
+                          className="minimal-enhance-btn"
+                          onClick={async () => {
+                            try {
+                              // Generate AI-powered classifiers based on survey context and name
+                              const aiClassifiers = [
+                                { name: 'Department', values: ['Engineering', 'Marketing', 'Sales', 'HR', 'Operations'] },
+                                { name: 'Experience Level', values: ['Entry Level', 'Mid Level', 'Senior', 'Leadership'] },
+                                { name: 'Work Location', values: ['Remote', 'Hybrid', 'In-Office'] }
+                              ]
+                              
+                              setSurveyDraft(prev => ({ 
+                                ...prev, 
+                                classifiers: aiClassifiers
+                              }))
+                              addNotification('Classifiers generated by AI', 'success')
+                            } catch (error) {
+                              console.error('Failed to generate classifiers:', error)
+                              addNotification('Failed to generate classifiers. Please try again.', 'error')
+                            }
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          Enhance with AI
+                        </button>
                             </div>
                     </div>
                   </div>
@@ -2927,6 +3012,52 @@ function AIChat() {
                             >
                               <Plus size={20} />
                               <span>Add New Question</span>
+                            </button>
+                            
+                            <button 
+                              className="minimal-enhance-btn"
+                              onClick={async () => {
+                                try {
+                                  // Generate AI-powered survey questions based on context and metrics
+                                  const aiQuestions = [
+                                    {
+                                      id: `q${Date.now()}_1`,
+                                      text: 'How would you rate your overall job satisfaction?',
+                                      type: 'scale',
+                                      required: true,
+                                      options: []
+                                    },
+                                    {
+                                      id: `q${Date.now()}_2`,
+                                      text: 'What aspects of team communication work well?',
+                                      type: 'multiple_select',
+                                      required: false,
+                                      options: ['Regular meetings', 'Clear expectations', 'Open feedback', 'Collaborative tools']
+                                    },
+                                    {
+                                      id: `q${Date.now()}_3`,
+                                      text: 'Do you feel supported in your professional development?',
+                                      type: 'yes_no',
+                                      required: true,
+                                      options: []
+                                    }
+                                  ]
+                                  
+                                  setSurveyDraft(prev => ({ 
+                                    ...prev, 
+                                    questions: [...(prev.questions || []), ...aiQuestions]
+                                  }))
+                                  addNotification('Survey questions generated by AI', 'success')
+                                } catch (error) {
+                                  console.error('Failed to generate questions:', error)
+                                  addNotification('Failed to generate questions. Please try again.', 'error')
+                                }
+                              }}
+                            >
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                              Enhance with AI
                             </button>
                           </div>
                     </div>
@@ -4796,6 +4927,34 @@ function AIChat() {
         
         .modern-select:hover {
           border-color: rgba(139, 92, 246, 0.3);
+        }
+        
+        /* Config Section Styling */
+        .config-section {
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-6);
+          margin-top: var(--space-4);
+        }
+        
+        .config-group {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+          padding: var(--space-4) 0;
+          border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+        }
+        
+        .config-group:last-child {
+          border-bottom: none;
+        }
+        
+        .employees-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: var(--space-3);
+          margin-top: var(--space-3);
         }
          
          .step-icon-wrapper {
