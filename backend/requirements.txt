@@ -5,7 +5,7 @@ openai
 httpx
 pydantic
 pydantic-core
-pydantic-setting
+pydantic-settings
 python-multipart
 pytest
 pytest-asyncio
