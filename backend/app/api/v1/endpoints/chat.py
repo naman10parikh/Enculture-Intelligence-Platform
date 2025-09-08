@@ -148,6 +148,107 @@ async def generate_survey(request: SurveyGenerationRequest):
         )
 
 
+# New AI Enhancement Endpoints
+
+@router.post("/enhance-survey-name")
+async def enhance_survey_name(request: dict):
+    """Enhance a survey name using AI."""
+    try:
+        basic_name = request.get('name', '')
+        context = request.get('context', '')
+        
+        if not basic_name:
+            raise HTTPException(status_code=400, detail="Survey name is required")
+        
+        enhanced_name = await openai_service.enhance_survey_name(basic_name, context)
+        
+        return {"enhanced_name": enhanced_name}
+    
+    except Exception as e:
+        logger.error(f"Error enhancing survey name: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Name enhancement failed: {str(e)}")
+
+
+@router.post("/enhance-survey-context")
+async def enhance_survey_context(request: dict):
+    """Enhance survey context with AI-powered insights and structure."""
+    try:
+        basic_context = request.get('context', '')
+        survey_name = request.get('name', '')
+        
+        if not basic_context:
+            raise HTTPException(status_code=400, detail="Survey context is required")
+        
+        enhanced_context = await openai_service.enhance_survey_context(basic_context, survey_name)
+        
+        return {"enhanced_context": enhanced_context}
+    
+    except Exception as e:
+        logger.error(f"Error enhancing survey context: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Context enhancement failed: {str(e)}")
+
+
+@router.post("/generate-classifiers")
+async def generate_classifiers(request: dict):
+    """Generate intelligent survey classifiers based on context."""
+    try:
+        context = request.get('context', '')
+        survey_name = request.get('name', '')
+        
+        if not context:
+            raise HTTPException(status_code=400, detail="Survey context is required")
+        
+        classifiers = await openai_service.generate_survey_classifiers(context, survey_name)
+        
+        return {"classifiers": classifiers}
+    
+    except Exception as e:
+        logger.error(f"Error generating classifiers: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Classifier generation failed: {str(e)}")
+
+
+@router.post("/generate-formula")
+async def generate_formula(request: dict):
+    """Generate an advanced analytics formula for metrics."""
+    try:
+        description = request.get('description', '')
+        classifier_names = request.get('classifier_names', [])
+        
+        if not description:
+            raise HTTPException(status_code=400, detail="Metric description is required")
+        
+        formula = await openai_service.generate_advanced_formula(description, classifier_names)
+        
+        return {"formula": formula}
+    
+    except Exception as e:
+        logger.error(f"Error generating formula: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Formula generation failed: {str(e)}")
+
+
+@router.post("/generate-enhanced-questions")
+async def generate_enhanced_questions(request: dict):
+    """Generate enhanced survey questions based on context and metrics."""
+    try:
+        context = request.get('context', '')
+        num_questions = request.get('num_questions', 5)
+        question_types = request.get('question_types', ['multiple_choice', 'scale', 'text', 'yes_no'])
+        metrics = request.get('metrics', [])
+        
+        if not context:
+            raise HTTPException(status_code=400, detail="Survey context is required")
+        
+        questions = await openai_service.generate_survey_questions(
+            context, num_questions, question_types, metrics
+        )
+        
+        return {"questions": questions}
+    
+    except Exception as e:
+        logger.error(f"Error generating enhanced questions: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Question generation failed: {str(e)}")
+
+
 @router.get("/health")
 async def chat_health():
     """

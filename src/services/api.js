@@ -213,6 +213,155 @@ export class ChatService {
       return null;
     }
   }
+
+  // AI Enhancement Methods
+
+  /**
+   * Enhance survey name using AI
+   * @param {string} basicName - Basic survey name to enhance
+   * @param {string} context - Optional survey context
+   * @returns {Promise<string>} Enhanced survey name
+   */
+  async enhanceSurveyName(basicName, context = '') {
+    try {
+      const response = await fetch(`${this.baseUrl}/enhance-survey-name`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: basicName, context }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.enhanced_name;
+    } catch (error) {
+      console.error('Survey name enhancement error:', error);
+      return basicName; // Return original if enhancement fails
+    }
+  }
+
+  /**
+   * Enhance survey context using AI
+   * @param {string} basicContext - Basic context to enhance
+   * @param {string} surveyName - Optional survey name for context
+   * @returns {Promise<string>} Enhanced survey context
+   */
+  async enhanceSurveyContext(basicContext, surveyName = '') {
+    try {
+      const response = await fetch(`${this.baseUrl}/enhance-survey-context`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ context: basicContext, name: surveyName }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.enhanced_context;
+    } catch (error) {
+      console.error('Survey context enhancement error:', error);
+      return basicContext; // Return original if enhancement fails
+    }
+  }
+
+  /**
+   * Generate intelligent survey classifiers
+   * @param {string} context - Survey context
+   * @param {string} surveyName - Survey name for additional context
+   * @returns {Promise<Array>} Generated classifiers
+   */
+  async generateClassifiers(context, surveyName = '') {
+    try {
+      const response = await fetch(`${this.baseUrl}/generate-classifiers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ context, name: surveyName }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.classifiers;
+    } catch (error) {
+      console.error('Classifier generation error:', error);
+      return []; // Return empty array if generation fails
+    }
+  }
+
+  /**
+   * Generate advanced analytics formula
+   * @param {string} description - Metric description
+   * @param {Array<string>} classifierNames - Available classifier names
+   * @returns {Promise<string>} Generated formula
+   */
+  async generateFormula(description, classifierNames = []) {
+    try {
+      const response = await fetch(`${this.baseUrl}/generate-formula`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ description, classifier_names: classifierNames }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.formula;
+    } catch (error) {
+      console.error('Formula generation error:', error);
+      return `AVG(Response_Score) BY ${classifierNames[0] || 'Department'}`; // Return fallback formula
+    }
+  }
+
+  /**
+   * Generate enhanced survey questions
+   * @param {string} context - Survey context
+   * @param {number} numQuestions - Number of questions to generate
+   * @param {Array<string>} questionTypes - Types of questions to include
+   * @param {Array<string>} metrics - Metrics these questions should support
+   * @returns {Promise<Array>} Generated questions
+   */
+  async generateEnhancedQuestions(context, numQuestions = 5, questionTypes = ['multiple_choice', 'scale', 'text', 'yes_no'], metrics = []) {
+    try {
+      const response = await fetch(`${this.baseUrl}/generate-enhanced-questions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          context, 
+          num_questions: numQuestions, 
+          question_types: questionTypes,
+          metrics 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.questions;
+    } catch (error) {
+      console.error('Enhanced questions generation error:', error);
+      return []; // Return empty array if generation fails
+    }
+  }
 }
 
 /**

@@ -2430,22 +2430,48 @@ function AIChat() {
                 {surveyStep === 1 && (
                   <div className="step-container">
                     <div className="step-body">
-                      <input
-                        type="text"
-                        className="wizard-input large"
+                      <textarea
+                        className="wizard-input large name-field-wrap"
                         value={surveyDraft.name}
                         onChange={e => setSurveyDraft(prev => ({ ...prev, name: e.target.value }))}
                         placeholder="e.g., Q4 Team Engagement Survey"
                         autoFocus
+                        rows={1}
+                        style={{
+                          resize: 'none',
+                          overflow: 'hidden',
+                          minHeight: '3rem'
+                        }}
+                        onInput={(e) => {
+                          e.target.style.height = 'auto';
+                          e.target.style.height = e.target.scrollHeight + 'px';
+                        }}
                       />
                       <button 
                         className="minimal-enhance-btn"
                         onClick={async () => {
-                          // Simple AI enhancement for survey names
-                          const basicName = surveyDraft.name || 'Team Survey'
-                          const enhancedName = `${basicName} - ${new Date().getFullYear()} Edition`
-                          setSurveyDraft(prev => ({ ...prev, name: enhancedName }))
-                          addNotification('Survey name enhanced', 'success')
+                          try {
+                            if (!surveyDraft.name?.trim()) {
+                              addNotification('Please enter a survey name first', 'warning')
+                              return
+                            }
+                            
+                            addNotification('Enhancing survey name with AI...', 'info')
+                            const enhancedName = await chatService.enhanceSurveyName(
+                              surveyDraft.name, 
+                              surveyDraft.context || ''
+                            )
+                            
+                            if (enhancedName && enhancedName !== surveyDraft.name) {
+                              setSurveyDraft(prev => ({ ...prev, name: enhancedName }))
+                              addNotification('Survey name enhanced successfully!', 'success')
+                            } else {
+                              addNotification('No enhancements suggested for this name', 'info')
+                            }
+                          } catch (error) {
+                            console.error('Name enhancement error:', error)
+                            addNotification('Failed to enhance survey name', 'error')
+                          }
                         }}
                         disabled={!surveyDraft.name?.trim()}
                       >
@@ -2496,14 +2522,9 @@ function AIChat() {
                       </button>
                         </div>
                         
-                      <div className="modern-card">
-                        <div className="card-header-compact">
-                          <CheckCircle size={18} />
-                          <h3>Desired Outcomes</h3>
-                          <span>• What specific insights or changes are you hoping to achieve?</span>
-                        </div>
-                        <div className="card-content">
-                          <div className="outcomes-list">
+                      <div className="field-group">
+                        <label className="field-label-emphatic">Desired Outcomes</label>
+                        <div className="outcomes-minimal">
                           {(surveyDraft.desiredOutcomes || []).map((outcome, index) => (
                               <div key={index} className="outcome-row">
                                 <div className="outcome-number">{index + 1}</div>
@@ -2579,7 +2600,6 @@ function AIChat() {
                             </button>
                         </div>
                       </div>
-                    </div>
                   </div>
                 )}
 
@@ -2590,10 +2610,10 @@ function AIChat() {
                             {Array.from({ length: 4 }, (_, index) => {
                               const classifier = (surveyDraft.classifiers || [])[index] || { name: '', values: [''] }
                           const suggestions = [
-                            { name: 'Department', values: ['Engineering', 'Marketing', 'Sales', 'HR'] },
-                            { name: 'Experience Level', values: ['Entry Level', 'Mid Level', 'Senior', 'Leadership'] },
-                            { name: 'Work Style', values: ['Remote', 'Hybrid', 'In-Office'] },
-                            { name: 'Team Size', values: ['Individual', 'Small Team', 'Medium Team', 'Large Team'] }
+                            { name: 'Classifier 1', values: ['Option A', 'Option B', 'Option C', 'Option D'] },
+                            { name: 'Classifier 2', values: ['Category 1', 'Category 2', 'Category 3', 'Category 4'] },
+                            { name: 'Classifier 3', values: ['Type A', 'Type B', 'Type C'] },
+                            { name: 'Classifier 4', values: ['Group 1', 'Group 2', 'Group 3', 'Group 4'] }
                           ]
                               const suggestion = suggestions[index] || { name: '', values: [] }
                               
@@ -2959,20 +2979,20 @@ function AIChat() {
                                   <div className="analytics-selectors">
                                     <div className="analytics-selector">
                                       <label>Link to Metric</label>
-                                      <select 
-                                        value={question.linkedMetric || ''}
-                                      onChange={e => {
-                                        const updated = [...(surveyDraft.questions || [])]
-                                          updated[index] = { ...updated[index], linkedMetric: e.target.value }
-                                        setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                      }}
-                                        className="modern-select"
-                                      >
-                                        <option value="">Choose metric...</option>
-                                        {(surveyDraft.metrics || []).filter(m => m.name).map(metric => (
-                                          <option key={metric.name} value={metric.name}>{metric.name}</option>
-                                        ))}
-                                      </select>
+                              <select
+                                value={question.linkedMetric || ''}
+                              onChange={e => {
+                                const updated = [...(surveyDraft.questions || [])]
+                                  updated[index] = { ...updated[index], linkedMetric: e.target.value }
+                                setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                              }}
+                                className="modern-select full-width"
+                              >
+                                <option value="">Choose metric...</option>
+                                {(surveyDraft.metrics || []).filter(m => m.name).map(metric => (
+                                  <option key={metric.name} value={metric.name}>{metric.name}</option>
+                                ))}
+                              </select>
                                     </div>
                                     
                                     <div className="analytics-selector">
@@ -3207,11 +3227,7 @@ function AIChat() {
                                     <span className="stat-number">
                                       {(surveyDraft.configuration?.selectedEmployees || []).length}
                                     </span>
-                                    <span className="stat-label">Selected</span>
-                                  </div>
-                                  <div className="stat-item">
-                                    <span className="stat-number">{demoUsers.filter(u => u.id !== currentUserId).length}</span>
-                                    <span className="stat-label">Total</span>
+                                    <span className="stat-label">Recipients Selected</span>
                                   </div>
                                 </div>
                                 <button 
@@ -3354,9 +3370,6 @@ function AIChat() {
                         >
                           Publish Survey Now
                         </button>
-                        <p className="publish-summary">
-                          Send to {(surveyDraft.configuration?.selectedEmployees || []).length} selected recipients
-                        </p>
                       </div>
 
                       
@@ -3422,9 +3435,9 @@ function AIChat() {
                           </div>
                         </div>
 
-                        <div className="save-option">
+                        <div className="save-option-centered">
                           <button 
-                            className="tertiary-btn"
+                            className="tertiary-btn-centered"
                             onClick={async () => {
                               await saveSurveyDraft(surveyDraft)
                             }}
@@ -3590,6 +3603,35 @@ function AIChat() {
                 <button className="survey-nav-btn primary">Continue Survey</button>
               </div>
               
+            </div>
+          )}
+          
+          {/* Static Footer Navigation - Only show in wizard view */}
+          {canvasView === 'wizard' && (
+            <div className="wizard-navigation-static">
+              <button
+                className={`nav-btn secondary ${surveyStep <= 1 ? 'disabled' : ''}`}
+                onClick={() => setSurveyStep(prev => Math.max(1, prev - 1))}
+                disabled={surveyStep <= 1}
+              >
+                <ArrowLeft size={16} />
+                Previous
+              </button>
+              
+              <div className="step-indicator">
+                <span className="current-step">{surveyStep}</span>
+                <span className="step-divider">of</span>
+                <span className="total-steps">7</span>
+              </div>
+              
+              <button
+                className={`nav-btn primary ${surveyStep >= 7 ? 'disabled' : ''}`}
+                onClick={() => setSurveyStep(prev => Math.min(7, prev + 1))}
+                disabled={surveyStep >= 7}
+              >
+                Next
+                <ArrowRight size={16} />
+              </button>
             </div>
           )}
           {canvasView === 'survey' && (
@@ -3807,12 +3849,11 @@ function AIChat() {
         }
         
         .chat-content {
-          max-width: 1200px;
-          margin: 0 auto;
           width: 100%;
           display: flex;
           flex-direction: column;
           gap: var(--space-6);
+          padding: 0 var(--space-4);
         }
 
         /* Backend Connection Status */
@@ -4353,27 +4394,33 @@ function AIChat() {
         .minimal-enhance-btn {
           display: inline-flex;
           align-items: center;
+          justify-content: center;
           gap: var(--space-2);
-          padding: var(--space-2) var(--space-3);
+          padding: var(--space-2) var(--space-4);
           margin-top: var(--space-3);
-          background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
-          border: 1px solid rgba(139, 92, 246, 0.2);
-          border-radius: 6px;
-          color: rgba(139, 92, 246, 0.8);
-          font-size: 0.9em;
+          background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.8) 100%);
+          border: none;
+          border-radius: 8px;
+          color: white;
+          font-size: 0.85em;
           font-weight: 500;
           cursor: pointer;
           transition: all 0.2s ease;
+          box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+          min-width: 140px;
         }
         
         .minimal-enhance-btn:hover:not(:disabled) {
-          background: rgba(139, 92, 246, 0.1);
-          border-color: rgba(139, 92, 246, 0.3);
+          background: linear-gradient(135deg, rgba(139, 92, 246, 1) 0%, rgba(124, 58, 237, 1) 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
         }
         
         .minimal-enhance-btn:disabled {
           opacity: 0.5;
           cursor: not-allowed;
+          transform: none;
+          background: rgba(156, 163, 175, 0.4);
         }
         
         .outcomes-minimal {
@@ -4609,13 +4656,17 @@ function AIChat() {
           margin-bottom: var(--space-2);
         }
         
-        .classifier-chips {
+        .classifier-selection-sleek {
+          margin-bottom: var(--space-4);
+        }
+        
+        .classifier-toggle-chips {
           display: flex;
           flex-wrap: wrap;
           gap: var(--space-2);
         }
         
-        .classifier-chip {
+        .classifier-toggle-chip {
           display: flex;
           align-items: center;
           gap: var(--space-2);
@@ -4628,23 +4679,24 @@ function AIChat() {
           font-size: 0.85em;
         }
         
-        .classifier-chip:hover {
+        .classifier-toggle-chip:hover {
           background: rgba(139, 92, 246, 0.05);
           border-color: rgba(139, 92, 246, 0.3);
+          transform: translateY(-1px);
         }
         
-        .classifier-chip input[type="checkbox"] {
-          display: none;
-        }
-        
-        .classifier-chip input[type="checkbox"]:checked + .chip-text {
-          color: rgba(139, 92, 246, 0.8);
-          font-weight: 500;
-        }
-        
-        .classifier-chip:has(input:checked) {
+        .classifier-toggle-chip.selected {
           background: rgba(139, 92, 246, 0.1);
           border-color: rgba(139, 92, 246, 0.4);
+          color: rgba(139, 92, 246, 0.9);
+        }
+        
+        .classifier-toggle-chip.selected .plus-icon {
+          transform: rotate(45deg);
+        }
+        
+        .classifier-toggle-chip .plus-icon {
+          transition: transform 0.2s ease;
         }
         
         .chip-text {
@@ -4728,11 +4780,17 @@ function AIChat() {
           gap: var(--space-4);
         }
         
-        .schedule-option, .save-option {
+        .schedule-option, .save-option, .save-option-centered {
           padding: var(--space-4);
           border: 1px solid rgba(226, 232, 240, 0.4);
           border-radius: 12px;
           background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .save-option-centered {
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         
         .schedule-controls {
@@ -4741,7 +4799,7 @@ function AIChat() {
           margin-top: var(--space-3);
         }
         
-        .secondary-btn, .tertiary-btn {
+        .secondary-btn, .tertiary-btn, .tertiary-btn-centered {
           padding: var(--space-2) var(--space-4);
           border-radius: 8px;
           font-weight: 500;
@@ -4760,13 +4818,13 @@ function AIChat() {
           transform: translateY(-1px);
         }
         
-        .tertiary-btn {
+        .tertiary-btn, .tertiary-btn-centered {
           background: rgba(156, 163, 175, 0.1);
           border: 1px solid rgba(156, 163, 175, 0.3);
           color: rgba(75, 85, 99, 0.8);
         }
         
-        .tertiary-btn:hover:not(:disabled) {
+        .tertiary-btn:hover:not(:disabled), .tertiary-btn-centered:hover:not(:disabled) {
           background: rgba(156, 163, 175, 0.15);
           transform: translateY(-1px);
         }
@@ -4879,29 +4937,50 @@ function AIChat() {
           box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
         }
         
+        /* Static Footer Navigation */
+        .wizard-navigation-static {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(8px);
+          border-top: 1px solid rgba(226, 232, 240, 0.4);
+          padding: var(--space-4);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          z-index: 1000;
+          box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.05);
+        }
+        
         /* Questions Section Styling */
         .questions-section {
           padding: 0;
         }
         
         .questions-list {
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-6);
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-5);
           margin-top: var(--space-4);
+          width: 100%;
         }
         
         .question-card {
-          padding: var(--space-5);
+          padding: var(--space-4);
           border: 1px solid rgba(226, 232, 240, 0.4);
           border-radius: 12px;
           background: rgba(255, 255, 255, 0.7);
           transition: all 0.2s ease;
+          width: 100%;
         }
         
         .question-card:hover {
           border-color: rgba(139, 92, 246, 0.2);
           background: rgba(255, 255, 255, 0.9);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(139, 92, 246, 0.08);
         }
         
         .question-type-section {
@@ -4929,6 +5008,10 @@ function AIChat() {
           border-color: rgba(139, 92, 246, 0.3);
         }
         
+        .modern-select.full-width {
+          width: 100%;
+        }
+        
         /* Config Section Styling */
         .config-section {
           padding: 0;
@@ -4936,6 +5019,7 @@ function AIChat() {
           flex-direction: column;
           gap: var(--space-6);
           margin-top: var(--space-4);
+          width: 100%;
         }
         
         .config-group {
@@ -4944,6 +5028,7 @@ function AIChat() {
           gap: var(--space-4);
           padding: var(--space-4) 0;
           border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+          width: 100%;
         }
         
         .config-group:last-child {
@@ -4952,9 +5037,24 @@ function AIChat() {
         
         .employees-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
           gap: var(--space-3);
           margin-top: var(--space-3);
+          width: 100%;
+        }
+        
+        .config-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-4);
+          width: 100%;
+        }
+        
+        .timing-grid, .privacy-options {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: var(--space-4);
+          width: 100%;
         }
          
          .step-icon-wrapper {
