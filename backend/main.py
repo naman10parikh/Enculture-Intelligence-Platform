@@ -1,6 +1,6 @@
 """
 Enculture Platform Backend API
-AI-native culture intelligence platform with OpenAI gpt-4.1 integration
+AI-native culture intelligence platform with OpenAI gpt-5-mini integration
 """
 
 import os

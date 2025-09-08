@@ -33,7 +33,7 @@ from app.api.v1.endpoints.chat_threads import chat_thread_service
 @router.post("/stream")
 async def chat_stream(request: ChatRequest):
     """
-    Stream chat completion responses from OpenAI gpt-4.1.
+    Stream chat completion responses from OpenAI gpt-5-mini.
     
     This endpoint provides real-time streaming responses for better user experience.
     """

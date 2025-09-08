@@ -1,10 +1,10 @@
 # Enculture Platform Backend
 
-AI-native culture intelligence platform backend built with FastAPI and OpenAI gpt-4.1 integration.
+AI-native culture intelligence platform backend built with FastAPI and OpenAI gpt-5-mini integration.
 
 ## Features
 
-- 🤖 **OpenAI gpt-4.1 Integration**: Advanced AI chat capabilities with streaming responses
+- 🤖 **OpenAI gpt-5-mini Integration**: Advanced AI chat capabilities with streaming responses
 - 🌐 **Web Search Tools**: Function calling with web search capabilities for real-time data
 - 🎭 **Persona-Aware**: Tailored responses for different user personas (CEO, HR admin, manager, employee)
 - 📊 **Survey Generation**: AI-powered survey question generation for culture assessment
@@ -142,7 +142,7 @@ backend/
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `OPENAI_API_KEY` | OpenAI API key (required) | - |
-| `OPENAI_MODEL` | OpenAI model to use | `gpt-4.1` |
+| `OPENAI_MODEL` | OpenAI model to use | `gpt-5-mini` |
 | `OPENAI_MAX_TOKENS` | Maximum tokens per response | `2048` |
 | `OPENAI_TEMPERATURE` | Response creativity (0-1) | `0.7` |
 | `ENVIRONMENT` | Environment mode | `development` |

@@ -69,8 +69,8 @@ INFO:     127.0.0.1:55976 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
 2025-09-07 22:16:36 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 43489735-c652-4505-a229-c9027c26257a
 2025-09-07 22:16:36 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 43489735-c652-4505-a229-c9027c26257a
 INFO:     127.0.0.1:55978 - "POST /api/v1/chat/stream-with-thread?thread_id=43489735-c652-4505-a229-c9027c26257a&prompt=hello HTTP/1.1" 200 OK
-2025-09-07 22:16:36 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 22:16:36 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 22:16:36 - app.services.openai_service - INFO - Initiating gpt-5-mini Responses API call with web search: True
+2025-09-07 22:16:36 - app.services.openai_service - INFO - Initiating gpt-5-mini Responses API call with web search: True
 2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
 2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
 2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_headers.complete
@@ -169,8 +169,8 @@ INFO:     127.0.0.1:56044 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=a
 2025-09-07 22:16:49 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread a5898802-c36c-40d3-8bfd-c22894ad1352
 2025-09-07 22:16:49 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
 INFO:     127.0.0.1:56044 - "POST /api/v1/chat/stream-with-thread?thread_id=a5898802-c36c-40d3-8bfd-c22894ad1352&prompt=hows%20it%20going HTTP/1.1" 200 OK
-2025-09-07 22:16:49 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 22:16:49 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 22:16:49 - app.services.openai_service - INFO - Initiating gpt-5-mini Responses API call with web search: True
+2025-09-07 22:16:49 - app.services.openai_service - INFO - Initiating gpt-5-mini Responses API call with web search: True
 2025-09-07 22:16:49 - httpcore.connection - DEBUG - close.started
 2025-09-07 22:16:49 - httpcore.connection - DEBUG - close.started
 2025-09-07 22:16:49 - httpcore.connection - DEBUG - close.complete
@@ -460,4 +460,113 @@ DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
 DEBUG:    > PING cd 5c c2 97 [binary, 4 bytes]
 DEBUG:    < PONG cd 5c c2 97 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 'iʆS' [text, 4 bytes]
+DEBUG:    < PONG 'iʆS' [text, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308809518}' [46 bytes]
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 8b 95 5f b2 [binary, 4 bytes]
+2025-09-07 22:20:09 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308809518}
+2025-09-07 22:20:09 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308809518}
+DEBUG:    < PONG 8b 95 5f b2 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56183 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 28 7e 8d 66 [binary, 4 bytes]
+DEBUG:    < PONG 28 7e 8d 66 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 5a a0 92 22 [binary, 4 bytes]
+DEBUG:    < PONG 5a a0 92 22 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308839520}' [46 bytes]
+2025-09-07 22:20:39 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308839520}
+2025-09-07 22:20:39 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308839520}
+INFO:     127.0.0.1:56226 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING eb ad 2b 4c [binary, 4 bytes]
+DEBUG:    < PONG eb ad 2b 4c [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 08 70 95 1d [binary, 4 bytes]
+DEBUG:    < PONG 08 70 95 1d [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING '\x11<gF' [text, 4 bytes]
+DEBUG:    < PONG '\x11<gF' [text, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 14 55 cd 04 [binary, 4 bytes]
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308869549}' [46 bytes]
+DEBUG:    < PONG 14 55 cd 04 [binary, 4 bytes]
+2025-09-07 22:21:09 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308869549}
+2025-09-07 22:21:09 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308869549}
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56255 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56268 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56268 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    = connection is CONNECTING
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < host: localhost:8000
+DEBUG:    < connection: Upgrade
+DEBUG:    < pragma: no-cache
+DEBUG:    < cache-control: no-cache
+DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+DEBUG:    < upgrade: websocket
+DEBUG:    < origin: http://localhost:3000
+DEBUG:    < sec-websocket-version: 13
+DEBUG:    < accept-encoding: gzip, deflate, br, zstd
+DEBUG:    < accept-language: en-US,en;q=0.9
+DEBUG:    < sec-websocket-key: mw6+4QQBy0l3F4EGYJW9Uw==
+DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+INFO:     ('127.0.0.1', 56270) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 22:21:20 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 22:21:20 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:21:20.677084"}' [128 bytes]
+DEBUG:    > HTTP/1.1 101 Switching Protocols
+DEBUG:    > Upgrade: websocket
+DEBUG:    > Connection: Upgrade
+DEBUG:    > Sec-WebSocket-Accept: mqx1oLxwY2K3f819rIkyEwLBRQ8=
+DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
+DEBUG:    > date: Mon, 08 Sep 2025 05:21:20 GMT
+DEBUG:    > server: uvicorn
+INFO:     connection open
+DEBUG:    = connection is OPEN
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:21:20.677084"}' [128 bytes]
+INFO:     127.0.0.1:56268 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56268 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    = connection is CONNECTING
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < host: localhost:8000
+DEBUG:    < connection: Upgrade
+DEBUG:    < pragma: no-cache
+DEBUG:    < cache-control: no-cache
+DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+DEBUG:    < upgrade: websocket
+DEBUG:    < origin: http://localhost:3000
+DEBUG:    < sec-websocket-version: 13
+DEBUG:    < accept-encoding: gzip, deflate, br, zstd
+DEBUG:    < accept-language: en-US,en;q=0.9
+DEBUG:    < sec-websocket-key: qM8QTZD0on569bTfu6EGSg==
+DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+INFO:     ('127.0.0.1', 56272) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 22:21:20 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 22:21:20 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:21:20.737151"}' [128 bytes]
+DEBUG:    > HTTP/1.1 101 Switching Protocols
+DEBUG:    > Upgrade: websocket
+DEBUG:    > Connection: Upgrade
+DEBUG:    > Sec-WebSocket-Accept: DhRFPKTFITozTWfwABBtV2kXZz0=
+DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
+DEBUG:    > date: Mon, 08 Sep 2025 05:21:20 GMT
+DEBUG:    > server: uvicorn
+INFO:     connection open
+DEBUG:    = connection is OPEN
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:21:20.737151"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:21:20.737151"}' [128 bytes]
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 94 a8 a3 4e [binary, 4 bytes]
+DEBUG:    < PONG 94 a8 a3 4e [binary, 4 bytes]
 DEBUG:    % received keepalive pong

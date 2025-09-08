@@ -1,5 +1,5 @@
 """
-OpenAI gpt-4.1 Responses API service for chat functionality with streaming support
+OpenAI gpt-5-miniiniini Responses API service for chat functionality with streaming support
 """
 
 import json
@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 
 
 class OpenAIService:
-    """Service for interacting with OpenAI gpt-4.1 Responses API."""
+    """Service for interacting with OpenAI gpt-5-miniiniini Responses API."""
     
     def __init__(self):
         """Initialize OpenAI service with API key."""
@@ -25,9 +25,9 @@ class OpenAIService:
         self.sync_client = OpenAI(api_key=settings.openai_api_key)
         # Keep async client for compatibility
         self.async_client = AsyncOpenAI(api_key=settings.openai_api_key)
-        self.model = "gpt-4.1"  # Using gpt-4.1 model
+        self.model = "gpt-5-miniiniini"  # gpt-5-mini5-mini5-mini model
         
-        # Culture intelligence instructions for gpt-4.1 Responses API
+        # Culture intelligence instructions for gpt-5-miniiniini Responses API
         self.base_instructions = """You are an AI Culture Intelligence Assistant for Enculture, a platform designed to enhance and quantify company culture. Your role is to:
 
 1. **Analyze Culture Data**: Help interpret employee feedback, survey results, and culture metrics
@@ -45,7 +45,7 @@ Always be empathetic, professional, and focused on positive culture building. Us
         persona: Optional[str] = None
     ) -> AsyncGenerator[str, None]:
         """
-        Generate streaming chat completion using gpt-4.1 Responses API.
+        Generate streaming chat completion using gpt-5-miniiniini Responses API.
         
         Args:
             messages: List of chat messages
@@ -85,7 +85,7 @@ Always be empathetic, professional, and focused on positive culture building. Us
             if use_tools:
                 tools.append({"type": "web_search_preview"})
             
-            logger.info(f"Initiating gpt-4.1 Responses API call with web search: {use_tools}")
+            logger.info(f"Initiating gpt-5-miniiniini Responses API call with web search: {use_tools}")
             
             # Use synchronous client in async context (based on your working test.py)
             def call_responses_api():
@@ -137,7 +137,7 @@ Always be empathetic, professional, and focused on positive culture building. Us
                         await asyncio.sleep(0.05)
             
         except Exception as e:
-            logger.error(f"Error in gpt-4.1 Responses API: {str(e)}")
+            logger.error(f"Error in gpt-5-miniiniini Responses API: {str(e)}")
             yield f"I apologize, but I encountered an error while processing your request. Please try again. Error: {str(e)}"
 
     async def _perform_web_search(self, query: str, num_results: int = 5) -> List[str]:
@@ -167,7 +167,7 @@ Always be empathetic, professional, and focused on positive culture building. Us
         persona: Optional[str] = None
     ) -> str:
         """
-        Get a complete chat response using gpt-4.1 Responses API (non-streaming).
+        Get a complete chat response using gpt-5-miniiniini Responses API (non-streaming).
         
         Args:
             messages: List of chat messages
@@ -217,7 +217,7 @@ Always be empathetic, professional, and focused on positive culture building. Us
             return response.output_text
             
         except Exception as e:
-            logger.error(f"Error in gpt-4.1 chat completion: {str(e)}")
+            logger.error(f"Error in gpt-5-miniiniini chat completion: {str(e)}")
             return "I apologize, but I encountered an error while processing your request. Please try again."
 
     async def enhance_survey_name(self, basic_name: str, context: str = "") -> str:
@@ -554,7 +554,7 @@ Focus on questions that generate actionable insights for improving workplace cul
             return questions
             
         except Exception as e:
-            logger.error(f"Error generating survey questions with gpt-4.1: {str(e)}")
+            logger.error(f"Error generating survey questions with gpt-5-miniiniini: {str(e)}")
             # Return fallback questions
             return [
                 {

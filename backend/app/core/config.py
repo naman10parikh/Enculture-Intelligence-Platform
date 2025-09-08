@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     
     # OpenAI configuration
     openai_api_key: str = Field(..., env="OPENAI_API_KEY")
-    openai_model: str = Field(default="gpt-4.1", env="OPENAI_MODEL")  # Using gpt-4.1 with Responses API
+    openai_model: str = Field(default="gpt-5-mini", env="OPENAI_MODEL")  # Using gpt-5-mini with Responses API
     # Let OpenAI API handle default max_tokens and temperature for optimal performance
     # openai_max_tokens: int = Field(default=2048, env="OPENAI_MAX_TOKENS") 
     # openai_temperature: float = Field(default=0.7, env="OPENAI_TEMPERATURE")

@@ -211,7 +211,7 @@ class TestOpenAIServiceConfiguration:
         with patch('app.services.openai_service.AsyncOpenAI') as mock_client:
             with patch('app.services.openai_service.settings') as mock_settings:
                 mock_settings.openai_api_key = "test-key"
-                mock_settings.openai_model = "gpt-4.1"
+                mock_settings.openai_model = "gpt-5-mini"
                 # max_tokens and temperature are now handled by the API directly
                 
                 service = OpenAIService()
@@ -220,7 +220,7 @@ class TestOpenAIServiceConfiguration:
                 mock_client.assert_called_once_with(api_key="test-key")
                 
                 # Check that settings were applied  
-                assert service.model == "gpt-4.1"
+                assert service.model == "gpt-5-mini"
                 # No longer checking max_tokens and temperature as API handles defaults
     
     def test_web_search_tool_definition(self, openai_service):
