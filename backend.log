@@ -1,42 +1,58 @@
 INFO:     Will watch for changes in these directories: ['/Users/naman/Enculture-Intelligence-Platform/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [60633] using WatchFiles
-INFO:     Started server process [60666]
+INFO:     Started reloader process [73444] using WatchFiles
+INFO:     Started server process [73451]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 🚀 Starting Enculture Backend API...
 Environment: development
 Debug Mode: True
-INFO:     127.0.0.1:49924 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49934 - "GET /health HTTP/1.1" 200 OK
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11438a8b0>
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11438a8b0>
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10dd5f890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10dd5f890> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11438a880>
-2025-09-07 20:53:19 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11438a880>
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:19 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 03:53:24 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_733b972cb3cf8ff1b131288a43b3ba38'), (b'openai-processing-ms', b'3944'), (b'x-envoy-upstream-service-time', b'3946'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=hTTYa0L2HufHGtY.xLqLa.mjDXjTg6Og3rQUxyB1wmo-1757303604-1.0.1.1-r59BmAtZnOwEAEwuMM1dsVQTxWT1bnvHZ3EOtPP8aLKNQQai9zkZ4sdcpL1OMTRcETn4wctZ2J_pVeLOTBUBrNeYdZ0Hdd8zNyQGgHmEywQ; path=/; expires=Mon, 08-Sep-25 04:23:24 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=4bcYxx4OyT2qYJ7FJiV5R82L.ePJSWczaJkK_oOxw64-1757303604047-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bb7f8c0d39ebcf-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 03:53:24 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_733b972cb3cf8ff1b131288a43b3ba38'), (b'openai-processing-ms', b'3944'), (b'x-envoy-upstream-service-time', b'3946'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=hTTYa0L2HufHGtY.xLqLa.mjDXjTg6Og3rQUxyB1wmo-1757303604-1.0.1.1-r59BmAtZnOwEAEwuMM1dsVQTxWT1bnvHZ3EOtPP8aLKNQQai9zkZ4sdcpL1OMTRcETn4wctZ2J_pVeLOTBUBrNeYdZ0Hdd8zNyQGgHmEywQ; path=/; expires=Mon, 08-Sep-25 04:23:24 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=4bcYxx4OyT2qYJ7FJiV5R82L.ePJSWczaJkK_oOxw64-1757303604047-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bb7f8c0d39ebcf-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:53395 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53407 - "GET /health HTTP/1.1" 200 OK
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8cac0>
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8cac0>
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110477740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110477740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8ca90>
+2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8ca90>
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:32 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:36 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/app/services/openai_service.py')}
+WARNING:  WatchFiles detected changes in 'app/services/openai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:38 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_47a17612020e8f9f247151abcd7ee2ed'), (b'openai-processing-ms', b'5840'), (b'x-envoy-upstream-service-time', b'5843'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=fF7Z10gO6UPJGLH7sO3FjsI7wjIdHf7z5eFEEhekyS4-1757306318-1.0.1.1-a1nh4sx0Rv09qK57zbcJbqYJLhm1OBqbm2tfEaZBIE_CvOOoFnLB.au_PdTerZxXjtPF2fQ7kneXUwvVaftDA.XcIcnueVM_fjWwVgBdnUo; path=/; expires=Mon, 08-Sep-25 05:08:38 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=aYGLPLKD4n4d5vX0rYoYv8EdI1EPQEibzCO61eMAuX8-1757306318332-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1c4795dc3a7-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:38 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_47a17612020e8f9f247151abcd7ee2ed'), (b'openai-processing-ms', b'5840'), (b'x-envoy-upstream-service-time', b'5843'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=fF7Z10gO6UPJGLH7sO3FjsI7wjIdHf7z5eFEEhekyS4-1757306318-1.0.1.1-a1nh4sx0Rv09qK57zbcJbqYJLhm1OBqbm2tfEaZBIE_CvOOoFnLB.au_PdTerZxXjtPF2fQ7kneXUwvVaftDA.XcIcnueVM_fjWwVgBdnUo; path=/; expires=Mon, 08-Sep-25 05:08:38 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=aYGLPLKD4n4d5vX0rYoYv8EdI1EPQEibzCO61eMAuX8-1757306318332-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1c4795dc3a7-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:53409 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73451]
+🛑 Shutting down Enculture Backend API...
+2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.started
+2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.started
+2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.complete
+2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.complete
+INFO:     Started server process [73486]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -49,92 +65,70 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: XVFSQpQ7Fbj/il/ypfQRLQ==
+DEBUG:    < sec-websocket-key: 8lcymzmOXGTj1DuN+RoHmw==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 49942) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 20:53:24 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 20:53:24 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-INFO:     127.0.0.1:49937 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 53423) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+🚀 Starting Enculture Backend API...
+Environment: development
+Debug Mode: True
+2025-09-07 21:38:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:38:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: TDg5atmekUA/xyK0xn0zu/rGLxo=
+DEBUG:    > Sec-WebSocket-Accept: juNFq0JRlRSf0uBLwbw0ll2XzPc=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 03:53:23 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 04:38:39 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:24.202790"}' [128 bytes]
-INFO:     127.0.0.1:49944 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-2025-09-07 20:53:24 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 5a6225c7-e494-4886-b179-aef69d6ca170
-2025-09-07 20:53:24 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 5a6225c7-e494-4886-b179-aef69d6ca170
-INFO:     127.0.0.1:49946 - "POST /api/v1/chat/stream-with-thread?thread_id=5a6225c7-e494-4886-b179-aef69d6ca170&prompt=hello HTTP/1.1" 200 OK
-2025-09-07 20:53:24 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 20:53:24 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 20:53:24 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-INFO:     127.0.0.1:49949 - "GET /health HTTP/1.1" 200 OK
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 03:53:25 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449485'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_4244bf75b14145cb6a793ec711438fd1'), (b'openai-processing-ms', b'1371'), (b'x-envoy-upstream-service-time', b'1377'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bb7fa72c66ebcf-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 03:53:25 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449485'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_4244bf75b14145cb6a793ec711438fd1'), (b'openai-processing-ms', b'1371'), (b'x-envoy-upstream-service-time', b'1377'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bb7fa72c66ebcf-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 20:53:25 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 20:53:26 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:39.348613"}' [128 bytes]
+INFO:     127.0.0.1:53429 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
+2025-09-07 21:38:39 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 71dafe7e-1e7c-4d95-9a6a-d306bc17a09f
+2025-09-07 21:38:39 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 71dafe7e-1e7c-4d95-9a6a-d306bc17a09f
+INFO:     127.0.0.1:53434 - "POST /api/v1/chat/stream-with-thread?thread_id=71dafe7e-1e7c-4d95-9a6a-d306bc17a09f&prompt=hello HTTP/1.1" 200 OK
+2025-09-07 21:38:39 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 21:38:39 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 21:38:39 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf74f0>
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf74f0>
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c4f7740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c4f7740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf7490>
+2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf7490>
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:39 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:40 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_a4d00da0c00a173519c63a2cc03cca89'), (b'openai-processing-ms', b'1102'), (b'x-envoy-upstream-service-time', b'1104'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=yiay1zL_wl_kZ8vJ7GUKpDY3oSm1T_r2BH3__smSeZk-1757306320-1.0.1.1-kU4RPNXIEncHJm2TavHCUGGEROsp3sxCwDM50Wxhz0ykKPiraX5twpnJymkd1eD2MpRAlIRFJDo04RjabI4CTNdzHAA4SEU1p8HYmBHImaE; path=/; expires=Mon, 08-Sep-25 05:08:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=kGP7SmtX7h0nFTrGKa1gcLEmeGj5pRFWU5HTcjDDqJg-1757306320908-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1f21c93b99f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:40 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_a4d00da0c00a173519c63a2cc03cca89'), (b'openai-processing-ms', b'1102'), (b'x-envoy-upstream-service-time', b'1104'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=yiay1zL_wl_kZ8vJ7GUKpDY3oSm1T_r2BH3__smSeZk-1757306320-1.0.1.1-kU4RPNXIEncHJm2TavHCUGGEROsp3sxCwDM50Wxhz0ykKPiraX5twpnJymkd1eD2MpRAlIRFJDo04RjabI4CTNdzHAA4SEU1p8HYmBHImaE; path=/; expires=Mon, 08-Sep-25 05:08:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=kGP7SmtX7h0nFTrGKa1gcLEmeGj5pRFWU5HTcjDDqJg-1757306320908-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1f21c93b99f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:38:41 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
 DEBUG:    < CLOSE 1001 (going away) [2 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1001 (going away) [2 bytes]
 DEBUG:    x half-closing TCP connection
 DEBUG:    = connection is CLOSED
-2025-09-07 20:53:27 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:53:27 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:53:27 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 20:53:27 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:38:43 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:38:43 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:38:43 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:38:43 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
 INFO:     connection closed
-INFO:     127.0.0.1:49993 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    = connection is CONNECTING
-INFO:     127.0.0.1:49993 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: /EKqgnxuINL7KxKOXNtb9g==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 49995) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 20:53:31 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 20:53:31 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: tC0i8nNj0zulF9rA8+eHyhQBJd8=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 03:53:30 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:31.502189"}' [128 bytes]
-INFO:     127.0.0.1:49997 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49993 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -147,23 +141,25 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: zK3h1X4FfZJrlzWzu2EwHw==
+DEBUG:    < sec-websocket-key: O7aWmssnlvXhPOAdw/uoBw==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 50002) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 20:53:31 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 20:53:31 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:31.556013"}' [128 bytes]
+INFO:     ('127.0.0.1', 53492) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 21:38:47 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:38:47 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+INFO:     127.0.0.1:53494 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: zt514FON8gN3KZukn4HWADg3VR8=
+DEBUG:    > Sec-WebSocket-Accept: q8wH4R/h9RH7kdsgGDV8bkshk/s=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 03:53:30 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 04:38:46 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:31.556013"}' [128 bytes]
-INFO:     127.0.0.1:50096 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53496 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:47.727720"}' [128 bytes]
+INFO:     127.0.0.1:53494 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53496 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -176,24 +172,54 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: /iNBTNjViME2ZD7Lq3mZcg==
+DEBUG:    < sec-websocket-key: RjyNBlW78L3fdtfJ2JijVw==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 50098) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 20:53:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 20:53:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:51.246148"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:51.246148"}' [128 bytes]
+INFO:     ('127.0.0.1', 53511) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 21:38:48 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:38:48 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: u5YsPsF7hMcFNSZRXKXqm1wnOwU=
+DEBUG:    > Sec-WebSocket-Accept: PMF6zA7z4Nr4Ubc9c0J90MqHePo=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 03:53:50 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 04:38:46 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:51.246148"}' [128 bytes]
-INFO:     127.0.0.1:50096 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:48.097169"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:48.097169"}' [128 bytes]
+INFO:     127.0.0.1:53510 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53496 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+2025-09-07 21:38:50 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/app/services/openai_service.py')}
+WARNING:  WatchFiles detected changes in 'app/services/openai_service.py'. Reloading...
+INFO:     Shutting down
+DEBUG:    ! failing connection with code 1012
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1012 (service restart) [2 bytes]
+DEBUG:    ! failing connection with code 1012
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1012 (service restart) [2 bytes]
+DEBUG:    = connection is CLOSED
+DEBUG:    = connection is CLOSED
+DEBUG:    x half-closing TCP connection
+DEBUG:    x half-closing TCP connection
+2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+INFO:     connection closed
+INFO:     connection closed
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73486]
+🛑 Shutting down Enculture Backend API...
+INFO:     Started server process [73649]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -206,246 +232,193 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: DNUAz9+BKtQS2RxeNpLa0g==
+DEBUG:    < sec-websocket-key: N07NOeYWqLO6ri0Td68vkw==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 50100) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 20:53:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 20:53:51 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:51.329058"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:51.329058"}' [128 bytes]
+INFO:     ('127.0.0.1', 53535) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+🚀 Starting Enculture Backend API...
+Environment: development
+Debug Mode: True
+2025-09-07 21:38:53 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:38:53 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: ii9wK28F0y9jUPCXcP1MLObxVLw=
+DEBUG:    > Sec-WebSocket-Accept: fvIzt9VQaCqsygPQe1feYDbLt0U=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 03:53:51 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 04:38:52 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:51.329058"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:53:51.329058"}' [128 bytes]
-INFO:     127.0.0.1:50096 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50096 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:53.366394"}' [128 bytes]
+INFO:     127.0.0.1:53560 - "OPTIONS /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
+2025-09-07 21:38:56 - app.api.v1.endpoints.chat - INFO - Generating survey template for: on growth mindset...
+2025-09-07 21:38:56 - app.api.v1.endpoints.chat - INFO - Generating survey template for: on growth mindset...
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1147f6e80>
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1147f6e80>
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x113b28190>
+2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x113b28190>
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 21:38:56 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 42 09 da 5a [binary, 4 bytes]
-DEBUG:    < PONG 42 09 da 5a [binary, 4 bytes]
+DEBUG:    > PING ed 65 94 34 [binary, 4 bytes]
+DEBUG:    < PONG ed 65 94 34 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53596 - "GET /health HTTP/1.1" 200 OK
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:39:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_52a6b45b5d718fd274e95cf2359099fd'), (b'openai-processing-ms', b'23832'), (b'x-envoy-upstream-service-time', b'23834'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=qXGMqSWpC_abJBG0yY_k.YFH7at9x_7lt4fKC8hjbV8-1757306360-1.0.1.1-cSUKprQ41GOG0.AFUd8uRBkUgCgvS8YTbKuozpLsFo6ELmeM5ZUrJ5xqtshIlMk7qznb1IL8zJMQnnQutD2BmHu_D3MWJGD5cPtfwiGXk4c; path=/; expires=Mon, 08-Sep-25 05:09:20 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=pId3HKHHNQh9BrsXJdVQkCeUYAowySJQOD_0WJkVBQE-1757306360552-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc25bea13ebfe-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:39:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_52a6b45b5d718fd274e95cf2359099fd'), (b'openai-processing-ms', b'23832'), (b'x-envoy-upstream-service-time', b'23834'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=qXGMqSWpC_abJBG0yY_k.YFH7at9x_7lt4fKC8hjbV8-1757306360-1.0.1.1-cSUKprQ41GOG0.AFUd8uRBkUgCgvS8YTbKuozpLsFo6ELmeM5ZUrJ5xqtshIlMk7qznb1IL8zJMQnnQutD2BmHu_D3MWJGD5cPtfwiGXk4c; path=/; expires=Mon, 08-Sep-25 05:09:20 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=pId3HKHHNQh9BrsXJdVQkCeUYAowySJQOD_0WJkVBQE-1757306360552-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc25bea13ebfe-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:39:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
+{
+  "survey_metadata": {
+    "title": "Unlocking Organizational Potential: Growth Mindset at Work",
+    "name": "GrowthMindsetPulse",
+    "context": "A growth mindset—the belief that abilities...
+2025-09-07 21:39:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
+{
+  "survey_metadata": {
+    "title": "Unlocking Organizational Potential: Growth Mindset at Work",
+    "name": "GrowthMindsetPulse",
+    "context": "A growth mindset—the belief that abilities...
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field name, using empty default
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field name, using empty default
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field context, using empty default
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field context, using empty default
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
+2025-09-07 21:39:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
+2025-09-07 21:39:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
+2025-09-07 21:39:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
+INFO:     127.0.0.1:53560 - "POST /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306363371}' [46 bytes]
+2025-09-07 21:39:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306363371}
+2025-09-07 21:39:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306363371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 23 81 c7 22 [binary, 4 bytes]
+DEBUG:    < PONG 23 81 c7 22 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53608 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306393369}' [46 bytes]
+2025-09-07 21:39:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306393369}
+2025-09-07 21:39:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306393369}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 4b d8 cf 5d [binary, 4 bytes]
+DEBUG:    < PONG 4b d8 cf 5d [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 7f 51 e3 c1 [binary, 4 bytes]
-DEBUG:    < PONG 7f 51 e3 c1 [binary, 4 bytes]
+DEBUG:    > PING '-,sa' [text, 4 bytes]
+DEBUG:    < PONG '-,sa' [text, 4 bytes]
 DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50104 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303641577}' [46 bytes]
-2025-09-07 20:54:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303641577}
-2025-09-07 20:54:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303641577}
+INFO:     127.0.0.1:53626 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306423370}' [46 bytes]
+2025-09-07 21:40:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306423370}
+2025-09-07 21:40:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306423370}
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 64 a4 0a 8a [binary, 4 bytes]
-DEBUG:    < PONG 64 a4 0a 8a [binary, 4 bytes]
+DEBUG:    > PING f4 0c 22 d6 [binary, 4 bytes]
+DEBUG:    < PONG f4 0c 22 d6 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53650 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306453370}' [46 bytes]
+2025-09-07 21:40:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306453370}
+2025-09-07 21:40:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306453370}
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 34 09 20 9c [binary, 4 bytes]
-DEBUG:    < PONG 34 09 20 9c [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 2e 5a d4 15 [binary, 4 bytes]
-DEBUG:    < PONG 2e 5a d4 15 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 82 44 40 fd [binary, 4 bytes]
-DEBUG:    < PONG 82 44 40 fd [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50114 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50120 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING '\x165\x0b\t' [text, 4 bytes]
-DEBUG:    < PONG '\x165\x0b\t' [text, 4 bytes]
+DEBUG:    > PING d2 b3 5b 8d [binary, 4 bytes]
+DEBUG:    < PONG d2 b3 5b 8d [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 88 5c 73 f5 [binary, 4 bytes]
-DEBUG:    < PONG 88 5c 73 f5 [binary, 4 bytes]
+DEBUG:    > PING '\x05HC\x17' [text, 4 bytes]
+DEBUG:    < PONG '\x05HC\x17' [text, 4 bytes]
 DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53700 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53724 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53724 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    = connection is CONNECTING
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < host: localhost:8000
+DEBUG:    < connection: Upgrade
+DEBUG:    < pragma: no-cache
+DEBUG:    < cache-control: no-cache
+DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+DEBUG:    < upgrade: websocket
+DEBUG:    < origin: http://localhost:3000
+DEBUG:    < sec-websocket-version: 13
+DEBUG:    < accept-encoding: gzip, deflate, br, zstd
+DEBUG:    < accept-language: en-US,en;q=0.9
+DEBUG:    < sec-websocket-key: Z62Iobl/4JrUIRW+SeBLWA==
+DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+INFO:     ('127.0.0.1', 53726) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.659722"}' [128 bytes]
+DEBUG:    > HTTP/1.1 101 Switching Protocols
+DEBUG:    > Upgrade: websocket
+DEBUG:    > Connection: Upgrade
+DEBUG:    > Sec-WebSocket-Accept: Sgi1VCl60ytxoeitxAOmqi3P48s=
+DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
+DEBUG:    > date: Mon, 08 Sep 2025 04:41:22 GMT
+DEBUG:    > server: uvicorn
+INFO:     connection open
+DEBUG:    = connection is OPEN
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.659722"}' [128 bytes]
+INFO:     127.0.0.1:53724 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53724 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    = connection is CONNECTING
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < host: localhost:8000
+DEBUG:    < connection: Upgrade
+DEBUG:    < pragma: no-cache
+DEBUG:    < cache-control: no-cache
+DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+DEBUG:    < upgrade: websocket
+DEBUG:    < origin: http://localhost:3000
+DEBUG:    < sec-websocket-version: 13
+DEBUG:    < accept-encoding: gzip, deflate, br, zstd
+DEBUG:    < accept-language: en-US,en;q=0.9
+DEBUG:    < sec-websocket-key: 3gxt1bU2n+8yLna45fOTJg==
+DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+INFO:     ('127.0.0.1', 53728) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.752374"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.752374"}' [128 bytes]
+DEBUG:    > HTTP/1.1 101 Switching Protocols
+DEBUG:    > Upgrade: websocket
+DEBUG:    > Connection: Upgrade
+DEBUG:    > Sec-WebSocket-Accept: 48JJRE+k5N+J71ZsM4hwue8y+uo=
+DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
+DEBUG:    > date: Mon, 08 Sep 2025 04:41:22 GMT
+DEBUG:    > server: uvicorn
+INFO:     connection open
+DEBUG:    = connection is OPEN
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.752374"}' [128 bytes]
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306483371}' [46 bytes]
+2025-09-07 21:41:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306483371}
+2025-09-07 21:41:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306483371}
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING ',CI\x1c' [text, 4 bytes]
-DEBUG:    < PONG ',CI\x1c' [text, 4 bytes]
+DEBUG:    > PING 49 28 2b 9e [binary, 4 bytes]
+DEBUG:    < PONG 49 28 2b 9e [binary, 4 bytes]
 DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 8f cd 2d 26 [binary, 4 bytes]
-DEBUG:    < PONG 8f cd 2d 26 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303671577}' [46 bytes]
-2025-09-07 20:54:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303671577}
-2025-09-07 20:54:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303671577}
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303674546}' [46 bytes]
-2025-09-07 20:54:34 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303674546}
-2025-09-07 20:54:34 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303674546}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 'i\x83v' [text, 4 bytes]
-DEBUG:    < PONG 'i\x83v' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50126 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 1d d5 e3 75 [binary, 4 bytes]
-DEBUG:    < PONG 1d d5 e3 75 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 0c d0 c2 91 [binary, 4 bytes]
-DEBUG:    < PONG 0c d0 c2 91 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING b2 a0 22 d9 [binary, 4 bytes]
-DEBUG:    < PONG b2 a0 22 d9 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50128 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303701577}' [46 bytes]
-2025-09-07 20:55:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303701577}
-2025-09-07 20:55:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303701577}
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303704561}' [46 bytes]
-2025-09-07 20:55:04 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303704561}
-2025-09-07 20:55:04 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303704561}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING b2 33 36 3e [binary, 4 bytes]
-DEBUG:    < PONG b2 33 36 3e [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING b6 1b a3 4d [binary, 4 bytes]
-DEBUG:    < PONG b6 1b a3 4d [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 0f 15 c4 7a [binary, 4 bytes]
-DEBUG:    < PONG 0f 15 c4 7a [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 2a ce f3 20 [binary, 4 bytes]
-DEBUG:    < PONG 2a ce f3 20 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50145 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50151 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING ad 4f 48 37 [binary, 4 bytes]
-DEBUG:    < PONG ad 4f 48 37 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 18 d6 72 dd [binary, 4 bytes]
-DEBUG:    < PONG 18 d6 72 dd [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING '-"\x05n' [text, 4 bytes]
-DEBUG:    < PONG '-"\x05n' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING c8 fe 8b 91 [binary, 4 bytes]
-DEBUG:    < PONG c8 fe 8b 91 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303731577}' [46 bytes]
-2025-09-07 20:55:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303731577}
-2025-09-07 20:55:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303731577}
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303734546}' [46 bytes]
-2025-09-07 20:55:34 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303734546}
-2025-09-07 20:55:34 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303734546}
-INFO:     127.0.0.1:50155 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING fa ee 70 50 [binary, 4 bytes]
-DEBUG:    < PONG fa ee 70 50 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING fb 3e ae a8 [binary, 4 bytes]
-DEBUG:    < PONG fb 3e ae a8 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 08 f2 a8 ae [binary, 4 bytes]
-DEBUG:    < PONG 08 f2 a8 ae [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 03 8d 36 57 [binary, 4 bytes]
-DEBUG:    < PONG 03 8d 36 57 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50158 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303761576}' [46 bytes]
-2025-09-07 20:56:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303761576}
-2025-09-07 20:56:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303761576}
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303764547}' [46 bytes]
-2025-09-07 20:56:04 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303764547}
-2025-09-07 20:56:04 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303764547}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 86 15 31 ee [binary, 4 bytes]
-DEBUG:    < PONG 86 15 31 ee [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 37 22 81 26 [binary, 4 bytes]
-DEBUG:    < PONG 37 22 81 26 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 7d d7 c2 c9 [binary, 4 bytes]
-DEBUG:    < PONG 7d d7 c2 c9 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING d3 1d 46 95 [binary, 4 bytes]
-DEBUG:    < PONG d3 1d 46 95 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50174 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50180 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 8e 75 12 3c [binary, 4 bytes]
-DEBUG:    < PONG 8e 75 12 3c [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 79 df 90 fa [binary, 4 bytes]
-DEBUG:    < PONG 79 df 90 fa [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING e0 b8 20 24 [binary, 4 bytes]
-DEBUG:    < PONG e0 b8 20 24 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303791577}' [46 bytes]
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 62 0c 2e c8 [binary, 4 bytes]
-2025-09-07 20:56:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303791577}
-2025-09-07 20:56:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303791577}
-DEBUG:    < PONG 62 0c 2e c8 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303794545}' [46 bytes]
-2025-09-07 20:56:34 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303794545}
-2025-09-07 20:56:34 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303794545}
-INFO:     127.0.0.1:50186 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 6a c6 0d 18 [binary, 4 bytes]
-DEBUG:    < PONG 6a c6 0d 18 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 69 1d 81 26 [binary, 4 bytes]
-DEBUG:    < PONG 69 1d 81 26 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 85 80 ef ae [binary, 4 bytes]
-DEBUG:    < PONG 85 80 ef ae [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING fa a9 33 d0 [binary, 4 bytes]
-DEBUG:    < PONG fa a9 33 d0 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50189 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303821576}' [46 bytes]
-2025-09-07 20:57:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303821576}
-2025-09-07 20:57:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303821576}
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303824544}' [46 bytes]
-2025-09-07 20:57:04 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303824544}
-2025-09-07 20:57:04 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303824544}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 76 68 51 b3 [binary, 4 bytes]
-DEBUG:    < PONG 76 68 51 b3 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 9c c9 14 af [binary, 4 bytes]
-DEBUG:    < PONG 9c c9 14 af [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING d5 5f cb 7b [binary, 4 bytes]
-DEBUG:    < PONG d5 5f cb 7b [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 40 57 80 92 [binary, 4 bytes]
-DEBUG:    < PONG 40 57 80 92 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
 DEBUG:    < CLOSE 1001 (going away) [2 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1001 (going away) [2 bytes]
@@ -454,106 +427,22 @@ DEBUG:    = connection is CLOSED
 DEBUG:    < CLOSE 1001 (going away) [2 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1001 (going away) [2 bytes]
-2025-09-07 20:57:26 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:57:26 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:57:26 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 20:57:26 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
 DEBUG:    x half-closing TCP connection
 DEBUG:    = connection is CLOSED
-2025-09-07 20:57:26 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:57:26 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:57:26 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 20:57:26 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
 INFO:     connection closed
 INFO:     connection closed
-INFO:     127.0.0.1:50212 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 2c 9c 86 12 [binary, 4 bytes]
-DEBUG:    < PONG 2c 9c 86 12 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 7c 9b 52 9f [binary, 4 bytes]
-DEBUG:    < PONG 7c 9b 52 9f [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303851587}' [46 bytes]
-2025-09-07 20:57:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303851587}
-2025-09-07 20:57:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303851587}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 02 38 f2 b3 [binary, 4 bytes]
-DEBUG:    < PONG 02 38 f2 b3 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING e3 09 03 73 [binary, 4 bytes]
-DEBUG:    < PONG e3 09 03 73 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50217 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303881577}' [46 bytes]
-2025-09-07 20:58:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303881577}
-2025-09-07 20:58:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303881577}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING c4 1c b2 5b [binary, 4 bytes]
-DEBUG:    < PONG c4 1c b2 5b [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 0b 33 ae 6e [binary, 4 bytes]
-DEBUG:    < PONG 0b 33 ae 6e [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50224 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING bd df 13 3d [binary, 4 bytes]
-DEBUG:    < PONG bd df 13 3d [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303911576}' [46 bytes]
-2025-09-07 20:58:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303911576}
-2025-09-07 20:58:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303911576}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 94 5f ba d0 [binary, 4 bytes]
-DEBUG:    < PONG 94 5f ba d0 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 51 d3 6e c9 [binary, 4 bytes]
-DEBUG:    < PONG 51 d3 6e c9 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 1d 28 9b 87 [binary, 4 bytes]
-DEBUG:    < PONG 1d 28 9b 87 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50227 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303941576}' [46 bytes]
-2025-09-07 20:59:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303941576}
-2025-09-07 20:59:01 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303941576}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 87 0f 38 45 [binary, 4 bytes]
-DEBUG:    < PONG 87 0f 38 45 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 0f 2e c5 f4 [binary, 4 bytes]
-DEBUG:    < PONG 0f 2e c5 f4 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50233 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 7f 41 ae 4a [binary, 4 bytes]
-DEBUG:    < PONG 7f 41 ae 4a [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757303971576}' [46 bytes]
-2025-09-07 20:59:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303971576}
-2025-09-07 20:59:31 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757303971576}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING bf dd f3 7c [binary, 4 bytes]
-DEBUG:    < PONG bf dd f3 7c [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-2025-09-07 20:59:41 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:59:41 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 20:59:41 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 20:59:41 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-INFO:     connection closed
+INFO:     127.0.0.1:53747 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/emily_rodriguez HTTP/1.1
+INFO:     127.0.0.1:53747 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
 DEBUG:    < connection: Upgrade
 DEBUG:    < pragma: no-cache
@@ -564,89 +453,402 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: Dha5wIycTnggoc5xiRo+Dg==
+DEBUG:    < sec-websocket-key: 8kfNQx4mFAnjIFgDPXQuyQ==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 50235) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
-2025-09-07 20:59:41 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
-2025-09-07 20:59:41 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+INFO:     ('127.0.0.1', 53755) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.477888"}' [128 bytes]
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: uGTqTmZpy+HcJmGkBYioyjMiNsg=
+DEBUG:    > Sec-WebSocket-Accept: q2XFNqsNru2f/Pq9/VBA985t8Ck=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 03:59:40 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 04:41:38 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T20:59:41.515968"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.477888"}' [128 bytes]
+INFO:     127.0.0.1:53747 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53758 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    = connection is CONNECTING
+DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < host: localhost:8000
+DEBUG:    < connection: Upgrade
+DEBUG:    < pragma: no-cache
+DEBUG:    < cache-control: no-cache
+DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+DEBUG:    < upgrade: websocket
+DEBUG:    < origin: http://localhost:3000
+DEBUG:    < sec-websocket-version: 13
+DEBUG:    < accept-encoding: gzip, deflate, br, zstd
+DEBUG:    < accept-language: en-US,en;q=0.9
+DEBUG:    < sec-websocket-key: re+HrY7ClgXZw1IZX6Ypzw==
+DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+INFO:     ('127.0.0.1', 53759) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.496740"}' [128 bytes]
+DEBUG:    > HTTP/1.1 101 Switching Protocols
+DEBUG:    > Upgrade: websocket
+DEBUG:    > Connection: Upgrade
+DEBUG:    > Sec-WebSocket-Accept: k5iju+Nzig1UqnL1c/mSgFC/QTY=
+DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
+DEBUG:    > date: Mon, 08 Sep 2025 04:41:38 GMT
+DEBUG:    > server: uvicorn
+INFO:     connection open
+DEBUG:    = connection is OPEN
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.496740"}' [128 bytes]
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.496740"}' [128 bytes]
+INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53764 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306513371}' [46 bytes]
+2025-09-07 21:41:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306513371}
+2025-09-07 21:41:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306513371}
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 3b 39 df 76 [binary, 4 bytes]
-DEBUG:    < PONG 3b 39 df 76 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50240 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 1b 05 e5 e8 [binary, 4 bytes]
-DEBUG:    < PONG 1b 05 e5 e8 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50242 - "OPTIONS /api/v1/surveys/submit-response HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50242 - "POST /api/v1/surveys/submit-response HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:50256 - "GET /api/v1/chat-threads/threads/08e2568e-62df-4953-9540-52a46df7160c HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757304011535}' [46 bytes]
-2025-09-07 21:00:11 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304011535}
-2025-09-07 21:00:11 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304011535}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING e6 92 2f 0f [binary, 4 bytes]
-DEBUG:    < PONG e6 92 2f 0f [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 28 48 be ea [binary, 4 bytes]
-DEBUG:    < PONG 28 48 be ea [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50263 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 80 9b 3d 63 [binary, 4 bytes]
-DEBUG:    < PONG 80 9b 3d 63 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757304041535}' [46 bytes]
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 55 77 89 6f [binary, 4 bytes]
-2025-09-07 21:00:41 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304041535}
-2025-09-07 21:00:41 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304041535}
-DEBUG:    < PONG 55 77 89 6f [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING de f1 73 7f [binary, 4 bytes]
-DEBUG:    < PONG de f1 73 7f [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50268 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 'n\x05\x02I' [text, 4 bytes]
-DEBUG:    < PONG 'n\x05\x02I' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757304071536}' [46 bytes]
-2025-09-07 21:01:11 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304071536}
-2025-09-07 21:01:11 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304071536}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 8f 43 3d 05 [binary, 4 bytes]
-DEBUG:    < PONG 8f 43 3d 05 [binary, 4 bytes]
+DEBUG:    > PING c5 74 3c df [binary, 4 bytes]
+DEBUG:    < PONG c5 74 3c df [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 11 bb ca 63 [binary, 4 bytes]
-DEBUG:    < PONG 11 bb ca 63 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:50294 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING ab c7 bf e1 [binary, 4 bytes]
-DEBUG:    < PONG ab c7 bf e1 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757304101536}' [46 bytes]
-2025-09-07 21:01:41 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304101536}
-2025-09-07 21:01:41 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757304101536}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 4e 26 1c bc [binary, 4 bytes]
-DEBUG:    < PONG 4e 26 1c bc [binary, 4 bytes]
+DEBUG:    > PING 7c 8e 94 ac [binary, 4 bytes]
+DEBUG:    < PONG 7c 8e 94 ac [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 22 1c 99 22 [binary, 4 bytes]
-DEBUG:    < PONG 22 1c 99 22 [binary, 4 bytes]
+DEBUG:    > PING 5f 26 23 d8 [binary, 4 bytes]
+DEBUG:    < PONG 5f 26 23 d8 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53769 - "OPTIONS /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
+2025-09-07 21:42:00 - app.api.v1.endpoints.chat - INFO - Generating survey template for: innovative workspace design feedback...
+2025-09-07 21:42:00 - app.api.v1.endpoints.chat - INFO - Generating survey template for: innovative workspace design feedback...
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.started
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.started
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.complete
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.complete
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114c76fd0>
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114c76fd0>
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbed60>
+2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbed60>
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 21:42:00 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+INFO:     127.0.0.1:53771 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306530732}' [46 bytes]
+2025-09-07 21:42:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306530732}
+2025-09-07 21:42:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306530732}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 54 ea ed b7 [binary, 4 bytes]
+DEBUG:    < PONG 54 ea ed b7 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53777 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING b2 a4 83 7c [binary, 4 bytes]
+DEBUG:    < PONG b2 a4 83 7c [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING e1 d8 90 63 [binary, 4 bytes]
+DEBUG:    < PONG e1 d8 90 63 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:42:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449173'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e7f920c2a1e2aea4628ffdee91614773'), (b'openai-processing-ms', b'19291'), (b'x-envoy-upstream-service-time', b'19294'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc6da2dceeb40-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:42:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449173'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e7f920c2a1e2aea4628ffdee91614773'), (b'openai-processing-ms', b'19291'), (b'x-envoy-upstream-service-time', b'19294'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc6da2dceeb40-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:42:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
+{
+  "metadata": {
+    "title": "Innovative Workspace Design Feedback for Enhanced Culture & Collaboration",
+    "name": "WorkspaceInnovate",
+    "context": "Our organization values the role wo...
+2025-09-07 21:42:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
+{
+  "metadata": {
+    "title": "Innovative Workspace Design Feedback for Enhanced Culture & Collaboration",
+    "name": "WorkspaceInnovate",
+    "context": "Our organization values the role wo...
+2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field context, using empty default
+2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field context, using empty default
+2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
+2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
+2025-09-07 21:42:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
+2025-09-07 21:42:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
+2025-09-07 21:42:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 11 questions, 5 metrics, and 5 classifiers
+2025-09-07 21:42:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 11 questions, 5 metrics, and 5 classifiers
+INFO:     127.0.0.1:53769 - "POST /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306543371}' [46 bytes]
+2025-09-07 21:42:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306543371}
+2025-09-07 21:42:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306543371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 01 2e 11 c7 [binary, 4 bytes]
+DEBUG:    < PONG 01 2e 11 c7 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a7 88 b4 fc [binary, 4 bytes]
+DEBUG:    < PONG a7 88 b4 fc [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53786 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 3d 62 7c a6 [binary, 4 bytes]
+DEBUG:    < PONG 3d 62 7c a6 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306560725}' [46 bytes]
+2025-09-07 21:42:40 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306560725}
+2025-09-07 21:42:40 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306560725}
+INFO:     127.0.0.1:53789 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306573370}' [46 bytes]
+2025-09-07 21:42:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306573370}
+2025-09-07 21:42:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306573370}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 24 08 fc 87 [binary, 4 bytes]
+DEBUG:    < PONG 24 08 fc 87 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 7a ff 87 bb [binary, 4 bytes]
+DEBUG:    < PONG 7a ff 87 bb [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING '$~X3' [text, 4 bytes]
+DEBUG:    < PONG '$~X3' [text, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53817 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306590725}' [46 bytes]
+2025-09-07 21:43:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306590725}
+2025-09-07 21:43:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306590725}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 92 7c 4c e8 [binary, 4 bytes]
+DEBUG:    < PONG 92 7c 4c e8 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53820 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING b2 e7 55 a6 [binary, 4 bytes]
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 33 a4 3a ab [binary, 4 bytes]
+DEBUG:    < PONG b2 e7 55 a6 [binary, 4 bytes]
+DEBUG:    < PONG 33 a4 3a ab [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306603371}' [46 bytes]
+2025-09-07 21:43:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306603371}
+2025-09-07 21:43:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306603371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a1 d8 2e 98 [binary, 4 bytes]
+DEBUG:    < PONG a1 d8 2e 98 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53827 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING '\x174p\x17' [text, 4 bytes]
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING a0 04 c5 da [binary, 4 bytes]
+DEBUG:    < PONG '\x174p\x17' [text, 4 bytes]
+DEBUG:    < PONG a0 04 c5 da [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % received keepalive pong
+DEBUG:    < CLOSE 1001 (going away) [2 bytes]
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1001 (going away) [2 bytes]
+DEBUG:    x half-closing TCP connection
+DEBUG:    = connection is CLOSED
+DEBUG:    < CLOSE 1001 (going away) [2 bytes]
+DEBUG:    = connection is CLOSING
+DEBUG:    > CLOSE 1001 (going away) [2 bytes]
+2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+DEBUG:    x half-closing TCP connection
+DEBUG:    = connection is CLOSED
+2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:53830 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306633371}' [46 bytes]
+2025-09-07 21:43:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306633371}
+2025-09-07 21:43:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306633371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING c3 98 80 98 [binary, 4 bytes]
+DEBUG:    < PONG c3 98 80 98 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+2025-09-07 21:44:09 - app.api.v1.endpoints.chat - INFO - Generating survey template for: customer retention analysis...
+2025-09-07 21:44:09 - app.api.v1.endpoints.chat - INFO - Generating survey template for: customer retention analysis...
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.started
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.started
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.complete
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.complete
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dc4700>
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dc4700>
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbe610>
+2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbe610>
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 21:44:09 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 46 12 78 fe [binary, 4 bytes]
+DEBUG:    < PONG 46 12 78 fe [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53845 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306663371}' [46 bytes]
+2025-09-07 21:44:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306663371}
+2025-09-07 21:44:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306663371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING c6 4b 60 50 [binary, 4 bytes]
+DEBUG:    < PONG c6 4b 60 50 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53887 - "GET /health HTTP/1.1" 200 OK
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:44:52 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_61c02b2303266fe7bd49e1ee889950aa'), (b'openai-processing-ms', b'42491'), (b'x-envoy-upstream-service-time', b'42493'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbca028899284a-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:44:52 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_61c02b2303266fe7bd49e1ee889950aa'), (b'openai-processing-ms', b'42491'), (b'x-envoy-upstream-service-time', b'42493'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbca028899284a-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 21:44:52 - app.services.openai_service - INFO - OpenAI Response content: ```json
+{
+  "metadata": {
+    "title": "Building a Culture of Customer Loyalty: Employee Insights for Retention Excellence",
+    "name": "RetentionCultureCheck",
+    "context": [
+      "Customer reten...
+2025-09-07 21:44:52 - app.services.openai_service - INFO - OpenAI Response content: ```json
+{
+  "metadata": {
+    "title": "Building a Culture of Customer Loyalty: Employee Insights for Retention Excellence",
+    "name": "RetentionCultureCheck",
+    "context": [
+      "Customer reten...
+2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field context, using empty default
+2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field context, using empty default
+2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
+2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
+2025-09-07 21:44:52 - app.services.openai_service - WARNING - Context is brief - adding description based on input
+2025-09-07 21:44:52 - app.services.openai_service - WARNING - Context is brief - adding description based on input
+2025-09-07 21:44:52 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
+2025-09-07 21:44:52 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
+INFO:     127.0.0.1:53842 - "POST /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306693370}' [46 bytes]
+2025-09-07 21:44:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306693370}
+2025-09-07 21:44:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306693370}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING e6 52 af 59 [binary, 4 bytes]
+DEBUG:    < PONG e6 52 af 59 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 5e 64 d8 44 [binary, 4 bytes]
+DEBUG:    < PONG 5e 64 d8 44 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53905 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306723370}' [46 bytes]
+2025-09-07 21:45:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306723370}
+2025-09-07 21:45:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306723370}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 47 e3 4c d8 [binary, 4 bytes]
+DEBUG:    < PONG 47 e3 4c d8 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53912 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306753370}' [46 bytes]
+2025-09-07 21:45:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306753370}
+2025-09-07 21:45:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306753370}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING de e9 81 ea [binary, 4 bytes]
+DEBUG:    < PONG de e9 81 ea [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 8d 3b 52 dd [binary, 4 bytes]
+DEBUG:    < PONG 8d 3b 52 dd [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53936 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306783372}' [46 bytes]
+2025-09-07 21:46:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306783372}
+2025-09-07 21:46:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306783372}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 0e 32 eb c0 [binary, 4 bytes]
+DEBUG:    < PONG 0e 32 eb c0 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53942 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306813370}' [46 bytes]
+2025-09-07 21:46:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306813370}
+2025-09-07 21:46:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306813370}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING ef 87 cf dd [binary, 4 bytes]
+DEBUG:    < PONG ef 87 cf dd [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING e0 0f d6 f0 [binary, 4 bytes]
+DEBUG:    < PONG e0 0f d6 f0 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53958 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306843371}' [46 bytes]
+2025-09-07 21:47:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306843371}
+2025-09-07 21:47:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306843371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 8b 8d 3e 05 [binary, 4 bytes]
+DEBUG:    < PONG 8b 8d 3e 05 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53973 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306873371}' [46 bytes]
+2025-09-07 21:47:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306873371}
+2025-09-07 21:47:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306873371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 86 9e d7 e3 [binary, 4 bytes]
+DEBUG:    < PONG 86 9e d7 e3 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 82 d7 13 c8 [binary, 4 bytes]
+DEBUG:    < PONG 82 d7 13 c8 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53978 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306903372}' [46 bytes]
+2025-09-07 21:48:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306903372}
+2025-09-07 21:48:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306903372}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 6a 20 2d ad [binary, 4 bytes]
+DEBUG:    < PONG 6a 20 2d ad [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:53991 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306933371}' [46 bytes]
+2025-09-07 21:48:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306933371}
+2025-09-07 21:48:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306933371}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING c9 f7 47 38 [binary, 4 bytes]
+DEBUG:    < PONG c9 f7 47 38 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 14 69 af 87 [binary, 4 bytes]
+DEBUG:    < PONG 14 69 af 87 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:54006 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306963371}' [46 bytes]
+2025-09-07 21:49:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306963371}
+2025-09-07 21:49:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306963371}

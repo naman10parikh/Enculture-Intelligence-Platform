@@ -60,6 +60,9 @@ function AIChat() {
   const [surveyTakingMode, setSurveyTakingMode] = useState(false)
   const [activeSurveyData, setActiveSurveyData] = useState(null)
   const [surveyResponses, setSurveyResponses] = useState({})
+  const [surveyAssistantMessages, setSurveyAssistantMessages] = useState([])
+  const [surveyAssistantInput, setSurveyAssistantInput] = useState('')
+  const [showSurveyAssistant, setShowSurveyAssistant] = useState(false)
   const [surveyDraft, setSurveyDraft] = useState({
     name: '',
     context: '',
@@ -81,7 +84,7 @@ function AIChat() {
       fontFamily: 'Inter'
     }
   })
-
+  
   // State for interactive preview responses
   const [previewResponses, setPreviewResponses] = useState({})
   
@@ -296,10 +299,10 @@ function AIChat() {
     
     setNotifications(prev => [...prev, notification])
     
-    // Auto-remove after 4 seconds
+    // Auto-remove after 1.5 seconds (ephemeral)
     setTimeout(() => {
       setNotifications(prev => prev.filter(n => n.id !== id))
-    }, 4000)
+    }, 1500)
   }
 
   // Survey notification with action
@@ -346,6 +349,84 @@ function AIChat() {
     }))
   }
 
+  // Survey Assistant AI Chat Function
+  const handleSurveyAssistantMessage = async () => {
+    if (!surveyAssistantInput.trim() || !activeSurveyData) return
+
+    const userMessage = {
+      id: `user-${Date.now()}`,
+      type: 'user',
+      content: surveyAssistantInput.trim(),
+      timestamp: new Date()
+    }
+
+    setSurveyAssistantMessages(prev => [...prev, userMessage])
+    setSurveyAssistantInput('')
+    setIsLoading(true)
+
+    try {
+      // Prepare survey context for AI
+      const surveyContext = {
+        surveyName: activeSurveyData.name,
+        context: activeSurveyData.context,
+        questions: activeSurveyData.questions.map((q, index) => ({
+          number: index + 1,
+          id: q.id,
+          question: q.question,
+          type: q.response_type,
+          options: q.options,
+          mandatory: q.mandatory
+        })),
+        currentResponses: surveyResponses
+      }
+
+      const systemPrompt = `You are an AI survey assistant helping a user complete a survey. You have full context of the survey they're taking and should help them understand questions, provide clarification, and reduce survey fatigue.
+
+SURVEY CONTEXT:
+- Name: ${surveyContext.surveyName}
+- Purpose: ${surveyContext.context}
+- Questions: ${JSON.stringify(surveyContext.questions, null, 2)}
+- Current Responses: ${JSON.stringify(surveyContext.currentResponses, null, 2)}
+
+GUIDELINES:
+1. When asked about specific questions (e.g., "explain question 2"), refer to the exact question text and provide helpful context
+2. Help users understand what each question is asking for
+3. Provide examples when helpful
+4. Be encouraging and supportive to reduce survey fatigue
+5. Don't provide answers for the user, but help them understand what's being asked
+6. Keep responses concise but helpful
+7. Reference question numbers and content accurately
+
+The user is currently taking this survey and may ask for help with specific questions or general guidance.`
+
+      const response = await chatService.sendMessage([
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userMessage.content }
+      ])
+
+      if (response.content) {
+        const aiMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: response.content,
+          timestamp: new Date()
+        }
+        setSurveyAssistantMessages(prev => [...prev, aiMessage])
+      }
+    } catch (error) {
+      console.error('Error with survey assistant:', error)
+      const errorMessage = {
+        id: `ai-${Date.now()}`,
+        type: 'ai',
+        content: "I'm sorry, I'm having trouble connecting right now. Please try again or contact support if you need help with the survey.",
+        timestamp: new Date()
+      }
+      setSurveyAssistantMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const submitSurvey = async () => {
     if (!activeSurveyData) return
 
@@ -361,18 +442,12 @@ function AIChat() {
       if (result.success) {
         addNotification('Survey submitted successfully!', 'success')
         
-        // Mark survey as completed in localStorage
-        const publishedSurveys = JSON.parse(localStorage.getItem('enculture_publishedSurveys') || '[]')
-        const updatedSurveys = publishedSurveys.map(survey => {
-          if (survey.id === activeSurveyData.id) {
-            return {
-              ...survey,
-              completedBy: [...(survey.completedBy || []), currentUserId]
-            }
-          }
-          return survey
-        })
-        localStorage.setItem('enculture_publishedSurveys', JSON.stringify(updatedSurveys))
+        // Mark survey as completed in localStorage (using new key for completed surveys)
+        const completedSurveys = JSON.parse(localStorage.getItem('enculture_completedSurveys') || '[]')
+        if (!completedSurveys.includes(activeSurveyData.id)) {
+          completedSurveys.push(activeSurveyData.id)
+          localStorage.setItem('enculture_completedSurveys', JSON.stringify(completedSurveys))
+        }
         
         // Remove the survey thread from recent threads since it's completed
         setRecentThreads(prev => prev.filter(thread => 
@@ -401,47 +476,73 @@ function AIChat() {
   // Check for pending surveys for a user and create notification chat if needed
   const checkAndCreateSurveyNotifications = async (userId) => {
     try {
-      // Get published surveys from localStorage
-      const publishedSurveys = JSON.parse(localStorage.getItem('enculture_publishedSurveys') || '[]')
+      // Get all published surveys from the backend API instead of localStorage
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+      const response = await fetch(`${baseUrl}/api/v1/surveys/list`)
+      if (!response.ok) {
+        console.error('Failed to fetch surveys from backend')
+        return
+      }
+      
+      const data = await response.json()
+      const allSurveys = data.surveys || []
+      
+      // Filter for published surveys only
+      const publishedSurveys = allSurveys.filter(survey => survey.status === 'published')
       console.log(`🔍 Checking notifications for ${userId}. Found ${publishedSurveys.length} published surveys:`, publishedSurveys)
+      
+      // Get completed surveys from localStorage (user completion state)
+      const completedSurveys = JSON.parse(localStorage.getItem('enculture_completedSurveys') || '[]')
       
       // Find surveys for this user that haven't been completed
       const userSurveys = publishedSurveys.filter(survey => {
-        const isTargeted = survey.targetAudience && survey.targetAudience.includes(userId)
-        const notCompleted = !survey.completedBy?.includes(userId)
-        console.log(`📋 Survey "${survey.name}": targeted=${isTargeted}, not completed=${notCompleted}`)
+        // Check if this user is in the survey's target audience
+        const isTargeted = survey.configuration?.target_audience?.includes(userId) || false
+        const notCompleted = !completedSurveys.includes(survey.id)
+        console.log(`📋 Survey "${survey.name}": targeted for ${userId}=${isTargeted}, not completed=${notCompleted}`)
         return isTargeted && notCompleted
       })
       
       console.log(`📬 Found ${userSurveys.length} surveys for ${userId}:`, userSurveys.map(s => s.name))
       
       if (userSurveys.length > 0) {
-        // Create a survey notification chat for the most recent survey
-        const latestSurvey = userSurveys[userSurveys.length - 1]
-        const surveyThreadId = `survey_${latestSurvey.id}_${userId}`
-        
-        console.log(`🔄 Creating notification for survey: ${latestSurvey.name} (ID: ${surveyThreadId})`)
+        // Create survey notifications for all pending surveys
+        for (const survey of userSurveys) {
+          const surveyThreadId = `survey_${survey.id}_${userId}`
+          
+          console.log(`🔄 Creating notification for survey: ${survey.name} (ID: ${surveyThreadId})`)
         
         // Check if we already have this survey thread
         const existingSurveyThread = recentThreads.find(thread => thread.id === surveyThreadId)
         
         if (!existingSurveyThread) {
+            // Fetch full survey details to get questions
+            try {
+              const surveyResponse = await fetch(`${baseUrl}/api/v1/surveys/${survey.id}`)
+              if (surveyResponse.ok) {
+                const fullSurvey = await surveyResponse.json()
+                
           // Create survey notification thread
           const surveyThread = {
             id: surveyThreadId,
-            title: `📋 Survey: ${latestSurvey.name}`,
+                  title: `📋 Survey: ${fullSurvey.name}`,
             message_count: 2,
             updated_at: new Date().toISOString(),
             isSurveyThread: true,
-            surveyData: latestSurvey
+                  surveyData: fullSurvey
           }
           
           // Add to recent threads
           setRecentThreads(prev => [surveyThread, ...prev])
           
-          console.log(`✅ Created survey notification for ${userId}: ${latestSurvey.name}`)
+                console.log(`✅ Created survey notification for ${userId}: ${fullSurvey.name} with ${fullSurvey.questions?.length || 0} questions`)
+              }
+            } catch (err) {
+              console.error(`Error fetching survey details for ${survey.id}:`, err)
+            }
         } else {
-          console.log(`ℹ️  Survey thread already exists for ${userId}: ${latestSurvey.name}`)
+            console.log(`ℹ️  Survey thread already exists for ${userId}: ${survey.name}`)
+          }
         }
       } else {
         console.log(`📭 No pending surveys found for ${userId}`)
@@ -491,7 +592,7 @@ function AIChat() {
       )
 
       if (publishResult.success) {
-        addNotification(`Survey published successfully! Sent to ${publishResult.notifications_sent} users.`, 'success')
+        // Removed: addNotification(`Survey published successfully! Sent to ${publishResult.notifications_sent} users.`, 'success')
         
         // Store the published survey in localStorage for notifications
         const publishedSurveyData = {
@@ -816,7 +917,7 @@ function AIChat() {
     return () => clearInterval(interval)
   }, [messages, currentThreadId, recentThreads, notifications, surveyTakingMode, activeSurveyData, surveyResponses, receivedSurveys, currentUser?.id])
 
-  const openCanvasForSurvey = async (surveyId = 'draft') => {
+  const openCanvasForSurvey = async (surveyId = 'draft', overrideDraft = false) => {
     setActiveSurveyId(surveyId)
     setCanvasView('wizard')  // Start in wizard mode
     setSurveyStep(1)         // Reset to step 1
@@ -826,8 +927,35 @@ function AIChat() {
       const data = await fetchSurvey(surveyId)
       setSurveyDraft(prev => ({ ...prev, ...data }))
     } else {
-      // Try to load saved draft
+      // Only load saved draft if not overriding
+      if (!overrideDraft) {
       loadSavedDraft()
+      } else {
+        // Clear any existing draft and start fresh
+        clearSavedDraft()
+        setSurveyDraft({
+          name: '',
+          context: '',
+          desiredOutcomes: [],
+          classifiers: [],
+          metrics: [],
+          questions: [],
+          configuration: {
+            backgroundImage: null,
+            languages: ['English'],
+            targetAudience: [],
+            selectedEmployees: [],
+            releaseDate: null,
+            deadline: null,
+            anonymous: true
+          },
+          branding: {
+            primaryColor: '#8B5CF6',
+            backgroundColor: '#FAFBFF',
+            fontFamily: 'Inter'
+          }
+        })
+      }
     }
   }
 
@@ -1116,8 +1244,8 @@ function AIChat() {
       }
       setMessages(prev => [...prev, userMessage])
       
-      // Open canvas
-        openCanvasForSurvey('draft')
+      // Open canvas - override any existing draft when using /survey command
+        openCanvasForSurvey('draft', true)
       
       // If there's a description, show AI response and generate template
       if (description) {
@@ -1810,7 +1938,7 @@ function AIChat() {
   // Handle preview question responses
   const handlePreviewResponse = (questionId, value) => {
     setPreviewResponses(prev => ({
-      ...prev,
+                ...prev, 
       [questionId]: value
     }))
   }
@@ -2571,9 +2699,8 @@ function AIChat() {
                     className="save-btn" 
                     onClick={async () => { 
                       const result = await saveSurveyDraft(surveyDraft)
-                      if (result.ok) {
-                        addNotification('✅ Draft saved successfully!', 'success')
-                      }
+                      // Removed persistent notification for better UX
+                      // Success is already indicated by visual feedback
                     }}
                   >
                     💾 Save Draft
@@ -3505,21 +3632,11 @@ function AIChat() {
                                       
                                       setIsLoading(true)
                                       
-                                      // Simulate publishing
-                                      await new Promise(resolve => setTimeout(resolve, 2000))
+                                      // Actually publish the survey through the backend API
+                                      await handlePublishSurvey()
                                       
-                                      const publishedSurvey = {
-                                        ...surveyDraft,
-                                        id: `published_${Date.now()}`,
-                                        status: 'published',
-                                        publishedAt: new Date().toISOString(),
-                                        recipients: selectedEmployees
-                                      }
-                                      
-                                      // Clear the current draft
+                                      // Clear the current draft after successful publish
                                       clearSavedDraft()
-                                      
-                                      addNotification(`Survey published to ${selectedEmployees.length} recipients!`, 'success')
                                       setCanvasOpen(false)
                                     } catch (error) {
                                       addNotification('Failed to publish survey', 'error')
@@ -3601,14 +3718,16 @@ function AIChat() {
                                 <button 
                             className="tertiary-btn-centered"
                                   onClick={async () => {
-                                    await saveSurveyDraft(surveyDraft)
+                                    const result = await saveSurveyDraft(surveyDraft)
+                                    // Removed persistent notification for better UX
+                                    // Success is already indicated by visual feedback
                                   }}
                                   disabled={isLoading}
                                 >
                                   Save Draft
                                 </button>
+                              </div>
                             </div>
-                          </div>
 
                       
                       {/* Recipients Summary */}
@@ -3618,7 +3737,7 @@ function AIChat() {
                             ? `Ready to send to ${(surveyDraft.configuration?.selectedEmployees || []).length} recipients`
                             : 'No recipients selected - go back to step 6'}
                         </p>
-                                  </div>
+                          </div>
                             </div>
                                 </div>
                 )}
@@ -3652,15 +3771,15 @@ function AIChat() {
                     <div className="stat-card">
                       <span className="stat-number">{(surveyDraft.questions || []).filter(q => q.text && q.text.trim()).length}</span>
                       <span className="stat-label">Questions</span>
-                            </div>
+                                  </div>
                     <div className="stat-card">
                       <span className="stat-number">~{Math.ceil(((surveyDraft.questions || []).filter(q => q.text && q.text.trim()).length * 45) / 60)}</span>
                       <span className="stat-label">Minutes</span>
-                          </div>
+                            </div>
                     <div className="stat-card">
                       <span className="stat-number">{(surveyDraft.classifiers || []).length}</span>
                       <span className="stat-label">Categories</span>
-                        </div>
+                                </div>
                       </div>
                     </div>
                   </div>
@@ -3672,12 +3791,12 @@ function AIChat() {
                     <div className="empty-icon">📝</div>
                     <h3>No Questions Yet</h3>
                     <p>Add questions in the Create tab to see them here</p>
-                  <button
+                                <button 
                       className="empty-action-btn"
                       onClick={() => {setCanvasView('wizard'); setSurveyStep(5)}}
-                  >
+                                >
                       Add Questions
-                  </button>
+                                </button>
                   </div>
                 ) : (
                   <div className="questions-grid-modern">
@@ -3707,11 +3826,11 @@ function AIChat() {
                                   />
                                   <span className="option-indicator"></span>
                                   <span className="option-text">{option}</span>
-                                </label>
-                              ))}
-                            </div>
-                          )}
-                          
+                        </label>
+                      ))}
+                              </div>
+                            )}
+                    
                           {question.type === 'multiple_select' && (
                             <div className="options-interactive-modern">
                               {(question.options || []).map((option, optIndex) => (
@@ -3724,17 +3843,17 @@ function AIChat() {
                                   />
                                   <span className="option-indicator checkbox"></span>
                                   <span className="option-text">{option}</span>
-                                </label>
-                              ))}
-                            </div>
-                          )}
-                          
+                          </label>
+                        ))}
+                          </div>
+                    )}
+                    
                           {question.type === 'scale' && (
                             <div className="scale-interactive-modern">
                               <div className="scale-input-container">
                                 <span>1</span>
-                                <input 
-                                  type="range" 
+                        <input 
+                          type="range" 
                                   min="1" 
                                   max="10" 
                                   value={previewResponses[question.id || index] || 5}
@@ -3742,27 +3861,27 @@ function AIChat() {
                                   className="scale-slider-modern"
                                 />
                                 <span>10</span>
-                              </div>
+                            </div>
                               <div className="scale-value-modern">
                                 Value: {previewResponses[question.id || index] || 5}
-                              </div>
+                          </div>
                               <div className="scale-labels-modern">
                                 <span>Poor</span>
                                 <span>Excellent</span>
-                              </div>
-                            </div>
-                          )}
-                          
+                        </div>
+                      </div>
+                    )}
+                    
                           {question.type === 'text' && (
                             <div className="text-interactive-modern">
-                              <textarea 
+                      <textarea 
                                 className="text-area-interactive"
                                 placeholder="Share your thoughts..."
                                 value={previewResponses[question.id || index] || ''}
                                 onChange={(e) => handlePreviewResponse(question.id || index, e.target.value)}
-                                rows="3"
+                        rows="3" 
                               />
-                            </div>
+                    </div>
                           )}
                           
                           {question.type === 'yes_no' && (
@@ -3789,8 +3908,8 @@ function AIChat() {
                                 <span className="option-indicator"></span>
                                 <span className="option-text">No</span>
                               </label>
-                            </div>
-                          )}
+                  </div>
+                )}
                         </div>
                 </div>
               ))}
@@ -3800,7 +3919,7 @@ function AIChat() {
               
               {/* Preview Actions */}
               <div className="preview-actions-modern">
-                <button 
+                  <button
                   className="preview-action-btn secondary"
                   onClick={() => setCanvasView('wizard')}
                 >
@@ -3831,33 +3950,93 @@ function AIChat() {
                 className={`nav-btn secondary ${surveyStep <= 1 ? 'disabled' : ''}`}
                 onClick={() => setSurveyStep(prev => Math.max(1, prev - 1))}
                 disabled={surveyStep <= 1}
-              >
-                <ArrowLeft size={16} />
-                Previous
-              </button>
-              
-              <div className="step-indicator">
+                  >
+                    <ArrowLeft size={16} />
+                    Previous
+                  </button>
+                  
+                  <div className="step-indicator">
                 <span className="step-text">Page {surveyStep} of 7</span>
-              </div>
-              
-              <button
+                  </div>
+                  
+                  <button
                 className={`nav-btn primary ${surveyStep >= 7 ? 'disabled' : ''}`}
                 onClick={() => setSurveyStep(prev => Math.min(7, prev + 1))}
                 disabled={surveyStep >= 7}
-              >
-                Next
-                <ArrowRight size={16} />
-              </button>
-            </div>
+                  >
+                    Next
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
           )}
           {canvasView === 'survey' && (
-            <div className="survey-preview-modern">
-              {/* Survey Header - Same as Preview */}
-              <div className="preview-header-modern">
+            <div className="survey-container-with-assistant">
+              {/* AI Survey Assistant Panel */}
+              <div className={`survey-assistant-panel ${showSurveyAssistant ? 'open' : 'closed'}`}>
+                <div className="assistant-header">
+                  <div className="assistant-title">
+                    <span className="assistant-icon">🤖</span>
+                    AI Survey Assistant
+              </div>
+                  <button 
+                    className="assistant-toggle"
+                    onClick={() => setShowSurveyAssistant(!showSurveyAssistant)}
+                  >
+                    {showSurveyAssistant ? '✕' : '💬'}
+                  </button>
+              </div>
+              
+                {showSurveyAssistant && (
+                  <div className="assistant-content">
+                    <div className="assistant-messages">
+                      {surveyAssistantMessages.length === 0 && (
+                        <div className="assistant-welcome">
+                          <p>👋 Hi! I'm here to help you with this survey.</p>
+                          <p>Feel free to ask me:</p>
+                          <ul>
+                            <li>"Explain question 2 to me"</li>
+                            <li>"What does this question mean?"</li>
+                            <li>"Give me an example for this"</li>
+                            <li>"Help me understand the survey"</li>
+                          </ul>
+                    </div>
+                  )}
+                      {surveyAssistantMessages.map((message) => (
+                        <div key={message.id} className={`assistant-message ${message.type}`}>
+                          <div className="message-content">{message.content}</div>
+                        </div>
+                        ))}
+                      </div>
+                    
+                    <div className="assistant-input-area">
+                        <input 
+                        type="text"
+                        value={surveyAssistantInput}
+                        onChange={(e) => setSurveyAssistantInput(e.target.value)}
+                        placeholder="Ask me about any question..."
+                        onKeyPress={(e) => e.key === 'Enter' && handleSurveyAssistantMessage()}
+                        disabled={isLoading}
+                      />
+                      <button 
+                        onClick={handleSurveyAssistantMessage}
+                        disabled={isLoading || !surveyAssistantInput.trim()}
+                        className="assistant-send-btn"
+                      >
+                        {isLoading ? '⏳' : '➤'}
+                      </button>
+                    </div>
+                      </div>
+                )}
+              </div>
+              
+              {/* Main Survey Content */}
+              <div className="survey-preview-modern">
+                {/* Survey Header - Same as Preview */}
+                <div className="preview-header-modern">
                 <div className="survey-branding">
                   <img 
                     src="/EncultureLogo.png" 
-                    alt="enCulture Intelligence" 
+                      alt="enCulture Intelligence" 
                     className="survey-logo"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -3865,18 +4044,27 @@ function AIChat() {
                     }}
                   />
                   <div className="survey-logo-fallback" style={{display: 'none'}}>
-                    <span className="logo-text">enCulture</span>
+                      <span className="logo-text">enCulture</span>
                   </div>
                 </div>
-                
-                <div className="survey-overview">
-                  <h1 className="survey-title-modern">{activeSurveyData?.name || 'Culture Intelligence Survey'}</h1>
+                  
+                  <div className="survey-overview">
+                    <h1 className="survey-title-modern">{activeSurveyData?.name || 'Culture Intelligence Survey'}</h1>
+                    
+                    {/* AI Assistant Toggle Button */}
+                    <button 
+                      className="ai-assistant-toggle-main"
+                      onClick={() => setShowSurveyAssistant(!showSurveyAssistant)}
+                      title="Need help? Chat with AI Assistant"
+                    >
+                      🤖 Need Help?
+                    </button>
                   
                   <div className="survey-stats-grid">
                     <div className="stat-card">
                       <span className="stat-number">{activeSurveyData?.questions?.length || 0}</span>
                       <span className="stat-label">Questions</span>
-                    </div>
+                  </div>
                     <div className="stat-card">
                       <span className="stat-number">{Object.keys(surveyResponses).length}</span>
                       <span className="stat-label">Completed</span>
@@ -3909,75 +4097,75 @@ function AIChat() {
                           <div className="options-interactive-modern">
                             {(question.options || []).map((option, optIndex) => (
                               <label key={optIndex} className="option-interactive-modern">
-                                <input 
-                                  type="radio" 
+                            <input 
+                              type="radio" 
                                   name={`survey_q_${question.id || index}`}
-                                  value={option}
-                                  checked={surveyResponses[question.id] === option}
-                                  onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
-                                />
+                              value={option}
+                              checked={surveyResponses[question.id] === option}
+                              onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                            />
                                 <span className="option-indicator"></span>
                                 <span className="option-text">{option}</span>
-                              </label>
-                            ))}
-                          </div>
-                        )}
-                        
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
                         {(question.response_type === 'multiple_select' || question.type === 'multiple_select') && (
                           <div className="options-interactive-modern">
                             {(question.options || []).map((option, optIndex) => (
                               <label key={optIndex} className="option-interactive-modern">
-                                <input 
-                                  type="checkbox" 
-                                  value={option}
-                                  checked={Array.isArray(surveyResponses[question.id]) && surveyResponses[question.id].includes(option)}
-                                  onChange={(e) => {
-                                    const currentResponses = Array.isArray(surveyResponses[question.id]) ? surveyResponses[question.id] : [];
-                                    if (e.target.checked) {
-                                      updateSurveyResponse(question.id, [...currentResponses, option]);
-                                    } else {
-                                      updateSurveyResponse(question.id, currentResponses.filter(r => r !== option));
-                                    }
-                                  }}
-                                />
+                            <input 
+                              type="checkbox"
+                              value={option}
+                              checked={Array.isArray(surveyResponses[question.id]) && surveyResponses[question.id].includes(option)}
+                              onChange={(e) => {
+                                const currentResponses = Array.isArray(surveyResponses[question.id]) ? surveyResponses[question.id] : [];
+                                if (e.target.checked) {
+                                  updateSurveyResponse(question.id, [...currentResponses, option]);
+                                } else {
+                                  updateSurveyResponse(question.id, currentResponses.filter(r => r !== option));
+                                }
+                              }}
+                            />
                                 <span className="option-indicator checkbox"></span>
                                 <span className="option-text">{option}</span>
-                              </label>
-                            ))}
-                          </div>
-                        )}
-                        
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
                         {(question.response_type === 'scale' || question.type === 'scale') && (
                           <div className="scale-interactive-modern">
                             <div className="scale-input-container">
-                              <span>1</span>
-                              <input 
-                                type="range" 
-                                min="1" 
-                                max="10" 
-                                value={surveyResponses[question.id] || 5}
-                                onChange={(e) => updateSurveyResponse(question.id, parseInt(e.target.value))}
+                          <span>1</span>
+                        <input 
+                          type="range" 
+                          min="1" 
+                          max="10" 
+                          value={surveyResponses[question.id] || 5}
+                          onChange={(e) => updateSurveyResponse(question.id, parseInt(e.target.value))}
                                 className="scale-slider-modern"
-                              />
+                        />
                               <span>10</span>
                             </div>
                             <div className="scale-value-modern">
-                              Value: {surveyResponses[question.id] || 5}
-                            </div>
+                          Value: {surveyResponses[question.id] || 5}
+                        </div>
                             <div className="scale-labels-modern">
                               <span>Poor</span>
                               <span>Excellent</span>
-                            </div>
-                          </div>
-                        )}
-                        
+                        </div>
+                      </div>
+                    )}
+                    
                         {(question.response_type === 'text' || question.type === 'text') && (
                           <div className="text-interactive-modern">
-                            <textarea 
+                      <textarea 
                               className="text-area-interactive"
                               placeholder="Share your thoughts..."
-                              value={surveyResponses[question.id] || ''}
-                              onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                        value={surveyResponses[question.id] || ''}
+                        onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
                               rows="3"
                             />
                           </div>
@@ -4010,11 +4198,11 @@ function AIChat() {
                           </div>
                         )}
                       </div>
-                    </div>
-                  ))}
+                  </div>
+                ))}
                 </div>
               </div>
-
+              
               {/* Survey Actions - Same as Preview Style */}
               <div className="preview-actions-modern">
                 <button 
@@ -4035,6 +4223,7 @@ function AIChat() {
                   {isLoading ? 'Submitting...' : 'Submit Survey'}
                 </button>
               </div>
+            </div>
             </div>
           )}
         </div>

@@ -22,35 +22,16 @@ from app.services.survey_service import survey_service
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-# In-memory storage for demo (replace with database in production)
-surveys_storage: dict = {}
-survey_responses: dict = {}
+# Use persistent survey service instead of in-memory storage
+# surveys_storage and survey_responses now handled by survey_service
 
 
 @router.post("/create", response_model=Survey)
 async def create_survey(request: CreateSurveyRequest):
     """Create a new survey"""
     try:
-        survey_id = f"survey_{datetime.now().timestamp()}"
-        
-        survey = Survey(
-            id=survey_id,
-            name=request.name,
-            context=request.context,
-            desired_outcomes=request.desired_outcomes,
-            classifiers=request.classifiers,
-            metrics=request.metrics,
-            questions=request.questions,
-            configuration=request.configuration,
-            branding=request.branding,
-            created_by=request.created_by,
-            created_at=datetime.now(),
-            status="draft"
-        )
-        
-        surveys_storage[survey_id] = survey
-        logger.info(f"Created survey {survey_id}: {survey.name}")
-        
+        survey = await survey_service.create_survey(request)
+        logger.info(f"Created survey {survey.id}: {survey.name}")
         return survey
         
     except Exception as e:
@@ -67,17 +48,21 @@ async def publish_survey(request: PublishSurveyRequest):
     try:
         survey_id = request.survey_id
         
-        if survey_id not in surveys_storage:
+        # Get survey from persistent storage
+        survey = await survey_service.get_survey(survey_id)
+        if not survey:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Survey not found"
             )
         
         # Update survey status
-        survey = surveys_storage[survey_id]
         survey.status = "published"
         survey.published_at = datetime.now()
         survey.configuration.target_audience = request.target_audience
+        
+        # Save updated survey
+        await survey_service.update_survey(survey_id, survey)
         
         # Send real-time notifications to target audience
         survey_data = {
@@ -134,8 +119,12 @@ async def publish_survey(request: PublishSurveyRequest):
 async def list_surveys():
     """Get all surveys"""
     try:
+        # Use persistent storage to list surveys
+        surveys = await survey_service.list_surveys()
+        
         surveys_list = []
-        for survey in surveys_storage.values():
+        for survey in surveys:
+            responses = await survey_service.get_responses_for_survey(survey.id)
             surveys_list.append({
                 "id": survey.id,
                 "name": survey.name,
@@ -143,7 +132,7 @@ async def list_surveys():
                 "created_by": survey.created_by,
                 "created_at": survey.created_at.isoformat(),
                 "question_count": len(survey.questions),
-                "response_count": len(survey_responses.get(survey.id, {}))
+                "response_count": len(responses)
             })
         
         return {"surveys": surveys_list}
@@ -160,13 +149,13 @@ async def list_surveys():
 async def get_survey(survey_id: str):
     """Get a specific survey by ID"""
     try:
-        if survey_id not in surveys_storage:
+        survey = await survey_service.get_survey(survey_id)
+        if not survey:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Survey not found"
             )
         
-        survey = surveys_storage[survey_id]
         return survey
         
     except HTTPException:
@@ -185,15 +174,13 @@ async def submit_survey_response(request: SubmitSurveyResponseRequest):
     try:
         survey_id = request.survey_id
         
-        if survey_id not in surveys_storage:
+        # Check if survey exists using persistent storage
+        survey = await survey_service.get_survey(survey_id)
+        if not survey:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Survey not found"
             )
-        
-        # Initialize responses storage for this survey if needed
-        if survey_id not in survey_responses:
-            survey_responses[survey_id] = {}
         
         response_id = f"response_{datetime.now().timestamp()}"
         survey_response = SurveyResponse(
@@ -204,7 +191,8 @@ async def submit_survey_response(request: SubmitSurveyResponseRequest):
             submitted_at=datetime.now()
         )
         
-        survey_responses[survey_id][response_id] = survey_response
+        # Use persistent storage for responses
+        await survey_service.add_survey_response(survey_response)
         
         logger.info(f"Received survey response {response_id} for survey {survey_id} from user {request.user_id}")
         
@@ -228,16 +216,19 @@ async def submit_survey_response(request: SubmitSurveyResponseRequest):
 async def get_survey_responses(survey_id: str):
     """Get all responses for a survey"""
     try:
-        if survey_id not in surveys_storage:
+        # Check if survey exists using persistent storage
+        survey = await survey_service.get_survey(survey_id)
+        if not survey:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Survey not found"
             )
         
-        responses = survey_responses.get(survey_id, {})
+        # Get responses from persistent storage
+        responses = await survey_service.get_responses_for_survey(survey_id)
         response_list = []
         
-        for response in responses.values():
+        for response in responses:
             response_list.append({
                 "id": response.id,
                 "user_id": response.user_id,
