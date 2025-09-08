@@ -2567,7 +2567,15 @@ function AIChat() {
             <div className="canvas-actions">
               {!surveyTakingMode && canCreateSurveys && surveyStep < 7 ? (
                 <>
-                  <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
+                  <button 
+                    className="save-btn" 
+                    onClick={async () => { 
+                      const result = await saveSurveyDraft(surveyDraft)
+                      if (result.ok) {
+                        addNotification('✅ Draft saved successfully!', 'success')
+                      }
+                    }}
+                  >
                     💾 Save Draft
                   </button>
                 </>
@@ -3799,7 +3807,15 @@ function AIChat() {
                   <Edit3 size={16} />
                   Edit Survey
                 </button>
-                <button className="preview-action-btn primary">
+                <button 
+                  className="preview-action-btn primary"
+                  onClick={() => {
+                    // Navigate to step 7 (confirmation/publish page)
+                    setCanvasView('wizard')
+                    setSurveyStep(7)
+                    addNotification('Review and confirm your survey details before publishing', 'info')
+                  }}
+                >
                   <Send size={16} />
                   Publish Survey
                 </button>
@@ -3835,8 +3851,9 @@ function AIChat() {
             </div>
           )}
           {canvasView === 'survey' && (
-            <div className="survey-taking-enhanced">
-              <div className="survey-container">
+            <div className="survey-preview-modern">
+              {/* Survey Header - Same as Preview */}
+              <div className="preview-header-modern">
                 <div className="survey-branding">
                   <img 
                     src="/EncultureLogo.png" 
@@ -3848,188 +3865,174 @@ function AIChat() {
                     }}
                   />
                   <div className="survey-logo-fallback" style={{display: 'none'}}>
-                    <div className="logo-placeholder">
-                      <span className="logo-text">enCulture</span>
+                    <span className="logo-text">enCulture</span>
                   </div>
-                </div>
                 </div>
                 
-                <div className="survey-header">
-                  <h1 className="survey-title">{activeSurveyData?.name || 'Culture Intelligence Survey'}</h1>
-                  <p className="survey-description">{activeSurveyData?.context || 'Help us understand and improve our workplace culture. Your responses are confidential and will be used to create actionable insights for our team.'}</p>
+                <div className="survey-overview">
+                  <h1 className="survey-title-modern">{activeSurveyData?.name || 'Culture Intelligence Survey'}</h1>
                   
-                <div className="survey-progress">
-                  <div className="progress-info">
-                    <span>Question {Object.keys(surveyResponses).length + 1} of {activeSurveyData?.questions?.length || 0}</span>
-                      <span className="progress-percent">{Math.round(((Object.keys(surveyResponses).length + 1) / (activeSurveyData?.questions?.length || 1)) * 100)}% Complete</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div 
-                      className="progress-fill" 
-                      style={{width: `${((Object.keys(surveyResponses).length + 1) / (activeSurveyData?.questions?.length || 1)) * 100}%`}}
-                    ></div>
+                  <div className="survey-stats-grid">
+                    <div className="stat-card">
+                      <span className="stat-number">{activeSurveyData?.questions?.length || 0}</span>
+                      <span className="stat-label">Questions</span>
+                    </div>
+                    <div className="stat-card">
+                      <span className="stat-number">{Object.keys(surveyResponses).length}</span>
+                      <span className="stat-label">Completed</span>
+                    </div>
+                    <div className="stat-card">
+                      <span className="stat-number">{Math.round(((Object.keys(surveyResponses).length) / (activeSurveyData?.questions?.length || 1)) * 100)}%</span>
+                      <span className="stat-label">Progress</span>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div className="survey-questions">
-                {activeSurveyData?.questions?.map((question, index) => (
-                  <div key={question.id} className="survey-question-enhanced">
-                    <div className="question-header">
-                      <span className="question-number">{index + 1}</span>
-                      <label className="question-text">
-                        {question.question || question.text}
-                        {(question.mandatory || question.required) && <span className="required">*</span>}
-                    </label>
-                    </div>
-                    
-                    {(question.response_type === 'multiple_choice' || question.type === 'multiple_choice') && (
-                      <div className="response-options">
-                        {(question.options || []).map((option, optIndex) => (
-                          <label key={optIndex} className="option-label">
-                            <input 
-                              type="radio" 
-                              name={question.id}
-                              value={option}
-                              checked={surveyResponses[question.id] === option}
+              {/* Modern Survey Content - Same as Preview */}
+              <div className="preview-content-modern">
+                <div className="questions-grid-modern">
+                  {(activeSurveyData?.questions || []).map((question, index) => (
+                    <div key={question.id || index} className="question-card-modern">
+                      <div className="question-header-modern">
+                        <span className="question-number-modern">Q{index + 1}</span>
+                        <div className="question-meta-modern">
+                          <span className="question-type-modern">{formatQuestionType(question.response_type || question.type)}</span>
+                          {(question.mandatory || question.required) && <span className="required-badge-modern">Required</span>}
+                        </div>
+                      </div>
+                      
+                      <h4 className="question-text-modern">{question.question || question.text}</h4>
+                      
+                      <div className="question-interactive-modern">
+                        {(question.response_type === 'multiple_choice' || question.type === 'multiple_choice') && (
+                          <div className="options-interactive-modern">
+                            {(question.options || []).map((option, optIndex) => (
+                              <label key={optIndex} className="option-interactive-modern">
+                                <input 
+                                  type="radio" 
+                                  name={`survey_q_${question.id || index}`}
+                                  value={option}
+                                  checked={surveyResponses[question.id] === option}
+                                  onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                                />
+                                <span className="option-indicator"></span>
+                                <span className="option-text">{option}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {(question.response_type === 'multiple_select' || question.type === 'multiple_select') && (
+                          <div className="options-interactive-modern">
+                            {(question.options || []).map((option, optIndex) => (
+                              <label key={optIndex} className="option-interactive-modern">
+                                <input 
+                                  type="checkbox" 
+                                  value={option}
+                                  checked={Array.isArray(surveyResponses[question.id]) && surveyResponses[question.id].includes(option)}
+                                  onChange={(e) => {
+                                    const currentResponses = Array.isArray(surveyResponses[question.id]) ? surveyResponses[question.id] : [];
+                                    if (e.target.checked) {
+                                      updateSurveyResponse(question.id, [...currentResponses, option]);
+                                    } else {
+                                      updateSurveyResponse(question.id, currentResponses.filter(r => r !== option));
+                                    }
+                                  }}
+                                />
+                                <span className="option-indicator checkbox"></span>
+                                <span className="option-text">{option}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {(question.response_type === 'scale' || question.type === 'scale') && (
+                          <div className="scale-interactive-modern">
+                            <div className="scale-input-container">
+                              <span>1</span>
+                              <input 
+                                type="range" 
+                                min="1" 
+                                max="10" 
+                                value={surveyResponses[question.id] || 5}
+                                onChange={(e) => updateSurveyResponse(question.id, parseInt(e.target.value))}
+                                className="scale-slider-modern"
+                              />
+                              <span>10</span>
+                            </div>
+                            <div className="scale-value-modern">
+                              Value: {surveyResponses[question.id] || 5}
+                            </div>
+                            <div className="scale-labels-modern">
+                              <span>Poor</span>
+                              <span>Excellent</span>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {(question.response_type === 'text' || question.type === 'text') && (
+                          <div className="text-interactive-modern">
+                            <textarea 
+                              className="text-area-interactive"
+                              placeholder="Share your thoughts..."
+                              value={surveyResponses[question.id] || ''}
                               onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                              rows="3"
                             />
-                            <span className="option-indicator"></span>
-                            <span className="option-text">{option}</span>
-                          </label>
-                        ))}
+                          </div>
+                        )}
+                        
+                        {(question.response_type === 'yes_no' || question.type === 'yes_no') && (
+                          <div className="yesno-interactive-modern">
+                            <label className="option-interactive-modern">
+                              <input 
+                                type="radio" 
+                                name={`survey_q_${question.id || index}`}
+                                value="yes"
+                                checked={surveyResponses[question.id] === 'yes'}
+                                onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                              />
+                              <span className="option-indicator"></span>
+                              <span className="option-text">Yes</span>
+                            </label>
+                            <label className="option-interactive-modern">
+                              <input 
+                                type="radio" 
+                                name={`survey_q_${question.id || index}`}
+                                value="no"
+                                checked={surveyResponses[question.id] === 'no'}
+                                onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                              />
+                              <span className="option-indicator"></span>
+                              <span className="option-text">No</span>
+                            </label>
+                          </div>
+                        )}
                       </div>
-                    )}
-                    
-                    {(question.response_type === 'multiple_select' || question.type === 'multiple_select') && (
-                      <div className="response-options">
-                        {(question.options || []).map((option, optIndex) => (
-                          <label key={optIndex} className="option-label">
-                            <input 
-                              type="checkbox"
-                              value={option}
-                              checked={Array.isArray(surveyResponses[question.id]) && surveyResponses[question.id].includes(option)}
-                              onChange={(e) => {
-                                const currentResponses = Array.isArray(surveyResponses[question.id]) ? surveyResponses[question.id] : [];
-                                if (e.target.checked) {
-                                  updateSurveyResponse(question.id, [...currentResponses, option]);
-                                } else {
-                                  updateSurveyResponse(question.id, currentResponses.filter(r => r !== option));
-                                }
-                              }}
-                            />
-                            <span className="checkbox-indicator"></span>
-                            <span className="option-text">{option}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                    
-                    {question.response_type === 'scale' && (
-                      <div className="response-scale">
-                        <div className="scale-labels">
-                          <span>1</span>
-                          <span>10</span>
-                        </div>
-                        <input 
-                          type="range" 
-                          min="1" 
-                          max="10" 
-                          value={surveyResponses[question.id] || 5}
-                          onChange={(e) => updateSurveyResponse(question.id, parseInt(e.target.value))}
-                          className="scale-slider"
-                        />
-                        <div className="scale-value">
-                          Value: {surveyResponses[question.id] || 5}
-                        </div>
-                      </div>
-                    )}
-                    
-                    {(question.response_type === 'text' || question.type === 'text') && (
-                      <textarea 
-                        className="text-response" 
-                        rows="4" 
-                        placeholder="Share your thoughts... (optional)"
-                        value={surveyResponses[question.id] || ''}
-                        onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
-                      />
-                    )}
-                    
-                    {(question.response_type === 'scale' || question.type === 'scale') && (
-                      <div className="scale-response">
-                        <div className="scale-labels">
-                          <span>1 - Poor</span>
-                          <span>10 - Excellent</span>
-                        </div>
-                        <input 
-                          type="range" 
-                          min="1" 
-                          max="10" 
-                          className="scale-slider"
-                          value={surveyResponses[question.id] || 5}
-                          onChange={(e) => updateSurveyResponse(question.id, parseInt(e.target.value))}
-                        />
-                        <div className="scale-value">{surveyResponses[question.id] || 5}</div>
-                      </div>
-                    )}
-                    
-                    {(question.response_type === 'yes_no' || question.type === 'yes_no') && (
-                      <div className="response-options">
-                        <label className="option-label">
-                          <input 
-                            type="radio" 
-                            name={question.id}
-                            value="yes"
-                            checked={surveyResponses[question.id] === 'yes'}
-                            onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
-                          />
-                          <span className="option-indicator"></span>
-                          <span className="option-text">Yes</span>
-                        </label>
-                        <label className="option-label">
-                          <input 
-                            type="radio" 
-                            name={question.id}
-                            value="no"
-                            checked={surveyResponses[question.id] === 'no'}
-                            onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
-                          />
-                          <span className="option-indicator"></span>
-                          <span className="option-text">No</span>
-                        </label>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                    </div>
+                  ))}
+                </div>
               </div>
-              
-              <div className="survey-actions-enhanced">
+
+              {/* Survey Actions - Same as Preview Style */}
+              <div className="preview-actions-modern">
                 <button 
-                  className="survey-btn secondary" 
-                  onClick={closeSurveyTaking}
-                  disabled={isLoading}
+                  className="preview-action-btn secondary"
+                  onClick={() => {
+                    closeSurveyTaking()
+                  }}
                 >
-                  Save & Close
+                  <X size={16} />
+                  Cancel
                 </button>
                 <button 
-                  className="survey-btn primary" 
+                  className="preview-action-btn primary"
                   onClick={submitSurvey}
                   disabled={isLoading}
                 >
-                  {isLoading ? (
-                    <>
-                      <div className="loading-spinner"></div>
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                      Submit Survey
-                    </>
-                  )}
+                  <Send size={16} />
+                  {isLoading ? 'Submitting...' : 'Submit Survey'}
                 </button>
               </div>
             </div>

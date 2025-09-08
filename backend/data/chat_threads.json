@@ -2902,5 +2902,27 @@
       }
     ],
     "is_active": true
+  },
+  "5a6225c7-e494-4886-b179-aef69d6ca170": {
+    "id": "5a6225c7-e494-4886-b179-aef69d6ca170",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T03:53:24.247487",
+    "updated_at": "2025-09-08T03:53:26.465765",
+    "messages": [
+      {
+        "id": "f2ac3b21-cdff-4d92-bf29-7e6a0aef51bf",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T03:53:24.296211"
+      },
+      {
+        "id": "0f455f58-383a-42d4-8c0e-3622617e5d04",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Whether you're looking to analyze survey data, understand cultural trends, or identify actionable steps to enhance your organizational culture, I'm here to help. What's on your mind? ",
+        "timestamp": "2025-09-08T03:53:26.465693"
+      }
+    ],
+    "is_active": true
   }
 }
