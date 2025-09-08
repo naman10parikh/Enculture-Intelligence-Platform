@@ -1145,6 +1145,23 @@ function AIChat() {
       return
     }
 
+    // Handle page-specific AI editing requests
+    const sectionEditRequest = detectSectionEditRequest(currentInput)
+    if (sectionEditRequest && canvasOpen && canvasView === 'wizard') {
+      // Add user message to UI first
+      const userMessage = {
+        id: `user-${Date.now()}`,
+        type: 'user',
+        content: currentInput,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, userMessage])
+      
+      // Process the section edit request
+      handleSectionEditRequest(sectionEditRequest, currentInput)
+      return
+    }
+
     try {
       if (backendConnected) {
         // All users can use backend API for real AI responses
@@ -1659,6 +1676,116 @@ function AIChat() {
         id: `ai-${Date.now()}`,
         type: 'ai',
         content: `❌ There was an error generating the survey template: ${error.message}. Please try again.`,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    }
+  }
+
+  // Detect section-specific AI edit requests
+  const detectSectionEditRequest = (input) => {
+    const lowerInput = input.toLowerCase()
+    
+    // Check for section-specific keywords
+    if (lowerInput.includes('desired outcome') || lowerInput.includes('outcome')) {
+      return 'outcomes'
+    }
+    if (lowerInput.includes('classifier') || lowerInput.includes('categor')) {
+      return 'classifiers'
+    }
+    if (lowerInput.includes('metric') || lowerInput.includes('formula')) {
+      return 'metrics'
+    }
+    if (lowerInput.includes('question') && !lowerInput.includes('survey')) {
+      return 'questions'
+    }
+    if (lowerInput.includes('context') || lowerInput.includes('description') || lowerInput.includes('purpose')) {
+      return 'context'
+    }
+    if (lowerInput.includes('name') || lowerInput.includes('title')) {
+      return 'name'
+    }
+    
+    // Check for action keywords that suggest AI enhancement
+    const actionKeywords = ['fill', 'generate', 'create', 'enhance', 'improve', 'add', 'suggest']
+    const hasActionKeyword = actionKeywords.some(keyword => lowerInput.includes(keyword))
+    
+    if (hasActionKeyword) {
+      // Default to context if no specific section is mentioned
+      return 'context'
+    }
+    
+    return null
+  }
+
+  // Handle section-specific AI edit requests
+  const handleSectionEditRequest = async (sectionType, userRequest) => {
+    try {
+      const processingMessage = {
+        id: `ai-${Date.now()}`,
+        type: 'ai',
+        content: `I'll enhance the ${sectionType} section for you. Let me analyze your current survey data and generate improvements...`,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, processingMessage])
+
+      // Call the backend AI section editing service
+      const updatedContent = await chatService.aiEditSection(
+        sectionType,
+        surveyDraft,
+        userRequest,
+        {}
+      )
+
+      if (updatedContent) {
+        // Update the survey draft based on section type
+        switch (sectionType) {
+          case 'name':
+            setSurveyDraft(prev => ({ ...prev, name: updatedContent }))
+            break
+          case 'context':
+            setSurveyDraft(prev => ({ ...prev, context: updatedContent }))
+            break
+          case 'outcomes':
+            setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updatedContent }))
+            break
+          case 'classifiers':
+            setSurveyDraft(prev => ({ ...prev, classifiers: updatedContent }))
+            break
+          case 'metrics':
+            setSurveyDraft(prev => ({ ...prev, metrics: updatedContent }))
+            break
+          case 'questions':
+            setSurveyDraft(prev => ({ ...prev, questions: updatedContent }))
+            break
+        }
+
+        // Add success message
+        const successMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `✅ I've successfully updated the ${sectionType} section! You can see the changes in the survey wizard on the right. The updates are based on your current survey context and should enhance the overall quality.`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, successMessage])
+
+        // Navigate to the appropriate step if needed
+        if (sectionType === 'name' && surveyStep !== 1) setSurveyStep(1)
+        if (sectionType === 'context' && surveyStep !== 2) setSurveyStep(2)
+        if (sectionType === 'classifiers' && surveyStep !== 3) setSurveyStep(3)
+        if (sectionType === 'metrics' && surveyStep !== 4) setSurveyStep(4)
+        if (sectionType === 'questions' && surveyStep !== 5) setSurveyStep(5)
+        
+      } else {
+        throw new Error('No content received from AI service')
+      }
+
+    } catch (error) {
+      console.error('Failed to edit section:', error)
+      const errorMessage = {
+        id: `ai-${Date.now()}`,
+        type: 'ai',
+        content: `❌ I encountered an issue while updating the ${sectionType} section: ${error.message}. Please try again or be more specific about what you'd like me to change.`,
         timestamp: new Date()
       }
       setMessages(prev => [...prev, errorMessage])
@@ -2542,7 +2669,7 @@ function AIChat() {
                             }
                             
                             try {
-                              const enhancedContext = await enhanceContextWithAI(surveyDraft.context, surveyDraft.name)
+                              const enhancedContext = await chatService.enhanceSurveyContext(surveyDraft.context, surveyDraft.name)
                               if (enhancedContext && enhancedContext !== surveyDraft.context) {
                                 setSurveyDraft(prev => ({ ...prev, context: enhancedContext }))
                               }
@@ -2701,18 +2828,18 @@ function AIChat() {
                             className="minimal-enhance-btn"
                             onClick={async () => {
                               try {
+                                addNotification('Generating classifiers with AI...', 'info')
                                 // Generate AI-powered classifiers based on survey context and name
-                                const aiClassifiers = [
-                                  { name: 'Department', values: ['Engineering', 'Marketing', 'Sales', 'HR', 'Operations'] },
-                                  { name: 'Experience Level', values: ['Entry Level', 'Mid Level', 'Senior', 'Leadership'] },
-                                  { name: 'Work Location', values: ['Remote', 'Hybrid', 'In-Office'] }
-                                ]
+                                const aiClassifiers = await chatService.generateClassifiers(
+                                  surveyDraft.context || '', 
+                                  surveyDraft.name || ''
+                                )
                               
                               setSurveyDraft(prev => ({ 
                                 ...prev, 
                                 classifiers: aiClassifiers 
                               }))
-                              addNotification('Classifiers generated by AI', 'success')
+                              addNotification('Classifiers generated by AI successfully!', 'success')
                             } catch (error) {
                               console.error('Failed to generate classifiers:', error)
                               addNotification('Failed to generate classifiers. Please try again.', 'error')
@@ -3045,36 +3172,18 @@ function AIChat() {
                                 className="minimal-enhance-btn"
                               onClick={async () => {
                                 try {
+                                  addNotification('Generating questions with AI...', 'info')
                                   // Generate AI-powered survey questions based on context and metrics
-                                  const aiQuestions = [
-                                    {
-                                      id: `q${Date.now()}_1`,
-                                      text: 'How would you rate your overall job satisfaction?',
-                                      type: 'scale',
-                                      required: true,
-                                      options: []
-                                    },
-                                    {
-                                      id: `q${Date.now()}_2`,
-                                      text: 'What aspects of team communication work well?',
-                                      type: 'multiple_select',
-                                      required: false,
-                                      options: ['Regular meetings', 'Clear expectations', 'Open feedback', 'Collaborative tools']
-                                    },
-                                    {
-                                      id: `q${Date.now()}_3`,
-                                      text: 'Do you feel supported in your professional development?',
-                                      type: 'yes_no',
-                                      required: true,
-                                      options: []
-                                    }
-                                  ]
+                                  const metrics = (surveyDraft.metrics || []).map(m => m.name || '')
+                                  const aiQuestions = await chatService.generateEnhancedQuestions(
+                                    surveyDraft.context || '',
+                                    6, // Generate 6 questions
+                                    ['multiple_choice', 'scale', 'text', 'yes_no'],
+                                    metrics
+                                  )
                                   
-                                  setSurveyDraft(prev => ({ 
-                                    ...prev, 
-                                    questions: [...(prev.questions || []), ...aiQuestions]
-                                  }))
-                                  addNotification('Survey questions generated by AI', 'success')
+                                  setSurveyDraft(prev => ({ ...prev, questions: aiQuestions }))
+                                  addNotification('Survey questions generated by AI successfully!', 'success')
                                 } catch (error) {
                                   console.error('Failed to generate questions:', error)
                                   addNotification('Failed to generate questions. Please try again.', 'error')
