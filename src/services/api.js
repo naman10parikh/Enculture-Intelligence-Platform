@@ -365,41 +365,6 @@ export class ChatService {
   }
 
   /**
-   * Enhance metric formula using AI
-   * @param {string} metricName - Name of the metric
-   * @param {string} metricDescription - Description of what the metric measures
-   * @param {Array} questions - Survey questions for reference
-   * @param {Array} selectedClassifiers - Selected classifiers for the metric
-   * @returns {Promise<string>} Enhanced formula
-   */
-  async enhanceMetricFormula(metricName, metricDescription, questions, selectedClassifiers) {
-    try {
-      const response = await fetch(`${this.baseUrl}/enhance-metric-formula`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          metricName, 
-          metricDescription, 
-          questions, 
-          selectedClassifiers 
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      return result.enhanced_formula;
-    } catch (error) {
-      console.error('Metric formula enhancement error:', error);
-      return null;
-    }
-  }
-
-  /**
    * Edit a specific survey section using AI
    * @param {string} sectionType - Type of section to edit
    * @param {Object} currentData - Current survey state
