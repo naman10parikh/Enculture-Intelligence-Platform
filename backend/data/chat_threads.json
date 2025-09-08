@@ -2824,5 +2824,27 @@
       }
     ],
     "is_active": true
+  },
+  "de52f6e1-3115-4ffc-b7e7-427ab127cc7c": {
+    "id": "de52f6e1-3115-4ffc-b7e7-427ab127cc7c",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T00:10:47.133969",
+    "updated_at": "2025-09-08T00:10:50.102276",
+    "messages": [
+      {
+        "id": "5be9cc7e-e4db-4015-b6fd-d63b8f179943",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T00:10:47.233864"
+      },
+      {
+        "id": "66218b40-d852-4d30-9638-cef7ed014419",
+        "role": "assistant",
+        "content": "Hello! As a culture intelligence assistant, I'm here to help you analyze culture data, interpret feedback, and generate actionable insights to strengthen your organization's culture. How can I assist you today? Are you looking to review recent survey feedback, uncover engagement trends, or need recommendations for a particular team or culture challenge? Let me know what you're focused on! ",
+        "timestamp": "2025-09-08T00:10:50.102068"
+      }
+    ],
+    "is_active": true
   }
 }

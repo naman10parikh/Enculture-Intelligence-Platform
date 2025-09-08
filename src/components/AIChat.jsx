@@ -1227,6 +1227,11 @@ function AIChat() {
             
             if (data.done) {
               setIsTyping(false)
+              
+              // Parse AI response for survey updates if in survey context
+              if (canvasOpen && canvasView === 'wizard') {
+                parseSurveyUpdatesFromResponse(fullResponse, currentInput)
+              }
             }
             
             if (data.error) {
@@ -1601,68 +1606,179 @@ function AIChat() {
     }
   }
 
-  // AI Survey Template Generation with Streaming Effect
+  // AI Survey Template Generation - Manual Navigation
   const generateSurveyFromAIStreaming = async (description) => {
     try {
       const template = await chatService.generateSurveyTemplate(description)
       if (template) {
-        // Start with empty template and go to step 1
+        // Start at step 1 and populate all data at once for manual navigation
         setSurveyStep(1)
         setSurveyDraft(prev => ({ 
           ...prev, 
-          name: '',
-          context: '',
-          desiredOutcomes: [],
-          questions: [],
-          classifiers: [],
-          metrics: []
+          name: template.title || '',
+          context: template.description || '',
+          desiredOutcomes: template.desiredOutcomes || [],
+          questions: template.questions || [],
+          classifiers: template.classifiers || [],
+          metrics: template.metrics || []
         }))
-        
-        // Simulate streaming population with auto-navigation
-        await new Promise(resolve => {
-          let step = 0;
-          const interval = setInterval(() => {
-            step++;
-            
-            if (step === 1) {
-              // Add name and navigate to step 1
-              setSurveyStep(1)
-              setSurveyDraft(prev => ({ ...prev, name: template.title }))
-            } else if (step === 2) {
-              // Add context and navigate to step 2
-              setSurveyStep(2)
-              setSurveyDraft(prev => ({ ...prev, context: template.description }))
-            } else if (step === 3) {
-              // Add classifiers and navigate to step 3
-              setSurveyStep(3)
-              setSurveyDraft(prev => ({ ...prev, classifiers: template.classifiers || [] }))
-            } else if (step === 4) {
-              // Add metrics and navigate to step 4
-              setSurveyStep(4)
-              setSurveyDraft(prev => ({ ...prev, metrics: template.metrics || [] }))
-            } else if (step === 5) {
-              // Navigate to questions step and start adding
-              setSurveyStep(5)
-              setSurveyDraft(prev => ({ ...prev, questions: [] }))
-            } else if (step <= 5 + template.questions.length) {
-              // Add questions one by one while staying on step 5
-              const questionIndex = step - 6;
-              setSurveyDraft(prev => ({ 
-                ...prev, 
-                questions: template.questions.slice(0, questionIndex + 1)
-              }))
-            } else {
-              // Complete generation
-              clearInterval(interval)
-              resolve()
-            }
-          }, 1200) // 1200ms between each step for visible streaming effect
-        })
         
         setCanvasView('wizard') // Stay in wizard to show the generated survey
       }
     } catch (error) {
       console.error('Failed to generate survey template:', error)
+    }
+  }
+
+  // Parse AI responses for survey field updates
+  const parseSurveyUpdatesFromResponse = (aiResponse, userRequest) => {
+    try {
+      const lowerResponse = aiResponse.toLowerCase()
+      const lowerRequest = userRequest.toLowerCase()
+      
+      // Extract specific field updates based on AI response patterns
+      const updates = {}
+      
+      // Context updates
+      if (lowerRequest.includes('context') || lowerRequest.includes('background') || lowerRequest.includes('purpose')) {
+        const contextMatch = aiResponse.match(/(?:survey context|background|purpose):\s*["']?([^"'\n]+)["']?/i)
+        if (contextMatch) {
+          updates.context = contextMatch[1].trim()
+        }
+      }
+      
+      // Name/title updates
+      if (lowerRequest.includes('name') || lowerRequest.includes('title') || lowerRequest.includes('rename')) {
+        const nameMatch = aiResponse.match(/(?:survey (?:name|title)|title):\s*["']?([^"'\n]+)["']?/i)
+        if (nameMatch) {
+          updates.name = nameMatch[1].trim()
+        }
+      }
+      
+      // Desired outcomes updates
+      if (lowerRequest.includes('outcome') || lowerRequest.includes('goal') || lowerRequest.includes('objective')) {
+        const outcomeMatches = aiResponse.match(/(?:outcomes?|goals?|objectives?):\s*(.+?)(?:\n\n|$)/is)
+        if (outcomeMatches) {
+          const outcomes = outcomeMatches[1]
+            .split(/\n|•|\d+\./)
+            .map(o => o.trim())
+            .filter(o => o && !o.match(/^[-•]\s*$/))
+            .slice(0, 5) // Limit to 5 outcomes
+          if (outcomes.length > 0) {
+            updates.desiredOutcomes = outcomes
+          }
+        }
+      }
+      
+      // Questions updates
+      if (lowerRequest.includes('question') || lowerRequest.includes('add question')) {
+        const questionMatch = aiResponse.match(/(?:question|q\d+):\s*["']?([^"'\n]+)["']?/i)
+        if (questionMatch) {
+          const newQuestion = {
+            id: `q${(surveyDraft.questions || []).length + 1}`,
+            text: questionMatch[1].trim(),
+            type: 'multiple_choice',
+            required: false,
+            options: ['Yes', 'No', 'Somewhat']
+          }
+          updates.questions = [...(surveyDraft.questions || []), newQuestion]
+        }
+      }
+      
+      // Classifier updates  
+      if (lowerRequest.includes('classifier') || lowerRequest.includes('category')) {
+        const classifierMatch = aiResponse.match(/(?:classifier|category):\s*["']?([^"'\n]+)["']?/i)
+        if (classifierMatch) {
+          const newClassifier = {
+            name: classifierMatch[1].trim(),
+            values: ['Option 1', 'Option 2', 'Option 3']
+          }
+          const updatedClassifiers = [...(surveyDraft.classifiers || [])]
+          updatedClassifiers.push(newClassifier)
+          updates.classifiers = updatedClassifiers
+        }
+      }
+      
+      // Apply any detected updates
+      if (Object.keys(updates).length > 0) {
+        setSurveyDraft(prev => ({ ...prev, ...updates }))
+        
+        // Show a subtle notification about what was updated
+        const updatedFields = Object.keys(updates).join(', ')
+        addNotification(`Updated: ${updatedFields}`, 'success')
+      }
+    } catch (error) {
+      console.error('Failed to parse survey updates:', error)
+    }
+  }
+
+  // Generate default formula based on selected classifiers
+  const generateDefaultFormula = (selectedClassifiers = []) => {
+    if (!selectedClassifiers || selectedClassifiers.length === 0) {
+      return 'avg(survey_responses)'
+    }
+    
+    const classifierParts = selectedClassifiers.map((name, index) => {
+      const weight = (0.2 + (index * 0.1)).toFixed(1)
+      const varName = name.toLowerCase().replace(/\s+/g, '_')
+      return `${varName}_weight(${weight})`
+    }).join(' + ')
+    
+    return `weighted_avg(responses) * (${classifierParts})`
+  }
+
+  // AI Context Enhancement
+  const enhanceContextWithAI = async (basicContext, surveyName = '') => {
+    try {
+      // Check if context is too basic (less than 20 words or very generic)
+      const wordCount = basicContext.split(' ').length
+      const isVague = wordCount < 20 || 
+                      basicContext.toLowerCase().includes('employee satisfaction') ||
+                      basicContext.toLowerCase().includes('feedback') ||
+                      basicContext.toLowerCase().includes('survey')
+      
+      if (isVague) {
+        // For vague inputs, first try to get clarification through chat
+        const clarificationPrompt = `The user provided this basic survey context: "${basicContext}" for survey "${surveyName}". This seems quite vague. Can you suggest 3 specific clarifying questions they should consider to make their survey context more comprehensive and actionable?`
+        
+        // Instead of auto-asking, we'll enhance with what we have but suggest improvements
+        const enhancement = `${basicContext}\n\nSuggested areas to consider:\n- What specific aspects do you want to measure?\n- What recent changes or challenges prompted this survey?\n- What actions will you take based on the results?\n- Who is your target audience and what do they need to know?\n\nChat with AI to refine these details further.`
+        
+        return enhancement
+      }
+      
+      // For detailed contexts, enhance with structure and best practices
+      const enhancementPrompt = `Enhance this survey context to be more comprehensive and structured: "${basicContext}"`
+      
+      // Try to use backend AI service if available
+      if (backendConnected) {
+        const response = await chatService.enhanceContext?.(basicContext, surveyName)
+        if (response?.enhancedContext) {
+          return response.enhancedContext
+        }
+      }
+      
+      // Fallback enhancement
+      const sections = []
+      sections.push(`Background: ${basicContext}`)
+      
+      if (!basicContext.toLowerCase().includes('objective')) {
+        sections.push(`\nObjectives: [AI Suggestion: Define what specific outcomes you're trying to achieve with this survey]`)
+      }
+      
+      if (!basicContext.toLowerCase().includes('audience') && !basicContext.toLowerCase().includes('employee')) {
+        sections.push(`\nTarget Audience: [AI Suggestion: Specify which groups/departments this survey targets]`)
+      }
+      
+      if (!basicContext.toLowerCase().includes('confidential') && !basicContext.toLowerCase().includes('anonymous')) {
+        sections.push(`\nConfidentiality: Responses will be kept confidential and used only for organizational improvement purposes.`)
+      }
+      
+      return sections.join('')
+      
+    } catch (error) {
+      console.error('Failed to enhance context:', error)
+      return basicContext // Return original if enhancement fails
     }
   }
 
@@ -2245,13 +2361,10 @@ function AIChat() {
             </div>
             
             <div className="canvas-actions">
-              {!surveyTakingMode && canCreateSurveys && surveyStep !== 6 ? (
+              {!surveyTakingMode && canCreateSurveys && surveyStep < 7 ? (
                 <>
                   <button className="save-btn" onClick={async () => { await saveSurveyDraft(surveyDraft) }}>
-                    Save
-                  </button>
-                  <button className="publish-btn" onClick={() => handlePublishSurvey()}>
-                    Publish
+                    💾 Save Draft
                   </button>
                 </>
               ) : null}
@@ -2289,10 +2402,12 @@ function AIChat() {
                         <>
                           <div className="centered-step-header">
                             <div className="step-icon-wrapper">
-                              <Icon size={24} />
+                              <Icon size={20} />
                             </div>
+                            <div className="step-content">
                           <h4 className="step-title">{stepInfo.label}</h4>
-                          <p className="step-description">{stepInfo.desc}</p>
+                              <span className="step-description">• {stepInfo.desc}</span>
+                            </div>
                           </div>
                         </>
                       )
@@ -2320,20 +2435,6 @@ function AIChat() {
                         placeholder="e.g., Q4 Team Engagement Survey"
                         autoFocus
                       />
-                      <div className="ai-suggestion">
-                        <button 
-                          className="ai-suggest-btn"
-                          onClick={() => generateSurveyFromAIStreaming('Generate a creative survey name for employee engagement')}
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="ai-icon">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                          Generate AI-Powered Name
-                        </button>
-                        <div className="step-help">
-                          <span>Need inspiration? Let AI suggest creative survey titles based on your goals</span>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 )}
@@ -2342,12 +2443,10 @@ function AIChat() {
                   <div className="step-container modern">
                     <div className="step-body">
                       <div className="modern-card">
-                        <div className="card-header">
-                          <div className="header-icon">
-                            <Target size={20} />
-                          </div>
+                        <div className="card-header-compact">
+                          <Target size={18} />
                           <h3>Survey Context</h3>
-                          <p>Help us understand the purpose and background of your survey</p>
+                          <span>• Help us understand the purpose and background of your survey</span>
                         </div>
                         <div className="card-content">
                           <textarea
@@ -2357,16 +2456,40 @@ function AIChat() {
                             placeholder="e.g., We want to understand employee satisfaction with our new remote work policy and identify areas for improvement..."
                             rows={5}
                           />
+                          <div className="context-ai-enhance">
+                            <button 
+                              className="ai-enhance-btn"
+                              onClick={async () => {
+                                if (!surveyDraft.context?.trim()) {
+                                  alert('Please enter some initial context first')
+                                  return
+                                }
+                                
+                                try {
+                                  const enhancedContext = await enhanceContextWithAI(surveyDraft.context, surveyDraft.name)
+                                  setSurveyDraft(prev => ({ ...prev, context: enhancedContext }))
+                                } catch (error) {
+                                  console.error('Failed to enhance context:', error)
+                                  alert('Failed to enhance context. Please try again.')
+                                }
+                              }}
+                              disabled={!surveyDraft.context?.trim()}
+                            >
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                              Enhance with AI
+                            </button>
+                            <span className="enhance-hint">AI will expand your context with relevant details and structure</span>
+                          </div>
                         </div>
                         </div>
                         
                       <div className="modern-card">
-                        <div className="card-header">
-                          <div className="header-icon">
-                            <CheckCircle size={20} />
-                          </div>
+                        <div className="card-header-compact">
+                          <CheckCircle size={18} />
                           <h3>Desired Outcomes</h3>
-                          <p>What specific insights or changes are you hoping to achieve?</p>
+                          <span>• What specific insights or changes are you hoping to achieve?</span>
                         </div>
                         <div className="card-content">
                           <div className="outcomes-list">
@@ -2408,15 +2531,6 @@ function AIChat() {
                               <span>Add New Outcome</span>
                           </button>
                           </div>
-                          <div className="ai-help-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
-                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div>
-                              <strong>Need inspiration?</strong>
-                              <p>Ask AI: "What outcomes should I track for employee engagement surveys?"</p>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -2427,14 +2541,10 @@ function AIChat() {
                   <div className="step-container modern">
                     <div className="step-body">
                       <div className="modern-card">
-                        <div className="card-header">
-                          <div className="header-icon">
-                            <Tag size={20} />
-                          </div>
-                          <div>
+                        <div className="card-header-compact">
+                          <Tag size={18} />
                             <h3>Category Labels (Classifiers)</h3>
-                            <p>Define qualitative categories to analyze and segment your survey data</p>
-                          </div>
+                          <span>• Define qualitative categories to analyze and segment your survey data</span>
                         </div>
                         <div className="card-content">
                           <div className="classifiers-modern-grid">
@@ -2523,15 +2633,6 @@ function AIChat() {
                               </div>
                               )
                             })}
-                      </div>
-                          <div className="ai-help-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
-                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div>
-                              <strong>Smart Categorization</strong>
-                              <p>Use classifiers to analyze patterns like leadership styles, communication preferences, or work environments. This helps you segment and understand different groups in your data.</p>
-                    </div>
                   </div>
                             </div>
                             </div>
@@ -2543,14 +2644,10 @@ function AIChat() {
                   <div className="step-container modern">
                     <div className="step-body">
                       <div className="modern-card">
-                        <div className="card-header">
-                          <div className="header-icon">
-                            <Calculator size={20} />
-                            </div>
-                          <div>
+                        <div className="card-header-compact">
+                          <Calculator size={18} />
                             <h3>Analytics Metrics</h3>
-                            <p>Define how you want to measure and calculate insights from your survey data</p>
-                                </div>
+                          <span>• Define how you want to measure and calculate insights from your survey data</span>
                               </div>
                         <div className="card-content">
                           <div className="metrics-modern-list">
@@ -2600,41 +2697,46 @@ function AIChat() {
                                 
                                 <div className="metric-formula-section">
                                   <div className="formula-header">
-                                    <label className="formula-label">Smart Formula</label>
-                                    <button 
-                                      className="generate-formula-btn-modern"
-                                      onClick={async () => {
-                                        if (!metric.description) {
-                                          alert('Please add a description first to generate an AI formula')
-                                          return
-                                        }
-                                        
-                                        // Generate AI formula including classifiers
-                                        const classifierNames = (surveyDraft.classifiers || [])
-                                          .filter(c => c.name)
-                                          .map(c => c.name)
-                                        
-                                        const formula = await generateFormulaFromAI(metric.description, classifierNames)
+                                    <label className="formula-label">Analysis Formula</label>
+                                  </div>
+                                  
+                                  <div className="classifier-selection">
+                                    <label className="selection-label">Include Classifiers:</label>
+                                    <div className="classifier-checkboxes">
+                                      {(surveyDraft.classifiers || []).filter(c => c.name).map((classifier, classIndex) => (
+                                        <label key={classIndex} className="classifier-checkbox">
+                                          <input 
+                                            type="checkbox"
+                                            checked={metric.selectedClassifiers?.includes(classifier.name) || false}
+                                            onChange={(e) => {
                                         const updated = [...(surveyDraft.metrics || [])]
-                                        updated[index] = { ...updated[index], formula }
+                                              const selectedClassifiers = metric.selectedClassifiers || []
+                                              if (e.target.checked) {
+                                                updated[index] = { 
+                                                  ...updated[index], 
+                                                  selectedClassifiers: [...selectedClassifiers, classifier.name]
+                                                }
+                                              } else {
+                                                updated[index] = { 
+                                                  ...updated[index], 
+                                                  selectedClassifiers: selectedClassifiers.filter(name => name !== classifier.name)
+                                                }
+                                              }
                                         setSurveyDraft(prev => ({ ...prev, metrics: updated }))
                                       }}
-                                    >
-                                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                      </svg>
-                                      Generate Formula
-                                    </button>
+                                          />
+                                          <span>{classifier.name}</span>
+                                        </label>
+                                      ))}
                                   </div>
+                                  </div>
+                                  
                                   <div className="formula-display-modern">
-                                    <code>{metric.formula || 'avg(responses) + weight(classifiers)'}</code>
+                                    <code>{metric.formula || generateDefaultFormula(metric.selectedClassifiers)}</code>
                                   </div>
-                                  <div className="formula-explanation">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                                      <path d="m9 12 2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                    </svg>
-                                    This formula will incorporate your classifiers and survey responses for intelligent analysis
+                                  
+                                  <div className="formula-hint">
+                                    <span>Chat with AI to generate custom formulas using natural language</span>
                                   </div>
                                 </div>
                               </div>
@@ -2663,16 +2765,6 @@ function AIChat() {
                               ))}
                             </div>
                           </div>
-                          
-                          <div className="ai-help-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
-                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div>
-                              <strong>Advanced Analytics</strong>
-                              <p>Our AI generates smart formulas that combine your survey responses with classifiers for deeper insights. Each metric can analyze patterns across different employee segments.</p>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -2683,14 +2775,10 @@ function AIChat() {
                   <div className="step-container modern">
                     <div className="step-body">
                       <div className="modern-card">
-                        <div className="card-header">
-                          <div className="header-icon">
-                            <List size={20} />
-                          </div>
-                          <div>
+                        <div className="card-header-compact">
+                          <List size={18} />
                             <h3>Survey Questions</h3>
-                            <p>Create engaging questions that will provide valuable insights from your team</p>
-                          </div>
+                          <span>• Create engaging questions that will provide valuable insights from your team</span>
                         </div>
                         <div className="card-content">
                           <div className="questions-modern-builder">
@@ -2757,28 +2845,24 @@ function AIChat() {
                                     </div>
                                   </div>
                                   
-                                  <div className="question-type-grid">
-                                    {[
-                                      { type: 'multiple_choice', label: 'Multiple Choice', icon: '◉' },
-                                      { type: 'scale', label: 'Rating Scale', icon: '⭐' },
-                                      { type: 'likert', label: 'Likert Scale', icon: '📊' },
-                                      { type: 'text', label: 'Text Response', icon: '✏️' },
-                                      { type: 'yes_no', label: 'Yes/No', icon: '✓' },
-                                      { type: 'multiple_select', label: 'Multiple Select', icon: '☑️' }
-                                    ].map(typeOption => (
-                                      <button
-                                        key={typeOption.type}
-                                        className={`question-type-option ${question.type === typeOption.type ? 'active' : ''}`}
-                                        onClick={() => {
+                                  <div className="question-type-selector">
+                                    <label className="type-selector-label">Response Type:</label>
+                                    <select
+                                      className="modern-dropdown"
+                                      value={question.type}
+                                      onChange={(e) => {
                                           const updated = [...(surveyDraft.questions || [])]
-                                          updated[index] = { ...updated[index], type: typeOption.type }
+                                        updated[index] = { ...updated[index], type: e.target.value }
                                           setSurveyDraft(prev => ({ ...prev, questions: updated }))
                                         }}
                                       >
-                                        <span className="type-icon">{typeOption.icon}</span>
-                                        <span className="type-label">{typeOption.label}</span>
-                                      </button>
-                                    ))}
+                                      <option value="multiple_choice">◉ Multiple Choice</option>
+                                      <option value="scale">⭐ Rating Scale</option>
+                                      <option value="likert">📊 Likert Scale</option>
+                                      <option value="text">✏️ Text Response</option>
+                                      <option value="yes_no">✓ Yes/No</option>
+                                      <option value="multiple_select">☑️ Multiple Select</option>
+                                    </select>
                                   </div>
                                 </div>
                                 
@@ -2849,7 +2933,7 @@ function AIChat() {
                                           updated[index] = { ...updated[index], linkedMetric: e.target.value }
                                         setSurveyDraft(prev => ({ ...prev, questions: updated }))
                                       }}
-                                        className="modern-select"
+                                        className="modern-dropdown"
                                       >
                                         <option value="">Choose metric...</option>
                                         {(surveyDraft.metrics || []).filter(m => m.name).map(metric => (
@@ -2867,7 +2951,7 @@ function AIChat() {
                                           updated[index] = { ...updated[index], linkedClassifier: e.target.value }
                                         setSurveyDraft(prev => ({ ...prev, questions: updated }))
                                       }}
-                                        className="modern-select"
+                                        className="modern-dropdown"
                                       >
                                         <option value="">Choose classifier...</option>
                                         {(surveyDraft.classifiers || []).filter(c => c.name).map(classifier => (
@@ -2915,16 +2999,6 @@ function AIChat() {
                               ))}
                             </div>
                           </div>
-                          
-                          <div className="ai-help-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
-                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div>
-                              <strong>Smart Question Design</strong>
-                              <p>Link questions to your metrics and classifiers for intelligent analysis. This helps create actionable insights from your survey responses.</p>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -2935,22 +3009,16 @@ function AIChat() {
                   <div className="step-container modern">
                     <div className="step-body">
                       <div className="modern-card">
-                        <div className="card-header">
-                          <div className="header-icon">
-                            <Settings size={20} />
-                          </div>
-                          <div>
+                        <div className="card-header-compact">
+                          <Settings size={18} />
                             <h3>Survey Configuration</h3>
-                            <p>Customize your survey settings, timing, and target audience</p>
-                          </div>
+                          <span>• Customize your survey settings, timing, and target audience</span>
                         </div>
                         <div className="card-content">
                           {/* Appearance Section */}
                           <div className="config-section-modern">
-                            <div className="section-header">
-                              <div className="section-icon">
+                            <div className="section-header-compact">
                                 <Image size={18} />
-                              </div>
                               <h4>Survey Appearance</h4>
                             </div>
                             
@@ -3043,10 +3111,8 @@ function AIChat() {
 
                           {/* Target Audience Section */}
                           <div className="config-section-modern">
-                            <div className="section-header">
-                              <div className="section-icon">
+                            <div className="section-header-compact">
                                 <Users size={18} />
-                              </div>
                               <h4>Target Audience</h4>
                             </div>
 
@@ -3129,10 +3195,8 @@ function AIChat() {
 
                           {/* Timing Section */}
                           <div className="config-section-modern">
-                            <div className="section-header">
-                              <div className="section-icon">
+                            <div className="section-header-compact">
                                 <Calendar size={18} />
-                              </div>
                               <h4>Survey Timing</h4>
                             </div>
 
@@ -3167,10 +3231,8 @@ function AIChat() {
 
                           {/* Privacy Settings */}
                           <div className="config-section-modern">
-                            <div className="section-header">
-                              <div className="section-icon">
+                            <div className="section-header-compact">
                                 <Shield size={18} />
-                              </div>
                               <h4>Privacy & Settings</h4>
                             </div>
 
@@ -3304,24 +3366,15 @@ function AIChat() {
 
                           {/* Publish Options */}
                           <div className="publish-options-section">
-                            <div className="section-header">
-                              <div className="section-icon">
+                            <div className="section-header-compact">
                                 <Send size={18} />
-                              </div>
                               <h4>Publishing Options</h4>
                             </div>
 
-                            <div className="publish-options-grid">
-                              <div className="publish-option">
-                                <div className="option-header">
-                                  <div className="option-icon">🚀</div>
-                                  <div>
-                                    <div className="option-title">Publish Now</div>
-                                    <div className="option-description">Send survey immediately to selected recipients</div>
-                                  </div>
-                                </div>
+                            {/* Primary Publish Action - Prominent */}
+                            <div className="primary-publish-section">
                                 <button 
-                                  className="publish-action-btn primary"
+                                className="modern-primary-btn"
                                   onClick={async () => {
                                     try {
                                       const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
@@ -3331,7 +3384,6 @@ function AIChat() {
                                       }
                                       
                                       setIsLoading(true)
-                                      // addNotification('Publishing survey...', 'info') // Hidden for clean UX
                                       
                                       // Simulate publishing
                                       await new Promise(resolve => setTimeout(resolve, 2000))
@@ -3358,10 +3410,16 @@ function AIChat() {
                                   }}
                                   disabled={isLoading || (surveyDraft.configuration?.selectedEmployees || []).length === 0}
                                 >
-                                  <Send size={16} />
-                                  Publish Survey
+                                <Send size={18} />
+                                Publish Survey Now
                                 </button>
+                              <p className="publish-summary">
+                                Send to {(surveyDraft.configuration?.selectedEmployees || []).length} selected recipients
+                              </p>
                               </div>
+
+                            {/* Additional Options */}
+                            <div className="publish-options-grid">
 
                               <div className="publish-option">
                                 <div className="option-header">
@@ -3382,10 +3440,10 @@ function AIChat() {
                                         scheduledPublishDate: e.target.value
                                       }
                                     }))}
-                                    className="schedule-input"
+                                    className="modern-input"
                                   />
                                   <button 
-                                    className="publish-action-btn secondary"
+                                    className="modern-secondary-btn"
                                     onClick={async () => {
                                       const scheduleDate = surveyDraft.configuration?.scheduledPublishDate
                                       const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
@@ -3440,7 +3498,7 @@ function AIChat() {
                                   </div>
                                 </div>
                                 <button 
-                                  className="publish-action-btn tertiary"
+                                  className="modern-tertiary-btn"
                                   onClick={async () => {
                                     await saveSurveyDraft(surveyDraft)
                                   }}
@@ -3488,15 +3546,6 @@ function AIChat() {
                             )}
                           </div>
 
-                          <div className="ai-help-card">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="help-icon">
-                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div>
-                              <strong>Ready to Launch!</strong>
-                              <p>Your survey is configured and ready to go. Choose when to publish and track responses through your dashboard.</p>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -3530,98 +3579,12 @@ function AIChat() {
               </div>
             </div>
           ) : canvasView === 'preview' ? (
-            <div className="survey-preview">
-              <div className="preview-header">
-                <div className="preview-branding">
-                  <img 
-                    src="/EncultureLogo.png" 
-                    alt="Enculture" 
-                    className="preview-logo"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
-                  />
-                  <div className="preview-logo-fallback" style={{display: 'none'}}>
-                    <span className="logo-text">enculture</span>
-                  </div>
-                </div>
-                <h1 className="preview-title">{surveyDraft.name || 'Untitled Survey'}</h1>
-                <p className="preview-description">{surveyDraft.context || 'Culture intelligence survey'}</p>
-                <div className="preview-meta">
-                  <span className="preview-audience">Target: {surveyDraft.configuration?.targetAudience || 'All employees'}</span>
-                  <span className="preview-anonymous">{surveyDraft.configuration?.anonymous ? 'Anonymous' : 'Named'} responses</span>
-                </div>
-              </div>
-              
-              <div className="preview-questions">
-                {surveyDraft.questions.map((q, index) => (
-                  <div key={q.id} className="preview-question">
-                    <label className="preview-q-label">
-                      {index + 1}. {q.text}{q.required ? ' *' : ''}
-                    </label>
-                    
-                    {q.type === 'multiple_choice' && (
-                      <div className="preview-options">
-                        {q.options?.map((opt, optIndex) => (
-                          <label key={optIndex} className="preview-option">
-                            <input type="radio" name={`preview-${q.id}`} />
-                          <span>{opt}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                    
-                    {q.type === 'multiple_select' && (
-                      <div className="preview-options">
-                        {q.options?.map((opt, optIndex) => (
-                          <label key={optIndex} className="preview-option">
-                            <input type="checkbox" />
-                            <span>{opt}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                    
-                    {q.type === 'scale' && (
-                      <div className="preview-scale">
-                        <div className="scale-labels">
-                          <span>{q.min || 1}</span>
-                          <span>{q.max || 10}</span>
-                        </div>
-                        <input 
-                          type="range" 
-                          min={q.min || 1} 
-                          max={q.max || 10} 
-                          className="scale-slider"
-                        />
-                      </div>
-                    )}
-                    
-                  {q.type === 'text' && (
-                      <textarea 
-                        className="preview-text" 
-                        rows="3" 
-                        placeholder={q.placeholder || "Type your answer..."}
-                        disabled
-                      />
-                  )}
-                </div>
-              ))}
-              </div>
-              
-              <div className="preview-actions">
-                <button className="preview-btn primary">Submit Survey</button>
-                <button className="preview-btn secondary">Save as Draft</button>
-              </div>
-            </div>
-          ) : canvasView === 'survey' ? (
-            <div className="survey-taking">
-              <div className="survey-header">
+            <div className="survey-preview-enhanced">
+              <div className="survey-preview-container">
                 <div className="survey-branding">
                   <img 
                     src="/EncultureLogo.png" 
-                    alt="Enculture" 
+                    alt="enCulture" 
                     className="survey-logo"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -3629,35 +3592,163 @@ function AIChat() {
                     }}
                   />
                   <div className="survey-logo-fallback" style={{display: 'none'}}>
-                    <span className="logo-text">enculture</span>
+                    <div className="logo-placeholder">
+                      <span className="logo-text">enCulture</span>
+                    </div>
                   </div>
                 </div>
-                <h1 className="survey-title">{activeSurveyData?.name || 'Survey'}</h1>
-                <p className="survey-description">{activeSurveyData?.context || 'Please complete this culture intelligence survey'}</p>
-                <div className="survey-progress">
-                  <div className="progress-info">
-                    <span>Question {Object.keys(surveyResponses).length + 1} of {activeSurveyData?.questions?.length || 0}</span>
+                
+                <div className="survey-header">
+                  <h1 className="survey-title">{surveyDraft.name || 'Untitled Survey'}</h1>
+                  <p className="survey-description">{surveyDraft.context || 'Help us understand and improve our workplace culture through this brief survey.'}</p>
+                  
+                  <div className="survey-progress">
+                    <div className="progress-info">
+                      <span>Question 1 of {(surveyDraft.questions || []).filter(q => q.text).length}</span>
+                    </div>
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{width: '0%'}}></div>
+                    </div>
                   </div>
-                  <div className="progress-bar">
-                    <div 
-                      className="progress-fill" 
-                      style={{width: `${((Object.keys(surveyResponses).length + 1) / (activeSurveyData?.questions?.length || 1)) * 100}%`}}
-                    ></div>
+                </div>
+              </div>
+              
+              <div className="survey-questions">
+                {(surveyDraft.questions || []).filter(q => q.text).slice(0, 1).map((question, index) => (
+                  <div key={question.id || index} className="survey-question">
+                    <label className="question-label">
+                      {index + 1}. {question.text}
+                      {question.required && <span className="required">*</span>}
+                    </label>
+                    
+                    {question.type === 'multiple_choice' && (
+                      <div className="response-options">
+                        {(question.options || []).map((option, optIndex) => (
+                          <label key={optIndex} className="option-label">
+                            <input type="radio" name={`q${index}`} value={option} />
+                            <span className="option-text">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {question.type === 'multiple_select' && (
+                      <div className="response-options">
+                        {(question.options || []).map((option, optIndex) => (
+                          <label key={optIndex} className="option-label">
+                            <input type="checkbox" value={option} />
+                            <span className="option-text">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {question.type === 'scale' && (
+                      <div className="scale-response">
+                        <div className="scale-labels">
+                          <span>1 - Poor</span>
+                          <span>10 - Excellent</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min="1" 
+                          max="10" 
+                          className="scale-slider"
+                          defaultValue="5"
+                        />
+                        <div className="scale-value">5</div>
+                      </div>
+                    )}
+                    
+                    {question.type === 'text' && (
+                      <textarea 
+                        className="text-response" 
+                        rows="3" 
+                        placeholder="Share your thoughts..."
+                      />
+                    )}
+                    
+                    {question.type === 'yes_no' && (
+                      <div className="response-options">
+                        <label className="option-label">
+                          <input type="radio" name={`q${index}`} value="yes" />
+                          <span className="option-text">Yes</span>
+                        </label>
+                        <label className="option-label">
+                          <input type="radio" name={`q${index}`} value="no" />
+                          <span className="option-text">No</span>
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                
+                {(surveyDraft.questions || []).filter(q => q.text).length === 0 && (
+                  <div className="no-questions">
+                    <p>No questions added yet. Go back to step 5 to add survey questions.</p>
+                  </div>
+                )}
+              </div>
+              
+              <div className="survey-actions">
+                <button className="survey-btn secondary">Previous</button>
+                <button className="survey-btn primary">Next Question</button>
+              </div>
+              
+            </div>
+          ) : canvasView === 'survey' ? (
+            <div className="survey-taking-enhanced">
+              <div className="survey-container">
+                <div className="survey-branding">
+                  <img 
+                    src="/EncultureLogo.png" 
+                    alt="enCulture Intelligence" 
+                    className="survey-logo"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <div className="survey-logo-fallback" style={{display: 'none'}}>
+                    <div className="logo-placeholder">
+                      <span className="logo-text">enCulture</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="survey-header">
+                  <h1 className="survey-title">{activeSurveyData?.name || 'Culture Intelligence Survey'}</h1>
+                  <p className="survey-description">{activeSurveyData?.context || 'Help us understand and improve our workplace culture. Your responses are confidential and will be used to create actionable insights for our team.'}</p>
+                  
+                  <div className="survey-progress">
+                    <div className="progress-info">
+                      <span>Question {Object.keys(surveyResponses).length + 1} of {activeSurveyData?.questions?.length || 0}</span>
+                      <span className="progress-percent">{Math.round(((Object.keys(surveyResponses).length + 1) / (activeSurveyData?.questions?.length || 1)) * 100)}% Complete</span>
+                    </div>
+                    <div className="progress-bar">
+                      <div 
+                        className="progress-fill" 
+                        style={{width: `${((Object.keys(surveyResponses).length + 1) / (activeSurveyData?.questions?.length || 1)) * 100}%`}}
+                      ></div>
+                    </div>
                   </div>
                 </div>
               </div>
               
               <div className="survey-questions">
                 {activeSurveyData?.questions?.map((question, index) => (
-                  <div key={question.id} className="survey-question">
-                    <label className="question-label">
-                      {index + 1}. {question.question}
-                      {question.mandatory && <span className="required">*</span>}
-                    </label>
+                  <div key={question.id} className="survey-question-enhanced">
+                    <div className="question-header">
+                      <span className="question-number">{index + 1}</span>
+                      <label className="question-text">
+                        {question.question || question.text}
+                        {(question.mandatory || question.required) && <span className="required">*</span>}
+                      </label>
+                    </div>
                     
-                    {question.response_type === 'multiple_choice' && (
+                    {(question.response_type === 'multiple_choice' || question.type === 'multiple_choice') && (
                       <div className="response-options">
-                        {question.options?.map((option, optIndex) => (
+                        {(question.options || []).map((option, optIndex) => (
                           <label key={optIndex} className="option-label">
                             <input 
                               type="radio" 
@@ -3666,15 +3757,16 @@ function AIChat() {
                               checked={surveyResponses[question.id] === option}
                               onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
                             />
-                            <span>{option}</span>
+                            <span className="option-indicator"></span>
+                            <span className="option-text">{option}</span>
                           </label>
                         ))}
                       </div>
                     )}
                     
-                    {question.response_type === 'multiple_select' && (
+                    {(question.response_type === 'multiple_select' || question.type === 'multiple_select') && (
                       <div className="response-options">
-                        {question.options?.map((option, optIndex) => (
+                        {(question.options || []).map((option, optIndex) => (
                           <label key={optIndex} className="option-label">
                             <input 
                               type="checkbox"
@@ -3689,7 +3781,8 @@ function AIChat() {
                                 }
                               }}
                             />
-                            <span>{option}</span>
+                            <span className="checkbox-indicator"></span>
+                            <span className="option-text">{option}</span>
                           </label>
                         ))}
                       </div>
@@ -3715,32 +3808,90 @@ function AIChat() {
                       </div>
                     )}
                     
-                    {question.response_type === 'text' && (
+                    {(question.response_type === 'text' || question.type === 'text') && (
                       <textarea 
-                        className="response-text" 
+                        className="text-response" 
                         rows="4" 
-                        placeholder="Type your answer..."
+                        placeholder="Share your thoughts... (optional)"
                         value={surveyResponses[question.id] || ''}
                         onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
                       />
+                    )}
+                    
+                    {(question.response_type === 'scale' || question.type === 'scale') && (
+                      <div className="scale-response">
+                        <div className="scale-labels">
+                          <span>1 - Poor</span>
+                          <span>10 - Excellent</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min="1" 
+                          max="10" 
+                          className="scale-slider"
+                          value={surveyResponses[question.id] || 5}
+                          onChange={(e) => updateSurveyResponse(question.id, parseInt(e.target.value))}
+                        />
+                        <div className="scale-value">{surveyResponses[question.id] || 5}</div>
+                      </div>
+                    )}
+                    
+                    {(question.response_type === 'yes_no' || question.type === 'yes_no') && (
+                      <div className="response-options">
+                        <label className="option-label">
+                          <input 
+                            type="radio" 
+                            name={question.id}
+                            value="yes"
+                            checked={surveyResponses[question.id] === 'yes'}
+                            onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                          />
+                          <span className="option-indicator"></span>
+                          <span className="option-text">Yes</span>
+                        </label>
+                        <label className="option-label">
+                          <input 
+                            type="radio" 
+                            name={question.id}
+                            value="no"
+                            checked={surveyResponses[question.id] === 'no'}
+                            onChange={(e) => updateSurveyResponse(question.id, e.target.value)}
+                          />
+                          <span className="option-indicator"></span>
+                          <span className="option-text">No</span>
+                        </label>
+                      </div>
                     )}
                   </div>
                 ))}
               </div>
               
-              <div className="survey-actions">
+              <div className="survey-actions-enhanced">
                 <button 
                   className="survey-btn secondary" 
                   onClick={closeSurveyTaking}
+                  disabled={isLoading}
                 >
-                  Close Survey
+                  Save & Close
                 </button>
                 <button 
                   className="survey-btn primary" 
                   onClick={submitSurvey}
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Submitting...' : 'Submit Survey'}
+                  {isLoading ? (
+                    <>
+                      <div className="loading-spinner"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Submit Survey
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -4211,10 +4362,19 @@ function AIChat() {
          
          .centered-step-header {
            display: flex;
-           flex-direction: column;
            align-items: center;
+           justify-content: center;
            gap: var(--space-3);
-           text-align: center;
+           padding: var(--space-3) var(--space-4);
+           background: rgba(255, 255, 255, 0.8);
+           border-radius: 12px;
+           border: 1px solid rgba(139, 92, 246, 0.1);
+         }
+         
+         .step-content {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
          }
          
          .step-icon-wrapper {
@@ -4428,6 +4588,30 @@ function AIChat() {
            display: flex;
            align-items: flex-start;
            gap: var(--space-4);
+         }
+         
+         .card-header-compact {
+           display: flex;
+           align-items: center;
+           gap: var(--space-2);
+           margin-bottom: var(--space-4);
+           padding: var(--space-2) var(--space-3);
+           background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(124, 58, 237, 0.02) 100%);
+           border-radius: 8px;
+           border-left: 3px solid rgba(139, 92, 246, 0.3);
+         }
+         
+         .card-header-compact h3 {
+           margin: 0;
+           font-size: 1.1em;
+           font-weight: 600;
+           color: var(--text-primary);
+         }
+         
+         .card-header-compact span {
+           font-size: 0.85em;
+           color: var(--text-secondary);
+           opacity: 0.8;
          }
          
          .header-icon {
