@@ -1792,6 +1792,18 @@ function AIChat() {
     }
   }
 
+  // Utility function to format question types for display
+  const formatQuestionType = (type) => {
+    const typeMap = {
+      'multiple_choice': 'Multiple Choice',
+      'multiple_select': 'Multiple Select',
+      'scale': 'Rating Scale',
+      'text': 'Open Text',
+      'yes_no': 'Yes/No'
+    }
+    return typeMap[type] || type
+  }
+
   // Parse AI responses for survey field updates
   const parseSurveyUpdatesFromResponse = (aiResponse, userRequest) => {
     try {
@@ -3582,118 +3594,158 @@ function AIChat() {
             </div>
           )}
           {canvasView === 'preview' && (
-            <div className="survey-preview-enhanced">
-              <div className="survey-preview-container">
-                {/* Centered Logo */}
-                <div className="survey-branding-centered">
+            <div className="survey-preview-modern">
+              {/* Modern Survey Header */}
+              <div className="preview-header-modern">
+                <div className="survey-branding">
                   <img 
                     src="/EncultureLogo.png" 
                     alt="enCulture Intelligence" 
-                    className="survey-logo-centered"
+                    className="survey-logo"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'block';
                     }}
                   />
-                  <div className="survey-logo-fallback-centered" style={{display: 'none'}}>
-                    <span className="logo-text-centered">enCulture</span>
+                  <div className="survey-logo-fallback" style={{display: 'none'}}>
+                    <span className="logo-text">enCulture</span>
                   </div>
                 </div>
                 
-                <div className="survey-header-centered">
-                  <h1 className="survey-title-centered">{surveyDraft.name || 'Untitled Survey'}</h1>
-                  <p className="survey-description-centered">{surveyDraft.context || 'Help us understand and improve our workplace culture through this brief survey.'}</p>
+                <div className="survey-overview">
+                  <h1 className="survey-title-modern">{surveyDraft.name || 'Untitled Survey'}</h1>
+                  <p className="survey-description-modern">{surveyDraft.context || 'Help us understand and improve our workplace culture through this brief survey.'}</p>
                   
-                  <div className="survey-progress-centered">
-                    <div className="progress-info-centered">
-                      <span>Question 1 of {(surveyDraft.questions || []).filter(q => q.text).length}</span>
+                  <div className="survey-stats-grid">
+                    <div className="stat-card">
+                      <span className="stat-number">{(surveyDraft.questions || []).filter(q => q.text && q.text.trim()).length}</span>
+                      <span className="stat-label">Questions</span>
                     </div>
-                    <div className="progress-bar-centered">
-                      <div className="progress-fill" style={{width: '0%'}}></div>
+                    <div className="stat-card">
+                      <span className="stat-number">~{Math.ceil(((surveyDraft.questions || []).filter(q => q.text && q.text.trim()).length * 45) / 60)}</span>
+                      <span className="stat-label">Minutes</span>
+                    </div>
+                    <div className="stat-card">
+                      <span className="stat-number">{(surveyDraft.classifiers || []).length}</span>
+                      <span className="stat-label">Categories</span>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div className="survey-questions">
-                {(surveyDraft.questions || []).filter(q => q.text).slice(0, 1).map((question, index) => (
-                  <div key={question.id || index} className="survey-question">
-                    <label className="question-label">
-                      {index + 1}. {question.text}
-                      {question.required && <span className="required">*</span>}
-                    </label>
-                    
-                    {question.type === 'multiple_choice' && (
-                      <div className="response-options">
-                        {(question.options || []).map((option, optIndex) => (
-                          <label key={optIndex} className="option-label">
-                            <input type="radio" name={`q${index}`} value={option} />
-                            <span className="option-text">{option}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                    
-                    {question.type === 'multiple_select' && (
-                      <div className="response-options">
-                        {(question.options || []).map((option, optIndex) => (
-                          <label key={optIndex} className="option-label">
-                            <input type="checkbox" value={option} />
-                            <span className="option-text">{option}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                    
-                    {question.type === 'scale' && (
-                      <div className="scale-response">
-                        <div className="scale-labels">
-                          <span>1 - Poor</span>
-                          <span>10 - Excellent</span>
+              {/* Modern Questions Preview */}
+              <div className="preview-content-modern">
+                {(surveyDraft.questions || []).filter(q => q.text && q.text.trim()).length === 0 ? (
+                  <div className="empty-state-modern">
+                    <div className="empty-icon">📝</div>
+                    <h3>No Questions Yet</h3>
+                    <p>Add questions in the Create tab to see them here</p>
+                    <button 
+                      className="empty-action-btn"
+                      onClick={() => {setCanvasView('wizard'); setSurveyStep(5)}}
+                    >
+                      Add Questions
+                    </button>
+                  </div>
+                ) : (
+                  <div className="questions-grid-modern">
+                    {(surveyDraft.questions || []).filter(q => q.text && q.text.trim()).map((question, index) => (
+                      <div key={question.id || index} className="question-card-modern">
+                        <div className="question-header-modern">
+                          <span className="question-number-modern">Q{index + 1}</span>
+                          <div className="question-meta-modern">
+                            <span className="question-type-modern">{formatQuestionType(question.type)}</span>
+                            {question.required && <span className="required-badge-modern">Required</span>}
+                          </div>
                         </div>
-                        <input 
-                          type="range" 
-                          min="1" 
-                          max="10" 
-                          className="scale-slider"
-                          defaultValue="5"
-                        />
-                        <div className="scale-value">5</div>
+                        
+                        <h4 className="question-text-modern">{question.text}</h4>
+                        
+                        <div className="question-preview-modern">
+                          {question.type === 'multiple_choice' && (
+                            <div className="options-preview-modern">
+                              {(question.options || []).slice(0, 3).map((option, optIndex) => (
+                                <div key={optIndex} className="option-preview-modern">
+                                  <div className="radio-preview"></div>
+                                  <span>{option}</span>
+                                </div>
+                              ))}
+                              {(question.options || []).length > 3 && (
+                                <div className="more-options-modern">+{(question.options || []).length - 3} more</div>
+                              )}
+                            </div>
+                          )}
+                          
+                          {question.type === 'multiple_select' && (
+                            <div className="options-preview-modern">
+                              {(question.options || []).slice(0, 3).map((option, optIndex) => (
+                                <div key={optIndex} className="option-preview-modern">
+                                  <div className="checkbox-preview"></div>
+                                  <span>{option}</span>
+                                </div>
+                              ))}
+                              {(question.options || []).length > 3 && (
+                                <div className="more-options-modern">+{(question.options || []).length - 3} more</div>
+                              )}
+                            </div>
+                          )}
+                          
+                          {question.type === 'scale' && (
+                            <div className="scale-preview-modern">
+                              <div className="scale-visual">
+                                <span>1</span>
+                                <div className="scale-track">
+                                  <div className="scale-thumb"></div>
+                                </div>
+                                <span>10</span>
+                              </div>
+                              <div className="scale-labels-modern">
+                                <span>Poor</span>
+                                <span>Excellent</span>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {question.type === 'text' && (
+                            <div className="text-preview-modern">
+                              <div className="text-area-placeholder">
+                                <span>Open text response area...</span>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {question.type === 'yes_no' && (
+                            <div className="yesno-preview-modern">
+                              <div className="option-preview-modern">
+                                <div className="radio-preview"></div>
+                                <span>Yes</span>
+                              </div>
+                              <div className="option-preview-modern">
+                                <div className="radio-preview"></div>
+                                <span>No</span>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    )}
-                    
-                    {question.type === 'text' && (
-                      <textarea 
-                        className="text-response" 
-                        rows="3" 
-                        placeholder="Share your thoughts..."
-                      />
-                    )}
-                    
-                    {question.type === 'yes_no' && (
-                      <div className="response-options">
-                        <label className="option-label">
-                          <input type="radio" name={`q${index}`} value="yes" />
-                          <span className="option-text">Yes</span>
-                        </label>
-                        <label className="option-label">
-                          <input type="radio" name={`q${index}`} value="no" />
-                          <span className="option-text">No</span>
-                        </label>
-                      </div>
-                    )}
-                </div>
-              ))}
-                
-                {(surveyDraft.questions || []).filter(q => q.text).length === 0 && (
-                  <div className="no-questions">
-                    <p>No questions added yet. Go back to step 5 to add survey questions.</p>
+                    ))}
                   </div>
                 )}
               </div>
               
-              <div className="survey-navigation-centered">
-                <button className="survey-nav-btn primary">Continue Survey</button>
+              {/* Preview Actions */}
+              <div className="preview-actions-modern">
+                <button 
+                  className="preview-action-btn secondary"
+                  onClick={() => setCanvasView('wizard')}
+                >
+                  <Edit3 size={16} />
+                  Edit Survey
+                </button>
+                <button className="preview-action-btn primary">
+                  <Send size={16} />
+                  Publish Survey
+                </button>
               </div>
               
             </div>
@@ -4941,7 +4993,353 @@ function AIChat() {
           color: var(--text-secondary);
         }
         
-        /* Preview Section Styling - Centered Layout */
+         /* Modern Preview Styling */
+        .survey-preview-modern {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          overflow-y: auto;
+          background: linear-gradient(135deg, 
+            rgba(248, 250, 252, 0.9) 0%, 
+            rgba(255, 255, 255, 0.95) 100%);
+        }
+
+        .preview-header-modern {
+          padding: var(--space-6);
+          background: white;
+          border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .survey-overview {
+          max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .survey-title-modern {
+          font-size: 2.25em;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: var(--space-3);
+          line-height: 1.2;
+        }
+
+        .survey-description-modern {
+          font-size: 1.1em;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          margin-bottom: var(--space-6);
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .survey-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: var(--space-4);
+          max-width: 400px;
+          margin: 0 auto;
+        }
+
+        .stat-card {
+          background: rgba(139, 92, 246, 0.05);
+          border: 1px solid rgba(139, 92, 246, 0.15);
+          border-radius: 12px;
+          padding: var(--space-4);
+          text-align: center;
+          transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+          background: rgba(139, 92, 246, 0.08);
+          transform: translateY(-1px);
+        }
+
+        .stat-number {
+          display: block;
+          font-size: 1.8em;
+          font-weight: 700;
+          color: rgba(139, 92, 246, 0.9);
+          line-height: 1;
+        }
+
+        .stat-label {
+          font-size: 0.85em;
+          color: var(--text-secondary);
+          font-weight: 500;
+          margin-top: 4px;
+        }
+
+        .preview-content-modern {
+          flex: 1;
+          padding: var(--space-6);
+          max-width: 900px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        .empty-state-modern {
+          text-align: center;
+          padding: var(--space-8) var(--space-4);
+          background: white;
+          border-radius: 16px;
+          border: 1px solid rgba(226, 232, 240, 0.6);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-icon {
+          font-size: 3em;
+          margin-bottom: var(--space-4);
+          opacity: 0.6;
+        }
+
+        .empty-state-modern h3 {
+          font-size: 1.5em;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: var(--space-2);
+        }
+
+        .empty-state-modern p {
+          color: var(--text-secondary);
+          margin-bottom: var(--space-5);
+        }
+
+        .empty-action-btn {
+          background: rgba(139, 92, 246, 0.9);
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .empty-action-btn:hover {
+          background: rgba(139, 92, 246, 1);
+          transform: translateY(-1px);
+        }
+
+        .questions-grid-modern {
+          display: grid;
+          gap: var(--space-5);
+        }
+
+        .question-card-modern {
+          background: white;
+          border: 1px solid rgba(226, 232, 240, 0.6);
+          border-radius: 16px;
+          padding: var(--space-5);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+          transition: all 0.3s ease;
+        }
+
+        .question-card-modern:hover {
+          box-shadow: 0 8px 24px rgba(139, 92, 246, 0.1);
+          border-color: rgba(139, 92, 246, 0.3);
+          transform: translateY(-2px);
+        }
+
+        .question-header-modern {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: var(--space-3);
+        }
+
+        .question-number-modern {
+          background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(124, 58, 237, 0.9));
+          color: white;
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-weight: 700;
+          font-size: 0.9em;
+          letter-spacing: 0.5px;
+        }
+
+        .question-meta-modern {
+          display: flex;
+          gap: var(--space-2);
+          align-items: center;
+        }
+
+        .question-type-modern {
+          background: rgba(34, 197, 94, 0.1);
+          color: rgba(34, 197, 94, 0.8);
+          padding: 4px 8px;
+          border-radius: 6px;
+          font-size: 0.75em;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .required-badge-modern {
+          background: rgba(239, 68, 68, 0.1);
+          color: rgba(239, 68, 68, 0.8);
+          padding: 4px 8px;
+          border-radius: 6px;
+          font-size: 0.75em;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+
+        .question-text-modern {
+          font-size: 1.1em;
+          font-weight: 600;
+          color: var(--text-primary);
+          line-height: 1.4;
+          margin-bottom: var(--space-4);
+        }
+
+        .question-preview-modern {
+          padding-top: var(--space-3);
+          border-top: 1px solid rgba(226, 232, 240, 0.4);
+        }
+
+        .options-preview-modern {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-2);
+        }
+
+        .option-preview-modern {
+          display: flex;
+          align-items: center;
+          gap: var(--space-2);
+          padding: 8px 0;
+          font-size: 0.9em;
+          color: var(--text-secondary);
+        }
+
+        .radio-preview, .checkbox-preview {
+          width: 16px;
+          height: 16px;
+          border: 2px solid rgba(139, 92, 246, 0.3);
+          background: rgba(139, 92, 246, 0.05);
+          flex-shrink: 0;
+        }
+
+        .radio-preview {
+          border-radius: 50%;
+        }
+
+        .checkbox-preview {
+          border-radius: 3px;
+        }
+
+        .more-options-modern {
+          font-size: 0.8em;
+          color: rgba(139, 92, 246, 0.7);
+          font-style: italic;
+          margin-top: 4px;
+        }
+
+        .scale-preview-modern {
+          padding: var(--space-3) 0;
+        }
+
+        .scale-visual {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          margin-bottom: var(--space-2);
+        }
+
+        .scale-track {
+          flex: 1;
+          height: 6px;
+          background: rgba(226, 232, 240, 0.6);
+          border-radius: 3px;
+          position: relative;
+        }
+
+        .scale-thumb {
+          position: absolute;
+          left: 40%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 16px;
+          height: 16px;
+          background: rgba(139, 92, 246, 0.9);
+          border-radius: 50%;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .scale-labels-modern {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.8em;
+          color: var(--text-secondary);
+        }
+
+        .text-preview-modern {
+          padding: var(--space-3) 0;
+        }
+
+        .text-area-placeholder {
+          background: rgba(248, 250, 252, 0.8);
+          border: 1px solid rgba(226, 232, 240, 0.6);
+          border-radius: 8px;
+          padding: var(--space-3);
+          color: var(--text-muted);
+          font-style: italic;
+          font-size: 0.9em;
+        }
+
+        .yesno-preview-modern {
+          display: flex;
+          gap: var(--space-4);
+        }
+
+        .preview-actions-modern {
+          padding: var(--space-5) var(--space-6);
+          background: white;
+          border-top: 1px solid rgba(226, 232, 240, 0.6);
+          display: flex;
+          justify-content: center;
+          gap: var(--space-3);
+        }
+
+        .preview-action-btn {
+          display: flex;
+          align-items: center;
+          gap: var(--space-2);
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          font-size: 0.9em;
+        }
+
+        .preview-action-btn.secondary {
+          background: rgba(248, 250, 252, 0.9);
+          color: var(--text-secondary);
+          border: 1px solid rgba(226, 232, 240, 0.6);
+        }
+
+        .preview-action-btn.secondary:hover {
+          background: rgba(226, 232, 240, 0.3);
+          border-color: rgba(139, 92, 246, 0.3);
+          color: var(--text-primary);
+        }
+
+        .preview-action-btn.primary {
+          background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(124, 58, 237, 0.9));
+          color: white;
+          border: none;
+        }
+
+        .preview-action-btn.primary:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Legacy Preview Styles (for backward compatibility) */
         .survey-branding-centered {
           text-align: center;
           margin-bottom: var(--space-6);
