@@ -2974,7 +2974,7 @@
     "title": "Culture Intelligence Support Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-08T04:26:32.817764",
-    "updated_at": "2025-09-08T05:16:53.612868",
+    "updated_at": "2025-09-08T05:31:11.821607",
     "messages": [
       {
         "id": "d8056ae4-c2e0-4906-9de9-687654c47df8",
@@ -2987,6 +2987,18 @@
         "role": "assistant",
         "content": "Hello! I'm here and ready to help you analyze and optimize culture data. How can I support your culture intelligence work today? If you have survey results, engagement metrics, or specific culture questions, just let me know. ",
         "timestamp": "2025-09-08T05:16:52.701712"
+      },
+      {
+        "id": "a9313c8d-6fb1-448c-984c-c8fdb8d120ad",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-08T05:31:07.040783"
+      },
+      {
+        "id": "c0e86b43-f557-473b-9afe-026b7bfd202c",
+        "role": "assistant",
+        "content": "Doing well \u2014 thanks for checking in! I'm ready to help with any culture work you have. Would you like to: - Analyze survey results or engagement metrics (paste numbers or a CSV) - Draft communications or manager talking points - Identify top culture risks from recent feedback - Build an action plan with prioritized interventions - Run a quick pulse survey or question set Tell me which one (or describe your situation) and I'll get started. ",
+        "timestamp": "2025-09-08T05:31:11.821563"
       }
     ],
     "is_active": true
@@ -3119,6 +3131,28 @@
         "role": "assistant",
         "content": "Hello! \ud83d\udc4b As the Culture Intelligence Assistant, I'm here to help you analyze, interpret, and act on your company's culture data. How can I assist you today? Are you looking for insights on recent survey results, team dynamics, or ways to improve your organizational culture? Let me know how you'd like to get started! ",
         "timestamp": "2025-09-08T05:16:38.561286"
+      }
+    ],
+    "is_active": true
+  },
+  "27f33065-724a-4d59-9762-235b93f65c48": {
+    "id": "27f33065-724a-4d59-9762-235b93f65c48",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:30:44.210034",
+    "updated_at": "2025-09-08T05:30:54.467918",
+    "messages": [
+      {
+        "id": "d76da810-bc1d-4b05-8fa0-58daf693daa3",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:30:44.273900"
+      },
+      {
+        "id": "fd98defd-c509-4771-a479-5bb350bb0b63",
+        "role": "assistant",
+        "content": "Hi \u2014 great to meet you. I'm Enculture's Culture Intelligence Assistant. How can I help today? Here are some common ways I can support you (pick one or tell me something else): - Analyze survey results (eNPS, engagement, pulse) \u2014 I can identify trends, strengths, and risks. - Interpret open-text feedback \u2014 thematic coding, sentiment, sample quotes. - Build an action plan \u2014 prioritized interventions, owners, and metrics. - Manager coaching templates \u2014 one-on-one guides, conversation scripts. - Benchmarking & best practices \u2014 latest research and trends (I'll look these up). If you want analysis, please share: - The dataset or key metrics (CSV, Excel, or pasted summary). - Survey date range and sample size. - Any specific concerns or goals (e.g., reduce attrition, improve trust). Note: don't include personally identifiable information \u2014 anonymized or aggregated data works best. What would you like to start with? ",
+        "timestamp": "2025-09-08T05:30:54.467850"
       }
     ],
     "is_active": true

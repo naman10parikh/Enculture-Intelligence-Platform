@@ -6,6 +6,7 @@ import Insights from './components/Insights'
 import Actions from './components/Actions'
 import SafeSpace from './components/SafeSpace'
 import { UserProvider } from './context/UserContext'
+import { PersonaProvider } from './context/PersonaContext'
 import './styles/App.css'
 
 function App() {
@@ -13,23 +14,25 @@ function App() {
 
   return (
     <UserProvider>
-      <Router>
-        <div className="app">
-          <Sidebar 
-            activeSection={activeSection} 
-            setActiveSection={setActiveSection}
-          />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<AIChat />} />
-              <Route path="/chat" element={<AIChat />} />
-              <Route path="/insights" element={<Insights />} />
-              <Route path="/actions" element={<Actions />} />
-              <Route path="/safespace" element={<SafeSpace />} />
-            </Routes>
-          </main>
-        </div>
-      </Router>
+      <PersonaProvider>
+        <Router>
+          <div className="app">
+            <Sidebar 
+              activeSection={activeSection} 
+              setActiveSection={setActiveSection}
+            />
+            <main className="main-content">
+              <Routes>
+                <Route path="/" element={<AIChat />} />
+                <Route path="/chat" element={<AIChat />} />
+                <Route path="/insights" element={<Insights />} />
+                <Route path="/actions" element={<Actions />} />
+                <Route path="/safespace" element={<SafeSpace />} />
+              </Routes>
+            </main>
+          </div>
+        </Router>
+      </PersonaProvider>
     </UserProvider>
   )
 }
