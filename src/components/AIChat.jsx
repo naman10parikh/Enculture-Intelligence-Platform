@@ -1725,7 +1725,7 @@ function AIChat() {
     } else if (selectedClassifiers.length === 2) {
       const secondaryClassifier = selectedClassifiers[1]?.toLowerCase().replace(/\s+/g, '_')
       return `cross_analysis(avg(responses), ${primaryClassifier}_vs_${secondaryClassifier})`
-    } else {
+            } else {
       return `multi_dimensional_analysis(responses, [${selectedClassifiers.map(c => c.toLowerCase().replace(/\s+/g, '_')).join(', ')}])`
     }
   }
@@ -1810,7 +1810,7 @@ function AIChat() {
           formula = `culture_health_score(avg(responses), segment_variance(${primaryClassifier}))`
         } else if (descLower.includes('communication')) {
           formula = `communication_effectiveness(avg(responses), cross_${primaryClassifier}_correlation)`
-        } else {
+      } else {
           formula = `insight_metric(weighted_avg(responses, ${primaryClassifier}_weights))`
         }
       } else {
@@ -2408,7 +2408,7 @@ function AIChat() {
                           <div className="step-icon-title-row">
                             <Icon size={18} />
                             <h2 className="step-title-minimal">{stepInfo.label}</h2>
-                          </div>
+                            </div>
                           <div className="step-explanation">
                             <em>{stepInfo.desc}</em>
                           </div>
@@ -2447,7 +2447,7 @@ function AIChat() {
                           e.target.style.height = e.target.scrollHeight + 'px';
                         }}
                       />
-                      <button 
+                        <button 
                         className="minimal-enhance-btn"
                         onClick={async () => {
                           try {
@@ -2476,10 +2476,10 @@ function AIChat() {
                         disabled={!surveyDraft.name?.trim()}
                       >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
                         Enhance with AI
-                      </button>
+                        </button>
                     </div>
                   </div>
                 )}
@@ -2488,10 +2488,10 @@ function AIChat() {
                   <div className="minimal-step-container">
                     <div className="field-group">
                       <label className="field-label-emphatic">Survey Context</label>
-                      <textarea
+                          <textarea
                         className="minimal-textarea"
-                        value={surveyDraft.context}
-                        onChange={e => setSurveyDraft(prev => ({ ...prev, context: e.target.value }))}
+                            value={surveyDraft.context}
+                            onChange={e => setSurveyDraft(prev => ({ ...prev, context: e.target.value }))}
                         placeholder="Describe what you want to learn from this survey..."
                         rows={4}
                       />
@@ -2520,7 +2520,7 @@ function AIChat() {
                         </svg>
                         Enhance with AI
                       </button>
-                        </div>
+                          </div>
                         
                       <div className="field-group">
                         <label className="field-label-emphatic">Desired Outcomes</label>
@@ -2552,16 +2552,16 @@ function AIChat() {
                                 </button>
                             </div>
                           ))}
-                            <button
-                              className="modern-add-btn"
-                              onClick={() => {
-                                const updated = [...(surveyDraft.desiredOutcomes || []), '']
-                                setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
-                              }}
-                            >
-                              <Plus size={16} />
-                                <span>Add New Outcome</span>
-                            </button>
+                          <button
+                            className="modern-add-btn"
+                            onClick={() => {
+                              const updated = [...(surveyDraft.desiredOutcomes || []), '']
+                              setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updated }))
+                            }}
+                          >
+                            <Plus size={16} />
+                              <span>Add New Outcome</span>
+                          </button>
                             
                             <button 
                               className="minimal-enhance-btn"
@@ -2594,12 +2594,12 @@ function AIChat() {
                               disabled={!surveyDraft.context?.trim()}
                             >
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
                               Enhance with AI
                             </button>
-                        </div>
                       </div>
+                    </div>
                   </div>
                 )}
 
@@ -2715,8 +2715,8 @@ function AIChat() {
                           }}
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
                           Enhance with AI
                         </button>
                             </div>
@@ -2816,17 +2816,17 @@ function AIChat() {
                               </div>
                             ))}
                             
-                        <button
+                            <button
                           className="add-btn-minimal"
-                          onClick={() => {
+                              onClick={() => {
                             const updated = [...(surveyDraft.metrics || []), { name: '', description: '', formula: '', selectedClassifiers: [] }]
-                            setSurveyDraft(prev => ({ ...prev, metrics: updated }))
-                          }}
-                        >
+                                setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                              }}
+                            >
                           <Plus size={14} />
                           Add Metric
-                        </button>
-                      </div>
+                            </button>
+                          </div>
                     </div>
                   </div>
                 )}
@@ -2835,7 +2835,7 @@ function AIChat() {
                   <div className="minimal-step-container">
                     <div className="questions-section">
                       <div className="questions-list">
-                        {(surveyDraft.questions || [{ text: '', type: 'multiple_choice', required: false, options: [''] }]).map((question, index) => (
+                            {(surveyDraft.questions || [{ text: '', type: 'multiple_choice', required: false, options: [''] }]).map((question, index) => (
                           <div key={index} className="question-card">
                                 <div className="question-card-header">
                                   <div className="question-drag-handle">
@@ -2904,11 +2904,11 @@ function AIChat() {
                                 className="modern-select"
                                 value={question.type}
                                 onChange={(e) => {
-                                  const updated = [...(surveyDraft.questions || [])]
+                                          const updated = [...(surveyDraft.questions || [])]
                                   updated[index] = { ...updated[index], type: e.target.value }
-                                  setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                                }}
-                              >
+                                          setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                        }}
+                                      >
                                 <option value="multiple_choice">◉ Multiple Choice</option>
                                 <option value="scale">⭐ Rating Scale</option>
                                 <option value="likert">📊 Likert Scale</option>
@@ -2916,7 +2916,7 @@ function AIChat() {
                                 <option value="yes_no">✓ Yes/No</option>
                                 <option value="multiple_select">☑️ Multiple Select</option>
                               </select>
-                            </div>
+                                  </div>
                                 </div>
                                 
                                 {(question.type === 'multiple_choice' || question.type === 'multiple_select') && (
@@ -2979,20 +2979,20 @@ function AIChat() {
                                   <div className="analytics-selectors">
                                     <div className="analytics-selector">
                                       <label>Link to Metric</label>
-                              <select
-                                value={question.linkedMetric || ''}
-                              onChange={e => {
-                                const updated = [...(surveyDraft.questions || [])]
-                                  updated[index] = { ...updated[index], linkedMetric: e.target.value }
-                                setSurveyDraft(prev => ({ ...prev, questions: updated }))
-                              }}
+                                      <select 
+                                        value={question.linkedMetric || ''}
+                                      onChange={e => {
+                                        const updated = [...(surveyDraft.questions || [])]
+                                          updated[index] = { ...updated[index], linkedMetric: e.target.value }
+                                        setSurveyDraft(prev => ({ ...prev, questions: updated }))
+                                      }}
                                 className="modern-select full-width"
-                              >
-                                <option value="">Choose metric...</option>
-                                {(surveyDraft.metrics || []).filter(m => m.name).map(metric => (
-                                  <option key={metric.name} value={metric.name}>{metric.name}</option>
-                                ))}
-                              </select>
+                                      >
+                                        <option value="">Choose metric...</option>
+                                        {(surveyDraft.metrics || []).filter(m => m.name).map(metric => (
+                                          <option key={metric.name} value={metric.name}>{metric.name}</option>
+                                        ))}
+                                      </select>
                                     </div>
                                     
                                     <div className="analytics-selector">
@@ -3075,11 +3075,11 @@ function AIChat() {
                               }}
                             >
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
                               Enhance with AI
                             </button>
-                          </div>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -3087,7 +3087,7 @@ function AIChat() {
                 {surveyStep === 6 && (
                   <div className="minimal-step-container">
                     <div className="config-section">
-                      {/* Appearance Section */}
+                          {/* Appearance Section */}
                       <div className="config-group">
                         <label className="field-label-emphatic">Background Image</label>
                             <div className="config-grid">
@@ -3331,122 +3331,122 @@ function AIChat() {
                     <div className="publish-section">
                       {/* Primary Publish Action */}
                       <div className="publish-primary">
-                        <button 
+                                <button 
                           className="primary-publish-btn"
-                          onClick={async () => {
-                            try {
-                              const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
-                              if (selectedEmployees.length === 0) {
-                                addNotification('Please select at least one recipient', 'error')
-                                return
-                              }
-                              
-                              setIsLoading(true)
-                              
-                              // Simulate publishing
-                              await new Promise(resolve => setTimeout(resolve, 2000))
-                              
-                              const publishedSurvey = {
-                                ...surveyDraft,
-                                id: `published_${Date.now()}`,
-                                status: 'published',
-                                publishedAt: new Date().toISOString(),
-                                recipients: selectedEmployees
-                              }
-                              
-                              // Clear the current draft
-                              clearSavedDraft()
-                              
-                              addNotification(`Survey published to ${selectedEmployees.length} recipients!`, 'success')
-                              setCanvasOpen(false)
-                            } catch (error) {
-                              addNotification('Failed to publish survey', 'error')
-                              console.error('Publishing error:', error)
-                            } finally {
-                              setIsLoading(false)
-                            }
-                          }}
-                          disabled={isLoading || (surveyDraft.configuration?.selectedEmployees || []).length === 0}
-                        >
+                                  onClick={async () => {
+                                    try {
+                                      const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
+                                      if (selectedEmployees.length === 0) {
+                                        addNotification('Please select at least one recipient', 'error')
+                                        return
+                                      }
+                                      
+                                      setIsLoading(true)
+                                      
+                                      // Simulate publishing
+                                      await new Promise(resolve => setTimeout(resolve, 2000))
+                                      
+                                      const publishedSurvey = {
+                                        ...surveyDraft,
+                                        id: `published_${Date.now()}`,
+                                        status: 'published',
+                                        publishedAt: new Date().toISOString(),
+                                        recipients: selectedEmployees
+                                      }
+                                      
+                                      // Clear the current draft
+                                      clearSavedDraft()
+                                      
+                                      addNotification(`Survey published to ${selectedEmployees.length} recipients!`, 'success')
+                                      setCanvasOpen(false)
+                                    } catch (error) {
+                                      addNotification('Failed to publish survey', 'error')
+                                      console.error('Publishing error:', error)
+                                    } finally {
+                                      setIsLoading(false)
+                                    }
+                                  }}
+                                  disabled={isLoading || (surveyDraft.configuration?.selectedEmployees || []).length === 0}
+                                >
                           Publish Survey Now
-                        </button>
-                      </div>
+                                </button>
+                              </div>
 
                       
                       {/* Additional Options */}
                       <div className="publish-options">
                         <div className="schedule-option">
                           <label className="field-label">Schedule for Later</label>
-                          <div className="schedule-controls">
-                            <input
-                              type="datetime-local"
-                              value={surveyDraft.configuration?.scheduledPublishDate || ''}
-                              onChange={e => setSurveyDraft(prev => ({
-                                ...prev,
-                                configuration: {
-                                  ...prev.configuration,
-                                  scheduledPublishDate: e.target.value
-                                }
-                              }))}
+                                <div className="schedule-controls">
+                                  <input
+                                    type="datetime-local"
+                                    value={surveyDraft.configuration?.scheduledPublishDate || ''}
+                                    onChange={e => setSurveyDraft(prev => ({
+                                      ...prev,
+                                      configuration: {
+                                        ...prev.configuration,
+                                        scheduledPublishDate: e.target.value
+                                      }
+                                    }))}
                               className="minimal-input"
-                            />
-                            <button 
+                                  />
+                                  <button 
                               className="secondary-btn"
-                              onClick={async () => {
-                                const scheduleDate = surveyDraft.configuration?.scheduledPublishDate
-                                const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
-                                
-                                if (!scheduleDate) {
-                                  addNotification('Please select a publishing date', 'error')
-                                  return
-                                }
-                                
-                                if (selectedEmployees.length === 0) {
-                                  addNotification('Please select at least one recipient', 'error')
-                                  return
-                                }
-                                
-                                try {
-                                  setIsLoading(true)
-                                  
-                                  await new Promise(resolve => setTimeout(resolve, 1500))
-                                  
-                                  const scheduledSurvey = {
-                                    ...surveyDraft,
-                                    id: `scheduled_${Date.now()}`,
-                                    status: 'scheduled',
-                                    scheduledFor: scheduleDate,
-                                    recipients: selectedEmployees
-                                  }
-                                  
-                                  clearSavedDraft()
-                                  addNotification(`Survey scheduled for ${new Date(scheduleDate).toLocaleString()}`, 'success')
-                                  setCanvasOpen(false)
-                                } catch (error) {
-                                  addNotification('Failed to schedule survey', 'error')
-                                } finally {
-                                  setIsLoading(false)
-                                }
-                              }}
-                              disabled={isLoading || !surveyDraft.configuration?.scheduledPublishDate || (surveyDraft.configuration?.selectedEmployees || []).length === 0}
-                            >
-                              Schedule Survey
-                            </button>
-                          </div>
-                        </div>
+                                    onClick={async () => {
+                                      const scheduleDate = surveyDraft.configuration?.scheduledPublishDate
+                                      const selectedEmployees = surveyDraft.configuration?.selectedEmployees || []
+                                      
+                                      if (!scheduleDate) {
+                                        addNotification('Please select a publishing date', 'error')
+                                        return
+                                      }
+                                      
+                                      if (selectedEmployees.length === 0) {
+                                        addNotification('Please select at least one recipient', 'error')
+                                        return
+                                      }
+                                      
+                                      try {
+                                        setIsLoading(true)
+                                        
+                                        await new Promise(resolve => setTimeout(resolve, 1500))
+                                        
+                                        const scheduledSurvey = {
+                                          ...surveyDraft,
+                                          id: `scheduled_${Date.now()}`,
+                                          status: 'scheduled',
+                                          scheduledFor: scheduleDate,
+                                          recipients: selectedEmployees
+                                        }
+                                        
+                                        clearSavedDraft()
+                                        addNotification(`Survey scheduled for ${new Date(scheduleDate).toLocaleString()}`, 'success')
+                                        setCanvasOpen(false)
+                                      } catch (error) {
+                                        addNotification('Failed to schedule survey', 'error')
+                                      } finally {
+                                        setIsLoading(false)
+                                      }
+                                    }}
+                                    disabled={isLoading || !surveyDraft.configuration?.scheduledPublishDate || (surveyDraft.configuration?.selectedEmployees || []).length === 0}
+                                  >
+                                    Schedule Survey
+                                  </button>
+                                </div>
+                              </div>
 
                         <div className="save-option-centered">
-                          <button 
+                                <button 
                             className="tertiary-btn-centered"
-                            onClick={async () => {
-                              await saveSurveyDraft(surveyDraft)
-                            }}
-                            disabled={isLoading}
-                          >
-                            Save Draft
-                          </button>
-                        </div>
-                      </div>
+                                  onClick={async () => {
+                                    await saveSurveyDraft(surveyDraft)
+                                  }}
+                                  disabled={isLoading}
+                                >
+                                  Save Draft
+                                </button>
+                            </div>
+                          </div>
 
                       
                       {/* Recipients Summary */}
@@ -3456,35 +3456,11 @@ function AIChat() {
                             ? `Ready to send to ${(surveyDraft.configuration?.selectedEmployees || []).length} recipients`
                             : 'No recipients selected - go back to step 6'}
                         </p>
-                      </div>
-                    </div>
+                                  </div>
+                            </div>
                   </div>
                 )}
 
-                {/* Navigation */}
-                <div className="wizard-navigation">
-                  <button
-                    className="nav-btn secondary"
-                    onClick={prevStep}
-                    disabled={surveyStep === 1}
-                  >
-                    <ArrowLeft size={16} />
-                    Previous
-                  </button>
-                  
-                  <div className="step-indicator">
-                    Step {surveyStep} of 7
-                  </div>
-                  
-                  <button
-                    className="nav-btn primary"
-                    onClick={nextStep}
-                    disabled={surveyStep === 7}
-                  >
-                    Next
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
               </div>
             </div>
           )}
@@ -4276,6 +4252,8 @@ function AIChat() {
            height: 100%;
            display: flex;
            flex-direction: column;
+           width: 100%;
+           min-height: calc(100vh - 200px); /* Ensure proper height accounting for static footer */
          }
          
          .wizard-progress {
@@ -4307,8 +4285,8 @@ function AIChat() {
         }
         
         .minimal-step-header {
-          display: flex;
-          flex-direction: column;
+           display: flex;
+           flex-direction: column;
           align-items: center;
           justify-content: center;
           text-align: center;
@@ -4318,8 +4296,8 @@ function AIChat() {
         
         .step-icon-title-row {
           display: flex;
-          align-items: center;
-          gap: var(--space-3);
+           align-items: center;
+           gap: var(--space-3);
           margin-bottom: var(--space-2);
         }
         
@@ -4332,8 +4310,8 @@ function AIChat() {
         
         .minimal-step-container {
           padding: 0;
-          max-width: 600px;
-          margin: 0 auto;
+          width: 100%; /* Use full width instead of max-width constraint */
+          margin: 0;
         }
         
         .field-group {
@@ -4734,8 +4712,8 @@ function AIChat() {
         }
         
         .publish-primary {
-          text-align: center;
-        }
+           text-align: center;
+         }
         
         .primary-publish-btn {
           display: flex;
@@ -5120,7 +5098,7 @@ function AIChat() {
          .wizard-content {
            flex: 1;
            overflow-y: auto;
-           padding: var(--space-4);
+           padding: var(--space-4) var(--space-4) 120px var(--space-4); /* Add bottom padding for static footer */
            display: flex;
            flex-direction: column;
          }
@@ -5594,7 +5572,7 @@ function AIChat() {
           font-size: 1.1em;
           font-weight: 600;
           border: 2px solid rgba(139, 92, 246, 0.2);
-          border-radius: 8px;
+           border-radius: 8px;
           background: white;
           margin-bottom: var(--space-3);
           transition: all 0.2s ease;
@@ -5611,7 +5589,7 @@ function AIChat() {
         }
         
         .classifier-values-list {
-          display: flex;
+           display: flex;
           flex-direction: column;
           gap: var(--space-2);
         }
