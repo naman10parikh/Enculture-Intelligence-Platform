@@ -81,6 +81,9 @@ function AIChat() {
       fontFamily: 'Inter'
     }
   })
+
+  // State for interactive preview responses
+  const [previewResponses, setPreviewResponses] = useState({})
   
   // Chat thread management state
   const [currentThreadId, setCurrentThreadId] = useState(null)
@@ -1658,7 +1661,7 @@ function AIChat() {
           timestamp: new Date()
         }
         setMessages(prev => [...prev, successMessage])
-      } else {
+            } else {
         // Add error message to chat
         const errorMessage = {
           id: `ai-${Date.now()}`,
@@ -1802,6 +1805,28 @@ function AIChat() {
       'yes_no': 'Yes/No'
     }
     return typeMap[type] || type
+  }
+
+  // Handle preview question responses
+  const handlePreviewResponse = (questionId, value) => {
+    setPreviewResponses(prev => ({
+      ...prev,
+      [questionId]: value
+    }))
+  }
+
+  // Handle multiple select responses in preview
+  const handlePreviewMultiSelect = (questionId, option) => {
+    setPreviewResponses(prev => {
+      const currentSelections = prev[questionId] || []
+      const newSelections = currentSelections.includes(option)
+        ? currentSelections.filter(item => item !== option)
+        : [...currentSelections, option]
+      return {
+        ...prev,
+        [questionId]: newSelections
+      }
+    })
   }
 
   // Parse AI responses for survey field updates
@@ -2651,8 +2676,8 @@ function AIChat() {
                           disabled={!surveyDraft.name?.trim()}
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
                           Enhance with AI
                         </button>
                       </div>
@@ -2697,8 +2722,8 @@ function AIChat() {
                           </svg>
                           Enhance with AI
                         </button>
-                      </div>
                           </div>
+                        </div>
                         
                       <div className="field-group">
                         <label className="field-label-emphatic">Desired Outcomes</label>
@@ -2863,7 +2888,7 @@ function AIChat() {
                             </svg>
                           Enhance with AI
                         </button>
-                        </div>
+                            </div>
                             </div>
                     </div>
                   </div>
@@ -3207,7 +3232,7 @@ function AIChat() {
                             </svg>
                                 Enhance with AI
                               </button>
-                            </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3587,12 +3612,12 @@ function AIChat() {
                         </p>
                                   </div>
                             </div>
-                  </div>
+                                </div>
                 )}
 
               </div>
-            </div>
-          )}
+                              </div>
+                            )}
           {canvasView === 'preview' && (
             <div className="survey-preview-modern">
               {/* Modern Survey Header */}
@@ -3610,28 +3635,27 @@ function AIChat() {
                   <div className="survey-logo-fallback" style={{display: 'none'}}>
                     <span className="logo-text">enCulture</span>
                   </div>
-                </div>
-                
+                          </div>
+
                 <div className="survey-overview">
                   <h1 className="survey-title-modern">{surveyDraft.name || 'Untitled Survey'}</h1>
-                  <p className="survey-description-modern">{surveyDraft.context || 'Help us understand and improve our workplace culture through this brief survey.'}</p>
                   
                   <div className="survey-stats-grid">
                     <div className="stat-card">
                       <span className="stat-number">{(surveyDraft.questions || []).filter(q => q.text && q.text.trim()).length}</span>
                       <span className="stat-label">Questions</span>
-                    </div>
+                            </div>
                     <div className="stat-card">
                       <span className="stat-number">~{Math.ceil(((surveyDraft.questions || []).filter(q => q.text && q.text.trim()).length * 45) / 60)}</span>
                       <span className="stat-label">Minutes</span>
-                    </div>
+                          </div>
                     <div className="stat-card">
                       <span className="stat-number">{(surveyDraft.classifiers || []).length}</span>
                       <span className="stat-label">Categories</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
               
               {/* Modern Questions Preview */}
               <div className="preview-content-modern">
@@ -3640,12 +3664,12 @@ function AIChat() {
                     <div className="empty-icon">📝</div>
                     <h3>No Questions Yet</h3>
                     <p>Add questions in the Create tab to see them here</p>
-                    <button 
+                  <button
                       className="empty-action-btn"
                       onClick={() => {setCanvasView('wizard'); setSurveyStep(5)}}
-                    >
+                  >
                       Add Questions
-                    </button>
+                  </button>
                   </div>
                 ) : (
                   <div className="questions-grid-modern">
@@ -3656,48 +3680,63 @@ function AIChat() {
                           <div className="question-meta-modern">
                             <span className="question-type-modern">{formatQuestionType(question.type)}</span>
                             {question.required && <span className="required-badge-modern">Required</span>}
-                          </div>
-                        </div>
-                        
+                </div>
+              </div>
+              
                         <h4 className="question-text-modern">{question.text}</h4>
                         
-                        <div className="question-preview-modern">
+                        <div className="question-interactive-modern">
                           {question.type === 'multiple_choice' && (
-                            <div className="options-preview-modern">
-                              {(question.options || []).slice(0, 3).map((option, optIndex) => (
-                                <div key={optIndex} className="option-preview-modern">
-                                  <div className="radio-preview"></div>
-                                  <span>{option}</span>
-                                </div>
+                            <div className="options-interactive-modern">
+                              {(question.options || []).map((option, optIndex) => (
+                                <label key={optIndex} className="option-interactive-modern">
+                                  <input 
+                                    type="radio" 
+                                    name={`preview_q_${question.id || index}`}
+                                    value={option}
+                                    checked={previewResponses[question.id || index] === option}
+                                    onChange={(e) => handlePreviewResponse(question.id || index, e.target.value)}
+                                  />
+                                  <span className="option-indicator"></span>
+                                  <span className="option-text">{option}</span>
+                                </label>
                               ))}
-                              {(question.options || []).length > 3 && (
-                                <div className="more-options-modern">+{(question.options || []).length - 3} more</div>
-                              )}
                             </div>
                           )}
                           
                           {question.type === 'multiple_select' && (
-                            <div className="options-preview-modern">
-                              {(question.options || []).slice(0, 3).map((option, optIndex) => (
-                                <div key={optIndex} className="option-preview-modern">
-                                  <div className="checkbox-preview"></div>
-                                  <span>{option}</span>
-                                </div>
+                            <div className="options-interactive-modern">
+                              {(question.options || []).map((option, optIndex) => (
+                                <label key={optIndex} className="option-interactive-modern">
+                                  <input 
+                                    type="checkbox" 
+                                    value={option}
+                                    checked={(previewResponses[question.id || index] || []).includes(option)}
+                                    onChange={() => handlePreviewMultiSelect(question.id || index, option)}
+                                  />
+                                  <span className="option-indicator checkbox"></span>
+                                  <span className="option-text">{option}</span>
+                                </label>
                               ))}
-                              {(question.options || []).length > 3 && (
-                                <div className="more-options-modern">+{(question.options || []).length - 3} more</div>
-                              )}
                             </div>
                           )}
                           
                           {question.type === 'scale' && (
-                            <div className="scale-preview-modern">
-                              <div className="scale-visual">
+                            <div className="scale-interactive-modern">
+                              <div className="scale-input-container">
                                 <span>1</span>
-                                <div className="scale-track">
-                                  <div className="scale-thumb"></div>
-                                </div>
+                                <input 
+                                  type="range" 
+                                  min="1" 
+                                  max="10" 
+                                  value={previewResponses[question.id || index] || 5}
+                                  onChange={(e) => handlePreviewResponse(question.id || index, parseInt(e.target.value))}
+                                  className="scale-slider-modern"
+                                />
                                 <span>10</span>
+                              </div>
+                              <div className="scale-value-modern">
+                                Value: {previewResponses[question.id || index] || 5}
                               </div>
                               <div className="scale-labels-modern">
                                 <span>Poor</span>
@@ -3707,28 +3746,46 @@ function AIChat() {
                           )}
                           
                           {question.type === 'text' && (
-                            <div className="text-preview-modern">
-                              <div className="text-area-placeholder">
-                                <span>Open text response area...</span>
-                              </div>
+                            <div className="text-interactive-modern">
+                              <textarea 
+                                className="text-area-interactive"
+                                placeholder="Share your thoughts..."
+                                value={previewResponses[question.id || index] || ''}
+                                onChange={(e) => handlePreviewResponse(question.id || index, e.target.value)}
+                                rows="3"
+                              />
                             </div>
                           )}
                           
                           {question.type === 'yes_no' && (
-                            <div className="yesno-preview-modern">
-                              <div className="option-preview-modern">
-                                <div className="radio-preview"></div>
-                                <span>Yes</span>
-                              </div>
-                              <div className="option-preview-modern">
-                                <div className="radio-preview"></div>
-                                <span>No</span>
-                              </div>
+                            <div className="yesno-interactive-modern">
+                              <label className="option-interactive-modern">
+                                <input 
+                                  type="radio" 
+                                  name={`preview_q_${question.id || index}`}
+                                  value="yes"
+                                  checked={previewResponses[question.id || index] === 'yes'}
+                                  onChange={(e) => handlePreviewResponse(question.id || index, e.target.value)}
+                                />
+                                <span className="option-indicator"></span>
+                                <span className="option-text">Yes</span>
+                              </label>
+                              <label className="option-interactive-modern">
+                                <input 
+                                  type="radio" 
+                                  name={`preview_q_${question.id || index}`}
+                                  value="no"
+                                  checked={previewResponses[question.id || index] === 'no'}
+                                  onChange={(e) => handlePreviewResponse(question.id || index, e.target.value)}
+                                />
+                                <span className="option-indicator"></span>
+                                <span className="option-text">No</span>
+                              </label>
                             </div>
                           )}
                         </div>
-                      </div>
-                    ))}
+                </div>
+              ))}
                   </div>
                 )}
               </div>
@@ -4073,6 +4130,34 @@ function AIChat() {
           display: flex;
           flex-direction: column;
           gap: var(--space-4);
+          
+          /* Custom scrollbar styling */
+          scrollbar-width: thin;
+          scrollbar-color: transparent transparent;
+        }
+
+        /* Hide scrollbar by default */
+        .chat-messages::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+          background: transparent;
+          border-radius: 3px;
+          transition: background 0.2s ease;
+        }
+
+        /* Show scrollbar on hover */
+        .chat-messages:hover::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-messages:hover::-webkit-scrollbar-thumb:hover {
+          background: rgba(0, 0, 0, 0.4);
         }
 
         .message {
@@ -5025,15 +5110,6 @@ function AIChat() {
           line-height: 1.2;
         }
 
-        .survey-description-modern {
-          font-size: 1.1em;
-          color: var(--text-secondary);
-          line-height: 1.6;
-          margin-bottom: var(--space-6);
-          max-width: 600px;
-          margin-left: auto;
-          margin-right: auto;
-        }
 
         .survey-stats-grid {
           display: grid;
@@ -5295,6 +5371,182 @@ function AIChat() {
           gap: var(--space-4);
         }
 
+        /* Interactive Preview Styles */
+        .question-interactive-modern {
+          padding-top: var(--space-3);
+          border-top: 1px solid rgba(226, 232, 240, 0.4);
+        }
+
+        .options-interactive-modern {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+        }
+
+        .option-interactive-modern {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          padding: var(--space-3);
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border: 1px solid rgba(226, 232, 240, 0.6);
+          background: rgba(248, 250, 252, 0.5);
+        }
+
+        .option-interactive-modern:hover {
+          background: rgba(139, 92, 246, 0.05);
+          border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .option-interactive-modern input[type="radio"],
+        .option-interactive-modern input[type="checkbox"] {
+          position: absolute;
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .option-indicator {
+          width: 18px;
+          height: 18px;
+          border: 2px solid rgba(139, 92, 246, 0.4);
+          border-radius: 50%;
+          background: white;
+          transition: all 0.2s ease;
+          position: relative;
+          flex-shrink: 0;
+        }
+
+        .option-indicator.checkbox {
+          border-radius: 4px;
+        }
+
+        .option-interactive-modern input:checked + .option-indicator {
+          background: rgba(139, 92, 246, 0.9);
+          border-color: rgba(139, 92, 246, 0.9);
+        }
+
+        .option-interactive-modern input:checked + .option-indicator::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 6px;
+          height: 6px;
+          background: white;
+          border-radius: 50%;
+        }
+
+        .option-interactive-modern input:checked + .option-indicator.checkbox::after {
+          width: 8px;
+          height: 4px;
+          border: none;
+          border-left: 2px solid white;
+          border-bottom: 2px solid white;
+          transform: translate(-50%, -70%) rotate(-45deg);
+          border-radius: 0;
+        }
+
+        .option-text {
+          font-size: 0.95em;
+          color: var(--text-primary);
+          font-weight: 500;
+        }
+
+        .scale-interactive-modern {
+          padding: var(--space-4) 0;
+        }
+
+        .scale-input-container {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          margin-bottom: var(--space-3);
+        }
+
+        .scale-slider-modern {
+          flex: 1;
+          height: 6px;
+          border-radius: 3px;
+          background: rgba(226, 232, 240, 0.6);
+          outline: none;
+          -webkit-appearance: none;
+          appearance: none;
+        }
+
+        .scale-slider-modern::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: rgba(139, 92, 246, 0.9);
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+          transition: all 0.2s ease;
+        }
+
+        .scale-slider-modern::-webkit-slider-thumb:hover {
+          transform: scale(1.1);
+          box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+
+        .scale-slider-modern::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: rgba(139, 92, 246, 0.9);
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+        }
+
+        .scale-value-modern {
+          text-align: center;
+          font-weight: 600;
+          color: rgba(139, 92, 246, 0.9);
+          font-size: 1.1em;
+          margin-bottom: var(--space-2);
+        }
+
+        .scale-labels-modern {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.85em;
+          color: var(--text-secondary);
+        }
+
+        .text-interactive-modern {
+          padding: var(--space-3) 0;
+        }
+
+        .text-area-interactive {
+          width: 100%;
+          border: 1px solid rgba(226, 232, 240, 0.6);
+          border-radius: 8px;
+          padding: var(--space-3);
+          font-family: inherit;
+          font-size: 0.95em;
+          resize: vertical;
+          transition: all 0.2s ease;
+          background: rgba(248, 250, 252, 0.8);
+        }
+
+        .text-area-interactive:focus {
+          outline: none;
+          border-color: rgba(139, 92, 246, 0.5);
+          background: white;
+          box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .yesno-interactive-modern {
+          display: flex;
+          gap: var(--space-4);
+        }
+
         .preview-actions-modern {
           padding: var(--space-5) var(--space-6);
           background: white;
@@ -5552,7 +5804,7 @@ function AIChat() {
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
           gap: var(--space-4);
           width: 100%;
-        }
+         }
          
          .step-icon-wrapper {
            width: 56px;
