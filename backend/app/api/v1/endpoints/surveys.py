@@ -6,8 +6,9 @@ import json
 import logging
 from datetime import datetime
 from typing import List
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Request
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 
 from app.models.survey import (
     Survey,
@@ -27,15 +28,27 @@ logger = logging.getLogger(__name__)
 
 
 @router.post("/create", response_model=Survey)
-async def create_survey(request: CreateSurveyRequest):
+async def create_survey(request: CreateSurveyRequest, raw_request: Request = None):
     """Create a new survey"""
     try:
+        if raw_request:
+            body = await raw_request.body()
+            logger.info(f"Raw request body: {body.decode()}")
+        logger.info(f"Creating survey with data: {request.model_dump()}")
         survey = await survey_service.create_survey(request)
         logger.info(f"Created survey {survey.id}: {survey.name}")
         return survey
         
+    except RequestValidationError as e:
+        logger.error(f"Validation error creating survey: {e}")
+        logger.error(f"Request validation details: {e.errors()}")
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Validation error: {e.errors()}"
+        )
     except Exception as e:
         logger.error(f"Error creating survey: {e}")
+        logger.error(f"Request data: {request}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to create survey: {str(e)}"

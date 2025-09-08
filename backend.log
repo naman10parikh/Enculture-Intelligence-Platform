@@ -1,60 +1,16 @@
 INFO:     Will watch for changes in these directories: ['/Users/naman/Enculture-Intelligence-Platform/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [73444] using WatchFiles
-INFO:     Started server process [73451]
+INFO:     Started reloader process [90348] using WatchFiles
+INFO:     Started server process [90359]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 🚀 Starting Enculture Backend API...
 Environment: development
 Debug Mode: True
-INFO:     127.0.0.1:53395 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53407 - "GET /health HTTP/1.1" 200 OK
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8cac0>
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8cac0>
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110477740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110477740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8ca90>
-2025-09-07 21:38:32 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x116a8ca90>
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:32 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:36 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/app/services/openai_service.py')}
-WARNING:  WatchFiles detected changes in 'app/services/openai_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for connections to close. (CTRL+C to force quit)
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:38 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_47a17612020e8f9f247151abcd7ee2ed'), (b'openai-processing-ms', b'5840'), (b'x-envoy-upstream-service-time', b'5843'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=fF7Z10gO6UPJGLH7sO3FjsI7wjIdHf7z5eFEEhekyS4-1757306318-1.0.1.1-a1nh4sx0Rv09qK57zbcJbqYJLhm1OBqbm2tfEaZBIE_CvOOoFnLB.au_PdTerZxXjtPF2fQ7kneXUwvVaftDA.XcIcnueVM_fjWwVgBdnUo; path=/; expires=Mon, 08-Sep-25 05:08:38 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=aYGLPLKD4n4d5vX0rYoYv8EdI1EPQEibzCO61eMAuX8-1757306318332-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1c4795dc3a7-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:38 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449501'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_47a17612020e8f9f247151abcd7ee2ed'), (b'openai-processing-ms', b'5840'), (b'x-envoy-upstream-service-time', b'5843'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=fF7Z10gO6UPJGLH7sO3FjsI7wjIdHf7z5eFEEhekyS4-1757306318-1.0.1.1-a1nh4sx0Rv09qK57zbcJbqYJLhm1OBqbm2tfEaZBIE_CvOOoFnLB.au_PdTerZxXjtPF2fQ7kneXUwvVaftDA.XcIcnueVM_fjWwVgBdnUo; path=/; expires=Mon, 08-Sep-25 05:08:38 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=aYGLPLKD4n4d5vX0rYoYv8EdI1EPQEibzCO61eMAuX8-1757306318332-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1c4795dc3a7-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:38:38 - httpcore.http11 - DEBUG - response_closed.complete
-INFO:     127.0.0.1:53409 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [73451]
-🛑 Shutting down Enculture Backend API...
-2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.started
-2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.started
-2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.complete
-2025-09-07 21:38:38 - httpcore.connection - DEBUG - close.complete
-INFO:     Started server process [73486]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
+INFO:     127.0.0.1:55867 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55884 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < GET /api/v1/notifications/ws/emily_rodriguez HTTP/1.1
 DEBUG:    < host: localhost:8000
 DEBUG:    < connection: Upgrade
 DEBUG:    < pragma: no-cache
@@ -65,69 +21,87 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: 8lcymzmOXGTj1DuN+RoHmw==
+DEBUG:    < sec-websocket-key: d24CxSRVgIxXoSuqmeu6Ng==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53423) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-🚀 Starting Enculture Backend API...
-Environment: development
-Debug Mode: True
-2025-09-07 21:38:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:38:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+INFO:     ('127.0.0.1', 55863) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
+2025-09-07 22:16:25 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+2025-09-07 22:16:25 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: juNFq0JRlRSf0uBLwbw0ll2XzPc=
+DEBUG:    > Sec-WebSocket-Accept: rEFatXW+ddrHn3bDwxk5BCQqnkU=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:38:39 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 05:16:24 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:39.348613"}' [128 bytes]
-INFO:     127.0.0.1:53429 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
-2025-09-07 21:38:39 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 71dafe7e-1e7c-4d95-9a6a-d306bc17a09f
-2025-09-07 21:38:39 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 71dafe7e-1e7c-4d95-9a6a-d306bc17a09f
-INFO:     127.0.0.1:53434 - "POST /api/v1/chat/stream-with-thread?thread_id=71dafe7e-1e7c-4d95-9a6a-d306bc17a09f&prompt=hello HTTP/1.1" 200 OK
-2025-09-07 21:38:39 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 21:38:39 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
-2025-09-07 21:38:39 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf74f0>
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf74f0>
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c4f7740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c4f7740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf7490>
-2025-09-07 21:38:39 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112bf7490>
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:39 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:40 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_a4d00da0c00a173519c63a2cc03cca89'), (b'openai-processing-ms', b'1102'), (b'x-envoy-upstream-service-time', b'1104'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=yiay1zL_wl_kZ8vJ7GUKpDY3oSm1T_r2BH3__smSeZk-1757306320-1.0.1.1-kU4RPNXIEncHJm2TavHCUGGEROsp3sxCwDM50Wxhz0ykKPiraX5twpnJymkd1eD2MpRAlIRFJDo04RjabI4CTNdzHAA4SEU1p8HYmBHImaE; path=/; expires=Mon, 08-Sep-25 05:08:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=kGP7SmtX7h0nFTrGKa1gcLEmeGj5pRFWU5HTcjDDqJg-1757306320908-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1f21c93b99f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:38:40 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449484'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_a4d00da0c00a173519c63a2cc03cca89'), (b'openai-processing-ms', b'1102'), (b'x-envoy-upstream-service-time', b'1104'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=yiay1zL_wl_kZ8vJ7GUKpDY3oSm1T_r2BH3__smSeZk-1757306320-1.0.1.1-kU4RPNXIEncHJm2TavHCUGGEROsp3sxCwDM50Wxhz0ykKPiraX5twpnJymkd1eD2MpRAlIRFJDo04RjabI4CTNdzHAA4SEU1p8HYmBHImaE; path=/; expires=Mon, 08-Sep-25 05:08:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=kGP7SmtX7h0nFTrGKa1gcLEmeGj5pRFWU5HTcjDDqJg-1757306320908-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc1f21c93b99f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:38:41 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:38:41 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:16:25.471418"}' [128 bytes]
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112654b80>
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112654b80>
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1125e28e0>
+2025-09-07 22:16:25 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1125e28e0>
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:25 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:35 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449500'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_0ec0bdc33dac0ce19356e566cd4c750b'), (b'openai-processing-ms', b'9972'), (b'x-envoy-upstream-service-time', b'9976'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=8HxnasJ1nFCVbpeSvdjD1s7rIS.3UmHF.RthlWSzCVA-1757308595-1.0.1.1-bdFkRXUupUc9cx3oJ.ciyUOyhWPMXGPhCtidO4rE6vdtjtYVv56CiMpkgrCRxiF47AVg_my_ignLhwqbeRHwV1C7auF_qd6ET2CjyZNm0RE; path=/; expires=Mon, 08-Sep-25 05:46:35 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=_Zy2aTG3qbmEag4ch3UFoPREv5B4..B5xUvv5.bLAhA-1757308595693-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf944497c766c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:35 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449500'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'66ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_0ec0bdc33dac0ce19356e566cd4c750b'), (b'openai-processing-ms', b'9972'), (b'x-envoy-upstream-service-time', b'9976'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=8HxnasJ1nFCVbpeSvdjD1s7rIS.3UmHF.RthlWSzCVA-1757308595-1.0.1.1-bdFkRXUupUc9cx3oJ.ciyUOyhWPMXGPhCtidO4rE6vdtjtYVv56CiMpkgrCRxiF47AVg_my_ignLhwqbeRHwV1C7auF_qd6ET2CjyZNm0RE; path=/; expires=Mon, 08-Sep-25 05:46:35 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=_Zy2aTG3qbmEag4ch3UFoPREv5B4..B5xUvv5.bLAhA-1757308595693-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf944497c766c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:16:35 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:55887 - "GET /api/v1/chat/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55976 - "POST /api/v1/chat-threads/threads HTTP/1.1" 200 OK
+2025-09-07 22:16:36 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 43489735-c652-4505-a229-c9027c26257a
+2025-09-07 22:16:36 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread 43489735-c652-4505-a229-c9027c26257a
+INFO:     127.0.0.1:55978 - "POST /api/v1/chat/stream-with-thread?thread_id=43489735-c652-4505-a229-c9027c26257a&prompt=hello HTTP/1.1" 200 OK
+2025-09-07 22:16:36 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 22:16:36 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:36 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:36 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:37 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449485'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_5cb07f0163136baa0cad9b3ee28ca14e'), (b'openai-processing-ms', b'1395'), (b'x-envoy-upstream-service-time', b'1398'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf9862d05766c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:37 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449485'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'68ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_5cb07f0163136baa0cad9b3ee28ca14e'), (b'openai-processing-ms', b'1395'), (b'x-envoy-upstream-service-time', b'1398'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf9862d05766c-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:16:37 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:16:38 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
 DEBUG:    < CLOSE 1001 (going away) [2 bytes]
 DEBUG:    = connection is CLOSING
 DEBUG:    > CLOSE 1001 (going away) [2 bytes]
 DEBUG:    x half-closing TCP connection
 DEBUG:    = connection is CLOSED
-2025-09-07 21:38:43 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:38:43 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:38:43 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:38:43 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 22:16:39 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
+2025-09-07 22:16:39 - app.services.websocket_manager - INFO - WebSocket connection closed for user emily_rodriguez
+2025-09-07 22:16:39 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
+2025-09-07 22:16:39 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user emily_rodriguez
 INFO:     connection closed
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
@@ -141,25 +115,25 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: O7aWmssnlvXhPOAdw/uoBw==
+DEBUG:    < sec-websocket-key: Ud4HglAr03z2LKRLaCS9eA==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53492) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 21:38:47 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:38:47 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-INFO:     127.0.0.1:53494 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 56030) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 22:16:42 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 22:16:42 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+INFO:     127.0.0.1:56032 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: q8wH4R/h9RH7kdsgGDV8bkshk/s=
+DEBUG:    > Sec-WebSocket-Accept: 3EPrT3u00DPVvB5r9YFLdiMEN6k=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:38:46 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 05:16:41 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-INFO:     127.0.0.1:53496 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:47.727720"}' [128 bytes]
-INFO:     127.0.0.1:53494 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53496 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56034 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:16:42.787470"}' [128 bytes]
+INFO:     127.0.0.1:56032 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56037 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
 DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
 DEBUG:    < host: localhost:8000
@@ -172,277 +146,242 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: RjyNBlW78L3fdtfJ2JijVw==
+DEBUG:    < sec-websocket-key: 1Q9WZEeGZ8/8NaZDlEkJbQ==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53511) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 21:38:48 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:38:48 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+INFO:     ('127.0.0.1', 56038) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
+2025-09-07 22:16:42 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+2025-09-07 22:16:42 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:16:42.921220"}' [128 bytes]
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: PMF6zA7z4Nr4Ubc9c0J90MqHePo=
+DEBUG:    > Sec-WebSocket-Accept: ah1/Ic1795tsp205NORsetoRisA=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:38:46 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 05:16:41 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:48.097169"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:48.097169"}' [128 bytes]
-INFO:     127.0.0.1:53510 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53496 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-2025-09-07 21:38:50 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/app/services/openai_service.py')}
-WARNING:  WatchFiles detected changes in 'app/services/openai_service.py'. Reloading...
-INFO:     Shutting down
-DEBUG:    ! failing connection with code 1012
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:16:42.921220"}' [128 bytes]
+INFO:     127.0.0.1:56037 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56032 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56044 - "OPTIONS /api/v1/chat/stream-with-thread?thread_id=a5898802-c36c-40d3-8bfd-c22894ad1352&prompt=hows%20it%20going HTTP/1.1" 200 OK
+2025-09-07 22:16:49 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread a5898802-c36c-40d3-8bfd-c22894ad1352
+2025-09-07 22:16:49 - app.api.v1.endpoints.chat - INFO - Received streaming chat request for thread a5898802-c36c-40d3-8bfd-c22894ad1352
+2025-09-07 22:16:49 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+INFO:     127.0.0.1:56044 - "POST /api/v1/chat/stream-with-thread?thread_id=a5898802-c36c-40d3-8bfd-c22894ad1352&prompt=hows%20it%20going HTTP/1.1" 200 OK
+2025-09-07 22:16:49 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 22:16:49 - app.services.openai_service - INFO - Initiating gpt-4.1 Responses API call with web search: True
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - close.started
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - close.started
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - close.complete
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - close.complete
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b76430>
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b76430>
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:16:49 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:16:50 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11262b5e0>
+2025-09-07 22:16:50 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11262b5e0>
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:50 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:50 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:51 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449481'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'69ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_71d8563b331da5c17ed779213d37213c'), (b'openai-processing-ms', b'1529'), (b'x-envoy-upstream-service-time', b'1534'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf9dd0cbcc3d5-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:51 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449481'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'69ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_71d8563b331da5c17ed779213d37213c'), (b'openai-processing-ms', b'1529'), (b'x-envoy-upstream-service-time', b'1534'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf9dd0cbcc3d5-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:16:51 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x10c78ddc0>
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x10c78ddc0>
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1f0c10> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1f0c10> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b44400>
+2025-09-07 22:16:52 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b44400>
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:52 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:16:52 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:53 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449855'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f0fc88d76da170aa012c692682384ec1'), (b'openai-processing-ms', b'606'), (b'x-envoy-upstream-service-time', b'610'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=q1Q6wDi803jSmm7et6vx9Luuz5lwGWrE0Hs01r58L.s-1757308613-1.0.1.1-NaC4FC6f3Mll_a7QPkBOmPoy1oPtfmq1U0P1vM103wc9AlpaNGOz4gjMYF2kolBion_T7b_LAtLgq0_oyhS03dx6T2.MrbjxiTI1PX40M4U; path=/; expires=Mon, 08-Sep-25 05:46:53 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=pPeS7hDez_mew61Ir9O5KCY3pIeHzsPXlGCRb_MpKmc-1757308613646-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf9eeb8f5388f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:16:53 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449855'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_f0fc88d76da170aa012c692682384ec1'), (b'openai-processing-ms', b'606'), (b'x-envoy-upstream-service-time', b'610'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=q1Q6wDi803jSmm7et6vx9Luuz5lwGWrE0Hs01r58L.s-1757308613-1.0.1.1-NaC4FC6f3Mll_a7QPkBOmPoy1oPtfmq1U0P1vM103wc9AlpaNGOz4gjMYF2kolBion_T7b_LAtLgq0_oyhS03dx6T2.MrbjxiTI1PX40M4U; path=/; expires=Mon, 08-Sep-25 05:46:53 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=pPeS7hDez_mew61Ir9O5KCY3pIeHzsPXlGCRb_MpKmc-1757308613646-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbf9eeb8f5388f-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:16:53 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:56044 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
+2025-09-07 22:16:53 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/chat_threads.json')}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING f7 1e fc 86 [binary, 4 bytes]
+DEBUG:    < PONG f7 1e fc 86 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING ca 11 46 3f [binary, 4 bytes]
+DEBUG:    < PONG ca 11 46 3f [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56062 - "OPTIONS /api/v1/chat/enhance-survey-name HTTP/1.1" 200 OK
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - close.started
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - close.started
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - close.complete
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - close.complete
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b44a00>
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b44a00>
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b44820>
+2025-09-07 22:17:03 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b44820>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:17:03 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449854'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_5cbb95e21b5761f77783a9e7765350c8'), (b'openai-processing-ms', b'639'), (b'x-envoy-upstream-service-time', b'642'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbfa2eadabdeec-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:17:03 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449854'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'19ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_5cbb95e21b5761f77783a9e7765350c8'), (b'openai-processing-ms', b'639'), (b'x-envoy-upstream-service-time', b'642'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbfa2eadabdeec-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:17:03 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:56062 - "POST /api/v1/chat/enhance-survey-name HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56075 - "OPTIONS /api/v1/chat/enhance-survey-context HTTP/1.1" 200 OK
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - close.started
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - close.started
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - close.complete
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - close.complete
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b40400>
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b40400>
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10c1389e0> server_hostname='api.openai.com' timeout=5.0
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b403d0>
+2025-09-07 22:17:11 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x112b403d0>
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-09-07 22:17:11 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+INFO:     127.0.0.1:56084 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308633071}' [46 bytes]
+2025-09-07 22:17:13 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757308633071}
+2025-09-07 22:17:13 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757308633071}
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:17:19 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449246'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'100ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_24bd03efe734664b5bc465957ba12dd1'), (b'openai-processing-ms', b'8187'), (b'x-envoy-upstream-service-time', b'8190'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbfa606989ec30-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 05:17:19 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449246'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'100ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_24bd03efe734664b5bc465957ba12dd1'), (b'openai-processing-ms', b'8187'), (b'x-envoy-upstream-service-time', b'8190'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbfa606989ec30-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-07 22:17:19 - httpcore.http11 - DEBUG - response_closed.complete
+INFO:     127.0.0.1:56075 - "POST /api/v1/chat/enhance-survey-context HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 00 23 4c e9 [binary, 4 bytes]
+DEBUG:    < PONG 00 23 4c e9 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 9d e4 42 22 [binary, 4 bytes]
+DEBUG:    < PONG 9d e4 42 22 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56093 - "OPTIONS /api/v1/chat/enhance-metric-formula HTTP/1.1" 200 OK
+2025-09-07 22:17:41 - app.api.v1.endpoints.chat - INFO - Enhancing formula for metric: Empowerment Score
+2025-09-07 22:17:41 - app.api.v1.endpoints.chat - INFO - Enhancing formula for metric: Empowerment Score
+2025-09-07 22:17:41 - app.api.v1.endpoints.chat - ERROR - Error enhancing metric formula: 'OpenAIService' object has no attribute 'send_message'
+2025-09-07 22:17:41 - app.api.v1.endpoints.chat - ERROR - Error enhancing metric formula: 'OpenAIService' object has no attribute 'send_message'
+INFO:     127.0.0.1:56093 - "POST /api/v1/chat/enhance-metric-formula HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56101 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING ee 10 6d 44 [binary, 4 bytes]
+DEBUG:    < PONG ee 10 6d 44 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 9f 6e dc 27 [binary, 4 bytes]
+DEBUG:    < PONG 9f 6e dc 27 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308663070}' [46 bytes]
+2025-09-07 22:17:43 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757308663070}
+2025-09-07 22:17:43 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757308663070}
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 88 bb ae 64 [binary, 4 bytes]
+DEBUG:    < PONG 88 bb ae 64 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 90 ed c2 bd [binary, 4 bytes]
+DEBUG:    < PONG 90 ed c2 bd [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56109 - "OPTIONS /api/v1/surveys/create HTTP/1.1" 200 OK
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Raw request body: {"name":"Unlocking Customer Loyalty Drivers Pulse","context":"**Unlocking Customer Loyalty Drivers Pulse**\n\nIn today's competitive marketplace, customer retention is paramount. Studies show that a mere 5% increase in customer retention can boost profits by 25% to 95% ([businessdasher.com](https://www.businessdasher.com/customer-retention-statistics/?utm_source=openai)). Despite this, the average company loses 10% to 25% of its customers annually ([zippia.com](https://www.zippia.com/advice/customer-retention-statistics/?utm_source=openai)). Understanding the factors that drive customer loyalty is essential for sustainable growth.\n\n**The Challenge:**\n\nWhile acquiring new customers is vital, retaining existing ones is more cost-effective and profitable. It costs five times more to acquire a new customer than to retain an existing one ([sprinklr.com](https://www.sprinklr.com/blog/customer-retention-statistics/?utm_source=openai)). Moreover, repeat customers are 50% more likely to try new products and spend 31% more compared to new customers ([gitnux.org](https://gitnux.org/customer-retention-statistics/?utm_source=openai)). Identifying and enhancing the drivers of customer loyalty can significantly impact the bottom line.\n\n**Our Approach:**\n\nThe \"Unlocking Customer Loyalty Drivers Pulse\" survey aims to delve into the key factors influencing customer retention within our organization. By gathering insights directly from our customers, we can pinpoint areas of strength and opportunities for improvement. This survey will employ a combination of quantitative and qualitative questions to provide a comprehensive understanding of customer loyalty drivers.\n\n**Anticipated Impact:**\n\nThe insights gained will inform targeted strategies to enhance customer satisfaction and loyalty. Implementing these strategies can lead to increased customer lifetime value, reduced churn rates, and higher profitability. For instance, companies with mature customer success programs achieve 15% higher customer retention rates ([en.wikipedia.org](https://en.wikipedia.org/wiki/Customer_success?utm_source=openai)).\n\n**Confidentiality Assurance:**\n\nWe are committed to maintaining the confidentiality of all survey responses. Data will be aggregated and anonymized to ensure individual privacy. Your honest feedback is invaluable and will directly contribute to our efforts to enhance customer experiences.\n\n**Your Participation:**\n\nThe survey will take approximately 10 minutes to complete. Your input is crucial in shaping our customer retention strategies and ensuring we meet your expectations. We understand concerns about survey fatigue and assure you that this survey is designed to be concise and impactful. Our organization is dedicated to acting on the results to drive meaningful improvements.\n\nThank you for your time and valuable insights.","desired_outcomes":[],"classifiers":[{"name":"Department","description":"Employee’s primary department or business unit","options":["Sales / Business Development","Customer Support / Success","Product / Engineering","Marketing / Communications","Operations / Administration"]},{"name":"Experience Level","description":"Length of time working in this organization","options":["Less than 1 year","1-3 years","4-7 years","8+ years"]},{"name":"Work Arrangement","description":"Primary work setup","options":["On-site / In-office","Remote / Work from home","Hybrid (mix of on-site and remote)"]},{"name":"Role Type","description":"General nature of employee's current role","options":["Individual Contributor","Team Lead / Supervisor","Manager / Director","Executive / Senior Leadership"]},{"name":"Geographic Location","description":"Region where employee primarily works","options":["North America","Europe","Asia-Pacific","Other / Multiple Regions"]}],"metrics":[{"name":"Empowerment Score","description":"Measures the average level to which employees feel equipped and authorized to resolve customer issues and take retention-focused actions.","formula":"Average of responses to Q3 and Q4, segmented by Department, Experience Level, and Role Type."},{"name":"Retention Culture Alignment","description":"Assesses the degree of organizational alignment around customer retention as a shared responsibility and cultural value.","formula":"Average of responses to Q1, Q2, Q6, and Q8 across all departments."},{"name":"Communication Effectiveness Index","description":"Evaluates how effectively cross-team feedback and information flows are supporting customer retention efforts.","formula":"Average of Q7 and Q9, segmented by Department and Work Arrangement."},{"name":"Psychological Safety for Customer Topics","description":"Assesses whether employees feel safe raising concerns or innovative solutions related to customer retention.","formula":"Proportion of positive (4-5) responses to Q5 and the proportion of 'Yes' responses to Q10, by Department and Role Type."},{"name":"Retention Tool Readiness","description":"Measures perceived adequacy of tools, training, and support for customer-facing work.","formula":"Average of responses to Q3, Q4, and Q11, cross-tabbed with Experience Level."}],"questions":[{"id":"Q1","question":"How clearly is customer retention described as a shared responsibility across all departments?","response_type":"scale","options":[],"mandatory":true},{"id":"Q2","question":"To what extent do you feel that our organizational values emphasize long-term customer relationships?","response_type":"scale","options":[],"mandatory":true},{"id":"Q3","question":"I have access to the resources, information, and authority needed to resolve customer issues and retain their business.","response_type":"scale","options":[],"mandatory":true},{"id":"Q4","question":"Our organization provides effective training and ongoing support to help me address customer needs confidently.","response_type":"scale","options":[],"mandatory":true},{"id":"Q5","question":"I feel safe sharing concerns, mistakes, or innovative ideas related to improving customer retention.","response_type":"scale","options":[],"mandatory":true},{"id":"Q6","question":"Recognition for contributions to customer retention is fair and celebrated across all levels of the organization.","response_type":"scale","options":[],"mandatory":true},{"id":"Q7","question":"We have efficient communication channels to share frontline feedback about why customers stay or leave.","response_type":"scale","options":[],"mandatory":true},{"id":"Q8","question":"Which statement best describes your understanding of your role in customer retention?","response_type":"multiple_choice","options":["Everyone, regardless of role, should be involved in customer retention.","Customer retention is mainly the job of customer-facing teams.","Responsibility for retention isn’t clearly assigned.","I’m unsure how my role connects to customer retention."],"mandatory":true},{"id":"Q9","question":"There are clear processes for acting on feedback from employees about ways to improve customer loyalty.","response_type":"scale","options":[],"mandatory":false},{"id":"Q10","question":"Would you feel comfortable proposing a new idea to improve our customer experience or retention processes?","response_type":"yes_no","options":[],"mandatory":true},{"id":"Q11","question":"The tools and technologies we use meet customer expectations and enable efficient issue resolution.","response_type":"scale","options":[],"mandatory":false},{"id":"Q12","question":"What is the single most important change you believe would most improve our customer retention culture?","response_type":"text","options":[],"mandatory":false}],"configuration":{"backgroundImage":null,"languages":["English"],"targetAudience":[],"selectedEmployees":["emily_rodriguez"],"releaseDate":null,"deadline":null,"anonymous":true,"target_audience":["emily_rodriguez"]},"branding":{"primaryColor":"#8B5CF6","backgroundColor":"#FAFBFF","fontFamily":"Inter"},"created_by":"Michael Chen"}
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Raw request body: {"name":"Unlocking Customer Loyalty Drivers Pulse","context":"**Unlocking Customer Loyalty Drivers Pulse**\n\nIn today's competitive marketplace, customer retention is paramount. Studies show that a mere 5% increase in customer retention can boost profits by 25% to 95% ([businessdasher.com](https://www.businessdasher.com/customer-retention-statistics/?utm_source=openai)). Despite this, the average company loses 10% to 25% of its customers annually ([zippia.com](https://www.zippia.com/advice/customer-retention-statistics/?utm_source=openai)). Understanding the factors that drive customer loyalty is essential for sustainable growth.\n\n**The Challenge:**\n\nWhile acquiring new customers is vital, retaining existing ones is more cost-effective and profitable. It costs five times more to acquire a new customer than to retain an existing one ([sprinklr.com](https://www.sprinklr.com/blog/customer-retention-statistics/?utm_source=openai)). Moreover, repeat customers are 50% more likely to try new products and spend 31% more compared to new customers ([gitnux.org](https://gitnux.org/customer-retention-statistics/?utm_source=openai)). Identifying and enhancing the drivers of customer loyalty can significantly impact the bottom line.\n\n**Our Approach:**\n\nThe \"Unlocking Customer Loyalty Drivers Pulse\" survey aims to delve into the key factors influencing customer retention within our organization. By gathering insights directly from our customers, we can pinpoint areas of strength and opportunities for improvement. This survey will employ a combination of quantitative and qualitative questions to provide a comprehensive understanding of customer loyalty drivers.\n\n**Anticipated Impact:**\n\nThe insights gained will inform targeted strategies to enhance customer satisfaction and loyalty. Implementing these strategies can lead to increased customer lifetime value, reduced churn rates, and higher profitability. For instance, companies with mature customer success programs achieve 15% higher customer retention rates ([en.wikipedia.org](https://en.wikipedia.org/wiki/Customer_success?utm_source=openai)).\n\n**Confidentiality Assurance:**\n\nWe are committed to maintaining the confidentiality of all survey responses. Data will be aggregated and anonymized to ensure individual privacy. Your honest feedback is invaluable and will directly contribute to our efforts to enhance customer experiences.\n\n**Your Participation:**\n\nThe survey will take approximately 10 minutes to complete. Your input is crucial in shaping our customer retention strategies and ensuring we meet your expectations. We understand concerns about survey fatigue and assure you that this survey is designed to be concise and impactful. Our organization is dedicated to acting on the results to drive meaningful improvements.\n\nThank you for your time and valuable insights.","desired_outcomes":[],"classifiers":[{"name":"Department","description":"Employee’s primary department or business unit","options":["Sales / Business Development","Customer Support / Success","Product / Engineering","Marketing / Communications","Operations / Administration"]},{"name":"Experience Level","description":"Length of time working in this organization","options":["Less than 1 year","1-3 years","4-7 years","8+ years"]},{"name":"Work Arrangement","description":"Primary work setup","options":["On-site / In-office","Remote / Work from home","Hybrid (mix of on-site and remote)"]},{"name":"Role Type","description":"General nature of employee's current role","options":["Individual Contributor","Team Lead / Supervisor","Manager / Director","Executive / Senior Leadership"]},{"name":"Geographic Location","description":"Region where employee primarily works","options":["North America","Europe","Asia-Pacific","Other / Multiple Regions"]}],"metrics":[{"name":"Empowerment Score","description":"Measures the average level to which employees feel equipped and authorized to resolve customer issues and take retention-focused actions.","formula":"Average of responses to Q3 and Q4, segmented by Department, Experience Level, and Role Type."},{"name":"Retention Culture Alignment","description":"Assesses the degree of organizational alignment around customer retention as a shared responsibility and cultural value.","formula":"Average of responses to Q1, Q2, Q6, and Q8 across all departments."},{"name":"Communication Effectiveness Index","description":"Evaluates how effectively cross-team feedback and information flows are supporting customer retention efforts.","formula":"Average of Q7 and Q9, segmented by Department and Work Arrangement."},{"name":"Psychological Safety for Customer Topics","description":"Assesses whether employees feel safe raising concerns or innovative solutions related to customer retention.","formula":"Proportion of positive (4-5) responses to Q5 and the proportion of 'Yes' responses to Q10, by Department and Role Type."},{"name":"Retention Tool Readiness","description":"Measures perceived adequacy of tools, training, and support for customer-facing work.","formula":"Average of responses to Q3, Q4, and Q11, cross-tabbed with Experience Level."}],"questions":[{"id":"Q1","question":"How clearly is customer retention described as a shared responsibility across all departments?","response_type":"scale","options":[],"mandatory":true},{"id":"Q2","question":"To what extent do you feel that our organizational values emphasize long-term customer relationships?","response_type":"scale","options":[],"mandatory":true},{"id":"Q3","question":"I have access to the resources, information, and authority needed to resolve customer issues and retain their business.","response_type":"scale","options":[],"mandatory":true},{"id":"Q4","question":"Our organization provides effective training and ongoing support to help me address customer needs confidently.","response_type":"scale","options":[],"mandatory":true},{"id":"Q5","question":"I feel safe sharing concerns, mistakes, or innovative ideas related to improving customer retention.","response_type":"scale","options":[],"mandatory":true},{"id":"Q6","question":"Recognition for contributions to customer retention is fair and celebrated across all levels of the organization.","response_type":"scale","options":[],"mandatory":true},{"id":"Q7","question":"We have efficient communication channels to share frontline feedback about why customers stay or leave.","response_type":"scale","options":[],"mandatory":true},{"id":"Q8","question":"Which statement best describes your understanding of your role in customer retention?","response_type":"multiple_choice","options":["Everyone, regardless of role, should be involved in customer retention.","Customer retention is mainly the job of customer-facing teams.","Responsibility for retention isn’t clearly assigned.","I’m unsure how my role connects to customer retention."],"mandatory":true},{"id":"Q9","question":"There are clear processes for acting on feedback from employees about ways to improve customer loyalty.","response_type":"scale","options":[],"mandatory":false},{"id":"Q10","question":"Would you feel comfortable proposing a new idea to improve our customer experience or retention processes?","response_type":"yes_no","options":[],"mandatory":true},{"id":"Q11","question":"The tools and technologies we use meet customer expectations and enable efficient issue resolution.","response_type":"scale","options":[],"mandatory":false},{"id":"Q12","question":"What is the single most important change you believe would most improve our customer retention culture?","response_type":"text","options":[],"mandatory":false}],"configuration":{"backgroundImage":null,"languages":["English"],"targetAudience":[],"selectedEmployees":["emily_rodriguez"],"releaseDate":null,"deadline":null,"anonymous":true,"target_audience":["emily_rodriguez"]},"branding":{"primaryColor":"#8B5CF6","backgroundColor":"#FAFBFF","fontFamily":"Inter"},"created_by":"Michael Chen"}
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Creating survey with data: {'name': 'Unlocking Customer Loyalty Drivers Pulse', 'context': '**Unlocking Customer Loyalty Drivers Pulse**\n\nIn today\'s competitive marketplace, customer retention is paramount. Studies show that a mere 5% increase in customer retention can boost profits by 25% to 95% ([businessdasher.com](https://www.businessdasher.com/customer-retention-statistics/?utm_source=openai)). Despite this, the average company loses 10% to 25% of its customers annually ([zippia.com](https://www.zippia.com/advice/customer-retention-statistics/?utm_source=openai)). Understanding the factors that drive customer loyalty is essential for sustainable growth.\n\n**The Challenge:**\n\nWhile acquiring new customers is vital, retaining existing ones is more cost-effective and profitable. It costs five times more to acquire a new customer than to retain an existing one ([sprinklr.com](https://www.sprinklr.com/blog/customer-retention-statistics/?utm_source=openai)). Moreover, repeat customers are 50% more likely to try new products and spend 31% more compared to new customers ([gitnux.org](https://gitnux.org/customer-retention-statistics/?utm_source=openai)). Identifying and enhancing the drivers of customer loyalty can significantly impact the bottom line.\n\n**Our Approach:**\n\nThe "Unlocking Customer Loyalty Drivers Pulse" survey aims to delve into the key factors influencing customer retention within our organization. By gathering insights directly from our customers, we can pinpoint areas of strength and opportunities for improvement. This survey will employ a combination of quantitative and qualitative questions to provide a comprehensive understanding of customer loyalty drivers.\n\n**Anticipated Impact:**\n\nThe insights gained will inform targeted strategies to enhance customer satisfaction and loyalty. Implementing these strategies can lead to increased customer lifetime value, reduced churn rates, and higher profitability. For instance, companies with mature customer success programs achieve 15% higher customer retention rates ([en.wikipedia.org](https://en.wikipedia.org/wiki/Customer_success?utm_source=openai)).\n\n**Confidentiality Assurance:**\n\nWe are committed to maintaining the confidentiality of all survey responses. Data will be aggregated and anonymized to ensure individual privacy. Your honest feedback is invaluable and will directly contribute to our efforts to enhance customer experiences.\n\n**Your Participation:**\n\nThe survey will take approximately 10 minutes to complete. Your input is crucial in shaping our customer retention strategies and ensuring we meet your expectations. We understand concerns about survey fatigue and assure you that this survey is designed to be concise and impactful. Our organization is dedicated to acting on the results to drive meaningful improvements.\n\nThank you for your time and valuable insights.', 'desired_outcomes': [], 'classifiers': [{'name': 'Department', 'description': 'Employee’s primary department or business unit', 'options': ['Sales / Business Development', 'Customer Support / Success', 'Product / Engineering', 'Marketing / Communications', 'Operations / Administration']}, {'name': 'Experience Level', 'description': 'Length of time working in this organization', 'options': ['Less than 1 year', '1-3 years', '4-7 years', '8+ years']}, {'name': 'Work Arrangement', 'description': 'Primary work setup', 'options': ['On-site / In-office', 'Remote / Work from home', 'Hybrid (mix of on-site and remote)']}, {'name': 'Role Type', 'description': "General nature of employee's current role", 'options': ['Individual Contributor', 'Team Lead / Supervisor', 'Manager / Director', 'Executive / Senior Leadership']}, {'name': 'Geographic Location', 'description': 'Region where employee primarily works', 'options': ['North America', 'Europe', 'Asia-Pacific', 'Other / Multiple Regions']}], 'metrics': [{'name': 'Empowerment Score', 'description': 'Measures the average level to which employees feel equipped and authorized to resolve customer issues and take retention-focused actions.', 'formula': 'Average of responses to Q3 and Q4, segmented by Department, Experience Level, and Role Type.'}, {'name': 'Retention Culture Alignment', 'description': 'Assesses the degree of organizational alignment around customer retention as a shared responsibility and cultural value.', 'formula': 'Average of responses to Q1, Q2, Q6, and Q8 across all departments.'}, {'name': 'Communication Effectiveness Index', 'description': 'Evaluates how effectively cross-team feedback and information flows are supporting customer retention efforts.', 'formula': 'Average of Q7 and Q9, segmented by Department and Work Arrangement.'}, {'name': 'Psychological Safety for Customer Topics', 'description': 'Assesses whether employees feel safe raising concerns or innovative solutions related to customer retention.', 'formula': "Proportion of positive (4-5) responses to Q5 and the proportion of 'Yes' responses to Q10, by Department and Role Type."}, {'name': 'Retention Tool Readiness', 'description': 'Measures perceived adequacy of tools, training, and support for customer-facing work.', 'formula': 'Average of responses to Q3, Q4, and Q11, cross-tabbed with Experience Level.'}], 'questions': [{'id': 'Q1', 'question': 'How clearly is customer retention described as a shared responsibility across all departments?', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q2', 'question': 'To what extent do you feel that our organizational values emphasize long-term customer relationships?', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q3', 'question': 'I have access to the resources, information, and authority needed to resolve customer issues and retain their business.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q4', 'question': 'Our organization provides effective training and ongoing support to help me address customer needs confidently.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q5', 'question': 'I feel safe sharing concerns, mistakes, or innovative ideas related to improving customer retention.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q6', 'question': 'Recognition for contributions to customer retention is fair and celebrated across all levels of the organization.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q7', 'question': 'We have efficient communication channels to share frontline feedback about why customers stay or leave.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q8', 'question': 'Which statement best describes your understanding of your role in customer retention?', 'response_type': 'multiple_choice', 'options': ['Everyone, regardless of role, should be involved in customer retention.', 'Customer retention is mainly the job of customer-facing teams.', 'Responsibility for retention isn’t clearly assigned.', 'I’m unsure how my role connects to customer retention.'], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q9', 'question': 'There are clear processes for acting on feedback from employees about ways to improve customer loyalty.', 'response_type': 'scale', 'options': [], 'mandatory': False, 'metrics': [], 'classifiers': {}}, {'id': 'Q10', 'question': 'Would you feel comfortable proposing a new idea to improve our customer experience or retention processes?', 'response_type': 'yes_no', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q11', 'question': 'The tools and technologies we use meet customer expectations and enable efficient issue resolution.', 'response_type': 'scale', 'options': [], 'mandatory': False, 'metrics': [], 'classifiers': {}}, {'id': 'Q12', 'question': 'What is the single most important change you believe would most improve our customer retention culture?', 'response_type': 'text', 'options': [], 'mandatory': False, 'metrics': [], 'classifiers': {}}], 'configuration': {'background_image': None, 'languages': ['English'], 'target_audience': ['emily_rodriguez'], 'release_date': None, 'deadline': None, 'anonymous': True}, 'branding': {'primary_color': '#8B5CF6', 'background_color': '#FAFBFF', 'font_family': 'Inter'}, 'created_by': 'Michael Chen'}
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Creating survey with data: {'name': 'Unlocking Customer Loyalty Drivers Pulse', 'context': '**Unlocking Customer Loyalty Drivers Pulse**\n\nIn today\'s competitive marketplace, customer retention is paramount. Studies show that a mere 5% increase in customer retention can boost profits by 25% to 95% ([businessdasher.com](https://www.businessdasher.com/customer-retention-statistics/?utm_source=openai)). Despite this, the average company loses 10% to 25% of its customers annually ([zippia.com](https://www.zippia.com/advice/customer-retention-statistics/?utm_source=openai)). Understanding the factors that drive customer loyalty is essential for sustainable growth.\n\n**The Challenge:**\n\nWhile acquiring new customers is vital, retaining existing ones is more cost-effective and profitable. It costs five times more to acquire a new customer than to retain an existing one ([sprinklr.com](https://www.sprinklr.com/blog/customer-retention-statistics/?utm_source=openai)). Moreover, repeat customers are 50% more likely to try new products and spend 31% more compared to new customers ([gitnux.org](https://gitnux.org/customer-retention-statistics/?utm_source=openai)). Identifying and enhancing the drivers of customer loyalty can significantly impact the bottom line.\n\n**Our Approach:**\n\nThe "Unlocking Customer Loyalty Drivers Pulse" survey aims to delve into the key factors influencing customer retention within our organization. By gathering insights directly from our customers, we can pinpoint areas of strength and opportunities for improvement. This survey will employ a combination of quantitative and qualitative questions to provide a comprehensive understanding of customer loyalty drivers.\n\n**Anticipated Impact:**\n\nThe insights gained will inform targeted strategies to enhance customer satisfaction and loyalty. Implementing these strategies can lead to increased customer lifetime value, reduced churn rates, and higher profitability. For instance, companies with mature customer success programs achieve 15% higher customer retention rates ([en.wikipedia.org](https://en.wikipedia.org/wiki/Customer_success?utm_source=openai)).\n\n**Confidentiality Assurance:**\n\nWe are committed to maintaining the confidentiality of all survey responses. Data will be aggregated and anonymized to ensure individual privacy. Your honest feedback is invaluable and will directly contribute to our efforts to enhance customer experiences.\n\n**Your Participation:**\n\nThe survey will take approximately 10 minutes to complete. Your input is crucial in shaping our customer retention strategies and ensuring we meet your expectations. We understand concerns about survey fatigue and assure you that this survey is designed to be concise and impactful. Our organization is dedicated to acting on the results to drive meaningful improvements.\n\nThank you for your time and valuable insights.', 'desired_outcomes': [], 'classifiers': [{'name': 'Department', 'description': 'Employee’s primary department or business unit', 'options': ['Sales / Business Development', 'Customer Support / Success', 'Product / Engineering', 'Marketing / Communications', 'Operations / Administration']}, {'name': 'Experience Level', 'description': 'Length of time working in this organization', 'options': ['Less than 1 year', '1-3 years', '4-7 years', '8+ years']}, {'name': 'Work Arrangement', 'description': 'Primary work setup', 'options': ['On-site / In-office', 'Remote / Work from home', 'Hybrid (mix of on-site and remote)']}, {'name': 'Role Type', 'description': "General nature of employee's current role", 'options': ['Individual Contributor', 'Team Lead / Supervisor', 'Manager / Director', 'Executive / Senior Leadership']}, {'name': 'Geographic Location', 'description': 'Region where employee primarily works', 'options': ['North America', 'Europe', 'Asia-Pacific', 'Other / Multiple Regions']}], 'metrics': [{'name': 'Empowerment Score', 'description': 'Measures the average level to which employees feel equipped and authorized to resolve customer issues and take retention-focused actions.', 'formula': 'Average of responses to Q3 and Q4, segmented by Department, Experience Level, and Role Type.'}, {'name': 'Retention Culture Alignment', 'description': 'Assesses the degree of organizational alignment around customer retention as a shared responsibility and cultural value.', 'formula': 'Average of responses to Q1, Q2, Q6, and Q8 across all departments.'}, {'name': 'Communication Effectiveness Index', 'description': 'Evaluates how effectively cross-team feedback and information flows are supporting customer retention efforts.', 'formula': 'Average of Q7 and Q9, segmented by Department and Work Arrangement.'}, {'name': 'Psychological Safety for Customer Topics', 'description': 'Assesses whether employees feel safe raising concerns or innovative solutions related to customer retention.', 'formula': "Proportion of positive (4-5) responses to Q5 and the proportion of 'Yes' responses to Q10, by Department and Role Type."}, {'name': 'Retention Tool Readiness', 'description': 'Measures perceived adequacy of tools, training, and support for customer-facing work.', 'formula': 'Average of responses to Q3, Q4, and Q11, cross-tabbed with Experience Level.'}], 'questions': [{'id': 'Q1', 'question': 'How clearly is customer retention described as a shared responsibility across all departments?', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q2', 'question': 'To what extent do you feel that our organizational values emphasize long-term customer relationships?', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q3', 'question': 'I have access to the resources, information, and authority needed to resolve customer issues and retain their business.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q4', 'question': 'Our organization provides effective training and ongoing support to help me address customer needs confidently.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q5', 'question': 'I feel safe sharing concerns, mistakes, or innovative ideas related to improving customer retention.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q6', 'question': 'Recognition for contributions to customer retention is fair and celebrated across all levels of the organization.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q7', 'question': 'We have efficient communication channels to share frontline feedback about why customers stay or leave.', 'response_type': 'scale', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q8', 'question': 'Which statement best describes your understanding of your role in customer retention?', 'response_type': 'multiple_choice', 'options': ['Everyone, regardless of role, should be involved in customer retention.', 'Customer retention is mainly the job of customer-facing teams.', 'Responsibility for retention isn’t clearly assigned.', 'I’m unsure how my role connects to customer retention.'], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q9', 'question': 'There are clear processes for acting on feedback from employees about ways to improve customer loyalty.', 'response_type': 'scale', 'options': [], 'mandatory': False, 'metrics': [], 'classifiers': {}}, {'id': 'Q10', 'question': 'Would you feel comfortable proposing a new idea to improve our customer experience or retention processes?', 'response_type': 'yes_no', 'options': [], 'mandatory': True, 'metrics': [], 'classifiers': {}}, {'id': 'Q11', 'question': 'The tools and technologies we use meet customer expectations and enable efficient issue resolution.', 'response_type': 'scale', 'options': [], 'mandatory': False, 'metrics': [], 'classifiers': {}}, {'id': 'Q12', 'question': 'What is the single most important change you believe would most improve our customer retention culture?', 'response_type': 'text', 'options': [], 'mandatory': False, 'metrics': [], 'classifiers': {}}], 'configuration': {'background_image': None, 'languages': ['English'], 'target_audience': ['emily_rodriguez'], 'release_date': None, 'deadline': None, 'anonymous': True}, 'branding': {'primary_color': '#8B5CF6', 'background_color': '#FAFBFF', 'font_family': 'Inter'}, 'created_by': 'Michael Chen'}
+2025-09-07 22:18:03 - app.services.survey_service - INFO - Created survey: survey_1757308683.081156
+2025-09-07 22:18:03 - app.services.survey_service - INFO - Created survey: survey_1757308683.081156
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Created survey survey_1757308683.081156: Unlocking Customer Loyalty Drivers Pulse
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Created survey survey_1757308683.081156: Unlocking Customer Loyalty Drivers Pulse
+INFO:     127.0.0.1:56109 - "POST /api/v1/surveys/create HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56109 - "OPTIONS /api/v1/surveys/publish HTTP/1.1" 200 OK
+2025-09-07 22:18:03 - app.services.survey_service - INFO - Updated survey: survey_1757308683.081156
+2025-09-07 22:18:03 - app.services.survey_service - INFO - Updated survey: survey_1757308683.081156
+2025-09-07 22:18:03 - app.services.websocket_manager - WARNING - No active connections for user emily_rodriguez
+2025-09-07 22:18:03 - app.services.websocket_manager - WARNING - No active connections for user emily_rodriguez
+2025-09-07 22:18:03 - app.services.websocket_manager - INFO - Survey notification sent to 0/1 users
+2025-09-07 22:18:03 - app.services.websocket_manager - INFO - Survey notification sent to 0/1 users
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Published survey survey_1757308683.081156 to 1 users, 0 notifications sent
+2025-09-07 22:18:03 - app.api.v1.endpoints.surveys - INFO - Published survey survey_1757308683.081156 to 1 users, 0 notifications sent
+INFO:     127.0.0.1:56109 - "POST /api/v1/surveys/publish HTTP/1.1" 200 OK
+2025-09-07 22:18:03 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, '/Users/naman/Enculture-Intelligence-Platform/backend/data/surveys.json')}
+DEBUG:    < CLOSE 1000 (OK) Manual disconnect [19 bytes]
 DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1012 (service restart) [2 bytes]
-DEBUG:    ! failing connection with code 1012
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1012 (service restart) [2 bytes]
-DEBUG:    = connection is CLOSED
-DEBUG:    = connection is CLOSED
-DEBUG:    x half-closing TCP connection
-DEBUG:    x half-closing TCP connection
-2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:38:50 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:38:50 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-INFO:     connection closed
-INFO:     connection closed
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [73486]
-🛑 Shutting down Enculture Backend API...
-INFO:     Started server process [73649]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: N07NOeYWqLO6ri0Td68vkw==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53535) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-🚀 Starting Enculture Backend API...
-Environment: development
-Debug Mode: True
-2025-09-07 21:38:53 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:38:53 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: fvIzt9VQaCqsygPQe1feYDbLt0U=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:38:52 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:38:53.366394"}' [128 bytes]
-INFO:     127.0.0.1:53560 - "OPTIONS /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
-2025-09-07 21:38:56 - app.api.v1.endpoints.chat - INFO - Generating survey template for: on growth mindset...
-2025-09-07 21:38:56 - app.api.v1.endpoints.chat - INFO - Generating survey template for: on growth mindset...
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1147f6e80>
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1147f6e80>
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x113b28190>
-2025-09-07 21:38:56 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x113b28190>
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 21:38:56 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING ed 65 94 34 [binary, 4 bytes]
-DEBUG:    < PONG ed 65 94 34 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53596 - "GET /health HTTP/1.1" 200 OK
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:39:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_52a6b45b5d718fd274e95cf2359099fd'), (b'openai-processing-ms', b'23832'), (b'x-envoy-upstream-service-time', b'23834'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=qXGMqSWpC_abJBG0yY_k.YFH7at9x_7lt4fKC8hjbV8-1757306360-1.0.1.1-cSUKprQ41GOG0.AFUd8uRBkUgCgvS8YTbKuozpLsFo6ELmeM5ZUrJ5xqtshIlMk7qznb1IL8zJMQnnQutD2BmHu_D3MWJGD5cPtfwiGXk4c; path=/; expires=Mon, 08-Sep-25 05:09:20 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=pId3HKHHNQh9BrsXJdVQkCeUYAowySJQOD_0WJkVBQE-1757306360552-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc25bea13ebfe-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:39:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_52a6b45b5d718fd274e95cf2359099fd'), (b'openai-processing-ms', b'23832'), (b'x-envoy-upstream-service-time', b'23834'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=qXGMqSWpC_abJBG0yY_k.YFH7at9x_7lt4fKC8hjbV8-1757306360-1.0.1.1-cSUKprQ41GOG0.AFUd8uRBkUgCgvS8YTbKuozpLsFo6ELmeM5ZUrJ5xqtshIlMk7qznb1IL8zJMQnnQutD2BmHu_D3MWJGD5cPtfwiGXk4c; path=/; expires=Mon, 08-Sep-25 05:09:20 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=pId3HKHHNQh9BrsXJdVQkCeUYAowySJQOD_0WJkVBQE-1757306360552-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc25bea13ebfe-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:39:20 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:39:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
-{
-  "survey_metadata": {
-    "title": "Unlocking Organizational Potential: Growth Mindset at Work",
-    "name": "GrowthMindsetPulse",
-    "context": "A growth mindset—the belief that abilities...
-2025-09-07 21:39:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
-{
-  "survey_metadata": {
-    "title": "Unlocking Organizational Potential: Growth Mindset at Work",
-    "name": "GrowthMindsetPulse",
-    "context": "A growth mindset—the belief that abilities...
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field name, using empty default
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field name, using empty default
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field context, using empty default
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field context, using empty default
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
-2025-09-07 21:39:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
-2025-09-07 21:39:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
-2025-09-07 21:39:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
-INFO:     127.0.0.1:53560 - "POST /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306363371}' [46 bytes]
-2025-09-07 21:39:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306363371}
-2025-09-07 21:39:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306363371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 23 81 c7 22 [binary, 4 bytes]
-DEBUG:    < PONG 23 81 c7 22 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53608 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306393369}' [46 bytes]
-2025-09-07 21:39:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306393369}
-2025-09-07 21:39:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306393369}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 4b d8 cf 5d [binary, 4 bytes]
-DEBUG:    < PONG 4b d8 cf 5d [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING '-,sa' [text, 4 bytes]
-DEBUG:    < PONG '-,sa' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53626 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306423370}' [46 bytes]
-2025-09-07 21:40:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306423370}
-2025-09-07 21:40:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306423370}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING f4 0c 22 d6 [binary, 4 bytes]
-DEBUG:    < PONG f4 0c 22 d6 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53650 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306453370}' [46 bytes]
-2025-09-07 21:40:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306453370}
-2025-09-07 21:40:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306453370}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING d2 b3 5b 8d [binary, 4 bytes]
-DEBUG:    < PONG d2 b3 5b 8d [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING '\x05HC\x17' [text, 4 bytes]
-DEBUG:    < PONG '\x05HC\x17' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53700 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53724 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53724 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: Z62Iobl/4JrUIRW+SeBLWA==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53726) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.659722"}' [128 bytes]
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: Sgi1VCl60ytxoeitxAOmqi3P48s=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:41:22 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.659722"}' [128 bytes]
-INFO:     127.0.0.1:53724 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53724 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: 3gxt1bU2n+8yLna45fOTJg==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53728) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:41:22 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.752374"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.752374"}' [128 bytes]
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: 48JJRE+k5N+J71ZsM4hwue8y+uo=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:41:22 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:22.752374"}' [128 bytes]
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306483371}' [46 bytes]
-2025-09-07 21:41:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306483371}
-2025-09-07 21:41:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306483371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 49 28 2b 9e [binary, 4 bytes]
-DEBUG:    < PONG 49 28 2b 9e [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-DEBUG:    < CLOSE 1001 (going away) [2 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1001 (going away) [2 bytes]
+DEBUG:    > CLOSE 1000 (OK) Manual disconnect [19 bytes]
 DEBUG:    x half-closing TCP connection
 DEBUG:    = connection is CLOSED
-DEBUG:    < CLOSE 1001 (going away) [2 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1001 (going away) [2 bytes]
-2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:41:37 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:41:37 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 22:18:09 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 22:18:09 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
+2025-09-07 22:18:09 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
+2025-09-07 22:18:09 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
 INFO:     connection closed
-INFO:     connection closed
-INFO:     127.0.0.1:53747 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    = connection is CONNECTING
-INFO:     127.0.0.1:53747 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
-DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
+DEBUG:    < GET /api/v1/notifications/ws/emily_rodriguez HTTP/1.1
 DEBUG:    < host: localhost:8000
 DEBUG:    < connection: Upgrade
 DEBUG:    < pragma: no-cache
@@ -453,402 +392,72 @@ DEBUG:    < origin: http://localhost:3000
 DEBUG:    < sec-websocket-version: 13
 DEBUG:    < accept-encoding: gzip, deflate, br, zstd
 DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: 8kfNQx4mFAnjIFgDPXQuyQ==
+DEBUG:    < sec-websocket-key: YBzt7O73M/2TPn684Y5rqQ==
 DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53755) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.477888"}' [128 bytes]
+INFO:     ('127.0.0.1', 56114) - "WebSocket /api/v1/notifications/ws/emily_rodriguez" [accepted]
+2025-09-07 22:18:09 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+2025-09-07 22:18:09 - app.services.websocket_manager - INFO - WebSocket connection established for user emily_rodriguez
+INFO:     127.0.0.1:56115 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
 DEBUG:    > HTTP/1.1 101 Switching Protocols
 DEBUG:    > Upgrade: websocket
 DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: q2XFNqsNru2f/Pq9/VBA985t8Ck=
+DEBUG:    > Sec-WebSocket-Accept: l3QQ/J2G9igD4n1RybNMJBXJA2I=
 DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:41:38 GMT
+DEBUG:    > date: Mon, 08 Sep 2025 05:18:08 GMT
 DEBUG:    > server: uvicorn
 INFO:     connection open
 DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.477888"}' [128 bytes]
-INFO:     127.0.0.1:53747 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53758 - "GET /api/v1/surveys/list HTTP/1.1" 200 OK
-DEBUG:    = connection is CONNECTING
-DEBUG:    < GET /api/v1/notifications/ws/michael_chen HTTP/1.1
-DEBUG:    < host: localhost:8000
-DEBUG:    < connection: Upgrade
-DEBUG:    < pragma: no-cache
-DEBUG:    < cache-control: no-cache
-DEBUG:    < user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
-DEBUG:    < upgrade: websocket
-DEBUG:    < origin: http://localhost:3000
-DEBUG:    < sec-websocket-version: 13
-DEBUG:    < accept-encoding: gzip, deflate, br, zstd
-DEBUG:    < accept-language: en-US,en;q=0.9
-DEBUG:    < sec-websocket-key: re+HrY7ClgXZw1IZX6Ypzw==
-DEBUG:    < sec-websocket-extensions: permessage-deflate; client_max_window_bits
-INFO:     ('127.0.0.1', 53759) - "WebSocket /api/v1/notifications/ws/michael_chen" [accepted]
-2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-2025-09-07 21:41:39 - app.services.websocket_manager - INFO - WebSocket connection established for user michael_chen
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.496740"}' [128 bytes]
-DEBUG:    > HTTP/1.1 101 Switching Protocols
-DEBUG:    > Upgrade: websocket
-DEBUG:    > Connection: Upgrade
-DEBUG:    > Sec-WebSocket-Accept: k5iju+Nzig1UqnL1c/mSgFC/QTY=
-DEBUG:    > Sec-WebSocket-Extensions: permessage-deflate
-DEBUG:    > date: Mon, 08 Sep 2025 04:41:38 GMT
-DEBUG:    > server: uvicorn
-INFO:     connection open
-DEBUG:    = connection is OPEN
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.496740"}' [128 bytes]
-DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T21:41:39.496740"}' [128 bytes]
-INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53747 - "GET /api/v1/chat-threads/threads/recent?limit=10&user_id=michael_chen HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53764 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306513371}' [46 bytes]
-2025-09-07 21:41:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306513371}
-2025-09-07 21:41:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306513371}
+DEBUG:    > TEXT '{"type": "connection_established", "message": "...09-07T22:18:09.499028"}' [128 bytes]
+INFO:     127.0.0.1:56117 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING c5 74 3c df [binary, 4 bytes]
-DEBUG:    < PONG c5 74 3c df [binary, 4 bytes]
+DEBUG:    > PING 06 21 b3 26 [binary, 4 bytes]
+DEBUG:    < PONG 06 21 b3 26 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 7c 8e 94 ac [binary, 4 bytes]
-DEBUG:    < PONG 7c 8e 94 ac [binary, 4 bytes]
+DEBUG:    > PING b0 58 44 b5 [binary, 4 bytes]
+DEBUG:    < PONG b0 58 44 b5 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308719514}' [46 bytes]
+2025-09-07 22:18:39 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308719514}
+2025-09-07 22:18:39 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308719514}
+INFO:     127.0.0.1:56136 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING 45 b9 6d 6b [binary, 4 bytes]
+DEBUG:    < PONG 45 b9 6d 6b [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 5f 26 23 d8 [binary, 4 bytes]
-DEBUG:    < PONG 5f 26 23 d8 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53769 - "OPTIONS /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
-2025-09-07 21:42:00 - app.api.v1.endpoints.chat - INFO - Generating survey template for: innovative workspace design feedback...
-2025-09-07 21:42:00 - app.api.v1.endpoints.chat - INFO - Generating survey template for: innovative workspace design feedback...
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.started
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.started
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.complete
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - close.complete
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114c76fd0>
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114c76fd0>
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbed60>
-2025-09-07 21:42:00 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbed60>
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 21:42:00 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-INFO:     127.0.0.1:53771 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306530732}' [46 bytes]
-2025-09-07 21:42:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306530732}
-2025-09-07 21:42:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306530732}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 54 ea ed b7 [binary, 4 bytes]
-DEBUG:    < PONG 54 ea ed b7 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53777 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING b2 a4 83 7c [binary, 4 bytes]
-DEBUG:    < PONG b2 a4 83 7c [binary, 4 bytes]
+DEBUG:    > PING c9 5d 21 50 [binary, 4 bytes]
+DEBUG:    < PONG c9 5d 21 50 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING e1 d8 90 63 [binary, 4 bytes]
-DEBUG:    < PONG e1 d8 90 63 [binary, 4 bytes]
+DEBUG:    > PING d6 08 a3 b8 [binary, 4 bytes]
+DEBUG:    < PONG d6 08 a3 b8 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:42:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449173'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e7f920c2a1e2aea4628ffdee91614773'), (b'openai-processing-ms', b'19291'), (b'x-envoy-upstream-service-time', b'19294'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc6da2dceeb40-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:42:20 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449173'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_e7f920c2a1e2aea4628ffdee91614773'), (b'openai-processing-ms', b'19291'), (b'x-envoy-upstream-service-time', b'19294'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbc6da2dceeb40-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:42:20 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:42:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
-{
-  "metadata": {
-    "title": "Innovative Workspace Design Feedback for Enhanced Culture & Collaboration",
-    "name": "WorkspaceInnovate",
-    "context": "Our organization values the role wo...
-2025-09-07 21:42:20 - app.services.openai_service - INFO - OpenAI Response content: ```json
-{
-  "metadata": {
-    "title": "Innovative Workspace Design Feedback for Enhanced Culture & Collaboration",
-    "name": "WorkspaceInnovate",
-    "context": "Our organization values the role wo...
-2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field context, using empty default
-2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field context, using empty default
-2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
-2025-09-07 21:42:20 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
-2025-09-07 21:42:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
-2025-09-07 21:42:20 - app.services.openai_service - WARNING - Context is brief - adding description based on input
-2025-09-07 21:42:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 11 questions, 5 metrics, and 5 classifiers
-2025-09-07 21:42:20 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 11 questions, 5 metrics, and 5 classifiers
-INFO:     127.0.0.1:53769 - "POST /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306543371}' [46 bytes]
-2025-09-07 21:42:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306543371}
-2025-09-07 21:42:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306543371}
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308749512}' [46 bytes]
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 01 2e 11 c7 [binary, 4 bytes]
-DEBUG:    < PONG 01 2e 11 c7 [binary, 4 bytes]
+DEBUG:    > PING f5 3b 36 f7 [binary, 4 bytes]
+2025-09-07 22:19:09 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308749512}
+2025-09-07 22:19:09 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308749512}
+DEBUG:    < PONG f5 3b 36 f7 [binary, 4 bytes]
+DEBUG:    % received keepalive pong
+INFO:     127.0.0.1:56142 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    % sending keepalive ping
+DEBUG:    > PING b8 29 ba 47 [binary, 4 bytes]
+DEBUG:    < PONG b8 29 ba 47 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING a7 88 b4 fc [binary, 4 bytes]
-DEBUG:    < PONG a7 88 b4 fc [binary, 4 bytes]
+DEBUG:    > PING 82 c7 ac f0 [binary, 4 bytes]
+DEBUG:    < PONG 82 c7 ac f0 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53786 - "GET /health HTTP/1.1" 200 OK
+DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757308779511}' [46 bytes]
+2025-09-07 22:19:39 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308779511}
+2025-09-07 22:19:39 - app.api.v1.endpoints.websocket - INFO - Received message from emily_rodriguez: {"type":"heartbeat","timestamp":1757308779511}
+INFO:     127.0.0.1:56161 - "GET /health HTTP/1.1" 200 OK
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 3d 62 7c a6 [binary, 4 bytes]
-DEBUG:    < PONG 3d 62 7c a6 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306560725}' [46 bytes]
-2025-09-07 21:42:40 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306560725}
-2025-09-07 21:42:40 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306560725}
-INFO:     127.0.0.1:53789 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306573370}' [46 bytes]
-2025-09-07 21:42:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306573370}
-2025-09-07 21:42:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306573370}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 24 08 fc 87 [binary, 4 bytes]
-DEBUG:    < PONG 24 08 fc 87 [binary, 4 bytes]
+DEBUG:    > PING 48 8b ca a7 [binary, 4 bytes]
+DEBUG:    < PONG 48 8b ca a7 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
 DEBUG:    % sending keepalive ping
-DEBUG:    > PING 7a ff 87 bb [binary, 4 bytes]
-DEBUG:    < PONG 7a ff 87 bb [binary, 4 bytes]
+DEBUG:    > PING cd 5c c2 97 [binary, 4 bytes]
+DEBUG:    < PONG cd 5c c2 97 [binary, 4 bytes]
 DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING '$~X3' [text, 4 bytes]
-DEBUG:    < PONG '$~X3' [text, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53817 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306590725}' [46 bytes]
-2025-09-07 21:43:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306590725}
-2025-09-07 21:43:10 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306590725}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 92 7c 4c e8 [binary, 4 bytes]
-DEBUG:    < PONG 92 7c 4c e8 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53820 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING b2 e7 55 a6 [binary, 4 bytes]
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 33 a4 3a ab [binary, 4 bytes]
-DEBUG:    < PONG b2 e7 55 a6 [binary, 4 bytes]
-DEBUG:    < PONG 33 a4 3a ab [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % received keepalive pong
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306603371}' [46 bytes]
-2025-09-07 21:43:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306603371}
-2025-09-07 21:43:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306603371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING a1 d8 2e 98 [binary, 4 bytes]
-DEBUG:    < PONG a1 d8 2e 98 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53827 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING '\x174p\x17' [text, 4 bytes]
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING a0 04 c5 da [binary, 4 bytes]
-DEBUG:    < PONG '\x174p\x17' [text, 4 bytes]
-DEBUG:    < PONG a0 04 c5 da [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % received keepalive pong
-DEBUG:    < CLOSE 1001 (going away) [2 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1001 (going away) [2 bytes]
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-DEBUG:    < CLOSE 1001 (going away) [2 bytes]
-DEBUG:    = connection is CLOSING
-DEBUG:    > CLOSE 1001 (going away) [2 bytes]
-2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-DEBUG:    x half-closing TCP connection
-DEBUG:    = connection is CLOSED
-2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:43:40 - app.services.websocket_manager - INFO - WebSocket connection closed for user michael_chen
-2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-2025-09-07 21:43:40 - app.api.v1.endpoints.websocket - INFO - WebSocket disconnected for user michael_chen
-INFO:     connection closed
-INFO:     connection closed
-INFO:     127.0.0.1:53830 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306633371}' [46 bytes]
-2025-09-07 21:43:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306633371}
-2025-09-07 21:43:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306633371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING c3 98 80 98 [binary, 4 bytes]
-DEBUG:    < PONG c3 98 80 98 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-2025-09-07 21:44:09 - app.api.v1.endpoints.chat - INFO - Generating survey template for: customer retention analysis...
-2025-09-07 21:44:09 - app.api.v1.endpoints.chat - INFO - Generating survey template for: customer retention analysis...
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.started
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.started
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.complete
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - close.complete
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dc4700>
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dc4700>
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10e2a9740> server_hostname='api.openai.com' timeout=5.0
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbe610>
-2025-09-07 21:44:09 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x114dbe610>
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-09-07 21:44:09 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 46 12 78 fe [binary, 4 bytes]
-DEBUG:    < PONG 46 12 78 fe [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53845 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306663371}' [46 bytes]
-2025-09-07 21:44:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306663371}
-2025-09-07 21:44:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306663371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING c6 4b 60 50 [binary, 4 bytes]
-DEBUG:    < PONG c6 4b 60 50 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53887 - "GET /health HTTP/1.1" 200 OK
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:44:52 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_61c02b2303266fe7bd49e1ee889950aa'), (b'openai-processing-ms', b'42491'), (b'x-envoy-upstream-service-time', b'42493'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbca028899284a-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 08 Sep 2025 04:44:52 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'5000'), (b'x-ratelimit-limit-tokens', b'450000'), (b'x-ratelimit-remaining-requests', b'4999'), (b'x-ratelimit-remaining-tokens', b'449175'), (b'x-ratelimit-reset-requests', b'12ms'), (b'x-ratelimit-reset-tokens', b'110ms'), (b'openai-version', b'2020-10-01'), (b'openai-organization', b'user-knjlzgxswesrudhiuqhfddgj'), (b'openai-project', b'proj_5U72iGaa6G8r6dGo2gXOIAt4'), (b'x-request-id', b'req_61c02b2303266fe7bd49e1ee889950aa'), (b'openai-processing-ms', b'42491'), (b'x-envoy-upstream-service-time', b'42493'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'97bbca028899284a-SEA'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.started
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:44:52 - httpcore.http11 - DEBUG - response_closed.complete
-2025-09-07 21:44:52 - app.services.openai_service - INFO - OpenAI Response content: ```json
-{
-  "metadata": {
-    "title": "Building a Culture of Customer Loyalty: Employee Insights for Retention Excellence",
-    "name": "RetentionCultureCheck",
-    "context": [
-      "Customer reten...
-2025-09-07 21:44:52 - app.services.openai_service - INFO - OpenAI Response content: ```json
-{
-  "metadata": {
-    "title": "Building a Culture of Customer Loyalty: Employee Insights for Retention Excellence",
-    "name": "RetentionCultureCheck",
-    "context": [
-      "Customer reten...
-2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field context, using empty default
-2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field context, using empty default
-2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
-2025-09-07 21:44:52 - app.services.openai_service - WARNING - Missing field desiredOutcomes, using empty default
-2025-09-07 21:44:52 - app.services.openai_service - WARNING - Context is brief - adding description based on input
-2025-09-07 21:44:52 - app.services.openai_service - WARNING - Context is brief - adding description based on input
-2025-09-07 21:44:52 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
-2025-09-07 21:44:52 - app.api.v1.endpoints.chat - INFO - Successfully generated survey with 12 questions, 5 metrics, and 5 classifiers
-INFO:     127.0.0.1:53842 - "POST /api/v1/chat/generate-survey-template HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306693370}' [46 bytes]
-2025-09-07 21:44:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306693370}
-2025-09-07 21:44:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306693370}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING e6 52 af 59 [binary, 4 bytes]
-DEBUG:    < PONG e6 52 af 59 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 5e 64 d8 44 [binary, 4 bytes]
-DEBUG:    < PONG 5e 64 d8 44 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53905 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306723370}' [46 bytes]
-2025-09-07 21:45:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306723370}
-2025-09-07 21:45:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306723370}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 47 e3 4c d8 [binary, 4 bytes]
-DEBUG:    < PONG 47 e3 4c d8 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53912 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306753370}' [46 bytes]
-2025-09-07 21:45:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306753370}
-2025-09-07 21:45:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306753370}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING de e9 81 ea [binary, 4 bytes]
-DEBUG:    < PONG de e9 81 ea [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 8d 3b 52 dd [binary, 4 bytes]
-DEBUG:    < PONG 8d 3b 52 dd [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53936 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306783372}' [46 bytes]
-2025-09-07 21:46:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306783372}
-2025-09-07 21:46:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306783372}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 0e 32 eb c0 [binary, 4 bytes]
-DEBUG:    < PONG 0e 32 eb c0 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53942 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306813370}' [46 bytes]
-2025-09-07 21:46:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306813370}
-2025-09-07 21:46:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306813370}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING ef 87 cf dd [binary, 4 bytes]
-DEBUG:    < PONG ef 87 cf dd [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING e0 0f d6 f0 [binary, 4 bytes]
-DEBUG:    < PONG e0 0f d6 f0 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53958 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306843371}' [46 bytes]
-2025-09-07 21:47:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306843371}
-2025-09-07 21:47:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306843371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 8b 8d 3e 05 [binary, 4 bytes]
-DEBUG:    < PONG 8b 8d 3e 05 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53973 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306873371}' [46 bytes]
-2025-09-07 21:47:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306873371}
-2025-09-07 21:47:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306873371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 86 9e d7 e3 [binary, 4 bytes]
-DEBUG:    < PONG 86 9e d7 e3 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 82 d7 13 c8 [binary, 4 bytes]
-DEBUG:    < PONG 82 d7 13 c8 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53978 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306903372}' [46 bytes]
-2025-09-07 21:48:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306903372}
-2025-09-07 21:48:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306903372}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 6a 20 2d ad [binary, 4 bytes]
-DEBUG:    < PONG 6a 20 2d ad [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:53991 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306933371}' [46 bytes]
-2025-09-07 21:48:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306933371}
-2025-09-07 21:48:53 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306933371}
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING c9 f7 47 38 [binary, 4 bytes]
-DEBUG:    < PONG c9 f7 47 38 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-DEBUG:    % sending keepalive ping
-DEBUG:    > PING 14 69 af 87 [binary, 4 bytes]
-DEBUG:    < PONG 14 69 af 87 [binary, 4 bytes]
-DEBUG:    % received keepalive pong
-INFO:     127.0.0.1:54006 - "GET /health HTTP/1.1" 200 OK
-DEBUG:    < TEXT '{"type":"heartbeat","timestamp":1757306963371}' [46 bytes]
-2025-09-07 21:49:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306963371}
-2025-09-07 21:49:23 - app.api.v1.endpoints.websocket - INFO - Received message from michael_chen: {"type":"heartbeat","timestamp":1757306963371}

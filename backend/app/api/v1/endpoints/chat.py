@@ -755,3 +755,55 @@ async def generate_survey_template(request: dict):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to generate comprehensive survey template: {str(e)}"
         )
+
+
+@router.post("/enhance-metric-formula")
+async def enhance_metric_formula(request: dict):
+    """
+    Enhance a metric formula using AI.
+    """
+    try:
+        metric_name = request.get('metricName', '')
+        metric_description = request.get('metricDescription', '')
+        questions = request.get('questions', [])
+        selected_classifiers = request.get('selectedClassifiers', [])
+        
+        logger.info(f"Enhancing formula for metric: {metric_name}")
+        
+        # Create a focused prompt for formula enhancement
+        prompt = f"""
+        Create an advanced analytical formula for this metric:
+        
+        Metric Name: {metric_name}
+        Description: {metric_description}
+        
+        Available Questions: {[q.get('text', '') for q in questions]}
+        Selected Classifiers: {selected_classifiers}
+        
+        Generate a sophisticated formula that:
+        - Uses statistical functions like AVG(), COUNT(), PERCENT(), SUM()
+        - References specific questions by their index (q1, q2, etc.)
+        - Incorporates the selected classifiers for segmentation (BY Department, etc.)
+        - Provides meaningful business insights
+        
+        Return only the formula string, such as:
+        "AVG(q1, q3) * 100 BY Department, Experience Level"
+        "COUNT(q2 >= 4) / COUNT(total_responses) * 100"
+        "PERCENT(q1 == 'Very Satisfied') BY Work Arrangement"
+        """
+        
+        enhanced_formula = await openai_service.send_message([
+            {"role": "system", "content": "You are an expert data analyst and metrics designer."},
+            {"role": "user", "content": prompt}
+        ])
+        
+        return {
+            "enhanced_formula": enhanced_formula.strip().replace('"', '').replace("'", "")
+        }
+        
+    except Exception as e:
+        logger.error(f"Error enhancing metric formula: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to enhance metric formula: {str(e)}"
+        )

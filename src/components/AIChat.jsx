@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp, Settings, Eye, FileText, Palette, Type, List, Grid, Sliders, ArrowRight, ArrowLeft, CheckCircle, Target, Tag, Calculator, Globe, Calendar, Users as UsersIcon, Image, Wand2, Shield, Bell } from 'lucide-react'
+import { Send, BarChart, Users, MessageSquare, PanelLeft, Plus, Search, History, X, Copy, Edit3, RotateCcw, Check, ThumbsUp, Settings, Eye, FileText, Palette, Type, List, Grid, Sliders, ArrowRight, ArrowLeft, CheckCircle, Target, Tag, Calculator, Globe, Calendar, Users as UsersIcon, Image, Wand2, Shield, Bell, Sparkles } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -291,6 +291,51 @@ function AIChat() {
     return { ok: true, surveyId, responses }
   }
 
+  // Celebration confetti function
+  const triggerConfettiCelebration = () => {
+    // Create multiple confetti pieces
+    const confettiContainer = document.createElement('div')
+    confettiContainer.className = 'confetti-container'
+    document.body.appendChild(confettiContainer)
+
+    const colors = ['#8B5CF6', '#A855F7', '#EC4899', '#F59E0B', '#10B981', '#3B82F6']
+    const shapes = ['square', 'circle', 'triangle']
+
+    for (let i = 0; i < 150; i++) {
+      const confetti = document.createElement('div')
+      confetti.className = `confetti confetti-${shapes[Math.floor(Math.random() * shapes.length)]}`
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)]
+      confetti.style.left = Math.random() * 100 + '%'
+      confetti.style.animationDelay = Math.random() * 3 + 's'
+      confetti.style.animationDuration = Math.random() * 3 + 2 + 's'
+      confettiContainer.appendChild(confetti)
+    }
+
+    // Remove confetti after animation
+    setTimeout(() => {
+      document.body.removeChild(confettiContainer)
+    }, 6000)
+
+    // Show celebration message overlay
+    const celebrationOverlay = document.createElement('div')
+    celebrationOverlay.className = 'celebration-overlay'
+    celebrationOverlay.innerHTML = `
+      <div class="celebration-content">
+        <div class="celebration-icon">🎉</div>
+        <h2 class="celebration-title">Survey Published!</h2>
+        <p class="celebration-message">Your survey is now live and has been sent to team members!</p>
+      </div>
+    `
+    document.body.appendChild(celebrationOverlay)
+
+    setTimeout(() => {
+      celebrationOverlay.style.opacity = '0'
+      setTimeout(() => {
+        document.body.removeChild(celebrationOverlay)
+      }, 500)
+    }, 3000)
+  }
+
   // Canvas control helpers
   // Notification helpers
   const addNotification = (message, type = 'info') => {
@@ -564,23 +609,28 @@ The user is currently taking this survey and may ask for help with specific ques
       
       // First create the survey
       const surveyData = {
-        name: surveyDraft.name,
-        context: surveyDraft.context,
-        desired_outcomes: surveyDraft.desiredOutcomes,
-        classifiers: surveyDraft.classifiers,
-        metrics: surveyDraft.metrics,
-        questions: surveyDraft.questions.map(q => ({
-          id: q.id,
-          question: q.text,
-          response_type: q.type,
-          options: q.options,
-          mandatory: q.required
+        name: surveyDraft.name || 'Untitled Survey',
+        context: surveyDraft.context || 'Survey created to gather feedback and insights.',
+        desired_outcomes: surveyDraft.desiredOutcomes || ['Gather feedback', 'Identify improvements'],
+        classifiers: surveyDraft.classifiers || [],
+        metrics: surveyDraft.metrics || [],
+        questions: (surveyDraft.questions || []).filter(q => q.text || q.question).map((q, index) => ({
+          id: q.id || `q${index + 1}`,
+          question: q.text || q.question || '',
+          response_type: q.type || q.response_type || 'multiple_choice',
+          options: q.options || [],
+          mandatory: q.required || q.mandatory || false
         })),
-        configuration: surveyDraft.configuration,
-        branding: surveyDraft.branding,
-        created_by: currentUser?.name || currentUserId
+        configuration: {
+          ...surveyDraft.configuration,
+          target_audience: surveyDraft.configuration?.selectedEmployees || [],
+          anonymous: surveyDraft.configuration?.anonymous !== false
+        },
+        branding: surveyDraft.branding || { primary_color: '#8B5CF6' },
+        created_by: currentUser?.name || currentUserId || 'Anonymous'
       }
 
+      console.log('📤 Sending survey data to backend:', JSON.stringify(surveyData, null, 2))
       const createdSurvey = await surveyService.createSurvey(surveyData)
       
       // Use the target audience selected in the survey configuration
@@ -592,7 +642,8 @@ The user is currently taking this survey and may ask for help with specific ques
       )
 
       if (publishResult.success) {
-        // Removed: addNotification(`Survey published successfully! Sent to ${publishResult.notifications_sent} users.`, 'success')
+        // Trigger celebration confetti
+        triggerConfettiCelebration()
         
         // Store the published survey in localStorage for notifications
         const publishedSurveyData = {
@@ -2976,7 +3027,7 @@ The user is currently taking this survey and may ask for help with specific ques
                                       </div>
                                     ))}
                                     <button
-                                        className="add-value-btn-modern"
+                                        className="add-option-btn"
                                       onClick={() => {
                                         const updated = [...(surveyDraft.classifiers || [])]
                                           while (updated.length <= index) {
@@ -3113,8 +3164,46 @@ The user is currently taking this survey and may ask for help with specific ques
                                   </div>
                                   </div>
                                   
-                                  <div className="formula-display-modern">
-                                    <code>{metric.formula || generateDefaultFormula(metric.selectedClassifiers)}</code>
+                                  <div className="formula-editor-section">
+                                    <div className="formula-editor-header">
+                                      <label className="formula-label">Analysis Formula</label>
+                                      <button
+                                        type="button"
+                                        className="enhance-formula-btn"
+                                        onClick={async () => {
+                                          const enhanced = await chatService.enhanceMetricFormula(
+                                            metric.name, 
+                                            metric.description, 
+                                            surveyDraft.questions || [],
+                                            metric.selectedClassifiers || []
+                                          )
+                                          if (enhanced) {
+                                            const updated = [...(surveyDraft.metrics || [])]
+                                            updated[index] = { ...updated[index], formula: enhanced }
+                                            setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                                          }
+                                        }}
+                                      >
+                                        <Sparkles size={14} />
+                                        Enhance with AI
+                                      </button>
+                                    </div>
+                                    <textarea
+                                      value={metric.formula || generateDefaultFormula(metric.selectedClassifiers)}
+                                      onChange={e => {
+                                        const updated = [...(surveyDraft.metrics || [])]
+                                        updated[index] = { ...updated[index], formula: e.target.value }
+                                        setSurveyDraft(prev => ({ ...prev, metrics: updated }))
+                                      }}
+                                      placeholder="e.g., AVG(satisfaction_rating, engagement_score) BY Department"
+                                      className="formula-editor"
+                                      rows={2}
+                                    />
+                                    <div className="formula-help">
+                                      <div className="formula-examples">
+                                        <strong>Examples:</strong> AVG(q1,q2), COUNT(responses &gt;= 4), PERCENT(yes_responses) BY Department
+                                      </div>
+                                    </div>
                                   </div>
                                   
                                 </div>
@@ -4908,10 +4997,133 @@ The user is currently taking this survey and may ask for help with specific ques
         }
         
         .classifiers-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: var(--space-6);
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-8);
+          margin-top: var(--space-6);
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        
+        .classifier-item {
+          background: rgba(255, 255, 255, 0.8);
+          border: 2px solid rgba(226, 232, 240, 0.3);
+          border-radius: 16px;
+          padding: var(--space-6);
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        
+        .classifier-item:hover {
+          border-color: rgba(139, 92, 246, 0.3);
+          box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
+          transform: translateY(-2px);
+        }
+        
+        .classifier-title-input {
+          width: 100%;
+          border: none;
+          background: rgba(248, 250, 252, 0.6);
+          border-radius: 10px;
+          padding: 16px 20px;
+          font-weight: 600;
+          font-size: 1.1em;
+          color: var(--text-primary);
+          outline: none;
+          margin-bottom: var(--space-4);
+          transition: all 0.2s ease;
+        }
+        
+        .classifier-title-input:focus {
+          background: white;
+          box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+        
+        .classifier-values-section {
           margin-top: var(--space-4);
+        }
+        
+        .section-label {
+          display: block;
+          font-size: 0.9em;
+          font-weight: 600;
+          color: var(--text-secondary);
+          margin-bottom: var(--space-3);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        .classifier-values-list {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+          margin-bottom: var(--space-4);
+        }
+        
+        .value-input-row {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+        }
+        
+        .value-input {
+          flex: 1;
+          border: 1px solid rgba(226, 232, 240, 0.4);
+          background: rgba(248, 250, 252, 0.4);
+          border-radius: 8px;
+          padding: 12px 16px;
+          font-size: 0.95em;
+          color: var(--text-primary);
+          outline: none;
+          transition: all 0.2s ease;
+        }
+        
+        .value-input:focus {
+          background: white;
+          border-color: rgba(139, 92, 246, 0.3);
+          box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
+        }
+        
+        .remove-value-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          background: rgba(239, 68, 68, 0.1);
+          border: 1px solid rgba(239, 68, 68, 0.2);
+          border-radius: 8px;
+          color: rgba(239, 68, 68, 0.7);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+        }
+        
+        .remove-value-btn:hover {
+          background: rgba(239, 68, 68, 0.15);
+          border-color: rgba(239, 68, 68, 0.4);
+          transform: scale(1.05);
+        }
+        
+        .add-option-btn {
+          display: flex;
+          align-items: center;
+          gap: var(--space-2);
+          padding: 10px 16px;
+          background: transparent;
+          border: 1px dashed rgba(139, 92, 246, 0.4);
+          border-radius: 8px;
+          color: rgba(139, 92, 246, 0.7);
+          font-size: 0.9em;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          margin-top: var(--space-2);
+        }
+        
+        .add-option-btn:hover {
+          background: rgba(139, 92, 246, 0.05);
+          border-color: rgba(139, 92, 246, 0.6);
         }
         
         .classifier-card {
@@ -7056,6 +7268,71 @@ The user is currently taking this survey and may ask for help with specific ques
            font-size: 0.8em;
            color: var(--text-secondary);
            font-weight: 500;
+         }
+         
+         .formula-editor-section {
+           margin-top: 16px;
+         }
+         
+         .formula-editor-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 8px;
+         }
+         
+         .enhance-formula-btn {
+           display: flex;
+           align-items: center;
+           gap: 6px;
+           padding: 6px 12px;
+           background: linear-gradient(135deg, #8B5CF6, #A855F7);
+           color: white;
+           border: none;
+           border-radius: 6px;
+           font-size: 0.8em;
+           font-weight: 500;
+           cursor: pointer;
+           transition: all 0.2s ease;
+         }
+         
+         .enhance-formula-btn:hover {
+           background: linear-gradient(135deg, #7C3AED, #9333EA);
+           transform: translateY(-1px);
+         }
+         
+         .formula-editor {
+           width: 100%;
+           border: 1px solid rgba(226, 232, 240, 0.3);
+           background: rgba(248, 250, 252, 0.4);
+           border-radius: 8px;
+           padding: 12px 16px;
+           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+           font-size: 0.85em;
+           color: var(--text-primary);
+           outline: none;
+           resize: vertical;
+           line-height: 1.4;
+         }
+         
+         .formula-editor:focus {
+           background: white;
+           border-color: rgba(139, 92, 246, 0.3);
+           box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
+         }
+         
+         .formula-help {
+           margin-top: 8px;
+           padding: 8px 12px;
+           background: rgba(139, 92, 246, 0.05);
+           border-radius: 6px;
+           border-left: 3px solid rgba(139, 92, 246, 0.3);
+         }
+         
+         .formula-examples {
+           font-size: 0.8em;
+           color: var(--text-secondary);
+           line-height: 1.4;
          }
          
          .formula-display {
@@ -10596,54 +10873,145 @@ The user is currently taking this survey and may ask for help with specific ques
           color: white;
         }
 
+      
+      /* Confetti Celebration Styles */
+      .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10000;
+        overflow: hidden;
+      }
+      
+      .confetti {
+        position: absolute;
+        top: -10px;
+        width: 10px;
+        height: 10px;
+        animation: confetti-fall linear infinite;
+      }
+      
+      .confetti-square {
+        width: 8px;
+        height: 8px;
+      }
+      
+      .confetti-circle {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      
+      .confetti-triangle {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 8px solid currentColor;
+        background: transparent !important;
+      }
+      
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+      
+      .celebration-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10001;
+        backdrop-filter: blur(4px);
+        animation: celebration-fade-in 0.5s ease-out;
+        transition: opacity 0.5s ease-out;
+      }
+      
+      .celebration-content {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        text-align: center;
+        max-width: 400px;
+        animation: celebration-bounce 0.6s ease-out;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      
+      .celebration-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: celebration-pulse 1s ease-in-out infinite;
+      }
+      
+      .celebration-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1a202c;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #8B5CF6, #EC4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .celebration-message {
+        font-size: 1rem;
+        color: #718096;
+        margin: 0;
+        line-height: 1.5;
+      }
+      
+      @keyframes celebration-fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes celebration-bounce {
+        0% {
+          transform: scale(0.3) translateY(100px);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.05) translateY(-10px);
+        }
+        70% {
+          transform: scale(0.95) translateY(5px);
+        }
+        100% {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+      }
+      
+      @keyframes celebration-pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+      
       `}</style>
       
-      {/* Notifications */}
-      {notifications.length > 0 && (
-        <div className="notification-container">
-          {notifications.map(notification => (
-            <div key={notification.id} className={`notification-toast ${notification.type}`}>
-              <div className={`notification-icon ${notification.type}`}>
-                {notification.type === 'success' ? '✓' : 
-                 notification.type === 'error' ? '✕' : 
-                 notification.type === 'survey' ? <Bell size={16} /> :
-                 notification.type === 'info' ? 'i' : '!'}
-              </div>
-              <div className="notification-content">
-                <div className="notification-title">
-                  {notification.type === 'success' ? 'Success' : 
-                   notification.type === 'error' ? 'Error' : 
-                   notification.type === 'survey' ? 'New Survey' :
-                   notification.type === 'info' ? 'Info' : 'Warning'}
-                </div>
-                <div className="notification-message">{notification.message}</div>
-                {notification.type === 'survey' && notification.action && (
-                  <div className="notification-actions">
-                    <button 
-                      className="notification-btn primary"
-                      onClick={() => {
-                        notification.action();
-                        // Remove this notification after clicking
-                        setNotifications(prev => prev.filter(n => n.id !== notification.id));
-                      }}
-                    >
-                      Take Survey
-                    </button>
-                    <button 
-                      className="notification-btn secondary"
-                      onClick={() => {
-                        setNotifications(prev => prev.filter(n => n.id !== notification.id));
-                      }}
-                    >
-                      Dismiss
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Notifications - REMOVED: User requested no notifications at all */}
     </div>
   )
 }

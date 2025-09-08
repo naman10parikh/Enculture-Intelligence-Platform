@@ -2971,11 +2971,24 @@
   },
   "a5898802-c36c-40d3-8bfd-c22894ad1352": {
     "id": "a5898802-c36c-40d3-8bfd-c22894ad1352",
-    "title": "New Chat",
+    "title": "Culture Intelligence Support Chat",
     "user_id": "michael_chen",
     "created_at": "2025-09-08T04:26:32.817764",
-    "updated_at": "2025-09-08T04:26:32.817884",
-    "messages": [],
+    "updated_at": "2025-09-08T05:16:53.612868",
+    "messages": [
+      {
+        "id": "d8056ae4-c2e0-4906-9de9-687654c47df8",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-08T05:16:49.497667"
+      },
+      {
+        "id": "c7fdf0ad-6542-4bcb-a0b1-c39194b1aca3",
+        "role": "assistant",
+        "content": "Hello! I'm here and ready to help you analyze and optimize culture data. How can I support your culture intelligence work today? If you have survey results, engagement metrics, or specific culture questions, just let me know. ",
+        "timestamp": "2025-09-08T05:16:52.701712"
+      }
+    ],
     "is_active": true
   },
   "169cc56c-3b39-453d-bc96-e818a5e85882": {
@@ -3018,6 +3031,94 @@
         "role": "assistant",
         "content": "Hello! How can I assist you today in analyzing or enhancing your company culture? If you have any culture data to review, need insights, or are looking for recommendations, just let me know. ",
         "timestamp": "2025-09-08T04:38:41.747759"
+      }
+    ],
+    "is_active": true
+  },
+  "cdab5732-017d-471a-b162-7786ae952bc1": {
+    "id": "cdab5732-017d-471a-b162-7786ae952bc1",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T04:57:52.396284",
+    "updated_at": "2025-09-08T04:57:54.798739",
+    "messages": [
+      {
+        "id": "c036fcd5-4cae-44cd-9e41-e797da02210c",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T04:57:52.459875"
+      },
+      {
+        "id": "10eaed43-6831-4694-ab75-196dc18367b3",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence goals? Are you looking to analyze recent survey data, interpret culture metrics, or get recommendations for strengthening your organizational culture? Let me know what you'd like to focus on! ",
+        "timestamp": "2025-09-08T04:57:54.798634"
+      }
+    ],
+    "is_active": true
+  },
+  "2e070157-037a-4d8a-a407-02bf6f3cc052": {
+    "id": "2e070157-037a-4d8a-a407-02bf6f3cc052",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:09:42.321349",
+    "updated_at": "2025-09-08T05:09:44.681409",
+    "messages": [
+      {
+        "id": "26bc8008-0f18-4804-9b44-e0094264fada",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:09:42.386317"
+      },
+      {
+        "id": "fea0f439-86f3-4413-8205-9fc3957c3200",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your culture intelligence needs today? Are you looking for help analyzing culture data, interpreting survey results, or generating insights and action recommendations? Let me know what you're focusing on, and I'll tailor my support to your goals. ",
+        "timestamp": "2025-09-08T05:09:44.681369"
+      }
+    ],
+    "is_active": true
+  },
+  "69c2efe4-1152-4c9b-a346-e4cba7ab5af1": {
+    "id": "69c2efe4-1152-4c9b-a346-e4cba7ab5af1",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:12:18.827083",
+    "updated_at": "2025-09-08T05:12:21.158202",
+    "messages": [
+      {
+        "id": "79e339cf-d12f-4d44-be9c-e01c3b95e613",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:12:18.875156"
+      },
+      {
+        "id": "ee94f8cf-f804-48b2-931e-cab632db5db1",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your organizational culture intelligence today? Are you looking to analyze some recent survey data, interpret culture metrics, or generate actionable insights? Let me know what you'd like to focus on! ",
+        "timestamp": "2025-09-08T05:12:21.158020"
+      }
+    ],
+    "is_active": true
+  },
+  "43489735-c652-4505-a229-c9027c26257a": {
+    "id": "43489735-c652-4505-a229-c9027c26257a",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:16:36.057614",
+    "updated_at": "2025-09-08T05:16:38.561383",
+    "messages": [
+      {
+        "id": "3f5235af-21e1-469f-93c0-d1e1cb39892b",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:16:36.128024"
+      },
+      {
+        "id": "a0eed07f-185f-4a34-b059-6469efeec4ae",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As the Culture Intelligence Assistant, I'm here to help you analyze, interpret, and act on your company's culture data. How can I assist you today? Are you looking for insights on recent survey results, team dynamics, or ways to improve your organizational culture? Let me know how you'd like to get started! ",
+        "timestamp": "2025-09-08T05:16:38.561286"
       }
     ],
     "is_active": true

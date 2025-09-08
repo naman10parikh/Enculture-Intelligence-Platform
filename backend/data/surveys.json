@@ -1,1 +1,578 @@
-{}
+{
+  "survey_1757307657.366218": {
+    "id": "survey_1757307657.366218",
+    "name": "Customer Loyalty Insight Pulse",
+    "context": "Survey focused on customer retention analysis. ",
+    "desired_outcomes": [],
+    "classifiers": [
+      {
+        "name": "Department",
+        "description": "Employee\u2019s primary department or business unit",
+        "options": [
+          "Sales / Business Development",
+          "Customer Support / Success",
+          "Product / Engineering",
+          "Marketing / Communications",
+          "Operations / Administration"
+        ]
+      },
+      {
+        "name": "Experience Level",
+        "description": "Length of time working in this organization",
+        "options": [
+          "Less than 1 year",
+          "1-3 years",
+          "4-7 years",
+          "8+ years"
+        ]
+      },
+      {
+        "name": "Work Arrangement",
+        "description": "Primary work setup",
+        "options": [
+          "On-site / In-office",
+          "Remote / Work from home",
+          "Hybrid (mix of on-site and remote)"
+        ]
+      },
+      {
+        "name": "Role Type",
+        "description": "General nature of employee's current role",
+        "options": [
+          "Individual Contributor",
+          "Team Lead / Supervisor",
+          "Manager / Director",
+          "Executive / Senior Leadership"
+        ]
+      },
+      {
+        "name": "Geographic Location",
+        "description": "Region where employee primarily works",
+        "options": [
+          "North America",
+          "Europe",
+          "Asia-Pacific",
+          "Other / Multiple Regions"
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "name": "Empowerment Score",
+        "description": "Measures the average level to which employees feel equipped and authorized to resolve customer issues and take retention-focused actions.",
+        "formula": "Average of responses to Q3 and Q4, segmented by Department, Experience Level, and Role Type."
+      },
+      {
+        "name": "Retention Culture Alignment",
+        "description": "Assesses the degree of organizational alignment around customer retention as a shared responsibility and cultural value.",
+        "formula": "Average of responses to Q1, Q2, Q6, and Q8 across all departments."
+      },
+      {
+        "name": "Communication Effectiveness Index",
+        "description": "Evaluates how effectively cross-team feedback and information flows are supporting customer retention efforts.",
+        "formula": "Average of Q7 and Q9, segmented by Department and Work Arrangement."
+      },
+      {
+        "name": "Psychological Safety for Customer Topics",
+        "description": "Assesses whether employees feel safe raising concerns or innovative solutions related to customer retention.",
+        "formula": "Proportion of positive (4-5) responses to Q5 and the proportion of 'Yes' responses to Q10, by Department and Role Type."
+      },
+      {
+        "name": "Retention Tool Readiness",
+        "description": "Measures perceived adequacy of tools, training, and support for customer-facing work.",
+        "formula": "Average of responses to Q3, Q4, and Q11, cross-tabbed with Experience Level."
+      }
+    ],
+    "questions": [
+      {
+        "id": "Q1",
+        "question": "How clearly is customer retention described as a shared responsibility across all departments?",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q2",
+        "question": "To what extent do you feel that our organizational values emphasize long-term customer relationships?",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q3",
+        "question": "I have access to the resources, information, and authority needed to resolve customer issues and retain their business.",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q4",
+        "question": "Our organization provides effective training and ongoing support to help me address customer needs confidently.",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q5",
+        "question": "I feel safe sharing concerns, mistakes, or innovative ideas related to improving customer retention.",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q6",
+        "question": "Recognition for contributions to customer retention is fair and celebrated across all levels of the organization.",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q7",
+        "question": "We have efficient communication channels to share frontline feedback about why customers stay or leave.",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q8",
+        "question": "Which statement best describes your understanding of your role in customer retention?",
+        "response_type": "multiple_choice",
+        "options": [
+          "Everyone, regardless of role, should be involved in customer retention.",
+          "Customer retention is mainly the job of customer-facing teams.",
+          "Responsibility for retention isn\u2019t clearly assigned.",
+          "I\u2019m unsure how my role connects to customer retention."
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q9",
+        "question": "There are clear processes for acting on feedback from employees about ways to improve customer loyalty.",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": false,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q10",
+        "question": "Would you feel comfortable proposing a new idea to improve our customer experience or retention processes?",
+        "response_type": "yes_no",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q11",
+        "question": "The tools and technologies we use meet customer expectations and enable efficient issue resolution.",
+        "response_type": "scale",
+        "options": null,
+        "mandatory": false,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q12",
+        "question": "What is the single most important change you believe would most improve our customer retention culture?",
+        "response_type": "text",
+        "options": null,
+        "mandatory": false,
+        "metrics": [],
+        "classifiers": {}
+      }
+    ],
+    "configuration": {
+      "background_image": null,
+      "languages": [
+        "English"
+      ],
+      "target_audience": [
+        "emily_rodriguez"
+      ],
+      "release_date": null,
+      "deadline": null,
+      "anonymous": true
+    },
+    "branding": {
+      "primary_color": "#8B5CF6",
+      "background_color": "#FAFBFF",
+      "font_family": "Inter"
+    },
+    "status": "published",
+    "created_by": "Michael Chen",
+    "created_at": "2025-09-07 22:00:57.367093",
+    "published_at": "2025-09-07 22:00:57.383601"
+  },
+  "survey_1757308102.294257": {
+    "id": "survey_1757308102.294257",
+    "name": "Test Survey",
+    "context": "Test context that should be long enough to pass validation checks. This is a test survey for debugging the 422 error that occurs when trying to create surveys.",
+    "desired_outcomes": [
+      "Test outcome 1",
+      "Test outcome 2"
+    ],
+    "classifiers": [
+      {
+        "name": "Department",
+        "values": [
+          "Engineering",
+          "Marketing"
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "name": "Satisfaction",
+        "formula": "AVG(q1)"
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "question": "How satisfied are you?",
+        "response_type": "scale",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      }
+    ],
+    "configuration": {
+      "background_image": null,
+      "languages": [
+        "English"
+      ],
+      "target_audience": [],
+      "release_date": null,
+      "deadline": null,
+      "anonymous": true
+    },
+    "branding": {
+      "primary_color": "#8B5CF6",
+      "background_color": "#FAFBFF",
+      "font_family": "Inter"
+    },
+    "status": "draft",
+    "created_by": "test_user",
+    "created_at": "2025-09-07 22:08:22.294469",
+    "published_at": null
+  },
+  "survey_1757308222.697181": {
+    "id": "survey_1757308222.697181",
+    "name": "Professional Culture Assessment",
+    "context": "This comprehensive culture assessment is designed to gather critical insights about emily test survey for notification testing. Based on current industry research, organizations that regularly measure and act on culture data see 23% higher employee engagement, 18% better retention rates, and 12% improved business performance.",
+    "desired_outcomes": [
+      "Establish baseline culture metrics for data-driven improvement",
+      "Identify specific areas requiring immediate attention and intervention"
+    ],
+    "classifiers": [
+      {
+        "name": "Department",
+        "values": [
+          "Engineering",
+          "Product",
+          "Marketing",
+          "Sales",
+          "HR",
+          "Operations",
+          "Leadership"
+        ]
+      },
+      {
+        "name": "Experience Level",
+        "values": [
+          "0-1 years",
+          "2-5 years",
+          "6-10 years",
+          "11+ years"
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "name": "Culture Index",
+        "formula": "AVG(satisfaction_rating, engagement_score, growth_perception) * 100"
+      },
+      {
+        "name": "Engagement Distribution",
+        "formula": "COUNT(engagement_score >= 4) / COUNT(total_responses) BY Department"
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "question": "How would you rate your overall culture in this organization?",
+        "response_type": "rating",
+        "options": null,
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      }
+    ],
+    "configuration": {
+      "background_image": null,
+      "languages": [
+        "English"
+      ],
+      "target_audience": [
+        "emily_rodriguez"
+      ],
+      "release_date": null,
+      "deadline": null,
+      "anonymous": true
+    },
+    "branding": {
+      "primary_color": "#8B5CF6",
+      "background_color": "#FAFBFF",
+      "font_family": "Inter"
+    },
+    "status": "draft",
+    "created_by": "Michael Chen",
+    "created_at": "2025-09-07 22:10:22.697390",
+    "published_at": null
+  },
+  "survey_1757308683.081156": {
+    "id": "survey_1757308683.081156",
+    "name": "Unlocking Customer Loyalty Drivers Pulse",
+    "context": "**Unlocking Customer Loyalty Drivers Pulse**\n\nIn today's competitive marketplace, customer retention is paramount. Studies show that a mere 5% increase in customer retention can boost profits by 25% to 95% ([businessdasher.com](https://www.businessdasher.com/customer-retention-statistics/?utm_source=openai)). Despite this, the average company loses 10% to 25% of its customers annually ([zippia.com](https://www.zippia.com/advice/customer-retention-statistics/?utm_source=openai)). Understanding the factors that drive customer loyalty is essential for sustainable growth.\n\n**The Challenge:**\n\nWhile acquiring new customers is vital, retaining existing ones is more cost-effective and profitable. It costs five times more to acquire a new customer than to retain an existing one ([sprinklr.com](https://www.sprinklr.com/blog/customer-retention-statistics/?utm_source=openai)). Moreover, repeat customers are 50% more likely to try new products and spend 31% more compared to new customers ([gitnux.org](https://gitnux.org/customer-retention-statistics/?utm_source=openai)). Identifying and enhancing the drivers of customer loyalty can significantly impact the bottom line.\n\n**Our Approach:**\n\nThe \"Unlocking Customer Loyalty Drivers Pulse\" survey aims to delve into the key factors influencing customer retention within our organization. By gathering insights directly from our customers, we can pinpoint areas of strength and opportunities for improvement. This survey will employ a combination of quantitative and qualitative questions to provide a comprehensive understanding of customer loyalty drivers.\n\n**Anticipated Impact:**\n\nThe insights gained will inform targeted strategies to enhance customer satisfaction and loyalty. Implementing these strategies can lead to increased customer lifetime value, reduced churn rates, and higher profitability. For instance, companies with mature customer success programs achieve 15% higher customer retention rates ([en.wikipedia.org](https://en.wikipedia.org/wiki/Customer_success?utm_source=openai)).\n\n**Confidentiality Assurance:**\n\nWe are committed to maintaining the confidentiality of all survey responses. Data will be aggregated and anonymized to ensure individual privacy. Your honest feedback is invaluable and will directly contribute to our efforts to enhance customer experiences.\n\n**Your Participation:**\n\nThe survey will take approximately 10 minutes to complete. Your input is crucial in shaping our customer retention strategies and ensuring we meet your expectations. We understand concerns about survey fatigue and assure you that this survey is designed to be concise and impactful. Our organization is dedicated to acting on the results to drive meaningful improvements.\n\nThank you for your time and valuable insights.",
+    "desired_outcomes": [],
+    "classifiers": [
+      {
+        "name": "Department",
+        "description": "Employee\u2019s primary department or business unit",
+        "options": [
+          "Sales / Business Development",
+          "Customer Support / Success",
+          "Product / Engineering",
+          "Marketing / Communications",
+          "Operations / Administration"
+        ]
+      },
+      {
+        "name": "Experience Level",
+        "description": "Length of time working in this organization",
+        "options": [
+          "Less than 1 year",
+          "1-3 years",
+          "4-7 years",
+          "8+ years"
+        ]
+      },
+      {
+        "name": "Work Arrangement",
+        "description": "Primary work setup",
+        "options": [
+          "On-site / In-office",
+          "Remote / Work from home",
+          "Hybrid (mix of on-site and remote)"
+        ]
+      },
+      {
+        "name": "Role Type",
+        "description": "General nature of employee's current role",
+        "options": [
+          "Individual Contributor",
+          "Team Lead / Supervisor",
+          "Manager / Director",
+          "Executive / Senior Leadership"
+        ]
+      },
+      {
+        "name": "Geographic Location",
+        "description": "Region where employee primarily works",
+        "options": [
+          "North America",
+          "Europe",
+          "Asia-Pacific",
+          "Other / Multiple Regions"
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "name": "Empowerment Score",
+        "description": "Measures the average level to which employees feel equipped and authorized to resolve customer issues and take retention-focused actions.",
+        "formula": "Average of responses to Q3 and Q4, segmented by Department, Experience Level, and Role Type."
+      },
+      {
+        "name": "Retention Culture Alignment",
+        "description": "Assesses the degree of organizational alignment around customer retention as a shared responsibility and cultural value.",
+        "formula": "Average of responses to Q1, Q2, Q6, and Q8 across all departments."
+      },
+      {
+        "name": "Communication Effectiveness Index",
+        "description": "Evaluates how effectively cross-team feedback and information flows are supporting customer retention efforts.",
+        "formula": "Average of Q7 and Q9, segmented by Department and Work Arrangement."
+      },
+      {
+        "name": "Psychological Safety for Customer Topics",
+        "description": "Assesses whether employees feel safe raising concerns or innovative solutions related to customer retention.",
+        "formula": "Proportion of positive (4-5) responses to Q5 and the proportion of 'Yes' responses to Q10, by Department and Role Type."
+      },
+      {
+        "name": "Retention Tool Readiness",
+        "description": "Measures perceived adequacy of tools, training, and support for customer-facing work.",
+        "formula": "Average of responses to Q3, Q4, and Q11, cross-tabbed with Experience Level."
+      }
+    ],
+    "questions": [
+      {
+        "id": "Q1",
+        "question": "How clearly is customer retention described as a shared responsibility across all departments?",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q2",
+        "question": "To what extent do you feel that our organizational values emphasize long-term customer relationships?",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q3",
+        "question": "I have access to the resources, information, and authority needed to resolve customer issues and retain their business.",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q4",
+        "question": "Our organization provides effective training and ongoing support to help me address customer needs confidently.",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q5",
+        "question": "I feel safe sharing concerns, mistakes, or innovative ideas related to improving customer retention.",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q6",
+        "question": "Recognition for contributions to customer retention is fair and celebrated across all levels of the organization.",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q7",
+        "question": "We have efficient communication channels to share frontline feedback about why customers stay or leave.",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q8",
+        "question": "Which statement best describes your understanding of your role in customer retention?",
+        "response_type": "multiple_choice",
+        "options": [
+          "Everyone, regardless of role, should be involved in customer retention.",
+          "Customer retention is mainly the job of customer-facing teams.",
+          "Responsibility for retention isn\u2019t clearly assigned.",
+          "I\u2019m unsure how my role connects to customer retention."
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q9",
+        "question": "There are clear processes for acting on feedback from employees about ways to improve customer loyalty.",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": false,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q10",
+        "question": "Would you feel comfortable proposing a new idea to improve our customer experience or retention processes?",
+        "response_type": "yes_no",
+        "options": [],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q11",
+        "question": "The tools and technologies we use meet customer expectations and enable efficient issue resolution.",
+        "response_type": "scale",
+        "options": [],
+        "mandatory": false,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "Q12",
+        "question": "What is the single most important change you believe would most improve our customer retention culture?",
+        "response_type": "text",
+        "options": [],
+        "mandatory": false,
+        "metrics": [],
+        "classifiers": {}
+      }
+    ],
+    "configuration": {
+      "background_image": null,
+      "languages": [
+        "English"
+      ],
+      "target_audience": [
+        "emily_rodriguez"
+      ],
+      "release_date": null,
+      "deadline": null,
+      "anonymous": true
+    },
+    "branding": {
+      "primary_color": "#8B5CF6",
+      "background_color": "#FAFBFF",
+      "font_family": "Inter"
+    },
+    "status": "published",
+    "created_by": "Michael Chen",
+    "created_at": "2025-09-07 22:18:03.081947",
+    "published_at": "2025-09-07 22:18:03.101739"
+  }
+}

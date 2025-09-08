@@ -597,12 +597,18 @@ Requirements for a world-class survey:
 1. SURVEY METADATA:
    - Title: Professional, actionable title that captures the core purpose (no generic "survey" unless necessary)
    - Name: Short, memorable name for internal use
-   - Context: 3-4 paragraph description explaining purpose, importance, and expected outcomes
-   - Desired Outcomes: 3-5 specific, measurable outcomes this survey will help achieve
+   - Context: CRITICAL - Must be a substantial 4-5 paragraph problem statement that includes:
+     * Current industry challenges and trends related to {description}
+     * Why this topic matters for organizational success (with data/statistics)
+     * The business impact of not addressing this area
+     * How this survey will provide actionable insights
+     * Expected outcomes and next steps
+   - Desired Outcomes: 4-6 specific, measurable, actionable outcomes with clear success metrics
 
 2. CLASSIFIERS (4-6 demographic/segmentation categories):
-   - Each classifier should be relevant for meaningful data analysis
-   - Include 3-5 realistic options per classifier
+   - Each classifier must have a clear name AND a complete values/options array
+   - Include 3-5 realistic, specific options per classifier (not generic like "Option 1, Option 2")
+   - Format: {"name": "Department", "values": ["Engineering", "Product", "Marketing", "Sales", "HR"]}
    - Consider: departments, experience levels, work arrangements, team sizes, roles, locations
 
 3. METRICS (3-5 key performance indicators):
@@ -727,19 +733,42 @@ Use current industry statistics, research findings, and best practices. Make eve
                     logger.warning(f"Missing field {field}, using empty default")
                     survey_data[field] = [] if field in ["desiredOutcomes", "classifiers", "metrics", "questions"] else ""
         
-        # Flexible content validation - don't be too strict
-        if len(survey_data.get("context", "")) < 50:
-            logger.warning("Context is brief - adding description based on input")
-            survey_data["context"] = f"Survey focused on {description}. " + survey_data.get("context", "")
+        # Strict content validation for context - this is critical
+        context_length = len(survey_data.get("context", ""))
+        if context_length < 200:
+            logger.error(f"Context too brief ({context_length} chars) - AI must provide substantial problem statement")
+            raise ValueError(f"Context must be at least 200 characters, got {context_length}. AI failed to generate proper context.")
         
         if len(survey_data.get("questions", [])) < 2:
             logger.warning("Few questions provided - using fallback")
             raise ValueError("Too few questions - needs at least 2 questions")
         
-        # More lenient classifier validation
-        if len(survey_data.get("classifiers", [])) < 1:
-            logger.warning("No classifiers provided - adding default")
-            survey_data["classifiers"] = [{"name": "Department", "values": ["Engineering", "Product", "Marketing", "Other"]}]
+        # Validate desired outcomes
+        if len(survey_data.get("desiredOutcomes", [])) < 3:
+            logger.warning("Too few desired outcomes - adding defaults")
+            survey_data["desiredOutcomes"] = [
+                f"Assess current state of {description} within the organization",
+                "Identify key improvement opportunities for organizational development",
+                f"Establish baseline metrics for measuring progress",
+                f"Generate actionable insights for leadership decisions"
+            ]
+        
+        # Validate classifiers have proper structure with values
+        classifiers = survey_data.get("classifiers", [])
+        if len(classifiers) < 3:
+            logger.warning("Too few classifiers provided - adding defaults")
+            survey_data["classifiers"] = [
+                {"name": "Department", "values": ["Engineering", "Product", "Marketing", "Sales", "HR", "Operations"]},
+                {"name": "Experience Level", "values": ["0-1 years", "2-5 years", "6-10 years", "11+ years"]},
+                {"name": "Work Arrangement", "values": ["Fully Remote", "Hybrid", "Fully In-Office"]},
+                {"name": "Team Size", "values": ["Individual Contributor", "Small Team (2-5)", "Medium Team (6-15)", "Large Team (16+)"]}
+            ]
+        else:
+            # Ensure each classifier has values array
+            for i, classifier in enumerate(classifiers):
+                if not classifier.get("values") or len(classifier.get("values", [])) < 2:
+                    logger.warning(f"Classifier '{classifier.get('name', f'classifier_{i}')}' missing values - adding defaults")
+                    classifier["values"] = ["Option A", "Option B", "Option C", "Other"]
 
     def _generate_sophisticated_fallback(self, description: str, survey_type: str, target_audience: str) -> Dict[str, Any]:
         """Generate a sophisticated fallback survey if AI generation fails."""
