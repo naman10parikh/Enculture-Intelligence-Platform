@@ -206,8 +206,9 @@ export class ChatService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const template = await response.json();
-      return template;
+      const result = await response.json();
+      // The backend returns { template: { ... } }, but frontend expects direct access
+      return result.template || result;
     } catch (error) {
       console.error('Survey template generation error:', error);
       return null;
@@ -360,6 +361,41 @@ export class ChatService {
     } catch (error) {
       console.error('Enhanced questions generation error:', error);
       return []; // Return empty array if generation fails
+    }
+  }
+
+  /**
+   * Edit a specific survey section using AI
+   * @param {string} sectionType - Type of section to edit
+   * @param {Object} currentData - Current survey state
+   * @param {string} editRequest - What the user wants to change
+   * @param {Object} sectionContent - Current section content
+   * @returns {Promise<Object>} Updated content
+   */
+  async aiEditSection(sectionType, currentData, editRequest, sectionContent = {}) {
+    try {
+      const response = await fetch(`${this.baseUrl}/ai-edit-section`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          section_type: sectionType,
+          current_data: currentData,
+          edit_request: editRequest,
+          section_content: sectionContent
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.updated_content;
+    } catch (error) {
+      console.error('AI section editing error:', error);
+      throw error; // Propagate error for handling in UI
     }
   }
 }

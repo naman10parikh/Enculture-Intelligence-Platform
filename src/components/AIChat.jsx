@@ -1609,14 +1609,22 @@ function AIChat() {
   // AI Survey Template Generation - Manual Navigation
   const generateSurveyFromAIStreaming = async (description) => {
     try {
+      console.log('Generating survey template for:', description)
       const template = await chatService.generateSurveyTemplate(description)
+      console.log('Received template:', template)
+      
       if (template) {
+        // Open the canvas if it's not already open
+        if (!canvasOpen) {
+          setCanvasOpen(true)
+        }
+        
         // Start at step 1 and populate all data at once for manual navigation
         setSurveyStep(1)
         setSurveyDraft(prev => ({ 
           ...prev, 
-          name: template.title || '',
-          context: template.description || '',
+          name: template.name || template.title || '',
+          context: template.context || template.description || '',
           desiredOutcomes: template.desiredOutcomes || [],
           questions: template.questions || [],
           classifiers: template.classifiers || [],
@@ -1624,9 +1632,36 @@ function AIChat() {
         }))
         
         setCanvasView('wizard') // Stay in wizard to show the generated survey
+        
+        // Add success message to chat
+        const successMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `✅ I've successfully generated a comprehensive survey template with ${(template.questions || []).length} questions, ${(template.metrics || []).length} metrics, and ${(template.classifiers || []).length} classifiers. You can now review and customize it in the survey wizard on the right!`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, successMessage])
+      } else {
+        // Add error message to chat
+        const errorMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `❌ I couldn't generate the survey template. Please try again with a more specific description.`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, errorMessage])
       }
     } catch (error) {
       console.error('Failed to generate survey template:', error)
+      
+      // Add error message to chat
+      const errorMessage = {
+        id: `ai-${Date.now()}`,
+        type: 'ai',
+        content: `❌ There was an error generating the survey template: ${error.message}. Please try again.`,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
     }
   }
 
@@ -2447,39 +2482,41 @@ function AIChat() {
                           e.target.style.height = e.target.scrollHeight + 'px';
                         }}
                       />
+                        <div className="enhance-ai-center">
                         <button 
-                        className="minimal-enhance-btn"
-                        onClick={async () => {
-                          try {
-                            if (!surveyDraft.name?.trim()) {
-                              addNotification('Please enter a survey name first', 'warning')
-                              return
+                          className="minimal-enhance-btn"
+                          onClick={async () => {
+                            try {
+                              if (!surveyDraft.name?.trim()) {
+                                addNotification('Please enter a survey name first', 'warning')
+                                return
+                              }
+                              
+                              addNotification('Enhancing survey name with AI...', 'info')
+                              const enhancedName = await chatService.enhanceSurveyName(
+                                surveyDraft.name, 
+                                surveyDraft.context || ''
+                              )
+                              
+                              if (enhancedName && enhancedName !== surveyDraft.name) {
+                                setSurveyDraft(prev => ({ ...prev, name: enhancedName }))
+                                addNotification('Survey name enhanced successfully!', 'success')
+                              } else {
+                                addNotification('No enhancements suggested for this name', 'info')
+                              }
+                            } catch (error) {
+                              console.error('Name enhancement error:', error)
+                              addNotification('Failed to enhance survey name', 'error')
                             }
-                            
-                            addNotification('Enhancing survey name with AI...', 'info')
-                            const enhancedName = await chatService.enhanceSurveyName(
-                              surveyDraft.name, 
-                              surveyDraft.context || ''
-                            )
-                            
-                            if (enhancedName && enhancedName !== surveyDraft.name) {
-                              setSurveyDraft(prev => ({ ...prev, name: enhancedName }))
-                              addNotification('Survey name enhanced successfully!', 'success')
-                            } else {
-                              addNotification('No enhancements suggested for this name', 'info')
-                            }
-                          } catch (error) {
-                            console.error('Name enhancement error:', error)
-                            addNotification('Failed to enhance survey name', 'error')
-                          }
-                        }}
-                        disabled={!surveyDraft.name?.trim()}
-                      >
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        Enhance with AI
+                          }}
+                          disabled={!surveyDraft.name?.trim()}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          Enhance with AI
                         </button>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -2495,31 +2532,33 @@ function AIChat() {
                         placeholder="Describe what you want to learn from this survey..."
                         rows={4}
                       />
-                      <button 
-                        className="minimal-enhance-btn"
-                        onClick={async () => {
-                          if (!surveyDraft.context?.trim()) {
-                            alert('Please enter some initial context first')
-                            return
-                          }
-                          
-                          try {
-                            const enhancedContext = await enhanceContextWithAI(surveyDraft.context, surveyDraft.name)
-                            if (enhancedContext && enhancedContext !== surveyDraft.context) {
-                              setSurveyDraft(prev => ({ ...prev, context: enhancedContext }))
+                      <div className="enhance-ai-center">
+                        <button 
+                          className="minimal-enhance-btn"
+                          onClick={async () => {
+                            if (!surveyDraft.context?.trim()) {
+                              alert('Please enter some initial context first')
+                              return
                             }
-                          } catch (error) {
-                            console.error('Failed to enhance context:', error)
-                            alert('Failed to enhance context. Please try again.')
-                          }
-                        }}
-                        disabled={!surveyDraft.context?.trim()}
-                      >
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        Enhance with AI
-                      </button>
+                            
+                            try {
+                              const enhancedContext = await enhanceContextWithAI(surveyDraft.context, surveyDraft.name)
+                              if (enhancedContext && enhancedContext !== surveyDraft.context) {
+                                setSurveyDraft(prev => ({ ...prev, context: enhancedContext }))
+                              }
+                            } catch (error) {
+                              console.error('Failed to enhance context:', error)
+                              alert('Failed to enhance context. Please try again.')
+                            }
+                          }}
+                          disabled={!surveyDraft.context?.trim()}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          Enhance with AI
+                        </button>
+                      </div>
                           </div>
                         
                       <div className="field-group">
@@ -2657,20 +2696,21 @@ function AIChat() {
                               )
                             })}
                         
-                        <button 
-                          className="minimal-enhance-btn"
-                          onClick={async () => {
-                            try {
-                              // Generate AI-powered classifiers based on survey context and name
-                              const aiClassifiers = [
-                                { name: 'Department', values: ['Engineering', 'Marketing', 'Sales', 'HR', 'Operations'] },
-                                { name: 'Experience Level', values: ['Entry Level', 'Mid Level', 'Senior', 'Leadership'] },
-                                { name: 'Work Location', values: ['Remote', 'Hybrid', 'In-Office'] }
-                              ]
+                        <div className="enhance-ai-center">
+                          <button 
+                            className="minimal-enhance-btn"
+                            onClick={async () => {
+                              try {
+                                // Generate AI-powered classifiers based on survey context and name
+                                const aiClassifiers = [
+                                  { name: 'Department', values: ['Engineering', 'Marketing', 'Sales', 'HR', 'Operations'] },
+                                  { name: 'Experience Level', values: ['Entry Level', 'Mid Level', 'Senior', 'Leadership'] },
+                                  { name: 'Work Location', values: ['Remote', 'Hybrid', 'In-Office'] }
+                                ]
                               
                               setSurveyDraft(prev => ({ 
                                 ...prev, 
-                                classifiers: aiClassifiers
+                                classifiers: aiClassifiers 
                               }))
                               addNotification('Classifiers generated by AI', 'success')
                             } catch (error) {
@@ -2684,6 +2724,7 @@ function AIChat() {
                             </svg>
                           Enhance with AI
                         </button>
+                        </div>
                             </div>
                     </div>
                   </div>
@@ -2999,8 +3040,9 @@ function AIChat() {
                               <span>Add New Question</span>
                             </button>
                             
-                            <button 
-                              className="minimal-enhance-btn"
+                            <div className="enhance-ai-center">
+                              <button 
+                                className="minimal-enhance-btn"
                               onClick={async () => {
                                 try {
                                   // Generate AI-powered survey questions based on context and metrics
@@ -3042,8 +3084,9 @@ function AIChat() {
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
-                              Enhance with AI
-                            </button>
+                                Enhance with AI
+                              </button>
+                            </div>
                       </div>
                     </div>
                   </div>
@@ -4332,13 +4375,19 @@ function AIChat() {
           box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
         }
         
+        .enhance-ai-center {
+          display: flex;
+          justify-content: center;
+          margin-top: var(--space-4);
+          width: 100%;
+        }
+        
         .minimal-enhance-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
           gap: var(--space-2);
           padding: var(--space-2) var(--space-4);
-          margin-top: var(--space-3);
           background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.8) 100%);
           border: none;
           border-radius: 8px;
