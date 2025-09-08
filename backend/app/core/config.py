@@ -32,6 +32,10 @@ class Settings(BaseSettings):
     def allowed_hosts(self) -> List[str]:
         """Get allowed hosts for CORS."""
         hosts = [self.frontend_url]
+        
+        # In production, also allow the exact frontend URL (double-check)
+        # The main host is already added above via self.frontend_url
+        
         if self.debug:
             hosts.extend([
                 "http://localhost:3000",
