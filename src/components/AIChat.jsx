@@ -1408,9 +1408,9 @@ The user is currently taking this survey and may ask for help with specific ques
       return
     }
 
-    // Handle page-specific AI editing requests (when canvas is already open)
-    const sectionEditRequest = detectSectionEditRequest(currentInput)
-    if (sectionEditRequest && canvasOpen && canvasView === 'wizard') {
+    // Handle page-specific AI editing requests (single or multi-component)
+    const detectedSections = detectAllSectionEdits(currentInput)
+    if (detectedSections.length > 0) {
       // Add user message to UI first
       const userMessage = {
         id: `user-${Date.now()}`,
@@ -1420,8 +1420,24 @@ The user is currently taking this survey and may ask for help with specific ques
       }
       setMessages(prev => [...prev, userMessage])
       
-      // Process the section edit request with auto-navigation
-      handleSectionEditRequest(sectionEditRequest, currentInput)
+      // Open canvas if not already open
+      if (!canvasOpen) {
+        openCanvasForSurvey('draft', false) // Don't override existing draft
+        addNotification('Opening survey wizard...', 'info')
+      }
+      
+      // Ensure we're in wizard view
+      if (canvasView !== 'wizard') {
+        setCanvasView('wizard')
+      }
+      
+      // Process multi-component updates if multiple sections detected
+      if (detectedSections.length > 1) {
+        handleMultiComponentUpdate(detectedSections, currentInput)
+      } else {
+        // Single section update
+        handleSectionEditRequest(detectedSections[0], currentInput)
+      }
       return
     }
     
@@ -2047,43 +2063,66 @@ The user is currently taking this survey and may ask for help with specific ques
     return null
   }
 
-  // Detect section-specific AI edit requests
-  const detectSectionEditRequest = (input) => {
+  // Detect ALL sections mentioned in a request (for multi-component updates)
+  const detectAllSectionEdits = (input) => {
     const lowerInput = input.toLowerCase()
+    const detectedSections = []
     
-    // Check for section-specific keywords with improved patterns
-    if (lowerInput.includes('desired outcome') || lowerInput.includes('outcome')) {
-      return 'outcomes'
+    // Check for each section type
+    if (lowerInput.includes('language') || lowerInput.includes('spanish') || lowerInput.includes('french') || 
+        lowerInput.includes('german') || lowerInput.includes('translation') ||
+        lowerInput.includes('anonymous') || lowerInput.includes('deadline') || lowerInput.includes('release date') ||
+        lowerInput.includes('target audience') || lowerInput.includes('selected employees') ||
+        lowerInput.includes('config') || lowerInput.includes('setting')) {
+      detectedSections.push('configuration')
     }
-    if (lowerInput.includes('classifier') || lowerInput.includes('categor') || lowerInput.includes('demographic')) {
-      return 'classifiers'
+    
+    if (lowerInput.includes('question') || lowerInput.includes('response type') || 
+        lowerInput.includes('required') || lowerInput.includes('mandatory') ||
+        lowerInput.includes('optional') || lowerInput.match(/question\s*\d+/)) {
+      detectedSections.push('questions')
     }
+    
     if (lowerInput.includes('metric') || lowerInput.includes('formula') || lowerInput.includes('analytics')) {
-      return 'metrics'
+      if (!detectedSections.includes('metrics')) detectedSections.push('metrics')
     }
-    if (lowerInput.includes('question') && !lowerInput.includes('survey')) {
-      return 'questions'
+    
+    if (lowerInput.includes('classifier') || lowerInput.includes('categor') || lowerInput.includes('demographic')) {
+      detectedSections.push('classifiers')
     }
+    
+    if (lowerInput.includes('desired outcome') || (lowerInput.includes('outcome') && !lowerInput.includes('outcomes'))) {
+      detectedSections.push('outcomes')
+    }
+    
     if (lowerInput.includes('context') || lowerInput.includes('description') || lowerInput.includes('purpose') || lowerInput.includes('background')) {
-      return 'context'
+      detectedSections.push('context')
     }
+    
     if ((lowerInput.includes('name') || lowerInput.includes('title')) && !lowerInput.includes('classifier')) {
-      return 'name'
-    }
-    if (lowerInput.includes('config') || lowerInput.includes('setting') || lowerInput.includes('audience') || lowerInput.includes('publish')) {
-      return 'configuration'
+      detectedSections.push('name')
     }
     
-    // Check for action keywords that suggest AI enhancement
-    const actionKeywords = ['fill', 'generate', 'create', 'enhance', 'improve', 'add', 'suggest']
-    const hasActionKeyword = actionKeywords.some(keyword => lowerInput.includes(keyword))
+    // Check for action keywords
+    const updateKeywords = ['update', 'change', 'modify', 'edit', 'adjust', 'set', 'make']
+    const hasUpdateKeyword = updateKeywords.some(keyword => lowerInput.includes(keyword))
     
-    if (hasActionKeyword) {
-      // Default to context if no specific section is mentioned
-      return 'context'
+    // If no specific sections detected but has update keywords, try to infer
+    if (detectedSections.length === 0 && hasUpdateKeyword) {
+      const actionKeywords = ['fill', 'generate', 'create', 'enhance', 'improve', 'add', 'suggest']
+      const hasActionKeyword = actionKeywords.some(keyword => lowerInput.includes(keyword))
+      if (hasActionKeyword) {
+        detectedSections.push('context') // Default
+      }
     }
     
-    return null
+    return detectedSections
+  }
+  
+  // Keep single section detection for backward compatibility
+  const detectSectionEditRequest = (input) => {
+    const sections = detectAllSectionEdits(input)
+    return sections.length > 0 ? sections[0] : null
   }
   
   // Map section names to wizard steps
@@ -2108,82 +2147,238 @@ The user is currently taking this survey and may ask for help with specific ques
     )
   }
 
+  // Handle multi-component updates (when multiple sections are mentioned)
+  const handleMultiComponentUpdate = async (sectionTypes, userRequest) => {
+    try {
+      // Show loading state
+      setIsTyping(true)
+      addNotification(`Processing updates for ${sectionTypes.length} components...`, 'info')
+      
+      console.log(`Multi-component update for sections:`, sectionTypes)
+      
+      // Process all sections in parallel
+      const updatePromises = sectionTypes.map(async (sectionType) => {
+        try {
+          console.log(`Calling aiEditSection for ${sectionType}`)
+          const result = await chatService.aiEditSection(
+            sectionType,
+            surveyDraft,
+            userRequest,
+            {}
+          )
+          console.log(`Received result for ${sectionType}:`, result)
+          // The service already extracts updated_content, so result IS the content
+          return { sectionType, content: result, success: true }
+        } catch (error) {
+          console.error(`Failed to update ${sectionType}:`, error)
+          return { sectionType, error: error.message, success: false }
+        }
+      })
+      
+      const results = await Promise.all(updatePromises)
+      console.log('All update results:', results)
+      
+      // Apply all successful updates to the draft
+      let newDraft = { ...surveyDraft }
+      const successfulSections = []
+      const failedSections = []
+      
+      for (const result of results) {
+        if (result.success && result.content) {
+          successfulSections.push(result.sectionType)
+          
+          switch (result.sectionType) {
+            case 'name':
+              newDraft.name = result.content
+              break
+            case 'context':
+              newDraft.context = result.content
+              break
+            case 'outcomes':
+              newDraft.desiredOutcomes = result.content
+              break
+            case 'classifiers':
+              newDraft.classifiers = result.content
+              break
+            case 'metrics':
+              newDraft.metrics = result.content
+              break
+            case 'questions':
+              // Transform questions
+              const transformedQuestions = Array.isArray(result.content) ? result.content.map(q => ({
+                id: q.id,
+                text: q.text || q.question || '',
+                description: q.description || '',
+                type: q.type || q.response_type || 'multiple_choice',
+                options: q.options || [],
+                required: q.required !== undefined ? q.required : (q.mandatory || false),
+                linkedMetric: q.linkedMetric || '',
+                linkedClassifier: q.linkedClassifier || ''
+              })) : result.content
+              newDraft.questions = transformedQuestions
+              break
+            case 'configuration':
+              // Merge configuration updates
+              newDraft.configuration = { ...(newDraft.configuration || {}), ...result.content }
+              break
+          }
+        } else {
+          failedSections.push(result.sectionType)
+        }
+      }
+      
+      // Update state with all changes
+      setSurveyDraft(newDraft)
+      await saveSurveyDraft(newDraft)
+      
+      setIsTyping(false)
+      
+      // Navigate to the first updated section
+      if (successfulSections.length > 0) {
+        const firstSection = successfulSections[0]
+        const targetStep = sectionToStep[firstSection]
+        if (targetStep) {
+          setSurveyStep(targetStep)
+        }
+      }
+      
+      // Provide comprehensive feedback
+      if (successfulSections.length > 0) {
+        const sectionList = successfulSections.join(', ')
+        const successMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `✅ Successfully updated ${successfulSections.length} component(s): ${sectionList}. Review the changes in the wizard!`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, successMessage])
+        addNotification(`${successfulSections.length} components updated!`, 'success')
+      }
+      
+      if (failedSections.length > 0) {
+        const failedList = failedSections.join(', ')
+        addNotification(`Failed to update: ${failedList}`, 'error')
+      }
+      
+    } catch (error) {
+      setIsTyping(false)
+      console.error('Failed multi-component update:', error)
+      addNotification('Failed to process updates', 'error')
+      
+      const errorMessage = {
+        id: `ai-${Date.now()}`,
+        type: 'ai',
+        content: `❌ I encountered an issue while processing your updates: ${error.message || 'Unknown error'}. Please try again.`,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    }
+  }
+
   // Handle section-specific AI edit requests with auto-navigation
   const handleSectionEditRequest = async (sectionType, userRequest) => {
     try {
-      // Navigate to the appropriate wizard step immediately
-      const targetStep = sectionToStep[sectionType]
-      if (targetStep && targetStep !== surveyStep) {
-        setSurveyStep(targetStep)
-        addNotification(`Navigated to ${sectionType} section`, 'info')
-      }
+      // Show loading state
+      setIsTyping(true)
+      addNotification(`Processing your ${sectionType} update...`, 'info')
       
-      const processingMessage = {
-        id: `ai-${Date.now()}`,
-        type: 'ai',
-        content: `I'll enhance the ${sectionType} section for you. Let me analyze your current survey data and generate improvements...`,
-        timestamp: new Date()
-      }
-      setMessages(prev => [...prev, processingMessage])
-
+      console.log(`Single-component update for ${sectionType}`)
+      console.log('Current survey draft:', surveyDraft)
+      console.log('User request:', userRequest)
+      
       // Call the backend AI section editing service
-      const updatedContent = await chatService.aiEditSection(
+      const result = await chatService.aiEditSection(
         sectionType,
         surveyDraft,
         userRequest,
         {}
       )
-
-      if (updatedContent) {
-        // Update the survey draft based on section type
-        switch (sectionType) {
-          case 'name':
-            setSurveyDraft(prev => ({ ...prev, name: updatedContent }))
-            break
-          case 'context':
-            setSurveyDraft(prev => ({ ...prev, context: updatedContent }))
-            break
-          case 'outcomes':
-            setSurveyDraft(prev => ({ ...prev, desiredOutcomes: updatedContent }))
-            break
-          case 'classifiers':
-            setSurveyDraft(prev => ({ ...prev, classifiers: updatedContent }))
-            break
-          case 'metrics':
-            setSurveyDraft(prev => ({ ...prev, metrics: updatedContent }))
-            break
-          case 'questions':
-            setSurveyDraft(prev => ({ ...prev, questions: updatedContent }))
-            break
-        }
-
-        // Add success message
-        const successMessage = {
-          id: `ai-${Date.now()}`,
-          type: 'ai',
-          content: `✅ I've successfully updated the ${sectionType} section! The wizard is now showing step ${targetStep || surveyStep} where you can review the changes. The updates are based on your current survey context and should enhance the overall quality.`,
-          timestamp: new Date()
-        }
-        setMessages(prev => [...prev, successMessage])
-
-        // Save draft automatically after updates
-        saveSurveyDraft(surveyDraft)
-        if (sectionType === 'name' && surveyStep !== 1) setSurveyStep(1)
-        if (sectionType === 'context' && surveyStep !== 2) setSurveyStep(2)
-        if (sectionType === 'classifiers' && surveyStep !== 3) setSurveyStep(3)
-        if (sectionType === 'metrics' && surveyStep !== 4) setSurveyStep(4)
-        if (sectionType === 'questions' && surveyStep !== 5) setSurveyStep(5)
-        
-      } else {
+      
+      console.log(`Received result for ${sectionType}:`, result)
+      
+      // The service already extracts updated_content, so result IS the content
+      if (!result) {
         throw new Error('No content received from AI service')
       }
+      
+      // For configuration, even an empty object is valid (no changes needed)
+      const updatedContent = result
+      
+      // Update the survey draft based on section type
+      let newDraft = { ...surveyDraft }
+      
+      switch (sectionType) {
+        case 'name':
+          newDraft.name = updatedContent
+          break
+        case 'context':
+          newDraft.context = updatedContent
+          break
+        case 'outcomes':
+          newDraft.desiredOutcomes = updatedContent
+          break
+        case 'classifiers':
+          newDraft.classifiers = updatedContent
+          break
+        case 'metrics':
+          newDraft.metrics = updatedContent
+          break
+        case 'questions':
+          // Transform questions if needed
+          const transformedQuestions = Array.isArray(updatedContent) ? updatedContent.map(q => ({
+            id: q.id,
+            text: q.text || q.question || '',
+            description: q.description || '',
+            type: q.type || q.response_type || 'multiple_choice',
+            options: q.options || [],
+            required: q.required !== undefined ? q.required : (q.mandatory || false),
+            linkedMetric: q.linkedMetric || '',
+            linkedClassifier: q.linkedClassifier || ''
+          })) : updatedContent
+          newDraft.questions = transformedQuestions
+          break
+        case 'configuration':
+          // Merge configuration updates
+          newDraft.configuration = { ...(newDraft.configuration || {}), ...updatedContent }
+          break
+      }
+      
+      console.log('New draft after update:', newDraft)
+      
+      // Update state
+      setSurveyDraft(newDraft)
+      
+      // Save draft automatically after updates
+      await saveSurveyDraft(newDraft)
+      
+      setIsTyping(false)
+      
+      // Navigate to the appropriate wizard step
+      const targetStep = sectionToStep[sectionType]
+      if (targetStep) {
+        setSurveyStep(targetStep)
+      }
+
+      // Add success message
+      const successMessage = {
+        id: `ai-${Date.now()}`,
+        type: 'ai',
+        content: `✅ Updated ${sectionType} successfully! Check step ${targetStep || surveyStep} in the wizard to review the changes.`,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, successMessage])
+      
+      addNotification(`${sectionType} updated!`, 'success')
 
     } catch (error) {
+      setIsTyping(false)
       console.error('Failed to edit section:', error)
+      addNotification(`Failed to update ${sectionType}`, 'error')
+      
       const errorMessage = {
         id: `ai-${Date.now()}`,
         type: 'ai',
-        content: `❌ I encountered an issue while updating the ${sectionType} section: ${error.message}. Please try again or be more specific about what you'd like me to change.`,
+        content: `❌ I encountered an issue while updating the ${sectionType} section: ${error.message || 'Unknown error'}. Please try again or make sure the canvas is open with a survey draft.`,
         timestamp: new Date()
       }
       setMessages(prev => [...prev, errorMessage])

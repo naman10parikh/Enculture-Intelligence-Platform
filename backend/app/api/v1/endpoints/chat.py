@@ -287,13 +287,11 @@ async def ai_edit_section(request: dict):
         elif section_type == 'metrics':
             updated_content = await _ai_edit_metrics(edit_request, current_data)
         elif section_type == 'questions':
-            metrics = [m.get('name', '') for m in current_data.get('metrics', [])]
-            updated_content = await openai_service.generate_survey_questions(
-                current_data.get('context', ''),
-                len(current_data.get('questions', [])) or 5,
-                ['multiple_choice', 'scale', 'text', 'yes_no'],
-                metrics
-            )
+            # Use the edit_request to intelligently update questions
+            updated_content = await _ai_edit_questions(edit_request, current_data)
+        elif section_type == 'configuration':
+            # Handle configuration updates
+            updated_content = await _ai_edit_configuration(edit_request, current_data)
         else:
             raise HTTPException(status_code=400, detail=f"Unsupported section type: {section_type}")
         
@@ -407,6 +405,180 @@ Return as a JSON array of metric objects."""
                 "selectedClassifiers": classifier_names[:2] if classifier_names else ["Department"]
             }
         ]
+
+
+async def _ai_edit_questions(edit_request: str, current_data: dict) -> list:
+    """Intelligently edit questions based on user request."""
+    try:
+        context = current_data.get('context', '')
+        survey_name = current_data.get('name', '')
+        current_questions = current_data.get('questions', [])
+        metrics = [m.get('name', '') for m in current_data.get('metrics', [])]
+        classifiers = [c.get('name', '') for c in current_data.get('classifiers', [])]
+        
+        user_input = f"""Intelligently update the survey questions based on this request:
+
+User Request: {edit_request}
+
+Current Survey Context:
+- Name: {survey_name}
+- Context: {context}
+- Current Questions ({len(current_questions)}): {json.dumps([q.get('question', q.get('text', '')) for q in current_questions], indent=2)}
+- Available Metrics: {', '.join(metrics)}
+- Available Classifiers: {', '.join(classifiers)}
+
+Instructions:
+1. Parse the user request to understand what changes they want
+2. If they mention specific question numbers (e.g., "question 1"), update those specific questions
+3. If they mention response types, update the response_type field appropriately
+4. If they mention "required" or "optional", update the mandatory field
+5. If they want to add questions, append new ones
+6. If they want to change topics, regenerate questions focused on that topic
+7. Maintain other questions that aren't mentioned
+8. Ensure all questions have: id, question, description, response_type, options, mandatory, linkedMetric, linkedClassifier
+
+Return the complete updated questions array as JSON."""
+
+        instructions = """You are an expert survey designer. Carefully parse the user's request and make ONLY the changes they specifically asked for. Preserve existing questions unless explicitly told to change them. Be precise and literal in your interpretation."""
+
+        def call_responses_api():
+            return openai_service.sync_client.responses.create(
+                model=openai_service.model,
+                input=user_input,
+                instructions=instructions
+            )
+        
+        response = await asyncio.get_event_loop().run_in_executor(None, call_responses_api)
+        
+        import json
+        import re
+        content = response.output_text
+        
+        # Extract JSON if wrapped in markdown
+        if '```json' in content:
+            start = content.find('```json') + len('```json')
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        elif '```' in content:
+            start = content.find('```') + 3
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        
+        questions = json.loads(content)
+        
+        logger.info(f"AI updated {len(questions) if isinstance(questions, list) else 1} questions based on request")
+        return questions if isinstance(questions, list) else [questions]
+        
+    except Exception as e:
+        logger.error(f"Error editing questions with AI: {str(e)}")
+        # Return current questions unchanged
+        return current_data.get('questions', [])
+
+
+async def _ai_edit_configuration(edit_request: str, current_data: dict) -> dict:
+    """Edit survey configuration based on user request."""
+    try:
+        current_config = current_data.get('configuration', {})
+        
+        logger.info(f"Configuration edit request: {edit_request}")
+        logger.info(f"Current config: {current_config}")
+        
+        user_input = f"""Update the survey configuration based on this request:
+
+User Request: {edit_request}
+
+Current Configuration: {json.dumps(current_config, indent=2)}
+
+Parse the request and update the configuration object. Common fields:
+- languages: Array of language codes (e.g., ["English", "Spanish", "French"])
+- targetAudience: Array of department/role names
+- selectedEmployees: Array of specific employee IDs
+- releaseDate: ISO date string or null
+- deadline: ISO date string or null
+- anonymous: boolean (true/false)
+- backgroundImage: URL or null
+- allowPause: boolean
+- showProgress: boolean
+- requireCompletion: boolean
+- sendReminders: boolean
+
+IMPORTANT: Return ONLY valid JSON with the fields that changed. Example:
+{{"languages": ["English", "Spanish", "French"]}}
+
+Do NOT include explanations, just pure JSON."""
+
+        instructions = """You are a configuration expert. Parse the user's natural language request and convert it to precise configuration changes. Return ONLY valid JSON with the changed fields. No markdown, no explanations, just JSON."""
+
+        def call_responses_api():
+            return openai_service.sync_client.responses.create(
+                model=openai_service.model,
+                input=user_input,
+                instructions=instructions
+            )
+        
+        response = await asyncio.get_event_loop().run_in_executor(None, call_responses_api)
+        
+        content = response.output_text
+        logger.info(f"Raw AI response for configuration: {content[:500]}")
+        
+        # Extract JSON
+        if '```json' in content:
+            start = content.find('```json') + len('```json')
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        elif '```' in content:
+            start = content.find('```') + 3
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        
+        # Clean any remaining formatting
+        content = content.strip()
+        
+        if not content or content == '{}':
+            logger.warning("Empty configuration response from AI")
+            # Try to parse the request manually for common patterns
+            lower_request = edit_request.lower()
+            config_updates = {}
+            
+            # Detect language changes
+            if 'language' in lower_request:
+                languages = []
+                if 'english' in lower_request:
+                    languages.append('English')
+                if 'spanish' in lower_request:
+                    languages.append('Spanish')
+                if 'french' in lower_request:
+                    languages.append('French')
+                if 'german' in lower_request:
+                    languages.append('German')
+                if languages:
+                    config_updates['languages'] = languages
+            
+            # Detect anonymous setting
+            if 'anonymous' in lower_request:
+                config_updates['anonymous'] = 'anonymous' in lower_request and 'not' not in lower_request
+            
+            if config_updates:
+                logger.info(f"Using fallback parsing, extracted: {config_updates}")
+                return config_updates
+            
+            return {}
+        
+        config_updates = json.loads(content)
+        
+        logger.info(f"✅ AI updated configuration fields: {list(config_updates.keys())}")
+        logger.info(f"Configuration values: {config_updates}")
+        return config_updates
+        
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON decode error in configuration: {str(e)}")
+        logger.error(f"Content was: {content if 'content' in locals() else 'No content'}")
+        return {}
+    except Exception as e:
+        logger.error(f"Error editing configuration with AI: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
+        return {}
 
 
 @router.post("/test-ai-survey-generation")
