@@ -34,9 +34,23 @@ class OpenAIService:
 2. **Provide Insights**: Generate actionable insights about team dynamics, employee engagement, and cultural health
 3. **Suggest Actions**: Recommend specific actions to improve culture based on data patterns
 4. **Support Different Personas**: Tailor responses for CEOs, HR admins, managers, and employees
-5. **Use Web Search**: When discussing current trends, best practices, or recent research in organizational culture, use web search to provide up-to-date information
+5. **Guide Survey Creation**: When users create surveys, provide expert guidance on:
+   - Crafting clear, unbiased questions
+   - Selecting appropriate question types and metrics
+   - Ensuring comprehensive coverage of culture topics
+   - Designing engaging survey experiences
+   - Following best practices in survey design (avoid leading questions, use appropriate scales, logical flow)
+6. **Use Web Search**: When discussing current trends, best practices, or recent research in organizational culture, use web search to provide up-to-date information
 
-Always be empathetic, professional, and focused on positive culture building. Use data-driven insights while maintaining a human-centered approach. Be concise yet comprehensive in your responses."""
+Always be empathetic, professional, and focused on positive culture building. Use data-driven insights while maintaining a human-centered approach. Be concise yet comprehensive in your responses.
+
+**Survey Creation Best Practices:**
+- Use clear, concise language in questions
+- Avoid double-barreled questions (asking two things at once)
+- Provide balanced response options
+- Use appropriate question types (Likert scales for opinions, multiple choice for discrete options)
+- Keep surveys focused and not too long (fatigue reduction)
+- Include both quantitative and qualitative questions for rich insights"""
 
     async def chat_completion_streaming(
         self,
@@ -527,11 +541,14 @@ Requirements:
 - Support data analysis for the specified metrics
 
 Return a JSON array where each question has:
-- text: The question text
-- type: Question type (multiple_choice, scale, text, yes_no)
-- options: Array of options (for multiple_choice, or scale labels)
-- required: Boolean indicating if required
-- linkedMetric: Suggested metric this question supports
+- id: Unique identifier (q1, q2, etc.)
+- question: The question text
+- description: Brief helper text explaining what this question measures (optional but recommended)
+- response_type: Question type (multiple_choice, scale, text, yes_no)
+- options: Array of options (for multiple_choice, or scale labels like ["1 - Strongly Disagree", "2", "3", "4", "5 - Strongly Agree"])
+- mandatory: Boolean indicating if required (true/false)
+- linkedMetric: Name of metric this question measures (should match one of: {metrics_text})
+- linkedClassifier: Demographic classifier to segment responses by (e.g., "Department", "Experience Level", "Work Arrangement")
 
 Focus on questions that generate actionable insights for improving workplace culture."""
 
@@ -555,21 +572,27 @@ Focus on questions that generate actionable insights for improving workplace cul
             
         except Exception as e:
             logger.error(f"Error generating survey questions with gpt-5-mini: {str(e)}")
-            # Return fallback questions
+            # Return fallback questions with complete structure
             return [
                 {
-                    "text": "How would you rate your overall job satisfaction?",
-                    "type": "scale",
-                    "options": ["Very Dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very Satisfied"],
-                    "required": True,
-                    "linkedMetric": "Employee Satisfaction"
+                    "id": "q1",
+                    "question": "How would you rate your overall job satisfaction?",
+                    "description": "Rate your satisfaction on a 5-point scale",
+                    "response_type": "scale",
+                    "options": ["1 - Very Dissatisfied", "2 - Dissatisfied", "3 - Neutral", "4 - Satisfied", "5 - Very Satisfied"],
+                    "mandatory": True,
+                    "linkedMetric": "Employee Satisfaction",
+                    "linkedClassifier": "Department"
                 },
                 {
-                    "text": "What aspects of our company culture do you value most?",
-                    "type": "text",
+                    "id": "q2",
+                    "question": "What aspects of our company culture do you value most?",
+                    "description": "Share your thoughts on what makes our culture great",
+                    "response_type": "text",
                     "options": [],
-                    "required": False,
-                    "linkedMetric": "Culture Strengths"
+                    "mandatory": False,
+                    "linkedMetric": "Culture Strengths",
+                    "linkedClassifier": "Experience Level"
                 }
             ]
 
@@ -587,69 +610,80 @@ Focus on questions that generate actionable insights for improving workplace cul
         """
         try:
             # Advanced system prompt for comprehensive survey generation
-            user_input = f"""Generate a comprehensive, professional survey based on this description: "{description}"
+            user_input = f"""Generate a comprehensive, professional survey based on this user description: "{description}"
 
 Survey Type: {survey_type}
 Target Audience: {target_audience}
 
-Requirements for a world-class survey:
+CRITICAL: You MUST respond with ONLY valid JSON. No markdown, no explanations, no code blocks - just pure JSON.
 
-1. SURVEY METADATA:
-   - Title: Professional, actionable title that captures the core purpose (no generic "survey" unless necessary)
-   - Name: Short, memorable name for internal use
-   - Context: CRITICAL - Must be a substantial 4-5 paragraph problem statement that includes:
-     * Current industry challenges and trends related to {description}
-     * Why this topic matters for organizational success (with data/statistics)
-     * The business impact of not addressing this area
-     * How this survey will provide actionable insights
-     * Expected outcomes and next steps
-   - Desired Outcomes: 4-6 specific, measurable, actionable outcomes with clear success metrics
+Create a JSON object with this exact structure:
 
-2. CLASSIFIERS (4-6 demographic/segmentation categories):
-   - Each classifier must have a clear name AND a complete values/options array
-   - Include 3-5 realistic, specific options per classifier (not generic like "Option 1, Option 2")
-   - Format: {"name": "Department", "values": ["Engineering", "Product", "Marketing", "Sales", "HR"]}
-   - Consider: departments, experience levels, work arrangements, team sizes, roles, locations
+{{
+  "name": "Create a concise, professional survey title based on the user's description '{description}' - DO NOT use generic names like 'Professional Culture Assessment'",
+  "context": "Write a substantial 3-4 paragraph survey context (300-500 characters minimum) that explains why this survey matters, what it will measure related to '{description}', and how the insights will be used. Include relevant statistics or trends.",
+  "desiredOutcomes": [
+    "Specific measurable outcome 1 related to {description}",
+    "Specific measurable outcome 2 related to {description}",
+    "Specific measurable outcome 3 related to {description}",
+    "Specific measurable outcome 4 related to {description}"
+  ],
+  "classifiers": [
+    {{"name": "Department", "values": ["Engineering", "Product", "Marketing", "Sales", "HR", "Operations"]}},
+    {{"name": "Experience Level", "values": ["0-1 years", "2-5 years", "6-10 years", "11+ years"]}},
+    {{"name": "Work Arrangement", "values": ["Remote", "Hybrid", "In-Office"]}},
+    {{"name": "Team Size", "values": ["1-5 people", "6-15 people", "16-50 people", "51+ people"]}}
+  ],
+  "metrics": [
+    {{
+      "name": "Relevant metric name for {description}",
+      "description": "What this metric measures",
+      "formula": "AVG(q1, q2, q3)",
+      "selectedClassifiers": ["Department"]
+    }}
+  ],
+  "questions": [
+    {{
+      "id": "q1",
+      "question": "A clear, specific question about {description}",
+      "description": "Brief explanation of what this question measures or why it matters (optional helper text for respondents)",
+      "response_type": "scale",
+      "options": ["1 - Strongly Disagree", "2", "3", "4", "5 - Strongly Agree"],
+      "mandatory": true,
+      "linkedMetric": "Name of the metric this question helps measure (must match one of the metrics defined above)",
+      "linkedClassifier": "Name of classifier to segment responses by (must match one of the classifiers above, e.g., Department)"
+    }},
+    {{
+      "id": "q2",
+      "question": "Another relevant question",
+      "description": "Optional context or guidance for this question",
+      "response_type": "multiple_choice",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "mandatory": true,
+      "linkedMetric": "Relevant metric name",
+      "linkedClassifier": "Department"
+    }}
+  ]
+}}
 
-3. METRICS (3-5 key performance indicators):
-   - Each metric should have a clear name, description, and analytical formula
-   - Formulas should reference specific questions and classifiers
-   - Focus on actionable business insights
-
-4. QUESTIONS (8-12 research-backed questions):
-   - Mix of question types: multiple_choice, scale (1-5 or 1-10), text, yes_no
-   - Each question should be clear, unbiased, and actionable
-   - Include required/optional flags appropriately
-   - Link questions to specific metrics
-   - Consider psychological safety, engagement, satisfaction, growth, communication
-
-5. CONFIGURATION:
-   - Professional appearance settings
-   - Appropriate timing (5-10 minutes completion time)
-   - Response handling and follow-up procedures
-
-Return a detailed JSON structure with ALL fields populated with substantial, professional content."""
+Generate 6-8 meaningful questions that directly address '{description}'. Ensure all content is specific to the user's request, not generic templates."""
 
             # Sophisticated instructions for survey design
-            instructions = """You are a world-class organizational psychologist and survey design expert with 15+ years of experience in culture intelligence and employee engagement research.
+            instructions = """You are an expert survey design specialist for organizational culture and employee engagement.
 
-Your expertise includes:
-- Advanced psychometric survey design principles
-- Statistical analysis and data interpretation
-- Organizational behavior and workplace psychology  
-- Current industry trends and best practices
-- Research-backed question development
-- Bias reduction and inclusive design
+CRITICAL RULES:
+1. Return ONLY valid JSON - no markdown formatting, no code blocks, no extra text
+2. Use the user's description to create a custom, specific survey - never use generic templates
+3. All survey content must be directly relevant to what the user described
+4. Questions should be clear, actionable, and unbiased
+5. Context must be substantial (300+ characters) with real insights
 
-Create surveys that:
-- Reduce survey fatigue through engaging, well-crafted questions
-- Generate actionable insights for business leaders
-- Follow scientific rigor in measurement design
-- Consider cultural sensitivity and inclusivity
-- Enable meaningful data segmentation and analysis
-- Support evidence-based organizational improvements
-
-Use current industry statistics, research findings, and best practices. Make every element substantial and professionally crafted - no generic placeholders or one-word answers."""
+Create professional surveys with:
+- Clear, engaging questions that reduce survey fatigue
+- Actionable insights for business leaders
+- Mix of quantitative and qualitative questions
+- Appropriate question types (scale, multiple_choice, text)
+- Relevant classifiers for data segmentation"""
 
             def call_responses_api():
                 return self.sync_client.responses.create(
@@ -664,7 +698,8 @@ Use current industry statistics, research findings, and best practices. Make eve
             
             # Parse the comprehensive response
             content = response.output_text
-            logger.info(f"OpenAI Response content: {content[:200]}...")
+            logger.info(f"OpenAI Response received. Length: {len(content)} chars")
+            logger.info(f"First 300 chars: {content[:300]}...")
             
             if not content or not content.strip():
                 logger.error("OpenAI returned empty response")
@@ -694,6 +729,8 @@ Use current industry statistics, research findings, and best practices. Make eve
             content = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', content)
             
             survey_data = json.loads(content)
+            logger.info(f"Successfully parsed JSON. Survey name: {survey_data.get('name', 'MISSING')}")
+            logger.info(f"Survey has {len(survey_data.get('questions', []))} questions")
             
             # Handle nested structure if OpenAI returns metadata wrapper
             if "metadata" in survey_data and "name" not in survey_data:
@@ -706,15 +743,18 @@ Use current industry statistics, research findings, and best practices. Make eve
             
             # Validate and ensure completeness
             self._validate_survey_completeness(survey_data, description)
+            logger.info(f"✅ Survey validation passed. Returning custom survey: {survey_data.get('name')}")
             
             return survey_data
             
         except json.JSONDecodeError as e:
-            logger.error(f"JSON parsing error: {str(e)}. Content: {content[:500] if 'content' in locals() else 'No content'}")
+            logger.error(f"❌ JSON parsing error: {str(e)}. Content: {content[:500] if 'content' in locals() else 'No content'}")
+            logger.warning(f"⚠️ Using fallback survey for description: '{description}'")
             # Return sophisticated fallback instead of basic one
             return self._generate_sophisticated_fallback(description, survey_type, target_audience)
         except Exception as e:
-            logger.error(f"Error generating comprehensive survey: {str(e)}")
+            logger.error(f"❌ Error generating comprehensive survey: {str(e)}")
+            logger.warning(f"⚠️ Using fallback survey for description: '{description}'")
             # Return sophisticated fallback instead of basic one
             return self._generate_sophisticated_fallback(description, survey_type, target_audience)
 
@@ -733,11 +773,12 @@ Use current industry statistics, research findings, and best practices. Make eve
                     logger.warning(f"Missing field {field}, using empty default")
                     survey_data[field] = [] if field in ["desiredOutcomes", "classifiers", "metrics", "questions"] else ""
         
-        # Strict content validation for context - this is critical
+        # Content validation for context - ensure it's meaningful
         context_length = len(survey_data.get("context", ""))
-        if context_length < 200:
-            logger.error(f"Context too brief ({context_length} chars) - AI must provide substantial problem statement")
-            raise ValueError(f"Context must be at least 200 characters, got {context_length}. AI failed to generate proper context.")
+        if context_length < 100:
+            logger.warning(f"Context brief ({context_length} chars) - using fallback")
+            # Instead of raising error, add a better context
+            survey_data["context"] = f"This survey focuses on gathering insights about {description}. Your feedback will help us understand current challenges and opportunities, identify areas for improvement, and create data-driven action plans. All responses are confidential and will be used to enhance our organizational culture and employee experience."
         
         if len(survey_data.get("questions", [])) < 2:
             logger.warning("Few questions provided - using fallback")
@@ -772,9 +813,15 @@ Use current industry statistics, research findings, and best practices. Make eve
 
     def _generate_sophisticated_fallback(self, description: str, survey_type: str, target_audience: str) -> Dict[str, Any]:
         """Generate a sophisticated fallback survey if AI generation fails."""
+        # Use the user's description to create a meaningful name
+        survey_name = description if description else f"{survey_type.title()} Assessment"
+        # Capitalize properly if it's a short phrase
+        if len(survey_name.split()) <= 5:
+            survey_name = ' '.join(word.capitalize() for word in survey_name.split())
+        
         return {
-            "name": f"Professional {survey_type.title()} Assessment",
-            "context": f"""This comprehensive {survey_type} assessment is designed to gather critical insights about {description.lower()}. 
+            "name": survey_name,
+            "context": f"""This comprehensive survey is designed to gather critical insights about {description.lower() if description else survey_type}. 
 
 Based on current industry research, organizations that regularly measure and act on {survey_type} data see 23% higher employee engagement, 18% better retention rates, and 12% improved business performance.
 
@@ -814,32 +861,44 @@ Expected completion time: 7-10 minutes. Your honest feedback is essential for cr
             
             "questions": [
                 {
-                    "text": f"How would you rate your overall {survey_type} in this organization?",
-                    "type": "scale",
+                    "id": "q1",
+                    "question": f"How would you rate your overall {survey_type} in this organization?",
+                    "description": "Rate your satisfaction on a 5-point scale",
+                    "response_type": "scale",
                     "options": ["1 - Very Poor", "2 - Poor", "3 - Average", "4 - Good", "5 - Excellent"],
-                    "required": True,
-                    "linkedMetric": f"{survey_type.title()} Index"
+                    "mandatory": True,
+                    "linkedMetric": f"{survey_type.title()} Index",
+                    "linkedClassifier": "Department"
                 },
                 {
-                    "text": "What factors most positively impact your experience here?",
-                    "type": "multiple_choice", 
+                    "id": "q2",
+                    "question": "What factors most positively impact your experience here?",
+                    "description": "Select all factors that contribute to your positive experience",
+                    "response_type": "multiple_choice", 
                     "options": ["Leadership support", "Career development", "Work-life balance", "Team collaboration", "Recognition", "Compensation", "Meaningful work"],
-                    "required": True,
-                    "linkedMetric": f"{survey_type.title()} Index"
+                    "mandatory": True,
+                    "linkedMetric": f"{survey_type.title()} Index",
+                    "linkedClassifier": "Experience Level"
                 },
                 {
-                    "text": "How likely are you to recommend this organization as a great place to work?",
-                    "type": "scale",
+                    "id": "q3",
+                    "question": "How likely are you to recommend this organization as a great place to work?",
+                    "description": "This is the Net Promoter Score (NPS) question",
+                    "response_type": "scale",
                     "options": ["1 - Not at all likely", "2", "3", "4", "5", "6", "7", "8", "9", "10 - Extremely likely"],
-                    "required": True,
-                    "linkedMetric": "Engagement Distribution"
+                    "mandatory": True,
+                    "linkedMetric": "Engagement Distribution",
+                    "linkedClassifier": "Department"
                 },
                 {
-                    "text": "What specific improvements would have the greatest positive impact?",
-                    "type": "text",
+                    "id": "q4",
+                    "question": "What specific improvements would have the greatest positive impact?",
+                    "description": "Share your thoughts on what we can improve",
+                    "response_type": "text",
                     "options": [],
-                    "required": False,
-                    "linkedMetric": ""
+                    "mandatory": False,
+                    "linkedMetric": f"{survey_type.title()} Index",
+                    "linkedClassifier": "Department"
                 }
             ]
         }

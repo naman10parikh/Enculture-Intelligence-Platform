@@ -1281,7 +1281,90 @@ The user is currently taking this survey and may ask for help with specific ques
     const currentInput = inputValue
     setInputValue('')
 
-    // Handle special commands
+    // ✨ Enhanced: Check for survey creation/update intent FIRST (before /survey command)
+    const surveyIntent = detectSurveyIntent(currentInput)
+    
+    if (surveyIntent) {
+      // Add user message to UI first
+      const userMessage = {
+        id: `user-${Date.now()}`,
+        type: 'user',
+        content: currentInput,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, userMessage])
+      
+      // Handle survey creation intent
+      if (surveyIntent.type === 'create') {
+        // Check if user has permission to create surveys
+        if (!canCreateSurveys) {
+          const errorMessage = {
+            id: `ai-${Date.now()}`,
+            type: 'ai',
+            content: `I'm sorry, but your current role (${currentUser?.role || 'Employee'}) doesn't have permission to create surveys. Survey creation is available for Managers, HR Admins, and leadership roles. You can still take surveys and view insights! 📊`,
+            timestamp: new Date()
+          }
+          setMessages(prev => [...prev, errorMessage])
+          return
+        }
+        
+        // Check if there's an existing draft
+        if (hasExistingDraft() && !canvasOpen) {
+          const confirmMessage = {
+            id: `ai-${Date.now()}`,
+            type: 'ai',
+            content: `📋 I noticed you have an existing survey draft with "${surveyDraft.name || 'unsaved work'}". Would you like to:\n\n1️⃣ **Continue editing** the existing draft\n2️⃣ **Start fresh** with a new survey\n\nPlease let me know your preference!`,
+            timestamp: new Date()
+          }
+          setMessages(prev => [...prev, confirmMessage])
+          return
+        }
+        
+        // Extract survey description from input
+        const description = currentInput
+          .replace(/create (a |an )?survey/gi, '')
+          .replace(/make (a |an )?survey/gi, '')
+          .replace(/generate (a |an )?survey/gi, '')
+          .replace(/build (a |an )?survey/gi, '')
+          .replace(/(for|about|on)/gi, '')
+          .trim()
+        
+        // Open canvas
+        openCanvasForSurvey('draft', true)
+        
+        // If there's a description, generate template
+        if (description && description.length > 5) {
+          const aiMessage = {
+            id: `ai-${Date.now()}`,
+            type: 'ai',
+            content: `Perfect! I'll create a comprehensive survey about "${description}". Let me generate a professional template with questions, metrics, and classifiers... 🎨`,
+            timestamp: new Date()
+          }
+          setMessages(prev => [...prev, aiMessage])
+          
+          setTimeout(() => {
+            generateSurveyFromAIStreaming(description)
+          }, 1000)
+        } else {
+          const aiMessage = {
+            id: `ai-${Date.now()}`,
+            type: 'ai',
+            content: '📝 I\'ve opened the Survey Creation Wizard for you! You can now build a professional culture intelligence survey step by step. Need help with any section? Just ask!',
+            timestamp: new Date()
+          }
+          setMessages(prev => [...prev, aiMessage])
+        }
+        return
+      }
+      
+      // Handle update intent with auto-navigation
+      if (surveyIntent.type === 'update' && surveyIntent.section) {
+        handleSectionEditRequest(surveyIntent.section, currentInput)
+        return
+      }
+    }
+    
+    // Handle special commands (fallback for explicit /survey command)
     if (currentInput.startsWith('/survey')) {
       // Extract description from command
       const description = currentInput.replace('/survey', '').trim()
@@ -1295,26 +1378,35 @@ The user is currently taking this survey and may ask for help with specific ques
       }
       setMessages(prev => [...prev, userMessage])
       
+      // Check permission
+      if (!canCreateSurveys) {
+        const errorMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `I'm sorry, but your current role (${currentUser?.role || 'Employee'}) doesn't have permission to create surveys.`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, errorMessage])
+        return
+      }
+      
       // Open canvas - override any existing draft when using /survey command
-        openCanvasForSurvey('draft', true)
+      openCanvasForSurvey('draft', true)
       
       // If there's a description, show AI response and generate template
       if (description) {
-        // Add AI response message
         const aiMessage = {
           id: `ai-${Date.now()}`,
-          type: 'ai', 
+          type: 'ai',
           content: `I'll create a professional survey for "${description}". Let me generate that template for you now...`,
           timestamp: new Date()
         }
         setMessages(prev => [...prev, aiMessage])
         
-        // Generate template with streaming effect
         setTimeout(() => {
           generateSurveyFromAIStreaming(description)
         }, 1000)
       } else {
-        // Just show that canvas was opened
         const aiMessage = {
           id: `ai-${Date.now()}`,
           type: 'ai',
@@ -1327,7 +1419,7 @@ The user is currently taking this survey and may ask for help with specific ques
       return
     }
 
-    // Handle page-specific AI editing requests
+    // Handle page-specific AI editing requests (when canvas is already open)
     const sectionEditRequest = detectSectionEditRequest(currentInput)
     if (sectionEditRequest && canvasOpen && canvasView === 'wizard') {
       // Add user message to UI first
@@ -1339,9 +1431,37 @@ The user is currently taking this survey and may ask for help with specific ques
       }
       setMessages(prev => [...prev, userMessage])
       
-      // Process the section edit request
+      // Process the section edit request with auto-navigation
       handleSectionEditRequest(sectionEditRequest, currentInput)
       return
+    }
+    
+    // Handle "continue" or "start fresh" responses for draft confirmation
+    if (hasExistingDraft() && !canvasOpen) {
+      const lowerInput = currentInput.toLowerCase()
+      if (lowerInput.includes('continue') || lowerInput.includes('existing') || lowerInput.includes('edit') || lowerInput === '1') {
+        const confirmMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `Great! I'll open your existing draft "${surveyDraft.name || 'Untitled Survey'}". You can continue where you left off. 📋`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, confirmMessage])
+        openCanvasForSurvey('draft', false) // Don't override
+        return
+      }
+      
+      if (lowerInput.includes('fresh') || lowerInput.includes('new') || lowerInput.includes('start over') || lowerInput === '2') {
+        const confirmMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'ai',
+          content: `Understood! I'll create a brand new survey for you. Your previous draft has been cleared. Let's start fresh! 🆕`,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, confirmMessage])
+        openCanvasForSurvey('draft', true) // Override/clear
+        return
+      }
     }
 
     try {
@@ -1797,7 +1917,23 @@ The user is currently taking this survey and may ask for help with specific ques
     try {
       const template = await chatService.generateSurveyTemplate(description)
       if (template) {
-        setSurveyDraft(prev => ({ ...prev, ...template }))
+        // Transform questions from backend format to frontend format
+        const transformedQuestions = (template.questions || []).map(q => ({
+          id: q.id,
+          text: q.question || q.text || '',
+          description: q.description || '',
+          type: q.response_type || q.type || 'multiple_choice',
+          options: q.options || [],
+          required: q.mandatory !== undefined ? q.mandatory : (q.required || false),
+          linkedMetric: q.linkedMetric || '',
+          linkedClassifier: q.linkedClassifier || ''
+        }))
+        
+        setSurveyDraft(prev => ({ 
+          ...prev, 
+          ...template,
+          questions: transformedQuestions
+        }))
         setCanvasView('editor') // Switch to editor to show the generated survey
       }
     } catch (error) {
@@ -1818,6 +1954,18 @@ The user is currently taking this survey and may ask for help with specific ques
           setCanvasOpen(true)
         }
         
+        // Transform questions from backend format (question field) to frontend format (text field)
+        const transformedQuestions = (template.questions || []).map(q => ({
+          id: q.id,
+          text: q.question || q.text || '', // Backend uses 'question', frontend uses 'text'
+          description: q.description || '', // Helper text for respondents
+          type: q.response_type || q.type || 'multiple_choice',
+          options: q.options || [],
+          required: q.mandatory !== undefined ? q.mandatory : (q.required || false),
+          linkedMetric: q.linkedMetric || '', // Which metric this question measures
+          linkedClassifier: q.linkedClassifier || '' // Which classifier to segment by
+        }))
+        
         // Start at step 1 and populate all data at once for manual navigation
         setSurveyStep(1)
         setSurveyDraft(prev => ({ 
@@ -1825,7 +1973,7 @@ The user is currently taking this survey and may ask for help with specific ques
           name: template.name || template.title || '',
           context: template.context || template.description || '',
           desiredOutcomes: template.desiredOutcomes || [],
-          questions: template.questions || [],
+          questions: transformedQuestions,
           classifiers: template.classifiers || [],
           metrics: template.metrics || []
         }))
@@ -1864,28 +2012,64 @@ The user is currently taking this survey and may ask for help with specific ques
     }
   }
 
+  // Enhanced: Detect user intent for survey creation, updates, or modifications
+  const detectSurveyIntent = (input) => {
+    const lowerInput = input.toLowerCase()
+    
+    // Intent patterns for survey creation
+    const createPatterns = [
+      'create a survey', 'create survey', 'make a survey', 'make survey',
+      'new survey', 'build a survey', 'build survey', 'generate a survey',
+      'generate survey', 'design a survey', 'design survey', 'set up a survey',
+      'set up survey', 'start a survey', 'start survey', 'i want to create',
+      'i need to create', 'help me create', 'can you create'
+    ]
+    
+    // Intent patterns for survey updates (when canvas is open)
+    const updatePatterns = [
+      'update the', 'change the', 'modify the', 'edit the', 'revise the',
+      'improve the', 'enhance the', 'fix the', 'correct the', 'adjust the'
+    ]
+    
+    const isCreateIntent = createPatterns.some(pattern => lowerInput.includes(pattern))
+    const isUpdateIntent = updatePatterns.some(pattern => lowerInput.includes(pattern))
+    
+    if (isCreateIntent) {
+      return { type: 'create', input }
+    }
+    
+    if (isUpdateIntent && canvasOpen) {
+      return { type: 'update', section: detectSectionEditRequest(input), input }
+    }
+    
+    return null
+  }
+
   // Detect section-specific AI edit requests
   const detectSectionEditRequest = (input) => {
     const lowerInput = input.toLowerCase()
     
-    // Check for section-specific keywords
+    // Check for section-specific keywords with improved patterns
     if (lowerInput.includes('desired outcome') || lowerInput.includes('outcome')) {
       return 'outcomes'
     }
-    if (lowerInput.includes('classifier') || lowerInput.includes('categor')) {
+    if (lowerInput.includes('classifier') || lowerInput.includes('categor') || lowerInput.includes('demographic')) {
       return 'classifiers'
     }
-    if (lowerInput.includes('metric') || lowerInput.includes('formula')) {
+    if (lowerInput.includes('metric') || lowerInput.includes('formula') || lowerInput.includes('analytics')) {
       return 'metrics'
     }
     if (lowerInput.includes('question') && !lowerInput.includes('survey')) {
       return 'questions'
     }
-    if (lowerInput.includes('context') || lowerInput.includes('description') || lowerInput.includes('purpose')) {
+    if (lowerInput.includes('context') || lowerInput.includes('description') || lowerInput.includes('purpose') || lowerInput.includes('background')) {
       return 'context'
     }
-    if (lowerInput.includes('name') || lowerInput.includes('title')) {
+    if ((lowerInput.includes('name') || lowerInput.includes('title')) && !lowerInput.includes('classifier')) {
       return 'name'
+    }
+    if (lowerInput.includes('config') || lowerInput.includes('setting') || lowerInput.includes('audience') || lowerInput.includes('publish')) {
+      return 'configuration'
     }
     
     // Check for action keywords that suggest AI enhancement
@@ -1899,10 +2083,39 @@ The user is currently taking this survey and may ask for help with specific ques
     
     return null
   }
+  
+  // Map section names to wizard steps
+  const sectionToStep = {
+    'name': 1,
+    'context': 2,
+    'outcomes': 2, // Outcomes are on context page
+    'classifiers': 3,
+    'metrics': 4,
+    'questions': 5,
+    'configuration': 6
+  }
+  
+  // Check if there's an existing draft with meaningful content
+  const hasExistingDraft = () => {
+    return !!(
+      surveyDraft.name || 
+      surveyDraft.context || 
+      (surveyDraft.questions && surveyDraft.questions.length > 0) ||
+      (surveyDraft.classifiers && surveyDraft.classifiers.length > 0) ||
+      (surveyDraft.metrics && surveyDraft.metrics.length > 0)
+    )
+  }
 
-  // Handle section-specific AI edit requests
+  // Handle section-specific AI edit requests with auto-navigation
   const handleSectionEditRequest = async (sectionType, userRequest) => {
     try {
+      // Navigate to the appropriate wizard step immediately
+      const targetStep = sectionToStep[sectionType]
+      if (targetStep && targetStep !== surveyStep) {
+        setSurveyStep(targetStep)
+        addNotification(`Navigated to ${sectionType} section`, 'info')
+      }
+      
       const processingMessage = {
         id: `ai-${Date.now()}`,
         type: 'ai',
@@ -1946,12 +2159,13 @@ The user is currently taking this survey and may ask for help with specific ques
         const successMessage = {
           id: `ai-${Date.now()}`,
           type: 'ai',
-          content: `✅ I've successfully updated the ${sectionType} section! You can see the changes in the survey wizard on the right. The updates are based on your current survey context and should enhance the overall quality.`,
+          content: `✅ I've successfully updated the ${sectionType} section! The wizard is now showing step ${targetStep || surveyStep} where you can review the changes. The updates are based on your current survey context and should enhance the overall quality.`,
           timestamp: new Date()
         }
         setMessages(prev => [...prev, successMessage])
 
-        // Navigate to the appropriate step if needed
+        // Save draft automatically after updates
+        saveSurveyDraft(surveyDraft)
         if (sectionType === 'name' && surveyStep !== 1) setSurveyStep(1)
         if (sectionType === 'context' && surveyStep !== 2) setSurveyStep(2)
         if (sectionType === 'classifiers' && surveyStep !== 3) setSurveyStep(3)
@@ -3443,7 +3657,19 @@ The user is currently taking this survey and may ask for help with specific ques
                                     metrics
                                   )
                                   
-                                  setSurveyDraft(prev => ({ ...prev, questions: aiQuestions }))
+                                  // Ensure questions are in the correct format (text field)
+                                  const transformedQuestions = (aiQuestions || []).map((q, index) => ({
+                                    id: q.id || `q${index + 1}`,
+                                    text: q.text || q.question || '',
+                                    description: q.description || '',
+                                    type: q.type || q.response_type || 'multiple_choice',
+                                    options: q.options || [],
+                                    required: q.required || q.mandatory || false,
+                                    linkedMetric: q.linkedMetric || '',
+                                    linkedClassifier: q.linkedClassifier || ''
+                                  }))
+                                  
+                                  setSurveyDraft(prev => ({ ...prev, questions: transformedQuestions }))
                                   addNotification('Survey questions generated by AI successfully!', 'success')
                                 } catch (error) {
                                   console.error('Failed to generate questions:', error)
