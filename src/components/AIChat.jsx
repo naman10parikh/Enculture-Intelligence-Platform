@@ -1332,19 +1332,14 @@ The user is currently taking this survey and may ask for help with specific ques
         // Open canvas
         openCanvasForSurvey('draft', true)
         
-        // If there's a description, generate template
+        // If there's a description, generate template (no intermediate message)
         if (description && description.length > 5) {
-          const aiMessage = {
-            id: `ai-${Date.now()}`,
-            type: 'ai',
-            content: `Perfect! I'll create a comprehensive survey about "${description}". Let me generate a professional template with questions, metrics, and classifiers... 🎨`,
-            timestamp: new Date()
-          }
-          setMessages(prev => [...prev, aiMessage])
-          
+          // Show loading state briefly, then generate
+          setIsTyping(true)
           setTimeout(() => {
+            setIsTyping(false)
             generateSurveyFromAIStreaming(description)
-          }, 1000)
+          }, 800)
         } else {
           const aiMessage = {
             id: `ai-${Date.now()}`,
@@ -1393,19 +1388,13 @@ The user is currently taking this survey and may ask for help with specific ques
       // Open canvas - override any existing draft when using /survey command
       openCanvasForSurvey('draft', true)
       
-      // If there's a description, show AI response and generate template
+      // If there's a description, generate template (no intermediate message)
       if (description) {
-        const aiMessage = {
-          id: `ai-${Date.now()}`,
-          type: 'ai',
-          content: `I'll create a professional survey for "${description}". Let me generate that template for you now...`,
-          timestamp: new Date()
-        }
-        setMessages(prev => [...prev, aiMessage])
-        
+        setIsTyping(true)
         setTimeout(() => {
+          setIsTyping(false)
           generateSurveyFromAIStreaming(description)
-        }, 1000)
+        }, 800)
       } else {
         const aiMessage = {
           id: `ai-${Date.now()}`,
@@ -1980,11 +1969,24 @@ The user is currently taking this survey and may ask for help with specific ques
         
         setCanvasView('wizard') // Stay in wizard to show the generated survey
         
-        // Add success message to chat
+        // Add dynamic success message to chat
+        const numQuestions = (template.questions || []).length
+        const numMetrics = (template.metrics || []).length
+        const surveyName = template.name || 'your survey'
+        
+        // Create a more natural, varied message
+        const successVariants = [
+          `I've created "${surveyName}" with ${numQuestions} carefully crafted questions and ${numMetrics} analytics metrics. The survey is ready for your review in the wizard! Feel free to customize any aspect.`,
+          `Your survey "${surveyName}" is ready! I've designed ${numQuestions} questions that will help measure the key areas you're interested in, along with ${numMetrics} metrics for deeper insights. Check it out in the wizard on the right.`,
+          `Done! "${surveyName}" includes ${numQuestions} research-backed questions and ${numMetrics} measurement metrics. Take a look in the survey wizard and adjust anything you'd like to refine.`
+        ]
+        
+        const randomVariant = successVariants[Math.floor(Math.random() * successVariants.length)]
+        
         const successMessage = {
           id: `ai-${Date.now()}`,
           type: 'ai',
-          content: `✅ I've successfully generated a comprehensive survey template with ${(template.questions || []).length} questions, ${(template.metrics || []).length} metrics, and ${(template.classifiers || []).length} classifiers. You can now review and customize it in the survey wizard on the right!`,
+          content: randomVariant,
           timestamp: new Date()
         }
         setMessages(prev => [...prev, successMessage])
@@ -3032,18 +3034,31 @@ The user is currently taking this survey and may ask for help with specific ques
                       <textarea
                         className="wizard-input large name-field-wrap"
                         value={surveyDraft.name}
-                        onChange={e => setSurveyDraft(prev => ({ ...prev, name: e.target.value }))}
+                        onChange={e => {
+                          setSurveyDraft(prev => ({ ...prev, name: e.target.value }))
+                          // Auto-expand on change
+                          e.target.style.height = 'auto'
+                          e.target.style.height = e.target.scrollHeight + 'px'
+                        }}
                         placeholder="e.g., Q4 Team Engagement Survey"
                         autoFocus
                         rows={1}
                         style={{
                           resize: 'none',
                           overflow: 'hidden',
-                          minHeight: '3rem'
+                          minHeight: '3rem',
+                          maxHeight: '12rem' // Prevent it from getting too tall
                         }}
                         onInput={(e) => {
                           e.target.style.height = 'auto';
                           e.target.style.height = e.target.scrollHeight + 'px';
+                        }}
+                        ref={(el) => {
+                          // Auto-expand when value is set programmatically
+                          if (el && surveyDraft.name) {
+                            el.style.height = 'auto'
+                            el.style.height = el.scrollHeight + 'px'
+                          }
                         }}
                       />
                         <div className="enhance-ai-center">
