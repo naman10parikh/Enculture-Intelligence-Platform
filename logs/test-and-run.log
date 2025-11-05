@@ -1,0 +1,49 @@
+🚀 Starting Enculture Platform Test and Run Script...
+=======================================================
+[0;34m[INFO][0m Cleaning up existing processes on ports 8000 and 3000...
+[0;34m[INFO][0m Starting backend server...
+[0;34m[INFO][0m Waiting for backend to start...
+[0;32m[SUCCESS][0m Backend is running on http://localhost:8000
+[0;34m[INFO][0m Testing backend API endpoints...
+[0;34m[INFO][0m Testing health endpoints...
+[0;34m[INFO][0m Testing thread creation...
+[0;32m[SUCCESS][0m Created thread: cdab5732-017d-471a-b162-7786ae952bc1
+[0;34m[INFO][0m Testing streaming chat endpoint...
+[0;32m[SUCCESS][0m Streaming endpoint working correctly
+[0;32m[SUCCESS][0m All backend tests passed!
+[0;34m[INFO][0m Starting frontend server...
+[0;34m[INFO][0m Waiting for frontend to start...
+[0;32m[SUCCESS][0m Frontend is running on http://localhost:3000
+[0;34m[INFO][0m Installing and running Playwright tests...
+[0;34m[INFO][0m Running Playwright tests...
+ReferenceError: module is not defined in ES module scope
+This file is being treated as an ES module because it has a '.js' file extension and '/Users/naman/Enculture-Intelligence-Platform/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///Users/naman/Enculture-Intelligence-Platform/playwright.config.js:1:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+    at requireOrImport (/Users/naman/Enculture-Intelligence-Platform/node_modules/playwright/lib/transform/transform.js:214:12)
+    at loadUserConfig (/Users/naman/Enculture-Intelligence-Platform/node_modules/playwright/lib/common/configLoader.js:107:46)
+    at loadConfig (/Users/naman/Enculture-Intelligence-Platform/node_modules/playwright/lib/common/configLoader.js:119:22)
+    at loadConfigFromFile (/Users/naman/Enculture-Intelligence-Platform/node_modules/playwright/lib/common/configLoader.js:331:10)
+    at runTests (/Users/naman/Enculture-Intelligence-Platform/node_modules/playwright/lib/program.js:145:18)
+    at i.<anonymous> (/Users/naman/Enculture-Intelligence-Platform/node_modules/playwright/lib/program.js:64:7)
+[0;31m[ERROR][0m Some Playwright tests failed
+[1;33m[WARNING][0m Some Playwright tests failed, but services are running
+
+=======================================================
+[0;32m[SUCCESS][0m 🎉 Enculture Platform is running successfully!
+
+📊 Services:
+   • Backend:  http://localhost:8000
+   • Frontend: http://localhost:3000
+
+📋 Log files:
+   • Backend:  backend.log
+   • Frontend: frontend.log
+
+🛑 To stop services:
+   • Backend:  kill $(cat backend.pid)
+   • Frontend: kill $(cat frontend.pid)
+
+🧪 Test results: All tests passed ✅
+=======================================================

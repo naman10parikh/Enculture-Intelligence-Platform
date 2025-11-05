@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, Calendar, Bell, User, Settings, MoreVertical, ChevronDown, ArrowRight, Star, FileText, Heart, Activity, Thermometer, Target, CheckCircle, Clock, ChevronRight, ChevronLeft } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts'
+import { usePersona } from '../context/PersonaContext'
+import PersonaToggle from './PersonaToggle'
+import { usePersonaData } from '../hooks/usePersonaData'
 
 // Employee engagement score data for the past 7 days
 const engagementData = [
@@ -144,6 +147,10 @@ function Insights() {
   const [currentEmployeeIndex, setCurrentEmployeeIndex] = useState(0)
   const navigate = useNavigate()
 
+  // Persona-specific data and context
+  const { dashboardConfig, isTransitioning } = usePersona()
+  const { filteredData, isLoading, getChartData, getMetrics, getInsights } = usePersonaData()
+
   const nextEmployee = () => {
     setCurrentEmployeeIndex((prev) => (prev + 1) % employeeProfiles.length)
   }
@@ -153,6 +160,15 @@ function Insights() {
   }
 
   const currentEmployee = employeeProfiles[currentEmployeeIndex]
+
+  // Use persona-specific data or fallback to static data
+  const dynamicEngagementData = getChartData('engagement')?.length > 0 ? getChartData('engagement') : engagementData
+  const dynamicSurveyData = getChartData('surveyCompletion')?.length > 0 ? getChartData('surveyCompletion') : surveyCompletionData
+  const dynamicProductivityData = getChartData('productivity')?.length > 0 ? getChartData('productivity') : productivityData
+  
+  // Get persona-specific metrics
+  const personaMetrics = getMetrics()
+  const personaInsights = getInsights()
   
   // Circular progress data for career development progress
   const careerProgressData = [
@@ -167,10 +183,21 @@ function Insights() {
         {/* Title Section */}
         <div className="dashboard-title-section">
           <div className="title-left">
-            <h1 className="dashboard-title">Dashboard</h1>
-            <p className="dashboard-subtitle">An overview of team culture insights: engagement scores, growth trends, and survey analytics.</p>
+            <h1 className="dashboard-title">
+              {dashboardConfig?.title || 'Dashboard'}
+            </h1>
+            <p className="dashboard-subtitle">
+              {dashboardConfig?.subtitle || 'An overview of culture insights: engagement scores, growth trends, and survey analytics.'}
+            </p>
+            {(isLoading || isTransitioning) && (
+              <div className="loading-indicator">
+                <div className="loading-spinner"></div>
+                <span>Updating dashboard...</span>
+              </div>
+            )}
           </div>
           <div className="title-right">
+            <PersonaToggle className="persona-toggle-dashboard" />
             <button className="customize-btn">
               <Settings size={16} />
               Customize dashboard
@@ -207,7 +234,7 @@ function Insights() {
                 </div>
               </div>
               <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={engagementData}>
+                <LineChart data={dynamicEngagementData}>
                   <defs>
                     <linearGradient id="engagementGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="0%" stopColor="rgba(177, 156, 217, 0.3)" />
@@ -524,7 +551,7 @@ function Insights() {
                 <span className="metric-trend positive">↗ +8%</span>
             </div>
               <ResponsiveContainer width="100%" height={120}>
-                <LineChart data={surveyCompletionData}>
+                <LineChart data={dynamicSurveyData}>
                   <defs>
                     <linearGradient id="completionGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="0%" stopColor="rgba(57, 42, 72, 0.4)" />
@@ -573,7 +600,7 @@ function Insights() {
             </div>
             <div className="productivity-chart">
               <ResponsiveContainer width="100%" height={150}>
-                <BarChart data={productivityData}>
+                <BarChart data={dynamicProductivityData}>
                   <defs>
                     <linearGradient id="productivityGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="0%" stopColor="rgba(48, 25, 52, 0.8)" />
@@ -845,6 +872,38 @@ function Insights() {
         .title-right {
           display: flex;
           gap: 12px;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        .persona-toggle-dashboard {
+          margin-right: 8px;
+        }
+
+        .loading-indicator {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 8px;
+          padding: 8px 12px;
+          background: rgba(59, 130, 246, 0.1);
+          border-radius: 8px;
+          font-size: 13px;
+          color: #3b82f6;
+        }
+
+        .loading-spinner {
+          width: 12px;
+          height: 12px;
+          border: 2px solid rgba(59, 130, 246, 0.2);
+          border-top: 2px solid #3b82f6;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
 
         .customize-btn {
@@ -2347,6 +2406,17 @@ function Insights() {
           .dashboard-title-section {
             flex-direction: column;
             gap: 16px;
+          }
+
+          .title-right {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+          }
+
+          .persona-toggle-dashboard {
+            margin-right: 0;
+            margin-bottom: 8px;
           }
 
           .dashboard-grid {

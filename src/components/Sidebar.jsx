@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { MessageCircle, BarChart3, CheckSquare, Palette } from 'lucide-react'
+import { MessageCircle, BarChart3, CheckSquare, Palette, ChevronDown, ChevronUp } from 'lucide-react'
+import { useUser } from '../context/UserContext'
 
 const navigationItems = [
   {
@@ -35,6 +36,25 @@ const navigationItems = [
 
 function Sidebar({ activeSection, setActiveSection }) {
   const location = useLocation()
+  const { currentUser, demoUsers, switchUser } = useUser()
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.user-dropdown')) {
+        setDropdownOpen(false)
+      }
+    }
+
+    if (dropdownOpen) {
+      document.addEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [dropdownOpen])
 
   return (
     <aside className="sidebar">
@@ -81,13 +101,49 @@ function Sidebar({ activeSection, setActiveSection }) {
       </nav>
 
       <div className="sidebar-footer">
-        <div className="user-profile glass-card">
-          <div className="user-avatar">
-            <span>GS</span>
-          </div>
-          <div className="user-info">
-            <span className="user-name">Gayathri Sriram</span>
-            <span className="user-role">Product Manager</span>
+        <div className={`user-profile glass-card ${dropdownOpen ? 'dropdown-open' : ''}`}>
+          {dropdownOpen && (
+            <div className="user-dropdown-expanded">
+              {demoUsers?.filter(user => user.id !== currentUser?.id).map(user => (
+                <div 
+                  key={user.id} 
+                  className="user-dropdown-item"
+                  onClick={() => {
+                    switchUser(user.id)
+                    setDropdownOpen(false)
+                  }}
+                >
+                  <div className="user-card">
+                    <div className="user-card-avatar">{user.avatar}</div>
+                    <div className="user-card-info">
+                      <div className="user-card-name">{user.name}</div>
+                      <div className="user-card-role">{user.role}</div>
+                      <div className="user-card-department">{user.department}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          <div className="user-active-section">
+            <div className="user-avatar">
+              <span>{currentUser?.avatar || '👤'}</span>
+            </div>
+            <div className="user-info">
+              <div className={`user-dropdown ${dropdownOpen ? 'open' : ''}`}>
+                <button 
+                  className="user-dropdown-trigger"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  <div className="user-dropdown-content">
+                    <span className="user-dropdown-name">{currentUser?.name}</span>
+                    <span className="user-dropdown-role">{currentUser?.role}</span>
+                  </div>
+                  {dropdownOpen ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -218,14 +274,10 @@ function Sidebar({ activeSection, setActiveSection }) {
 
         .sidebar-footer {
           margin-top: var(--space-6);
+          position: relative;
         }
 
-        .user-profile {
-          padding: var(--space-4);
-          display: flex;
-          align-items: center;
-          gap: var(--space-3);
-        }
+        /* Removed duplicate user-profile styling - now handled by user-active-section */
 
         .user-avatar {
           width: 40px;
@@ -236,25 +288,168 @@ function Sidebar({ activeSection, setActiveSection }) {
           align-items: center;
           justify-content: center;
           font-weight: 600;
-          font-size: var(--text-sm);
+          font-size: var(--text-lg);
           color: #301934;
         }
 
         .user-info {
           display: flex;
           flex-direction: column;
+          flex: 1;
         }
 
-        .user-name {
+        .user-dropdown {
+          position: relative;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .user-profile {
+          position: relative;
+          border-radius: 12px;
+          transition: all 0.3s ease;
+          overflow: visible;
+          max-height: 400px;
+        }
+
+        .user-active-section {
+          padding: var(--space-4);
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+        }
+
+        .user-profile.dropdown-open {
+          border-radius: 12px;
+        }
+
+        .user-dropdown-trigger {
+          background: transparent;
+          border: none;
           font-weight: 500;
           font-size: var(--text-sm);
           color: var(--text-primary);
+          cursor: pointer;
+          padding: 4px 0;
+          outline: none;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          transition: all 0.2s ease;
         }
 
-        .user-role {
+        /* No hover effects - keep it simple */
+
+        .user-dropdown-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .user-dropdown-name {
+          font-weight: 500;
+          font-size: var(--text-sm);
+        }
+
+        .user-dropdown-role {
           font-size: var(--text-xs);
           color: var(--text-secondary);
+          margin-top: 1px;
         }
+
+        .user-dropdown-expanded {
+          padding-bottom: var(--space-3);
+          border-bottom: 1px solid rgba(177, 156, 217, 0.15);
+          margin-bottom: var(--space-3);
+          animation: slideDown 0.2s ease-out;
+          max-height: 250px;
+          overflow-y: auto;
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .user-dropdown-item {
+          padding: var(--space-2) 0;
+          cursor: pointer;
+          border-radius: 8px;
+          transition: background-color 0.2s ease;
+        }
+
+        .user-dropdown-item:hover {
+          background: rgba(177, 156, 217, 0.05);
+        }
+
+        .user-dropdown-item:last-child {
+          padding-bottom: 0;
+        }
+
+        .user-card {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          padding: var(--space-2);
+          position: relative;
+          border-radius: 8px;
+        }
+
+        .user-card-avatar {
+          font-size: 16px;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #f9fafb;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .user-card-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          min-width: 0;
+        }
+
+        .user-card-name {
+          font-weight: 500;
+          font-size: 13px;
+          color: #1f2937;
+          line-height: 1.2;
+        }
+
+        .user-card-role {
+          font-size: 12px;
+          color: #6b7280;
+          font-weight: 400;
+        }
+
+        .user-card-department {
+          font-size: 11px;
+          color: #9ca3af;
+          font-weight: 400;
+        }
+
+        .current-user-indicator {
+          color: #10b981;
+          font-weight: 600;
+          font-size: 14px;
+          flex-shrink: 0;
+        }
+
+        /* Clean and simple dropdown */
 
         @media (max-width: 1024px) {
           .sidebar {

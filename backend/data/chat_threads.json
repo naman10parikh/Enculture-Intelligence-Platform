@@ -1,0 +1,3334 @@
+{
+  "culture-001": {
+    "id": "culture-001",
+    "title": "Team Engagement Survey Analysis",
+    "user_id": null,
+    "created_at": "2025-09-07T08:30:00",
+    "updated_at": "2025-09-07T14:10:33.973084",
+    "messages": [
+      {
+        "id": "msg-001-1",
+        "role": "user",
+        "content": "Can you help me analyze our team engagement survey results? I'm seeing some concerning trends.",
+        "timestamp": "2025-09-07T08:30:00"
+      },
+      {
+        "id": "msg-001-2",
+        "role": "assistant",
+        "content": "I'd be happy to help analyze your team engagement survey results. What specific trends are you noticing that concern you? Are you seeing patterns in particular areas like communication, workload, career development, or team dynamics?\n\nTo provide the most valuable insights, could you share:\n- Overall engagement scores or key metrics\n- Any demographic breakdowns (by department, tenure, etc.)\n- Specific areas with declining scores\n\nThis will help me identify root causes and suggest targeted improvement strategies.",
+        "timestamp": "2025-09-07T08:30:15"
+      }
+    ],
+    "is_active": true
+  },
+  "culture-002": {
+    "id": "culture-002",
+    "title": "Remote Work Culture Assessment",
+    "user_id": null,
+    "created_at": "2025-09-06T14:15:00",
+    "updated_at": "2025-09-06T14:20:00",
+    "messages": [
+      {
+        "id": "msg-002-1",
+        "role": "user",
+        "content": "How can we maintain company culture with our new remote-first policy?",
+        "timestamp": "2025-09-06T14:15:00"
+      },
+      {
+        "id": "msg-002-2",
+        "role": "assistant",
+        "content": "**Remote-first culture** requires intentional design and consistent effort. Here are proven strategies:\n\n## Core Elements:\n\n### **Virtual Connection Rituals**\n- **Daily standups** with personal check-ins\n- **Virtual coffee chats** (15-min random pairings)\n- **All-hands meetings** with interactive elements\n- **Online team building** activities\n\n### **Communication Standards** \n- **Async-first** communication principles\n- **Documentation culture** for transparency\n- **Response time expectations** clearly defined\n- **Video-on meetings** for important discussions\n\n### **Recognition & Belonging**\n- **Digital recognition wall** for achievements\n- **Virtual celebration** of milestones\n- **Inclusive meeting practices** (camera etiquette, speaking time)\n- **Remote onboarding buddy** system\n\nThe key is being **more intentional** about culture touchpoints that happened naturally in-office. What specific aspect would you like to focus on first?",
+        "timestamp": "2025-09-06T14:16:00"
+      }
+    ],
+    "is_active": true
+  },
+  "culture-003": {
+    "id": "culture-003",
+    "title": "Diversity & Inclusion Metrics",
+    "user_id": null,
+    "created_at": "2025-09-05T16:45:00",
+    "updated_at": "2025-09-07T19:43:01.270613",
+    "messages": [
+      {
+        "id": "msg-003-1",
+        "role": "user",
+        "content": "What are the most important D&I metrics we should be tracking?",
+        "timestamp": "2025-09-05T16:45:00"
+      },
+      {
+        "id": "msg-003-2",
+        "role": "assistant",
+        "content": "Here are the **essential D&I metrics** every organization should track:\n\n## Representation Metrics:\n- **Demographic composition** by level/department\n- **Leadership diversity** (C-suite, VP, Director levels)\n- **Hiring diversity** (candidate pipeline \u2192 offers \u2192 acceptances)\n- **Promotion rates** by demographic groups\n\n## Inclusion Experience:\n- **Belonging scores** (survey-based)\n- **Psychological safety** index\n- **Voice & influence** perception surveys\n- **Mentor/sponsor** access rates\n\n## Pay Equity:\n- **Compensation analysis** by role and demographics\n- **Bonus/equity** distribution patterns\n- **Performance rating** distribution fairness\n\n## Retention & Growth:\n- **Turnover rates** by demographic groups\n- **Internal mobility** success rates\n- **High-potential identification** diversity\n\n## Actionable Insights:\nTrack these **quarterly** and focus on **trends over time** rather than snapshots. The most critical metric is often **belonging scores** - they predict retention and performance better than representation alone.\n\nWhich metrics would you like help setting up measurement frameworks for?",
+        "timestamp": "2025-09-05T16:46:30"
+      },
+      {
+        "id": "f5af3d44-00a1-4eb9-be7e-864fe3bf3c96",
+        "role": "user",
+        "content": "What are the most important D&I metrics we should be tracking?",
+        "timestamp": "2025-09-07T19:42:49.056412"
+      },
+      {
+        "id": "d1070f5b-ed38-404d-b3e0-d8dec7cdc793",
+        "role": "assistant",
+        "content": "Here's a concise summary tailored specifically for someone focused on culture intelligence and measurement strategy at scale: --- ## **Key D&I Metrics to Track** ### 1. **Representation & Workforce Composition** - **Workforce demographics:** Gender, race/ethnicity, LGBTQ+, disability status, etc.\u2014by function, level, and geography. - **Leadership diversity:** Distribution of underrepresented groups in management and executive roles. - **Hiring funnel diversity:** Candidate pool, interview, offer, and acceptance rates by demographic. ### 2. **Equity & Advancement** - **Promotion rates:** Compare how often different demographic groups are promoted. - **Pay equity:** Analysis of compensation (base, bonus, equity) by demographic group, controlling for role, tenure, and performance. - **Performance ratings:** Identify rating bias by analyzing distribution across demographics. ### 3. **Inclusion & Belonging** - **Inclusion index:** Survey-based scores measuring belonging, trust, respect, and voice. - **Psychological safety:** % agree/strongly agree on \"safe to speak up\" survey items. - **Resource & opportunity access:** Participation and utilization rates in mentorship, sponsorship, and stretch assignments by demographic. ### 4. **Retention & Mobility** - **Turnover rates:** Voluntary and involuntary turnover by demographic. - **Tenure & internal mobility:** Average length of service and lateral/vertical moves by group. - **Exit interviews:** Thematic analysis for inclusion or bias-related attrition. ### 5. **Incident & Sentiment Data** - **ER/ethics complaints:** Volume, closure rates, and outcomes by type and demographic. - **Employee Listening:** Sentiment analysis from pulse surveys, open comments, and eNPS by group. --- ### **Best Practice:** - **Baseline and trend reporting:** Track change over time, not just static snapshots. - **Intersectionality:** Look at overlapping identities (e.g., women of color). - **Confidentiality:** Protect anonymity, especially in small population groups. - **Action linkage:** Tie insights to measurable actions and leadership accountability. Would you like templates for reporting, advice on inclusive survey design, or support building an analytics dashboard for tracking these metrics? ",
+        "timestamp": "2025-09-07T19:43:01.270526"
+      }
+    ],
+    "is_active": true
+  },
+  "culture-004": {
+    "id": "culture-004",
+    "title": "Employee Feedback Analysis",
+    "user_id": null,
+    "created_at": "2025-09-04T11:20:00",
+    "updated_at": "2025-09-04T11:25:00",
+    "messages": [
+      {
+        "id": "msg-004-1",
+        "role": "user",
+        "content": "Our anonymous feedback is showing burnout concerns. How should we address this?",
+        "timestamp": "2025-09-04T11:20:00"
+      },
+      {
+        "id": "msg-004-2",
+        "role": "assistant",
+        "content": "**Burnout signals** in anonymous feedback require immediate, thoughtful action. Here's a strategic approach:\n\n## Immediate Assessment:\n- **Follow-up survey** with specific burnout indicators\n- **Workload audit** across teams and individuals\n- **Manager 1:1 quality** evaluation\n- **Resource availability** check\n\n## Root Cause Analysis:\n### Common Burnout Drivers:\n- **Unclear priorities** or constantly shifting goals\n- **Insufficient resources** for expected outcomes\n- **Poor work-life boundaries** (especially remote)\n- **Lack of autonomy** or micromanagement\n- **Inadequate recognition** for extra effort\n\n## Action Framework:\n\n### **Week 1**: Emergency measures\n- **Deadline audit** - what can be postponed?\n- **Resource reallocation** - who needs help?\n- **Manager coaching** on recognizing burnout signs\n\n### **Month 1**: Structural changes  \n- **Workload redistribution** protocols\n- **Meeting audit** (reduce unnecessary meetings)\n- **\"Right to disconnect\"** policies\n- **Mental health resources** enhancement\n\n**Critical**: Address this transparently with the team. Acknowledge the feedback and share your action plan. Burnout spreads quickly but so does the positive impact of genuine leadership response.",
+        "timestamp": "2025-09-04T11:21:45"
+      }
+    ],
+    "is_active": true
+  },
+  "34c74251-4d56-423f-b8d8-d8dc3268e2dd": {
+    "id": "34c74251-4d56-423f-b8d8-d8dc3268e2dd",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T14:52:22.702262",
+    "updated_at": "2025-09-07T14:52:42.677702",
+    "messages": [],
+    "is_active": false
+  },
+  "81fb2ce7-0e57-4bdc-b0a2-256bddc82d44": {
+    "id": "81fb2ce7-0e57-4bdc-b0a2-256bddc82d44",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T14:52:22.709668",
+    "updated_at": "2025-09-07T14:52:42.052699",
+    "messages": [],
+    "is_active": false
+  },
+  "b9ccfb60-7d00-4394-afb7-014fbdc43ebd": {
+    "id": "b9ccfb60-7d00-4394-afb7-014fbdc43ebd",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T14:56:35.038096",
+    "updated_at": "2025-09-07T15:23:39.947903",
+    "messages": [],
+    "is_active": false
+  },
+  "33d8bf6c-1ca5-4fca-ace6-32b2f8c013e3": {
+    "id": "33d8bf6c-1ca5-4fca-ace6-32b2f8c013e3",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T14:56:35.047529",
+    "updated_at": "2025-09-07T15:23:39.801723",
+    "messages": [],
+    "is_active": false
+  },
+  "fbcaf8dd-c0df-4713-a71a-a695b8d3fd63": {
+    "id": "fbcaf8dd-c0df-4713-a71a-a695b8d3fd63",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T14:56:58.652098",
+    "updated_at": "2025-09-07T17:55:54.948183",
+    "messages": [
+      {
+        "id": "87395b9a-144e-4a5c-b5e5-1370f2e62409",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T14:56:58.702741"
+      },
+      {
+        "id": "62db94a0-0de9-4d5b-b4c4-7ef1c04aeb46",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Are you looking to analyze recent culture data, interpret survey results, or explore ways to improve team engagement and organizational health? Let me know your focus, and I'll provide tailored insights or recommendations! ",
+        "timestamp": "2025-09-07T14:57:00.637343"
+      },
+      {
+        "id": "ee886e17-0d66-4e22-bb38-6857b88f5a03",
+        "role": "user",
+        "content": "hows it going today",
+        "timestamp": "2025-09-07T17:08:39.229426"
+      },
+      {
+        "id": "f0f7781c-6dff-4ba1-88f8-30b94e60bb2d",
+        "role": "assistant",
+        "content": "Thank you for asking! I'm ready to help you dive into your culture metrics, interpret trends, and identify any emerging strengths or challenges in your organizational culture. If you have recent data, survey results, or specific concerns, let me know\u2014I'm here to provide clear, actionable insights or answer any culture-related questions you have today. Is there a particular area of your culture intelligence work you'd like to focus on right now (e.g., engagement, communication, inclusion, team dynamics)? ",
+        "timestamp": "2025-09-07T17:08:42.522221"
+      }
+    ],
+    "is_active": false
+  },
+  "95eb6fb4-742a-4d32-9f9a-e09d7a6a74ce": {
+    "id": "95eb6fb4-742a-4d32-9f9a-e09d7a6a74ce",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T14:57:03.507466",
+    "updated_at": "2025-09-07T15:23:38.039887",
+    "messages": [],
+    "is_active": false
+  },
+  "b6e49776-1bc5-4b04-92cf-8d0949041add": {
+    "id": "b6e49776-1bc5-4b04-92cf-8d0949041add",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T14:57:03.516093",
+    "updated_at": "2025-09-07T15:23:37.373760",
+    "messages": [],
+    "is_active": false
+  },
+  "a3c8cbbc-9d74-458f-adc7-a71bc2bea69a": {
+    "id": "a3c8cbbc-9d74-458f-adc7-a71bc2bea69a",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:04:24.126870",
+    "updated_at": "2025-09-07T15:23:37.173788",
+    "messages": [],
+    "is_active": false
+  },
+  "c9f8f7a9-7d25-40ba-b259-84bccfe17faa": {
+    "id": "c9f8f7a9-7d25-40ba-b259-84bccfe17faa",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:04:24.128954",
+    "updated_at": "2025-09-07T15:23:37.042486",
+    "messages": [],
+    "is_active": false
+  },
+  "cfc41bac-5624-41dd-bbd7-56145e087080": {
+    "id": "cfc41bac-5624-41dd-bbd7-56145e087080",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:08:55.235513",
+    "updated_at": "2025-09-07T15:23:36.904005",
+    "messages": [],
+    "is_active": false
+  },
+  "f5617c77-7f3f-4238-839d-93f69c4157b7": {
+    "id": "f5617c77-7f3f-4238-839d-93f69c4157b7",
+    "title": "Culture Analytics Introduction",
+    "user_id": null,
+    "created_at": "2025-09-07T15:08:55.247909",
+    "updated_at": "2025-09-07T15:09:34.880953",
+    "messages": [
+      {
+        "id": "0404008c-ca5e-492a-bb69-7eaade4c4b30",
+        "role": "user",
+        "content": "hello test",
+        "timestamp": "2025-09-07T15:09:32.338715"
+      },
+      {
+        "id": "3626d9ad-3fd7-4ed5-8843-cba39d2fe600",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b I'm here and ready to assist you with any culture analytics, insights, or recommendations you need for your organization. How can I help you today? ",
+        "timestamp": "2025-09-07T15:09:34.351017"
+      }
+    ],
+    "is_active": true
+  },
+  "2876de5e-7246-4ee9-9871-7d76ea9525e6": {
+    "id": "2876de5e-7246-4ee9-9871-7d76ea9525e6",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:14:41.778760",
+    "updated_at": "2025-09-07T15:23:36.122267",
+    "messages": [],
+    "is_active": false
+  },
+  "4a29e15e-7748-4780-8940-2066f9906365": {
+    "id": "4a29e15e-7748-4780-8940-2066f9906365",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:14:41.784024",
+    "updated_at": "2025-09-07T15:23:35.934156",
+    "messages": [],
+    "is_active": false
+  },
+  "f71a8f6e-84da-40d3-8a8d-766fda86638e": {
+    "id": "f71a8f6e-84da-40d3-8a8d-766fda86638e",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T15:20:46.543494",
+    "updated_at": "2025-09-07T17:55:56.730515",
+    "messages": [
+      {
+        "id": "25fe3966-d860-491c-9cb0-bc15bcb42f08",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T15:20:46.593270"
+      },
+      {
+        "id": "5f949d20-8526-435d-b671-344a27e05cd8",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As your Culture Intelligence Assistant, I'm here to help you analyze and interpret your organization's culture data, surface insights, and suggest actionable steps to build a healthier workplace. How can I support your culture analytics goals today? ",
+        "timestamp": "2025-09-07T15:20:48.968935"
+      }
+    ],
+    "is_active": false
+  },
+  "7127fbaa-4223-4542-a10a-de5530c33ca0": {
+    "id": "7127fbaa-4223-4542-a10a-de5530c33ca0",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:20:52.094581",
+    "updated_at": "2025-09-07T15:23:35.110677",
+    "messages": [],
+    "is_active": false
+  },
+  "703a9f6e-8bf2-48d3-a65e-b8f3e962979a": {
+    "id": "703a9f6e-8bf2-48d3-a65e-b8f3e962979a",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:20:52.102269",
+    "updated_at": "2025-09-07T15:23:34.602377",
+    "messages": [],
+    "is_active": false
+  },
+  "fdaf9d60-4b71-40dd-b6d8-1cebefaa220e": {
+    "id": "fdaf9d60-4b71-40dd-b6d8-1cebefaa220e",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:25:40.195181",
+    "updated_at": "2025-09-07T15:34:26.246011",
+    "messages": [],
+    "is_active": false
+  },
+  "d82e1a10-aeda-41ca-ac3d-a81218877354": {
+    "id": "d82e1a10-aeda-41ca-ac3d-a81218877354",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:25:40.205597",
+    "updated_at": "2025-09-07T15:34:25.939955",
+    "messages": [],
+    "is_active": false
+  },
+  "a70498be-8bd4-46bb-98f6-731612d07175": {
+    "id": "a70498be-8bd4-46bb-98f6-731612d07175",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:33:00.645686",
+    "updated_at": "2025-09-07T15:34:25.471160",
+    "messages": [],
+    "is_active": false
+  },
+  "0e263657-040c-44ef-a676-a4dc6dcdcf4b": {
+    "id": "0e263657-040c-44ef-a676-a4dc6dcdcf4b",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:33:00.663038",
+    "updated_at": "2025-09-07T15:34:25.289250",
+    "messages": [],
+    "is_active": false
+  },
+  "4bf4a708-907c-4a2d-ae1e-98ae7aec45bc": {
+    "id": "4bf4a708-907c-4a2d-ae1e-98ae7aec45bc",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:33:14.434394",
+    "updated_at": "2025-09-07T15:34:25.137522",
+    "messages": [],
+    "is_active": false
+  },
+  "868f2d5b-9b11-430c-9968-6f63baba9507": {
+    "id": "868f2d5b-9b11-430c-9968-6f63baba9507",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:33:14.435958",
+    "updated_at": "2025-09-07T15:34:24.981342",
+    "messages": [],
+    "is_active": false
+  },
+  "4053e722-116b-4201-a5aa-0260dcc1e519": {
+    "id": "4053e722-116b-4201-a5aa-0260dcc1e519",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:34:21.171835",
+    "updated_at": "2025-09-07T15:34:24.796806",
+    "messages": [],
+    "is_active": false
+  },
+  "73fa8d47-0a62-4faa-b992-5ee36936c0e8": {
+    "id": "73fa8d47-0a62-4faa-b992-5ee36936c0e8",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:34:21.174662",
+    "updated_at": "2025-09-07T15:34:24.644411",
+    "messages": [],
+    "is_active": false
+  },
+  "237c3109-302a-464e-96fa-a4225f59264b": {
+    "id": "237c3109-302a-464e-96fa-a4225f59264b",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:51:47.257521",
+    "updated_at": "2025-09-07T16:54:04.014860",
+    "messages": [],
+    "is_active": false
+  },
+  "d91db6fb-81e9-4cb4-ab5e-eb7d324770e1": {
+    "id": "d91db6fb-81e9-4cb4-ab5e-eb7d324770e1",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:51:47.302486",
+    "updated_at": "2025-09-07T16:54:03.888671",
+    "messages": [],
+    "is_active": false
+  },
+  "ccb24ee6-b29c-4e23-9e2f-fb44802e76e1": {
+    "id": "ccb24ee6-b29c-4e23-9e2f-fb44802e76e1",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:51:56.737334",
+    "updated_at": "2025-09-07T16:54:03.756695",
+    "messages": [],
+    "is_active": false
+  },
+  "d141064c-0e60-46ce-889e-a9c0600500ab": {
+    "id": "d141064c-0e60-46ce-889e-a9c0600500ab",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:51:56.738404",
+    "updated_at": "2025-09-07T16:54:03.639858",
+    "messages": [],
+    "is_active": false
+  },
+  "00725d2c-c4fc-4e03-8bd4-6f6a44759631": {
+    "id": "00725d2c-c4fc-4e03-8bd4-6f6a44759631",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:52:43.288925",
+    "updated_at": "2025-09-07T16:54:03.521836",
+    "messages": [],
+    "is_active": false
+  },
+  "a1f683e7-69db-4211-8cb4-88dde5e17c3c": {
+    "id": "a1f683e7-69db-4211-8cb4-88dde5e17c3c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:52:43.298902",
+    "updated_at": "2025-09-07T16:54:03.112750",
+    "messages": [],
+    "is_active": false
+  },
+  "441704d2-c094-41b2-bca9-7a9cc002af75": {
+    "id": "441704d2-c094-41b2-bca9-7a9cc002af75",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:52:46.123596",
+    "updated_at": "2025-09-07T16:54:03.006759",
+    "messages": [],
+    "is_active": false
+  },
+  "1cdc1709-74ea-4871-a020-4ac8330dfd19": {
+    "id": "1cdc1709-74ea-4871-a020-4ac8330dfd19",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:52:46.125543",
+    "updated_at": "2025-09-07T16:54:02.881539",
+    "messages": [],
+    "is_active": false
+  },
+  "430fe187-3ff6-4509-8146-d6cecd970153": {
+    "id": "430fe187-3ff6-4509-8146-d6cecd970153",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:57:48.250540",
+    "updated_at": "2025-09-07T16:54:02.781251",
+    "messages": [],
+    "is_active": false
+  },
+  "5f1d5725-085c-4885-a4a5-a6aec59f486b": {
+    "id": "5f1d5725-085c-4885-a4a5-a6aec59f486b",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:57:48.255508",
+    "updated_at": "2025-09-07T16:54:02.654509",
+    "messages": [],
+    "is_active": false
+  },
+  "356d47de-c979-4920-9e54-e6b0b66ca6fb": {
+    "id": "356d47de-c979-4920-9e54-e6b0b66ca6fb",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:57:50.483448",
+    "updated_at": "2025-09-07T16:54:02.547818",
+    "messages": [],
+    "is_active": false
+  },
+  "381e9768-7505-4393-aca9-ed3c8a8b2bcf": {
+    "id": "381e9768-7505-4393-aca9-ed3c8a8b2bcf",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T15:57:50.484940",
+    "updated_at": "2025-09-07T16:54:02.431591",
+    "messages": [],
+    "is_active": false
+  },
+  "5ffa76ab-b258-45ef-9942-7cbcd4f095fb": {
+    "id": "5ffa76ab-b258-45ef-9942-7cbcd4f095fb",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:25:04.308919",
+    "updated_at": "2025-09-07T16:54:02.305445",
+    "messages": [],
+    "is_active": false
+  },
+  "e75e5a8d-0d47-4465-8374-7b94b5cd126c": {
+    "id": "e75e5a8d-0d47-4465-8374-7b94b5cd126c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:25:04.317540",
+    "updated_at": "2025-09-07T16:54:02.098843",
+    "messages": [],
+    "is_active": false
+  },
+  "781b77e0-c1e1-427b-810b-1d2ce4aee94b": {
+    "id": "781b77e0-c1e1-427b-810b-1d2ce4aee94b",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:25:11.356462",
+    "updated_at": "2025-09-07T16:54:01.988920",
+    "messages": [],
+    "is_active": false
+  },
+  "6ff0b8e4-0d3c-4292-ab24-40e11f17e3fa": {
+    "id": "6ff0b8e4-0d3c-4292-ab24-40e11f17e3fa",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:25:11.358208",
+    "updated_at": "2025-09-07T16:54:01.763010",
+    "messages": [],
+    "is_active": false
+  },
+  "d80ffa0e-fb37-4a1a-9961-67e498d7ae89": {
+    "id": "d80ffa0e-fb37-4a1a-9961-67e498d7ae89",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:51:45.170489",
+    "updated_at": "2025-09-07T16:54:01.608265",
+    "messages": [],
+    "is_active": false
+  },
+  "1867ef6b-e632-4fb5-b2bf-fa1c35d428a6": {
+    "id": "1867ef6b-e632-4fb5-b2bf-fa1c35d428a6",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:51:45.177129",
+    "updated_at": "2025-09-07T16:54:01.453053",
+    "messages": [],
+    "is_active": false
+  },
+  "6da2c60d-2f3f-4b5d-b304-32d41ebc1deb": {
+    "id": "6da2c60d-2f3f-4b5d-b304-32d41ebc1deb",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:51:46.147912",
+    "updated_at": "2025-09-07T16:54:01.298088",
+    "messages": [],
+    "is_active": false
+  },
+  "d555da8b-9bd2-4343-a26b-9273b36d434c": {
+    "id": "d555da8b-9bd2-4343-a26b-9273b36d434c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:51:46.149308",
+    "updated_at": "2025-09-07T16:54:01.148079",
+    "messages": [],
+    "is_active": false
+  },
+  "d7f061b6-a413-4841-ae04-ebb377fa3bcb": {
+    "id": "d7f061b6-a413-4841-ae04-ebb377fa3bcb",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:52:42.136876",
+    "updated_at": "2025-09-07T16:54:00.965133",
+    "messages": [],
+    "is_active": false
+  },
+  "b801658d-0277-4704-a309-9759359f9c46": {
+    "id": "b801658d-0277-4704-a309-9759359f9c46",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:52:42.142055",
+    "updated_at": "2025-09-07T16:54:00.803734",
+    "messages": [],
+    "is_active": false
+  },
+  "c70be6c9-787d-47af-ad7d-33964ecc81ab": {
+    "id": "c70be6c9-787d-47af-ad7d-33964ecc81ab",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:52:42.352851",
+    "updated_at": "2025-09-07T16:54:00.644003",
+    "messages": [],
+    "is_active": false
+  },
+  "46592052-c878-4b12-8028-f7607a94936c": {
+    "id": "46592052-c878-4b12-8028-f7607a94936c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:52:42.358450",
+    "updated_at": "2025-09-07T16:54:00.438981",
+    "messages": [],
+    "is_active": false
+  },
+  "b19b7601-8119-4db7-b8b7-e3451a1903ea": {
+    "id": "b19b7601-8119-4db7-b8b7-e3451a1903ea",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:53:18.127016",
+    "updated_at": "2025-09-07T16:54:00.263397",
+    "messages": [],
+    "is_active": false
+  },
+  "a2235070-847f-4547-9169-232517cc8b3c": {
+    "id": "a2235070-847f-4547-9169-232517cc8b3c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:53:18.131141",
+    "updated_at": "2025-09-07T16:54:00.096198",
+    "messages": [],
+    "is_active": false
+  },
+  "97fcd011-8f96-4422-a066-73e5418f316c": {
+    "id": "97fcd011-8f96-4422-a066-73e5418f316c",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T16:53:36.749164",
+    "updated_at": "2025-09-07T17:55:55.416248",
+    "messages": [
+      {
+        "id": "f2044b55-0ad2-43c0-a85f-5e74e7eafa9c",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T16:53:36.799706"
+      },
+      {
+        "id": "ef70b987-3d87-46ea-bb16-7c9415e40d36",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As your Culture Intelligence Assistant, I'm here to help you analyze and interpret company culture data, generate actionable insights, and support your culture initiatives. How can I assist you today? Are you looking to review recent survey results, uncover actionable insights, or explore recommendations for improving culture? Let me know your focus, and I'll tailor my support. ",
+        "timestamp": "2025-09-07T16:53:39.539925"
+      }
+    ],
+    "is_active": false
+  },
+  "7a0d3754-4ada-40ea-99e6-14ac57dedf74": {
+    "id": "7a0d3754-4ada-40ea-99e6-14ac57dedf74",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:53:43.537049",
+    "updated_at": "2025-09-07T17:21:55.602529",
+    "messages": [],
+    "is_active": false
+  },
+  "974a93b2-bcf8-4c2d-aaa9-fe81e2431933": {
+    "id": "974a93b2-bcf8-4c2d-aaa9-fe81e2431933",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T16:53:43.541558",
+    "updated_at": "2025-09-07T16:53:59.175789",
+    "messages": [],
+    "is_active": false
+  },
+  "0b31a20c-c10c-4059-81a8-d54959cb916b": {
+    "id": "0b31a20c-c10c-4059-81a8-d54959cb916b",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:19:38.714534",
+    "updated_at": "2025-09-07T17:21:54.797308",
+    "messages": [],
+    "is_active": false
+  },
+  "79160720-187d-4fce-b4fe-bd9c6aa374e8": {
+    "id": "79160720-187d-4fce-b4fe-bd9c6aa374e8",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:19:38.720449",
+    "updated_at": "2025-09-07T17:21:54.221642",
+    "messages": [],
+    "is_active": false
+  },
+  "024430f8-f40f-4df3-963a-a69b92c1a287": {
+    "id": "024430f8-f40f-4df3-963a-a69b92c1a287",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:20:11.069443",
+    "updated_at": "2025-09-07T17:21:53.750718",
+    "messages": [],
+    "is_active": false
+  },
+  "969cc78c-e4a1-47f1-830e-595049f93ef5": {
+    "id": "969cc78c-e4a1-47f1-830e-595049f93ef5",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:20:11.079400",
+    "updated_at": "2025-09-07T17:21:53.368173",
+    "messages": [],
+    "is_active": false
+  },
+  "86766cf2-e438-4648-b1b5-100eaf159301": {
+    "id": "86766cf2-e438-4648-b1b5-100eaf159301",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:22:18.346831",
+    "updated_at": "2025-09-07T17:28:29.397175",
+    "messages": [],
+    "is_active": false
+  },
+  "5b8a12b3-c489-46ca-98ee-649ce45060be": {
+    "id": "5b8a12b3-c489-46ca-98ee-649ce45060be",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:22:18.356202",
+    "updated_at": "2025-09-07T17:28:29.236115",
+    "messages": [],
+    "is_active": false
+  },
+  "89e12784-0a7c-4434-a43d-97fc68fe7678": {
+    "id": "89e12784-0a7c-4434-a43d-97fc68fe7678",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T17:22:39.526450",
+    "updated_at": "2025-09-07T17:55:54.784048",
+    "messages": [
+      {
+        "id": "9f6457e0-8bc2-48ca-bb72-d7c01b8c7447",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:22:39.578079"
+      },
+      {
+        "id": "820b6692-4807-4c3b-94d9-97a728c07eff",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? If you have data to review, need help interpreting survey results, want to compare teams, or are looking for actionable ways to strengthen your culture, just let me know! ",
+        "timestamp": "2025-09-07T17:22:41.794689"
+      }
+    ],
+    "is_active": false
+  },
+  "d0d6e0b2-5988-438b-87a4-d20cc745fd16": {
+    "id": "d0d6e0b2-5988-438b-87a4-d20cc745fd16",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:22:43.931825",
+    "updated_at": "2025-09-07T17:28:28.435087",
+    "messages": [],
+    "is_active": false
+  },
+  "0391f046-d487-42da-9b41-dda95826ecc1": {
+    "id": "0391f046-d487-42da-9b41-dda95826ecc1",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:22:43.963203",
+    "updated_at": "2025-09-07T17:28:27.872446",
+    "messages": [],
+    "is_active": false
+  },
+  "9c85e5a6-8220-4ae6-b39f-cae41c80b740": {
+    "id": "9c85e5a6-8220-4ae6-b39f-cae41c80b740",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:25:13.495685",
+    "updated_at": "2025-09-07T17:28:27.655541",
+    "messages": [],
+    "is_active": false
+  },
+  "1a8566ee-2216-4ffc-95c7-28291fc848ed": {
+    "id": "1a8566ee-2216-4ffc-95c7-28291fc848ed",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:25:13.501901",
+    "updated_at": "2025-09-07T17:28:27.480928",
+    "messages": [],
+    "is_active": false
+  },
+  "6660b3ac-25bb-4a1a-ac79-c8573b224811": {
+    "id": "6660b3ac-25bb-4a1a-ac79-c8573b224811",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:26:38.266970",
+    "updated_at": "2025-09-07T17:28:27.280623",
+    "messages": [],
+    "is_active": false
+  },
+  "27cc900d-3b20-4be3-acec-1fbd6d080577": {
+    "id": "27cc900d-3b20-4be3-acec-1fbd6d080577",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:26:38.274745",
+    "updated_at": "2025-09-07T17:28:27.114956",
+    "messages": [],
+    "is_active": false
+  },
+  "769eea9f-6b4c-464b-8b55-015630254bcc": {
+    "id": "769eea9f-6b4c-464b-8b55-015630254bcc",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:26:42.575761",
+    "updated_at": "2025-09-07T17:28:26.961598",
+    "messages": [],
+    "is_active": false
+  },
+  "0d8d866f-27f2-419d-b04d-fa51e1813547": {
+    "id": "0d8d866f-27f2-419d-b04d-fa51e1813547",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:26:42.577541",
+    "updated_at": "2025-09-07T17:28:26.593768",
+    "messages": [],
+    "is_active": false
+  },
+  "c71c6aad-d991-4384-b644-5108305acdda": {
+    "id": "c71c6aad-d991-4384-b644-5108305acdda",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:26:49.848491",
+    "updated_at": "2025-09-07T17:28:26.246017",
+    "messages": [],
+    "is_active": false
+  },
+  "69e8d592-69ff-49fc-9f22-920f1a9c5a73": {
+    "id": "69e8d592-69ff-49fc-9f22-920f1a9c5a73",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:26:49.852473",
+    "updated_at": "2025-09-07T17:28:26.119503",
+    "messages": [],
+    "is_active": false
+  },
+  "17503531-e3ab-408f-a13f-2b0bb220c670": {
+    "id": "17503531-e3ab-408f-a13f-2b0bb220c670",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T17:44:04.000746",
+    "updated_at": "2025-09-07T17:55:54.640191",
+    "messages": [],
+    "is_active": false
+  },
+  "5a4a227c-e065-4bb2-8d62-7c088901acf4": {
+    "id": "5a4a227c-e065-4bb2-8d62-7c088901acf4",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T17:44:54.967143",
+    "updated_at": "2025-09-07T17:55:54.484259",
+    "messages": [
+      {
+        "id": "80dd0b64-866b-4cd3-924f-66d596702bc2",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:44:55.027212"
+      },
+      {
+        "id": "64c92b2f-7a4e-41a3-8c54-bfa136c92cce",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your company culture intelligence? If you'd like to discuss trends, analyze recent survey results, or need actionable recommendations for fostering a stronger culture, just let me know what you'd like to focus on. ",
+        "timestamp": "2025-09-07T17:44:57.411917"
+      }
+    ],
+    "is_active": false
+  },
+  "10bfe715-e2ee-4ba7-ab71-d1c240e35319": {
+    "id": "10bfe715-e2ee-4ba7-ab71-d1c240e35319",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T17:45:42.229222",
+    "updated_at": "2025-09-07T17:55:54.307984",
+    "messages": [
+      {
+        "id": "edbc8e97-2ee2-4868-a2a4-a4655910f8be",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:45:42.276176"
+      },
+      {
+        "id": "fddfabcd-d05c-47f1-9984-54c3030371b5",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence needs? Are you looking to analyze some recent culture data, need insights on team dynamics, or perhaps recommendations to boost engagement or wellbeing? Let me know how I can help! ",
+        "timestamp": "2025-09-07T17:45:44.711168"
+      }
+    ],
+    "is_active": false
+  },
+  "9145c1aa-3789-4fc9-9d7c-d8b48690886d": {
+    "id": "9145c1aa-3789-4fc9-9d7c-d8b48690886d",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T17:53:29.701797",
+    "updated_at": "2025-09-07T17:55:53.966963",
+    "messages": [
+      {
+        "id": "786f38b1-4d32-429c-8801-ec5f4a100d08",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:53:29.764466"
+      },
+      {
+        "id": "22602915-5144-4346-9319-048d1c99499c",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As the Culture Intelligence lead, is there a particular area of your organization's culture you'd like to analyze or discuss today? For example, would you like to: - Review employee feedback or survey results? - Explore current engagement or culture metrics? - Identify patterns in recent culture data? - Get suggestions for cultural improvement actions? Let me know how I can assist you best! ",
+        "timestamp": "2025-09-07T17:53:32.471702"
+      }
+    ],
+    "is_active": false
+  },
+  "7ea3fbc1-80cb-4bbe-a22d-752f3d8f0e49": {
+    "id": "7ea3fbc1-80cb-4bbe-a22d-752f3d8f0e49",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:53:35.829389",
+    "updated_at": "2025-09-07T17:54:22.592980",
+    "messages": [],
+    "is_active": false
+  },
+  "4453e419-7069-4c3b-978f-179d38cf46ca": {
+    "id": "4453e419-7069-4c3b-978f-179d38cf46ca",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:53:35.848326",
+    "updated_at": "2025-09-07T17:54:22.279110",
+    "messages": [],
+    "is_active": false
+  },
+  "bf18ea82-a475-4b61-8741-6baa40209fd9": {
+    "id": "bf18ea82-a475-4b61-8741-6baa40209fd9",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T17:54:09.022983",
+    "updated_at": "2025-09-07T17:55:53.730579",
+    "messages": [
+      {
+        "id": "db6914f0-7525-431d-8145-5fbd25344ef1",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T17:54:09.075154"
+      },
+      {
+        "id": "a7afe6dd-21a7-4796-978b-6ff9b1598e86",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence needs? Whether you're looking to interpret culture data, generate actionable insights, or explore best practices in organizational culture, I'm here to help. Let me know what you'd like to focus on! ",
+        "timestamp": "2025-09-07T17:54:11.350413"
+      }
+    ],
+    "is_active": false
+  },
+  "93bf52e1-465a-4931-a476-f8cbaf2ce311": {
+    "id": "93bf52e1-465a-4931-a476-f8cbaf2ce311",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:54:14.586848",
+    "updated_at": "2025-09-07T17:54:20.471916",
+    "messages": [],
+    "is_active": false
+  },
+  "a9bb4b99-0ca2-4935-a2f0-f15fa0c960ce": {
+    "id": "a9bb4b99-0ca2-4935-a2f0-f15fa0c960ce",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:54:14.592270",
+    "updated_at": "2025-09-07T17:54:20.112697",
+    "messages": [],
+    "is_active": false
+  },
+  "c5a43df7-c0a4-4543-a8ce-d8d70a2d8946": {
+    "id": "c5a43df7-c0a4-4543-a8ce-d8d70a2d8946",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:58:18.649041",
+    "updated_at": "2025-09-07T18:06:26.299899",
+    "messages": [],
+    "is_active": false
+  },
+  "1ccaf7a4-d7ff-4fdf-8c68-c125c7983d8f": {
+    "id": "1ccaf7a4-d7ff-4fdf-8c68-c125c7983d8f",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T17:58:18.690018",
+    "updated_at": "2025-09-07T18:06:26.103505",
+    "messages": [],
+    "is_active": false
+  },
+  "2ca401b8-88a7-4935-b871-080c3c7c7f49": {
+    "id": "2ca401b8-88a7-4935-b871-080c3c7c7f49",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T18:02:32.948328",
+    "updated_at": "2025-09-07T18:02:34.943762",
+    "messages": [
+      {
+        "id": "7a7bae7c-582d-44c5-9e87-4c1e3e3f4dd9",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T18:02:32.999043"
+      },
+      {
+        "id": "d86a8816-053c-4578-bfc0-8a88cc426e17",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today in analyzing or enhancing your company's culture? If you have specific data, survey results, or areas of concern, feel free to share them, and I'll provide insights and actionable recommendations. ",
+        "timestamp": "2025-09-07T18:02:34.943710"
+      }
+    ],
+    "is_active": true
+  },
+  "9793dff0-4c52-4e33-b13c-7b6bfb0333f6": {
+    "id": "9793dff0-4c52-4e33-b13c-7b6bfb0333f6",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:02:37.295770",
+    "updated_at": "2025-09-07T18:06:25.095999",
+    "messages": [],
+    "is_active": false
+  },
+  "1c42e4cc-dcdf-452c-a01f-7adec3639c3f": {
+    "id": "1c42e4cc-dcdf-452c-a01f-7adec3639c3f",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:02:37.298555",
+    "updated_at": "2025-09-07T18:06:24.958279",
+    "messages": [],
+    "is_active": false
+  },
+  "4c77be3e-0c21-4251-8707-a26b812e5424": {
+    "id": "4c77be3e-0c21-4251-8707-a26b812e5424",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:03:54.184624",
+    "updated_at": "2025-09-07T18:06:24.707745",
+    "messages": [],
+    "is_active": false
+  },
+  "ac484df8-2717-4efd-9ce6-4d73afc4d392": {
+    "id": "ac484df8-2717-4efd-9ce6-4d73afc4d392",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:03:54.192265",
+    "updated_at": "2025-09-07T18:06:24.299177",
+    "messages": [],
+    "is_active": false
+  },
+  "bc6cca85-aee0-4e5e-a99d-90b3b8375ecd": {
+    "id": "bc6cca85-aee0-4e5e-a99d-90b3b8375ecd",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:04:33.230240",
+    "updated_at": "2025-09-07T18:06:23.907153",
+    "messages": [],
+    "is_active": false
+  },
+  "5f23b022-0a07-427e-851a-3f2f15989d25": {
+    "id": "5f23b022-0a07-427e-851a-3f2f15989d25",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:04:33.236242",
+    "updated_at": "2025-09-07T18:06:23.775566",
+    "messages": [],
+    "is_active": false
+  },
+  "013422ef-6058-47d3-99af-7fc4aa0b8553": {
+    "id": "013422ef-6058-47d3-99af-7fc4aa0b8553",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:04:56.927639",
+    "updated_at": "2025-09-07T18:06:23.641804",
+    "messages": [],
+    "is_active": false
+  },
+  "23176af0-a645-45e9-a669-b35d1e5556a3": {
+    "id": "23176af0-a645-45e9-a669-b35d1e5556a3",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:04:56.935248",
+    "updated_at": "2025-09-07T18:06:23.504300",
+    "messages": [],
+    "is_active": false
+  },
+  "bc48de98-ce99-4119-b207-195f5bed66df": {
+    "id": "bc48de98-ce99-4119-b207-195f5bed66df",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:05:17.030889",
+    "updated_at": "2025-09-07T18:06:23.153315",
+    "messages": [],
+    "is_active": false
+  },
+  "fb034933-b503-412d-bfb1-80d9084fc0da": {
+    "id": "fb034933-b503-412d-bfb1-80d9084fc0da",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:05:17.046953",
+    "updated_at": "2025-09-07T18:06:22.997653",
+    "messages": [],
+    "is_active": false
+  },
+  "1aadd9d6-da5a-4981-b996-49cfed3421fd": {
+    "id": "1aadd9d6-da5a-4981-b996-49cfed3421fd",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:05:42.415279",
+    "updated_at": "2025-09-07T18:06:22.807206",
+    "messages": [],
+    "is_active": false
+  },
+  "cfe25361-51a8-4ef7-9efe-a49be96015d2": {
+    "id": "cfe25361-51a8-4ef7-9efe-a49be96015d2",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:05:42.423651",
+    "updated_at": "2025-09-07T18:06:22.545675",
+    "messages": [],
+    "is_active": false
+  },
+  "2792bf8b-a214-45a1-aed1-c9ef392acc87": {
+    "id": "2792bf8b-a214-45a1-aed1-c9ef392acc87",
+    "title": "Survey Naming Assistance",
+    "user_id": null,
+    "created_at": "2025-09-07T18:06:10.875840",
+    "updated_at": "2025-09-07T19:49:16.591827",
+    "messages": [
+      {
+        "id": "75922754-58a8-4957-b125-29c41fb3d913",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Untitled\" at step 1 (name). Current survey data: name=\"\", context=\"\", 0 questions defined, 0 classifiers, 0 metrics.] User request: hi",
+        "timestamp": "2025-09-07T18:06:14.741587"
+      },
+      {
+        "id": "06d89c7b-776b-4604-a097-0e70b945fb79",
+        "role": "assistant",
+        "content": "Hello! I see you're starting to create a new survey (currently untitled). How can I assist you today? Would you like help with: - Naming your survey - Defining its purpose or context - Suggesting relevant questions - Setting up classifiers or metrics Let me know your focus, and I can offer tailored suggestions to get your culture survey off to a strong start! ",
+        "timestamp": "2025-09-07T18:06:17.526550"
+      },
+      {
+        "id": "44c99b0b-6a9b-4d27-80a8-3deb6cfaa28c",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Culture Generate A Creative Survey Name For Employee Engag\" at step 2 (context). Current survey data: name=\"Culture Generate A Creative Survey Name For Employee Engag\", context=\"Generate a creative survey name for employee engagement\", 2 questions defined, 1 classifiers, 1 metrics.] User request: can you change the title to employee engagement",
+        "timestamp": "2025-09-07T19:49:12.717434"
+      },
+      {
+        "id": "83793789-20ca-41cc-8ee9-2ed226709d80",
+        "role": "assistant",
+        "content": "Of course! Here's the updated survey information based on your request: - **Survey Title:** Employee Engagement - **Context:** Generate a creative survey name for employee engagement (let me know if you'd like to update or clarify this context as well) - **Questions, classifiers, and metrics:** remain unchanged. Would you like to proceed with any additional edits? For example: - Refining the survey context/description - Reviewing or adding questions - Adjusting classifiers or metrics Let me know your next step, or if you'd like suggestions specific to employee engagement! ",
+        "timestamp": "2025-09-07T19:49:16.591767"
+      }
+    ],
+    "is_active": true
+  },
+  "ff326943-d212-4217-8558-51613c49671f": {
+    "id": "ff326943-d212-4217-8558-51613c49671f",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:10:22.913219",
+    "updated_at": "2025-09-07T18:33:23.767855",
+    "messages": [],
+    "is_active": false
+  },
+  "c5c94ed9-2423-4c8f-83a4-26682df199e6": {
+    "id": "c5c94ed9-2423-4c8f-83a4-26682df199e6",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:11:44.552000",
+    "updated_at": "2025-09-07T18:33:23.140815",
+    "messages": [],
+    "is_active": false
+  },
+  "9078819a-f188-4a11-b882-d33b0ea5b7de": {
+    "id": "9078819a-f188-4a11-b882-d33b0ea5b7de",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:11:44.565184",
+    "updated_at": "2025-09-07T18:33:23.007155",
+    "messages": [],
+    "is_active": false
+  },
+  "001b716c-9780-4c5d-8afe-d96ccec2d12e": {
+    "id": "001b716c-9780-4c5d-8afe-d96ccec2d12e",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:12:00.408546",
+    "updated_at": "2025-09-07T18:33:22.797714",
+    "messages": [],
+    "is_active": false
+  },
+  "94cf6b37-bc88-4e07-9cad-c90fc7163462": {
+    "id": "94cf6b37-bc88-4e07-9cad-c90fc7163462",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:12:00.420644",
+    "updated_at": "2025-09-07T18:33:22.690701",
+    "messages": [],
+    "is_active": false
+  },
+  "bf9aa66b-df8f-484f-990b-e21dba12a7cf": {
+    "id": "bf9aa66b-df8f-484f-990b-e21dba12a7cf",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:21:13.552627",
+    "updated_at": "2025-09-07T18:33:22.546640",
+    "messages": [],
+    "is_active": false
+  },
+  "a09bbf73-7d84-4ea4-bdad-e47089382de5": {
+    "id": "a09bbf73-7d84-4ea4-bdad-e47089382de5",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:21:13.564622",
+    "updated_at": "2025-09-07T18:33:22.431279",
+    "messages": [],
+    "is_active": false
+  },
+  "d083b24b-4292-47a0-9c1d-413c4b0179b3": {
+    "id": "d083b24b-4292-47a0-9c1d-413c4b0179b3",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T18:22:30.214476",
+    "updated_at": "2025-09-07T18:33:24.916418",
+    "messages": [
+      {
+        "id": "6a08e5a7-7835-44b7-8bdd-253eef6662b0",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T18:22:30.270032"
+      },
+      {
+        "id": "a54f298d-6823-40b1-a14a-baccd7fef3b3",
+        "role": "assistant",
+        "content": "Hello! I'm here to help you analyze and enhance your company culture using data-driven insights. How can I assist you today? If you have specific culture metrics, survey results, or feedback data to review, just let me know\u2014I can help you interpret the data and suggest actionable steps to create a thriving workplace culture. ",
+        "timestamp": "2025-09-07T18:22:32.700658"
+      }
+    ],
+    "is_active": false
+  },
+  "fa384cdf-2061-4edc-8c5c-33b0197af8ae": {
+    "id": "fa384cdf-2061-4edc-8c5c-33b0197af8ae",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:30:25.269532",
+    "updated_at": "2025-09-07T18:33:21.490838",
+    "messages": [],
+    "is_active": false
+  },
+  "d842fa8b-4fa5-472a-8eb4-1ca62b1206e3": {
+    "id": "d842fa8b-4fa5-472a-8eb4-1ca62b1206e3",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:30:25.291497",
+    "updated_at": "2025-09-07T18:33:20.822451",
+    "messages": [],
+    "is_active": false
+  },
+  "77b8e165-af30-4171-9abf-a8af8c796efb": {
+    "id": "77b8e165-af30-4171-9abf-a8af8c796efb",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:30:29.404927",
+    "updated_at": "2025-09-07T18:33:20.699020",
+    "messages": [],
+    "is_active": false
+  },
+  "05105561-0b6b-4aeb-a043-268694974f0e": {
+    "id": "05105561-0b6b-4aeb-a043-268694974f0e",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:30:29.467319",
+    "updated_at": "2025-09-07T18:33:20.587041",
+    "messages": [],
+    "is_active": false
+  },
+  "5ce6682e-e72b-40b8-b25b-744c0c6f8789": {
+    "id": "5ce6682e-e72b-40b8-b25b-744c0c6f8789",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:30:43.340181",
+    "updated_at": "2025-09-07T18:33:20.443687",
+    "messages": [],
+    "is_active": false
+  },
+  "61e38a1b-8744-44e5-8f2e-b9fc8ab6a67d": {
+    "id": "61e38a1b-8744-44e5-8f2e-b9fc8ab6a67d",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:30:43.624803",
+    "updated_at": "2025-09-07T18:33:20.227226",
+    "messages": [],
+    "is_active": false
+  },
+  "5274db14-3f0b-4ee3-82a4-99007c5949be": {
+    "id": "5274db14-3f0b-4ee3-82a4-99007c5949be",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:31:45.073844",
+    "updated_at": "2025-09-07T18:33:20.008291",
+    "messages": [],
+    "is_active": false
+  },
+  "a4e7b32e-5534-49d3-af2e-65f41e5eeaf5": {
+    "id": "a4e7b32e-5534-49d3-af2e-65f41e5eeaf5",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:31:45.402793",
+    "updated_at": "2025-09-07T18:33:19.866977",
+    "messages": [],
+    "is_active": false
+  },
+  "7e58692b-9722-472e-8445-3fabc5b1c750": {
+    "id": "7e58692b-9722-472e-8445-3fabc5b1c750",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T18:32:58.849610",
+    "updated_at": "2025-09-07T18:33:24.781803",
+    "messages": [
+      {
+        "id": "a5ee43f3-f9c3-4d56-8ed0-639ca98be5e2",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T18:32:58.909367"
+      },
+      {
+        "id": "ca9731c6-6b3c-4afd-8886-47c6cb727d45",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your culture intelligence needs today? Are you looking to analyze recent culture data, interpret employee feedback, or get suggestions on enhancing your organization's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T18:33:00.867206"
+      }
+    ],
+    "is_active": false
+  },
+  "ca554111-bfa1-4f2a-85fa-01df9c2e8078": {
+    "id": "ca554111-bfa1-4f2a-85fa-01df9c2e8078",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:33:04.300434",
+    "updated_at": "2025-09-07T18:33:19.005383",
+    "messages": [],
+    "is_active": false
+  },
+  "4d38c2ac-b3bb-4984-9d9d-2ec582ddf862": {
+    "id": "4d38c2ac-b3bb-4984-9d9d-2ec582ddf862",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:33:04.316915",
+    "updated_at": "2025-09-07T18:33:18.800574",
+    "messages": [],
+    "is_active": false
+  },
+  "67de88a1-4202-4672-8f34-316970ca6af7": {
+    "id": "67de88a1-4202-4672-8f34-316970ca6af7",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:34:19.254746",
+    "updated_at": "2025-09-07T19:33:34.799871",
+    "messages": [],
+    "is_active": false
+  },
+  "0bdf6898-0404-4e8c-9f1a-5f41a9c35de6": {
+    "id": "0bdf6898-0404-4e8c-9f1a-5f41a9c35de6",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T18:34:19.306600",
+    "updated_at": "2025-09-07T19:33:34.677399",
+    "messages": [],
+    "is_active": false
+  },
+  "b9928754-e979-4bab-8bae-fe14a64036ad": {
+    "id": "b9928754-e979-4bab-8bae-fe14a64036ad",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:10:27.907119",
+    "updated_at": "2025-09-07T19:33:34.540806",
+    "messages": [],
+    "is_active": false
+  },
+  "3d10aa08-72bf-4854-a84f-72554ff333d9": {
+    "id": "3d10aa08-72bf-4854-a84f-72554ff333d9",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:10:27.913567",
+    "updated_at": "2025-09-07T19:33:34.399566",
+    "messages": [],
+    "is_active": false
+  },
+  "b71572d1-6a32-4e98-921c-897201b5d46a": {
+    "id": "b71572d1-6a32-4e98-921c-897201b5d46a",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T19:11:41.182760",
+    "updated_at": "2025-09-07T19:11:43.437198",
+    "messages": [
+      {
+        "id": "1b7d41a5-4d85-469f-961e-9f5843e4792d",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T19:11:41.258429"
+      },
+      {
+        "id": "a2f7465d-3bb7-4481-aeb3-1b71b78b1e77",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your culture intelligence work today? If you have data to analyze, need help interpreting survey results, or are looking for recommendations to enhance your organization's culture, just let me know how you'd like to proceed. ",
+        "timestamp": "2025-09-07T19:11:43.437126"
+      }
+    ],
+    "is_active": true
+  },
+  "cc0d0d95-59ec-4799-b6e6-5c81e21802f2": {
+    "id": "cc0d0d95-59ec-4799-b6e6-5c81e21802f2",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:11:46.785332",
+    "updated_at": "2025-09-07T19:33:33.657527",
+    "messages": [],
+    "is_active": false
+  },
+  "a1fb0f8f-3ba3-4512-ba90-28877eb173d3": {
+    "id": "a1fb0f8f-3ba3-4512-ba90-28877eb173d3",
+    "title": "Culture Intelligence Introduction",
+    "user_id": null,
+    "created_at": "2025-09-07T19:11:46.797230",
+    "updated_at": "2025-09-07T19:16:32.564315",
+    "messages": [
+      {
+        "id": "f8844fb3-46e4-44af-8153-fe36e260b9d0",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T19:16:29.029516"
+      },
+      {
+        "id": "a0de133b-ded7-4251-bba6-6c947a529401",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with culture intelligence today? If you have specific culture data, survey results, or insights you'd like help analyzing, just let me know. I'm here to help you interpret feedback, identify patterns, and recommend actions to strengthen your company culture. What would you like to focus on? ",
+        "timestamp": "2025-09-07T19:16:31.873124"
+      }
+    ],
+    "is_active": true
+  },
+  "1658c6f9-2074-4f61-8b4b-c6979b7e729f": {
+    "id": "1658c6f9-2074-4f61-8b4b-c6979b7e729f",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:14:46.458116",
+    "updated_at": "2025-09-07T19:33:33.452535",
+    "messages": [],
+    "is_active": false
+  },
+  "77d96cd7-b420-4199-96cf-6b0f02821774": {
+    "id": "77d96cd7-b420-4199-96cf-6b0f02821774",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:14:47.456631",
+    "updated_at": "2025-09-07T19:33:33.307902",
+    "messages": [],
+    "is_active": false
+  },
+  "237fbac6-4b74-4333-a369-b6622f9edc86": {
+    "id": "237fbac6-4b74-4333-a369-b6622f9edc86",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:18:31.625547",
+    "updated_at": "2025-09-07T19:33:32.680102",
+    "messages": [],
+    "is_active": false
+  },
+  "e01098d3-5046-4866-8176-3d1732eebdd7": {
+    "id": "e01098d3-5046-4866-8176-3d1732eebdd7",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:18:31.655055",
+    "updated_at": "2025-09-07T19:33:32.235002",
+    "messages": [],
+    "is_active": false
+  },
+  "05002c15-1160-44ce-ad07-e9fda5ab4e51": {
+    "id": "05002c15-1160-44ce-ad07-e9fda5ab4e51",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:20:14.614414",
+    "updated_at": "2025-09-07T19:33:32.077956",
+    "messages": [],
+    "is_active": false
+  },
+  "c7752ccc-f825-4a44-acec-f2261b129675": {
+    "id": "c7752ccc-f825-4a44-acec-f2261b129675",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:20:14.618026",
+    "updated_at": "2025-09-07T19:33:31.902586",
+    "messages": [],
+    "is_active": false
+  },
+  "792e5ebc-69d3-43c3-904a-a4860c316bd7": {
+    "id": "792e5ebc-69d3-43c3-904a-a4860c316bd7",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:26:08.852550",
+    "updated_at": "2025-09-07T19:33:31.718085",
+    "messages": [],
+    "is_active": false
+  },
+  "ff06502b-8dcb-4d51-9ba9-9c822837a14c": {
+    "id": "ff06502b-8dcb-4d51-9ba9-9c822837a14c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:26:08.864157",
+    "updated_at": "2025-09-07T19:33:31.547005",
+    "messages": [],
+    "is_active": false
+  },
+  "86defffb-90d8-45c4-8e27-3a8a2e9ca57c": {
+    "id": "86defffb-90d8-45c4-8e27-3a8a2e9ca57c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:38:47.124771",
+    "updated_at": "2025-09-07T19:47:14.045407",
+    "messages": [],
+    "is_active": false
+  },
+  "b568c258-3601-4114-a575-0a28e92f89dc": {
+    "id": "b568c258-3601-4114-a575-0a28e92f89dc",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:38:47.394083",
+    "updated_at": "2025-09-07T19:47:13.474602",
+    "messages": [],
+    "is_active": false
+  },
+  "d6bf4c38-4429-44da-a1fd-f981d7279005": {
+    "id": "d6bf4c38-4429-44da-a1fd-f981d7279005",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:46:10.715214",
+    "updated_at": "2025-09-07T19:47:12.671646",
+    "messages": [],
+    "is_active": false
+  },
+  "92b8c553-25c1-43f7-ad73-8394e1889ae0": {
+    "id": "92b8c553-25c1-43f7-ad73-8394e1889ae0",
+    "title": "Recent Company Culture News",
+    "user_id": null,
+    "created_at": "2025-09-07T19:46:10.726687",
+    "updated_at": "2025-09-07T19:46:51.672524",
+    "messages": [
+      {
+        "id": "222a23e8-3ac6-4eb0-a836-782a8eaa0bff",
+        "role": "user",
+        "content": "give me the top 3 news items as it relates to company culture",
+        "timestamp": "2025-09-07T19:46:32.198286"
+      },
+      {
+        "id": "fd9038f0-9be9-46e3-be80-a3b7e08b5a26",
+        "role": "assistant",
+        "content": "Here are three recent news items related to company culture: 1. **Mo\u00ebt Hennessy Faces Sexual Harassment Allegations Highlighting Toxic Workplace Culture** Mo\u00ebt Hennessy, the \u20ac6 billion drinks division of LVMH, is embroiled in controversy following allegations by former chief of staff Maria Gasparovic of sexual harassment, gender discrimination, and unjust dismissal. Gasparovic claims she was fired after reporting misconduct and was subjected to sexist remarks, including being told she needed \"anti-seduction\" training for a promotion. Her dismissal, along with at least 20 other staff members going on long-term sick leave in 2024, highlights what insiders describe as a toxic, male-dominated workplace culture characterized by bullying, gossip, and mismanagement. Mo\u00ebt Hennessy has countered by suing Gasparovic for defamation, denying wrongdoing. The controversy has prompted high-level departures, including CEO Philippe Schaus and other top executives. An employment trial is expected later this year. The case raises broader concerns about LVMH's internal culture and handling of labor issues amid restructuring efforts driven by poor performance in the global alcohol market. ([ft.com](https://www.ft.com/content/2411725d-383f-4832-bfc6-c33c730290e8?utm_source=openai)) 2. **Law Firms Urged to Learn from Big Brands on Diversity, Equity, and Inclusion (DEI)** In 2025, law firms face critical decisions on how to handle Diversity, Equity, and Inclusion (DEI) amidst mounting political and societal pressure. Drawing on insights from leading consumer brands like Patagonia, Costco, and Microsoft\u2014who are experiencing reputational gains due to their authentic and consistent DEI practices\u2014the article highlights valuable lessons for law firms. Firms that embed DEI authentically into their operations and maintain consistency through turbulence can gain reputational credibility, talent loyalty, and client trust. Corporations increasingly value diverse legal teams, demanding law firms align with these inclusive ideals. Authentic leadership buy-in, employee engagement, and long-term consistency in DEI initiatives are vital. Law firms that fail to uphold DEI principles risk losing credibility, talent, and clients, especially as younger legal professionals choose employers aligned with their values. Ultimately, treating DEI as a strategic imperative, led by firm leadership and ingrained in the firm's culture, is essential in building and maintaining a trustworthy, resilient, and competitive legal brand. ([reuters.com](https://www.reuters.com/legal/legalindustry/what-law-firms-can-learn-big-brands-dei-why-reputation-is-stake-2025-06-25/?utm_source=openai)) 3. **CEOs Reassert Control Over Workplace Culture, Reducing Flexibility** In a shift signaling the rise of the \"Big Boss Era,\" American CEOs are increasingly reasserting control over workplace culture by emphasizing productivity and speed, while dialing back on flexibility and work-life balance. This transition, marked by notable moves from CEOs at AT&T and Cognition, is part of a broader trend across industries involving mass layoffs, return-to-office mandates, and scaled-back diversity and inclusion efforts. Experts like Glassdoor's Daniel Zhao attribute this shift to a sense of fear among executives, while others, such as Indeed's Kyle M.K., warn that deprioritizing employee well-being could hinder performance and talent attraction. Return-to-office policies remain contentious, and employees expect greater transparency from leadership amid changes. Strategically leaking memos to convey a tougher workplace stance is emerging as a method to influence investors and stakeholders. This cultural reset is unfolding as companies undergo significant transformations, particularly in response to technological advancements like AI. ([axios.com](https://www.axios.com/2025/08/14/ceo-workplace-culture-rto-att-cognition?utm_source=openai)) ## Recent Developments in Company Culture: - [Mo\u00ebt Hennessy sexual harassment case shines light on company's culture](https://www.ft.com/content/2411725d-383f-4832-bfc6-c33c730290e8?utm_source=openai) - [What law firms can learn from big brands on DEI - and why reputation is at stake](https://www.reuters.com/legal/legalindustry/what-law-firms-can-learn-big-brands-dei-why-reputation-is-stake-2025-06-25/?utm_source=openai) ",
+        "timestamp": "2025-09-07T19:46:50.849795"
+      }
+    ],
+    "is_active": true
+  },
+  "f86136cf-7d31-431b-a0ca-cee0e47e3abf": {
+    "id": "f86136cf-7d31-431b-a0ca-cee0e47e3abf",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:49:45.235672",
+    "updated_at": "2025-09-07T19:53:27.510242",
+    "messages": [],
+    "is_active": false
+  },
+  "742d3945-e688-4f10-a751-5a34e1d02807": {
+    "id": "742d3945-e688-4f10-a751-5a34e1d02807",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:49:45.242770",
+    "updated_at": "2025-09-07T19:53:27.124007",
+    "messages": [],
+    "is_active": false
+  },
+  "0ff2aacd-69e9-490c-8a9c-cd580fefcceb": {
+    "id": "0ff2aacd-69e9-490c-8a9c-cd580fefcceb",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:51:37.410290",
+    "updated_at": "2025-09-07T19:53:26.607603",
+    "messages": [],
+    "is_active": false
+  },
+  "7fcc14ff-9e8e-4cc9-97c5-72e78583730f": {
+    "id": "7fcc14ff-9e8e-4cc9-97c5-72e78583730f",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:51:37.425666",
+    "updated_at": "2025-09-07T19:53:26.417717",
+    "messages": [],
+    "is_active": false
+  },
+  "167d3ee8-40c6-44bb-be43-93555bdb0ba8": {
+    "id": "167d3ee8-40c6-44bb-be43-93555bdb0ba8",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:52:27.651656",
+    "updated_at": "2025-09-07T19:53:26.168781",
+    "messages": [],
+    "is_active": false
+  },
+  "59bc0aca-e5aa-4218-a342-8a74205e8309": {
+    "id": "59bc0aca-e5aa-4218-a342-8a74205e8309",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T19:52:27.656535",
+    "updated_at": "2025-09-07T20:16:07.011936",
+    "messages": [],
+    "is_active": false
+  },
+  "d7cace86-78e8-4a1f-a820-872458cff9f5": {
+    "id": "d7cace86-78e8-4a1f-a820-872458cff9f5",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:06:25.824934",
+    "updated_at": "2025-09-07T20:16:06.322051",
+    "messages": [],
+    "is_active": false
+  },
+  "0498ebad-7607-4494-b72d-1645337a4569": {
+    "id": "0498ebad-7607-4494-b72d-1645337a4569",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:06:25.990735",
+    "updated_at": "2025-09-07T20:16:06.231649",
+    "messages": [],
+    "is_active": false
+  },
+  "7cc546fb-c92d-4196-a4f5-11ad45f42bbf": {
+    "id": "7cc546fb-c92d-4196-a4f5-11ad45f42bbf",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:09:31.714089",
+    "updated_at": "2025-09-07T20:16:06.091407",
+    "messages": [],
+    "is_active": false
+  },
+  "65b5adb3-bf0d-4d49-b51b-aa42a9ebdc9f": {
+    "id": "65b5adb3-bf0d-4d49-b51b-aa42a9ebdc9f",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:09:32.185010",
+    "updated_at": "2025-09-07T20:16:06.006943",
+    "messages": [],
+    "is_active": false
+  },
+  "08a68468-2df2-4e60-bfd8-c94105972afe": {
+    "id": "08a68468-2df2-4e60-bfd8-c94105972afe",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:11:09.379664",
+    "updated_at": "2025-09-07T20:16:05.890081",
+    "messages": [],
+    "is_active": false
+  },
+  "9ab742fc-0539-4cf2-8e96-7a244c6ca350": {
+    "id": "9ab742fc-0539-4cf2-8e96-7a244c6ca350",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:11:09.589872",
+    "updated_at": "2025-09-07T20:16:05.784238",
+    "messages": [],
+    "is_active": false
+  },
+  "b9b522b5-ee0f-4d35-86b9-299e08522d7a": {
+    "id": "b9b522b5-ee0f-4d35-86b9-299e08522d7a",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:11:52.332763",
+    "updated_at": "2025-09-07T20:16:05.651584",
+    "messages": [],
+    "is_active": false
+  },
+  "7ee2cb68-5b8f-4890-95e2-46b8e0a00509": {
+    "id": "7ee2cb68-5b8f-4890-95e2-46b8e0a00509",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:11:52.357578",
+    "updated_at": "2025-09-07T20:16:05.441538",
+    "messages": [],
+    "is_active": false
+  },
+  "a37da4a4-55f7-440a-bc58-52c3d77c1f26": {
+    "id": "a37da4a4-55f7-440a-bc58-52c3d77c1f26",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:12:04.971337",
+    "updated_at": "2025-09-07T20:16:05.299861",
+    "messages": [],
+    "is_active": false
+  },
+  "08be93c4-4423-48c2-aa50-64df164a4974": {
+    "id": "08be93c4-4423-48c2-aa50-64df164a4974",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:12:04.990852",
+    "updated_at": "2025-09-07T20:16:05.153795",
+    "messages": [],
+    "is_active": false
+  },
+  "ef0a6d90-83ed-453f-b5f5-1bd11a0c0a71": {
+    "id": "ef0a6d90-83ed-453f-b5f5-1bd11a0c0a71",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:12:17.402570",
+    "updated_at": "2025-09-07T20:16:05.008497",
+    "messages": [],
+    "is_active": false
+  },
+  "012e75ad-f126-4185-a41d-da412a2e4810": {
+    "id": "012e75ad-f126-4185-a41d-da412a2e4810",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:12:17.426152",
+    "updated_at": "2025-09-07T20:16:04.855594",
+    "messages": [],
+    "is_active": false
+  },
+  "b40c66aa-8829-4a0a-9ee7-46464780a493": {
+    "id": "b40c66aa-8829-4a0a-9ee7-46464780a493",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:13:00.042521",
+    "updated_at": "2025-09-07T20:16:04.707142",
+    "messages": [],
+    "is_active": false
+  },
+  "8bf2581e-f6d6-4adc-82a9-af287e6fbab8": {
+    "id": "8bf2581e-f6d6-4adc-82a9-af287e6fbab8",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:13:00.061964",
+    "updated_at": "2025-09-07T20:16:04.567377",
+    "messages": [],
+    "is_active": false
+  },
+  "76135697-a4e0-4aab-a04b-ac814b232157": {
+    "id": "76135697-a4e0-4aab-a04b-ac814b232157",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:13:17.345571",
+    "updated_at": "2025-09-07T20:16:04.423992",
+    "messages": [],
+    "is_active": false
+  },
+  "6ad2eac1-7db2-438e-8ab8-9de2b2e86777": {
+    "id": "6ad2eac1-7db2-438e-8ab8-9de2b2e86777",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:13:17.370663",
+    "updated_at": "2025-09-07T20:16:04.275544",
+    "messages": [],
+    "is_active": false
+  },
+  "a2a937ca-b90e-4106-b271-3228eb7bdca8": {
+    "id": "a2a937ca-b90e-4106-b271-3228eb7bdca8",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:13:56.853032",
+    "updated_at": "2025-09-07T20:16:04.125585",
+    "messages": [],
+    "is_active": false
+  },
+  "3350380a-a0a5-4091-8b69-5051e653d1f3": {
+    "id": "3350380a-a0a5-4091-8b69-5051e653d1f3",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T20:15:09.706730",
+    "updated_at": "2025-09-07T20:15:13.173546",
+    "messages": [
+      {
+        "id": "911a4a9f-ca53-4489-bbcb-b399067765fd",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T20:15:09.835462"
+      },
+      {
+        "id": "976dfb97-996f-46ef-8d56-a8ca9884f6ec",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture insights or workforce data? If you have specific employee feedback, survey results, or culture metrics you'd like to analyze or discuss, just let me know. I'm here to help you interpret the data, uncover actionable insights, and suggest strategies for building a stronger organizational culture. ",
+        "timestamp": "2025-09-07T20:15:13.172620"
+      }
+    ],
+    "is_active": true
+  },
+  "84c655b7-b762-419e-8945-1270fdfe8e68": {
+    "id": "84c655b7-b762-419e-8945-1270fdfe8e68",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:15:16.668259",
+    "updated_at": "2025-09-07T20:16:02.645522",
+    "messages": [],
+    "is_active": false
+  },
+  "22711462-f70a-42bf-b666-48d96e54947e": {
+    "id": "22711462-f70a-42bf-b666-48d96e54947e",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:15:16.770800",
+    "updated_at": "2025-09-07T20:16:01.071844",
+    "messages": [],
+    "is_active": false
+  },
+  "3a643ecc-083c-4a57-a9c4-1f25ad98ccfa": {
+    "id": "3a643ecc-083c-4a57-a9c4-1f25ad98ccfa",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:15:21.411904",
+    "updated_at": "2025-09-07T20:16:02.259379",
+    "messages": [],
+    "is_active": false
+  },
+  "d00f635f-5a55-4522-9cd7-55b8806067bb": {
+    "id": "d00f635f-5a55-4522-9cd7-55b8806067bb",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:15:21.457088",
+    "updated_at": "2025-09-07T20:16:01.690567",
+    "messages": [],
+    "is_active": false
+  },
+  "b646e099-b7ca-4253-af93-1605d5f43928": {
+    "id": "b646e099-b7ca-4253-af93-1605d5f43928",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:22:50.735402",
+    "updated_at": "2025-09-07T20:32:38.709760",
+    "messages": [],
+    "is_active": false
+  },
+  "b70794c1-f2b8-4d1e-ac02-db11b25f13a2": {
+    "id": "b70794c1-f2b8-4d1e-ac02-db11b25f13a2",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:22:50.750895",
+    "updated_at": "2025-09-07T20:32:38.514818",
+    "messages": [],
+    "is_active": false
+  },
+  "19f9f082-0dc1-4604-849d-64a4a51148c8": {
+    "id": "19f9f082-0dc1-4604-849d-64a4a51148c8",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T20:27:45.758737",
+    "updated_at": "2025-09-07T20:27:48.095025",
+    "messages": [
+      {
+        "id": "96479067-a36b-4225-9dbd-b77f37456907",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T20:27:45.819899"
+      },
+      {
+        "id": "874d21d1-3ab8-4b06-9454-c6859c6966d3",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Are you looking to analyze recent culture data, generate insights, or discuss strategies to enhance your organization's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T20:27:48.094782"
+      }
+    ],
+    "is_active": true
+  },
+  "e85ae717-7ebe-423e-95c2-141133c3ee5d": {
+    "id": "e85ae717-7ebe-423e-95c2-141133c3ee5d",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:27:51.793072",
+    "updated_at": "2025-09-07T20:32:37.676396",
+    "messages": [],
+    "is_active": false
+  },
+  "4f35b865-fd5a-4099-8a00-008d0b3ab468": {
+    "id": "4f35b865-fd5a-4099-8a00-008d0b3ab468",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:27:51.856339",
+    "updated_at": "2025-09-07T20:32:37.285217",
+    "messages": [],
+    "is_active": false
+  },
+  "f5cfb5b1-0ea4-45d6-9bfd-a56e0603efa1": {
+    "id": "f5cfb5b1-0ea4-45d6-9bfd-a56e0603efa1",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:27:56.147030",
+    "updated_at": "2025-09-07T20:32:36.933203",
+    "messages": [],
+    "is_active": false
+  },
+  "6bcaaf03-bc39-46b6-840a-e9cb85e2cf5a": {
+    "id": "6bcaaf03-bc39-46b6-840a-e9cb85e2cf5a",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:27:56.378457",
+    "updated_at": "2025-09-07T20:32:36.735060",
+    "messages": [],
+    "is_active": false
+  },
+  "32b425d3-4d5e-4b3c-9465-8917c017831d": {
+    "id": "32b425d3-4d5e-4b3c-9465-8917c017831d",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:30:29.437453",
+    "updated_at": "2025-09-07T20:32:36.557852",
+    "messages": [],
+    "is_active": false
+  },
+  "d7ec57d3-cdab-4430-98d5-4606002460c3": {
+    "id": "d7ec57d3-cdab-4430-98d5-4606002460c3",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:30:29.810738",
+    "updated_at": "2025-09-07T20:32:36.384994",
+    "messages": [],
+    "is_active": false
+  },
+  "c27c4085-79f0-4845-91cd-47a812bb49aa": {
+    "id": "c27c4085-79f0-4845-91cd-47a812bb49aa",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:32:11.934856",
+    "updated_at": "2025-09-07T20:32:36.217112",
+    "messages": [],
+    "is_active": false
+  },
+  "93e83a17-3d2f-446e-88ed-57f1f3c41fd3": {
+    "id": "93e83a17-3d2f-446e-88ed-57f1f3c41fd3",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:32:11.961454",
+    "updated_at": "2025-09-07T20:32:35.513356",
+    "messages": [],
+    "is_active": false
+  },
+  "ef8f3134-ebdf-4e8e-acef-caddc90e5f5e": {
+    "id": "ef8f3134-ebdf-4e8e-acef-caddc90e5f5e",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:32:28.262294",
+    "updated_at": "2025-09-07T20:32:36.042193",
+    "messages": [],
+    "is_active": false
+  },
+  "ecc2d931-48af-48fc-b8de-9ed634dd3bed": {
+    "id": "ecc2d931-48af-48fc-b8de-9ed634dd3bed",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:32:28.628081",
+    "updated_at": "2025-09-07T20:32:35.850208",
+    "messages": [],
+    "is_active": false
+  },
+  "f5e3d4fb-d890-4375-b49b-4cfe547e979a": {
+    "id": "f5e3d4fb-d890-4375-b49b-4cfe547e979a",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:33:37.312008",
+    "updated_at": "2025-09-07T20:33:37.312012",
+    "messages": [],
+    "is_active": true
+  },
+  "ee875f5a-8f20-4532-95a8-211176566c64": {
+    "id": "ee875f5a-8f20-4532-95a8-211176566c64",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:33:37.654645",
+    "updated_at": "2025-09-07T20:33:37.654649",
+    "messages": [],
+    "is_active": true
+  },
+  "1a4f6c1e-7f5f-40a6-bf84-8099764d3e5c": {
+    "id": "1a4f6c1e-7f5f-40a6-bf84-8099764d3e5c",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:36:17.063812",
+    "updated_at": "2025-09-07T20:36:17.063856",
+    "messages": [],
+    "is_active": true
+  },
+  "8ca00436-12be-4cdf-aa5c-aa8da2d7a377": {
+    "id": "8ca00436-12be-4cdf-aa5c-aa8da2d7a377",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:36:17.377237",
+    "updated_at": "2025-09-07T20:36:17.377241",
+    "messages": [],
+    "is_active": true
+  },
+  "deac6d37-09c5-43ea-bada-568976719839": {
+    "id": "deac6d37-09c5-43ea-bada-568976719839",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T20:51:11.803771",
+    "updated_at": "2025-09-07T20:51:13.822872",
+    "messages": [
+      {
+        "id": "dae27ac1-320e-495a-a76a-9b91222e6455",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T20:51:11.854197"
+      },
+      {
+        "id": "ea1b598e-1451-4414-8f3e-355d20f99ec3",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your organizational culture intelligence today? If you have data to analyze, questions about engagement, or need recommendations on improving company culture, just let me know. ",
+        "timestamp": "2025-09-07T20:51:13.822780"
+      }
+    ],
+    "is_active": true
+  },
+  "40d96263-5f99-4ea2-aba1-55a9205ee551": {
+    "id": "40d96263-5f99-4ea2-aba1-55a9205ee551",
+    "title": "Culture Intelligence Assistance",
+    "user_id": null,
+    "created_at": "2025-09-07T20:53:54.841500",
+    "updated_at": "2025-09-07T20:53:59.543650",
+    "messages": [
+      {
+        "id": "52180ba0-73e1-4902-b7e3-3fa7b3505314",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T20:53:56.562948"
+      },
+      {
+        "id": "272b286c-a173-4fe7-889d-cbeae2762d1c",
+        "role": "assistant",
+        "content": "Hello! It's great to connect with you. As the culture_intelligence persona, how can I assist you today? Are you looking to analyze culture data, get insights from recent feedback, or explore strategies to enhance your organization's culture? Let me know how I can support your current goals or projects. ",
+        "timestamp": "2025-09-07T20:53:58.880924"
+      }
+    ],
+    "is_active": true
+  },
+  "25baddbf-6299-4d35-9aba-74fe8b659bbf": {
+    "id": "25baddbf-6299-4d35-9aba-74fe8b659bbf",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T20:54:56.222538",
+    "updated_at": "2025-09-07T21:59:14.517011",
+    "messages": [],
+    "is_active": false
+  },
+  "b834d6b6-157f-45db-9e13-6cc2ea1f64cf": {
+    "id": "b834d6b6-157f-45db-9e13-6cc2ea1f64cf",
+    "title": "Organizational Culture Support",
+    "user_id": null,
+    "created_at": "2025-09-07T20:54:56.251133",
+    "updated_at": "2025-09-07T20:55:12.374333",
+    "messages": [
+      {
+        "id": "945a3291-c1f2-4c46-a786-72363818fd02",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T20:55:08.785684"
+      },
+      {
+        "id": "2f3d444c-7a32-476a-8be9-707fb260de97",
+        "role": "assistant",
+        "content": "Hello! How can I support you with culture intelligence today? Are you looking to analyze some data, review insights, or explore ways to enhance your organization's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T20:55:11.664709"
+      }
+    ],
+    "is_active": true
+  },
+  "06944b25-c919-4504-b56c-6832b1c43250": {
+    "id": "06944b25-c919-4504-b56c-6832b1c43250",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:19:59.739394",
+    "updated_at": "2025-09-07T21:20:02.029555",
+    "messages": [
+      {
+        "id": "df5cf8fe-e915-4cce-91eb-3daf8209d12c",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:19:59.791653"
+      },
+      {
+        "id": "c7d34e5c-8704-4f14-b9dc-ecc93904d528",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence needs? Are you looking to analyze recent culture data, interpret survey results, or need recommendations on improving your organizational culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T21:20:02.028770"
+      }
+    ],
+    "is_active": true
+  },
+  "e95c5757-30f0-432f-9af0-e4e7cc210810": {
+    "id": "e95c5757-30f0-432f-9af0-e4e7cc210810",
+    "title": "New Chat",
+    "user_id": null,
+    "created_at": "2025-09-07T21:20:04.528364",
+    "updated_at": "2025-09-07T21:20:04.528370",
+    "messages": [],
+    "is_active": true
+  },
+  "22e13e90-a50b-41fc-990f-6ae081ca3245": {
+    "id": "22e13e90-a50b-41fc-990f-6ae081ca3245",
+    "title": "Culture Intelligence Support Inquiry",
+    "user_id": null,
+    "created_at": "2025-09-07T21:20:04.536278",
+    "updated_at": "2025-09-07T21:30:46.955075",
+    "messages": [
+      {
+        "id": "beac6e74-e102-4d98-a55d-dfe184f1756e",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:20:18.903755"
+      },
+      {
+        "id": "0f411b6a-f877-4f50-a8d1-dce4edbc5607",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your organization's culture intelligence today? Whether you need help interpreting survey results, identifying engagement trends, or designing actionable strategies for cultural improvement, I'm here to support you. What would you like to focus on? ",
+        "timestamp": "2025-09-07T21:20:22.184477"
+      },
+      {
+        "id": "b22bf38b-b728-42e6-b5a5-7ab3c1fdca37",
+        "role": "user",
+        "content": "whats up",
+        "timestamp": "2025-09-07T21:30:43.741806"
+      },
+      {
+        "id": "65d6f678-145a-46ef-9d59-4b81fbb5086a",
+        "role": "assistant",
+        "content": "All good on my end! Here to help you analyze culture data, uncover insights, or brainstorm ways to build an even stronger workplace culture. Is there a particular challenge or dataset you're looking at right now, or are you exploring new ways to boost engagement and morale? Let me know how I can best support your culture intelligence goals! ",
+        "timestamp": "2025-09-07T21:30:46.955032"
+      }
+    ],
+    "is_active": true
+  },
+  "583dfdb5-cbdd-40f1-aa3b-000f00669f3f": {
+    "id": "583dfdb5-cbdd-40f1-aa3b-000f00669f3f",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:22:05.285049",
+    "updated_at": "2025-09-07T21:22:09.405893",
+    "messages": [
+      {
+        "id": "e828289f-b87a-4e15-8d33-ec96cd6d6a0e",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:22:05.334276"
+      },
+      {
+        "id": "5c3ac4ea-36a4-452b-a390-21de97b444cd",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As a culture intelligence partner, I'm here to help you analyze culture data, identify trends, generate insights, and suggest actions to strengthen your organization's culture. How can I assist you today? Are there specific culture metrics, feedback, or survey results you'd like to discuss? ",
+        "timestamp": "2025-09-07T21:22:09.405856"
+      }
+    ],
+    "is_active": true
+  },
+  "0f2beeb9-d4fa-4345-9bf2-693ad28ce488": {
+    "id": "0f2beeb9-d4fa-4345-9bf2-693ad28ce488",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:22:11.530509",
+    "updated_at": "2025-09-07T21:41:16.677959",
+    "messages": [],
+    "is_active": false
+  },
+  "266c04b1-34ce-4dbc-ad44-e4dbc7f1e0f3": {
+    "id": "266c04b1-34ce-4dbc-ad44-e4dbc7f1e0f3",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:22:11.535575",
+    "updated_at": "2025-09-07T21:41:16.236311",
+    "messages": [],
+    "is_active": false
+  },
+  "c2844d93-857f-4a8e-a5ab-0da58348b753": {
+    "id": "c2844d93-857f-4a8e-a5ab-0da58348b753",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:22:43.702516",
+    "updated_at": "2025-09-07T21:41:15.775085",
+    "messages": [],
+    "is_active": false
+  },
+  "f4ad082b-b8a5-4421-8f8e-cf018e6405b7": {
+    "id": "f4ad082b-b8a5-4421-8f8e-cf018e6405b7",
+    "title": "Chat History Persistence Test",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:22:43.725482",
+    "updated_at": "2025-09-07T21:56:25.312224",
+    "messages": [
+      {
+        "id": "1c072a40-f9a7-4447-a055-28605c868a96",
+        "role": "user",
+        "content": "Hello, this is Michael Chen testing the chat history persistence",
+        "timestamp": "2025-09-07T21:23:00.319560"
+      },
+      {
+        "id": "460d66be-4de1-44c7-bbbd-1f61cd9da71f",
+        "role": "assistant",
+        "content": "Hello Michael! Your message has been received, and your chat has been logged. If you continue the conversation, I'll maintain context and build on previous insights as needed. Please let me know how you'd like to proceed or if there's anything specific you'd like to test regarding chat history or culture intelligence features. ",
+        "timestamp": "2025-09-07T21:23:03.358796"
+      },
+      {
+        "id": "453a2b76-2d8b-419e-8420-fa161e36cfd3",
+        "role": "user",
+        "content": "Hi, this is Emily Rodriguez. I should not see Michael's chat history!",
+        "timestamp": "2025-09-07T21:23:47.576203"
+      },
+      {
+        "id": "41c3bad2-0cb3-4e64-b133-54dd90f64ca0",
+        "role": "assistant",
+        "content": "Hi Emily, thank you for pointing that out\u2014this is a critical aspect of privacy in culture intelligence tools. As a best practice, **individual chat histories and private data should always be siloed and accessible only to the relevant user** (or appropriate admin roles, if required by policy). If you're seeing any data or conversation history that belongs to another user, this is a privacy breach and should be reported immediately to your system administrator or technical support team for investigation. If your intended test is to ensure new users only see their own interactions: - **You should not see any previous user's chat history.** - **All insights, reports, and data views provided to you will be unique to your access level and permissions.** If you have further privacy or security expectations, or you're testing multi-user environment scenarios, let me know how you'd like to proceed! ",
+        "timestamp": "2025-09-07T21:23:54.063893"
+      },
+      {
+        "id": "8d1dda18-5e8d-4d01-8ced-858c64904af3",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-07T21:30:30.367935"
+      },
+      {
+        "id": "5c90e5d0-0da6-42a6-ab04-b0aadba99a6c",
+        "role": "assistant",
+        "content": "Hello Emily! I'm here and ready to help you with any questions or culture intelligence tasks you have. How can I assist you today\u2014are you interested in analyzing recent employee feedback, reviewing cultural health metrics, or do you have another culture-related topic on your mind? Let me know how you'd like to proceed! ",
+        "timestamp": "2025-09-07T21:30:33.593647"
+      },
+      {
+        "id": "1ead64ae-b87f-4faf-ace3-3af3fee3e6a8",
+        "role": "user",
+        "content": "Hello, this is Emily testing if I can send messages properly now!",
+        "timestamp": "2025-09-07T21:40:19.339063"
+      },
+      {
+        "id": "0f1bbd26-bec3-442a-8922-97be6b153e29",
+        "role": "assistant",
+        "content": "Hi Emily! Your message has come through perfectly\u2014everything is working as it should. If you'd like to test any other features (like culture data upload, survey analytics, generating insights, or privacy scenarios), just let me know what you'd like to try next. I'm here to ensure your experience is smooth, secure, and productive! Would you like to continue testing, or is there a specific culture intelligence task you'd like to explore now? ",
+        "timestamp": "2025-09-07T21:40:22.426993"
+      },
+      {
+        "id": "6e747022-e236-4994-9a8c-c1b3fbda13ce",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-07T21:41:20.162707"
+      },
+      {
+        "id": "8afb7c56-fae9-4ce0-a46d-a60c2cfeda37",
+        "role": "assistant",
+        "content": "It's going well, Emily! I'm here and ready to assist with anything you'd like\u2014whether it's more testing, demoing culture analytics, or digging into employee engagement insights. Just let me know what you want to work on next! Are you interested in trying out any specific culture intelligence features or do you want to continue testing messaging for now? ",
+        "timestamp": "2025-09-07T21:41:23.248170"
+      },
+      {
+        "id": "76df8b1c-d796-4715-8199-c8fb05156dad",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-07T21:46:33.867610"
+      },
+      {
+        "id": "50ff87e7-5654-4e5f-a515-faf263b28c8c",
+        "role": "assistant",
+        "content": "I'm doing well, thank you for asking! \ud83d\ude0a Ready to help you with anything related to company culture, employee feedback, or analytics. If you have any culture data you want to analyze, specific questions about engagement, or just want to continue testing, let me know how you'd like to proceed! What would you like to do next? ",
+        "timestamp": "2025-09-07T21:46:36.238572"
+      },
+      {
+        "id": "edd5d033-d036-45b3-aa9a-fb14a1edb6e9",
+        "role": "user",
+        "content": "Hello! This is Emily Rodriguez testing the new consistent logic. I should get a proper AI response, not a preset template.",
+        "timestamp": "2025-09-07T21:49:59.793785"
+      },
+      {
+        "id": "b0a559e9-0d2f-4fcf-99be-281afa1342ef",
+        "role": "assistant",
+        "content": "Hello Emily! Thanks for testing the new consistent logic\u2014your feedback is valuable. You're right; it's important that my responses feel natural and context-aware, rather than templated. Here's an AI-generated, thoughtful response based on your message: --- Hi Emily! It's great to see you testing the platform's consistency. I'm here to provide real-time, tailored insights and support as you explore or roll out new features. Whether you want to review recent culture trends in your data, run a test scenario around employee feedback, or just evaluate how the system responds to varied input styles, I'm ready to assist. Would you like to simulate an employee pulse survey, dig into analytics, or perhaps stress-test how the platform handles nuanced queries around culture? Let me know your next step\u2014I'll adapt accordingly! --- If you have a specific logic path or feature you want to try right now, just lay it out, and I'll respond dynamically. ",
+        "timestamp": "2025-09-07T21:50:07.204448"
+      },
+      {
+        "id": "b480b4bf-ce53-4f6f-bdbe-85709697d97b",
+        "role": "user",
+        "content": "This is a totally new message from Emily Rodriguez. I should get a real AI response from the backend, not a template response. What do you think about innovation in the workplace?",
+        "timestamp": "2025-09-07T21:56:09.245311"
+      },
+      {
+        "id": "047ec4ac-87ef-4714-b076-4a91ba7505d2",
+        "role": "assistant",
+        "content": "Absolutely, Emily! Innovation in the workplace is essential for both organizational growth and employee engagement. Here's a data-driven perspective on why it matters and how to foster it: ### Why Innovation Matters - **Drives Competitive Advantage:** Innovative companies adapt quickly to market changes, outpace competitors, and better satisfy customer needs. - **Boosts Employee Engagement:** Employees who are encouraged to innovate feel more valued, empowered, and invested in organizational success. - **Enhances Problem-Solving:** A culture of innovation nurtures creativity, resulting in fresh solutions to persistent challenges. ### Indicators of an Innovative Workplace (Based on Culture Data) - **Open Feedback Channels:** Employees regularly share ideas without fear of negative repercussions. - **Cross-Functional Collaboration:** Teams with diverse skills tackle challenges together, leading to more creative solutions. - **Recognition of Experimentation:** Efforts to innovate\u2014even those that \"fail\"\u2014are recognized and learned from. - **Agility:** Decision-making structures that adapt to insights and new information quickly. ### Actionable Recommendations to Foster Innovation 1. **Empower Risk-Taking:** Regularly solicit and pilot employee ideas, celebrating learnings from both successes and failures. 2. **Establish Psychological Safety:** Ensure teams feel comfortable voicing unconventional ideas by reinforcing leader support. 3. **Provide Innovation Resources:** Allocate time, budget, and training for experimental projects (e.g., \"hackathons,\" innovation sprints). 4. **Measure & Share Results:** Track metrics on new initiatives and transparently communicate outcomes\u2014what worked, what didn't, and why. 5. **Integrate Innovation into Values:** Explicitly include \"innovation\" in company values and reward behaviors that reinforce it. ### Cultural Challenges to Monitor - **Fear of Failure:** In cultures where mistakes are penalized, innovation is usually stifled. - **Siloed Information:** If knowledge doesn't flow freely, innovative ideas rarely evolve or scale. #### Example Metrics to Track (if you're measuring culture) - Frequency of new ideas proposed by employees per quarter - % of employees who feel comfortable suggesting improvements (survey item) - Number of cross-team projects launched If you'd like, I can help interpret your company's feedback data for innovation trends, or suggest specific questions to include in a culture survey. Would you like to see recent benchmarks or best practices from high-performing innovative companies? ",
+        "timestamp": "2025-09-07T21:56:25.312178"
+      }
+    ],
+    "is_active": true
+  },
+  "42898881-a438-41dc-badc-f6d2eedb5d3f": {
+    "id": "42898881-a438-41dc-badc-f6d2eedb5d3f",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:24:52.988028",
+    "updated_at": "2025-09-07T21:41:15.674241",
+    "messages": [],
+    "is_active": false
+  },
+  "5d24be12-3ffb-400f-b46a-10dc1edb216a": {
+    "id": "5d24be12-3ffb-400f-b46a-10dc1edb216a",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:24:53.005209",
+    "updated_at": "2025-09-07T21:41:15.554162",
+    "messages": [],
+    "is_active": false
+  },
+  "ae215eba-112c-4741-9264-dcdf7a8b347a": {
+    "id": "ae215eba-112c-4741-9264-dcdf7a8b347a",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:38:47.137629",
+    "updated_at": "2025-09-07T21:38:48.835726",
+    "messages": [
+      {
+        "id": "b8e4029d-d0c5-48c8-8f67-b9f20b97dd77",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:38:47.191399"
+      },
+      {
+        "id": "2159fb69-8dab-4732-9783-4ed01d8026b6",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence needs? If you have data to analyze, need help interpreting metrics, or want advice on improving your company's culture, just let me know. ",
+        "timestamp": "2025-09-07T21:38:48.835666"
+      }
+    ],
+    "is_active": true
+  },
+  "47e35664-d1d8-46c4-99c0-49b91b72fb90": {
+    "id": "47e35664-d1d8-46c4-99c0-49b91b72fb90",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:38:57.714364",
+    "updated_at": "2025-09-07T21:41:15.325234",
+    "messages": [],
+    "is_active": false
+  },
+  "aa833ee4-50c6-471e-a49e-7b44e8b1b33a": {
+    "id": "aa833ee4-50c6-471e-a49e-7b44e8b1b33a",
+    "title": "Loading Animation Fix Test",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:38:57.734833",
+    "updated_at": "2025-09-08T03:08:56.707810",
+    "messages": [
+      {
+        "id": "1942c74e-75a9-4f1a-85df-1b4761dc5d96",
+        "role": "user",
+        "content": "Testing the loading animation fix",
+        "timestamp": "2025-09-07T21:49:21.566873"
+      },
+      {
+        "id": "5306c433-c6ee-4409-b47c-bdda80490f3d",
+        "role": "assistant",
+        "content": "Thank you for letting me know! If you have any feedback or need to confirm that the loading animation fix is visually working as expected, please let me know what to look for or how you'd like to proceed. If you want me to simulate or describe how a good loading animation experience should feel from a culture intelligence perspective (e.g., impact on employee engagement during survey submission), just ask! ",
+        "timestamp": "2025-09-07T21:49:25.063433"
+      },
+      {
+        "id": "e6f98547-eb8d-4137-8898-65d44dbc05cd",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Shape Our Workplace Culture Together\" at step 5 (questions). Current survey data: name=\"Shape Our Workplace Culture Together\", context=\"We want to understand employee satisfaction and engagement levels in our technology company to improve workplace culture.\n\nSuggested areas to consider:\n- What specific aspects do you want to measure?\n- What recent changes or challenges prompted this survey?\n- What actions will you take based on the results?\n- Who is your target audience and what do they need to know?\n\nChat with AI to refine these details further.\n\nSuggested areas to consider:\n- What specific aspects do you want to measure?\n- What recent changes or challenges prompted this survey?\n- What actions will you take based on the results?\n- Who is your target audience and what do they need to know?\n\nChat with AI to refine these details further.\", 3 questions defined, 3 classifiers, 0 metrics.] User request: Create a comprehensive customer satisfaction survey for a retail company with 8 questions, metrics, and classifiers",
+        "timestamp": "2025-09-08T03:08:37.853060"
+      },
+      {
+        "id": "8d5faeb9-46e8-4d91-ae3e-6b90cdf01bed",
+        "role": "assistant",
+        "content": "Certainly! Here's a **comprehensive customer satisfaction survey** tailored for a retail company, including **8 diverse questions**, corresponding **metrics** (to quantify responses), and **classifiers** (to segment or analyze responses by relevant groups). --- ## **Customer Satisfaction Survey for [Retail Company Name]** ### **Survey Context** *We value your feedback and want to enhance your shopping experience. Please help us understand your satisfaction and preferences so we can better serve you.* --- ### **Questions** 1. **Overall, how satisfied are you with your recent shopping experience at our store?** - Scale: 1 (Very Dissatisfied) to 5 (Very Satisfied) - *Metric: Average satisfaction score* 2. **How would you rate the friendliness and helpfulness of our staff?** - Scale: 1 (Very Poor) to 5 (Excellent) - *Metric: Staff interaction score* 3. **How satisfied are you with the variety and quality of products available?** - Scale: 1 (Not at all satisfied) to 5 (Extremely satisfied) - *Metric: Product satisfaction score* 4. **How easy was it to find what you were looking for in our store?** - Choices: Very Easy, Somewhat Easy, Neutral, Somewhat Difficult, Very Difficult - *Metric: Shopping ease score* 5. **How likely are you to recommend our store to a friend or colleague?** - Scale: 0 (Not at all likely) to 10 (Extremely likely) - *Metric: Net Promoter Score (NPS)* 6. **Were our checkout and payment processes fast and convenient?** - Choices: Yes, always; Yes, usually; Sometimes; Rarely; Never - *Metric: Checkout satisfaction ratio* 7. **Have you experienced any issues with your purchase or our service? If yes, please describe.** - Choices: Yes / No; (Open text for details if Yes) - *Metric: Issue rate (% reporting problems)* 8. **What can we improve to make your shopping experience better?** - Open-ended - *Metric: Thematic analysis for common improvement themes* --- ### **Metrics** - **Average Satisfaction Score** (Q1) - **Staff Interaction Score** (Q2) - **Product Satisfaction Score** (Q3) - **Shopping Ease Score** (Q4) - **Net Promoter Score (NPS)** (Q5) - **Checkout Satisfaction Ratio** (Q6) - **Issue Rate** (Q7) - **Thematic Insights for Improvement** (Q8) --- ### **Classifiers** Segment audience responses by: 1. **Store Location** (if operating multiple stores) 2. **Customer Type** (New vs. Returning) 3. **Purchase Channel** (In-store vs. Online) 4. **Demographics** (e.g., Age range, Gender, optional if collected respectfully) --- **Tips for Use:** - Pair metrics and classifiers to uncover patterns (e.g., NPS by store location). - Use open-ended feedback to drive actionable improvements. - Benchmark results over time to measure progress. Would you like example data outputs, question wording refinement, or dashboard setup suggestions for this survey? ",
+        "timestamp": "2025-09-08T03:08:56.707709"
+      }
+    ],
+    "is_active": false
+  },
+  "00bf5678-6c8d-416f-8a36-174eceb8f1db": {
+    "id": "00bf5678-6c8d-416f-8a36-174eceb8f1db",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:39:08.330224",
+    "updated_at": "2025-09-07T21:41:15.038782",
+    "messages": [],
+    "is_active": false
+  },
+  "5f0f9caf-daaa-4883-8e15-2e650684ad74": {
+    "id": "5f0f9caf-daaa-4883-8e15-2e650684ad74",
+    "title": "Profile Isolation Feature Test",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:39:08.353582",
+    "updated_at": "2025-09-07T23:25:21.350984",
+    "messages": [
+      {
+        "id": "c14785cd-37c0-49a1-b27f-4d9a1a178cc3",
+        "role": "user",
+        "content": "Hello, this is Michael Chen testing the new profile isolation feature.",
+        "timestamp": "2025-09-07T21:39:27.822121"
+      },
+      {
+        "id": "4738b38c-38c7-4442-88d8-f9448c6f6d54",
+        "role": "assistant",
+        "content": "Hello Michael! Thank you for testing the new profile isolation feature. Your session is set to the **culture_intelligence** role, which means responses will be tailored for someone analyzing and interpreting culture data across organizations. If you'd like to: - Analyze sample data - Test insights generation - Check recommendations for specific personas (CEO, HR, managers, etc.) - Or see how profile isolation impacts data privacy and context switching Just let me know your scenario or the type of workflow you want to test! How would you like to proceed? ",
+        "timestamp": "2025-09-07T21:39:32.227590"
+      },
+      {
+        "id": "2d7fec9a-3a09-4eba-8b4c-8f03b897d260",
+        "role": "user",
+        "content": "cool thanks",
+        "timestamp": "2025-09-07T21:59:31.357736"
+      },
+      {
+        "id": "0c9df69e-dba0-4b17-b244-351994829a2d",
+        "role": "assistant",
+        "content": "You're welcome, Michael! If you'd like to try out any specific workflows (like importing sample culture data, running a pulse survey mock analysis, or switching perspectives between personas), just let me know the scenario. I can walk you through insight generation, action recommendations, or demonstrate how profile isolation keeps user data segmented and secure. Ready to test something specific, or do you want suggestions on possible test cases for the culture_intelligence role? ",
+        "timestamp": "2025-09-07T21:59:35.243310"
+      },
+      {
+        "id": "e711c078-f977-4485-bc24-d30684066737",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Untitled\" at step 1 (name). Current survey data: name=\"\", context=\"\", 0 questions defined, 0 classifiers, 0 metrics.] User request: make a survey about employee satisfaction",
+        "timestamp": "2025-09-07T23:25:07.831233"
+      },
+      {
+        "id": "10cf0008-f986-4196-8ec5-7081ac6c668a",
+        "role": "assistant",
+        "content": "Great! Let's design a baseline **Employee Satisfaction Survey**. I'll guide you through the key steps: --- ### Step 1. Name Your Survey **Suggestion:** `Employee Satisfaction Survey \u2013 [Month/Year]` --- ### Step 2. Context/Purpose (Optional) **Suggestion:** \"This survey aims to assess overall employee satisfaction, identify areas for improvement, and inform actions to enhance our workplace culture.\" --- ### Step 3. Core Questions Here are some data-driven, benchmark-friendly questions for employee satisfaction. These use a standard agreement scale (Strongly Disagree \u2192 Strongly Agree): 1. **Overall, I am satisfied with my experience at [Company].** 2. **I feel valued for the work I do.** 3. **I have the resources and support I need to do my job well.** 4. **Communication from management is clear and effective.** 5. **I have opportunities for professional growth and development.** 6. **The work environment at [Company] is positive and inclusive.** 7. **I am satisfied with the balance between my work and personal life.** 8. **I would recommend [Company] as a great place to work.** **Optional Open-Ended:** - What is one thing [Company] could do to improve your satisfaction at work? --- ### Step 4. Classifiers To analyze results by group, consider adding classifiers like: - Department/Team - Tenure (e.g., 0-1 yr, 2-5 yrs, etc.) - Location --- ### Step 5. Metrics The above questions can be used to create these metrics: - **Overall satisfaction (Q1)** - **Perceived value/recognition (Q2)** - **Support/resources (Q3)** - **Communications (Q4)** - **Growth opportunity (Q5)** - **Work environment & inclusivity (Q6)** - **Work-life balance (Q7)** - **Net Promoter Score (Q8, adapted)** --- **Next Steps:** - Would you like to use these default questions, or add/remove any? - Do you want help configuring classifiers or metrics? - Shall I fill these into your survey draft and propose a flow? Let me know how you'd like to customize or proceed! ",
+        "timestamp": "2025-09-07T23:25:21.350920"
+      }
+    ],
+    "is_active": true
+  },
+  "01fb7425-d337-4c1c-8a89-05c2385b29a3": {
+    "id": "01fb7425-d337-4c1c-8a89-05c2385b29a3",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:40:51.093447",
+    "updated_at": "2025-09-07T21:40:53.483606",
+    "messages": [
+      {
+        "id": "e2fc3a78-d047-4cf5-a518-7a1e30d43cae",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:40:51.152198"
+      },
+      {
+        "id": "364ed2b9-ab5e-4239-ac47-bfb3dff172e0",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your company culture analysis today? If you have specific culture data, survey results, or are looking for actionable insights or trends, just let me know what you need. ",
+        "timestamp": "2025-09-07T21:40:53.483516"
+      }
+    ],
+    "is_active": true
+  },
+  "71d4371f-14a3-44e5-971a-d7b5f75cb345": {
+    "id": "71d4371f-14a3-44e5-971a-d7b5f75cb345",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:40:56.702468",
+    "updated_at": "2025-09-07T21:46:53.873067",
+    "messages": [],
+    "is_active": false
+  },
+  "b8078844-cf6d-48da-833c-b585e708f11d": {
+    "id": "b8078844-cf6d-48da-833c-b585e708f11d",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:40:56.718016",
+    "updated_at": "2025-09-07T21:46:53.115712",
+    "messages": [],
+    "is_active": false
+  },
+  "7a9a83d1-03c2-4621-900e-cdd699c81f27": {
+    "id": "7a9a83d1-03c2-4621-900e-cdd699c81f27",
+    "title": "Culture Intelligence Assistance Overview",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:46:54.750239",
+    "updated_at": "2025-10-06T06:44:19.414747",
+    "messages": [
+      {
+        "id": "6e843d8e-37f2-4157-bf8b-98327c990cd9",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:47:00.856314"
+      },
+      {
+        "id": "8ff5e8c9-44fe-4a24-a2ac-e2ed6b90a44f",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Are you looking to analyze recent culture data, interpret survey results, or explore ways to improve team engagement? Let me know what you need, and I'll provide tailored insights or recommendations. ",
+        "timestamp": "2025-09-07T21:47:03.218802"
+      },
+      {
+        "id": "5fbdb71f-ede3-4e78-b776-731565b2273d",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:56:47.388054"
+      },
+      {
+        "id": "f1032a3b-9367-4894-ab6e-f4f74adf56e1",
+        "role": "assistant",
+        "content": "Hi again! \ud83d\ude0a How can I support your work in culture intelligence today? If you have a specific dataset, recent feedback, or survey results you'd like to discuss, just share the details. I can help analyze trends, identify strengths or risks in culture, and suggest actionable next steps. What would you like to focus on? ",
+        "timestamp": "2025-09-07T21:56:50.556961"
+      },
+      {
+        "id": "d2cfb945-c34a-4747-bf65-b9f70b38c94e",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-10-06T01:44:06.246324"
+      },
+      {
+        "id": "09f20115-fa53-43c7-bb56-b559d86f8343",
+        "role": "assistant",
+        "content": "Hi \u2014 welcome back! \ud83d\udc4b How can I help with culture intelligence today? Here are a few things I can do \u2014 pick one or tell me what you need: - Analyze survey results or employee feedback (paste data or key metrics) - Interpret culture metrics (engagement, eNPS, retention warning signs) - Create an action plan for HR, managers, or execs - Draft pulse survey questions or communication templates - Benchmark best practices or recent research (I can look up current trends) If you have data, share a sample (anonymized) or tell me your role and goal, timeframe, and any concerns. ",
+        "timestamp": "2025-10-06T01:44:12.797304"
+      },
+      {
+        "id": "e5b33f15-f8e5-4156-83ea-40168ef59c27",
+        "role": "user",
+        "content": "summarize jeff bezos wedding with lauren sanches with citations in 21 words",
+        "timestamp": "2025-10-06T01:44:26.818098"
+      },
+      {
+        "id": "312d238a-d1f2-4fa4-964e-e917d9e89fb3",
+        "role": "assistant",
+        "content": "Jeff Bezos married Lauren S\u00e1nchez in Venice on June 27, 2025; notable, star-studded multi-day celebrations sparked local protests and charity donations. ([amp.cnn.com](https://amp.cnn.com/cnn/2025/06/27/style/jeff-bezos-lauren-sanchez-wedding?utm_source=openai)) ",
+        "timestamp": "2025-10-06T01:44:55.082042"
+      },
+      {
+        "id": "ea70cf23-22e1-4c2a-beef-de67d259b6b7",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Work-Location Wellbeing Survey \u2014 Remote vs In-Person\" at step 5 (questions). Current survey data: name=\"Work-Location Wellbeing Survey \u2014 Remote vs In-Person\", context=\"This survey measures employee wellbeing with a specific focus on differences between remote, hybrid, and in-person work arrangements. It asks about work-life balance, stress/burnout drivers, social connection, and access to resources so leaders can compare outcomes by location. With hybrid models common, organizations increasingly see location-based gaps in stress and engagement. Results will be used to prioritize targeted interventions, inform hybrid policy design, and track progress over time. Responses are anonymous and analyzed by department, experience level, team size, and work arrangement to surface practical, measurable actions.\", 7 questions defined, 4 classifiers, 1 metrics.] User request: ok awesome now can you update the survey languages to english spaniush and french AND change the response type of question 1 to text responbe and dont make it required",
+        "timestamp": "2025-10-06T02:36:29.868447"
+      },
+      {
+        "id": "da4de1fd-cfbc-4606-8a6a-d3aceeb9ad58",
+        "role": "assistant",
+        "content": "Done \u2014 I updated the survey as requested. Summary of changes - Languages: set to English, Spanish, and French (corrected \"spaniush\" \u2192 Spanish). - Question 1: response type changed to open text (free-text) and set to not required (optional). Notes & quick options - Do you want the text field to be single-line (short answer) or multi-line (paragraph)? I can also add a character limit (e.g., 250/500/1000). - I can provide professional-quality translations of all survey elements (questions, instructions, consent text, response options) into Spanish and French now \u2014 would you like me to auto-translate and include both language variants for review? - Reminder: switching Q1 to open text improves richness but reduces ease of quantitative comparison across groups. If you want to preserve comparability, consider adding a short multiple-choice or Likert follow-up to capture structured data. Next step Tell me: 1) single-line or multi-line for Q1 (and preferred char limit, if any), and 2) whether you want me to translate the full survey into Spanish and French now (I'll provide both language versions for review). ",
+        "timestamp": "2025-10-06T02:36:47.236956"
+      },
+      {
+        "id": "55cf1204-c078-4b26-ace5-ede0320e85f8",
+        "role": "user",
+        "content": "[Survey Creation Context: Currently working on survey \"Work-Location Wellbeing Survey \u2014 Remote vs In-Person\" at step 5 (questions). Current survey data: name=\"Work-Location Wellbeing Survey \u2014 Remote vs In-Person\", context=\"This survey measures how work location (remote, hybrid, or in-office) affects employee wellbeing across physical, mental, social, and managerial dimensions. It will compare experiences by work arrangement to reveal gaps in work-life balance, social connection, ergonomics, and manager support. Recent research shows a large majority of remote-capable employees prefer some remote work (93%) and that loneliness and wellbeing vary by location, with fully remote employees reporting higher loneliness in some studies. ([gallup.com](https://www.gallup.com/workplace/283985/state-of-the-global-workplace.aspx?utm_source=openai))\n\nWe will collect both quantitative ratings and open-text suggestions so leaders can target interventions (ergonomic stipends, manager training, hybrid scheduling, social programming) and measure impact over time. Evidence suggests hybrid arrangements often correlate with better overall wellbeing than strictly remote or strictly in-office models, while management practices strongly influence outcomes. ([theguardian.com](https://www.theguardian.com/business/article/2024/jun/16/hybrid-working-makes-employees-happier-healthier-and-more-productive-study-shows?utm_source=openai))\n\nResponses will be segmented by department, experience level, team size, and work arrangement to identify where location-based differences are greatest and to prioritize quick wins and longer-term investments. Results will inform policy, people-leader coaching, and site/hybrid design decisions tied to retention and productivity goals. ([forbes.com](https://www.forbes.com/sites/bryanrobinson/2024/09/26/hybrid-and-remote-work-still-on-the-rise-despite-misconceptions-study-shows/?utm_source=openai))\", 7 questions defined, 4 classifiers, 1 metrics.] User request: ok awesome now can you update the survey languages to english spaniush and french AND change the response type of question 1 to text responbe and dont make it required",
+        "timestamp": "2025-10-06T02:47:08.523877"
+      },
+      {
+        "id": "3100a927-1b80-4f2a-991a-8e149c97a452",
+        "role": "assistant",
+        "content": "Done \u2014 I've updated the survey as you requested. Summary of changes - Languages: set to English, Spanish (corrected from \"spaniush\"), and French. - Question 1: response type changed to open text (free-text) and set to optional (not required). Quick notes and next-step options - Field type: Do you want Q1 to be single-line (short answer) or multi-line (paragraph)? Suggested char limits: 250 / 500 / 1000. - Comparability: Open-text increases richness but reduces ease of quantitative analysis. If you want structured comparisons by location, I recommend adding a short follow-up (e.g., \"Overall, how would you rate your wellbeing?\" \u2014 5\u2011point Likert) or a brief multiple-choice checkbox. Shall I add that? - Translations: I can auto-translate the full survey (questions, instructions, consent text, response options) into Spanish and French now and provide both language variants for review. Want me to proceed? Tell me: 1) Single-line or multi-line for Q1 (and preferred char limit), and 2) Whether you want the full survey translated into Spanish and French now \u2014 and if so, do you want neutral (Spain/France) or locale variants (e.g., Latin American Spanish, Canadian French)? ",
+        "timestamp": "2025-10-06T02:47:25.365525"
+      },
+      {
+        "id": "16092a67-52f5-40ff-946a-e6bbb842e0be",
+        "role": "user",
+        "content": "ok awesome now can you update the survey languages to english spaniush and french AND change the response type of question 1 to text responbe and dont make it required",
+        "timestamp": "2025-10-06T06:44:06.331376"
+      },
+      {
+        "id": "40c68097-90e3-4d50-870d-841dea2689c5",
+        "role": "assistant",
+        "content": "Done \u2014 I updated the survey as requested. What I changed - Languages: set to English, Spanish (corrected from \"spaniush\"), and French. - Question 1: changed to an open text (free-text) response and made it optional (not required). A few quick choices so I can finish everything exactly how you want 1) Q1 text field style \u2014 pick one: - Single-line (short answer) - Multi-line (paragraph) - If multi-line, pick a character limit (suggested: 250 / 500 / 1000) 2) Translations \u2014 do you want me to auto-translate the full survey now (questions, instructions, consent text, response options)? - If yes, which locale variants do you prefer? - Spanish: Spain (ES) or Latin American (LATAM) - French: France (FR) or Canadian (CA) Suggested optional improvement - To preserve comparability across work arrangements, consider adding a short structured follow-up to Q1 (example: \"Overall, how would you rate your current wellbeing?\" \u2014 5\u2011point Likert from Very Poor to Very Good). Want me to add that automatically? Tell me your choices for 1 and 2 (and whether to add the structured follow-up) and I'll apply them and return the updated survey text in all three languages for review. ",
+        "timestamp": "2025-10-06T06:44:19.414646"
+      }
+    ],
+    "is_active": true
+  },
+  "092c6f8d-c21d-4f13-9a08-e42557f439d8": {
+    "id": "092c6f8d-c21d-4f13-9a08-e42557f439d8",
+    "title": "New Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-07T21:47:33.013004",
+    "updated_at": "2025-09-07T21:59:27.603557",
+    "messages": [],
+    "is_active": false
+  },
+  "277d85cd-e127-44c7-88aa-b0e9b939637a": {
+    "id": "277d85cd-e127-44c7-88aa-b0e9b939637a",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:48:28.041643",
+    "updated_at": "2025-09-07T21:48:30.618921",
+    "messages": [
+      {
+        "id": "c8bc93cc-5d10-466f-bafc-789bac12b3a0",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:48:28.105464"
+      },
+      {
+        "id": "83c114fd-5c6a-489e-b3c2-f6c5c2922363",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your culture intelligence efforts today? If you have specific culture data, survey results, or any questions about employee engagement and team dynamics, feel free to share them\u2014I'm here to help you analyze and generate actionable insights. ",
+        "timestamp": "2025-09-07T21:48:30.618859"
+      }
+    ],
+    "is_active": true
+  },
+  "172a7f9d-1311-4190-b3b3-ec67620ffe9a": {
+    "id": "172a7f9d-1311-4190-b3b3-ec67620ffe9a",
+    "title": "Culture Intelligence Assistance",
+    "user_id": "sarah_johnson",
+    "created_at": "2025-09-07T21:53:56.883080",
+    "updated_at": "2025-09-07T21:59:51.485538",
+    "messages": [
+      {
+        "id": "42f17dd1-032f-41c0-adb0-6173ac5a3fb3",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:53:59.769520"
+      },
+      {
+        "id": "72b95a8e-24cf-4a2e-ba44-9181dbc59df7",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with culture intelligence today? Are you interested in analyzing recent survey data, looking for actionable insights, or would you like recommendations to strengthen your company culture? Let me know what you need, and I'll get started! ",
+        "timestamp": "2025-09-07T21:54:02.158569"
+      },
+      {
+        "id": "db501dd6-4835-45e2-871f-d62f6322fa5e",
+        "role": "user",
+        "content": "whats up",
+        "timestamp": "2025-09-07T21:56:56.702492"
+      },
+      {
+        "id": "b3e2f75a-9cd7-4a4c-8256-8f6ee344ca44",
+        "role": "assistant",
+        "content": "All good here\u2014ready to help! Is there a specific aspect of your company culture or recent data you're focusing on today? For example, do you want to dive into employee engagement results, team dynamics, or identify culture strengths and opportunities? Let me know what you're curious about, and I'll provide targeted insights or actions! ",
+        "timestamp": "2025-09-07T21:56:59.653459"
+      }
+    ],
+    "is_active": false
+  },
+  "bcac1826-3e67-46b1-8f99-b7177198bf5b": {
+    "id": "bcac1826-3e67-46b1-8f99-b7177198bf5b",
+    "title": "New Chat",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:54:06.779279",
+    "updated_at": "2025-09-07T21:54:13.903301",
+    "messages": [],
+    "is_active": false
+  },
+  "dcdb3780-5a23-446c-8aff-b56faebac033": {
+    "id": "dcdb3780-5a23-446c-8aff-b56faebac033",
+    "title": "New Chat",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:54:15.026073",
+    "updated_at": "2025-09-07T21:58:31.637493",
+    "messages": [],
+    "is_active": false
+  },
+  "cd5c16d4-9926-459f-84f5-1c112ef82095": {
+    "id": "cd5c16d4-9926-459f-84f5-1c112ef82095",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:55:27.522225",
+    "updated_at": "2025-09-07T21:55:29.437809",
+    "messages": [
+      {
+        "id": "61153d8b-cefd-43c8-abfa-eed0b8aa92d8",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:55:27.583462"
+      },
+      {
+        "id": "ebc1e047-374d-4e32-9fe9-f5494bbec16b",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your culture intelligence work today? If you have data to analyze, need insights on team dynamics, or are looking for actionable steps to enhance your company culture, just let me know. ",
+        "timestamp": "2025-09-07T21:55:29.437773"
+      }
+    ],
+    "is_active": true
+  },
+  "900740a9-6b6f-4f36-b765-9280306d7be4": {
+    "id": "900740a9-6b6f-4f36-b765-9280306d7be4",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T21:57:46.764582",
+    "updated_at": "2025-09-07T21:57:48.907713",
+    "messages": [
+      {
+        "id": "500cf726-2cb3-4cb5-b088-465771cdd0ae",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T21:57:46.812720"
+      },
+      {
+        "id": "eba524c6-e69d-4d91-b42e-362a28abbc23",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As a culture intelligence specialist, how can I assist you today? Are you looking to analyze recent culture data, generate insights, discuss best practices, or something else related to organizational culture? Let me know your focus, and I'll tailor my support accordingly. ",
+        "timestamp": "2025-09-07T21:57:48.907539"
+      }
+    ],
+    "is_active": true
+  },
+  "08e2568e-62df-4953-9540-52a46df7160c": {
+    "id": "08e2568e-62df-4953-9540-52a46df7160c",
+    "title": "Culture Intelligence Support Introduction",
+    "user_id": "emily_rodriguez",
+    "created_at": "2025-09-07T21:58:13.729803",
+    "updated_at": "2025-09-08T05:46:37.198039",
+    "messages": [
+      {
+        "id": "2c5eba9d-8bed-4739-b53c-57c35940975a",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:58:22.524768"
+      },
+      {
+        "id": "dadd9303-3a63-480d-b536-a3201733d05a",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I support your work in culture intelligence today? Are you looking to analyze recent survey results, derive insights, benchmark culture metrics, or discuss actions to boost your organization's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T21:58:24.906713"
+      },
+      {
+        "id": "336d3d9d-02a7-4e3f-bfff-bd4b6b0ed3ec",
+        "role": "user",
+        "content": "what does q1 mean",
+        "timestamp": "2025-09-08T05:46:26.885297"
+      },
+      {
+        "id": "a99d51ac-540e-4650-87fc-7f386e3c8a1f",
+        "role": "assistant",
+        "content": "It depends on the context \u2014 \"Q1\" commonly means one of a few things. Quick summary: - Quarter 1 (calendar): the first quarter of the year (Jan 1 \u2013 Mar 31). - Quarter 1 (fiscal): the first quarter of a company's fiscal year \u2014 dates vary by organization (e.g., if fiscal year starts July 1, Q1 = July 1\u2013Sept 30). - Question 1: in surveys or forms, \"Q1\" often just labels the first question. - Quartile 1 (statistics): the lowest 25% segment of a distribution (sometimes written Q1). Which of these applies to your situation \u2014 are you looking at a report over time, a survey dataset, or a statistical summary? Tell me the context and I'll give the exact interpretation and next steps for analysis. ",
+        "timestamp": "2025-09-08T05:46:37.197954"
+      }
+    ],
+    "is_active": true
+  },
+  "aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a": {
+    "id": "aae90d0c-91ea-4f67-8fa1-5a32c3cc0d9a",
+    "title": "Culture Intelligence Inquiry",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:58:32.759280",
+    "updated_at": "2025-09-07T21:58:41.303643",
+    "messages": [
+      {
+        "id": "3d02b756-0a68-4b8b-9c20-3b0e307a617d",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-07T21:58:38.168601"
+      },
+      {
+        "id": "42807243-bca1-48e3-b6f0-18341b1da63c",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your culture intelligence needs today? Are you looking to analyze recent culture data, discuss insights, or explore ways to enhance your company's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-07T21:58:40.522306"
+      }
+    ],
+    "is_active": true
+  },
+  "24b22cbc-d23f-494d-a35a-3c3703c1446a": {
+    "id": "24b22cbc-d23f-494d-a35a-3c3703c1446a",
+    "title": "User Role Clarification",
+    "user_id": "gayathri_sriram",
+    "created_at": "2025-09-07T21:58:54.136809",
+    "updated_at": "2025-09-07T22:00:43.444282",
+    "messages": [
+      {
+        "id": "95301a97-ef4a-4137-8ff8-38b164f7fbe7",
+        "role": "user",
+        "content": "whats my role",
+        "timestamp": "2025-09-07T21:59:01.159071"
+      },
+      {
+        "id": "00d2aab0-6b25-4176-895f-c6125d9d4ef1",
+        "role": "assistant",
+        "content": "As a **Culture Intelligence** user, your role typically involves analyzing and synthesizing data related to workplace culture within your organization. You likely have responsibilities such as: - Monitoring and interpreting employee feedback and survey data - Identifying patterns, trends, and potential issues in cultural health - Providing insights to leadership, HR, and teams about engagement, sentiment, and culture risks - Recommending evidence-based actions to strengthen or evolve company culture - Supporting or guiding the overall cultural strategy and initiatives You serve as a bridge between raw culture data and actionable decisions, ensuring that leadership can effectively use culture metrics to drive positive organizational outcomes. Would you like specific tools, frameworks, or examples to help you fulfill this role more effectively? ",
+        "timestamp": "2025-09-07T21:59:06.998842"
+      },
+      {
+        "id": "84718be7-163c-472b-8f13-d8d0649ce26a",
+        "role": "user",
+        "content": "awesome summarize jeff bezos wedding in 11 words",
+        "timestamp": "2025-09-07T22:00:19.356339"
+      },
+      {
+        "id": "bc605e6e-4c89-4fc7-b63a-f90e361a315d",
+        "role": "assistant",
+        "content": "Jeff Bezos and Lauren S\u00e1nchez's lavish Venice wedding sparked local protests. ",
+        "timestamp": "2025-09-07T22:00:24.525720"
+      },
+      {
+        "id": "2788e4b7-1161-4dcd-ab04-53db2c85fc03",
+        "role": "user",
+        "content": "give citations",
+        "timestamp": "2025-09-07T22:00:32.015376"
+      },
+      {
+        "id": "e165b641-b01a-4505-a06a-5b3c41a5387e",
+        "role": "assistant",
+        "content": "Jeff Bezos and Lauren S\u00e1nchez's lavish wedding in Venice drew significant attention and sparked local protests. The three-day celebration, held in June 2025, featured extravagant events and a star-studded guest list. However, the opulence of the festivities led to criticism from local activists concerned about overtourism and the commercialization of Venice's cultural heritage. ([theweek.com](https://theweek.com/culture-life/jeff-bezos-wedding-venice-tacky?utm_source=openai)) The wedding took place on June 27, 2025, with the couple exchanging vows at the Basilica of San Giorgio Maggiore. The ceremony was followed by themed parties, including a Great Gatsby event, a pajama party, and a foam party. S\u00e1nchez reportedly had 27 outfits for the extended nuptials. The couple stayed at the Aman Venice hotel, located in the former Palazzo Papadopoli. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Wedding_of_Jeff_Bezos_and_Lauren_S%C3%A1nchez?utm_source=openai)) The guest list included high-profile figures such as Oprah Winfrey, Tom Brady, Kim and Khlo\u00e9 Kardashian, Kris Jenner, Ivanka Trump, Leonardo DiCaprio, Orlando Bloom, Queen Rania of Jordan, Mick Jagger, Bill Gates, and the Jenner sisters. Despite the absence of NDAs, several celebrities reportedly opted to avoid being photographed during the event. ([apnews.com](https://apnews.com/article/03cfa41cbb38929e016f412236cbc213?utm_source=openai), [cinemablend.com](https://www.cinemablend.com/streaming-news/jeff-bezos-wedding-insider-speaks-celebs-refusing-be-photographed?utm_source=openai)) Local activists and residents expressed opposition to the wedding, viewing it as a symbol of the exploitation of Venice by outsiders. Protests were organized by groups such as \"No Space for Bezos,\" who criticized the event for treating Venice as a playground for the ultra-wealthy. Banners were displayed with slogans like \"If you can rent Venice for your wedding, you can pay more tax.\" In response to the backlash, Bezos donated \u20ac1 million to three environmental organizations focused on preserving Venice. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Wedding_of_Jeff_Bezos_and_Lauren_S%C3%A1nchez?utm_source=openai), [apnews.com](https://apnews.com/article/03cfa41cbb38929e016f412236cbc213?utm_source=openai)) The wedding's extravagance and the resulting protests highlighted broader debates about tourism, wealth disparity, and the preservation of local culture in historically significant cities like Venice. ([theweek.com](https://theweek.com/culture-life/jeff-bezos-wedding-venice-tacky?utm_source=openai)) ## Jeff Bezos and Lauren S\u00e1nchez's Venice Wedding Sparks Controversy: - [Jeff in Venice: a 'triumph of tackiness'?](https://theweek.com/culture-life/jeff-bezos-wedding-venice-tacky?utm_source=openai)18\ue201 ",
+        "timestamp": "2025-09-07T22:00:43.444110"
+      }
+    ],
+    "is_active": true
+  },
+  "c2b9f809-c79d-4d54-89fa-427a9f207ec9": {
+    "id": "c2b9f809-c79d-4d54-89fa-427a9f207ec9",
+    "title": "Assistant Introduction Query",
+    "user_id": "david_williams",
+    "created_at": "2025-09-07T21:59:39.364995",
+    "updated_at": "2025-09-07T21:59:46.930612",
+    "messages": [
+      {
+        "id": "a02ee3b5-283d-41a4-892d-caff7fe035fb",
+        "role": "user",
+        "content": "whats your name",
+        "timestamp": "2025-09-07T21:59:42.520483"
+      },
+      {
+        "id": "3f8c5800-7b00-4eb9-b1c1-47f5dad91e38",
+        "role": "assistant",
+        "content": "I'm your Enculture AI Culture Intelligence Assistant! You can call me \"Enculture AI,\" or just \"AI\" if you prefer. My role is to help you interpret culture data, generate insights, and recommend culture-building actions. If you'd like to give me a name that fits your organization's vibe, let me know\u2014personalizing even your digital collaborators can be a great touch for company culture! How can I assist you today? ",
+        "timestamp": "2025-09-07T21:59:46.123221"
+      }
+    ],
+    "is_active": true
+  },
+  "83917a0d-fda3-4276-aa5b-9c7edf27aaca": {
+    "id": "83917a0d-fda3-4276-aa5b-9c7edf27aaca",
+    "title": "CEO Culture Intelligence Guidance",
+    "user_id": "sarah_johnson",
+    "created_at": "2025-09-07T21:59:52.165843",
+    "updated_at": "2025-09-07T22:00:01.114061",
+    "messages": [
+      {
+        "id": "42536c39-7d36-4f87-b519-058a614ce6f1",
+        "role": "user",
+        "content": "hi ceo",
+        "timestamp": "2025-09-07T21:59:55.663930"
+      },
+      {
+        "id": "e9193233-36a8-45f8-90aa-1e53b99fe0f2",
+        "role": "assistant",
+        "content": "Hello! It looks like you might be addressing a CEO or would like information tailored for a CEO perspective on culture intelligence. How can I assist you today? Here are some ways I can help: - **Executive Summary**: Provide a high-level overview of your company's current cultural health and engagement trends. - **Strategic Insights**: Offer data-driven insights on culture strengths, gaps, and areas of risk. - **Actionable Recommendations**: Suggest executive-level initiatives for improving company culture and aligning culture with business goals. - **Benchmarking**: Share best practices and how your culture compares to industry standards. What specific information or insights would be most valuable to you right now? ",
+        "timestamp": "2025-09-07T22:00:00.509501"
+      }
+    ],
+    "is_active": true
+  },
+  "56da418e-6fe0-43d1-94ae-bf4606cfcf8d": {
+    "id": "56da418e-6fe0-43d1-94ae-bf4606cfcf8d",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T22:07:12.214365",
+    "updated_at": "2025-09-07T22:07:14.418252",
+    "messages": [
+      {
+        "id": "26d93fa5-534d-4669-bfbc-3c99814b1172",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T22:07:12.284501"
+      },
+      {
+        "id": "ffa22ccc-10fa-4c50-b2cd-1e129e6591d8",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your company culture goals today? If you have any culture data, survey results, or specific challenges you're facing, feel free to share. I'm here to help analyze, provide insights, and suggest ways to build a stronger, healthier workplace culture. ",
+        "timestamp": "2025-09-07T22:07:14.418209"
+      }
+    ],
+    "is_active": true
+  },
+  "f7e4f6a6-5336-495c-a97e-5a242f02ca5b": {
+    "id": "f7e4f6a6-5336-495c-a97e-5a242f02ca5b",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T22:13:19.433634",
+    "updated_at": "2025-09-07T22:13:22.142471",
+    "messages": [
+      {
+        "id": "e92374cc-a2bc-49ee-99fd-c112658780cb",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T22:13:19.486625"
+      },
+      {
+        "id": "0e2724bc-738b-4f41-8ff9-7d8fb5647208",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As your Culture Intelligence Assistant, I'm here to help you interpret culture data, uncover actionable insights, and recommend ways to strengthen your organization's culture. How can I assist you today? Are you looking to analyze recent survey results, discuss team engagement, or explore areas for culture improvement? Let me know your area of focus! ",
+        "timestamp": "2025-09-07T22:13:22.142348"
+      }
+    ],
+    "is_active": true
+  },
+  "7bc3fa10-28da-4fd6-90a3-49cd636517ab": {
+    "id": "7bc3fa10-28da-4fd6-90a3-49cd636517ab",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T22:19:58.947095",
+    "updated_at": "2025-09-07T22:20:00.819393",
+    "messages": [
+      {
+        "id": "4b42e8b3-508e-41eb-923c-ea5219da4dbd",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T22:19:59.001714"
+      },
+      {
+        "id": "81abe194-9af4-4807-8824-ec1eb96241f6",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your company's culture intelligence needs today? If you have data to review, need insights, or are looking for actionable recommendations, just let me know. ",
+        "timestamp": "2025-09-07T22:20:00.819352"
+      }
+    ],
+    "is_active": true
+  },
+  "b6d40bf7-00f2-4a2b-b869-922dbbdc57df": {
+    "id": "b6d40bf7-00f2-4a2b-b869-922dbbdc57df",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T23:24:23.635907",
+    "updated_at": "2025-09-07T23:24:26.654279",
+    "messages": [
+      {
+        "id": "5a00277e-7590-4a24-a24c-fbb1b5ebca44",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T23:24:23.692308"
+      },
+      {
+        "id": "ce48c5de-dbb4-4822-af96-78007e747199",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your culture data or insights today? Whether you need help interpreting survey results, identifying trends, or suggesting culture-improving actions, I'm here to help. Let me know what you'd like to explore or achieve! ",
+        "timestamp": "2025-09-07T23:24:26.654151"
+      }
+    ],
+    "is_active": true
+  },
+  "6fd42166-4c46-47dc-aa1f-24fa1710eb56": {
+    "id": "6fd42166-4c46-47dc-aa1f-24fa1710eb56",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-07T23:46:12.784142",
+    "updated_at": "2025-09-07T23:46:16.191861",
+    "messages": [
+      {
+        "id": "76ed577b-e535-4256-9e0f-597f0d37f27c",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-07T23:46:12.828622"
+      },
+      {
+        "id": "1b69219c-c75a-421a-99be-cbf38153c402",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your culture intelligence efforts today? If you have employee feedback, survey results, or any culture data to analyze, just let me know. I'm here to help you interpret the data, generate actionable insights, and recommend next steps to strengthen your company culture. What would you like to focus on? ",
+        "timestamp": "2025-09-07T23:46:16.191664"
+      }
+    ],
+    "is_active": true
+  },
+  "de52f6e1-3115-4ffc-b7e7-427ab127cc7c": {
+    "id": "de52f6e1-3115-4ffc-b7e7-427ab127cc7c",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T00:10:47.133969",
+    "updated_at": "2025-09-08T00:10:50.102276",
+    "messages": [
+      {
+        "id": "5be9cc7e-e4db-4015-b6fd-d63b8f179943",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T00:10:47.233864"
+      },
+      {
+        "id": "66218b40-d852-4d30-9638-cef7ed014419",
+        "role": "assistant",
+        "content": "Hello! As a culture intelligence assistant, I'm here to help you analyze culture data, interpret feedback, and generate actionable insights to strengthen your organization's culture. How can I assist you today? Are you looking to review recent survey feedback, uncover engagement trends, or need recommendations for a particular team or culture challenge? Let me know what you're focused on! ",
+        "timestamp": "2025-09-08T00:10:50.102068"
+      }
+    ],
+    "is_active": true
+  },
+  "66da715b-dd5c-4015-910e-d38d2fbf4140": {
+    "id": "66da715b-dd5c-4015-910e-d38d2fbf4140",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T02:59:32.864762",
+    "updated_at": "2025-09-08T02:59:35.393819",
+    "messages": [
+      {
+        "id": "bbdcba85-72ee-4383-9847-dc263f395f7f",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T02:59:32.937130"
+      },
+      {
+        "id": "613a8c4f-cf0f-4622-a37f-6b754a918025",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture data or insights today? If you have recent survey results, feedback, or specific culture metrics you'd like to discuss or analyze, just let me know. I'm here to help you turn your company's culture data into actionable insights! ",
+        "timestamp": "2025-09-08T02:59:35.393759"
+      }
+    ],
+    "is_active": true
+  },
+  "0f318b75-6895-4445-9750-beec8dff13ca": {
+    "id": "0f318b75-6895-4445-9750-beec8dff13ca",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T03:02:54.949467",
+    "updated_at": "2025-09-08T03:02:57.445987",
+    "messages": [
+      {
+        "id": "14e50d4f-0d9c-4a41-b23f-4ba0cc3c5179",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T03:02:55.027162"
+      },
+      {
+        "id": "d1f08621-2fdc-4a10-b845-ba23b4deab6e",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your company's culture intelligence today? Are you looking to analyze survey data, interpret cultural metrics, identify trends, or need recommendations for improving your workplace culture? Let me know how I can help! ",
+        "timestamp": "2025-09-08T03:02:57.445152"
+      }
+    ],
+    "is_active": true
+  },
+  "5a6225c7-e494-4886-b179-aef69d6ca170": {
+    "id": "5a6225c7-e494-4886-b179-aef69d6ca170",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T03:53:24.247487",
+    "updated_at": "2025-09-08T03:53:26.465765",
+    "messages": [
+      {
+        "id": "f2ac3b21-cdff-4d92-bf29-7e6a0aef51bf",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T03:53:24.296211"
+      },
+      {
+        "id": "0f455f58-383a-42d4-8c0e-3622617e5d04",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Whether you're looking to analyze survey data, understand cultural trends, or identify actionable steps to enhance your organizational culture, I'm here to help. What's on your mind? ",
+        "timestamp": "2025-09-08T03:53:26.465693"
+      }
+    ],
+    "is_active": true
+  },
+  "c9515fd2-c06b-46cb-84b0-fed5d40f52ab": {
+    "id": "c9515fd2-c06b-46cb-84b0-fed5d40f52ab",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T04:17:56.740519",
+    "updated_at": "2025-09-08T04:17:58.965198",
+    "messages": [
+      {
+        "id": "e15c4966-09c8-49cf-9d7c-ac0a3114afd9",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T04:17:56.787169"
+      },
+      {
+        "id": "a7ae3083-a03d-49f7-841f-6f2755d346e3",
+        "role": "assistant",
+        "content": "Hello! How can I assist you today in analyzing or enhancing your company's culture? If you have specific data, survey results, or questions about cultural dynamics, feel free to share them\u2014I'm here to provide actionable insights and recommendations. ",
+        "timestamp": "2025-09-08T04:17:58.965144"
+      }
+    ],
+    "is_active": true
+  },
+  "ca155dfd-885d-4ff3-863e-3c3084eed6bc": {
+    "id": "ca155dfd-885d-4ff3-863e-3c3084eed6bc",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T04:25:13.380824",
+    "updated_at": "2025-09-08T04:25:15.507492",
+    "messages": [
+      {
+        "id": "bcd9f89d-2dd1-44cc-af44-c56e0acd309f",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T04:25:13.437255"
+      },
+      {
+        "id": "1d5086cf-cac9-4178-a075-d38b411bdcd9",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with culture intelligence today? Are you looking to analyze recent feedback, review survey data, or explore specific insights or actions to enhance your organization's culture? Let me know how I can help! ",
+        "timestamp": "2025-09-08T04:25:15.507409"
+      }
+    ],
+    "is_active": true
+  },
+  "a5898802-c36c-40d3-8bfd-c22894ad1352": {
+    "id": "a5898802-c36c-40d3-8bfd-c22894ad1352",
+    "title": "Culture Intelligence Support Chat",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-08T04:26:32.817764",
+    "updated_at": "2025-09-08T05:31:11.821607",
+    "messages": [
+      {
+        "id": "d8056ae4-c2e0-4906-9de9-687654c47df8",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-08T05:16:49.497667"
+      },
+      {
+        "id": "c7fdf0ad-6542-4bcb-a0b1-c39194b1aca3",
+        "role": "assistant",
+        "content": "Hello! I'm here and ready to help you analyze and optimize culture data. How can I support your culture intelligence work today? If you have survey results, engagement metrics, or specific culture questions, just let me know. ",
+        "timestamp": "2025-09-08T05:16:52.701712"
+      },
+      {
+        "id": "a9313c8d-6fb1-448c-984c-c8fdb8d120ad",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-09-08T05:31:07.040783"
+      },
+      {
+        "id": "c0e86b43-f557-473b-9afe-026b7bfd202c",
+        "role": "assistant",
+        "content": "Doing well \u2014 thanks for checking in! I'm ready to help with any culture work you have. Would you like to: - Analyze survey results or engagement metrics (paste numbers or a CSV) - Draft communications or manager talking points - Identify top culture risks from recent feedback - Build an action plan with prioritized interventions - Run a quick pulse survey or question set Tell me which one (or describe your situation) and I'll get started. ",
+        "timestamp": "2025-09-08T05:31:11.821563"
+      }
+    ],
+    "is_active": true
+  },
+  "169cc56c-3b39-453d-bc96-e818a5e85882": {
+    "id": "169cc56c-3b39-453d-bc96-e818a5e85882",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T04:31:02.277998",
+    "updated_at": "2025-09-08T04:31:02.491159",
+    "messages": [
+      {
+        "id": "5cbcf220-4d19-4514-a443-07a95e7d61aa",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T04:31:02.333260"
+      },
+      {
+        "id": "d7184eb7-9e41-4bb5-91ca-4b758cd12b5c",
+        "role": "assistant",
+        "content": "I apologize, but I encountered an error while processing your request. Please try again. Error: Error code: 400 - {'error': {'message': \"Hosted tool 'web_search_preview' is not supported with gpt-4.\", 'type': 'invalid_request_error', 'param': 'tools', 'code': None}}",
+        "timestamp": "2025-09-08T04:31:02.491133"
+      }
+    ],
+    "is_active": true
+  },
+  "71dafe7e-1e7c-4d95-9a6a-d306bc17a09f": {
+    "id": "71dafe7e-1e7c-4d95-9a6a-d306bc17a09f",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T04:38:39.351920",
+    "updated_at": "2025-09-08T04:38:41.747798",
+    "messages": [
+      {
+        "id": "2e98e833-5032-4422-8a8e-67a7e0cd5a38",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T04:38:39.390764"
+      },
+      {
+        "id": "7ba1acab-abf3-412b-8376-6a235cc5b5ea",
+        "role": "assistant",
+        "content": "Hello! How can I assist you today in analyzing or enhancing your company culture? If you have any culture data to review, need insights, or are looking for recommendations, just let me know. ",
+        "timestamp": "2025-09-08T04:38:41.747759"
+      }
+    ],
+    "is_active": true
+  },
+  "cdab5732-017d-471a-b162-7786ae952bc1": {
+    "id": "cdab5732-017d-471a-b162-7786ae952bc1",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T04:57:52.396284",
+    "updated_at": "2025-09-08T04:57:54.798739",
+    "messages": [
+      {
+        "id": "c036fcd5-4cae-44cd-9e41-e797da02210c",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T04:57:52.459875"
+      },
+      {
+        "id": "10eaed43-6831-4694-ab75-196dc18367b3",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you today with your culture intelligence goals? Are you looking to analyze recent survey data, interpret culture metrics, or get recommendations for strengthening your organizational culture? Let me know what you'd like to focus on! ",
+        "timestamp": "2025-09-08T04:57:54.798634"
+      }
+    ],
+    "is_active": true
+  },
+  "2e070157-037a-4d8a-a407-02bf6f3cc052": {
+    "id": "2e070157-037a-4d8a-a407-02bf6f3cc052",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:09:42.321349",
+    "updated_at": "2025-09-08T05:09:44.681409",
+    "messages": [
+      {
+        "id": "26bc8008-0f18-4804-9b44-e0094264fada",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:09:42.386317"
+      },
+      {
+        "id": "fea0f439-86f3-4413-8205-9fc3957c3200",
+        "role": "assistant",
+        "content": "Hello! How can I assist you with your culture intelligence needs today? Are you looking for help analyzing culture data, interpreting survey results, or generating insights and action recommendations? Let me know what you're focusing on, and I'll tailor my support to your goals. ",
+        "timestamp": "2025-09-08T05:09:44.681369"
+      }
+    ],
+    "is_active": true
+  },
+  "69c2efe4-1152-4c9b-a346-e4cba7ab5af1": {
+    "id": "69c2efe4-1152-4c9b-a346-e4cba7ab5af1",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:12:18.827083",
+    "updated_at": "2025-09-08T05:12:21.158202",
+    "messages": [
+      {
+        "id": "79e339cf-d12f-4d44-be9c-e01c3b95e613",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:12:18.875156"
+      },
+      {
+        "id": "ee94f8cf-f804-48b2-931e-cab632db5db1",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b How can I assist you with your organizational culture intelligence today? Are you looking to analyze some recent survey data, interpret culture metrics, or generate actionable insights? Let me know what you'd like to focus on! ",
+        "timestamp": "2025-09-08T05:12:21.158020"
+      }
+    ],
+    "is_active": true
+  },
+  "43489735-c652-4505-a229-c9027c26257a": {
+    "id": "43489735-c652-4505-a229-c9027c26257a",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:16:36.057614",
+    "updated_at": "2025-09-08T05:16:38.561383",
+    "messages": [
+      {
+        "id": "3f5235af-21e1-469f-93c0-d1e1cb39892b",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:16:36.128024"
+      },
+      {
+        "id": "a0eed07f-185f-4a34-b059-6469efeec4ae",
+        "role": "assistant",
+        "content": "Hello! \ud83d\udc4b As the Culture Intelligence Assistant, I'm here to help you analyze, interpret, and act on your company's culture data. How can I assist you today? Are you looking for insights on recent survey results, team dynamics, or ways to improve your organizational culture? Let me know how you'd like to get started! ",
+        "timestamp": "2025-09-08T05:16:38.561286"
+      }
+    ],
+    "is_active": true
+  },
+  "27f33065-724a-4d59-9762-235b93f65c48": {
+    "id": "27f33065-724a-4d59-9762-235b93f65c48",
+    "title": "Test Integration",
+    "user_id": null,
+    "created_at": "2025-09-08T05:30:44.210034",
+    "updated_at": "2025-09-08T05:30:54.467918",
+    "messages": [
+      {
+        "id": "d76da810-bc1d-4b05-8fa0-58daf693daa3",
+        "role": "user",
+        "content": "hello",
+        "timestamp": "2025-09-08T05:30:44.273900"
+      },
+      {
+        "id": "fd98defd-c509-4771-a479-5bb350bb0b63",
+        "role": "assistant",
+        "content": "Hi \u2014 great to meet you. I'm Enculture's Culture Intelligence Assistant. How can I help today? Here are some common ways I can support you (pick one or tell me something else): - Analyze survey results (eNPS, engagement, pulse) \u2014 I can identify trends, strengths, and risks. - Interpret open-text feedback \u2014 thematic coding, sentiment, sample quotes. - Build an action plan \u2014 prioritized interventions, owners, and metrics. - Manager coaching templates \u2014 one-on-one guides, conversation scripts. - Benchmarking & best practices \u2014 latest research and trends (I'll look these up). If you want analysis, please share: - The dataset or key metrics (CSV, Excel, or pasted summary). - Survey date range and sample size. - Any specific concerns or goals (e.g., reduce attrition, improve trust). Note: don't include personally identifiable information \u2014 anonymized or aggregated data works best. What would you like to start with? ",
+        "timestamp": "2025-09-08T05:30:54.467850"
+      }
+    ],
+    "is_active": true
+  },
+  "b19a7cf8-9183-45c5-80ed-5c81685d9abb": {
+    "id": "b19a7cf8-9183-45c5-80ed-5c81685d9abb",
+    "title": "Culture Intelligence Assistant Introduction",
+    "user_id": "michael_chen",
+    "created_at": "2025-09-08T05:38:11.304500",
+    "updated_at": "2025-10-06T01:34:17.985236",
+    "messages": [
+      {
+        "id": "05fbc8cc-9e6b-46fa-b5aa-e0c165746352",
+        "role": "user",
+        "content": "hey hows it going",
+        "timestamp": "2025-09-08T05:40:05.441958"
+      },
+      {
+        "id": "a3748eea-8812-4566-a5be-ec5b15b5c308",
+        "role": "assistant",
+        "content": "Hey \u2014 I'm doing well, thanks! I'm your culture intelligence assistant. How can I help you today? Here are a few things I can do \u2014 pick one or tell me your own need: - Analyze survey or NPS results and highlight top strengths and risks - Diagnose engagement issues and root causes from employee feedback - Build a 30/60/90 action plan for improving retention or morale - Create manager coaching prompts and one-on-one templates - Draft a short pulse survey or meeting agenda to surface quick feedback If you want, tell me what you're working on (team size, recent signals, or paste a snippet of feedback) and I'll get started. ",
+        "timestamp": "2025-09-08T05:40:13.238170"
+      },
+      {
+        "id": "5d9cf42c-0526-460c-a2de-3fc3b409b3fb",
+        "role": "user",
+        "content": "hi",
+        "timestamp": "2025-09-26T01:06:58.032590"
+      },
+      {
+        "id": "036a8ca3-b941-422e-b999-8ae9483eb885",
+        "role": "assistant",
+        "content": "Hey \u2014 hi! Glad you're here. What would you like help with today? Quick options I can do right now (pick one or tell me your own need): - Analyze survey or NPS results and highlight strengths/risks - Diagnose engagement issues from employee feedback - Build a 30/60/90 action plan to improve retention or morale - Create manager coaching prompts and 1:1 templates - Draft a short pulse survey or meeting agenda to surface quick feedback If you want me to analyze something, tell me: - Your role (CEO / HR / manager / IC) - Team size and remote/on-site mix - Timeframe (when the data is from) - Paste a snippet of results or comments (you can anonymize or I can help anonymize) Example paste format that works well: - Team: Product, 24 people; Remote 70% - Engagement score: 71/100; eNPS: +4 - Top themes from comments: recognition, workload, career growth (paste 5\u201310 sample comments) What would you like to start with? ",
+        "timestamp": "2025-09-26T01:07:08.698751"
+      },
+      {
+        "id": "a51ad08c-ed0e-4116-8cb9-ccd8c395b19f",
+        "role": "user",
+        "content": "hows it going",
+        "timestamp": "2025-10-06T01:34:09.163778"
+      },
+      {
+        "id": "e7aa3b98-7b1d-4309-84cb-37f98c46a18e",
+        "role": "assistant",
+        "content": "Doing well \u2014 thanks for asking! I'm your culture intelligence assistant. How can I help today? Quick options (pick one or tell me your own need): - Analyze survey/eNPS results and highlight strengths & risks - Diagnose engagement issues from employee comments - Build a 30/60/90 action plan to improve retention or morale - Create manager coaching prompts & 1:1 templates - Draft a short pulse survey or an agenda to surface feedback - Just want to chat about culture best practices If you want analysis, tell me: - Your role (CEO / HR / Manager / IC) - Team size and remote/on-site mix - Timeframe (when the data is from) - Paste a few sample metrics or 5\u201310 anonymized comments (I can help anonymize) What would you like to do first? ",
+        "timestamp": "2025-10-06T01:34:17.985178"
+      }
+    ],
+    "is_active": true
+  },
+  "d122a6d3-bc81-4530-a661-fe35a5a05ee8": {
+    "id": "d122a6d3-bc81-4530-a661-fe35a5a05ee8",
+    "title": "Enculture AI Assistant Introduction",
+    "user_id": "sarah_johnson",
+    "created_at": "2025-09-08T05:52:47.910495",
+    "updated_at": "2025-09-08T05:53:08.209808",
+    "messages": [
+      {
+        "id": "086cc279-50dc-436b-81f3-280a021dc8ef",
+        "role": "user",
+        "content": "hey who are you",
+        "timestamp": "2025-09-08T05:52:56.665984"
+      },
+      {
+        "id": "ada3a5d8-d508-407c-b4c8-9b8ba04719d5",
+        "role": "assistant",
+        "content": "Hi \u2014 I'm Enculture's AI Culture Intelligence Assistant. I'm an AI that helps teams interpret employee feedback and culture metrics, generate actionable insights, and recommend concrete steps to improve engagement and team health. I can: - Analyze survey responses, NPS/engagement scores, and open-text feedback - Summarize strengths and risks in your culture - Suggest prioritized actions for CEOs, HR admins, managers, or individual contributors - Pull in current best practices and research when needed How would you like me to help right now? (Share a survey summary, a few comments, a role you're supporting, or ask a specific question.) ",
+        "timestamp": "2025-09-08T05:53:04.827416"
+      }
+    ],
+    "is_active": true
+  },
+  "c9597ca2-7475-4bd6-a494-696f0fd8eff3": {
+    "id": "c9597ca2-7475-4bd6-a494-696f0fd8eff3",
+    "title": "Enculture AI Assistant Introduction",
+    "user_id": "sarah_johnson",
+    "created_at": "2025-09-08T05:53:18.691286",
+    "updated_at": "2025-09-08T05:54:42.484623",
+    "messages": [
+      {
+        "id": "56f12a97-4968-45eb-b781-05a64c6509ce",
+        "role": "user",
+        "content": "hey who are you?",
+        "timestamp": "2025-09-08T05:53:24.882062"
+      },
+      {
+        "id": "21ce67cb-196b-4908-a8f6-413ff57986f4",
+        "role": "assistant",
+        "content": "Hi \u2014 I'm Enculture's AI culture intelligence assistant. I'm an AI (not a person) designed to help teams understand and improve workplace culture. I can: - Analyze employee feedback, survey results, and culture metrics - Turn data into clear insights about engagement, inclusion, manager effectiveness, turnover risk, etc. - Recommend concrete actions (manager coaching, recognition programs, communication plans, pulse surveys, OKRs) and prioritize them by impact and effort - Tailor advice for CEOs, HR admins, managers, or individual contributors - Reference current research and best practices when needed (I'll search the web for up\u2011to\u2011date trends) I don't have access to your internal systems unless you share data here. How can I help right now \u2014 e.g., upload a survey summary, describe a culture problem, or ask for a recommended next step? ",
+        "timestamp": "2025-09-08T05:53:32.828065"
+      },
+      {
+        "id": "2b512f74-80b0-4229-9f81-ca81b27a545e",
+        "role": "user",
+        "content": "summarize the top culture trends of 2025 and cite your sources",
+        "timestamp": "2025-09-08T05:53:52.943401"
+      },
+      {
+        "id": "25f6db77-0a86-45b3-bd99-e985fdb0fd41",
+        "role": "assistant",
+        "content": "Helpful summary \u2014 here are the top workplace\u2011culture trends observed in 2025 (so far, through Sept 8, 2025), with short explanations and sources you can follow up on. If you want this prioritized for a CEO, HR leader, or manager (or by industry), I can tailor next steps. 1) Rapid, widespread AI adoption \u2014 and \"shadow AI\" - Generative and agentic AI are being embedded into daily work (often used by employees before formal policy), shifting tasks, productivity expectations, and governance needs. Organizations are racing to set guardrails so AI augments rather than undermines trust. ([www2.deloitte.com](https://www2.deloitte.com/us/en/insights/focus/human-capital-trends.html?utm_source=openai), [investopedia.com](https://www.investopedia.com/are-ai-bosses-the-future-11795779?utm_source=openai)) 2) Reimagining the manager as coach / \"people developer\" - Firms are pushing managers away from administrative work toward coaching, development, and psychological\u2011safety responsibilities \u2014 especially because AI can offload transactional tasks but managers still need to develop human capabilities. ([www2.deloitte.com](https://www2.deloitte.com/us/en/insights/focus/human-capital-trends.html?utm_source=openai), [gartner.com](https://www.gartner.com/en/human-resources/topics/future-of-work?utm_source=openai)) 3) Hybrid work normalizes \u2014 focus on belonging and microcultures - Hybrid and remote models remain dominant; companies are investing in building genuine belonging and team\u2011level (microculture) practices rather than one\u2011size\u2011fits\u2011all office policies. Failure to create connection continues to drive turnover risk. ([weforum.org](https://www.weforum.org/stories/2025/01/attitudes-to-work-changing-intelligent-age/?utm_source=openai), [go.circles.com](https://go.circles.com/2025-us-q1and2-trends?utm_source=openai)) 4) Employee well\u2011being expands (mental, financial, and clinical benefits) - Employers broaden well\u2011being beyond perks to mental\u2011health supports, financial wellness, and even new clinical benefit choices; benefit design and wellbeing are being aligned to retention and productivity metrics. ([shrm.org](https://www.shrm.org/about/press-room/flexible-work-benefits-slightly-decline--while-healthcare-and-re?utm_source=openai), [forbes.com](https://www.forbes.com/sites/allbusiness/2025/01/08/workplace-trends-for-2025-attracting-workers-employee-well-being-and-more/?utm_source=openai)) 5) Skills\u2011based talent strategies and continuous upskilling - Organizations increasingly hire, promote, and measure by skills (not just job titles). AI\u2011driven, personalized learning and internal mobility programs are primary levers to close experience gaps. ([mckinsey.com](https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/hr-monitor-2025?utm_source=openai), [workai.com](https://workai.com/insights/ai-reshaping-hybrid-workplace-trends-for-2025/?utm_source=openai)) 6) DEI shifts toward inclusion, belonging, and accountable processes - With political scrutiny on some DEI practices, many companies are reframing efforts to emphasize inclusive processes, measurable equity outcomes, and psychological safety rather than only demographic targets. ([advisory.com](https://www.advisory.com/daily-briefing/2025/02/11/9-trends-ec?utm_source=openai), [weforum.org](https://www.weforum.org/stories/2025/01/attitudes-to-work-changing-intelligent-age/?utm_source=openai)) 7) Experimentation with work models and productivity norms (including shorter\u2011week pilots) - More organizations are experimenting with compressed schedules, asynchronous norms, and clearer output\u2011based expectations to balance flexibility, focus, and collaboration. ([ft.com](https://www.ft.com/content/3595f121-24da-41ff-b810-29edb9228aa9?utm_source=openai), [forbes.com](https://www.forbes.com/sites/esade/2024/12/30/workplace-in-2025-shaping-the-future-of-talent-technology-and-culture/?utm_source=openai)) 8) People analytics, privacy and ethical governance - As culture measurement becomes more data\u2011driven (pulse surveys, behavioral analytics, AI insights), leaders face tradeoffs between actionable insight and employee privacy/ethics; governance frameworks are rising on the agenda. ([gartner.com](https://www.gartner.com/en/human-resources/topics/future-of-work?utm_source=openai), [mckinsey.com](https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/hr-monitor-2025?utm_source=openai)) If you'd like, I can: - Turn this into an executive one\u2011pager (implications + 3 recommended actions), or - Map these trends to specific culture KPIs we should track (engagement, manager effectiveness, retention risk, skills coverage), or - Show industry\u2011specific examples and policies (tech, healthcare, manufacturing). Which would be most useful? ",
+        "timestamp": "2025-09-08T05:54:42.484335"
+      }
+    ],
+    "is_active": true
+  }
+}
