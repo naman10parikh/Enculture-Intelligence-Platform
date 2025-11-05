@@ -145,7 +145,8 @@ async def list_surveys():
                 "created_by": survey.created_by,
                 "created_at": survey.created_at.isoformat(),
                 "question_count": len(survey.questions),
-                "response_count": len(responses)
+                "response_count": len(responses),
+                "target_audience": survey.configuration.target_audience if survey.configuration else []
             })
         
         return {"surveys": surveys_list}

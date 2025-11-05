@@ -911,5 +911,188 @@
     "created_by": "Sarah Johnson",
     "created_at": "2025-09-07 23:00:56.283005",
     "published_at": "2025-09-07 23:00:56.314622"
+  },
+  "survey_1762310430.512321": {
+    "id": "survey_1762310430.512321",
+    "name": "Employee Wellbeing Pulse: Work-Life Health & Support",
+    "context": "Employee wellbeing is a critical driver of engagement, retention, and performance. This survey focuses on mental, physical, and social wellbeing at work\u2014including workload, manager support, access to resources, and work-life balance. Recent workforce trends show rising reports of burnout and a stronger link between wellbeing and productivity.\n\nWe will measure personal wellbeing signals (stress, exhaustion), organizational supports (benefits, manager behavior), and environmental factors (hours, flexibility) to create a baseline wellbeing score and identify high-risk groups. Questions are designed to be short, actionable, and segmented for analysis.\n\nInsights from this pulse will be used to prioritize interventions, allocate wellbeing resources, inform manager training, and track progress over time. Responses are anonymous and will be reported by segments (department, experience, work arrangement, team size) so leaders can make targeted, measurable changes.",
+    "desired_outcomes": [
+      "Establish a baseline Wellbeing Index to quantify current employee wellbeing and segment by Department, Experience Level, Work Arrangement, and Team Size",
+      "Identify and rank the top three drivers of poor wellbeing (e.g., workload, manager support, lack of resources) for targeted interventions",
+      "Increase perceived manager support and access to wellbeing resources by measurable improvement in scale scores within 12 months",
+      "Reduce the proportion of employees reporting frequent burnout or emotional exhaustion by 15% within 12 months through prioritized programs"
+    ],
+    "classifiers": [
+      {
+        "name": "Department",
+        "values": [
+          "Engineering",
+          "Product",
+          "Marketing",
+          "Sales",
+          "HR",
+          "Operations"
+        ]
+      },
+      {
+        "name": "Experience Level",
+        "values": [
+          "0-1 years",
+          "2-5 years",
+          "6-10 years",
+          "11+ years"
+        ]
+      },
+      {
+        "name": "Work Arrangement",
+        "values": [
+          "Remote",
+          "Hybrid",
+          "In-Office"
+        ]
+      },
+      {
+        "name": "Team Size",
+        "values": [
+          "1-5 people",
+          "6-15 people",
+          "16-50 people",
+          "51+ people"
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "name": "Wellbeing Index",
+        "description": "Composite measure of employee wellbeing derived from perceptions of workload, manager support, resource access, and overall organizational commitment to wellbeing. Higher scores indicate stronger overall wellbeing.",
+        "formula": "AVG(q1,q3,q4,q7)",
+        "selectedClassifiers": [
+          "Department"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "question": "I have a manageable workload that allows me to maintain a healthy work-life balance.",
+        "response_type": "scale",
+        "options": [
+          "1 - Strongly Disagree",
+          "2",
+          "3",
+          "4",
+          "5 - Strongly Agree"
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "q2",
+        "question": "In the past month, how often have you felt burned out or emotionally exhausted at work?",
+        "response_type": "multiple_choice",
+        "options": [
+          "Never",
+          "Rarely (once or twice)",
+          "Sometimes (several times)",
+          "Often (weekly)",
+          "Always (daily)"
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "q3",
+        "question": "My manager shows understanding and takes appropriate action when I raise concerns about my wellbeing.",
+        "response_type": "scale",
+        "options": [
+          "1 - Strongly Disagree",
+          "2",
+          "3",
+          "4",
+          "5 - Strongly Agree"
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "q4",
+        "question": "I can easily access the mental health and wellbeing resources I need (e.g., counseling, EAP, time off).",
+        "response_type": "scale",
+        "options": [
+          "1 - Strongly Disagree",
+          "2",
+          "3",
+          "4",
+          "5 - Strongly Agree"
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "q5",
+        "question": "Which single factor most negatively affects your wellbeing at work today?",
+        "response_type": "multiple_choice",
+        "options": [
+          "Workload / long hours",
+          "Unclear expectations or priorities",
+          "Lack of manager or team support",
+          "Insufficient pay or benefits",
+          "Poor physical or remote work environment",
+          "Lack of schedule flexibility"
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "q6",
+        "question": "Please describe one recent situation where work affected your wellbeing and suggest what could have helped.",
+        "response_type": "text",
+        "options": [],
+        "mandatory": false,
+        "metrics": [],
+        "classifiers": {}
+      },
+      {
+        "id": "q7",
+        "question": "I believe the company takes employee wellbeing seriously and acts on feedback.",
+        "response_type": "scale",
+        "options": [
+          "1 - Strongly Disagree",
+          "2",
+          "3",
+          "4",
+          "5 - Strongly Agree"
+        ],
+        "mandatory": true,
+        "metrics": [],
+        "classifiers": {}
+      }
+    ],
+    "configuration": {
+      "background_image": null,
+      "languages": [
+        "English"
+      ],
+      "target_audience": [
+        "emily_rodriguez"
+      ],
+      "release_date": null,
+      "deadline": null,
+      "anonymous": true
+    },
+    "branding": {
+      "primary_color": "#8B5CF6",
+      "background_color": "#FAFBFF",
+      "font_family": "Inter"
+    },
+    "status": "published",
+    "created_by": "Michael Chen",
+    "created_at": "2025-11-04 18:40:30.512347",
+    "published_at": "2025-11-04 18:40:30.525446"
   }
 }

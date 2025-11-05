@@ -365,6 +365,37 @@ export class ChatService {
   }
 
   /**
+   * AI-powered section detection (intelligently determines which sections need updates)
+   * @param {string} userRequest - User's natural language request
+   * @param {Object} currentData - Current survey state
+   * @returns {Promise<Array>} Array of section types that need to be updated
+   */
+  async aiDetectSections(userRequest, currentData) {
+    try {
+      const response = await fetch(`${this.baseUrl}/ai-detect-sections`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_request: userRequest,
+          current_data: currentData
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.detected_sections || [];
+    } catch (error) {
+      console.error('Error detecting sections:', error);
+      return []; // Return empty array on error
+    }
+  }
+
+  /**
    * Edit a specific survey section using AI
    * @param {string} sectionType - Type of section to edit
    * @param {Object} currentData - Current survey state

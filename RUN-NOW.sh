@@ -14,8 +14,7 @@ sleep 3
 # START BACKEND
 echo "🚀 Starting backend..."
 cd backend
-source venv/bin/activate
-python main.py &
+./venv/bin/python main.py &
 cd ..
 
 # Wait for backend
