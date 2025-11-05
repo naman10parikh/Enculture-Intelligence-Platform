@@ -3,49 +3,17 @@
 > vite
 
 
-  VITE v4.5.14  ready in 292 ms
+  VITE v4.5.14  ready in 202 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: use --host to expose
-10:32:07 PM [vite] hmr update /src/App.jsx
-10:32:18 PM [vite] hmr update /src/App.jsx
-10:32:52 PM [vite] hmr update /src/components/Insights.jsx
-10:33:17 PM [vite] hmr update /src/components/Insights.jsx
-10:33:30 PM [vite] hmr update /src/components/Insights.jsx
-10:33:38 PM [vite] hmr update /src/components/Insights.jsx
-10:33:43 PM [vite] hmr update /src/components/Insights.jsx
-10:33:48 PM [vite] hmr update /src/components/Insights.jsx
-10:34:01 PM [vite] hmr update /src/components/Insights.jsx
-10:34:45 PM [vite] hmr update /src/components/Insights.jsx
-10:35:06 PM [vite] hmr update /src/components/Actions.jsx
-10:35:19 PM [vite] hmr update /src/components/Actions.jsx
-10:35:26 PM [vite] hmr update /src/components/Actions.jsx
-10:35:34 PM [vite] hmr update /src/components/Actions.jsx
-10:35:51 PM [vite] hmr update /src/components/Actions.jsx
-10:36:21 PM [vite] hmr update /src/context/PersonaContext.jsx, /src/components/Insights.jsx, /src/components/Actions.jsx, /src/components/PersonaToggle.jsx
-10:36:21 PM [vite] hmr update /src/components/Insights.jsx, /src/components/Actions.jsx
-10:36:21 PM [vite] hmr update /src/components/PersonaToggle.jsx
-10:36:21 PM [vite] hmr update /src/components/Insights.jsx, /src/components/Actions.jsx
-10:36:21 PM [vite] hmr update /src/context/PersonaContext.jsx
-10:36:21 PM [vite] hmr update /src/App.jsx
-10:36:21 PM [vite] hmr update /src/components/Insights.jsx
-10:36:21 PM [vite] hmr update /src/components/Actions.jsx
-10:36:21 PM [vite] hmr invalidate /src/context/PersonaContext.jsx Could not Fast Refresh ("default" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
-10:36:21 PM [vite] hmr update /src/App.jsx, /src/components/Insights.jsx, /src/components/Actions.jsx, /src/components/PersonaToggle.jsx
-10:36:21 PM [vite] hmr invalidate /src/context/PersonaContext.jsx Could not Fast Refresh ("default" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
-10:36:21 PM [vite] hmr update /src/App.jsx, /src/components/Insights.jsx, /src/components/Actions.jsx, /src/components/PersonaToggle.jsx
-10:36:22 PM [vite] hmr invalidate /src/context/PersonaContext.jsx Could not Fast Refresh ("default" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
-10:36:22 PM [vite] hmr update /src/App.jsx, /src/components/Insights.jsx, /src/components/Actions.jsx, /src/components/PersonaToggle.jsx
-10:36:23 PM [vite] hmr invalidate /src/context/PersonaContext.jsx Could not Fast Refresh ("default" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
-10:36:23 PM [vite] hmr update /src/App.jsx, /src/components/Insights.jsx, /src/components/Actions.jsx, /src/components/PersonaToggle.jsx
-10:36:45 PM [vite] hmr update /src/components/Actions.jsx
-10:36:46 PM [vite] hmr update /src/components/Actions.jsx
-10:37:14 PM [vite] hmr update /src/components/Insights.jsx
-10:38:13 PM [vite] hmr update /src/components/Actions.jsx
-10:38:13 PM [vite] hmr update /src/components/Insights.jsx
-11:22:05 PM [vite] page reload dist/index.html
-11:50:52 PM [vite] hmr update /src/components/AIChat.jsx
-11:52:47 PM [vite] page reload dist/index.html
-1:05:19 AM [vite] hmr update /src/components/AIChat.jsx
-1:05:55 AM [vite] hmr update /src/components/AIChat.jsx
-1:05:55 AM [vite] hmr update /src/components/AIChat.jsx
+6:30:14 PM [vite] hmr update /src/components/AIChat.jsx
+6:30:28 PM [vite] hmr update /src/components/AIChat.jsx
+6:30:51 PM [vite] hmr update /src/components/AIChat.jsx
+6:31:24 PM [vite] hmr update /src/components/AIChat.jsx
+6:33:04 PM [vite] hmr update /src/components/AIChat.jsx
+6:33:58 PM [vite] hmr update /src/components/AIChat.jsx
+6:35:45 PM [vite] hmr update /src/components/AIChat.jsx
+6:44:44 PM [vite] hmr update /src/components/AIChat.jsx
+6:47:37 PM [vite] hmr update /src/components/AIChat.jsx
+6:48:34 PM [vite] hmr update /src/components/AIChat.jsx

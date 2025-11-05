@@ -9,6 +9,7 @@ import { chatThreadsApi } from '../services/chatThreadsApi'
 import websocketService from '../services/websocketService'
 import surveyService from '../services/surveyApi'
 import { useUser } from '../context/UserContext'
+import { usePersona } from '../context/PersonaContext'
 
 const chatThreads = [
   { id: 1, name: 'General Chat', active: true },
@@ -51,6 +52,9 @@ function AIChat() {
   
   // Get user context
   const { currentUser, currentUserId, demoUsers, switchUser } = useUser()
+  
+  // Get persona context for persona-aware survey notifications
+  const { activePersona, switchPersona } = usePersona()
   
   // Check if current user can create surveys
   const canCreateSurveys = currentUser?.canCreateSurveys || false
@@ -394,6 +398,91 @@ function AIChat() {
     }))
   }
 
+  // Complete survey submission with notifications
+  const handleCompleteSurvey = async () => {
+    if (!activeSurveyData || !currentUser) {
+      addNotification('Unable to submit survey', 'error');
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      // Validate required questions
+      const mandatoryQuestions = activeSurveyData.questions.filter(q => q.mandatory);
+      const unansweredRequired = mandatoryQuestions.filter(
+        q => !surveyResponses[q.id] || surveyResponses[q.id] === ''
+      );
+
+      if (unansweredRequired.length > 0) {
+        addNotification(`Please answer all required questions (${unansweredRequired.length} remaining)`, 'warning');
+        return;
+      }
+
+      // Submit survey response to backend
+      const result = await surveyService.submitSurveyResponse(
+        activeSurveyData.id,
+        currentUser.id,
+        surveyResponses
+      );
+
+      if (result.success) {
+        // Mark survey as completed in localStorage
+        const completedSurveys = JSON.parse(localStorage.getItem('enculture_completedSurveys') || '[]');
+        if (!completedSurveys.includes(activeSurveyData.id)) {
+          completedSurveys.push(activeSurveyData.id);
+          localStorage.setItem('enculture_completedSurveys', JSON.stringify(completedSurveys));
+        }
+
+        // Remove survey thread from recent threads
+        setRecentThreads(prev => prev.filter(t => !t.id.includes(activeSurveyData.id)));
+
+        // Send completion notification to survey creator via WebSocket (if connected)
+        try {
+          const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+          await fetch(`${baseUrl}/api/v1/notifications/survey-completed`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              survey_id: activeSurveyData.id,
+              survey_name: activeSurveyData.name,
+              completed_by: currentUser.id,
+              completed_by_name: currentUser.name,
+              creator_id: activeSurveyData.created_by
+            })
+          });
+        } catch (notifError) {
+          console.error('Failed to send completion notification:', notifError);
+          // Continue anyway - response was submitted
+        }
+
+        // Show success with celebration
+        addNotification('Survey submitted successfully! Thank you for your feedback.', 'success');
+        showCelebration();
+
+        // Add success message to chat
+        setMessages(prev => [...prev, {
+          id: `survey-complete-${Date.now()}`,
+          type: 'ai',
+          content: `🎉 **Survey Completed!**\n\nThank you ${currentUser.name}! Your responses have been submitted successfully.\n\nYour feedback is valuable and will help us improve our workplace culture. The survey creator will be notified of your completion.`,
+          timestamp: new Date()
+        }]);
+
+        // Close survey taking mode after a short delay
+        setTimeout(() => {
+          closeSurveyTaking();
+        }, 2000);
+
+        console.log(`✅ Survey ${activeSurveyData.name} completed by ${currentUser.name}`);
+      }
+    } catch (error) {
+      console.error('Error submitting survey:', error);
+      addNotification('Failed to submit survey. Please try again.', 'error');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   // Survey Assistant AI Chat Function
   const handleSurveyAssistantMessage = async () => {
     if (!surveyAssistantInput.trim() || !activeSurveyData) return
@@ -542,7 +631,7 @@ The user is currently taking this survey and may ask for help with specific ques
       // Find surveys for this user that haven't been completed
       const userSurveys = publishedSurveys.filter(survey => {
         // Check if this user is in the survey's target audience
-        const isTargeted = survey.configuration?.target_audience?.includes(userId) || false
+        const isTargeted = survey.target_audience?.includes(userId) || false
         const notCompleted = !completedSurveys.includes(survey.id)
         console.log(`📋 Survey "${survey.name}": targeted for ${userId}=${isTargeted}, not completed=${notCompleted}`)
         return isTargeted && notCompleted
@@ -551,9 +640,12 @@ The user is currently taking this survey and may ask for help with specific ques
       console.log(`📬 Found ${userSurveys.length} surveys for ${userId}:`, userSurveys.map(s => s.name))
       
       if (userSurveys.length > 0) {
+        let newSurveysCount = 0;
+        
         // Create survey notifications for all pending surveys
         for (const survey of userSurveys) {
-          const surveyThreadId = `survey_${survey.id}_${userId}`
+          // survey.id already starts with "survey_", so no need to add prefix
+          const surveyThreadId = `${survey.id}_${userId}`
           
           console.log(`🔄 Creating notification for survey: ${survey.name} (ID: ${surveyThreadId})`)
         
@@ -570,17 +662,22 @@ The user is currently taking this survey and may ask for help with specific ques
           // Create survey notification thread
           const surveyThread = {
             id: surveyThreadId,
-                  title: `📋 Survey: ${fullSurvey.name}`,
+                  title: `📋 ${fullSurvey.name}`,
             message_count: 2,
             updated_at: new Date().toISOString(),
             isSurveyThread: true,
-                  surveyData: fullSurvey
+                  surveyData: fullSurvey,
+                  isNew: true  // Mark as new
           }
           
-          // Add to recent threads
+          // Add to recent threads at the top
           setRecentThreads(prev => [surveyThread, ...prev])
           
                 console.log(`✅ Created survey notification for ${userId}: ${fullSurvey.name} with ${fullSurvey.questions?.length || 0} questions`)
+                newSurveysCount++;
+                
+                // Show popup notification for this survey
+                addSurveyNotification(fullSurvey);
               }
             } catch (err) {
               console.error(`Error fetching survey details for ${survey.id}:`, err)
@@ -588,6 +685,12 @@ The user is currently taking this survey and may ask for help with specific ques
         } else {
             console.log(`ℹ️  Survey thread already exists for ${userId}: ${survey.name}`)
           }
+        }
+        
+        // Show summary notification if new surveys were added
+        if (newSurveysCount > 0) {
+          const pluralSurvey = newSurveysCount === 1 ? 'survey' : 'surveys';
+          addNotification(`${newSurveysCount} new ${pluralSurvey} available!`, 'success');
         }
       } else {
         console.log(`📭 No pending surveys found for ${userId}`)
@@ -923,10 +1026,29 @@ The user is currently taking this survey and may ask for help with specific ques
       // Removed notification - keeping UX clean
     }
 
+    const handleSurveyCompleted = (data) => {
+      console.log('Survey completion notification received:', data)
+      
+      // Show notification to survey creator
+      addNotification(data.message, 'success')
+      
+      // Add message to chat
+      const completionMessage = {
+        id: `survey-completion-${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        type: 'ai',
+        content: `🎉 **Survey Response Received**\n\n${data.completed_by_name} has completed your survey **"${data.survey_name}"**.\n\nYou can now view their responses in the survey analytics dashboard.`,
+        timestamp: new Date(),
+        sender: 'system'
+      }
+      
+      setMessages(prev => [...prev, completionMessage])
+    }
+
     // Attach event listeners
     websocketService.on('connected', handleWebSocketConnected)
     websocketService.on('disconnected', handleWebSocketDisconnected)
     websocketService.on('survey_notification', handleSurveyNotification)
+    websocketService.on('survey_completed', handleSurveyCompleted)
     websocketService.on('error', handleWebSocketError)
 
     // Cleanup on unmount
@@ -934,6 +1056,7 @@ The user is currently taking this survey and may ask for help with specific ques
       websocketService.off('connected', handleWebSocketConnected)
       websocketService.off('disconnected', handleWebSocketDisconnected)
       websocketService.off('survey_notification', handleSurveyNotification)
+      websocketService.off('survey_completed', handleSurveyCompleted)
       websocketService.off('error', handleWebSocketError)
       websocketService.disconnect()
     }
@@ -954,6 +1077,23 @@ The user is currently taking this survey and may ask for help with specific ques
     // Update the ref for next time
     previousUserRef.current = currentUser?.id;
   }, [currentUser?.id])
+
+  // Effect to handle persona switching and check for survey notifications
+  useEffect(() => {
+    const checkSurveysForPersona = async () => {
+      if (!currentUser?.id || !activePersona) return;
+      
+      console.log(`🎭 Persona changed to: ${activePersona} for user: ${currentUser.name}`);
+      
+      // Check for pending surveys when switching to any persona
+      await checkAndCreateSurveyNotifications(currentUser.id);
+      
+      // Show a brief notification about persona switch
+      addNotification(`Switched to ${activePersona} view`, 'info');
+    };
+    
+    checkSurveysForPersona();
+  }, [activePersona, currentUser?.id])
 
   // Initial load effect removed - now handled in main initialization useEffect above
 
@@ -1332,14 +1472,10 @@ The user is currently taking this survey and may ask for help with specific ques
         // Open canvas
         openCanvasForSurvey('draft', true)
         
-        // If there's a description, generate template (no intermediate message)
+        // If there's a description, generate template (loading handled inside the function)
         if (description && description.length > 5) {
-          // Show loading state briefly, then generate
-          setIsTyping(true)
-          setTimeout(() => {
-            setIsTyping(false)
-            generateSurveyFromAIStreaming(description)
-          }, 800)
+          // Generate immediately - loading state is handled inside generateSurveyFromAIStreaming
+          generateSurveyFromAIStreaming(description)
         } else {
           const aiMessage = {
             id: `ai-${Date.now()}`,
@@ -1388,13 +1524,10 @@ The user is currently taking this survey and may ask for help with specific ques
       // Open canvas - override any existing draft when using /survey command
       openCanvasForSurvey('draft', true)
       
-      // If there's a description, generate template (no intermediate message)
+      // If there's a description, generate template (loading handled inside the function)
       if (description) {
-        setIsTyping(true)
-        setTimeout(() => {
-          setIsTyping(false)
-          generateSurveyFromAIStreaming(description)
-        }, 800)
+        // Generate immediately - loading state is handled inside generateSurveyFromAIStreaming
+        generateSurveyFromAIStreaming(description)
       } else {
         const aiMessage = {
           id: `ai-${Date.now()}`,
@@ -1409,8 +1542,9 @@ The user is currently taking this survey and may ask for help with specific ques
     }
 
     // Handle page-specific AI editing requests (single or multi-component)
-    const detectedSections = detectAllSectionEdits(currentInput)
-    if (detectedSections.length > 0) {
+    // Use AI to intelligently detect which sections need updates
+    // Check if there's an existing survey (even if canvas is closed)
+    if (surveyDraft && (surveyDraft.name || surveyDraft.context || surveyDraft.questions?.length > 0)) {
       // Add user message to UI first
       const userMessage = {
         id: `user-${Date.now()}`,
@@ -1420,25 +1554,52 @@ The user is currently taking this survey and may ask for help with specific ques
       }
       setMessages(prev => [...prev, userMessage])
       
-      // Open canvas if not already open
-      if (!canvasOpen) {
-        openCanvasForSurvey('draft', false) // Don't override existing draft
-        addNotification('Opening survey wizard...', 'info')
-      }
+      // Show loading state
+      setIsTyping(true)
+      addNotification('AI is analyzing your request...', 'info')
       
-      // Ensure we're in wizard view
-      if (canvasView !== 'wizard') {
-        setCanvasView('wizard')
+      try {
+        // Let AI decide which sections need to be updated
+        console.log('🔍 Calling AI detection for:', currentInput)
+        const detectedSections = await chatService.aiDetectSections(currentInput, surveyDraft)
+        console.log('🎯 AI detection result:', detectedSections)
+        
+        setIsTyping(false)
+        
+        if (detectedSections && detectedSections.length > 0) {
+          console.log('✅ AI detected', detectedSections.length, 'section(s):', detectedSections)
+          
+          // Open canvas if not already open
+          if (!canvasOpen) {
+            openCanvasForSurvey('draft', false) // Don't override existing draft
+            addNotification('Opening survey wizard...', 'info')
+          }
+          
+          // Ensure we're in wizard view
+          if (canvasView !== 'wizard') {
+            setCanvasView('wizard')
+          }
+          
+          // Process multi-component updates if multiple sections detected
+          if (detectedSections.length > 1) {
+            console.log('🔄 Processing compound request with', detectedSections.length, 'sections')
+            handleMultiComponentUpdate(detectedSections, currentInput)
+          } else {
+            // Single section update
+            console.log('📝 Processing single section:', detectedSections[0])
+            handleSectionEditRequest(detectedSections[0], currentInput)
+          }
+          return
+        } else {
+          // No sections detected, fall through to normal chat
+          console.log('ℹ️ No sections detected by AI, falling through to normal chat')
+          setIsTyping(false)
+        }
+      } catch (error) {
+        console.error('❌ Error detecting sections:', error)
+        setIsTyping(false)
+        // Fall through to normal chat on error
       }
-      
-      // Process multi-component updates if multiple sections detected
-      if (detectedSections.length > 1) {
-        handleMultiComponentUpdate(detectedSections, currentInput)
-      } else {
-        // Single section update
-        handleSectionEditRequest(detectedSections[0], currentInput)
-      }
-      return
     }
     
     // Handle "continue" or "start fresh" responses for draft confirmation
@@ -1948,10 +2109,14 @@ The user is currently taking this survey and may ask for help with specific ques
 
   // AI Survey Template Generation - Manual Navigation
   const generateSurveyFromAIStreaming = async (description) => {
+    // Set loading state at the very start
+    setIsTyping(true)
+    addNotification('AI is generating your survey...', 'info')
+    
     try {
-      console.log('Generating survey template for:', description)
+      console.log('🚀 Generating survey template for:', description)
       const template = await chatService.generateSurveyTemplate(description)
-      console.log('Received template:', template)
+      console.log('✅ Received template:', template)
       
       if (template) {
         // Open the canvas if it's not already open
@@ -1985,6 +2150,9 @@ The user is currently taking this survey and may ask for help with specific ques
         
         setCanvasView('wizard') // Stay in wizard to show the generated survey
         
+        // Stop loading before showing success message
+        setIsTyping(false)
+        
         // Add dynamic success message to chat
         const numQuestions = (template.questions || []).length
         const numMetrics = (template.metrics || []).length
@@ -2006,7 +2174,11 @@ The user is currently taking this survey and may ask for help with specific ques
           timestamp: new Date()
         }
         setMessages(prev => [...prev, successMessage])
-            } else {
+        addNotification('Survey created successfully!', 'success')
+      } else {
+        // Stop loading on error
+        setIsTyping(false)
+        
         // Add error message to chat
         const errorMessage = {
           id: `ai-${Date.now()}`,
@@ -2015,9 +2187,13 @@ The user is currently taking this survey and may ask for help with specific ques
           timestamp: new Date()
         }
         setMessages(prev => [...prev, errorMessage])
+        addNotification('Failed to generate survey', 'error')
       }
     } catch (error) {
-      console.error('Failed to generate survey template:', error)
+      console.error('❌ Failed to generate survey template:', error)
+      
+      // Stop loading on error
+      setIsTyping(false)
       
       // Add error message to chat
       const errorMessage = {
@@ -2027,6 +2203,7 @@ The user is currently taking this survey and may ask for help with specific ques
         timestamp: new Date()
       }
       setMessages(prev => [...prev, errorMessage])
+      addNotification('Survey generation failed', 'error')
     }
   }
 
@@ -2150,58 +2327,68 @@ The user is currently taking this survey and may ask for help with specific ques
   // Handle multi-component updates (when multiple sections are mentioned)
   const handleMultiComponentUpdate = async (sectionTypes, userRequest) => {
     try {
+      console.log('🔄 ============ MULTI-COMPONENT UPDATE START ============')
+      console.log('📋 Sections to update:', sectionTypes)
+      console.log('💬 User request:', userRequest)
+      console.log('📊 Current survey draft:', surveyDraft)
+      
       // Show loading state
       setIsTyping(true)
       addNotification(`Processing updates for ${sectionTypes.length} components...`, 'info')
       
-      console.log(`Multi-component update for sections:`, sectionTypes)
-      
       // Process all sections in parallel
       const updatePromises = sectionTypes.map(async (sectionType) => {
         try {
-          console.log(`Calling aiEditSection for ${sectionType}`)
+          console.log(`\n🔧 Calling aiEditSection for "${sectionType}"...`)
           const result = await chatService.aiEditSection(
             sectionType,
             surveyDraft,
             userRequest,
             {}
           )
-          console.log(`Received result for ${sectionType}:`, result)
+          console.log(`✅ Received result for "${sectionType}":`, result)
           // The service already extracts updated_content, so result IS the content
           return { sectionType, content: result, success: true }
         } catch (error) {
-          console.error(`Failed to update ${sectionType}:`, error)
+          console.error(`❌ Failed to update "${sectionType}":`, error)
           return { sectionType, error: error.message, success: false }
         }
       })
       
       const results = await Promise.all(updatePromises)
-      console.log('All update results:', results)
+      console.log('\n📦 All update results:', results)
       
       // Apply all successful updates to the draft
+      console.log('\n🔨 Applying updates to draft...')
       let newDraft = { ...surveyDraft }
       const successfulSections = []
       const failedSections = []
       
       for (const result of results) {
         if (result.success && result.content) {
+          console.log(`✅ Applying "${result.sectionType}" update:`, result.content)
           successfulSections.push(result.sectionType)
           
           switch (result.sectionType) {
             case 'name':
               newDraft.name = result.content
+              console.log(`  → Updated name to: ${result.content}`)
               break
             case 'context':
               newDraft.context = result.content
+              console.log(`  → Updated context (length: ${result.content.length})`)
               break
             case 'outcomes':
               newDraft.desiredOutcomes = result.content
+              console.log(`  → Updated outcomes (count: ${result.content.length})`)
               break
             case 'classifiers':
               newDraft.classifiers = result.content
+              console.log(`  → Updated classifiers (count: ${result.content.length})`)
               break
             case 'metrics':
               newDraft.metrics = result.content
+              console.log(`  → Updated metrics (count: ${result.content.length})`)
               break
             case 'questions':
               // Transform questions
@@ -2216,16 +2403,21 @@ The user is currently taking this survey and may ask for help with specific ques
                 linkedClassifier: q.linkedClassifier || ''
               })) : result.content
               newDraft.questions = transformedQuestions
+              console.log(`  → Updated questions (count: ${transformedQuestions.length})`)
               break
             case 'configuration':
               // Merge configuration updates
               newDraft.configuration = { ...(newDraft.configuration || {}), ...result.content }
+              console.log(`  → Updated configuration:`, result.content)
               break
           }
         } else {
+          console.log(`❌ Skipping failed "${result.sectionType}" update`)
           failedSections.push(result.sectionType)
         }
       }
+      
+      console.log('\n💾 Saving updated draft:', newDraft)
       
       // Update state with all changes
       setSurveyDraft(newDraft)
@@ -2237,6 +2429,7 @@ The user is currently taking this survey and may ask for help with specific ques
       if (successfulSections.length > 0) {
         const firstSection = successfulSections[0]
         const targetStep = sectionToStep[firstSection]
+        console.log(`🎯 Navigating to step ${targetStep} for section "${firstSection}"`)
         if (targetStep) {
           setSurveyStep(targetStep)
         }
@@ -2253,11 +2446,13 @@ The user is currently taking this survey and may ask for help with specific ques
         }
         setMessages(prev => [...prev, successMessage])
         addNotification(`${successfulSections.length} components updated!`, 'success')
+        console.log('✅ ============ MULTI-COMPONENT UPDATE COMPLETE ============')
       }
       
       if (failedSections.length > 0) {
         const failedList = failedSections.join(', ')
         addNotification(`Failed to update: ${failedList}`, 'error')
+        console.log('❌ Failed sections:', failedSections)
       }
       
     } catch (error) {

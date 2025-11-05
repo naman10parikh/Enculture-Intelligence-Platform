@@ -250,6 +250,103 @@ async def generate_enhanced_questions(request: dict):
         raise HTTPException(status_code=500, detail=f"Question generation failed: {str(e)}")
 
 
+@router.post("/ai-detect-sections")
+async def ai_detect_sections(request: dict):
+    """
+    Use AI to intelligently detect which survey sections need to be updated based on user request.
+    """
+    try:
+        user_request = request.get('user_request', '')
+        current_data = request.get('current_data', {})
+        
+        if not user_request:
+            raise HTTPException(status_code=400, detail="User request is required")
+        
+        logger.info(f"AI detecting sections for request: {user_request[:100]}...")
+        
+        # Use AI to intelligently detect which sections need updates
+        user_input = f"""Analyze this user request and determine which survey sections need to be updated:
+
+User Request: "{user_request}"
+
+Current Survey State:
+- Name: {current_data.get('name', 'Not set')}
+- Has Context: {'Yes' if current_data.get('context') else 'No'}
+- Has Outcomes: {'Yes' if current_data.get('desiredOutcomes') else 'No'}
+- Has Classifiers: {'Yes ({} items)'.format(len(current_data.get('classifiers', []))) if current_data.get('classifiers') else 'No'}
+- Has Metrics: {'Yes ({} items)'.format(len(current_data.get('metrics', []))) if current_data.get('metrics') else 'No'}
+- Has Questions: {'Yes ({} items)'.format(len(current_data.get('questions', []))) if current_data.get('questions') else 'No'}
+- Configuration Languages: {current_data.get('configuration', {}).get('languages', ['Not set'])}
+- Configuration Anonymous: {current_data.get('configuration', {}).get('anonymous', 'Not set')}
+
+Available Section Types:
+- name: Survey title/name
+- context: Survey description/purpose/background
+- outcomes: Desired outcomes and goals
+- classifiers: Demographic categories (department, role, location, etc.)
+- metrics: Analytics and measurement formulas
+- questions: Survey questions, response types, required status
+- configuration: Languages, anonymous status, deadlines, target audience
+
+Analyze the user's request and return ONLY a JSON array of section types that need to be updated.
+Examples:
+- "make question 1 optional" → ["questions"]
+- "add Spanish and French" → ["configuration"]
+- "make the first question optional and add French" → ["questions", "configuration"]
+- "change the survey name to Employee Engagement" → ["name"]
+- "add metrics for engagement" → ["metrics"]
+
+Return ONLY the JSON array, no explanations, no markdown."""
+
+        instructions = """You are an expert at understanding user intent. Carefully analyze what the user wants to change and return ONLY the relevant section types as a JSON array. Be precise and only include sections that actually need updates."""
+
+        def call_responses_api():
+            return openai_service.sync_client.responses.create(
+                model=openai_service.model,
+                input=user_input,
+                instructions=instructions
+            )
+        
+        response = await asyncio.get_event_loop().run_in_executor(None, call_responses_api)
+        
+        content = response.output_text
+        logger.info(f"Raw AI response for section detection: {content}")
+        
+        # Extract JSON if wrapped in markdown
+        if '```json' in content:
+            start = content.find('```json') + len('```json')
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        elif '```' in content:
+            start = content.find('```') + 3
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        
+        content = content.strip()
+        detected_sections = json.loads(content)
+        
+        if not isinstance(detected_sections, list):
+            detected_sections = [detected_sections]
+        
+        logger.info(f"✅ AI detected sections: {detected_sections}")
+        
+        return {
+            "detected_sections": detected_sections,
+            "success": True
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in AI section detection: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
+        # Fallback to empty array
+        return {
+            "detected_sections": [],
+            "success": False,
+            "error": str(e)
+        }
+
+
 @router.post("/ai-edit-section")
 async def ai_edit_section(request: dict):
     """
@@ -268,22 +365,35 @@ async def ai_edit_section(request: dict):
         
         # Create context-aware edit using specialized prompts per section
         if section_type == 'name':
-            updated_content = await openai_service.enhance_survey_name(
-                current_data.get('name', ''), 
-                current_data.get('context', '')
-            )
+            logger.info(f"Enhancing survey name with request: {edit_request}")
+            # If there's a specific request, use it; otherwise enhance existing name
+            if 'name' in edit_request.lower() or 'title' in edit_request.lower():
+                updated_content = await openai_service.enhance_survey_name(
+                    current_data.get('name', ''), 
+                    current_data.get('context', '')
+                )
+            else:
+                updated_content = await openai_service.enhance_survey_name(
+                    edit_request,  # Use the request as the new name
+                    current_data.get('context', '')
+                )
+            logger.info(f"✅ Updated name to: {updated_content[:100]}")
         elif section_type == 'context':
+            logger.info(f"Enhancing survey context with request: {edit_request}")
             updated_content = await openai_service.enhance_survey_context(
-                current_data.get('context', ''), 
+                current_data.get('context', '') or edit_request, 
                 current_data.get('name', '')
             )
+            logger.info(f"✅ Updated context (length: {len(updated_content) if isinstance(updated_content, str) else 'N/A'})")
         elif section_type == 'outcomes':
             updated_content = await _ai_edit_outcomes(edit_request, current_data)
         elif section_type == 'classifiers':
+            logger.info(f"Generating classifiers with request: {edit_request}")
             updated_content = await openai_service.generate_survey_classifiers(
                 current_data.get('context', ''), 
                 current_data.get('name', '')
             )
+            logger.info(f"✅ Generated {len(updated_content) if isinstance(updated_content, list) else 0} classifiers")
         elif section_type == 'metrics':
             updated_content = await _ai_edit_metrics(edit_request, current_data)
         elif section_type == 'questions':
@@ -318,6 +428,9 @@ async def _ai_edit_outcomes(edit_request: str, current_data: dict) -> list:
         survey_name = current_data.get('name', '')
         current_outcomes = current_data.get('desiredOutcomes', [])
         
+        logger.info(f"Outcomes edit request: {edit_request}")
+        logger.info(f"Current outcomes: {current_outcomes}")
+        
         user_input = f"""Based on this survey context and user request, generate enhanced desired outcomes:
 
 Survey Name: {survey_name}
@@ -333,9 +446,9 @@ Each outcome should be:
 - Relevant to the survey purpose
 - Time-bound where appropriate
 
-Return as a JSON array of strings."""
+Return ONLY a JSON array of strings. No markdown, no explanations."""
 
-        instructions = """You are an organizational development expert specializing in outcome-based survey design. Create desired outcomes that are strategic, measurable, and directly actionable for business leaders. Focus on specific business impact rather than generic goals."""
+        instructions = """You are an organizational development expert specializing in outcome-based survey design. Create desired outcomes that are strategic, measurable, and directly actionable for business leaders. Focus on specific business impact rather than generic goals. Return pure JSON only."""
 
         def call_responses_api():
             return openai_service.sync_client.responses.create(
@@ -346,12 +459,37 @@ Return as a JSON array of strings."""
         
         response = await asyncio.get_event_loop().run_in_executor(None, call_responses_api)
         
-        import json
-        outcomes = json.loads(response.output_text)
+        content = response.output_text
+        logger.info(f"Raw AI response for outcomes: {content[:500]}")
+        
+        # Extract JSON if wrapped in markdown
+        if '```json' in content:
+            start = content.find('```json') + len('```json')
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        elif '```' in content:
+            start = content.find('```') + 3
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        
+        content = content.strip()
+        outcomes = json.loads(content)
+        
+        logger.info(f"✅ AI generated {len(outcomes) if isinstance(outcomes, list) else 1} outcomes")
         return outcomes if isinstance(outcomes, list) else [outcomes]
         
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON decode error in outcomes: {str(e)}")
+        logger.error(f"Content was: {content if 'content' in locals() else 'No content'}")
+        return [
+            "Establish baseline metrics for data-driven improvement",
+            "Identify priority areas requiring immediate organizational attention",
+            "Create targeted action plans based on employee feedback"
+        ]
     except Exception as e:
         logger.error(f"Error generating AI outcomes: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
         return [
             "Establish baseline metrics for data-driven improvement",
             "Identify priority areas requiring immediate organizational attention",
@@ -366,6 +504,9 @@ async def _ai_edit_metrics(edit_request: str, current_data: dict) -> list:
         classifiers = current_data.get('classifiers', [])
         classifier_names = [c.get('name', '') for c in classifiers]
         
+        logger.info(f"Metrics edit request: {edit_request}")
+        logger.info(f"Available classifiers: {classifier_names}")
+        
         user_input = f"""Based on this survey context and user request, generate enhanced metrics:
 
 Survey Context: {context}
@@ -378,9 +519,9 @@ Generate 3-5 key metrics that this survey should track. Each metric should inclu
 - formula: Statistical formula using survey responses and classifiers
 - selectedClassifiers: Which classifiers are relevant for segmentation
 
-Return as a JSON array of metric objects."""
+Return ONLY a JSON array of metric objects. No markdown, no explanations."""
 
-        instructions = """You are a data science expert specializing in organizational analytics. Create metrics that provide actionable business insights through statistical analysis. Focus on practical, interpretable measurements that executives can act upon."""
+        instructions = """You are a data science expert specializing in organizational analytics. Create metrics that provide actionable business insights through statistical analysis. Focus on practical, interpretable measurements that executives can act upon. Return pure JSON only."""
 
         def call_responses_api():
             return openai_service.sync_client.responses.create(
@@ -391,12 +532,40 @@ Return as a JSON array of metric objects."""
         
         response = await asyncio.get_event_loop().run_in_executor(None, call_responses_api)
         
-        import json
-        metrics = json.loads(response.output_text)
+        content = response.output_text
+        logger.info(f"Raw AI response for metrics: {content[:500]}")
+        
+        # Extract JSON if wrapped in markdown
+        if '```json' in content:
+            start = content.find('```json') + len('```json')
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        elif '```' in content:
+            start = content.find('```') + 3
+            end = content.find('```', start)
+            content = content[start:end].strip()
+        
+        content = content.strip()
+        metrics = json.loads(content)
+        
+        logger.info(f"✅ AI generated {len(metrics) if isinstance(metrics, list) else 1} metrics")
         return metrics if isinstance(metrics, list) else [metrics]
         
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON decode error in metrics: {str(e)}")
+        logger.error(f"Content was: {content if 'content' in locals() else 'No content'}")
+        return [
+            {
+                "name": "Overall Engagement Score",
+                "description": "Composite measure of employee engagement across all survey dimensions",
+                "formula": "AVG(engagement_questions) * 100",
+                "selectedClassifiers": classifier_names[:2] if classifier_names else ["Department"]
+            }
+        ]
     except Exception as e:
         logger.error(f"Error generating AI metrics: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
         return [
             {
                 "name": "Overall Engagement Score",
@@ -416,6 +585,61 @@ async def _ai_edit_questions(edit_request: str, current_data: dict) -> list:
         metrics = [m.get('name', '') for m in current_data.get('metrics', [])]
         classifiers = [c.get('name', '') for c in current_data.get('classifiers', [])]
         
+        logger.info(f"Questions edit request: {edit_request}")
+        logger.info(f"Current questions count: {len(current_questions)}")
+        
+        # Simple fallback parsing for common patterns
+        lower_request = edit_request.lower()
+        
+        # Check if this is a simple update that we can handle directly
+        if current_questions and ('question' in lower_request or 'q1' in lower_request or 'q2' in lower_request):
+            updated_questions = [dict(q) for q in current_questions]  # Deep copy
+            
+            # Detect which question number
+            question_num = None
+            if 'question 1' in lower_request or 'question one' in lower_request or 'q1' in lower_request:
+                question_num = 0
+            elif 'question 2' in lower_request or 'question two' in lower_request or 'q2' in lower_request:
+                question_num = 1
+            elif 'question 3' in lower_request or 'question three' in lower_request or 'q3' in lower_request:
+                question_num = 2
+            
+            if question_num is not None and question_num < len(updated_questions):
+                logger.info(f"Applying direct updates to question {question_num + 1}")
+                
+                # Update response type
+                if 'text response' in lower_request or 'text type' in lower_request or 'type to text' in lower_request:
+                    updated_questions[question_num]['response_type'] = 'text'
+                    updated_questions[question_num]['options'] = []
+                    logger.info(f"Changed question {question_num + 1} to text response")
+                elif 'scale' in lower_request:
+                    updated_questions[question_num]['response_type'] = 'scale'
+                    if '1-10' in lower_request or '1 to 10' in lower_request:
+                        updated_questions[question_num]['options'] = [f"{i}" for i in range(1, 11)]
+                    else:
+                        updated_questions[question_num]['options'] = ["1", "2", "3", "4", "5"]
+                    logger.info(f"Changed question {question_num + 1} to scale")
+                elif 'multiple choice' in lower_request or 'multiple_choice' in lower_request:
+                    updated_questions[question_num]['response_type'] = 'multiple_choice'
+                    logger.info(f"Changed question {question_num + 1} to multiple_choice")
+                
+                # Update required/optional
+                if 'optional' in lower_request or 'not required' in lower_request or "don't make it required" in lower_request or 'not mandatory' in lower_request:
+                    updated_questions[question_num]['mandatory'] = False
+                    updated_questions[question_num]['required'] = False
+                    logger.info(f"Made question {question_num + 1} optional")
+                elif 'required' in lower_request or 'mandatory' in lower_request:
+                    updated_questions[question_num]['mandatory'] = True
+                    updated_questions[question_num]['required'] = True
+                    logger.info(f"Made question {question_num + 1} required")
+                
+                logger.info(f"✅ Direct update successful for question {question_num + 1}")
+                logger.info(f"Updated question: {updated_questions[question_num]}")
+                return updated_questions
+        
+        # If simple parsing didn't work, use AI
+        logger.info("Using AI for complex question updates")
+        
         user_input = f"""Intelligently update the survey questions based on this request:
 
 User Request: {edit_request}
@@ -423,23 +647,21 @@ User Request: {edit_request}
 Current Survey Context:
 - Name: {survey_name}
 - Context: {context}
-- Current Questions ({len(current_questions)}): {json.dumps([q.get('question', q.get('text', '')) for q in current_questions], indent=2)}
+- Current Questions ({len(current_questions)}): {json.dumps(current_questions, indent=2)}
 - Available Metrics: {', '.join(metrics)}
 - Available Classifiers: {', '.join(classifiers)}
 
-Instructions:
-1. Parse the user request to understand what changes they want
-2. If they mention specific question numbers (e.g., "question 1"), update those specific questions
-3. If they mention response types, update the response_type field appropriately
-4. If they mention "required" or "optional", update the mandatory field
-5. If they want to add questions, append new ones
-6. If they want to change topics, regenerate questions focused on that topic
-7. Maintain other questions that aren't mentioned
-8. Ensure all questions have: id, question, description, response_type, options, mandatory, linkedMetric, linkedClassifier
+CRITICAL Instructions:
+1. Parse the user request to understand EXACTLY what changes they want
+2. If they mention specific question numbers (e.g., "question 1"), update ONLY those questions
+3. If they mention response types (text, scale, multiple_choice), update the response_type field
+4. If they mention "required"/"optional"/"mandatory", update the mandatory field (true/false)
+5. PRESERVE all other questions exactly as they are
+6. Return the COMPLETE array of ALL questions with modifications applied
 
-Return the complete updated questions array as JSON."""
+Return ONLY valid JSON array. No markdown, no explanations."""
 
-        instructions = """You are an expert survey designer. Carefully parse the user's request and make ONLY the changes they specifically asked for. Preserve existing questions unless explicitly told to change them. Be precise and literal in your interpretation."""
+        instructions = """You are an expert survey designer. Parse the user's request literally and make ONLY the specific changes requested. Preserve all other questions unchanged. Return pure JSON only."""
 
         def call_responses_api():
             return openai_service.sync_client.responses.create(
@@ -450,9 +672,8 @@ Return the complete updated questions array as JSON."""
         
         response = await asyncio.get_event_loop().run_in_executor(None, call_responses_api)
         
-        import json
-        import re
         content = response.output_text
+        logger.info(f"Raw AI response for questions: {content[:500]}")
         
         # Extract JSON if wrapped in markdown
         if '```json' in content:
@@ -464,13 +685,21 @@ Return the complete updated questions array as JSON."""
             end = content.find('```', start)
             content = content[start:end].strip()
         
+        content = content.strip()
         questions = json.loads(content)
         
-        logger.info(f"AI updated {len(questions) if isinstance(questions, list) else 1} questions based on request")
+        logger.info(f"✅ AI updated {len(questions) if isinstance(questions, list) else 1} questions")
         return questions if isinstance(questions, list) else [questions]
         
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON decode error in questions: {str(e)}")
+        logger.error(f"Content was: {content if 'content' in locals() else 'No content'}")
+        # Return current questions unchanged
+        return current_data.get('questions', [])
     except Exception as e:
         logger.error(f"Error editing questions with AI: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
         # Return current questions unchanged
         return current_data.get('questions', [])
 
